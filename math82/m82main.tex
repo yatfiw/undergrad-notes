@@ -1,0 +1,29 @@
+\documentclass[10pt,a4paper,oneside]{book}
+
+% course info (for title)
+\newcommand{\courseid}{MATH 82}
+\newcommand{\coursetitle}{Differential Equations}
+\newcommand{\semester}{Summer 2023}
+
+\usepackage{import}
+\import{../Templates/}{Preamble Math Notes.tex}
+\graphicspath{{figures/}}
+
+\usepackage{subfiles}
+
+\begin{document}
+\tableofcontents
+
+\chapter{Introduction}
+\subfile{chapters/ch1}
+
+\chapter{First-Order Differential Equations}
+\subfile{chapters/ch2}
+
+\chapter{Second-Order Differential Equations}
+\subfile{chapters/ch3}
+
+\chapter{Systems of Differential Equations}
+\subfile{chapters/ch4}
+
+\end{document}

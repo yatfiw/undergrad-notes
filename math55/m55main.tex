@@ -1,0 +1,30 @@
+\documentclass[10pt,a4paper,oneside]{book}
+
+% course info (for title)
+\newcommand{\courseid}{MATH 55}
+\newcommand{\coursetitle}{Discrete Mathematics}
+\newcommand{\semester}{Fall 2023}
+
+\usepackage{import}
+\import{../Templates/}{Preamble Math Notes.tex}
+\graphicspath{{figures/}}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs,graphdrawing,graphs.standard}
+\usegdlibrary{force}
+
+\usepackage{subfiles}
+
+\begin{document}
+\tableofcontents
+
+\chapter{Combinatorics} % TODO: finish this section
+\subfile{chapters/ch1}
+
+\chapter{Number Theory}
+\subfile{chapters/ch2}
+
+\chapter{Graph Theory}
+\subfile{chapters/ch3}
+
+\end{document}

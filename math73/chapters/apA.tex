@@ -1,0 +1,32 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+Let $A$ be an $n\times n$ matrix and let $T : V \to V$ be a linear transformation whose matrix $[T]_{\mathcal{C} \from \mathcal{B}}$ with respect to bases $\mathcal{B}$ and $\mathcal{C}$ of $V$ and $W$, respectively, is $A$.
+The following statements are equivalent: 
+\begin{enumerate}[label=(\alph*)]	
+	\item $A$ is invertible.
+	\item $A\mbf{x} = \mbf{b}$ has a unique solution for every $\mbf{b} \in \R^n$.
+	\item $A\mbf{x} = \mbf{0}$ has only the trivial solution.
+	\item The reduced row echelon form of $A$ is $I_n$.
+	\item $A$ is a product of elementary matrices.
+	\item $\pfn{rank}(A) = n$
+	\item $\pfn{nullity}(A) = 0$
+	\item The column vectors of $A$ are linearly independent.
+	\item The column vectors of $A$ span $\R^n$.
+	\item The column vectors of $A$ form a basis for $\R^n$.
+	\item The row vectors of $A$ are linearly independent.
+	\item The row vectors of $A$ span $\R^n$.
+	\item The row vectors of $A$ form a basis for $\R^n$.
+	\item $\det A \neq 0$
+	\item 0 is not an eigenvalue of $A$.
+	\item $T$ is invertible.
+	\item $T$ is one-to-one.
+	\item $T$ is onto.
+	\item $\pfn{ker}(T) = \{\mbf{0}\}$.
+	\item $\pfn{range}(T) = W$.
+	\item 0 is not a singular value of $A$.
+\end{enumerate}
+
+\end{document}

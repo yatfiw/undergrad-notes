@@ -1,0 +1,658 @@
+\documentclass[../m55main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Introduction}
+Just as the central objects of previous chapters were combinations and integers, the central object of this chapter is the graph.
+
+\begin{definition}[Graph]
+    A graph $G = (V,E)$ consists of a finite vertex set $V$ and an edge set $E$ where $E$ contains size-2 subsets of $V$.
+\end{definition}
+
+This definition is precise, but it isn't very nice to work with.
+In practice, we usually think of a graph using its picture.
+For example, we associate the graph
+\begin{align*}
+    V &= \{ 1, 2, 3, 4, 5, 6, 7, 8 \} \\
+    E &= \Big\{ \{ 1,4 \}, \{ 1,5 \}, \{ 2,3 \}, \{ 3,5 \}, \{ 4,5 \}, \{ 6,7 \} \Big\}
+\end{align*}
+with the picture below.
+
+\begin{center}
+    \begin{tikzpicture}[spring layout, iterations=500, node distance=25pt]
+            \foreach \i in {1,...,8}
+                \node (node \i) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {\i};
+            \draw 
+                (node 1) edge (node 4)
+                edge (node 5)
+                (node 4) edge (node 5)
+                (node 5) edge (node 2)
+                edge (node 3)
+                (node 2) edge (node 3)
+                (node 6) edge (node 7);
+    \end{tikzpicture} % TODO: find a way to vertically align (tikz -> baseline?)
+\end{center}
+
+Note that, since graphs are defined in terms of sets, they cannot contain loops or ``multi-edges''.
+(If we were to allow multi-edges, we would have a multi-graph.)
+
+We say that two vertices are adjacent if there is an edge between them.
+The degree $d(v)$ of a vertex $v$ is the number of vertices that are adjacent to $v$.
+
+Now we can get into some basic properties of graphs.
+
+\begin{lemma}[Handshake lemma]
+    For any graph, the sum of the degrees of the vertices is twice the number of edges.
+    That is, if $G = (V,E)$, then
+    \[ \sum_{v \in V} d(v) = 2 |E|. \]
+\end{lemma}
+
+\begin{proof}
+    If we count the edges leaving each vertex, then every edge is counted exactly twice. 
+\end{proof}
+
+This result's namesake is its application to gatherings of people.
+If partygoers go around and shake hands with each other, each handshake increases the partygoers' ``degree sum'' by two.
+Therefore, this degree sum must always be even.
+
+\begin{corollary}[Oddballs]
+    In any graph, the number of vertices with odd degree must be even.
+\end{corollary}
+
+\begin{proof}
+    If the number of vertices with odd degree is odd, then the sum of the degrees is
+    \[ \text{even} + \cdots + \text{even} + \text{odd} + \cdots + \text{odd} = \text{even} + \text{odd} = \text{odd}, \]
+    which can't happen (by the handshake lemma).
+\end{proof}
+
+Graphs are considered to be equal if they have the same vertex and edge sets.
+We can push the vertices around as much as we want and, so long as no edges are created or severed, we will still have the same graph.
+
+Two graphs that have the same fundamental structure (though not necessarily the same vertex labels) are called isomorphic.
+Specifically, two graphs $G,H$ are isomorphic if $x \sim y \iff f(x) \sim f(y)$ for some function (isomorphism) $f$, where $x,y \in V_G$ and $\sim$ is an ``adjacency'' relation.
+
+The following graphs are not equal, but they are isomorphic.
+
+\medskip
+\begin{center}
+    \begin{tikzpicture}[spring layout, iterations=500, node distance=25pt]
+            \foreach \i in {1,...,4}
+                \node (node \i) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {\i};
+                \node (node A) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {A};
+                \node (node B) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {B};
+                \node (node C) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {C};
+                \node (node D) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {D};
+            \draw 
+                (node 1) edge (node 2)
+                edge (node 3)
+                edge (node 4)
+                (node A) edge (node B)
+                edge (node C)
+                edge (node D);
+    \end{tikzpicture}
+\end{center}
+
+There are certain types of graphs that are particularly interesting.
+One class of these is defined below.
+
+\begin{definition}[Complete graph]
+    A complete graph $K_n$ consists of $n$ vertices, where every vertex is adjacent to every other vertex.
+\end{definition}
+
+One well-known problem in graph theory has to do with coloring the edges of a complete graph (say, red and blue) and seeing what monochromatic subgraphs emerge, if any.
+A useful analogy for these is in the context of friends and strangers: if an edge between two vertices is colored red, we say the vertices are ``friends'', whereas if the edge is blue the vertices are strangers.
+We'll start simple with $K_6$.
+
+\begin{theorem}[Ramsey's theorem, (3, 3)]
+    In any collection of six people, there must exist three mutual friends or three mutual strangers.
+
+    Equivalently, if the edges of $K_6$ are colored red and blue, then it must contain a red $K_3$ or a blue $K_3$.
+\end{theorem}
+
+\begin{proof}
+    After coloring the edges of $K_6$, vertex 6 must have
+    \begin{enumerate}[label=(\alph*)]
+        \item at least three red edges or
+        \item at least three blue edges.
+    \end{enumerate}
+    We'll begin with case (a).
+    Consider the subgraph of $K_6$ which includes vertex 6 along with three of its red-adjacent nodes.
+
+    \begin{center}
+        \begin{tikzpicture}[spring layout, iterations=500, node distance=25pt]
+                \node (node 6) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=10pt] {6};
+                \node (node A) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {A};
+                \node (node B) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {B};
+                \node (node C) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {C};
+                \draw 
+                    (node 6) edge[color=red] (node A)
+                    edge[color=red] (node B)
+                    edge[color=red] (node C)
+                    (node A) edge[dashed, color=gray] (node B)
+                    edge[dashed, color=gray] (node C)
+                    (node B) edge[dashed, color=gray] (node C);
+        \end{tikzpicture}
+    \end{center}
+
+    If any of the edges among $A,B,C$ are red, then we have a red triangle.
+    Otherwise, all of the edges are blue, meaning we have a blue triangle!
+
+    Case (b) can be proved in the same way.
+\end{proof}
+
+A follow-up question that we could ask in response to this is whether we can state a similar theorem for, say, $K_5$.
+It turns out that we can't; finding a counterexample is relatively straightforward.
+Thus, 6 is known as the third Ramsey number---it describes the smallest complete graph that contains either a red $K_3$ or a blue $K_3$ after edge coloring.
+
+We'll now discover a similar number for a red $K_3$ or blue $K_4$.
+
+\begin{corollary}[Ramsey's theorem, (3, 4)]
+    Any group of ten people must contain three mutual friends or four mutual strangers.
+
+    Equivalently, if the edges of $K_{10}$ are colored red and blue, then it must contain a red $K_3$ or a blue $K_4$.
+\end{corollary}
+
+\begin{proof}
+    After coloring the edges of $K_{10}$, vertex 10 must have
+    \begin{enumerate}[label=(\alph*)]
+        \item at least four red edges or
+        \item at least six blue edges.
+    \end{enumerate}
+    We'll begin with case (a).
+    Consider the subgraph of $K_{10}$ which includes vertex 10 along with four of its red-adjacent vertices.
+
+    \begin{center}
+        \begin{tikzpicture}[spring layout, iterations=500, node distance=25pt]
+                \node (node 10) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {10};
+                \node (node A) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=11pt] {A};
+                \node (node B) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=11pt] {B};
+                \node (node C) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=11pt] {C};
+                \node (node D) [fill=black!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=11pt] {D};
+                \draw 
+                    (node 10) edge[color=red] (node A)
+                    edge[color=red] (node B)
+                    edge[color=red] (node C)
+                    edge[color=red] (node D)
+                    (node A) edge[dashed, color=gray] (node B)
+                    edge[dashed, color=gray] (node C)
+                    edge[dashed, color=gray] (node D)
+                    (node B) edge[dashed, color=gray] (node C)
+                    edge[dashed, color=gray] (node D)
+                    (node C) edge[dashed, color=gray] (node D);
+        \end{tikzpicture}
+    \end{center}
+
+    If any of the edges among $A,B,C,D$ are red, then we have a red $K_3$.
+    Otherwise, all of the edges are blue, meaning we have a blue $K_4$.
+
+    As for case (b), consider the graph of $K_{10}$ which includes vertex 10 along with six of its blue-adjacent vertices (similar to the above subgraph).
+    If we remove vertex 10 and consider only vertices $A$-$F$, we get a $K_6$; by the previous theorem, this must contain a red $K_3$ or a blue $K_3$.
+    If it contains a red $K_3$, then we're done; if it contains a blue $K_3$, then since each vertex is also connected to vertex 10 via a blue edge, this blue $K_3$ is part of a larger blue $K_4$.
+\end{proof}
+
+We can go a bit lower with $K_9$.
+
+\begin{corollary}[Ramsey's theorem, (3, 4)]
+    The above holds for nine people or, equivalently, $K_9$.
+\end{corollary}
+
+\begin{proof}
+    Suppose we color the edges of $K_9$.
+    By the previous corollary, if any vertex has
+    \begin{enumerate}[label=(\alph*)]
+        \item at least four red edges or
+        \item at least six blue edges,
+    \end{enumerate}
+    then we're done.
+    Otherwise, since each vertex has eight edges, every vertex has exactly three red edges and five blue edges.
+    But this is impossible by the oddball corollary since the red subgraph has nine vertices, each with degree 3.
+\end{proof}
+
+This is as far as we can go with (3, 4); there is a counterexample for $K_8$.
+The corresponding Ramsey number, then, is $R(3,4) = 9$.
+
+\section{Walking on Graphs}
+Now we'll introduce some more vocabulary so that we can more effectively describe other classes of graphs.
+
+\begin{definition}[Walk]
+    A walk on a graph is a sequence of adjacent vertices, with repetition.
+    The length of such a walk is the number of vertices in the sequence, minus one.
+\end{definition}
+
+\begin{definition}[Path]
+    A path is a walk with no repeated vertices.
+\end{definition}
+
+We can state a seemingly trivial relationship between these two objects, but it reveals a new technique of proof that we will take advantage of throughout this chapter.
+
+\begin{theorem}[]
+    For vertices $x$ and $y$, a path from $x$ to $y$ exists if and only if a walk from $x$ to $y$ exists.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$) Let $P$ be a path from $x$ to $y$.
+    By definition, $P$ is also a walk from $x$ to $y$.
+    \smallskip
+
+    ($\Leftarrow$) We give an extremal argument.
+    If there is a walk from $x$ to $y$, then there is a walk $W$ of minimum length.
+    We claim that $W$ is a path.
+
+    If there are repeated vertices in $W$, then there is a shorter walk that can be created by removing the vertices between the repetitions, so $W$ is not a minimal walk.
+    Therefore, if $W$ is a minimal walk, then there are not repeated vertices in $W$.
+\end{proof}
+
+We have a couple more definitions along the same lines as the previous ones.
+
+\begin{definition}[Trail]
+    A trail is a walk with no repeated edges.
+    A trail is closed if it begins and ends at the same vertex.
+\end{definition}
+
+\begin{definition}[Cycle]
+    A cycle is a closed trail such that removing the last vertex also yields a path.
+\end{definition}
+
+We can use this vocabulary to formalize an characteristic of graphs that is immediately obvious when looking at one.
+
+\begin{definition}[Connected graph]
+    A graph is connected if, for all vertices $x$ and $y$, a path exists from $x$ to $y$.
+\end{definition}
+
+Another immediate application of all this vocabulary comes in defining a couple other important classes of graphs.
+
+\begin{definition}[Eulerian graph]
+    An Eulerian trail is one that visits all edges of a graph at least once.
+
+    A connected graph is Eulerian if it can be drawn as a closed trail; such a trail is called an Eulerian circuit.
+\end{definition}
+
+The degrees of the vertices of a graph with Eulerian characteristics have nice relationships!
+These are given below; the proof of the second theorem is very similar to that of the first, so we omit it for clarity.
+
+\begin{theorem}[]
+    If $G$ is a connected graph that can be drawn as an Eulerian trail from $x$ to $y$, where $x \neq y$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item vertices $x$ and $y$ each have odd degree and
+        \item all other vertices have even degree.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Consider any Eulerian trail from $x$ to $y$.
+    For any vertex $v$ other than $x$ and $y$, every time we enter $v$ we must also immediately leave $v$, so $d(v)$ is even.
+    The same is true for $x$ after the initial exit and for $y$ after the final entry, so $d(x)$ and $d(y)$ are both odd.
+\end{proof}
+
+\begin{theorem}[]
+    If a connected graph $G$ is Eulerian, then all vertices have even degree.
+\end{theorem}
+
+It turns out that both of these are actually if and only if theorems---their converses are also true!
+
+\begin{theorem}[Eulerian graph theorem]
+    If $G$ is a connected graph and every vertex has even degree, then $G$ is Eulerian.
+\end{theorem}
+
+\begin{proof}
+    We do strong induction on the number of edges in $G$.
+    The base case, $e = 0$, is obviously true.
+
+    Now let $G$ be a connected graph with $e > 0$ edges.
+    Suppose as our inductive hypothesis that the theorem holds for all connected graphs with fewer than $e$ edges.
+    Since every vertex has even degree, every vertex has a degree of at least 2.
+    So $G$ must contain a cycle $C$.
+
+    If $G = C$, then we're done.
+    Otherwise, remove the edges of $C$ from $G$, creating the graph $G - C$, which has fewer edges than $G$; moreover, each vertex of $G - C$ still has even degree.
+    From here, we have two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G - C$ is connected, then by the inductive hypothesis, $G - C$ is Eulerian.
+        Thus $G - C$ can be drawn as an Eulerian circuit, beginning and ending at a vertex $v$ on $C$; from here we can draw $C$.
+        Thus all of $G$ can be drawn as an Eulerian circuit, meaning $G$ is Eulerian.
+
+        \item If $G - C$ is not connected, then $G - C$ has connected components, each of which is Eulerian (by the inductive hypothesis).
+        We can draw $G$ using the same idea as before.
+        We trace out $C$, traversing each new component of $G$ when we first visit it; we are guaranteed to visit each component at least once.
+    \end{enumerate}
+    Either way, we conclude that $G$ is Eulerian.
+\end{proof}
+
+\begin{corollary}
+    If $G$ is connected and all vertices have even degree, except for vertices $x$ and $y$, then $G$ has an Eulerian trail from $x$ to $y$.
+\end{corollary}
+
+\begin{proof}
+    Insert a new vertex $z$ that is adjacent to only $x$ and $y$.
+    This new graph $G + z$ is still connected, and all vertices have even degree, so by the previous theorem it is Eulerian.
+    So $G + z$ has an Eulerian circuit beginning and ending at $z$, thus removing $z$ gives an Eulerian trail from $x$ to $y$.
+\end{proof}
+
+When we generalize these Eulerian notions slightly, we get a new class of graphs, defined below.
+
+\begin{definition}[Hamiltonian graph]
+    Given a graph $G$:
+    \begin{itemize}
+        \item a Hamiltonian path is one that visits every vertex of $G$.
+        \item a Hamiltonian cycle is one that visits every vertex of $G$.
+        \item $G$ is Hamiltonian if it contains a Hamiltonian cycle.
+    \end{itemize}
+\end{definition}
+
+Unfortunately, unlike Eulerian graphs, it is unknown if there is an efficient way to determine if a large graph has a Hamiltonian cycle.
+But there are sometimes efficient tests!
+(For example, if $G$ has $n$ vertices and each vertex has a degree of at least $n/2$, then $G$ is Hamiltonian.)
+
+\section{Trees and Planar Graphs}
+Now we'll describe a couple of other types of graphs.
+
+\begin{definition}[Tree]
+    A tree is a connected graph with no cycles.
+    A disconnected graph whose components are trees is called a forest.
+\end{definition}
+
+A quick aside: Cayley's theorem states that, for $n \geq 1$,the number of distinct (unlabeled) trees with $n$ vertices is $n^{n-2}$.
+The proof of this statement is beyond the scope of this course.
+
+\begin{definition}[Leaf]
+    In a tree, a vertex with degree 1 is called a leaf.
+\end{definition}
+
+We'll show, now, that all trees have leaves!
+
+\begin{theorem}[]
+    Any tree with at least two vertices has at least two leaves.
+\end{theorem}
+
+\begin{proof}
+    We give an extermal argument.
+    Consider the longest path in $T$, which has $v_1$ as its first vertex.
+    We claim that $v_1$ must be a leaf.
+
+    Suppose, to the contrary, that $v_1$ is adjacent to a vertex $v \neq v_2$.
+    If $v$ is on $T$, then $T$ contains a cycle; if $v$ is not on $T$, then $v_1$ is adjacent to both $v$ and $v_2$, giving a path that is longer than $T$.
+    Either way, we get a contradiction.
+
+    By the same logic, the final vertex in $T$ is also a leaf.
+    Therefore, $T$ contains two leaves, meaning its graph also contains two leaves.
+\end{proof}
+
+Notice, now, that when we remove a leaf from a tree, we are still left with a tree.
+This leads to nice induction proofs, like the one below!
+
+\begin{theorem}[]
+    Every tree with $n$ vertices has $n-1$ edges.
+\end{theorem}
+
+\begin{proof}
+    We'll do induction on $n$, the number of vertices on the graph.
+    The base cases $n=1$ and $n=2$ are obviously true.
+
+    Now suppose as our inductive hypothesis that the statement holds for any tree with $n$ vertices.
+    If we take a tree $T$ with $n+1$ vertices and remove one of its leaves, we are left with a tree that has $n$ vertices; by the inductive hypothesis, the ``reduced'' tree has $n-1$ edges, so $T$ has $n$ edges, as desired.
+\end{proof}
+
+Finally, we have a theorem which is useful for ``communicating'' uniquely between vertices.
+
+\begin{theorem}[]
+    Any two vertices on a tree are connected by a unique path.
+\end{theorem}
+
+\begin{proof}
+    Since the tree $T$ is connected, we know that a path $P$ exists from $x$ to $y$.
+    Suppose there was also a different path $Q$ that connected these vertices.
+
+    Let $P$ and $Q$ be identical up until vertex $a$, and let $b$ be the next point on $P$ that is also on $Q$.
+    (We may have $a = x$ and $b = y$.)
+    Then, starting at $a$, we can reach $b$ via the path $P$, and we can get back to $a$ by backtracking $Q$.
+    This describes a cycle in $T$, which is not allowed by the definition of a tree.
+\end{proof}
+
+Trees are a special type of another class of graphs, defined below.
+
+\begin{definition}[Planar graph]
+    A planar graph is a graph that can be drawn in such a way that no edges cross.
+\end{definition}
+
+Notice that planar graphs divide the plane into regions, called faces.
+(The region outside of the graph is also a face.)
+This brings us to one last theorem from Euler.
+
+\begin{theorem}[]
+    If $G$ is a connected plane graph with $n$ vertices, $\mathcal{E}$ edges, and $f$ faces, then
+    \[ n - \mathcal{E} + f = 2. \]
+\end{theorem}
+
+\begin{proof}
+    We do induction on $\mathcal{E}$, the number of edges.
+    The base cases $\mathcal{E} = 0$ and $\mathcal{E} = 1$ are trivial.
+
+    Suppose, as our inductive hypothesis, that the statement holds when $\mathcal{E} = K$.
+    Now let $G$ be a connected plane graph with $\mathcal{E} = k+1$.
+    We have two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G$ is a tree with $n$ vertices, then $\mathcal{E} = n-1$ and $f = 1$, which satisfies $n - \mathcal{E} + f = 2$.
+        (No induction necessary here.)
+        \item If $G$ is not a tree, then it must contain a cycle.
+        After removing an edge from the cycle, the new graph remains connected, but has one fewer face; that is, it has $n$ vertices, $k$ edges, and $f-1$ faces.
+        By the inductive hypothesis:
+        \begin{align*}
+            n - k + (f-1) &= 2 \\
+            n - (k + 1) + f &= 2 \\
+            n - \mathcal{E} + f &= 2,
+        \end{align*}
+        as desired.
+    \end{enumerate}
+    Either way, we get $n - \mathcal{E} + f = 2$.
+\end{proof}
+
+This actually explains why we can't construct Venn diagrams with more than three circles!
+One with four circles would have $n = 12$, $f = 16$, and $\mathcal{E} = 24$, which violates the above theorem.
+
+Usually, graphs are made nonplanar when they have ``too many edges''.
+The next theorem gives an edge-related condition that a graph must satisfy to even possibly be planar.
+
+\begin{theorem}[]
+    If $G$ is planar with $n \geq 3$ vertices and $\mathcal{E}$ edges, then $\mathcal{E} \leq 3n - 6$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $G$ has $n$ vertices, $\mathcal{E}$ edges, and $f$ faces.
+    We have two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item $G$ is connected.
+        Construct the ``edge-face'' matrix $M$ with $\mathcal{E}$ rows and $f$ columns; the $(i,j)$ entry is 1 if edge $i$ borders face $j$, and the entry is otherwise 0.
+
+        Let $x$ be number of 1s in $M$.
+        Since every edge borders at most two faces, $x \leq 2\mathcal{E}$; also, since each face has at least three edges, $x \geq 3f$.
+        Thus $3f \leq  2\mathcal{E}$.
+        By Euler's theorem, $f = 2 - n + \mathcal{E}$, so
+        \begin{align*}
+            3(2 - n + \mathcal{E}) &\leq 2\mathcal{E} \\
+            \mathcal{E} &\leq 3n - 6,
+        \end{align*}
+        as desired.
+
+        \item $G$ is disconnected.
+        Insert $k-1$ edges at arbitrary locations such that they create the connected graph $G^+$.
+        (Note that this graph is still planar.)
+        Applying Case (a) to $G^+$ gives
+        \[ \mathcal{E} < \mathcal{E} + (k - 1) \leq 3n - 6, \]
+        as desired.
+    \end{enumerate}
+    either way, we get $\mathcal{E} \leq 3n - 6$.
+\end{proof}
+
+We can use this to quickly show that the complete graph $K_5$ is nonplanar.
+
+Another important graph that turns out to be nonplanar is $K_{3,3}$, which is drawn below.
+
+% TODO: make this look better
+\begin{center}
+    \begin{tikzpicture}[spring layout, iterations=500, node distance=25pt]
+            \foreach \i in {1,...,3}
+                \node (node \i) [fill=red!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {};
+            \foreach \i in {4,...,6}
+                \node (node \i) [fill=blue!70, text=white, circle, font=\scriptsize, inner sep=1pt, minimum size=8pt] {};
+            \draw 
+                (node 1) edge (node 4)
+                edge (node 5)
+                edge (node 6)
+                (node 2) edge (node 4)
+                edge (node 5)
+                edge (node 6)
+                (node 3) edge (node 4)
+                edge (node 5)
+                edge (node 6);
+    \end{tikzpicture}
+\end{center}
+
+A proof of this graph's nonplanarity is below.
+
+\begin{theorem}[]
+    $K_{3,3}$ is nonplanar.
+\end{theorem}
+
+\begin{proof}
+    Suppose, to the contrary, that $K_{3,3}$ is planar.
+    Then by Euler's theorem, $f = 5$, so its edge-face matrix has 9 rows and 5 columns.
+    Let $x$ be the number of 1s in this matrix, so $x \leq 18$.
+    But for $K_{3,3}$ every face must have at least four edges (notice that it has no triangles), meaning $x \geq 4f = 20$, a contradiction.
+\end{proof}
+
+As it turns out, by Kuratowski's theorem, every nonplanar graph contains $K_5$ or $K_{3,3}$, or a subdivision of $K_5$ or $K_{3,3}$.
+(To subdivide a graph is to add degree-2 nodes along the existing edges of the graph, so as to not drastically change its overall structure.)
+
+\section{Graph Coloring}
+One well-known class of problems in graph theory has to do with coloring graphs---assigning each vertex a color, with certain restrictions.
+For our purposes, we'll restrict ourselves to the following.
+
+\begin{definition}[Properly colored graph]
+    A graph is properly colored by giving each vertex a color in such a way that no adjacent vertices have the same color.
+\end{definition}
+
+We introduce some related vocabulary that more specifically describes graphs that are properly colorable.
+
+\begin{definition}[$k$-colorable]
+    A graph is $k$-colorable if it can be properly colored with $k$ colors or less.
+    (A graph that is 2-colorable is also called bipartite.)
+\end{definition}
+
+\begin{definition}[Chromatic number]
+    The chromatic number of a graph, denoted $\chi (G)$, is the smallest $k$ for which $G$ is $k$-colorable.
+\end{definition}
+
+A graph is 1-colorable only when $G$ has no edges.
+Creating a condition for 2-colorability is slightly more interesting!
+
+\begin{theorem}[2-colorable graphs]
+    $G$ is 2-colorable if and only if it has no odd cycles (cycles with an odd number of vertices).
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$) We prove the contrapositive.
+    Suppose $G$ has an odd cycle consisting of vertices $v_1, \ldots, v_{2k+1}$.
+    If we color this graph using two colors, then all of the odd vertices must be one color, and all the even vertices another.
+    But $v_1$ and $v_{2k+1}$ are both odd, so they must have the same color, meaning the graph is not 2-colorable.
+    \smallskip
+
+    ($\Leftarrow$) Suppose $G$ has no odd cycles.
+    It suffices to prove this for connected $G$ because, if each component is 2-colorable, then so is $G$.
+
+    We have two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose $G$ is a tree.
+        We'll prove this case by induction on the number $n$ of vertices.
+        The statement is clearly true for the base case $n=1$.
+
+        Suppose as our inductive hypothesis that any tree with $n$ vertices is 2-colorable.
+        (The no-odd-cycles condition is built into the tree by definition.)
+        Consider a tree with $n+1$ vertices and remove a leaf; we now have a tree with $n$ vertices, which we assume to be colorable.
+        Now add back the leaf, assign it the color opposite that of the vertex it's adjacent to, and we're done.
+
+        \item Suppose $G$ is not a tree.
+        Temporarily remove edges from $G$ until we do have a tree (called a spanning tree); from case (a), this tree is 2-colorable.
+        Now put all the edges back---we claim that no edge connects vertices of the same color.
+
+        When we add an edge from, say, $x$ to $y$, we get an even cycle $C$.
+        This means the number of steps from $x$ to $y$ is odd, so $x$ and $y$ have opposite colors.
+        Thus, when we insert all of the deleted edges, we still have a 2-coloring.
+    \end{enumerate}
+    Either way, if $G$ has no odd cycles, then it is 2-colorable.
+\end{proof}
+
+We'll now consider colorings of planar graphs in particular.
+This has an important application in mapmaking!
+Every map (in the colloquial sense) can be represented equivalently using using its dual graph.
+This is the graph whose vertices are regions on the map, and whose edges represent boundaires between regions.
+
+The four-color theorem states that any map can be ``properly colored'' using only four colors.
+That is, using four colors, one can color a map such that no adjacent regions have the same color.
+
+We will not prove the four-color theorem here, but we will prove its analogs for 6-colorings and 5-colorings.
+
+\begin{theorem}[Six-color theorem]
+    Every planar graph is 6-colorable.
+\end{theorem}
+
+\begin{proof}
+    We do induction on the number of vertices $n$.
+    The base cases $n \leq 6$ are obvious.
+
+    Suppose, as our inductive hypothesis, that any planar graph with $n$ vertices is 6-colorable.
+
+    Consider a graph with $n+1$ vertices.
+    This graph has at least one vertex $v$ of degree 5 or less; if we remove $v$, we are left with a graph that has $n$ vertices, which (by the IHOP) is 6-colorable.
+    Now if we add $v$ back into the graph, it is adjacent to at most five vertices, so there is a color we can assign to $v$ that has not been used by any adjacent vertex.
+\end{proof}
+
+\begin{theorem}[Five-color theorem]
+    Every planar graph is 5-colorable.
+\end{theorem}
+
+\begin{proof}
+    We do induction on the number of vertices $n$.
+    The base cases $n \leq 5$ are obvious.
+
+    Suppose, as our inductive hypothesis, that any planar graph with $n$ vertices is 5-colorable.
+
+    Consider a graph with $n+1$ vertices.
+    This graph has at least one vertex $v$ of degree 5 or less; if we remove $v$, we are left with a graph that has $n$ vertices, which (by the IHOP) is 5-colorable.
+    Now if we add $v$ back into the graph and it has less than five adjacent colors, then we're done; otherwise, $v$ has five adjacent colors.
+    We claim that, in this case, one vertex can be re-colored, which would free up a color for $v$.
+
+    Label the vertices adjacent to $v$ as $v_1, \ldots, v_5$ in clockwise-ascending order.
+    (This order is not necessarily unique.)
+    Suppose these vertices are respectively colored red, yellow, green, blue, and some fifth color.
+
+    Change the color of $v_1$ from red to green.
+    Then take all green vertices adjacent to $v_1$ and color them red.
+    Then color all red vertices adjacent to those green.
+    If we continue this, we get one of two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item The process eventually terminates and we can immediately color $v$ red.
+        \item We come back to $v_3$ and color it red, putting us back at square one.
+        But now we can do the same process with $v_2$ and $v_4$: change $v_4$ from blue to yellow, and continue the chain until it terminates.
+        (Here, the chain will never reach $v_2$ since it's being guarded by an entirely red-green chain!)
+        We can now safely color $v$ blue.
+    \end{enumerate}
+    Either way, we can re-color the graph in such a way that allows us to safely color $v$, as desired.
+\end{proof}
+
+FORGOT THE LEMMA THAT ALL PLANAR GRAPHS HAVE A VERTEX WITH DEGREE FIVE OR LESS!
+
+\section{Tournaments (Lec. 23)}
+TOURNAMENTS (Directed graphs)
+\begin{itemize}
+    \item DEF. A tournament is a complete directed graph.
+    \item THM. Every graph has a directed Hamiltonian path. (Pf. Induction on vertices.)
+    \item DEF. For a tournament, player $x$ is a king (or king chicken) if, for every other player $y$, either $x \to y$ or there exists a player $z$ such that $x \to z \to y$.
+    \item THM. Every tournament has a king. (Pf. The person who won the most games is a king.)
+\end{itemize}
+MINIMUM SPANNING TREES (Weighted graphs)
+\begin{itemize}
+    \item come back later...
+\end{itemize}
+
+\end{document}

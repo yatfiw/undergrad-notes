@@ -1,0 +1,451 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Vector Spaces and Subspaces}
+So far, we have treated vectors as ordered tuples of real numbers.
+However, there are plenty of other obejcts (like matrices) that behave similarly.
+We use the familiar properties of vectors in $\R^n$ to motivate a more general definition for a vector, one that encapsulates this characteristic behavior.
+
+\begin{definition}[Vector space]
+	Let $V$ be a set on which two operations, called addition and scalar multipliation, have been defined.
+	If $\mbf{u}$ and $\mbf{v}$ are in $V$, the sum of $\mbf{u}$ and $\mbf{v}$ is denoted by $\mbf{u} + \mbf{v}$.
+	If $c$ is a scalar, the scalar multiple of $\mbf{u}$ by $c$c is denoted by $c \mbf{u}$.
+	If the following axioms hold for all $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ in $V$ and for all scalars $c$ and $d$, then $V$ is called a vector space and its elements are called vectors.
+	\begin{enumerate}
+		\item $\mbf{u} + \mbf{v}$ is in $V$.
+		\item $\mbf{u} + \mbf{v} = \mbf{v} + \mbf{u}$
+		\item $(\mbf{u} + \mbf{v}) + \mbf{w} = \mbf{u} + (\mbf{v} + \mbf{w})$
+		\item There exists an element $\mbf{0}$ in $V$, called a zero vector, such that $\mbf{u} + \mbf{0} = \mbf{u}$.
+		\item For each $\mbf{u}$ in $V$, there is an element $-\mbf{u}$ in $V$ such that $\mbf{u} + (-\mbf{u}) = \mbf{0}$.
+		\item $c \mbf{u}$ is in $V$.
+		\item $c(\mbf{u} + \mbf{v}) = c \mbf{u} + c \mbf{v}$
+		\item $(c + d) \mbf{u} = c \mbf{u} + d \mbf{u}$
+		\item $c(d \mbf{u}) = (cd) \mbf{u}$
+		\item $1 \mbf{u} = \mbf{u}$
+	\end{enumerate}
+\end{definition}
+
+This definition allows us to describe other familiar properties and constructs.
+The rest of this section is dedicated to these---I'll just list them off.
+
+\begin{theorem}[Basic properties of vector spaces]
+	Let $V$ be a vector space, $\mbf{u}$ a vector in $V$. and $c$ a scalar.
+	\begin{enumerate}[label=(\alph*)]
+		\item $0 \mbf{u} = \mbf{0}$
+		\item $c \mbf{0} = \mbf{0}$
+		\item $(-1) \mbf{0} = -\mbf{u}$
+		\item If $c \mbf{u} = \mbf{0}$, then $c = 0$ or $\mbf{u} = \mbf{0}$
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Vector subtraction]
+	Let $V$ be a vector space, and let $\mbf{u}$ and $\mbf{v}$ be vectors in $V$.
+	The difference between $\mbf{u}$ and $\mbf{v}$, denoted by $\mbf{u} - \mbf{v}$, is defined as $\mbf{u} + (-\mbf{v})$.
+\end{definition}
+
+\begin{definition}[Linear combination]
+	Let $V$ be a vector space, let $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n$ be vectors in $V$, and let $c_1, c_2, \ldots, c_n$ be scalars.
+	Then $c_1\mbf{v}_1 + c_2\mbf{v}_2 + \cdots + c_n \mbf{v}_n$ is a linear combination of these vectors.
+\end{definition}
+
+\begin{definition}[Subspace]
+	A subset $W$ of a vector space $V$ is called a subspace of $V$ if $W$ is itself a vector space with the same scalars, addition, and scalar multiplication as $V$.
+\end{definition}
+
+\begin{theorem}[Conditions for a subspace]
+	Let $V$ be a vector space and let $W$ be a nonempty subset of $V$.
+	Then $W$ is a subspace of $V$ if and only if the following conditions hold.
+	\begin{enumerate}[label=(\alph*)]
+		\item If $\mbf{u}$ and $\mbf{v}$ are in $W$, then $\mbf{u} + \mbf{v}$ is in $W$.
+		\item If $\mbf{u}$ is in $W$ and $c$ is a scalar, then $c \mbf{u}$ is in $W$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Span]
+	If $S = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_{k}\}$ is a set of vectors in a vector space $V$, then the set of all linear combinations of $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ is called the span of $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ and is denoted by $\pfn{span}(\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k)$ or $\pfn{span}(S)$.
+	If $V = \pfn{span}(S)$, then $S$ is called a spanning set for $V$ and $V$ is said to be spanned by $S$.
+\end{definition}
+
+\begin{theorem}[Span as a subspace]
+	Let $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ be vectors in a vector space $V$.
+	\begin{enumerate}[label=(\alph*)]
+		\item $\pfn{span}(\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k)$ is a subspace of $V$.
+		\item $\pfn{span}(\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k)$ is the smallest subspace of $V$ that contains $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$.
+	\end{enumerate}
+\end{theorem}
+
+\section{Linear Independence, Basis, and Dimension}
+We'll continue to generalize many of the definitions and properties in $\R^n$ to all vector spaces.
+In most cases, the theorems (and their proofs) are identical, just replacing $\R^n$ with $V$.
+We begin with linear independence.
+
+\begin{definition}[Linear dependence]
+	A set of vectors $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ in a vector space $V$ is linearly dependent if there are scalars $c_1, c_2, \ldots, c_k$, at least one of which is not zero, such that
+	\[ c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k = 0. \]
+	A set of vectors that is not linearly dependent is said to be linearly independent.
+\end{definition}
+
+\begin{theorem}[Condition for linear dependence]
+	A set of vectors $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ in a vector space $V$ is linearly dependent if and only if at least one of the vectors can be expressed as a linear combination of the others.
+\end{theorem}
+
+With linear independence defined, we can move onto basis.
+
+\begin{definition}[Basis]
+	A subset $\mathcal{B}$ of a vector space $V$ is a basis for $V$ if
+	\begin{enumerate}
+		\item $\mathcal{B}$ spans $V$ and
+		\item $\mathcal{B}$ is linearly independent.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Unique representation of a vector]
+	Let $V$ be a vector space and let $\mathcal{B}$ be a basis for $V$.
+	For every vector $\mbf{v}$ in $V$, there is exactly one way to write $\mbf{v}$ as a linear combination of the basis vectors in $\mathcal{B}$.
+\end{theorem}
+
+Now we introduce a new concept, one that we alluded to earlier.
+Every basis for a vector space also provides a new coordinate system for that vector space.
+This coordinate system is defined as follows.
+
+\begin{definition}[Coordinate vector]
+	Let $\mathcal{B} = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n\}$ be a basis for a vector space $V$.
+	Let $\mbf{v}$ be a vector in $V$, and write $\mbf{v} = c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_n \mbf{v}_n$.
+	Then $c_1, c_2, \ldots, c_n$ are called the coordinates of $\mbf{v}$ with respect to $\mathcal{B}$, and the column vector
+	\[ [\mbf{v}]_{\mathcal{B}} = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix} \]
+	is called the coordinate vector of $\mbf{v}$ with respect to $\mathcal{B}$.
+\end{definition}
+
+There is a couple of useful things that arise from the use of coordinate systems.
+First is a corollary to the previous theorem: coordinate vectors preserve linear combinations.
+
+\begin{theorem}[Coordinates preserve linear combinations]
+	Let $\mathcal{B} = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n\}$ be a basis for a vector space $V$.
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $V$ and let $c$ be a scalar.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $[\mbf{u} + \mbf{v}]_{\mathcal{B}} = [\mbf{u}]_{\mathcal{B}} + [\mbf{v}]_{\mathcal{B}}$.
+		\item $[c \mbf{u}]_{\mathcal{B}} = c[\mbf{u}]_{\mathcal{B}}$
+	\end{enumerate}
+\end{theorem}
+
+Secondly, coordinates allow us to transfer information from a general vector space to $\R^n$, a space that we have already studied thoroughly.
+We will explore this idea in detail in the next section.
+For now, though, we can see that a set's linear independence (or dependence) carries over to the set's $\R^n$ counterpart.
+
+\begin{theorem}[Coordinates preserve of linear independence]
+	Let $\mathcal{B} = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n\}$ be a basis for a vector space $V$ and let $\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_k$ be vectors in $V$.
+	Then $\{\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_k	\}$ is linearly independent in $V$ if and only if $\{[\mbf{u}_1]_{\mathcal{B}}, [\mbf{u}_2]_{\mathcal{B}}, \ldots, [\mbf{u}_k]_{\mathcal{B}}\}$ is linearly independent in $\R^n$.
+\end{theorem}
+
+Now, having defined basis, we can generalize notions of dimension.
+We begin with some motivating theorems, both of which establish the size of a basis as an important quantity.
+
+\begin{theorem}[Necessary conditions for span and linear independence]
+	Let $\mathcal{B} = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n\}$ be a basis for a vector space $V$.
+	\begin{enumerate}[label=(\alph*)]
+		\item Any set of more than $n$ vectors in $V$ must be linearly dependent.
+		\item Any set of fewer than $n$ vectors in $V$ cannot span $V$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Sizes of distinct bases]
+	If a vector space $V$ has a basis with $n$ vectors, then every basis for $V$ has exactly $n$ vectors.
+\end{theorem}
+
+Now that we've established that every basis for a vector space contains the same number of vectors, we can define dimension as an intrinsic property of vector spaces.
+
+\begin{definition}[Dimension]
+	A vector space $V$ is called finite-dimensional if it has a basis containing finitely many vectors.
+	The dimension of $V$, denoted by $\pfn{dim}(V)$, is the number of vectors in a basis for $V$.
+	The dimension of the zero vector space $\{\mbf{0}\}$ is defined to be zero.
+	A vector space that has no finite basis is called infinite-dimensional.
+\end{definition}
+
+Knowing the dimension of a vector space provides us with much information about $V$.
+Some of this information is described in the next two theorems.
+
+\begin{theorem}[Dimension, span, and linear independence]
+	Let $V$ be a vector space with $\pfn{dim}(V) = n$.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item Any linearly independent set in $V$ contains at most $n$ vectors.
+		\item Any spanning set for $V$ contains at least $n$ vectors.
+		\item Any linearly independent set of exactly $n$ vectors in $V$ is a basis for $V$.
+		\item Any spanning set of exactly $n$ vectors in $V$ is a basis for $V$.
+		\item Any linearly independent set in $V$ can be extended to a basis for $V$.
+		\item Any spanning set for $V$ can be reduced to a basis for $V$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Dimension of a subspace]
+	Let $W$ be a subspace of a finite-dimensional vector space $V$.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $W$ is finite-dimensional and $\pfn{dim}(W) \leq \pfn{dim}(V)$.
+		\item $\pfn{dim}(W) = \pfn{dim}(V)$ if and only if $W = V$.
+	\end{enumerate}
+\end{theorem}
+
+\section{Change of Basis}
+Equipped with a working knowledge of coordinate systems in general vector spaces, we can now investigate how to convert between coordinate systems within a vector space.
+Most of our work here will center around a matrix that does this for us.
+
+\begin{definition}[Change-of-basis matrix]
+	Let $\mathcal{B} = \{\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_n\}$ and $\mathcal{C}$ be bases for a vector space $V$.
+	The square matrix whose columns are the coordinate vectors $[\mbf{u}_1]_{\mathcal{C}}, [\mbf{u}_2]_{\mathcal{C}}, \ldots, [\mbf{u}_n]_{\mathcal{C}}$ of the vectors in $\mathcal{B}$ with respect to $\mathcal{C}$ is denoted by $P_{\mathcal{C} \from \mathcal{B}}$ and is called the change-of-basis matrix from $\mathcal{B}$ to $\mathcal{C}$.
+	That is,
+	\[ P_{\mathcal{C} \from \mathcal{B}} = [[\mbf{u}_1]_{\mathcal{C}}, [\mbf{u}_2]_{\mathcal{C}}, \cdots, [\mbf{u}_n]_{\mathcal{C}}]. \]
+\end{definition}
+
+If we multiply a vector written with respect to $\mathcal{B}$ by this change-of-basis matrix, we get the same vector written with respect to $\mathcal{C}$.
+The change-of-basis matrix has this property and others, as described in the next theorem.
+
+\begin{theorem}[Properties of the change-of-basis matrix]
+	Let $\mathcal{B}$ and $\mathcal{C}$ be bases for a vector space $V$ and let $P_{\mathcal{C} \from \mathcal{B}}$ be the change-of-basis matrix from $\mathcal{B}$ to $\mathcal{C}$.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $P_{\mathcal{C} \from \mathcal{B}}[\mbf{x}]_{\mathcal{B}} = [\mbf{x}]_{\mathcal{C}}$ for all $\mbf{x}$ in $V$.
+		\item $P_{\mathcal{C} \from \mathcal{B}}$ is the unique matrix $P$ with the above property.
+		\item $P_{\mathcal{C} \from \mathcal{B}}$ is invertible and $(P_{\mathcal{C} \from \mathcal{B}})^{-1} = P_{\mathcal{B} \from \mathcal{C}}$.
+	\end{enumerate}
+\end{theorem}
+
+There is another way we can compute the change of basis matrix, this time via row reduction.
+It is similar to how we compute the inverse of a matrix via row reduction.
+
+\begin{theorem}[Change-of-basis matrix via row reduction]
+	Let $\mathcal{B} = \{\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_n\}$ and $\mathcal{C} = \{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_n\}$ be bases for a vector space $V$.
+	Also let $B = [[\mbf{u}_1]_{\mathcal{E}} \cdots [\mbf{u}_n]_{\mathcal{E}}]$ and $C = [[\mbf{v}_1]_{\mathcal{E}} \cdots [\mbf{v}_n]_{\mathcal{E}}]$, where $\mathcal{E}$ is any basis for $V$.
+	Then row reduction applied to the $n \times 2n$ augmented matrix $[C \;|\; B]$ produces
+	\[ [C \;|\; B] \to [I \;|\; P_{\mathcal{C} \from \mathcal{B}}]. \]
+\end{theorem}
+
+\section{Linear Transformations}
+Matrices can be interpreted as a transformation between two Euclidean vector spaces.
+Here, we extend this concept to linear transformations between arbitrary vector spaces.
+
+\begin{definition}[Linear transformation]
+	A linear transformation from a vector space $V$ to a vector space $W$ is a mapping $T : V \to W$ such that, for all $\mbf{u}$ and $\mbf{v}$ in $V$ and for all scalars $c$,
+	\begin{enumerate}
+		\item $T(\mbf{u} + \mbf{v}) = T(\mbf{u}) + T(\mbf{v})$.
+		\item $T(c \mbf{u}) = cT(\mbf{u})$.
+	\end{enumerate}
+	This is equivalent to saying that $T$ is a linear transformation if and only if it preserves all linear combinations.
+\end{definition}
+
+The zero matrix and the identity matrix also generalize.
+
+\begin{definition}[Zero and identity matrices]
+	The zero transformation $T_0 : V \to W$ maps every vector in $V$ to the zero vector in $W$.
+	The identity transformation $I : V \to V$ maps every vector in $V$ to itself.
+\end{definition}
+
+Many of the properties of linear transformations are familiar.
+Some of these are listed below.
+
+\begin{theorem}[Properties of linear transformations]
+	Let $T : V \to W$ be a linear transformation.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $T(\mbf{0}) = \mbf{0}$.
+		\item $T(-\mbf{v}) = -T(\mbf{v})$ for all $\mbf{v}$ in $V$.
+		\item $T(\mbf{u} - \mbf{v}) = T(\mbf{u}) - T(\mbf{v})$ for all $\mbf{u}, \mbf{v}$ in $V$.
+	\end{enumerate}
+\end{theorem}
+
+The most important property of a linear transformation $T : V \to W$ is that $T$ is completely determined by its effect on a basis for $V$.
+
+\begin{theorem}[Linear transformation using a nasis]
+	Let $T : V \to W$ be a linear transformation and let $\mathcal{B} = \{\mbf{v}_1, \ldots, \mbf{v}_n\}$ be a spanning set for $V$.
+	Then $T(\mathcal{B}) = \{T(\mbf{v}_1), \ldots, T(\mbf{v}_n)\}$ spans the range of $T$.
+\end{theorem}
+
+Analagous to matrix multiplication, we can compose linear transformations.
+The result is a new linear transformation that ``skips'' over the intermediate space.
+
+\begin{definition}[Composition of linear transformations]
+	If $T : U \to V$ and $S : V \to W$ are linear transformations, then the composition of $S$ with $T$ is the mapping $S \circ T : U \to W$, defined by
+	\[ (S \circ T)(\mbf{u}) = S(T(\mbf{u})) \]
+	where $\mbf{u}$ is in $U$.
+\end{definition}
+
+\begin{theorem}[Compositions of linear transformations are linear]
+	If $T : U \to V$ and $S : V \to W$ are linear transformations, then $S \circ T : U \to W$ is a linear transformation.
+\end{theorem}
+
+Lastly, we draw one more generalization from matrices having to do with inverses.
+
+\begin{definition}[Inverse transformation]
+	A linear transformation $T : V \to W$ is invertible if there is a linear transformation $T^{-1} : W \to V$ such that
+	\[ T^{-1} \circ T = I_V \]
+	\[ T \circ T^{-1} = I_W \]
+	In this case, $T^{-1}$ is called an inverse for $T$.
+\end{definition}
+
+\begin{theorem}[Condition for invertibility]
+	If $T$ is an invertible linear transformation, then its inverse is unique.
+\end{theorem}
+
+\section{Kernel and Range}
+This section generalizes the notions of a matrix's null space and column space.
+
+\begin{definition}[Kernel and range]
+	Let $T : V \to W$ be a linear transformation.
+	The kernel of $T$ is the set of vectors in $V$ defined by
+	\[ \pfn{ker}(T) = \{\mbf{v} \in V : T(\mbf{v}) = \mbf{0}\}. \]
+	The range of $T$ is the set of vectors in $W$ defined by
+	\[ \pfn{range}(T) = \{T(\mbf{v}) : \mbf{v} \in V\}. \]
+\end{definition}
+
+Like the null and column spaces of a matrix are subspaces of $\R^n$, the kernel and range of a linear transformation are subspaces of the domain and codomain.
+
+\begin{theorem}[Kernel and range as subspaces]
+	Let $T : V \to W$ be a linear transformation.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\pfn{ker}(T)$ is a subspace of $V$.
+		\item $\pfn{range}(T)$ is a subspace of $W$.
+	\end{enumerate}
+\end{theorem}
+
+Like before, we assign names to the dimensions of these subspaces and draw a connection between them.
+
+\begin{definition}[Rank and nullity]
+	Let $T : V \to W$ be a linear transformation.
+	The rank of $T$ is $\pfn{rank}(T) = \dim (\pfn{range}(T))$ and the nullity of $T$ is $\pfn{nullity}(T) = \dim (\pfn{ker}(T))$.
+\end{definition}
+
+\begin{theorem}[Rank theorem]
+	Let $T : V \to W$ be a linear transformation where $V$ is finite-dimensional.
+	Then
+	\[ \pfn{rank}(T) + \pfn{nullity}(T) = \dim V. \]
+\end{theorem}
+
+Now, we introduce some new vocabulary that will help us better describe the input and output spaces of a transformation.
+
+\begin{definition}[One-to-one and onto]
+	Let $T : V \to W$ be a linear transformation.
+	\begin{itemize}
+		\item $T$ is one-to-one if, for all $\mbf{u}, \mbf{v}$ in $V$, $\mbf{u} \neq \mbf{v} \implies T(\mbf{u}) \neq T(v)$.
+		\item $T$ is onto if $\pfn{range}(T) = W$.
+	\end{itemize}
+\end{definition}
+
+There is a very simple criterion for determining whether a linear transformation is one-to-one.
+
+\begin{theorem}[Condition for one-to-one]
+	A linear transformation $T$ is one-to-one if and only if $\pfn{ker}(T) = \{\mbf{0}\}$
+\end{theorem}
+
+If $T$ maps between two vector spaces of equal dimension, this also gives us a way to determine whether $T$ is onto.
+
+\begin{theorem}[Condition for onto]
+	Let $\dim V = \dim W$.
+	Then a linear transformation $T : V \to W$ is one-to-one if and only if it is onto.
+\end{theorem}
+
+In the previous section, we found that linear transformations, in a sense, preserve spanning sets.
+We now provide conditions under which a linear transformation will preserve linear independence and, thus, bases.
+
+\begin{theorem}[One-to-one transformations preserve linear independence]
+	Let $T : V \to W$ be a one-to-one linear transformation.
+	If $S$ is a linearly independent set in $V$, then $T(S)$ is a linearly independent set in $W$.
+\end{theorem}
+
+\begin{corollary}[Condition for the preservation of bases]
+	Let $\dim V = \dim W$.
+	Then a one-to-one linear transformation $T : V \to W$ maps a basis for $V$ to a basis for $W$.
+\end{corollary}
+
+We can use all this to describe which linear transformations $T : V \to W$ are invertible.
+
+\begin{theorem}[Condition for invertibility]
+	A linear transformation $T$ is invertible if and only if it is one-to-one and onto.
+\end{theorem}
+
+To finish the section, we concretely define what it means for two vectors to be ``essentially the same.''
+
+\begin{definition}[Isomorphism]
+	A linear transformation $T : V \to W$ is called an isomorphism if it is one-to-one and onto.
+	If $V$ and $W$ are two vector spaces such that there is an isomorphism from $V$ to $W$, then we say that $V$ is isomorphic to $W$ and we write $V \cong W$.
+\end{definition}
+
+There is a very easy way to check if two spaces are isomorphic, as this final theorem shows.
+
+\begin{theorem}[Condition for isomorphism]
+	Let $V$ and $W$ be two finite-dimensional vector spaces (over the same field of scalars).
+	Then $V$ is isomorphic to $W$ if and only if $\dim V = \dim W$.
+\end{theorem}
+
+\section{The Matrix of a Linear Transformation}
+We can exploit the fact that all $n$-dimensional vector spaces are isomorphic to $\R^n$ to represent linear tFransformations as matrices.
+Rather than transform directly between vector spaces, we will transform between spaces of \textit{coordinate} vectors, as the first theorem of this section shows.
+
+\begin{theorem}[Matrix of a linear transformation]
+	Let $V$ and $W$ be two finite-dimensional vector spaces with bases $\mathcal{B}$ and $\mathcal{C}$, respectively, where $\mathcal{B} = \{\mbf{v}_1, \ldots, \mbf{v}_n\}$.
+	If $T : V \to W$ is a linear transformation, then the $m \times n$ matrix $A$ defined by
+	\[ A = [ [T(\mbf{v}_1)]_{\mathcal{C}} \;|\; [T(\mbf{v}_2)]_{\mathcal{C}} \;|\; \cdots \;|\; [T(\mbf{v}_n)]_{\mathcal{C}} ] \]
+	satisfies
+	\[ A [\mbf{v}]_{\mathcal{B}} = [T(\mbf{v})]_[\mathcal{C}] \]
+	for every vector $\mbf{v}$ in $V$.
+\end{theorem}
+
+In the above theorem, the matrix $A$ is called the matrix of $T$ with respect to the bases $\mathcal{B}$ and $\mathcal{C}$; it is sometimes denoted by $[T]_{\mathcal{C} \from \mathcal{B}}$.
+
+We can make some intuitive statements about the matrices of composite and inverse linear transformations.
+These are our next two theorems.
+
+\begin{theorem}[Composition of matrix transformations]
+	Let $U$, $V$, and $W$ be finite-dimensional vector spaces with bases $\mathcal{B}$, $\mathcal{C}$, and $\mathcal{D}$, respectively.
+	Let $T : U \to V$ and $S : V \to W$ be linear transformations.
+	Then
+	\[ [S \circ T]_{\mathcal{D} \from \mathcal{B}} = [S]_{\mathcal{D} \from \mathcal{C}} [T]_{\mathcal{C} \from \mathcal{B}}. \]
+\end{theorem}
+
+\begin{theorem}[Inverse of a matrix transformation]
+	Let $T : V \to W$ be a linear transformation between $n$-dimensional vector spaces $V$ and $W$ and let $\mathcal{B}$ and $\mathcal{C}$ be bases for $V$ and $W$, respectively.
+	Then $T$ is invertible if and only if the matrix $[T]_{\mathcal{C} \from \mathcal{B}}$ is invertible.
+	In this case,
+	\[ \left( [T]_{\mathcal{C} \from \mathcal{B}} \right)^{-1} = \left[ T^{-1} \right]_{\mathcal{B} \from \mathcal{C}}. \]
+\end{theorem}
+
+We can draw a relationship between the potential matrices representing a linear transformation from a vector space to itself.
+Namely, we can use the change-of-basis matrix between two bases to show that all of the possible matrices are similar to each other.
+This is stated more clearly in the following theorem.
+
+\begin{theorem}[Matrix transformations are similar]
+	Let $V$ be a finite-dimensional vector space with bases $\mathcal{B}$ and $\mathcal{C}$ and let $T : V \to V$ be a linear transformation.
+	Then
+	\[ [T]_{\mathcal{C}} = P^{-1}[T]_{\mathcal{B}}P \]
+	where $P$ is the change-of-basis matrix from $\mathcal{C}$ to $\mathcal{B}$.
+\end{theorem}
+
+This naturally leads to the notion of diagonalization.
+
+\begin{definition}[Diagonalizible linear transformation]
+	Let $V$ be a finite-dimensional vector space and let $T : V \to V$ be a linear transformation.
+	Then $T$ is called diagonalizable if there is a basis $\mathcal{C}$ for $V$ such that the matrix $[T]_{\mathcal{C}}$ is a diagonal matrix.
+\end{definition}
+
+We can now make some new additions to the Fundamental Theorem.
+
+\begin{theorem}[Additions to the FTLA]
+	Let $A$ be an $n\times n$ matrix and let $T : V \to V$ be a linear transformation whose matrix $[T]_{\mathcal{C} \from \mathcal{B}}$ with respect to bases $\mathcal{B}$ and $\mathcal{C}$ of $V$ and $W$, respectively, is $A$.
+	The following statements are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is invertible. \\
+		\phantom{~}\hspace{-19.5pt} \vdots
+		\setcounter{enumi}{15}
+		\item $T$ is invertible.
+		\item $T$ is one-to-one.
+		\item $T$ is onto.
+		\item $\pfn{ker}(T) = \{\mbf{0}\}$.
+		\item $\pfn{range}(T) = W$.
+	\end{enumerate}
+	For the full theorem, see Appendix A.
+\end{theorem}
+
+\end{document}

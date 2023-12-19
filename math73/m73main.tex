@@ -1,0 +1,41 @@
+\documentclass[10pt,a4paper,oneside]{book}
+
+% course info (for title)
+\newcommand{\courseid}{MATH 73}
+\newcommand{\coursetitle}{Linear Algebra}
+\newcommand{\semester}{Spring 2023}
+
+\usepackage{import}
+\import{../Templates/}{Preamble Math Notes.tex}
+\graphicspath{{figures/}}
+
+\usepackage{subfiles}
+
+\begin{document}
+\tableofcontents
+
+\chapter{Vectors}
+\subfile{chapters/ch1}
+
+\chapter{Systems of Linear Equations}
+\subfile{chapters/ch2}
+
+\chapter{Matrices}
+\subfile{chapters/ch3}
+
+\chapter{Eigenvalues and Eigenvectors}
+\subfile{chapters/ch4}
+
+\chapter{Orthogonality}
+\subfile{chapters/ch5}
+
+\chapter{Vector Spaces}
+\subfile{chapters/ch6}
+
+\chapter{Distance and Approximation}
+\subfile{chapters/ch7}
+
+\appendix\chapter{The Fundamental Theorem of Linear Algebra}
+\subfile{chapters/apA}
+
+\end{document}

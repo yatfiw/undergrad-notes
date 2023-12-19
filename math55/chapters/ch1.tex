@@ -1,0 +1,87 @@
+\documentclass[../m55main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Introduction}
+We begin our discussion of combinatorics by giving two basic rules that will govern how we count things.
+
+\begin{theorem}[Rule of sum]
+    If $A_1, A_2, \ldots, A_n$ are disjoint sets, then
+    \[ \bigcup_{i=0}^n A_i = \sum_{i=0}^n |A_i|. \]
+\end{theorem}
+
+% TODO: proof here
+
+\begin{theorem}[Rule of product]
+    If an action is composed of $k$ steps such that there are $x_i$ choices for step $i$, then the action can be performed in $x_1 x_2 \cdots x_k$ different ways.
+\end{theorem}
+
+% TODO: proof here
+
+We'll apply these rules (especially the rule of product) to two different types of problems.
+First, we can count the number of ways we can arrange a set of objects.
+
+\begin{theorem}[Counting arrangements]
+    The number of arrangements (or permutations) of $n$ objects is given by $n!$. % <3
+
+    \medskip
+    \textit{Note: We define $0! = 1$ since there is, technically, one way to arrange an empty set of objects.}
+\end{theorem}
+
+\begin{proof}
+    Constructing a permutation of $n$ objects is an action that requires $n$ different steps.
+    \begin{itemize}
+        \item [1.] Step 1 is picking the first element in the permutation; there are $n$ ways to do this.
+        \item [2.] Step 2 is picking the second element in the permutation; since we've already picked an element to be first, there are $n-1$ ways to pick this element.
+        \item [3.] Step 3 is picking the third element; there are $n-2$ ways to do this.
+        \item [$\vdots$\phantom{.}]
+        \item [$n$.] Step $n$ is picking the final element; all but one element has already been chosen, so there is only one way to pick this element.
+    \end{itemize}
+    By the rule of product, there are $n \cdot (n-1) \cdot (n-2) \cdots 1 = n!$ ways to permute the elements in $S$.
+\end{proof}
+
+We can also count the number of subsets we can create using a set of objects, regardless of arrangement order.
+This type of problem is so fundamental to combinatorics that it gets a special name and symbol, given below.
+
+\begin{definition}[Combination]
+    Consider a set $S$ that has size $n$.
+    The number of size-$k$ subsets of $S$ is called ``$n$ choose $k$'' and is denoted by ${n \choose k}$.
+    For $k < 0$ or $k > n$, we define ${n \choose k} = 0$.
+\end{definition}
+
+\begin{theorem}[Counting subsets]
+    For $0 \leq k \leq n$,
+    \[ {n \choose k} = \frac{n!}{k! (n-k)!}. \]
+\end{theorem}
+
+\begin{proof}
+    Let $S$ be a set with size $n$.
+    We will count, in two different ways, the number of size-$k$ permutations of the elements in $S$.
+    \smallskip
+
+    (i) We first use the rule of product to directly compute the number of permutations:
+    \[ n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) = \frac{n!}{(n-k)!}. \]
+
+    (ii) There are ${n \choose k}$ ways to choose the $k$ letters we're permuting.
+    For each of these choices, there are $k!$ ways to arrange them.
+    So, there are
+    \[ k! \cdot {n \choose k} \]
+    size-$k$ permutations of the elements in $S$.
+    \smallskip
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+    That is,
+    \[ k! \cdot {n \choose k} = \frac{n!}{(n-k)!} \implies {n \choose k} = \frac{n!}{k!(n-k)!}, \]
+    as desired.
+\end{proof}
+
+This is an example of a combinatorial proof---we can prove an equivalence between two expressions by showing that they count the same thing.
+This will be a useful (and enlightening!) technique when proving other statements.
+
+\section{Pascal's Triangle}
+
+
+\section{things to save for later}
+
+\end{document}

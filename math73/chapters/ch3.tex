@@ -1,0 +1,444 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Matrix Operations}
+Now we turn our attention to matrices in their own right, rather than as a means to understand vectors and linear equations.
+
+\begin{definition}[Matrix]
+	A matrix is a rectangular array of numbers called the entries, or elements, of the matrix.
+	A matrix all of whose entries are zero is called the zero matrix $O$.
+\end{definition}
+
+There are several different kinds of matrices, all of which have their own special properties.
+Here are some of the simpler forms.
+
+\begin{definition}[Diagonal matrices]
+	Let $A$ be an $m \times n$ matrix.
+	\begin{itemize}
+		\item If $ m =n$, then $A$ is called a square matrix.
+		\item A square matrix whose nondiagonal entries are all zero is called a diagonal matrix.
+		\item A diagonal matrix all of whose diagonal entries are the same is called a scalar matrix.
+		\item If the scalar on the diagonal is 1, the scalar matrix is called an identity matrix.
+	\end{itemize}
+\end{definition}
+
+Like vectors, matrices can be added and scaled.
+
+\begin{definition}[Matrix addition]
+	Let $A = [a_{ij}]$ and $B_{ij}$ be $m \times n$ matrices.
+	Then their sum is defined componentwise:
+	\[ A + B = [a_{ij} + b_{ij}]. \]
+\end{definition}
+
+\begin{definition}[Scalar multiplication of matrices]
+	Let $A$ be an $m\times n$ matrix and let $c$ be a scalar.
+	Then the scalar multiple is defined componentwise:
+	\[ cA = [ca_{ij}]. \]
+\end{definition}
+
+Matrices can also be multiplied with each other, albeit in an at-first unintuitive way.
+The idea is that a matrix can be thought of as a function whose chief purpose is to transform vectors.
+
+Suppose we want to multiply $A \mbf{x}$, where $A$ is a matrix and $\mbf{x}$ is a vector.
+We can treat $A$ as some kind of function that maps one vector to another.
+The first column of $A$ tells us what happens to the first component $\mbf{x}$, the second column determines the second component, and so on.
+If $\mbf{a}_i$ is the $i$th column of $A$, then the resulting vector is the linear combination
+\[ A \mbf{x} = x_1 \mbf{a}_1 + x_2 \mbf{a}_2 + \cdots + x_n \mbf{a}_n. \]
+When we multiply matrices, we're essentially determining the overall effect of multiple transformations.
+This motivates the below definition of the matrix product.
+
+\begin{definition}[Matrix multiplication]
+	If $A$ is an $m\times n$ matrix and $B$ is an $n\times r$ matrix, then the product $C = AB$ is an $m\times r$ matrix.
+	The $(i,j)$ entry of the product is computed as follows:
+	\[ c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}. \]
+	The matrix-column and row-matrix representations of the product are, respectively,
+	\[ AB = \begin{bmatrix} A \mbf{b}_1 & A \mbf{b}_2 & \cdots & A \mbf{b}_r \end{bmatrix} \;\text{ and }\; AB = \begin{bmatrix} \mathbf{A}_1 B \\ \mathbf{A}_2 B\\ \vdots \\ \mathbf{A}_m B \end{bmatrix}. \]
+\end{definition}
+
+Sometimes it will be useful to use matrix multiplication to extract a particular row or column from a matrix.
+It's pretty easy to do using standard unit vectors.
+
+\begin{theorem}[Extracting a row or column]
+	Let $A$ be an $m\times n$ matrix, and let $e_i$ and $e_j$ be row and column versions of standard unit vectors.
+	Then
+	\begin{itemize}
+		\item $\mbf{e}_iA$ is the $i$th row of $A$ and
+		\item $A\mbf{e}_j$ is the $j$th column of $A$.
+	\end{itemize}
+\end{theorem}
+
+We'll define two more operations we can perform on matrices.
+The first is repeated multiplication, which is written as an exponent.
+
+\begin{definition}[Matrix exponentiation]
+	If $A$ is a square matrices, then $A^n = AA\cdots A$, where there are $n$ factors in this product.
+\end{definition}
+
+We'll also find it helpful to define something completely new and different: flipping a matrix over its main diagonal.
+
+\begin{definition}[Transpose of a matrix]
+	The transpose of an $m\times n$ matrix $A$ is the $n\times m$ matrix $A^T$ obtained by interchanging the rows and columns of $A$.
+	That is, the $i$th column of $A^T$ is the $i$th row of $A$ for all $i$, or $(A^T)_{ij} = A_{ji}$ for all $i, j$.
+\end{definition}
+
+This allows us to define another special, usuallly non-diagonal type of matrix that exhibit symmetry with respect to transposition.
+
+\begin{definition}[Symmetric matrix]
+	A square matrix $A$ is symmetric if $A^T = A$.
+	That is, $A$ is symmetric if and only if $A_{ij} = A_{ji}$ for all $i$ and $j$.
+\end{definition}
+
+Note that all diagonal matrices are symmetric.
+
+Using these matrix operations, we can define one last operation between vectors.
+It's minor in the context of this course, but still sometimes useful.
+
+\begin{definition}[Outer product]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $\R^m$ and $\R^n$, respectively.
+	Then their outer product is defined as the matrix product $\mbf{u}\mbf{v}^T$.
+\end{definition}
+
+\section{Matrix Algebra}
+We use the definitions from the previous section to derive some important properties for matrix algebra.
+We begin with the basic operations of addition and scalar multiplication.
+
+\begin{theorem}[Properties of matrix addition and scalar multiplication]
+	Let $A$, $B$, and $C$ be matrices of the same size and let $c$ and $d$ be scalars.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $A + B = B + A$
+		\item $(A + B) + C = A + (B + C)$
+		\item $A + O = A$
+		\item $A + (-A) = O$
+		\item $c(A + B) = cA + cB$
+		\item $(c+d)A = cA + dA$
+		\item $c(dA) = (cd)A$
+		\item $1A = A$
+	\end{enumerate}
+\end{theorem}
+
+(Note the similarities to the properties of vector addition and scalar multiplication!)
+Next, we analyze matrix multiplication.
+
+\begin{theorem}[Properties of matrix multiplication]
+	Let $A$, $B$, and $C$ be matrices (such that all indicated operations are defined) and let $k$ be a scalar.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $A(BC) = (AB)C$
+		\item $A(B+C) = AB+AC$
+		\item $(A+B)C = AC+BC$
+		\item $k(AB) = (kA)B = A(kB)$
+		\item $I_mA = A = AI_n$
+	\end{enumerate}
+\end{theorem}
+
+Most of these properties are familiar, but notice that we didn't include the commutative property anywhere.
+That's because matrix multiplication isn't commutative!
+It isn't generally true that $AB = BA$.
+
+Finally, let's talk about matrix transposition.
+
+\begin{theorem}[Properties of matrix transposition]
+	Let $A$ and $B$ be matrices (such that all indicated operations are defined) and let $k$ be a scalar.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $(A^T)^T = A$
+		\item $(A+B)^T = A^T + B^T$
+		\item $(kA)^T = k(A^T)$
+		\item $(AB)^T = B^TA^T$
+		\item $(A^r)^T = (A^T)^r$
+	\end{enumerate}
+\end{theorem}
+
+We can use some of these to show what happens when we add or multiply a matrix by its own transpose.
+
+\begin{theorem}[Adding or multiplying by a transpose]
+	We have two relationships.
+	\begin{enumerate}[label=(\alph*)]
+		\item If $A$ is a square matrix, then $A + A^T$ is a symmetric matrix.
+		\item For any matrix $A$, $AA^T$ and $A^TA$ are symmetric matrices.
+	\end{enumerate}
+\end{theorem}
+
+\section{The Inverse of a Matrix}
+The additive inverse of a matrix is obvious.
+Our attention now turns to deriving the multiplicative inverse of a matrix.
+
+\begin{definition}[Inverse of a matrix]
+	If $A$ is a square matrix, an inverse of $A$ is a matrix $A^{-1}$ of the same size with the property that
+	\[ A A^{-1} = I = A^{-1} A. \]
+	If such an $A^{-1}$ exists, then $A$ is called invertible.
+\end{definition}
+
+Just like with scalars, each invertible matrix can only have one inverse.
+
+\begin{theorem}[Uniqueness of the matirx inverse]
+	If $A$ is an invertible matrix, then its inverse is unique.
+\end{theorem}
+
+Since we can use matrix inverses to ``undo'' the effects of matrix multiplication, we can use them to solve certain equations involving matrices.
+
+\begin{theorem}[Unique solution of a linear system]
+	If $A$ is an invertible $n\times n$ matrix, then the system of linear equations given by $A\mbf{x} = \mbf{b}$ has the unique solution $\mbf{x} = A^{-1}\mbf{b}$ for any $\mbf{b}\in\R^n$.
+\end{theorem}
+
+This is great, but how do we actually compute these matrix inverses?
+We'll arrive at a general method shortly, but for now, the two-by-two case is relatively straightforward.
+
+\begin{theorem}[Inverse of a two-by-two matrix]
+	If $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, then $A$ is invertible if $ad - bc \neq 0$, in which case
+	\[ A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}. \]
+	If $ad-bc = 0$, then $A$ is not invertible.
+\end{theorem}
+
+To begin our search for an inverse matrix algorithm, we'll list out some significant properties of inverses.
+
+\begin{theorem}[Properties of matrix inverses]
+	If $A$ and $B$ are invertible matrices of the same size, then the following are true:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A^{-1}$ is invertible and $(A^{-1})^{-1} = A$.
+		\item If $c$ is a nonzero scalar, then $cA$ is invertible and $(cA)^{-1} = \frac{1}{c}A^{-1}$.
+		\item $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+		\item $A^T$ is invertible and $(A^T)^{-1} = (A^{-1})^T$.
+		\item $A^n$ is invertible for all nonnegative integers $n$ and $(A^n)^{-1} = (A^{-1})^n$.
+	\end{enumerate}
+\end{theorem}
+
+As a side note, property (e) allows us to define negative integer powers of a matrix.
+
+\begin{definition}[Negative powers of a matrix]
+	If $a$ is an invertible matrix and $n$ is a positive integer, then $A^{-n}$ is defined by
+	\[ A^{-n} = (A^{-1})^n = (A^n)^{-1}. \]
+\end{definition}
+
+We're now in a positon to introduce a new type of matrix that will lead us to the inverse algorithm.
+
+\begin{definition}[Elementary matrix]
+	An elementary matrix is any matrix that can be obtained by performing an elementary row operation on an identity matrix.
+\end{definition}
+
+Elementary matrices are useful because they are representations of the EROs performed on them.
+In this way, performing an ERO on a matrix is equivalent to multiplying by the corresponding elementary matrix.
+
+\begin{theorem}[Multiplication by an elementary matrix]
+	Let $E$ be the elementary matrix obtained by performing an elementary row operation on $I_n$.
+	If the same elementary row operation is performed on an $n\times r$ matrix $A$, the result is the same as the product $EA$.
+\end{theorem}
+
+For any ERO we might apply to a matrix, we can also undo it with the opposite ERO.
+The elementary-matrix analog of this fact is described in terms of inverses.
+
+\begin{theorem}[Inverse of an elementary matrix]
+	Each elementary matrix is invertible, and its inverse is an elementary matrix of the same type.
+\end{theorem}
+
+This allows us to begin formulating what is arguably the most important theorem of this course: the fundamental theorem of linear algebra (FTLA).
+
+\begin{theorem}[Additions to the FTLA]
+	Let $A$ be an $n\times n$ matrix.
+	The following statements are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is invertible.
+		\item $A\mbf{x}= \mbf{b}$ has a unique solution for every $\mbf{b}\in\R^n$.
+		\item $A\mbf{x}=\mbf{0}$ has only the trivial solution.
+		\item The reduced row echelon form of $A$ is $I_n$.
+		\item $A$ is a product of elementary matrices.
+	\end{enumerate}
+	For the full theorem, see Appendix A.
+\end{theorem}
+
+This is a powerful theorem!
+It gives us everything we need to prove these last two very important theorems, the first a stepping stone for the next.
+
+\begin{theorem}[Condition for matrix invertibility]
+	Let $A$ be a square matrix.
+	If $B$ is a square matrix such that either $AB = I$ or $BA = I$, then $A$ is invertible and $B = A^{-1}$.
+\end{theorem}
+
+\begin{theorem}[Computing the inverse of a matrix]
+	Let $A$ be a square matrix.
+	If a series of elementary row operations reduces $A$ to $I$, then the same series of elementary row operations transforms $I$ into $A^{-1}$.
+\end{theorem}
+
+Therefore, in order to invert a matrix, we simply reduce it to the identity matrx while simultaneously performing the same sequence of row operations on the identity matrix.
+
+\section{Subspaces, Basis, Dimension, and Rank}
+Now, we'll introduce the ideas of spaces and subspaces, and we'll see how they relate to matrices.
+
+\begin{definition}[Subspace]
+	A subspace of $\R^n$ is any collection $S$ of vectors in $\R^n$ such that:
+	\begin{itemize}
+		\item The zero vector $\mbf{0}$ is in $S$.
+		\item $S$ is closed under addition.
+		\item $S$ is closed under scalar multiplication.
+	\end{itemize}
+\end{definition}
+
+A very simple example of a subspace is the set of all vectors that can be reached by just a few vectors.
+
+\begin{theorem}[Span as a subspace]
+	Let $S$ be a set of vectors in $\R^n$.
+	Then $\pfn{span}(S)$ is a subspace of $\R^n$.
+\end{theorem}
+
+In this section, we will focus on three particular examples of subspaces, two of which are constructed by taking the span of some vectors.
+
+\begin{definition}[Row space and column space]
+	Let $A$ be an $m\times n$ matrix.
+	\begin{itemize}
+		\item The row space $\pfn{row}(A)$ of $A$ is the subspace of $\R^n$ spanned by the rows of $A$.
+		\item The column space $\pfn{col}(A)$ of $A$ is the subspace of $\R^m$ spanned by the columns of $A$.
+	\end{itemize}
+\end{definition}
+
+Drawing a connection to something we already know, we can note that a matrix's row space is invariant under elementary row operations.
+(The column space is also invariant under ``column'' operations, but that's less relevant to us).
+
+\begin{theorem}[Row spaces of row equivalent matrices]
+	Let $B$ be any matrix that is row equivalent to a matrix $A$.
+	Then $\pfn{row}(B) = \pfn{row}(A)$.
+\end{theorem}
+
+As for the third space of interest, we should also know that the solution set of a homogeneous linear system is a subspace.
+This subspace, like the row and column spaces, has a special name.
+
+\begin{theorem}[Solution space of a homogeneous linear system]
+	Let $A$ be an $m\times n$ matrix and let $S$ be the set of solutions of the homogeneous linear system $A\mbf{x} = \mbf{0}$.
+	Then $S$ is a subspace of $\R^n$.
+\end{theorem}
+
+\begin{definition}[Null space]
+	Let $A$ be an $m\times n$ matrix.
+	The null space $\pfn{null}(A)$ of $A$ is the subspaace of $A$ consisting of solutions of the homogeneous linear system $A\mbf{x} = \mbf{0}$.
+\end{definition}
+
+Now, given any two solutions $\mbf{x}_1$ and $\mbf{x}_2$ to the linear system $A\mbf{x} = \mbf{b}$, their difference $\mbf{x}_0 = \mbf{x}_2 - \mbf{x}_1$ solves the associated homogeneous linear system $A\mbf{x} = \mbf{0}$.
+If $\mbf{x}_1$ and $\mbf{x}_2$ are distinct, then $\mbf{x}_0 \neq \mbf{0}$ and $\pfn{null} (A)$ is nontrivial.
+Since $\mbf{x}_1 + c\mbf{x}_0$ solves the linear system for all $c \in \R$, the system must have infinitely many solutions.
+This discussion is summarized in the following theorem.
+
+\begin{theorem}[Number of solutions to a linear system]
+	Let $A$ be a matrix whose entries are real numbers.
+	For any system of linear equations $A\mbf{x} = \mbf{b}$, exactly one of the following is true:
+	\begin{enumerate}[label=(\alph*)]
+		\item There is no solution.
+		\item There is a unique solution.
+		\item There are infinitely many solutions.
+	\end{enumerate}
+\end{theorem}
+
+Let's move our discussion along with a new definition.
+
+\begin{definition}[Basis of a subspace]
+	A basis for a subspace $S$ of $\R^n$ is a set of vectors in $S$ that
+	\begin{itemize}
+		\item spans $S$ and
+		\item is linearly independent.
+	\end{itemize}
+\end{definition}
+
+A basis is the minimum information required to completely describe a subspace, so there's a lot of value in knowing it.
+Thankfully, for each subspace we've discussed, there is a straightforward way to find a basis.
+
+\begin{definition}[Determining bases for row, column, and null spaces]
+	To find bases for the row, column, and null spaces of a matrix $A$:
+	\begin{enumerate}
+		\item Find the reduced row echelon form $R$ of $A$.
+		\item $\pfn{row}(A)$: Use the nonzero row vectors of $R$.
+		\item $\pfn{col}(A)$: Use the column vectors of $A$ that correspond to the columns of $R$ with the leading 1s.
+		\item $\pfn{null}(A)$: Solve the linear system $R\mbf{x} = \mbf{0}$ and write the solution as a linear combination of vectors times free variables.
+	\end{enumerate}
+\end{definition}
+
+No subspace (except for the trivial space $\{ \mbf{0} \}$) has a unique basis.
+However, every possible basis for a subspace will have the same number of vectors, making this number an important intrinsic property of subspaces.
+
+\begin{theorem}[Sizes of distinct bases]
+	Let $S$ be a subspace of $\R^n$.
+	Then any two bases for $S$ have the same number of vectors.
+\end{theorem}
+
+\begin{definition}[Dimension]
+	If $S$ is a subspace of $\R^n$, then the number of vectors in a basis for $S$ is called the dimension of $S$, denoted by $\dim(S)$.
+\end{definition}
+
+The dimensions of the row and column space do not change under the influence of elementary row operations.
+Therefore, since in RREF the dimensions of the row and column space are the same, this is also true for the non-RREF matrix.
+
+\begin{theorem}[Row and column space dimensions]
+	The row and column spaces of a matrix $A$ have the same dimension.
+\end{theorem}
+
+This quantity, the dimension of the row and column space, also gets a name.
+
+\begin{definition}[Rank]
+	The rank $\pfn{rank}(A)$ of a matrix $A$ is the dimension of its row and column space.
+\end{definition}
+
+When we take the transpose of a matrix, its row and column spaces simply get swapped.
+The following, then, should not be surprising.
+
+\begin{theorem}[Rank of a transpose]
+	For any matrix $A$, $\pfn{rank}(A^T) = \pfn{rank}(A)$.
+\end{theorem}
+
+Just as the dimension of the row and column space has a name, so too does the dimension of the null space.
+
+\begin{definition}[Nullity]
+	The nullity $\pfn{nullity}(A)$ of a matrix $A$ is the dimension of its null space.
+\end{definition}
+
+Roughly, the nullity quantifies how many vectors are mapped to $\mbf{0}$ by the matrix, and the rank quantifies how many vectors are not mapped to $\mbf{0}$.
+It should not be surprising, then, that these quantities add up to the total ``amount'' of vectors being acted upon.
+
+\begin{theorem}[Rank theorem]
+	If $A$ is an $m\times n$ matrix, then
+	\[ \pfn{rank}(A) + \pfn{nullity}(A) = n. \]
+\end{theorem}
+
+At this point, we can add a bit more to the fundamental theorem.
+
+\begin{theorem}[Additions to the FTLA]
+	Let $A$ be an $n\times n$ matrix.
+	The following statements are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is invertible. \\
+		\phantom{~}\hspace{-19.5pt} \vdots
+		\setcounter{enumi}{5}		
+		\item $\pfn{rank}(A) = n$
+		\item $\pfn{nullity}(A) = 0$
+		\item The column vectors of $A$ are linearly independent.
+		\item The column vectors of $A$ span $\R^n$.
+		\item The column vectors of $A$ form a basis for $\R^n$.
+		\item The row vectors of $A$ are linearly independent.
+		\item The row vectors of $A$ span $\R^n$.
+		\item The row vectors of $A$ form a basis for $\R^n$.
+	\end{enumerate}
+	For the full theorem, see Appendix A.
+\end{theorem}
+
+The following is a small application of both the FTLA and the rank theorem.
+
+\begin{theorem}[Rank and invertibility of $A^TA$]
+	Let $A$ be an $m\times n$ matrix.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\pfn{rank}(A^TA) = \pfn{rank}(A)$
+		\item The $n\times n$ matrix $A^TA$ is invertible if and only if $\pfn{rank}(A) = n$
+	\end{enumerate}
+\end{theorem}
+
+There's one more very important reason why we're concerned with bases.
+They allow us to uniquely represent vectors in a particular subspace.
+
+\begin{theorem}[Unique representation of a vector]
+	Let $S$ be a subspace of $\R^n$ and let $\mathcal{B}$ be a basis for $S$.
+	For every vector $\mbf{v}$ in $S$, there is exactly one way to write $\mbf{v}$ as a linear combination of the basis vectors in $\mathcal{B}$.
+\end{theorem}
+
+Eventually, we'll use this idea to construct arbitrary coordinate systems for subspaces, all based around the bases of those subspaces.
+More on that later.
+
+\end{document}

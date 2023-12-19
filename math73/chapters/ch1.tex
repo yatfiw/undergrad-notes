@@ -1,0 +1,152 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{The Geometry and Algebra of Vectors}
+One of the fundamental objects of linear algebra is the vector.
+Vectors can take a variety of forms; for now, we will consider the simplest type, defined below.
+
+\begin{definition}[Vectors in $\R^n$]
+	$\R^n$ is the set of all ordered $n$-tuples of real numbers.
+	These tuples are called vectors, and they are written in the form
+	\[ \begin{bmatrix} v_1 & v_2 & \cdots & v_n \end{bmatrix} \text{ or } \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}. \]
+	A vector all of whose components are zero is called the zero vector $\mbf{0}$.
+\end{definition}
+
+Rather than considering vectors in two- or three-dimensional space, as was the case in previous courses, we now think of vectors as objeccts in $n$-dimensional space.
+However, we define addition and scalar multiplication in the same way.
+
+\begin{definition}[Vector operations]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $\R^n$ and let $c$ be a scalar.
+	Then the sum of $\mbf{u}$ and $\mbf{v}$ is defined componentwise:
+	\[ \mbf{u} + \mbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}. \]
+	Similarly, scalar multiplication between $c$ and $\mbf{v}$ is defined componentwise:
+	\[ c \mbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}. \]
+\end{definition}
+
+Since we've defined these two operations in familiar ways, it might not be surprising that many of their properties are also familiar.
+
+\begin{theorem}[Algebraic properties of vectors]
+	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in $\R^n$ and let $c$ and $d$ be scalars.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $\mbf{u} + \mbf{v} = \mbf{v} + \mbf{u}$.
+		\item $(\mbf{u} + \mbf{v}) + \mbf{w} = \mbf{u} + (\mbf{v} + \mbf{w})$.
+		\item $\mbf{u} + \mbf{0} = \mbf{u}$.
+		\item $\mbf{u} + (-\mbf{u}) = \mbf{0}$.
+		\item $c(\mbf{u} + \mbf{v}) + c \mbf{u} + c \mbf{v}$.
+		\item $(c + d) \mbf{u} = c \mbf{u} + d \mbf{u}$.
+		\item $c(d \mbf{u}) = (cd) \mbf{u}$.
+		\item $1 \mbf{u} = \mbf{u}$.
+	\end{enumerate}
+\end{theorem}
+
+Familiar properties aside, there's one very important thing we can do with these operations.
+We can combine vectors in a very particular way to create a new vector.
+
+\begin{definition}[Linear combination]
+	A vector $\mbf{v}$ is a linear combination of vectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ if there are scalars $c_1, c_2, \ldots, c_k$ such that
+	\[ \mbf{v} = c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k. \]
+	The scalars $c_1, c_2, \ldots, c_k$ are called the coefficients of the linear combination.
+\end{definition}
+
+The notion of the linear combination leads us to some powerful results---we will investigate these later.
+
+\section{The Dot Product}
+We now define a new vector operation.
+This time, we'll take a pair of two vectors and associate it with a scalar in the way defined below.
+
+\begin{definition}[Dot product]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $\R^n$.
+	The dot product of $\mbf{u}$ and $\mbf{v}$ is defined by
+	\[ \mbf{u} \cdot \mbf{v} = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n. \]
+\end{definition}
+
+The dot product turns out to have some very natural properties, many of which are reminiscent of the multiplication of real numbers.
+
+\begin{theorem}[Algebraic properties of the dot product]
+	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in $\R^n$ and let $c$ be a scalar.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $\mbf{u} \cdot \mbf{v} = \mbf{v} \cdot \mbf{u}$.
+		\item $\mbf{u} \cdot (\mbf{v} + \mbf{w}) = \mbf{u} \cdot \mbf{v} + \mbf{u} \cdot \mbf{w}$.
+		\item $(c \mbf{u}) \cdot \mbf{v} = c(\mbf{u} \cdot \mbf{v})$.
+		\item $\mbf{u} \cdot \mbf{u} \geq 0$ and $\mbf{u} \cdot \mbf{u} = 0$ if and only if $\mbf{u} = \mbf{0}$.
+	\end{enumerate}
+\end{theorem}
+
+The real importance of the dot product is that it us to define things like length in higher dimensions.
+
+\begin{definition}[Length]
+	The length (or norm) of a vector $\mbf{v}$ in $\R^n$ is the nonnegative scalar $\|\mbf{v}\|$ defined by
+	\[ \|\mbf{v}\| = \sqrt{\mbf{v} \cdot \mbf{v}} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}. \]
+\end{definition}
+
+Vectors that have a length of 1 are, in general, nice to work with.
+These vectors are especially nice when they describe the typical coordinate axes.
+
+\begin{definition}[Unit vector]
+	A vector of length 1 is called a unit vector.
+	The standard unit vectors in $\R^n$ are
+	\[ \mbf{e}_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \quad \mbf{e}_2 = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \quad \ldots, \quad \mbf{e}_n = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}. \]
+\end{definition}
+
+Given how natural the notion of length is, a couple of its basic properties might be expected.
+
+\begin{theorem}[Properties of the norm]
+	Let $\mbf{v}$ be a vector in $\R^n$ and let $c$ be a scalar.
+	Then
+	\begin{enumerate}[label=(\alph*)]
+		\item $\|\mbf{v}\| = 0$ if and only if $\mbf{v} = \mbf{0}$.
+		\item $\|c \mbf{v}\| = |c| \|\mbf{v}\|$.
+	\end{enumerate}
+\end{theorem}
+
+Now, we have a pair of perhaps less expected but still very important inequalities.
+
+\begin{theorem}[Cauchy-Schwarz inequality]
+	For all vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
+	\[ |\mbf{u} \cdot \mbf{v}| \leq \|\mbf{u}\| \|\mbf{v}\|. \]
+\end{theorem}
+
+\begin{theorem}[Triangle inequality]
+	For all vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
+	\[ \|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|. \]
+\end{theorem}
+
+Moving along, not only does the dot product allow us to define the length of a vector, but it also allows us to define such other geometric concepts as the distance or angle between two vectors.
+
+\begin{definition}[Distance]
+	The distance between two vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$ is defined by
+	\[ d(\mbf{u}, \mbf{v}) = \|\mbf{u} - \mbf{v}\|. \]
+\end{definition}
+
+\begin{definition}[Angle]
+	For nonzero vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
+	\[ \cos \theta = \frac{\mbf{u} \cdot \mbf{v}}{\|\mbf{u}\| \|\mbf{v}\|}. \]
+\end{definition}
+
+We might expect that two vectors are perpendicular to each other if the angle between them is $\dfrac{\pi}{2}$.
+Given how we've defined this angle, we can use the dot product to determine whether two vectors are perpendicular to each other.
+
+\begin{definition}[Orthogonality]
+	Two vectors $\mbf{u}$ and $\mbf{v}$ are orthogonal (or perpendicular) to each other if $\mbf{u} \cdot \mbf{v} = 0$.
+\end{definition}
+
+If we imagine that two orthogonal vectors are the two legs of a right triangle, we get a familiar result.
+
+\begin{theorem}[Pythagorean theorem]
+	For all vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
+	\[ \|\mbf{u} + \mbf{v}\|^2 = \|\mbf{u}\|^2 + \|\mbf{v}\|^2 \]
+	if and only if $\mbf{u}$ and $\mbf{v}$ are orthogonal.
+\end{theorem}
+
+Finally, we can imagine what happens when one vector $\mbf{v}$ casts a ``shadow'' onto another vector $\mbf{v}$.
+
+\begin{definition}[Projection onto a vector]
+	If $\mbf{u}$ and $\mbf{v}$ are vectors in $\R^2$ and $\mbf{u} \neq \mbf{0}$, then the projection of $\mbf{v}$ onto $\mbf{u}$ is the vector defined by
+	\[ \pfn{proj}_{\mbf{u}} \mbf{v} = \left( \frac{\mbf{u} \cdot \mbf{v}}{\|\mbf{u}\|} \right) \frac{\mbf{u}}{\|\mbf{u}\|}. \]
+\end{definition}
+
+\end{document}

@@ -1,0 +1,160 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Inner Product Spaces}
+We begin this chapter by continuing our generalization of Euclidean vector spaces.
+Here, we define the inner product as a generalization of the dot product.
+
+\begin{definition}[Inner product]
+	An inner product on a vector space $V$ is an operation that assigns to every pair of vectors $\mbf{u}, \mbf{v} \in V$ a real number $\left< \mbf{u}, \mbf{v} \right>$ such that the following properties hold for all vectors $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ in $W$ and all scalars $c$:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\left< \mbf{u}, \mbf{v} \right> = \left< \mbf{v}, \mbf{u} \right>$.
+		\item $\left< \mbf{u}, \mbf{v} + \mbf{w} \right> = \left< \mbf{u}, \mbf{v} \right> + \left< \mbf{u}, \mbf{w} \right>$.
+		\item $\left< c \mbf{u}, \mbf{v} \right> = c \left< \mbf{u}, \mbf{v} \right>$.
+		\item $\left< \mbf{u}, \mbf{u} \right> \geq 0$ and $\left< \mbf{u}, \mbf{u} \right> = 0$ if and only if $\mbf{u} = \mbf{0}$.
+	\end{enumerate}
+	A vector space with an inner product is called an inner product space.
+\end{definition}
+
+\begin{theorem}[Properties of the inner product]
+	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in an inner product space $V$ and let $c$ be a scalar.
+	\begin{enumerate}[label=(\alph*)]
+		\item $\left< \mbf{u} + \mbf{v}, \mbf{w} \right> = \left< \mbf{u}, \mbf{w} \right> + \left< \mbf{v}, \mbf{w} \right>$.
+		\item $\left< \mbf{u}, c \mbf{v} \right> = c \left< \mbf{u}, \mbf{v} \right>$.
+		\item $\left< \mbf{u}, \mbf{0} \right> = \left< \mbf{0}, \mbf{v} \right> = 0$.
+	\end{enumerate}
+\end{theorem}
+
+We can now define such notions as length, distance, and orthogonality in abstract vector spaces.
+The remainder of this section will be dedicated to rehashing many of the related results from Euclidean spaces.
+
+\begin{definition}[Geometry in inner product spaces]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in an inner product space $V$.
+	\begin{enumerate}
+		\item The length (or norm) of $\mbf{v}$ is $\|\mbf{v}\| = \sqrt{\left< \mbf{v}, \mbf{v} \right>}$.
+		(A unit vector is a vector of length 1.)
+		\item The distance between $\mbf{u}$ and $\mbf{v}$ is $\pfn{d}(\mbf{u}, \mbf{v}) = \|\mbf{u} - \mbf{v}\|$.
+		\item $\mbf{u}$ and $\mbf{v}$ are orthogonal if $\left< \mbf{u}, \mbf{v} \right> = 0$.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Pythagorean theorem]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in an inner product space $V$.
+	Then $\mbf{u}$ and $\mbf{v}$ are orthogonal if and only if
+	\[ \|\mbf{u} + \mbf{v}\|^2 = \|\mbf{u}\|^2 + \|\mbf{v}\|^2. \]
+\end{theorem}
+
+\begin{definition}[Orthogonal projection]
+	Let $\{\mbf{u}_1, \ldots, \mbf{u}_k\}$ be an orthogonal basis for a subspace $W$ of an inner product space $V$, and let $\mbf{v}$ be a vector in $V$.
+	Then the orthogonal projection $\pfn{proj}_W(\mbf{v})$ of $\mbf{v}$ onto $W$ is
+	\[ \pfn{proj}_W(\mbf{v}) = \frac{\left< \mbf{u}_1, \mbf{v} \right>}{\left< \mbf{u}_1, \mbf{u}_1 \right>} \mbf{u}_1 + \cdots + \frac{\left< \mbf{u}_k, \mbf{v} \right>}{\left< \mbf{u}_k, \mbf{u}_k \right>}. \]
+	The component of $\mbf{v}$ orthogonal to $W$ is the vector
+	\[ \pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v}) \]
+\end{definition}
+
+\begin{theorem}[Cauchy-Schwarz inequality]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in an inner product space $v$.
+	Then
+	\[ |\left< \mbf{u}, \mbf{v} \right>| \leq \|\mbf{u}\| \|\mbf{v}\|, \]
+	with equality holding if and only if $\mbf{u}$ and $\mbf{v}$ are scalar multiples of each other.
+\end{theorem}
+
+\begin{theorem}[Triangle inequality]
+	Let $\mbf{u}$ and $\mbf{v}$ be vectors in an inner product space $V$.
+	Then
+	\[ \|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|. \]
+\end{theorem}
+
+\section{Least Squares Approximation}
+This section is motivated by the search for a ``line of best fit'' for a given set of data.
+We begin by speaking strictly in terms of vectors.
+
+\begin{definition}[Best approximation of a vector]
+	If $W$ is a subspace of a normed vector space $V$ and if $\mbf{v}$ is a vector in $V$, then the best approximation to $\mbf{v}$ in $W$ is the vector $\overline{\mbf{v}}$ in $W$ such that
+	\[ \|\mbf{v} - \overline{\mbf{v}}\| < \|\mbf{v} - \mbf{w}\| \]
+	for every vector $\mbf{w}$ in $W$ different from $\overline{\mbf{v}}$.
+\end{definition}
+
+Provided that $V$ is equipped with an inner product, our problem has a simple solution.
+
+\begin{theorem}[Best approximation theorem]
+	If $W$ is a finite-dimensional subspace of an inner product space $V$ and if $\mbf{v}$ is a vector in $V$, then $\pfn{proj}_W(\mbf{v})$ is the best approximation to $\mbf{v}$ in $W$.
+\end{theorem}
+
+We can use this pair of ideas to determine approximate solutions to inconsistent linear systems.
+
+\begin{definition}[Least squares solution]
+	If $A$ is an $m \times n$ matrix and $\mbf{b}$ is in $\R^m$, a least squares soution of $A \mbf{x} = \mbf{b}$ is a vector $\overline{\mbf{x}}$ in $\R^n$ such that
+	\[ \|\mbf{b} - A \overline{\mbf{x}}\| \leq \|\mbf{b} - A \mbf{x}\| \]
+	for all $\mbf{x}$ in $\R^n$.
+\end{definition}
+
+Note that $\mbf{b} - A \overline{\mbf{x}} = \pfn{perp}_{\pfn{col}(A)}(\mbf{b})$.
+Therefore, $\mbf{b} - A \overline{\mbf{x}}$ is in $(\pfn{col}(A))^\perp = \pfn{null}(A^T)$, and we have the following.
+
+\begin{theorem}[Least squares theorem]
+	Let $A$ be an $m \times n$ matrix and let $\mbf{b}$ be in $\R^m$.
+	Then $A \mbf{x} = \mbf{b}$ always has at least one least squares solution $\overline{\mbf{x}}$.
+	Moreover:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\overline{\mbf{x}}$ is a least squares solution of $A \mbf{x} = \mbf{b}$ if and only if $\overline{\mbf{x}}$ is a solution of the normal equations $A^TA \overline{\mbf{x}} = A^T \mbf{b}$.
+		\item $A$ has linearly independent columns if and only if $A^TA$ is invertible.
+			  In this case, the least squares solution of $A \mbf{x} = \mbf{b}$ is unique and is given by
+			  \[ \overline{\mbf{x}} = (A^TA)^{-1}A^T \mbf{b}. \]
+	\end{enumerate}
+\end{theorem}
+
+Suppose we have a set of points of the form $(x_i, y_i)$, and we want to find a line of best fit $y = a + bx$ through them.
+To do this, we use the above theorem to find a least-squares solution to the linear system
+\[ \begin{bmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{bmatrix} \begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}. \]
+
+Computing $A^T A$ may take some time, and solving the resulting system of equations may take even longer.
+However, if we have a $QR$ factorization of $A$, our job is made much easier.
+
+\begin{theorem}[Least squares via $QR$ factorization]
+	Let $A$ be an $m \times n$ matrix with linearly independent columns and let $\mbf{b}$ be in $\R^m$.
+	If $A = QR$ is a $QR$ factorization of $A$, then the unique least square ssolution $\overline{\mbf{x}}$ of $A \mbf{x} = \mbf{v}$ is
+	\[ \overline{\mbf{x}} = R^{-1} Q^T \mbf{b}. \]
+\end{theorem}
+
+\section{The Singular Value Decomposition}
+In this final section, we will briefly investigate one last matrix decomposition.
+These have to do with the singular values of a matrix, deifned below.
+
+\begin{definition}[Singular values]
+	If $A$ is an $m \times n$ matrix, the singular values of $A$ are the square roots of the eigenvalues of $A^T A$ and are denoted by $\sigma_1, \ldots, \sigma_n$. It is conventional to arrange the singular values so that $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n$.
+\end{definition}
+
+If the eigenvalues of a matrix have to do with a lack of motion under a linear transformation, the singular values of a matrix quantifies the maximum and minimum motions of space under a linear transformation.
+We can use these singular values, along with the matrix's eigenvectors, to construct a relatively straightforward decomposition.
+
+\begin{theorem}[Singular value decomposition]
+	Let $A$ be an $m \times n$ matrix with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0$ and $\sigma_{r+1} = \sigma_{r+2} = \cdots = \sigma_n = 0$.
+	Then there eixst an $m \times m$ orthogonal matrix $U$, an $n \times n$ orthogonal matrix $V$, and an $m \times n$ matrix $\Sigma$ such that
+	\[ A = U \Sigma V^T. \]
+	The matrix $\Sigma$ contains the ordered singular values of $A$ along its main diagonal.
+	The matrices other $V$ and $U$ are of the following forms:
+	\begin{gather*}
+		V = \begin{bmatrix} \mbf{v}_1 & \cdots & \mbf{v}_n \end{bmatrix} \\
+		U = \begin{bmatrix} \mbf{u}_1 & \cdots & \mbf{u}_m \end{bmatrix}
+	\end{gather*}
+	where $\mbf{v}_1, \ldots, \mbf{v}_n$ are the eigenvectors of $A^T A$, $\mbf{u}_i = \frac{1}{\sigma_i} A \mbf{v}_i$ for $i \leq r$, and $\mbf{u}_{r+1}, \ldots, \mbf{u}_m$ are vectors added to the set $\{ \mbf{u}_1, \ldots, \mbf{u}_r \}$ to make it a basis for $\R^m$.
+\end{theorem}
+
+We can now make one last addition to the Fundamental Theorem.
+
+\begin{theorem}[Additions to the FTLA]
+	Let $A$ be an $n\times n$ matrix and let $T : V \to V$ be a linear transformation whose matrix $[T]_{\mathcal{C} \from \mathcal{B}}$ with respect to bases $\mathcal{B}$ and $\mathcal{C}$ of $V$ and $W$, respectively, is $A$.
+	The following statements are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is invertible. \\
+		\phantom{~}\hspace{-19.5pt} \vdots
+		\setcounter{enumi}{20}
+		\item 0 is not a singular value of $A$.
+	\end{enumerate}
+	For the full theorem, see Appendix A.
+\end{theorem}
+
+\end{document}

@@ -1,0 +1,281 @@
+\documentclass[../m82main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Theory of Higher-Order Differential Equations}
+We begin this new chapter by extending our discussion of existence and uniqueness.
+
+\begin{theorem}[Existence and uniqueness of solutions to a linear DE]
+    Consider this IVP for an $n$-th order linear DE in normal form:
+    \begin{gather*}
+        y^{(n)} + p_{n-1}(t)y^{(n-1)} + \cdots + p_1(t)y' + p_0(t)y = q(t) \\
+        \text{with }\; y(t_0),\; y'(t_0),\; \ldots,\; y^{(n-1)}(t_0)
+    \end{gather*}
+    If the coefficients $p_0(t),\; \ldots,\; p_{n-1}(t),\; q(t)$  $(a, b)$ containing $t_0$, then the solution of the IVP exists and is unique on the whole interval $(a, b)$.
+\end{theorem}
+
+Note that Theorem 3.1 is simply Theorem 2.3 recast in terms of order $n$ instead of order 1.
+This gives one example of how results for relatively simple differential equations can often be generalized quite easily to higher-order DEs.
+In a similar vein, the remainder of this section will focus on the theory of linear second-order differential equations, but all of the definitions and results can be easiy generalized to the $n$-th order.
+
+\begin{theorem}[Solution spaces as vector spaces]
+    Let the coefficients $a_0$, $a_1$, and $a_2$ be continuous on an interval $I$.
+    Then solutions to the homogeneous linear DE $a_2(t)y'' + a_1(t)y' + a_0(t)y = 0$ comprise a two-dimensional vector space.
+\end{theorem}
+
+It is easy to show that the solution space $S$ of a homogeneous DE is a vector space: $S$ is a subset of the set of twice-differentiable functions, which is known to be a vector space; also, it is easy to verify that $S$ is closed under linear combinations.
+In order to determine $\dim (S)$, however, we must develop the notion of linear independence.
+Since we can think of functions as elements of a vector space, the definition of linear independence is natural.
+
+\begin{definition}[Linear dependence]
+    Two functions $f$ and $g$ are called linearly dependent if there exist constants $c_1$ and $c_2$, not both zero, such that
+    \[ c_1f(t) + c_2g(t) = 0. \]
+    A pair of functions that is not linearly dependent is called linearly independent.
+\end{definition}
+
+Depending on the functions at hand, determining linear dependence by solving for $c_1$ and $c_2$ can be cumbersome.
+In a step toward an easier test, suppose that $f$ and $g$ are linearly dependent on an interval $I$.
+Rewrite the linear combination as $\displaystyle \frac{g(t)}{f(t)} = -\frac{c_1}{c_2}$ and differentiate to get
+\[ \frac{f(t)g'(t) - g(t)f'(t)}{f(t)^2} = 0. \]
+Therefore, if $f$ and $g$ are linearly dependent, then $f(t)g'(t) - g(t)f'(t) = 0$ for all $t \in I$.
+We'll give this difference a special name and state the result's contrapositive as a theorem.
+
+\begin{definition}[Wronskian]
+    The Wronskian $W$ of two functions $y_1$ and $y_2$ is the determinant
+    \[ W[y_1, y_2] = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix}. \]
+\end{definition}
+
+\begin{theorem}[Condition for linear independence]
+    If $W[y_1, y_2](t) \neq 0$ for some $t \in I$, then $y_1$ and $y_2$ are linearly independent on $I$.
+\end{theorem}
+
+Note that the converse is not true: if $W[y_1, y_2] = 0$ for all $t \in I$, the test is inconclusive.
+Things are simpler, however, when the functions are solutions to a linear DE.
+
+Suppose $y_1$ and $y_2$ solve the DE $y'' + py' + qy = 0$.
+When we differentiate the Wronskian $W[y_1, y_2]$, we find that $\dfrac{dW}{dt} = -pW$, which is a separable DE.
+Solving this DE gives the following.
+
+\begin{theorem}[Abel's theorem]
+    Let $p$ and $q$ be continuous on an interval $I$ and let $y_1$ and $y_2$ solve the DE $y'' + py' + qy = 0$.
+    Then, for some constant $C$, $W[y_1, y_2] = Ce^{-\int p(t) dt}$.
+\end{theorem}
+
+Since either $C = 0$ or $C \neq 0$, we have a corollary.
+
+\begin{corollary}[$W(t_0) = 0$ implies identially zero]
+    If $y_1$ and $y_2$ are any two solutions to $y'' + py' + qy = 0$ on an interval $I$, then either $W[y_1, y_2](t) = 0$ or $W[y_1, y_2](t) \neq 0$ for all $t \in I$.
+\end{corollary}
+
+We can now show that the solution space of a linear second-order homogeneous DE has dimension two.
+
+Consider the DE $y'' + py' + qy = 0$.
+For some $t_0 \in I$, let $y_1$ be a solution satisfying the initial conditions $y(t_0) = 1$, $y'(t_0) = 0$ and let $y_2$ be a solution satisfying $y(t_0) = 0$, $y'(t_0) = 1$.
+Since $W[y_1, y_2](t_0) = 1 \neq 0$, $y_1$ and $y_2$ are linearly independent on $I$.
+Therefore, the dimension of the DE's solution space is at least 2.
+
+On the other hand, consider the same DE under the initial conditions $y(t_0) = \alpha$, $y'(t_0) = \beta$.
+We can show that the solution to this IVP is $y = \alpha y_1 + \beta y_2$.
+Therefore, a solution $y$ to any IVP involving the above DE must necessarily lay in the span of $y_1$ and $y_2$, meaning the dimension of the DE's solution space is at most 2.
+
+All of this means that the DE's solution space is of dimension 2, and any pair of linearly independent solutions forms a basis for the space.
+This basis has a special name.
+
+\begin{definition}[Fundamental solution set]
+    A pair of functions $y_1$, $y_2$ solving the DE $y'' + py' + qy = 0$ form a fundamental solution set on the interval $I$ if $W[y_1, y_2] \neq 0$ for some $t \in I$.
+\end{definition}
+
+Now, what if our DE is instead inhomogeneous?
+Including a forcing term $f(t)$ complicates things slightly.
+When we solve, we still include the general solution to the corresponding homogeneous DE (since the DE just maps it to zero), but we have to add on some other particular solution that accounts for the forcing term.
+
+\begin{theorem}[General solution to an inhomogenous linear DE]
+    Let $y_p$ be a particular solution to the inhomogeneous DE $y'' + py' + qy = f(t)$ and let $y_h$ be the general solution to the associated homogeneous DE.
+    Then the general solution to the inhomogeneous DE is
+    \[ y(t) = y_p(t) + y_h(t). \]
+\end{theorem}
+
+\section{Homogeneous, Constant-Coefficient Differential Equations}
+Arguably the simplest second-order ODEs are those homogeneous ones with constant coefficients.
+Below, we derive a general solution to DEs of this form.
+
+\begin{example}[Solving a constant-coefficient DE]
+    We are concerned with equations of the form
+    \[ ay'' + by' + cy = 0, \]
+    where $a$, $b$, and $c$ are constants.
+    Let $\lambda_{1,2}$ solve the characteristic equation $a \lambda^2 + b \lambda + c = 0$, meaning $b = -a(\lambda_1 + \lambda_2)$ and $c = a \lambda_1 \lambda_2$.
+    Substituting these into the DE:
+    \begin{align*}
+        ay'' - a(\lambda_1 + \lambda_2)y' + a \lambda_1 \lambda_2 &= 0 \\
+        y'' - \lambda_1 y' - \lambda_2 (y' - \lambda_1 y) &= 0 \\
+        (y' - \lambda_1 y)' - \lambda_2 (y' - \lambda_1 y) &= 0
+    \end{align*}
+    Define $u = y' - \lambda_1 y$ to get the DE $u' - \lambda_2 u = 0$, which has the solution $u = Ae^{\lambda_2 x}$.
+    This in turn yields the DE $y' - \lambda_1 y = Ae^{\lambda_2 x}$, the solution of which is $\displaystyle y = e^{\lambda_1 x} \int Ae^{(\lambda_2 - \lambda_1)x} dx$.
+    This leaves us with two possibilities.
+    \begin{align*}
+        \lambda_1 \neq \lambda_2&:\quad y(x) = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x} \\
+        \lambda_1 = \lambda_2&:\quad y(x) = C_1e^{\lambda_1 x} + C_2 x e^{\lambda_1 x}
+    \end{align*}
+\end{example}
+
+\begin{theorem}[General solution to a homogenenous constant-coefficient DE]
+    Consider the DE $ay'' + by' + cy = 0$, where $a$, $b$, and $c$ are constants.
+    Let $\lambda_{1,2}$ solve the equation $a\lambda^2 + b\lambda + c = 0$.
+    If $\lambda_1 \neq \lambda_2$, then the general solution to the DE is
+    \[ y(x) = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x}. \]
+    If $\lambda_1 = \lambda_2$, then the general solution is instead
+    \[ y(x) = C_1 e^{\lambda_1 x} + C_2 x e^{\lambda_1 x}. \]
+\end{theorem}
+
+\section{Inhomogeneous Differential Equations}
+When we introduce a forcing term into the equation, the path to solution splits into two branches: first we determine the general solution to the associated homogeneous equation (perhaps using the method described previously), then we use some other method to find a particular solution to the inhomogeneous DE.
+We'll describe two of these methods here, the first of which simply boils down to a guessing game.
+
+\begin{definition}[Undetermined coefficients]
+    Consider the DE $p_2(x)y'' + p_1(x)y' + p_0(x)y = f(x)$.
+    The method of undetermined coefficients may be used to find a particular solutoin to this DE; the procedure is as follows.
+    \begin{itemize}
+        \item Use $f(t)$ to guess a particular solution as a linear combination of some related functions.
+        \item Plug the guess (a.k.a. ansatz) into the DE and determine the unknown constants.
+        \item If the guess doesn't work, go back to step one and try something different.
+        If it does, then the guess (with the unknown coefficients now determined) is a particular solution to the DE.
+    \end{itemize}
+    If we have initial conditions, we substitute them into the general solution to the DE (see Theorem 3.6).
+\end{definition}
+
+\textit{Remarks.}
+The ansatz should take into account any of the functions that the forcing term cycles through under differentiation; for example, if $f(x)$ is sinusoidal, then we might guess that the solution is a linear combination of a sine and a cosine.
+The ansatz also depends on the DE's homogeneous solution.
+We want a guess that is linearly independent of the correspoding homogeneous DE's fundamental solution set, because otherwise the DE will map the ansatz to zero and no progress will have been made.
+Based on the repeated roots case of the previous solution method, if $f(x)$ shows up in the homogeneous solution, we might tack an extra $x$ onto the guess and try again.
+
+An advantage of this solution method is that it can involve minimal work to find an answer.
+However, this relies on the forcing funciton being nice to work with.
+If this is not the case, we might appeal to the other solution method in this section, described below.
+
+\begin{example}[Solving a second-order linear DE via variation of parameters]
+    We aim to find a particular solution to the DE
+    \[ y'' + p_1(t)y' + p_2(t)y = f(t). \]
+    Suppose that $y_1$ and $y_2$ are linearly independent solutions to the associated homogeneous DE.
+    We'll assume that a particular solution to the inhomogeneous DE is of the form
+    \[ y(t) = u_1(t)y_1 + u_2(t)y_2. \]
+    Our aim now is to find two functions $u_1$ and $u_2$ that satisfy this condition.
+    Let's differentiate to get
+    \[ y'(t) = u_1'y_1 + u_1y_1' + u_2'y_2 + u_2y'_2. \]
+    The second derivative is unwieldy.
+    To avoid this, let's put another condition on $u_1$ and $u_2$: they must satisfy $u_1'y_1 + u_2'y_2 = 0$.
+    This gives
+    \[ y'(t) = u_1y_1' + u_2y_2' \]
+    and the second derivative
+    \[ y''(t) = u_1'y_1' + u_1y_1'' + u_2'y_2' + u_2y_2''. \]
+    So, when we substitute $y$ and its derivatives into the DE we get
+    \begin{align*}
+        (u_1'y_1' + u_1y_1'' + u_2'y_2' + u_2y_2'') + p_1 \cdot (u_1y_1' + u_2y_2') + p_2 \cdot (u_1y_1 + u_2y_2) &= f(t) \\
+        u_1'y_1' + u_1 \cdot (y_1'' + p_1y_1' + p_2y_1) + u_2'y_2' + u_2 \cdot (y_2'' + p_1y_2' + p_2y_2) &= f(t)
+    \end{align*}
+    Since $y_1$ and $y_2$ are homogeneous solutions, this simplifies to $u_1'y_1' + u_2'y_2' = f(t)$, giving us the system
+    \begin{align*}
+        u_1'y_1 + u_2'y_2 &= 0 \\
+        u_1'y_1' + u_2'y_2' &= f(t)
+    \end{align*}
+    This can be written as a matrix equation:
+    \[ \begin{bmatrix} y_1 & y_2 \\ y_1' & y_2' \end{bmatrix} \begin{bmatrix} u_1' \\ u_2' \end{bmatrix} = \begin{bmatrix} 0 \\ f(t) \end{bmatrix} \]
+    If $W[y_1, y_2] \neq 0$ then we can write
+    \[ \begin{bmatrix} u_1' \\ u_2' \end{bmatrix} = \frac{1}{W(t)} \begin{bmatrix} y_2' & -y_2 \\ -y_1' & y_1 \end{bmatrix} \begin{bmatrix} 0 \\ f(t) \end{bmatrix}. \]
+    Therefore,
+    \begin{align*}
+        u_1'(x) = -\frac{y_2(x)f(x)}{W(x)} &\;\Longrightarrow\; u_1(t) = -\int \frac{y_2(x)f(x)}{W(x)} dx \\
+        u_2'(x) = \frac{y_1(x)f(x)}{W(x)} &\;\Longrightarrow\; u_2(t) = \int \frac{y_1(x)f(x)}{W(x)} dx
+    \end{align*}
+    This means that a solution to the DE is
+    \[ y(x) = -y_1 \int \frac{y_2(x)f(x)}{W(x)} dx + y_2 \int \frac{y_1(x)f(x)}{W(x)} dx. \]
+    In fact, this is the general solution to the DE---notice how, because each integral comes with a constant of integration, the homogeneous solution is already packed into $y(x)$.
+\end{example}
+
+\begin{theorem}[Variation of parameters]
+    Consider the DE $y'' + p_1(t)y' + p_2(t)y = f(t)$, and let $y_1$ and $y_2$ be linearly independent solutions to the associated homogenenous DE.
+    Then the general solution to the inhomogeneous DE is
+    \[ y(t) = -y_1 \int \frac{y_2(t)f(t)}{W[y_1,y_2](t)} dx + y_2 \int \frac{y_1(t)f(t)}{W[y_1y_2](t)} dx. \]
+\end{theorem}
+
+\section{Series Methods}
+When the general solution to a differential equation cannot be expressed in terms of elementary functions (think exponentials, trig functions, etc), we might resort to expressing the solution as an infinite series.
+We'll discuss two general methods here; before we do, though, we must define some new properties of functions and differential equations.
+
+\begin{definition}[Analytic function]
+    A function $f$ is analytic at a point $x_0$ if there exists $R > 0$ such that $f(x)$ equals its Taylor series centered at $x_0$ for $|x - x_0| < R$.
+\end{definition}
+
+To simplify things, we will only consider Taylor (power) series centered at $x=0$.
+Further, all of the basic functions we're familiar with are analytic on any open interval of their domain, and these functions will be the only ones we'll deal with in this course.
+So for now, in order to determine whether a function is analytic at a point, we need only check that a function is continuous at that point.
+This will be very useful for our next definition, which gives us the two cases that we'll be working with in this section.
+
+\begin{definition}[Ordinary and singular points]
+    Consider the second-order linear homogeneous DE in normal form:
+    \[ y'' + p(x)y' + q(x)y = 0. \]
+    The point $x_0$ is an ordinary point of the DE if both $p(x)$ and $q(x)$ are analytic at $x=0$.
+    Otherwise, $x_0$ is a singular point.
+\end{definition}
+
+Generally, the case in which $x_0$ is an ordinary point is easier to deal with than the singular point case.
+They're both relatively straightforward, however.
+First, the case of the ordinary point is summarized below.
+
+\begin{theorem}[Analytic solution theorem]
+    If $x_0$ is an ordinary point, then the general solution of
+    \[ y'' + p(x)y' + q(x)y = 0 \]
+    has the form
+    \[ y(x) = \sum_{n=0}^\infty a_n x^n = a_0 y_1(x) + a_1 y_2(x) \]
+    where $a_0 = y(0)$ and $a_1 = y'(0)$ are arbitrary constants and $y_1, y_2$ are linearly independent analytic functions.
+    The radius of convergence of $y_1$ and $y_2$ is at least the minimum radious of convergence for $p(x)$ and $q(x)$.
+\end{theorem}
+
+When we apply this theorem to a problem, the solution boils down to a few key steps.
+\begin{enumerate}
+    \item Assume the solution can be represented by a power series centered at zero.
+    \item Differentiate the solution term-by-term and substitute it into the DE.
+    \item Simplify any terms and redindex series to have common powers.
+    \item Determine a recurrence relation for the coefficients $a_n$.
+\end{enumerate}
+Usually, we will obtain two linearly independent power series solutions, each with an infinite number of terms.
+There are some notable exceptions, however, one of which is given below.
+
+\begin{example}[Legendre's equation of order $\lambda$]
+    Consider the DE below, called Legendre's equation of order $\lambda$:
+    \[ (1 - x^2)y'' - 2xy' + \lambda (\lambda + 1)y'' = 0. \]
+    When we go through the motions of solving this DE using power series, we obtain the recurrence relation
+    \[ a_{n+2} = \frac{(n - \lambda)(n + \lambda + 1)}{(n + 2)(n + 1)}. \]
+    If $\lambda$ is a natural number $N$, then we will eventually come across a term $a_N$ that is zero.
+    This sparks a kind of domino effect---every subsequent term whose index has the same parity as $N$ will also be zero, cutting part of the sequence off at $a_{N-2}$.
+
+    In this case, then, one of the linearly independent solutions to the DE is a polynomial rather than a power series.
+    This solution is called the Legendre polynomial of degree $N$, and they have some neat properties making them useful in applications.
+\end{example}
+
+This all handles the ordinary point case, but how about singular points?
+The method does not change much.
+For the purposes of this course, if we must find a solution about a singular point, then a particular solution to the DE is of the form
+\[ y(x) = x^{r} \sum_{n = 0}^\infty a_n x^{n}, \]
+where $a_0 \neq 0$ and $r \in \R$.
+When we solve, we go through all the same steps as we did before;
+this is called the method of Frobenius.
+
+\begin{example}[Bessel's equation of order $\lambda$]
+    Consider the DE below, called Bessel's equation of order $\lambda$.
+    \[ x^2 y'' + xy' + (x^2 - \lambda^2) y = 0. \]
+    Since $x_0 = 0$ is singular, we seek constants $r$ and $a_n$ such that
+    \[ y(x) = \sum_{n = 0}^\infty a_n x^{n+r} \]
+    is a solution.
+    When we go through the motions of solving, assuming $a_0 \neq 0$ we obtain three conditions.
+    If all of these are satisfied, then $y(x)$ satisfies the DE.
+    \begin{enumerate}[label=(\alph*)]
+        \item $r = \pm \lambda$
+        \item $(2r + 1) a_1 = 0$
+        \item $a_n = \dfrac{-a_{n-2}}{n(2r+n)}$, $n \geq 2$
+    \end{enumerate}
+\end{example}
+
+\end{document}

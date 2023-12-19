@@ -1,0 +1,592 @@
+\documentclass[../m55main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Introduction}
+In this chapter we'll extend our discussion to the set of integers $\Z$.
+We don't know anything about primes, GCDs, or modular arithmetic yet---only the basic properties of integer arithmetic.
+
+We begin by formalizing the idea of division and remainders, as we learned back in fourth grade.
+Remember that, when we divide two integers $a$ and $b$, we're left with a unique quotient $q$ and remainder $r$.
+
+\begin{theorem}[Division Algorithm]
+    For any integers $a$ and $b > 0$, there exist unique integers $q$ and $r$ such that
+    \[ a = bq + r, \quad 0 \leq r < b. \]
+\end{theorem}
+
+% TODO: proof here
+
+Oftentimes, we're only interested in the remainder that comes from this division.
+In this case, we write $r = a \bmod b$.
+
+The division algorithm is a powerful tool in number theory!
+We can use it to define and prove a variety of important things, the first of these being the notion of divisibility.
+
+\begin{definition}[Divisibility]
+    We say that $b$ divides $a$ (or $b$ is a divisor of $a$) if there exists an integer $q$ such that $a = bq$.
+    When $b$ divides $a$, we write $b \mid a$.
+\end{definition}
+
+One intuitive consequence of this theorem is that the ``divisibility relation'' is transitive.
+
+\begin{theorem}[Transitive divisibility]
+    If $c \mid b$ and $b \mid a$ then $c \mid a$.
+\end{theorem}
+
+% TODO: proof here
+
+We may use this to prove a much more general and useful theorem about integer combinations.
+(These are like linear combinations, but with strictly integer coefficients.)
+
+\begin{theorem}[Integer combination theorem]
+    If $d \mid a$ and $d \mid b$ then $d \mid ax + by$ for all $x,y \in \Z$.
+\end{theorem}
+
+% TODO: proof here
+
+With this groundwork laid, we can begin talking about GCDs and related topics.
+
+\section{Greatest Common Divisors}
+The greatest common divisor between two numbers $a$ and $b$ is the largest divisor that the numbers have in common.
+This GCD is represented by $\gcd (a,b)$ or, more compactly, $(a,b)$.
+(We define $(a,0) = a$, and $(0,0)$ is undefined.)
+If $(a,b) = 1$, then we say that $a$ and $b$ are relatively prime.
+
+In this section are two significant theorems regarding the GCD.
+In preparation, we have another intuitive fact, which we state as a lemma.
+
+\begin{lemma}
+    For positive integers $d$ and $a$, if $d \mid a$, then $d \leq a$.
+\end{lemma}
+
+\begin{proof}
+    Suppose $d \mid a$.
+    Then $a = dq$ for some integer $q \geq 1$, meaning
+    \begin{align*}
+        a-d &= dq - d \\
+        &= d (q-1)
+    \end{align*}
+    Since $q-1 \geq 0$, $a-d \geq 0$ and $d \leq a$.
+\end{proof}
+
+From this, we get our first wildly unintuitive theorem.
+
+\begin{theorem}[Bezout's theorem]
+    For integers $a,b$, $\gcd (a,b)$ is an integer combination of $a$ and $b$.
+    That is, there exist integers $x$ and $y$ such that $ax + by = \gcd (a,b)$.
+
+    \medskip
+    \textit{Note: This integer combination is not unique.}
+\end{theorem}
+
+\begin{proof}
+    Let $g = \gcd (a,b)$ and let $l = ax_0 + by_0$ be the smallest integer of the form $ax + by$.
+    We will prove that $g = l$ by showing that (i) $g \leq l$ and (ii) $l \leq g$.
+    \smallskip
+
+    (i) By definition, $g \mid a$ and $g \mid b$.
+    So by the integer combination theorem, $g \mid ax + by$ for all $x,y$, meaning $g \mid l$.
+    Therefore, $g \leq l$.
+    \smallskip
+
+    (ii) We will show that $l$ is a common divisor of $a$ and $b$.
+    Suppose, to the contrary, that $l \nmid a$; by the division algorithm,
+    \[ a = lq + r, \quad 0 < r < l. \]
+    We may rewrite this equation as
+    \begin{align*}
+            r &= a - lq \\
+            &= a - (ax_0 + by_0)q \\
+            &= a(1 - x_0q) + b(-y_0q)
+    \end{align*}
+    So $r$ is an integer combination of $a$ and $b$.
+    But, since $0 < r < l$, this contradicts the definition of $l$ as the smallest positive integer combination of $a$ and $b$.
+    Therefore $l$ is a common divisor of $a$ and $b$, and since $g$ is the greatest of these common divisors, $l \leq g$.
+\end{proof}
+
+This result is important in its own right, but it also has a very useful corollary.
+
+\begin{corollary}
+    $a$ and $b$ are relatively prime if and only if there exist $x,y \in \Z$ such that $ax + by = 1$.
+\end{corollary}
+
+\begin{proof}
+    ($\Rightarrow$) Suppose $a$ and $b$ are relatively prime.
+    It immediately follows from Bezout's theorem that there exist $x,y \in \Z$ such that $ax + by = 1$.
+    \smallskip
+
+    ($\Leftarrow$) Conversely, suppose there exist $x,y \in \Z$ such that $ax + by = 1$.
+    Let $d$ be a common divisor of $a$ and $b$; by the integer combination theorem, $d \mid ax + by$, meaning $d \mid 1$.
+    So the only common divisors of $a$ and $b$ are $\pm 1$, meaning $\gcd (a,b) = 1$ and $a$ and $b$ are relatively prime.
+\end{proof}
+
+Bezout's theorem is one of the two ``pillars'' of this section on GCDs.
+The other is Euclid's theorem, stated below.
+
+\begin{theorem}[Euclid's theorem]
+    For $a,b,x \in \Z$, $\gcd (a,b) = \gcd (b, a - bx)$.
+\end{theorem}
+
+% TODO: proof here
+
+Arguably the most useful special case of this theorem applies the division algorithm to quickly compute GCDs.
+
+\begin{corollary}[Euclidean algorithm]
+    $\gcd (a,b)$ can be found by repeatedly computing $\gcd (b, a \bmod b)$.
+\end{corollary}
+
+% TODO: proof here
+
+Euclid's algorithm is very fast.
+Its worst-case runtime is when it acts on two consecutive Fibonacci numbers (in which case the ``quotient'' is always zero), and even then it will (by Lame's theorem) only take at most $5k$ steps, where $k$ is the number of digits in $b \leq a$.
+
+Not only does Euclid's algorithm find $(a,b)$, but it can also help us determine the coefficients of the integer combination that gives $(a,b)$.
+There are two methods of doing this, both of which are demonstrated below.
+
+\begin{example}[Bottom-up method]
+    Suppose we want to find integers $x$ and $y$ that satisfy $(847, 203) = 847x + 203y$.
+    First, we compute the GCD using Euclid's algorithm:
+    \[ (847,203) = (203,35) = (35,28) = (28,7) = (7,0) = 7 \]
+    Now, we'll back-trace the above computation to write each $a \bmod b$ in the form $a - bq$:
+    \begin{align*}
+        7 &= 35 - 28 \\
+        &= 35 - (203 - 5 \cdot 35) \\
+        &= 6 \cdot 35 - 1 \cdot 203 \\
+        &= 6 \cdot (647 - 4 \cdot 203) - 1 \cdot 203 \\
+        &= 6 \cdot 847 - 35 \cdot 203
+    \end{align*}
+    So the desired integers are $x = 6$ and $y = -35$.
+\end{example}
+
+\begin{example}[Top-down method]
+    Suppose we want to find integers $x$ and $y$ that satisfy $(847, 203) = 847x + 203y$.
+    First, we compute the GCD using Euclid's algorithm, as we did above.
+    Now, we'll trace the above computation and write each new number as a linear combination of the algorithm's ``roots''.
+    \begin{alignat*}{3}
+                     (1) \qquad &&      a \;\phantom{+}&&\;       =&\; 847 \\
+                     (2) \qquad &&        \;\phantom{+}&&\;     b =&\; 203 \\
+        (1) - 4(2) = (3) \qquad &&      a \;         - &&\;    4b =&\; 35 \\
+        (2) - 5(3) = (4) \qquad &&    -5a \;         + &&\;   21b =&\; 28 \\
+         (3) - (4) = (5) \qquad &&     6a \;         - &&\;   25b =&\; 7
+   \end{alignat*}
+   So the desired integers are $x=6$ and $y = -35$.
+\end{example}
+
+We'll finish this section with another important theorem which, as we will see, establishes an connection between GCDs and prime numbers.
+
+\begin{theorem}[The important theorem]
+    If $d \mid ab$ and $(d,a) = 1$ then $d \mid b$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $d \mid ab$ and $(d,a) = 1$.
+    Then $ab = dq$ for some integer $q$, and by Bezout's theorem
+    \begin{align*}
+        (d,a) = 1 &\implies dx + ay = 1 \\
+        &\implies dxb + aby = b \\
+        &\implies dxb + dqy = b \\
+        &\implies d (xb + qy) = b
+    \end{align*}
+    Therefore, $d \mid b$.
+\end{proof}
+
+\section{Primes}
+Moving on from the basic notion of the GCD, we define another basic idea: primality.
+
+\begin{definition}[Prime number]
+    An integer $p > 1$ is prime if its only positive divisors are 1 and $p$.
+\end{definition}
+
+\begin{definition}[Composite number]
+    If $n > 1$ is not prime, then $n$ is called composite.
+
+    \medskip
+    \textit{Note: This implies that 0 and 1 are neither prime nor composite.}
+\end{definition}
+
+Although they get decreasingly common at higher orders of magnitude, the primes are infinite.
+Euclid gave a very simple proof of this, a variation on which is given below.
+
+\begin{theorem}[Euclid's theorem]
+    There are infinitely many primes.
+\end{theorem}
+
+\begin{proof}
+    Suppose, to the contrary, that $p$ is the largest prime number.
+    Notice that no number $2, \ldots, p$ divides $p! + 1$, meaning $p! + 1$ is either prime or has a prime factor that is greater than $p$.
+    Either way, this contradicts our assumption that $p$ is the largest prime.
+\end{proof}
+
+Despire this, it can also be shown that, for any number $n$, there exists a list of $n$ consecutive prime numbers.
+Namely, $(n+1)! + 2, \; (n+1)! + 3, \; \ldots, (n+1)! + (n+1)$.
+
+It can be shown, by strong induction, that every number can be expressed as the product of primes.
+Our aim is to show that this product is unique.
+As a step toward this, we give a variation on the important theorem.
+
+\begin{theorem}[Theorem of prime importance]
+    If $p$ is prime and $p \mid ab$, then $p \mid a$ or $p \mid b$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $p$ is prime and $p \mid ab$.
+    If $p \mid a$, then we're done; otherwise, $p \nmid a$, and therefore $(p,a) = 1$.
+    So by the important theorem, $p \mid b$.
+    Either way, $p \mid a$ or $p \mid b$.
+\end{proof}
+
+\begin{corollary}
+    If $p$ is prime and $p \mid a_1 a_2 \cdots a_n$, then $p \mid a_1$ or $p \mid a_2$ or $\cdots$ or $p \mid a_n$.
+\end{corollary}
+
+% TODO: proof here
+
+Now, the centerpiece of the section.
+
+\begin{theorem}[Fundamental theorem of arithmetic]
+    Every integer $n \geq 2$ can be uniquely factored into primes.
+\end{theorem}
+
+\begin{proof}
+    Suppose, to the contrary, that $m$ is the smallest number with at least two prime factorizations, say
+    \[ p_1 p_2 \cdots p_r = m = q_1 q_2 \cdots q_s. \]
+    Since $p_1 \mid m$, $p_1 \mid q_1 q_2 \cdots q_s$ and, by the previous corollary, $p \mid q_i$ for some $i$; without loss of generality, say $p_1 \mid q_1$.
+    But since $q_1$ is prime, this means $p_1 = q_1$, so
+    \[ p_2 \cdots p_r = \frac{m}{p_1} = q_2 \cdots q_s. \]
+    So $\frac{m}{p_1}$ has two different prime factorizations, contradicting our assumption for $m$.
+\end{proof}
+
+We can use this fundamental theorem to solve a pretty neat counting problem.
+
+\begin{theorem}[Number of positive divisors from prime factorization]
+    Let $\ds a = \prod_{i=1}^r p_i^{\alpha_i}$, where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i \geq 0$.
+
+    $a$ has $(1 + \alpha_1) (1 + \alpha_2) \cdots (1 + \alpha_r)$ positive divisors.
+\end{theorem}
+
+% TODO: proof here
+
+Similarly, the exponents of this prime factorization can be used to quickly determine the greatest common divisor and least common multiple between two numbers.
+
+\begin{theorem}[GCD and LCD from prime factorization]
+    Let
+    \[ a = \prod_{i=1}^r p_i^{\alpha_i} \,\text{ and }\, b = \prod_{i=1}^r p_i^{\beta_i}, \]
+    where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i, \beta_i \geq 0$.
+    \[ \gcd (a,b) = \prod_{i=1}^r p_i^{\min \left\{ \alpha_i, \beta_i \right\}} \,\text{ and }\, \pfn{lcm} (a,b) = \prod_{i=1}^r p_i^{\max \left\{ \alpha_i, \beta_i \right\}}. \]
+\end{theorem}
+
+% TODO: proof here
+
+Note that the least common multiple is commonly denoted $[a,b]$.
+We give one last significant consequence of unique prime factorizations.
+
+\begin{theorem}[gcd $\cdot$ lcm]
+    For any $a,b \geq 1$, $(a,b) [a,b] = ab$.
+\end{theorem}
+
+% TODO: proof here
+
+\section{Modular Arithmetic}
+Modular arithmetic will be essential to the rest of our discussion of number theory.
+Informally, this is the arithmetic in which two numbers are called ``congruent'' if, when divided by some number, they have the same remainder.
+A more formal definition is below.
+
+\begin{definition}[Modular congruence]
+    For $m > 0$, we say that $a$ is congruent to $b$ modulo $m$ if $m \mid a - b$.
+    Symbolically, $a \equiv_m b$.
+    (Here, $m$ is called the modulus.)
+\end{definition}
+
+A more common notation for modular congruence is $a \equiv b \pmod m$, but we won't use this here.
+
+The relation $\equiv_m$ has a lot in common with the relation $=$.
+In fact, $\equiv_m$ can be calle an equivalence relation since it has the following three properties.
+
+\begin{theorem}[Modular congruence as an equivalence relation]
+    For any integers $a, b, c$:
+    \begin{enumerate}[label=(\alph*)]
+        \item Reflexivity. $a \equiv_m$ a.
+        \item Symmetry. If $a \equiv_m b$ then $b \equiv_m a$.
+        \item Transitivity. If $a \equiv_m b$ and $b \equiv_m c$ then $a \equiv_m c$.
+    \end{enumerate}
+\end{theorem}
+
+% TODO: proof here
+
+Now we'll explore some of the things we're ``allowed'' to do with this relation.
+
+\begin{theorem}[Operations on $\equiv_m$]
+    If $a \equiv_m b$ and $c \equiv_m d$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item $a + c \equiv_m b + d$
+        \item $ac \equiv_m bd$
+    \end{enumerate}
+\end{theorem}
+
+% TODO: proof here
+
+\begin{corollary}[Power rule]
+    If $a \equiv_m b$ then $a^n \equiv_m b^n$ for all $n \geq 0$.
+\end{corollary}
+
+Putting all this together, we get what may be a superficially surprising fact.
+
+\begin{corollary}[Polynomial rule]
+    Let $P(x)$ be a polynomial with integer coefficients.
+    If $a \equiv_m b$, then $P(a) \equiv_m P(b)$.
+\end{corollary}
+
+% TODO: proof here
+
+With this polynomial theorem, here's a little aside.
+Out of a variety of modular relationships that have to do with the digits of a number, we give a simple one.
+
+\begin{theorem}
+    Define $S(x)$ to be the sum of the digits of $x$.
+    $x \equiv_9 S(x)$.
+\end{theorem}
+
+\begin{proof}
+    Let $x$ have digits $a_n a_{n-1} \cdots a_1 a_0$.
+    Then
+    \[ x = \sum_{k=0}^n a_k 10^k \equiv_9 \sum_{k=0}^n a_k 1^k = S(x). \]
+    Therefore, $x \equiv_9 S(x)$.
+\end{proof}
+
+Now we'll continue with our discussion of arithmetic.
+We've seen that we can add (and thus subtract) and multiply on both sides of a congruence.
+We can only divide, however, under certain conditions.
+
+\begin{theorem}[Cancellation theorem]
+    If $ax \equiv_m ay$ and $\gcd (a,m) = 1$, then $x \equiv_m y$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $ax \equiv_m ay$ and $(a,m) = 1$.
+    By definition,
+    \begin{align*}
+        m &\mid ax - ay \\
+        m &\mid a (x - y)
+    \end{align*}
+    By the important theorem, $m \mid x - y$ and $x \equiv_m y$.
+\end{proof}
+
+We can generalize this theorem slightly, if we allow ourselves to change the modulus.
+
+\begin{theorem}
+    If $ax \equiv_m ay$ and $\gcd (a,m) = d$, then $x \equiv_{m/d} y$.
+\end{theorem}
+
+% TODO: proof here
+
+The cancellation theorem gives one idea of what it means to ``undo'' multiplication in a modular sense.
+Alternatively, we can define the multiplicative inverse of a number mod $m$.
+
+\begin{definition}[Multiplicative inverse]
+    An integer $a$ has a multiplicative inverse if there exists an integer $x$ such that $ax \equiv_m 1$.
+\end{definition}
+
+Unfortunately, not every number has an inverse; fortunately, it is easy to check if a number has one!
+
+\begin{theorem}[Existence and uniqueness of an inverse]
+    $a$ has an inverse mod $m$ if and only if $(a,m) = 1$.
+    The inverse is unique up to congruence mod $m$.
+\end{theorem}
+
+\begin{proof}
+    $(\Rightarrow)$ Suppose $a$ has an inverse mod $m$.
+    By definition, there exists an integer $x$ such that $ax \equiv_m 1$, so $m \mid ax - 1$.
+    So there exists another integer $y$ such that
+    \begin{gather*}
+        my = ax - 1 \\
+        ax - my = 1
+    \end{gather*}
+    By Bezout's theorem, $(a,m) = 1$.
+    \smallskip
+
+    $(\Leftarrow)$ All of the steps above are reversible, so if $(a,m) = 1$ then $a$ has an inverse mod $m$.
+\end{proof}
+
+If the modulus is prime, then we can make an even stronger statement.
+
+\begin{corollary}
+    If $p$ is prime, then the numbers $1, 2, \ldots, p-1$ have unique inverses mod $p$.
+\end{corollary}
+
+% TODO: proof here
+
+\section{Applications}
+Here we state four theorems that utilize everything we've discussed so far, largely 
+modular arithmetic.
+
+\begin{theorem}[Wilson's theorem]
+    If $p$ is prime then $(p-1)! \equiv_m -1$.
+\end{theorem}
+
+\begin{proof}
+    Let $p$ be prime, so the numbers $1, 2, \ldots, p-1$ have inverses mod $p$.
+    The only ones of these that are their own inverses are 1 and $p-1$.
+
+    To see this, consider a number $a$ that is its own inverse, so $a^2 \equiv_p 1$ and $p \mid a^2 - 1$.
+    By the theorem of prime importance, $p \mid a-1$ or $p \mid a+1$.
+    The only integers (among $1, 2, \ldots, p-1$) satisfying this condition are 1 and $p-1$.
+
+    Therefore, all of the other numbers $2, \ldots, p-2$ are inverses of each other, so when we compute $(p-1)!$ we get
+    \[ (p-1)! \equiv_p (p-1) \cdot 1. \]
+    Finally, since $p-1 \equiv_p -1$, we get $(p-1)! \equiv_p -1$.
+\end{proof}
+
+It isn't important for us, but Wilson's theorem is actually an iff theorem, since it can be shown that if $n$ is composite then $(n-1)! \not\equiv_n -1$.
+So in theory, we could use Wilson's theorem to determine if $n$ is prime; in practice, $(n-1)!$ is big.
+Like, really big.
+So we must resort to other means.
+
+\begin{theorem}[Fermat's little theorem]
+    If $p$ is prime, then $a^p \equiv_p a$ for any $a \in \Z$.
+    (Alternatively, $a^{p-1} \equiv_p 1$.)
+\end{theorem}
+
+\begin{proof}
+    We have two cases.
+    \smallskip
+
+    (i) If $p \mid a$, then $a \equiv_p 0$ and $a^p \equiv_p 0^p$.
+    Since $a^p = 0$, by transitivity, $a^p \equiv_p a$.
+    (And, by the cancellation theorem, $a^{p-1} \equiv_p 1$.)
+    \smallskip
+
+    (ii) Notice that the numbers $0, 1, 2, \ldots, p-1$ are all distinct mod $p$.
+    By the cancellation theorem contrapositive, since $(a,p) = 1$, the numbers $0, a, 2a, \ldots, (p-1)a$ are also distinct mod $p$.
+    Now, since each of these lists covers all possible remainders mod $p$,
+    \begin{align*}
+        \{ 0, a, 2a, \ldots, (p-1)a \} &\equiv_p\{ 0, 1, 2, \ldots, (p-1) \} \\
+        \{ a, 2a, \ldots, (p-1)a \} &\equiv_p\{ 1, 2, \ldots, (p-1) \}
+    \end{align*}
+    We can multiply all of the elements in each of these sets to get
+    \begin{align*}
+        a \cdot 2a \cdots (p-1)a &\equiv_p 1 \cdot 2 \cdots (p-1) \\
+        (p-1)! a^{p-1} \equiv_p (p-1)! \\
+        a^{p-1} \equiv_p 1
+    \end{align*}
+    Finally, multiplying by $a$ gives $a^p \equiv_p a$.
+\end{proof}
+
+Our next theorem will generalize Fermat's theorem.
+First, however, we'll need some scaffolding in the form of a new definition.
+
+\begin{definition}[Totient function]
+    For $n \geq 1$, define the totient function $\phi (n)$ as the number of elements in the set $\{ 1, 2, \ldots, n \}$ that are relatively prime to $n$.
+\end{definition}
+
+This totient function has a couple of convenient properties that are useful in certain computations.
+
+\begin{theorem}[Computing $\phi(n)$]
+    If $n$ has distinct prime factors $p_1, p_2, \ldots, p_r$, then
+    \[ \phi (n) = n \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \cdots \left( 1 - \frac{1}{p_r} \right). \]
+\end{theorem}
+
+\begin{proof}
+    We use the principle of inclusion and exclusion to prove the $r=3$ case.
+    We count in four phases:
+    \begin{enumerate}
+        \item Place no restrictions on the numbers we count.
+        \item Subtract the numbers that are multiples of at least one prime.
+        \item Add back the numbers that are multiples of at least two primes.
+        \item Subtract the numbers that are multiples of all three primes.
+    \end{enumerate}
+    This gives
+    \begin{align*}
+        \phi (n) &= n - \frac{n}{p_1} - \frac{n}{p_2} - \frac{n}{p_3} + \frac{n}{p_1p_2} + \frac{n}{p_1p_3} + \frac{n}{p_2p_3} - \frac{n}{p_1p_2p_3} \\
+        &= n \left( 1 - \frac{1}{p_1} - \frac{1}{p_2} - \frac{1}{p_3} + \frac{1}{p_1p_2} + \frac{1}{p_1p_3} + \frac{1}{p_2p_3} - \frac{1}{p_1p_2p_3} \right) \\
+        &= n \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \left( 1 - \frac{1}{p_3} \right)
+    \end{align*}
+    The method here can be easily extended to other values of $r$, be it much more cumbersome.
+\end{proof}
+
+There's some other, less rigorous intuition to be gained from this formula.
+Each factor represents a proportion of numbers that do not have $p_i$ as a factor (each of these proportions is independent), and multiplying all of these together gives the total proportion of numbers that do not have any $p_i$ as a factor.
+
+This leads to one other nice property of totients, given below.
+
+\begin{corollary}
+    If $(x,y) = 1$, then $\phi (xy) = \phi (x) \phi (y)$.
+\end{corollary}
+
+Finally, we have one more ``pure'' result, also related to totients.
+It is a generalization of Fermat's theorem.
+
+\begin{theorem}[Euler's theorem]
+    If $(a,m) = 1$, then $a^{\phi (m)} \equiv_m 1$.
+\end{theorem}
+
+% TODO: proof here
+
+As an interlude, consider again Fermat's theorem, specifically its contrapositive: if $a^n \not\equiv_n a$ then $n$ is not prime.
+This gives us a ``probable prime test''; it isn't perfect since Fermat's theorem isn't an iff statement, but it does filter out the vast majority of composite numbers.
+
+A number $n$ that passes the Fermat test for all possible bases $a$ is called an industrial-grade prime.
+Some of these IGPs, of course, are composite; such numbers are called Carmichael numbers.
+(There are tests to weed these out, but they won't be covered here.)
+
+We will, however, give a couple of practical methods for computing $a^n \bmod m$ for large $n$.
+First, if $(a,m) = 1$ and $\phi (m)$ are known, we may be able to exploit Euler's theorem in some way (often using the division algorithm).
+This method is simple, but it has limited use; the next one is much more widely applicable.
+
+\begin{example}[Seed planting]
+    Suppose we want to compute $6^{83} \bmod 79$.
+    First, we decompose the exponent into powers of two:
+    \[ 83 = 64 + 16 + 2 + 1. \]
+    Now we'll go through all the powers of two from 64 to 1 and, starting with $6^0$ (the seed), successively square numbers, multiplying by an extra 6 whenever we encounter a power of two that is listed above.
+    \begin{alignat*}{3}
+        \boxed{64} &\rightarrow 6^0 \cdot 6 &&= 6 \\
+        32 &\rightarrow 6^2 &&= 36 \\
+        \boxed{16} &\rightarrow 36^2 \cdot 6 &&= 7776 &&\equiv_{79} 34 \\
+        8 &\rightarrow 34^2 &&= 1156 &&\equiv_{79} 50 \\
+        4 &\rightarrow 50^2 &&= 2500 &&\equiv_{79} 51 \\
+        \boxed{2} &\rightarrow 51^2 \cdot 6 &&= 15606 &&\equiv_{79} 43 \\
+        \boxed{1} &\rightarrow 43^2 \cdot 6 &&= 11094 &&\equiv_{79} 34
+    \end{alignat*}
+    So, $6^{83} \bmod 79 = 34$.
+\end{example}
+
+Using this, we can make a statement that is much more immediately practical in cryptography.
+
+Consider a public key $\{ n, e \}$ and a private key $d$ known only to the recipient.
+The idea is to construct a function that is easy to compute using the public key, but very difficult to invert without knowing the private key.
+Specifically,
+\begin{itemize}
+    \item to encipher a message $m$ the sender computes $c = m^e \bmod n$, and
+    \item to decipher the resulting ciphertext the recipient computes $m = c^d \bmod n$.
+    (Note that, in order to unambiguously recover a message, we must have $m < n$.)
+\end{itemize}
+Now the problem becomes actually choosing values of $n$, $e$, and $d$ to make this work.
+The process is simple:
+\begin{enumerate}
+    \item $n$ is the product of two (private) primes $p$ and $q$.
+    \item $d$ is a random number that is relatively prime to $\phi (n) = (p-1)(q-1)$.
+    \item $e \geq 0$ is an integer that satisfies $de - \phi (n) f = 1$ for some $f \geq 0$.
+    (Note that this mean $de \equiv_{\phi (n)} 1$.)
+\end{enumerate}
+The proof that this works is similarly straightforward.
+
+\begin{theorem}[RSA encryption]
+    Let $n,d,e$ be chosen as described above.
+    If $c = m^e \bmod n$, then $c^d \bmod n = m$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $c = m^e \bmod n$ and $n,d,e$ are chosen as described above.
+    Since we require $0 \leq m < n$, we need only show that $c^d \bmod n \equiv_n m$.
+
+    By definition
+    \[ c = m^e \bmod n \equiv_n m. \]
+    So
+    \[ c^d \bmod n \equiv_n c^d \equiv_n \left( m^e \right)^d = m^{ed}. \]
+    Since $ed - \phi (n) f = 1$,
+    \[ m^{ed} = m^{1 + \phi(n) f} = m \cdot \left( m^{\phi (n)} \right)^f. \]
+    By Euler's theorem,
+    \[ m \cdot \left( m^{\phi (n)} \right)^f \equiv_n m \cdot 1^f = m. \]
+    Therefore, $c^d \bmod n \equiv_n m$ and $c^d \bmod n = m$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,294 @@
+\documentclass[../m73main.tex]{chapters}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\section{Determinants}
+We have already encountered determinants in our study of inverse matrices, albeit not by name.
+Here, we generalize the determinant to square matrices of any size.
+These first two definitions together define the determinant recursively.
+
+\begin{definition}[Cofactor]
+	Let $A$ be a square matrix, and let $A_{ij}$ be the submatrix of $A$ with its $i$th row and $j$th column deleted.
+	Then the quantity
+	\[ C_{ij} = (-1)^{i+j} \det A_{ij} \]
+	is called the $(i,j)$-cofactor of $A$.
+	(The quantity $\det A_{ij}$ is called the $(i,j)$-minor of $A$.)
+\end{definition}
+
+\begin{definition}[Determinant]
+	Let $A$ be an $n \times n$ matrix, where $n \geq 2$.
+	Then the determinant of $A$ is the scalar
+	\[ \det A = |A| = \sum_{j = 1}^{n} a_{1j} C_{1j}. \]
+\end{definition}
+
+Though this definition gives us a way to compute determinants via a ``cofactor expansion'' along the top row of a matrix, we can actually apply the algorithm to any row or column we'd like.
+This gives us a lot of flexibility and can possibly save us some work.
+
+\begin{theorem}[Computing determinants]
+	The determinant of an $n \times n$ matrix $A$, where $n \geq 2$, can be computed  in two ways:
+	\begin{align*}
+		\det A &= \sum_{j = 1}^{n} a_{ij} C_{ij} \\
+			   &= \sum_{i = 1}^{n} a_{ij} C_{ij}
+	\end{align*}
+\end{theorem}
+
+There are other cases involving special types of matrices in which finding determinants is especially easy.
+
+\begin{theorem}[Determinant of a triangular matrix]
+	The determinant of a triangular matrix is the product of the entries on its main diagonal.
+\end{theorem}
+
+Sometimes it will be useful to use row reduction as an alternative to cofactor expansion.
+We do this by taking advantage of the following rules.
+
+\begin{theorem}[Determinants via row reduction]
+	Let $A$ be a square matrix.
+	\begin{enumerate}[label=(\alph*)]
+		\item If $A$ has a zero row, then $\det A = 0$.
+		\item If $B$ is obtained by interchanging two rows of $A$, then $\det B = -\det A$.
+		\item If $A$ has two identical rows, then $\det A = 0$.
+		\item If $B$ is obtained by multiplying a row of $A$ by $k$, then $\det B = k \det A$.
+		\item If $A$, $B$, and $C$ are identical except the $i$th row of $C$ is the sum of the $i$th rows of $A$ and $B$, then $\det C = \det A + \det B$.
+		\item If $B$ is obtained by adding a multiple of one row of $A$ to another row, then $\det B = \det A$.
+	\end{enumerate}
+\end{theorem}
+
+We'll use these properties to draw a connection between determinants and invertibility.
+Elementary matrices will serve as our bridge.
+
+\begin{theorem}[Determinant of an elementary matrix]
+	Let $E$ be an $n \times n$ elementary matrix,
+	\begin{enumerate}[label=(\alph*)]
+		\item If $E$ results from interchanging two rows of $I_n$, then $\det E = -1$.
+		\item If $E$ results from multiplying one row of $I_n$ by $k$, then $\det E = k$.
+		\item If $E$ results from adding a multiple of one row of $I_n$ to another row, then $\det E = 1$.
+	\end{enumerate}
+\end{theorem}
+
+This allows us to succinctly summarize parts (b), (d), and (f) of Theorem 4.3 in another theorem.
+
+\begin{lemma}[Determinant after an ERO]
+	Let $B$ be a square matrix and let $E$ be an elementary matrix of the same size.
+	Then
+	\[ \det (EB) = (\det E)(\det B). \]
+\end{lemma}
+
+Finally, with the power of the fundamental theorem, we get the following.
+
+\begin{theorem}[Condition for invertibility]
+	A square matrix $A$ is invertible if and only if $\det A \neq 0$.
+\end{theorem}
+
+Many matrix operations come with their own ways to calculate the determinants of their resulting matrices.
+We'll consider scalar multiplication, matrix multiplication, inverses, and transposes; we exclude addition because there is no clear relationship between $\det (A + B)$ and the individual determinants of $A$ and $B$.
+
+\begin{theorem}[Determinant after scalar multiplication]
+	If $A$ is an $n \times n$ matrix, then
+	\[ \det kA = k^n \det A. \]
+\end{theorem}
+
+\begin{theorem}[Determinant after matrix multiplication]
+	If $A$ and $B$ are square matrices of the same size, then
+	\[ \det (AB) = (\det A)(\det B). \]
+\end{theorem}
+
+\begin{theorem}[Determinant after inversion]
+	If $A$ is invertible, then
+	\[ \det (A^{-1}) = \frac{1}{\det A}. \]
+\end{theorem}
+
+\begin{theorem}[Determinant after transposition]
+	For any square matrix $A$,
+	\[ \det A = \det A^T. \]
+\end{theorem}
+
+\section{Eigenvalues and Eigenvectors}
+We now begin investigating one of the most central problems to linear algebra: the eigenvalue problem.
+
+\begin{definition}[Eigen-stuff]
+	Let $A$ be a square matrix.
+	A scalar $\lambda$ is called an eigenvalue of $A$ if there is a nonzero vector $\mbf{x}$ such that $A \mbf{x} = \lambda \mbf{x}$.
+	Such a vector $\mbf{x}$ is called an eigenvector of $A$ corresponding to $\lambda$.
+	The set of all eigenvectors corersponding to $\lambda$, including the zero vector, is called the eigenspace of $\lambda$ and is denoted by $E_\lambda$.
+\end{definition}
+
+The study of eigenvectors is the study of vectors whose directions are invariant under a matrix transformation.
+We now discuss how to compute them.
+
+From the above definition, $(\lambda, \mbf{x})$ is an ``eigenpair'' of $A$ if they satisfy the equation
+\[ (A - \lambda I) \mbf{x} = \mbf{0}. \]
+This gives us an easy way to immediately compute the eigenvalues of $A$.
+
+\begin{theorem}[Computing eigenvalues]
+	The eigenvalues of a square matrix $A$ are precisely the solutions $\lambda$ of the equation
+	\[ \det (A - \lambda I) = 0. \]
+\end{theorem}
+
+This determinant gives us a polynomial in $\lambda$,
+Computing the eigenvalues of a matrix, therefore, is equivalent to finding the roots of this polynomial.
+
+\begin{definition}[Characteristic polynomial]
+	The polynomial in $\lambda$ resulting from the expansion of $\det (A - \lambda I)$ is called the characteristic polynomial $c_A (\lambda)$ of $A$.
+	The equation $\det (A - \lambda I) = 0$ is called the characteristic equation of $A$.
+\end{definition}
+
+Once we have our eigenvalues, we use them in the equation $(A - \lambda I) \mbf{x} = 0$ to determine the eigenvectors and, thus, eigenspaces.
+
+\begin{theorem}[Computing eigenvectors]
+	The eigenspace of a matrix $A$ corresponding to the eigenvalue $\lambda$ is precisely $\pfn{null} (A - \lambda I)$.
+\end{theorem}
+
+The remainder of this chapter will be dedicated to investigating this eigenstuff, both in their own right and in applications.
+Firstly, just like with determinants, when our matrix is triangular, our job turns out to be easy.
+
+\begin{theorem}[Eigenvalues of a triangular matrix]
+	The eigenvalues of a triangular matrix are the entries on its main diagonal.
+\end{theorem}
+
+Similarly, the eigenvalues of a matirix raised to a power relate to those of the original matrix.
+
+\begin{theorem}[Eigenvalues after exponentiation]
+	Let $A$ be a square matrix with an eigen-pair $(\lambda, \mbf{x})$.
+	\begin{enumerate}[label=(\alph*)]
+		\item For any positive $n$, $(\lambda^n, \mbf{x})$ is an eigen-pair of $A^n$.
+		\item Is $A$ is invertible, then $(1/\lambda, \mbf{x})$ is an eigen-pair of $A^{-1}$.
+		\item If $A$ is invertible, then for any integer $n$, $(\lambda^n, \mbf{x})$ is an eigen-pair of $A^n$.
+	\end{enumerate}
+\end{theorem}
+
+We can now draw a connection to invertible matrices.
+Just like with determinants, for a matrix to be invertible, its eigenvalues must not nonzero.
+
+\begin{theorem}[Condition for invertibility]
+	A square matrix is invertible if and only if it does not have 0 as an eigenvalue.
+\end{theorem}
+
+With this, we can add two more statements to our fundamental theorem.
+
+\begin{theorem}[Additions to the FTLA]
+	Let $A$ be an $n \times n$ matrix.
+	The following statements are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is invertible. \\
+		\phantom{~}\hspace{-19.5pt} \vdots
+		\setcounter{enumi}{13}
+		\item $\det A \neq 0$.
+		\item 0 is not an eigenvalue of $A$.
+	\end{enumerate}
+	For the full theorem, see Appendix A.
+\end{theorem}
+
+We can use the properties discussed to far to show what happens when we multiply a vector by the same matrix multiple time in succession.
+We take advantage of the case in which the vector can be represented as a linear combination of eigenvectors.
+
+\begin{theorem}[Repeated matrix transformations]
+	Suppose the $n \times n$ matrix $A$ has eigenpairs $(\lambda_1, \mbf{x}_1), (\lambda_2, \mbf{x}_2), \ldots, (\lambda_m, \mbf{x}_m)$.
+	If $\mbf{x}$ is a vector in $\R^n$ that can be expressed as a linear combination of these eigenvectors, then for every integer $k$,
+	\[ A^k \mbf{x} = c_1 \lambda_1^k \mbf{v}_1 + c_2 \lambda_2^k \mbf{v}_2 + \cdots + c_m \lambda_m^k \mbf{v}_m. \]
+\end{theorem}
+
+We won't always be able to apply this, though, since it's possible that $x$ is not a linear combination of eigenvectors.
+As a step toward seeing when we can apply the theorem, we have the following.
+
+\begin{theorem}[Condition for linearly independent eigenvectors]
+	Let $A$ be an $n \times n$ matrix and let $\lambda_1, \lambda_2, \ldots, \lambda_m$ be distinct eigenvalues of $A$ with corresponding eigenvectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$.
+	Then these eigenvectors are linearly independent.
+\end{theorem}
+
+\section{Similarity and Diagonalization}
+We've already considered a couple of different ways to transform a matrix, namely Gaussian and Gauss-Jordan elimination.
+Here, we consider another type of transformation that preserves eigenvalues and other key properties.
+
+\begin{definition}[Similar matrices]
+	Let $A$ and $B$ be square matrices of the same size.
+	We say that $A$ is similar to $B$ if there is an invertible matrix $P$ such that $P^{-1}AP = B$.
+	If $A$ is similar to $B$, we write $A \sim B$.
+\end{definition}
+
+Similarity can be interpreted as a kind of equivalence between matrices.
+We thus call similarity an equivalence relation, meaning it has the following famiiar properties.
+
+\begin{theorem}[Similarity as an equivalence relation]
+	Let $A$, $B$, and $C$ be square matrices of the same size.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A \sim B$.
+		\item If $A \sim B$, then $B \sim A$.
+		\item If $A \sim B$ and $B \sim C$, then $A \sim C$.
+	\end{enumerate}
+\end{theorem}
+
+Objects that are related via an equivalence relation usually share important properties.
+This is true of similar matrices, and some of these properties are below.
+
+\begin{theorem}[Shared properties of similar matrices]
+	Let $A$ and $B$ be square matrices of the same size with $A \sim B$.
+	Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\det A = \det B$.
+		\item $A$ is invertible if and only of $B$ is invertible.
+		\item $A$ and $B$ have the same rank.
+		\item $A$ and $B$ have the same characteristic polynomial.
+		\item $A$ and $B$ have the same eigenvalues.
+		\item $A^m \sim B^m$ for all integers $m \geq 0$.
+		\item If $A$ is invertible, then $A^m \sim B^m$ or all integers $m$.
+	\end{enumerate}
+\end{theorem}
+
+The best possible situation is when a square matrix is similar to a diagonal matrix, because these are really nice to work with.
+
+\begin{definition}[Diagonalizable matrix]
+	A square matrix $A$ is diagonalizible if there is a diagonal matrix $D$ such that $A$ is similar to $D$---that is, if there is an invertible matrix $P$ such that $P^{-1}AP = D$.
+\end{definition}
+
+The idea of diagonalization is intimately related to eigenvalues and eigenvectors.
+Not only do they give us a condition for diagonalizability, but they help us do the actual diagonalization.
+
+\begin{theorem}[Condition and method for diagonalization]
+	Let $A$ be an $n \times n$ matrix.
+	Then $A$ is diagonalizible if and only if $A$ has $n$ linearly independent eigenvectors.
+
+	More precisely, there exist an invertible matrix $P$ and a diagonal matrix $D$ such that $P^{-1}AP = D$ if and only if the columns of $P$ are $n$ linearly independent eigenvectors of $A$ and the diagonal entries of $D$ are the eigenvalues of $A$ corresponding to the eigenvectors in $P$ in the same order.
+\end{theorem}
+
+Usually, we would have to verify that $P$ is invertible before using it to find a matrix similar to $A$.
+The next theorem shows that this is not necessary for diagonalization problems.
+
+\begin{theorem}[Basis eigenvectors are linearly independent]
+	Let $A$ be a square matrix and let $\lambda_1, \lambda_2, \ldots, \lambda_k$ be distinct eigenvalues of $A$.
+	If $\mathcal{B}_i$ is a basis for the eigenspace $E_\lambda$, then $\displaystyle\bigcup_{i=1}^k\mathcal{B}_i$ is linearly independent.
+\end{theorem}
+
+This shows that linear independence is preserved when the bases of different eigenspaces are combined.
+So when we have $n$ different eigenspaces, each of dimension one, we automatically have a diagonalizable matrix.
+
+\begin{theorem}[Distinct eigenvalues imply diagonalizibility]
+	If $A$ is an $n \times n$ matrix with $n$ distinct eigenvalues, then $A$ is diagonalizible.
+\end{theorem}
+
+When this theorem isn't applicable, there's still a way we can use eigenvalues to determine diagonalizibility.
+It requires a preliminary definition.
+
+\begin{definition}[Algebraic and geometric multiplicity]
+	The algebraic multiplicity of an eigenvalue $\lambda$ is its multiplicity as a root of the characteristic polynomial.
+	The geometric multiplicity of the eigenvalue is $\pfn{dim} (E_\lambda)$
+\end{definition}
+
+\begin{lemma}[Diagonalizibility from multiplicities]
+	If $A$ is a square matrix, then the geometric mutiplicity of each eigenvalue is less than or equal to its algebraic multiplicity.
+\end{lemma}
+
+We summarize the different ways to check for diagonalizibility in one final theorem.
+
+\begin{theorem}[Conditions for diagonalizibility]
+	Let $A$ be an $n \times n$ matrix.
+	The following statements are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is diagonalizible.
+		\item The union $\mathcal{B}$ of the bases of the eigenspaces of $A$ contains $n$ vectors.
+		\item The algebraic multiplicity of each eigenvalue equals its geometric multiplicity.
+	\end{enumerate}
+\end{theorem}
+
+\end{document}
