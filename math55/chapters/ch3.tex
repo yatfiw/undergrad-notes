@@ -103,7 +103,7 @@ One class of these is defined below.
 \end{definition}
 
 One well-known problem in graph theory has to do with coloring the edges of a complete graph (say, red and blue) and seeing what monochromatic subgraphs emerge, if any.
-A useful analogy for these is in the context of friends and strangers: if an edge between two vertices is colored red, we say the vertices are ``friends'', whereas if the edge is blue the vertices are strangers.
+A useful analogy for these is in the context of friends and strangers: if an edge between two vertices is colored red, we say the vertices are ``friends'', whereas if the edge is blue the vertices are ``strangers''.
 We'll start simple with $K_6$.
 
 \begin{theorem}[Ramsey's theorem, (3, 3)]
@@ -593,6 +593,22 @@ The four-color theorem states that any map can be ``properly colored'' using onl
 That is, using four colors, one can color a map such that no adjacent regions have the same color.
 
 We will not prove the four-color theorem here, but we will prove its analogs for 6-colorings and 5-colorings.
+First, we prove a lemma that we'll find useful in the 6- and 5-color theorems.
+
+\begin{lemma}[]
+    Every planar graph has a vertex of degree 5 or less.
+\end{lemma}
+
+\begin{proof}
+    If not, then every vertex has degree 6 or greater.
+    But then
+    \[ 2\mathcal{E} = \sum d(v_i) \geq 6n, \]
+    meaning
+    \[ \mathcal{E} \geq 3n, \]
+    contradicting the planarity of the graph (since $3n > 3n-6$).
+\end{proof}
+
+Now, onto the theorems!
 
 \begin{theorem}[Six-color theorem]
     Every planar graph is 6-colorable.
@@ -642,19 +658,89 @@ We will not prove the four-color theorem here, but we will prove its analogs for
     Either way, we can re-color the graph in such a way that allows us to safely color $v$, as desired.
 \end{proof}
 
-FORGOT THE LEMMA THAT ALL PLANAR GRAPHS HAVE A VERTEX WITH DEGREE FIVE OR LESS!
+\section{Tournaments and Spanning Trees}
+We'll finish this chapter by making two variations on the graphs we've been talking about so far.
+Specifically, we'll dicuss a kind of graph whose edges are oriented, and we'll also talk about a problem that involves ``weighting'' each edge of a graph.
+Let's start with the former.
 
-\section{Tournaments (Lec. 23)}
-TOURNAMENTS (Directed graphs)
-\begin{itemize}
-    \item DEF. A tournament is a complete directed graph.
-    \item THM. Every graph has a directed Hamiltonian path. (Pf. Induction on vertices.)
-    \item DEF. For a tournament, player $x$ is a king (or king chicken) if, for every other player $y$, either $x \to y$ or there exists a player $z$ such that $x \to z \to y$.
-    \item THM. Every tournament has a king. (Pf. The person who won the most games is a king.)
-\end{itemize}
-MINIMUM SPANNING TREES (Weighted graphs)
-\begin{itemize}
-    \item come back later...
-\end{itemize}
+\begin{definition}[Tournament]
+    A tournament is a complete graph where every edge has an orientation $x \to y$ to $y \to x$.
+\end{definition}
+
+We call such a graph a tournament because we may interpret each edge of the graph as a game played between two contestants: if $x \to y$, then $x$ beat $y$ in the tournament.
+
+\begin{theorem}[]
+    Every tournament has a directed Hamiltonian path.
+    That is, there is some ordering of the $n$ vertices such that
+    \[ v_1 \to v_2 \to \cdots \to v_n. \]
+\end{theorem}
+
+\begin{proof}
+    We do induction on the number $n$ of vertices in the tournament.
+    The base cases $n=1$ and $n=2$ are trivial.
+
+    Suppose as our inductive hypothesis, that any tournament of size $n \geq 2$ has a directed Hamiltonian path.
+    Consider a tournament $T$ of size $n+1$, with vertices $v_1, v_2, \ldots, v_{n+1}$.
+    Temporarily remove vertex $v_{n+1}$ to create the subtournament $T'$, which we know to have a directed Hamiltonian path---say, without loss of generality, that this path is $v_1 \to v_2 \to \cdots \to v_n$.
+    We have three cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $v_n \to v_{n+1}$, then $v_1 \to v_2 \to \cdots \to v_{n+1}$ is a directed Hamiltonian path.
+        \item If $v_{n+1} \to v_1$, then $v_{v+1} \to v_1 \to v_2 \to \cdots \to v_n$ is a directed Hamiltonian path.
+        \item Oherwise, $v_1 \to v_{n+1} \to v_n$.
+        We know that $v_{n+1}$ has beaten at least one player, so let $v_f$ be the first player satisfying $v_{n+1} \to v_f$.
+        Thus $v_{f-1} \to v_{n+1} \to v_f$, and we can simply insert $v_{n+1}$ into the path at this point.
+    \end{enumerate}
+    In any case, there is a directed Hamiltonian path that includes all $n+1$ vertices in $T$.
+\end{proof}
+
+Oftentimes, there is a player in a tournament that dominates over everyone else.
+They may not win every game, but they can claim some direct superiority over every other player.
+There are some interesting things we can say about such a player, once defined.
+
+\begin{definition}[King (chicken)]
+    In a tournament, the vertex $x$ is a king (or king chicken) if, for every other player $y$, either $x \to y$ or there exists a player $z$ such that $x \to z \to y$.
+\end{definition}
+
+These are often called king \textit{chickens} because of how tournaments can be used to analyze pecking orders in flocks of chickens.
+These chickens get to claim superiority over all the rest!
+
+\begin{theorem}[King chicken theorem]
+    Every tournament has a king.
+\end{theorem}
+
+\begin{proof}
+    Let $v$ be a vertex with maximum ``out-degree'' $k$, and suppose $v$ beat $v_1, v_2, \ldots, v_k$.
+    We claim that $v$ must be a king.
+
+    If not, then there must exist a player $u$ that $v$ cannot reach in two steps, meaning $u \to v$ and $u \to v_1, \ldots, v_k$.
+    But then $u$ has larger out-degree than $v$, a contradiction.
+\end{proof}
+
+Now we'll move away from graphs with oriented edges and instead put weight on the edges.
+Suppose that, given any graph, we want to find a spanning tree (that is, a tree connecting all vertices) that minimizes the sum of its edges' weights.
+
+We can attempt to solve this problem using a greedy algorithm.
+Start with the edge that has the smallest weight; for each subsequent step, add the next least-weighted vertex that does not create a cycle.
+Continue doing this until all vertices are connected.
+
+\begin{theorem}[]
+    The greedy algorithm described above always creates a minimum spanning tree.
+\end{theorem}
+
+\begin{proof}
+    In this proof, we assume that all weights in the graph are distinct.
+    The statement can be proved for repeated weights, but we will not do it here.
+
+    Let $T_g$ be the spanning tree produced by the greedy algorithm, with edges $e_1, e_2, \ldots, e_{n-1}$.
+    Suppose, to the contrary, that $T_g$ is not optimal.
+    Let $T^*$ be any minimum spanning tree of the graph, so $w(T^*) < w(T_g)$, and let $e_k$ be the first edge of $T_g$ that is not also in $T^*$.
+
+    Inserting $e_k$ into $T^*$ creates a cycle.
+    On this cycle, there must be some edge $e^*$ that is not any of $e_1, \ldots, e_k$ (since otherwise $T_g$ would contain this cycle); by the greedy algorithm, $w(e_k) < w(e^*)$.
+
+    If we then remove $e^*$, we get a new spanning tree that contains no cycles and has all the same edges as $T^*$, except for $e^*$ having been replaced with $e_k$.
+    So this new tree has a smaller overall weight than $T^*$, a contradiction!
+\end{proof}
+
 
 \end{document}

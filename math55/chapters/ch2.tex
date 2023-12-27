@@ -17,8 +17,6 @@ Remember that, when we divide two integers $a$ and $b$, we're left with a unique
     \[ a = bq + r, \quad 0 \leq r < b. \]
 \end{theorem}
 
-% TODO: proof here
-
 Oftentimes, we're only interested in the remainder that comes from this division.
 In this case, we write $r = a \bmod b$.
 
@@ -36,7 +34,10 @@ One intuitive consequence of this theorem is that the ``divisibility relation'' 
     If $c \mid b$ and $b \mid a$ then $c \mid a$.
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    If $c \mid b$ and $b \mid a$, then there exist integers $p,q$ such that $b = cp$ and $a = bq$.
+    So $a = (cp)q = (pq)c$, and since $pq$ is an integer, $c \mid a$.
+\end{proof}
 
 We may use this to prove a much more general and useful theorem about integer combinations.
 (These are like linear combinations, but with strictly integer coefficients.)
@@ -45,7 +46,16 @@ We may use this to prove a much more general and useful theorem about integer co
     If $d \mid a$ and $d \mid b$ then $d \mid ax + by$ for all $x,y \in \Z$.
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    If $d \mid a$ and $d \mid b$, then there exist integers $p,q$ such that
+    \[ a = dp \;\text{ and }\; b = dq. \]
+    Multiply the equations by the integers $x$ and $y$, respectively, to get
+    \[ ax = dpx \;\text{ and }\; by = dqy. \]
+    Adding these equations together gives $ax + by = dpx + dqy$ or, alternatively,
+    \[ ax + by = d(px + qy). \]
+    Since $px + qy$ is an integer, $d \mid ax + by$.
+\end{proof}
+
 
 With this groundwork laid, we can begin talking about GCDs and related topics.
 
@@ -129,7 +139,9 @@ The other is Euclid's theorem, stated below.
     For $a,b,x \in \Z$, $\gcd (a,b) = \gcd (b, a - bx)$.
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    By the integer combination theorem, any common divisor of $a$ and $b$ is a common divisor of $b$ and $a - bx$ and vice versa.
+\end{proof}
 
 Arguably the most useful special case of this theorem applies the division algorithm to quickly compute GCDs.
 
@@ -137,7 +149,10 @@ Arguably the most useful special case of this theorem applies the division algor
     $\gcd (a,b)$ can be found by repeatedly computing $\gcd (b, a \bmod b)$.
 \end{corollary}
 
-% TODO: proof here
+\begin{proof}
+    By the division algorithm, for any integers $a,b$ there exist integers $q$ and $r$, $0 \leq r \leq b$, such that $a = bq + r$.
+    Let $x = q$ in Euclid's theorem.
+\end{proof}
 
 Euclid's algorithm is very fast.
 Its worst-case runtime is when it acts on two consecutive Fibonacci numbers (in which case the ``quotient'' is always zero), and even then it will (by Lame's theorem) only take at most $5k$ steps, where $k$ is the number of digits in $b \leq a$.
@@ -241,8 +256,6 @@ As a step toward this, we give a variation on the important theorem.
     If $p$ is prime and $p \mid a_1 a_2 \cdots a_n$, then $p \mid a_1$ or $p \mid a_2$ or $\cdots$ or $p \mid a_n$.
 \end{corollary}
 
-% TODO: proof here
-
 Now, the centerpiece of the section.
 
 \begin{theorem}[Fundamental theorem of arithmetic]
@@ -260,33 +273,26 @@ Now, the centerpiece of the section.
 
 We can use this fundamental theorem to solve a pretty neat counting problem.
 
+\pagebreak
+
 \begin{theorem}[Number of positive divisors from prime factorization]
-    Let $\ds a = \prod_{i=1}^r p_i^{\alpha_i}$, where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i \geq 0$.
-
-    $a$ has $(1 + \alpha_1) (1 + \alpha_2) \cdots (1 + \alpha_r)$ positive divisors.
+    Let $a = \prod\limits_{i=1}^r p_i^{\alpha_i}$, where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i \geq 0$.
+    $a$ has $\prod\limits_{i=1}^{r}(1 + \alpha_i)$ positive divisors.
 \end{theorem}
-
-% TODO: proof here
 
 Similarly, the exponents of this prime factorization can be used to quickly determine the greatest common divisor and least common multiple between two numbers.
 
 \begin{theorem}[GCD and LCD from prime factorization]
-    Let
-    \[ a = \prod_{i=1}^r p_i^{\alpha_i} \,\text{ and }\, b = \prod_{i=1}^r p_i^{\beta_i}, \]
-    where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i, \beta_i \geq 0$.
-    \[ \gcd (a,b) = \prod_{i=1}^r p_i^{\min \left\{ \alpha_i, \beta_i \right\}} \,\text{ and }\, \pfn{lcm} (a,b) = \prod_{i=1}^r p_i^{\max \left\{ \alpha_i, \beta_i \right\}}. \]
+    Let $a = \prod\limits_{i=1}^r p_i^{\alpha_i}$ and $b = \prod\limits_{i=1}^r p_i^{\beta_i}$,where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i, \beta_i \geq 0$.
+    \[ \gcd (a,b) = \prod_{i=1}^r p_i^{\min \left\{ \alpha_i, \beta_i \right\}} \,\text{ and }\, \pfn{lcm} [a,b] = \prod_{i=1}^r p_i^{\max \left\{ \alpha_i, \beta_i \right\}}. \]
 \end{theorem}
 
-% TODO: proof here
-
-Note that the least common multiple is commonly denoted $[a,b]$.
-We give one last significant consequence of unique prime factorizations.
+Note that the LCM is commonly denoted $[a,b]$.
+We give one last consequence of unique prime factorizations.
 
 \begin{theorem}[gcd $\cdot$ lcm]
     For any $a,b \geq 1$, $(a,b) [a,b] = ab$.
 \end{theorem}
-
-% TODO: proof here
 
 \section{Modular Arithmetic}
 Modular arithmetic will be essential to the rest of our discussion of number theory.
@@ -313,8 +319,6 @@ In fact, $\equiv_m$ can be calle an equivalence relation since it has the follow
     \end{enumerate}
 \end{theorem}
 
-% TODO: proof here
-
 Now we'll explore some of the things we're ``allowed'' to do with this relation.
 
 \begin{theorem}[Operations on $\equiv_m$]
@@ -325,7 +329,18 @@ Now we'll explore some of the things we're ``allowed'' to do with this relation.
     \end{enumerate}
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    (a) Suppose $a \equiv_m b$ and $c \equiv_m d$.
+    Then $m \mid a-b$ and $m \mid c-d$, so
+    \[ m \mid (a - b) + (c - d) \implies m \mid (a + c) - (b + d). \]
+    By definition, $a + c \equiv_m b + d$.
+    \smallskip
+
+    (c) By the same hypothesis and the integer combination theorem,
+    \[ m \mid (a - b)c + (c - d)b \implies m \mid ac - bd. \]
+    By definition, $ac \equiv_m bd$.
+\end{proof}
+
 
 \begin{corollary}[Power rule]
     If $a \equiv_m b$ then $a^n \equiv_m b^n$ for all $n \geq 0$.
@@ -337,8 +352,6 @@ Putting all this together, we get what may be a superficially surprising fact.
     Let $P(x)$ be a polynomial with integer coefficients.
     If $a \equiv_m b$, then $P(a) \equiv_m P(b)$.
 \end{corollary}
-
-% TODO: proof here
 
 With this polynomial theorem, here's a little aside.
 Out of a variety of modular relationships that have to do with the digits of a number, we give a simple one.
@@ -379,7 +392,11 @@ We can generalize this theorem slightly, if we allow ourselves to change the mod
     If $ax \equiv_m ay$ and $\gcd (a,m) = d$, then $x \equiv_{m/d} y$.
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    Suppose $ax \equiv_m ay$ and $\gcd (a,m) = d$.
+    So $m \mid ax - ay$, meaning $\frac{m}{d} \mid \frac{a}{d} (x - y)$.
+    Since $\left( \frac{m}{d}, \frac{a}{d} \right) = 1$, by the important theorem, $\frac{m}{d} \mid x - y$, and by definition $x \equiv_{m/d} y$.
+\end{proof}
 
 The cancellation theorem gives one idea of what it means to ``undo'' multiplication in a modular sense.
 Alternatively, we can define the multiplicative inverse of a number mod $m$.
@@ -414,8 +431,6 @@ If the modulus is prime, then we can make an even stronger statement.
 \begin{corollary}
     If $p$ is prime, then the numbers $1, 2, \ldots, p-1$ have unique inverses mod $p$.
 \end{corollary}
-
-% TODO: proof here
 
 \section{Applications}
 Here we state four theorems that utilize everything we've discussed so far, largely 
@@ -521,7 +536,23 @@ It is a generalization of Fermat's theorem.
     If $(a,m) = 1$, then $a^{\phi (m)} \equiv_m 1$.
 \end{theorem}
 
-% TODO: proof here
+\begin{proof}
+    Let $\left\{ r_1, \ldots, r_t \right\}$ be the subset of $\left\{ 1, \ldots, m \right\}$ containing the numbers that are relatively prime to $m$, so $t = \phi (m)$.
+    Since $r_1, \ldots, r_t$ are distinct mod $m$ and $(a,m) = 1$, by the cancellation theorem's contrapositive the numbers $ar_1, \ldots, ar_t$ are also distinct mod $m$.
+
+    Now, since $(a, m) = 1$ and $(r_i, m) = 1$, we also have $(ar_i, m) = 1$.
+    By Euclid's theorem this means $(m, ar_i \bmod m) = 1$, so $ar_i \bmod m = r_j$ and $ar_i \equiv_m r_j$ for some $j$.
+
+    Therefore, $\left\{ ar_1, \ldots, ar_t \right\} \equiv_m \left\{ r_1, \ldots, r_t \right\}$.
+    Multiplying everything together:
+    \begin{align*}
+        (ar_1) \cdots (ar_t) &\equiv_m r_1 \cdots r_t \\
+        a^t (r_1 \ldots r_t) &\equiv_m r_1 \ldots r_t \\
+        a^t &\equiv_m 1 \\
+        a^{\phi (m)} &\equiv_m 1,
+    \end{align*}
+    as desired.
+\end{proof}
 
 As an interlude, consider again Fermat's theorem, specifically its contrapositive: if $a^n \not\equiv_n a$ then $n$ is not prime.
 This gives us a ``probable prime test''; it isn't perfect since Fermat's theorem isn't an iff statement, but it does filter out the vast majority of composite numbers.
@@ -533,6 +564,8 @@ Some of these IGPs, of course, are composite; such numbers are called Carmichael
 We will, however, give a couple of practical methods for computing $a^n \bmod m$ for large $n$.
 First, if $(a,m) = 1$ and $\phi (m)$ are known, we may be able to exploit Euler's theorem in some way (often using the division algorithm).
 This method is simple, but it has limited use; the next one is much more widely applicable.
+
+\pagebreak
 
 \begin{example}[Seed planting]
     Suppose we want to compute $6^{83} \bmod 79$.

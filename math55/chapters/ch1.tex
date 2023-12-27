@@ -13,13 +13,9 @@ We begin our discussion of combinatorics by giving two basic rules that will gov
     \[ \bigcup_{i=0}^n A_i = \sum_{i=0}^n |A_i|. \]
 \end{theorem}
 
-% TODO: proof here
-
 \begin{theorem}[Rule of product]
     If an action is composed of $k$ steps such that there are $x_i$ choices for step $i$, then the action can be performed in $x_1 x_2 \cdots x_k$ different ways.
 \end{theorem}
-
-% TODO: proof here
 
 We'll apply these rules (especially the rule of product) to two different types of problems.
 First, we can count the number of ways we can arrange a set of objects.
@@ -43,8 +39,10 @@ First, we can count the number of ways we can arrange a set of objects.
     By the rule of product, there are $n \cdot (n-1) \cdot (n-2) \cdots 1 = n!$ ways to permute the elements in $S$.
 \end{proof}
 
+\pagebreak
+
 We can also count the number of subsets we can create using a set of objects, regardless of arrangement order.
-This type of problem is so fundamental to combinatorics that it gets a special name and symbol, given below.
+This type of problem is so fundamental that it gets a special name and symbol, given below.
 
 \begin{definition}[Combination]
     Consider a set $S$ that has size $n$.
@@ -79,11 +77,482 @@ This type of problem is so fundamental to combinatorics that it gets a special n
 \end{proof}
 
 This is an example of a combinatorial proof---we can prove an equivalence between two expressions by showing that they count the same thing.
-This will be a useful (and enlightening!) technique when proving other statements.
+This will be a useful (and enlightening!) technique when proving other statements later on.
+But first, we have one more result that may illustrate the surprisingly far-reaching power of combinatorics.
+
+\begin{theorem}[]
+    For $n \geq 1$, $\ds \frac{n(n+1)}{2} = {n+1 \choose 2}$.
+\end{theorem}
+
+\begin{proof}
+    Consider an equilateral triangle formed by rows of circles, each row with one more circle than the last.
+    If this triangle has $n$ rows, then there are $\frac{n(n+1)}{2}$ circles in the triangle.
+
+    Now add one more row (of length $n+1$) to the bottom of the triangle.
+    There is a one-to-one correspondence between pairs of circles in the bottom row and individual circles in the upper $n$ rows---we might illustrate this by drawing diagonal lines from any dot in the upper rows to a pair of dots in the bottom row.
+    There are ${n+1 \choose 2}$ ways to pick pairs of circles from the bottom row, so 
+    \[ \frac{n(n+1)}{2} = {n+1 \choose 2}, \]
+    as desired.
+\end{proof}
+
+\section{Fibonacci Numbers and Tilings}
+The Fibonacci numbers are often seen in the context of sequences as one of the first examples of a more ``complex'' rule for going from one term to the next.
+
+\begin{definition}[Fibonacci numbers]
+    The Fibonacci numbers are defined recursively by $F_0 = 0$, $F_1 = 1$, and
+    \[ F_n = F_{n-1} + F_{n-2}, \quad n \geq 2. \]
+\end{definition}
+
+We can quickly go through some interesting facts about these numbers.
+
+\begin{theorem}[Partial sums of Fibonacci numbers] \label{partialFibSum}
+    For $n \geq 0$,
+    \[ \sum_{k=0}^{n} F_n = F_{n+2} - 1. \]
+\end{theorem}
+
+\begin{proof}
+    We do induction on $n$.
+    The base case $n=0$ is trivial.
+    Now suppose, as our inductive hypothesis, that the statement is true for $n$.
+    So for $n+1$,
+    \begin{align*}
+        F_0 + F_1 + \cdots + F_n + F_{n+1} &= (F_{n+2} - 1) + F_{n+1} \\
+        &= F_{n+3} - 1,
+    \end{align*}
+    as desired.
+\end{proof}
+
+Surprisingly, there is a simple closed form for the $n$th Fibonacci number!
+
+\begin{theorem}[Binet's formula]
+    For $n \geq 0$,
+    \[ F_n = \frac{1}{\sqrt{5}} \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n} - \left( \frac{1 - \sqrt{5}}{2} \right)^{n} \right]. \]
+    If we define $\varphi = \frac{1 + \sqrt{5}}{2}$ and $\bar{\varphi} = \frac{1 - \sqrt{5}}{2}$, this turns into
+    \[ F_n = \frac{\varphi^{n} - \bar{\varphi}^{n}}{\sqrt{5}}. \]
+\end{theorem}
+
+\begin{proof}
+    We do induction on $n$.
+    The base cases $n=0$ and $n=1$ can be shown via simple arithmetic.
+    Now suppose, as our inductive hypothesis, that Binet's formula folds for both $n$ and $n-1$.
+    (We can do this since we have two base cases.)
+    By the definition of the Fibonacci numbers:
+    \begin{align*}
+        F_{n+1} &= F_n + F_{n-1} \\
+        \intertext{By the inductive hypothesis,}
+        &= \frac{1}{\sqrt{5}} \left( (\varphi^{n} + \varphi^{n-1}) - (\bar{\varphi}^{n} + \bar{\varphi}^{n-1}) \right) \\
+        &= \frac{1}{\sqrt{5}} \left( \varphi (\varphi + 1) - \bar{\varphi}({\varphi} + 1) \right) \\
+        \intertext{Since these constants solve $\varphi + 1 = \varphi^2$ and $\bar{\varphi} + 1 = \bar{\varphi}^2$, we get}
+        &= \frac{1}{\sqrt{5}} \left( \varphi^{n+1} - \bar{\varphi}^{n+1} \right),
+    \end{align*}
+    as desired.
+\end{proof}
+
+To prove our last property, we introduce a slight variation to the principle of mathematical induction that we'll use more later.
+
+\begin{theorem}[Fibonacci decomposition]
+    Every positive integer can be expressed as the sum of distinct Fibonacci numbers.
+\end{theorem}
+
+\begin{proof}
+    We do \textit{strong} induction on the positive integer $n$.
+    We still mention that the base case, $n=1$, obviously holds because $F_2 = 1$.
+
+    Now, for our inductive hypothesis, suppose the statement holds for \textit{all} numbers up to and including $n$.
+    We have two cases.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $n+1$ is a Fibonacci number, then we're done.
+        \item Otherwise, let $F_L$ be the largest Fibonacci number that is less than $n+1$, so $F_L < n+1 < F_{L+1}$.
+        Now, $n+1 = F_L + (n+1 - F_L)$, and since $n + 1 - F_L$, by the inductive hypothesis $n+1$ is the sum of Fibonacci numbers.
+        These numbers are distinct because
+        \[ n+1 - F_L < F_{L+1} - F_L = F_{L-1} \leq F_L, \]
+        so $F_L$ cannot be included in the sum of Fibonacci numbers that creates $n+1 - F_L$.
+    \end{enumerate}
+    In either case, $n+1$ is the sum of Fibonacci numbers.
+\end{proof}
+
+Since we're discussing all this in a chapter about combinatorics, it may not be surprising that there's a very direct connection between the Fibonacci numbers and counting.
+
+Suppose we have a board of length $n$, and that we wish to cover this board with tiles of lengths 1 and 2 (called squares and dominoes, respectively).
+Define $f_n$ as the total number of ways we can do this tiling; as it turns out, we can use Fibonacci numbers to quickly determine $f_n$!
+
+\begin{theorem}[Number of square-domino tilings]
+    For $n \geq 0$, $f_n = F_{n+1}$.
+\end{theorem}
+
+\begin{proof}
+    We do induction on the length $n$ of the tiling.
+    The base cases $n=0$ and $n=1$ are trivial.
+
+    Now suppose as our inductive hypothesis that $f_{n-1} = F_n$ and $f_n = F_{n+1}$.
+    To determine $f_{n+1}$, we observe that all length-$(n+1)$ tilings can be broken into two categories: ones that end with a domino (there are $f_{n-1}$ of these), and ones that don't ($f_n$).
+    Adding these together gives
+    \begin{align*}
+        f_{n+1} &= f_{n-1} + f_n \\
+        &= F_n + F_{n+1} \\
+        &= F_{n+2},
+    \end{align*}
+    as desired.
+\end{proof}
+
+This connection allows us to combinatorially prove many identities involving Fibonacci numbers!
+
+\begin{theorem}[Squares of consecutive Fibonacci numbers]
+    For $n \geq 1$, $f_{n-1}^2 + f_n^2 = f_{2n}$.
+\end{theorem}
+
+\begin{proof}
+    We give a combinatorial proof by counting the number of ways a length-$2n$ board can be tiled using squares and dominoes.
+    \smallskip
+
+    (i) By definition, there are $f_{2n}$ ways to do this.
+    \smallskip
+
+    (ii) Each tiling can be split into two categories: ones that have a domino at their midpoint ($f_{n-1}^2$ of these), and ones that don't ($f_n^2$).
+    Adding these together gives $f_{n-1}^2 + f_n^2$ total tilings.
+
+    \smallskip
+
+    Both expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+By a similar argument, we could generalize this statement to write $f_{m+n} = f_{m-1} f_{n-1} + f_m f_n$.
+We could also prove this generalization quite easily using induction, but the combinatorial route (one may argue) offers more intuition as to \textit{why} the identity is the way it is.
+
+In fact, we can even use combinatorics to prove something like Theorem 1.\ref{partialFibSum} by examining different ways in which the tilings can end (specifically, tilings that end with different numbers of consecutive squares).
 
 \section{Pascal's Triangle}
+One of the most widely recognizable objects in combinatorics is Pascal's triangle, an infinite arrangement of combinations.
+\begin{gather*}
+    {0 \choose 0} \\
+    {0 \choose 1} \qquad {1 \choose 1} \\
+    {0 \choose 2} \qquad {1 \choose 2} \qquad {2 \choose 2} \\
+    {0 \choose 3} \qquad {1 \choose 3} \qquad {2 \choose 3} \qquad {3 \choose 3} \\
+    \vdots
+\end{gather*}
+There's a lot of different patterns to uncover in this triangle.
+This section is dedicated to proving them!
+We'll start with an identity that many would call the defining feature of Pascal's triangle.
 
+\begin{theorem}[Pascal's identity]
+    For $0 < k \leq n$,
+    \[ {n \choose k} = {n-1 \choose k-1} + {n-1 \choose k}. \]
+\end{theorem}
 
-\section{things to save for later}
+\begin{proof}
+    We give a combinatorial proof by counting the number of size-$k$ subsets that can be created using a set of $n$ elements.
+    \smallskip
+
+    (i) By definition, ${n \choose k}$ subsets can be created.
+    \smallskip
+
+    (ii) Each subset can be categorized based on the presence of element $n$.
+    There are ${n-1 \choose k-1}$ size-$k$ subsets that do contain $n$, and ${n-1 \choose k}$ that don't.
+    So there are ${n-1 \choose k-1} + {n-1 \choose k}$ size-$k$ subsets in all.
+    \smallskip
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+Now we'll examine two patterns that exist within each row of the triangle.
+
+\pagebreak
+
+\begin{theorem}[Row sums] \label{rowSums}
+    For $n \geq 0$,
+    \[ \sum_{k=0}^{n} {n \choose k} = 2^{n}. \]
+\end{theorem}
+
+\begin{proof}
+    We give a combinatorial proof by counting the number of subsets (of any size) that can be created using a set of $n$ elements.
+    \smallskip
+
+    (i) We can simply add up the number of subsets of each size between 0 and $n$; this gives $\sum\limits_{k=0}^{n} {n \choose k}$.
+    \smallskip
+
+    (ii) We can also ``iterate'' through the elements in the set and, for each one, decide whether or not to include it in the subset.
+    There are $2^{n}$ ways to do this.
+    \smallskip
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+\begin{theorem}[Same-parity row sums] \label{parityRowSums}
+    For $n \geq 1$,
+    \[ \sum_{k\text{ even}} {n \choose k} = 2^{n-1} = \sum_{k\text{ odd}} {n \choose k}. \]
+\end{theorem}
+
+\begin{proof}
+    We give a combinatorial proof by counting the number of even-sized subsets that can be created using a set of $n$ elements.
+    \smallskip
+
+    (i) We can simply add up the number of subsets of each even size between 0 and $n$; this gives $\sum\limits_{k\text{ even}} {n \choose k}$.
+    \smallskip
+
+    (ii) We can also ``iterate'' through the first $n-1$ elements in the set and, for each one, decide whether or not to include it in the subset.
+    When we arrive at element $n$, whether we include or exclude it is predetermined by the parity of the subset we've already created, so there's no decision to be made.
+    There are $2^{n-1}$ ways to construct a subset in this way.
+    \smallskip
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+    (The odd case can be proved in the exact same way, just with odd-sized subsets instead.)
+\end{proof}
+
+Now consider a version of Pascal's triangle that is left-aligned, with the numeric values filled in.
+\begin{align*}
+    & 1 \quad \\
+    & 1 \quad 1 \\
+    & 1 \quad 2 \quad \phantom{1}1 \\
+    & 1 \quad 3 \quad \phantom{1}3 \quad \phantom{1}1 \\
+    & 1 \quad 4 \quad \phantom{1}6 \quad \phantom{1}4 \quad 1 \\
+    & 1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1 \\
+    & \phantom{1 \quad 5 \quad 10 \;\,} \vdots
+\end{align*}
+Notice that, when we start at the top of a column and sum the first few terms, we get the number immediately down and to the right of the last addend.
+(This forms a hockey stick-like shape.)
+We formalize and prove this observation below.
+
+\pagebreak
+
+\begin{theorem}[Hockey stick theorem]
+    For $0 \leq k \leq n$,
+    \[ \sum_{j=k}^{n} {j \choose k} = {n+1 \choose k+1}. \]
+\end{theorem}
+
+\begin{proof}
+    We count the number of size-$(k+1)$ subsets that can be created using a set of $n+1$ elements.
+    \smallskip
+
+    (i) By definition, ${n+1 \choose k+1}$ such subsets can be created.
+    \smallskip
+
+    (ii) Each subset can be categorized based on which elements are required or disallowed to be in it.
+    \begin{itemize}
+        \item There are ${n \choose k}$ ways to construct a subset that requires the presence of element $n+1$.
+        \item There are ${n-1 \choose k}$ ways to construct a subset that requires element $n$, but forbids $n+1$.
+        \item There are ${n-2 \choose k}$ ways to construct a subset that requires $n-1$ but forbids $n$ and $n+1$.
+        \item[$\vdots$]
+        \item There are ${k \choose k}$ ways to construct a subset that requires $k+1$ but forbids anything greater.
+    \end{itemize}
+    In all, this gives $\sum\limits_{j=k}^{n} {j \choose k}$ distinct subsets.
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+We can do the same thing with diagonal sums---pick a row and start summing terms going up and to the left.
+Doing this for many rows reveals an even more interesting pattern!
+
+\begin{theorem}[Diagonal sums]
+    For $n \geq 0$,
+    \[ \sum_{k \geq 0} {n-k \choose k} = f_n. \]
+\end{theorem}
+
+\begin{proof}
+    We give a combinatorial proof by counting the number of length-$n$ tilings that can be created using squares and dominoes.
+    \smallskip
+
+    (i) By definition, there are $f_n$ such tilings.
+    \smallskip
+
+    (ii) Consider a tiling that has exactly $k$ dominoes (and $n-2k$ squares).
+    So there are $n-k$ tiles in all, and there are ${n-k \choose k}$ ways to arrange the tiles.
+    Adding these up for all possible values of $k$ gives $\sum\limits_{k \geq 0} {n-k \choose k}$.
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+We've been sticking with combinatorial proofs in this section, but some of the theorems we've proved also have pretty easy algebraic proofs.
+In order to uncover these, though, we need another theorem.
+
+\begin{theorem}[Binomial theorem]
+    For $n \geq 0$,
+    \[ (x+y)^{n} = \sum_{k=0}^{n} {n \choose k} x^{k} y^{n-k}. \]
+\end{theorem}
+
+\begin{proof}
+    The expanded form of $(x+y)^{n}$ includes $n$ factors of the form $(x+y)$.
+    To create an $x^{k} y^{n-k}$ term, we pick $k$ factors to pull an $x$ from, and the rest contribute $y$'s; there are ${n \choose k}$ ways to do this.
+\end{proof}
+
+Using this, some proofs almost become trivial!
+For example, to prove Theorem 1.\ref{rowSums} we can simply write $2^{n}$ as the binomial $(1+1)^{n}$ and apply the binomial theorem.
+(We could do a similar thing to prove the equivalence between the summations in Theorem 1.\ref{parityRowSums}; we'll omit the details here.)
+
+We can also prove new identities!
+For example, we can differentiate both side of the equation
+\[ (1+x)^{n} = \sum_{k=0}^{n} {n \choose k} x^{k} \]
+and substitute $x=1$ to show that
+\[ n \cdot 2^{n-1} = \sum_{k=0}^{n} k {n \choose k}. \]
+
+\section{Multisets and Inclusion-Exclusion}
+So far we've been using combinations, which count the number of subsets that can be created from a set.
+Here, we'll extend our discussions into creating \textit{multisets}---that is, sets that can have repeated elements.
+
+\begin{definition}[Multichoose]
+    Consider a set $S$ that has size $n$.
+    The number of size-$k$ multisets that can be created using the elements in $S$ is called ``$n$ multichoose $k$'' and is denoted by $\left( {n \choose k} \right)$.
+\end{definition}
+
+We can quickly establish a nice connection to normal combinations that illuminates a different way of looking at the multichoose function.
+
+\begin{theorem}[Multichoose theorem]
+    \[ \left( {n \choose k} \right) = {n+k-1 \choose k}. \]
+\end{theorem}
+
+\begin{proof}
+    Suppose we have a set of $n$ integers and want to create a size-$k$ multiset using them.
+    \smallskip
+
+    (i) By definition, we can create $\left( {n \choose k} \right)$ multisets.
+    \smallskip
+
+    (ii) We have $k$ slots in the multiset, each of which is represented below by an asterisk.
+    \[ \underbrace{* \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\,\, *}_{k \text{ stars}} \]
+    Suppose we insert $n-1$ vertical bars into the spaces between the asterisks.
+    \[ \underbrace{\phantom{|}\,* \,|\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,\phantom{|}\, * \,|\, * \,\phantom{|}\, * \,\phantom{|}\,\, *\,|}_{n \text{ bars}} \]
+    Each bar represents a transition from one set element to the next.
+    For example, the above represents the construction of a multiset that contains one instance of element 1, six instances of element 2, three instances of element 3, and no instances of element 4.
+
+    In general, we'll always have $k$ stars and $n-1$ bars; these objects can be arranged in
+    \[ {n+k-1 \choose k} = {n+k-1 \choose n-1} \]
+    different ways.
+    \smallskip
+
+    Both of the expressions we've found count the same thing, so they must be equal.
+\end{proof}
+
+We can exploit this connection to state a Pascal-like theorem for the multichoose.
+
+\begin{theorem}[]
+    \[ \left( {n \choose k} \right) = \left( {n-1 \choose k} \right) + \left( {n \choose k-1} \right). \]
+\end{theorem}
+
+\begin{proof}
+    A simple algebraic proof using Pascal's identity:
+    \begin{align*}
+        \left( {n-1 \choose k} \right) + \left( {n \choose k-1} \right) &= {n+k-2 \choose k} + {n+k-2 \choose k-1} \\
+        &= {n+k-1 \choose k} \\
+        &= \left( {n \choose k} \right),
+    \end{align*}
+    as desired.
+\end{proof}
+
+The multichoose describes allocations of $k$ multiset slots to $n$ elements.
+(In class, we allocated kandies to ninjas.)
+We can place restrictions on this restriction by saying, for example, that each element must appear in the multiset at least once; in this case, we simply subtract $n$ from the available multiset slots.
+
+To use another restriction we might impise, we must first describe the principle of inclusion and exclusion.
+Suppose we want to count the number of elements in the union $A_1 \cup A_2 \cup A_3$.
+We do so in three steps:
+\begin{enumerate}
+    \item We first add up the magnitudes of the individual sets: $|A_1| + |A_2| + |A_3|$.
+    \item We then recognize that we've double-counted the elements that are present in at least two sets, so we subtract off the 2-intersections: $- |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3|$.
+    \item But now, while subtracting, we've triple counted the elements that are present in all three sets, so we add back the 3-intersection: $+ |A_1 \cap A_2 \cap A_3|$.
+\end{enumerate}
+Combining all of these together gives the size of $A_1 \cup A_2 \cup A_3$.
+We generalize this below.
+
+\begin{theorem}[Principle of inclusion and exclusion]
+    Let $A_1, A_2, \ldots, A_n$ be subsets of $S$, and let the indicies $i,j,k$ satisfy $1 \leq i \leq j \leq k \leq n$.
+    Then
+    \begin{align*}
+        |A_1 \cup A_2 \cup \cdots \cup A_n| =& \phantom{+}\sum_{i} |A_i| \\
+        & - \sum_{i,j} |A_i \cap A_j| \\
+        & + \sum_{i,j,k} |A_i \cap A_j \cap A_k| \\
+        & \;\,\vdots \\
+        & + (-1)^{n-1} |A_1 \cap A_2 \cap \cdots \cap A_n|
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    We'll show that each element $x$ in the union is counted exactly once.
+    Suppose $x$ is in exactly $m$ of the $n$ sets (and, without loss of generality, these sets are $A_1, \ldots, A_m$).
+    The first sum counts $x$ $m$ times, the second \textit{un}counts it ${m \choose 2}$ times, the third counts it ${m \choose 3}$ times, and so on; altogether, the number of times $x$ is counted is
+    \[ {m \choose 1} - {m \choose 2} + {m \choose 3} - {m \choose 4} + \cdots \pm {m \choose m} = \sum_{k\text{ odd}} {m \choose k} - \sum_{k\text{ even}} {m \choose k} = {m \choose 0} = 1, \]
+    as desired.
+\end{proof}
+
+\pagebreak
+
+So if we wanted to construct multisets such that no element is repeated more than $r$ times, we simply apply the principle of inclusion and exclusion:
+\[ \left( {n \choose k} \right) - n \left( {n \choose k - r} \right) + {n \choose 2} \left( {n \choose k - 2r} \right) - \cdots \]
+Another application comes in the form of derangements, defined below.
+
+\begin{definition}[Derangement]
+    A derangement of $n$ objects is an arrangement of the objects such that no object is in its natural position.
+    The number of derangements of $n$ objects is denoted by $D_n$.
+\end{definition}
+
+\begin{theorem}[]
+    For $n \geq 1$, $D_n = \pfn{round} \left( \frac{n!}{e} \right)$.
+\end{theorem}
+
+\begin{proof}
+    We can use the principle of inclusion and exclusion to show that
+    \[ D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!} \implies \frac{D_n}{n!} = \sum_{k=0}^{n} \frac{(-1)^k}{k!}. \]
+    Notice that this is a partial sum of the power series of $e^{-1}$.
+    From calculus, we know that
+    \[ \left| \frac{D_n}{n!} - \frac{1}{e} \right| < \left| \frac{1}{n+1} \right|. \]
+    Therefore, we have the chain of relations
+    \[ \left| D_n - \frac{n!}{e} \right| = n! \left| \frac{D_n}{n!} - \frac{1}{e} \right| < \frac{1}{n+1} \leq \frac{1}{2} \]
+    Since the distance between $D_n$ and $\frac{n!}{e}$ is always less than $\frac{1}{2}$, $D_n =\pfn{round}\left( \frac{n!}{e} \right)$.
+\end{proof}
+
+\section{Linear Recurrences and Generating Function}
+Now we'll step away from combinatorics and, as a brief interlude, study a simple kind of sequence.
+
+\begin{definition}[Linear recurrence]
+    A $t$-th linear recurrence is one of the form
+    \[ a_n = k_1 a_{n-1} + k_2a_{n-2} + \cdots + k_t a_{n-t}. \]
+\end{definition}
+
+First-order recurrences, also known as geometric sequences, have the closed form $a_n = c \cdot r^n$.
+We hypothesize that any $t$-th order linear recurrence also has this form.
+We can test this on a second-order recurrence:
+\begin{align*}
+    a_n &= k_1 a_{n-1} + k_2 a_{n-2} \\
+    c r^{n} &= k_1 cr^{n-1} + k_2 cr^{n-2} \\
+    0 &= r^2 - k_1 r - k_2
+\end{align*}
+This equation has solutions $r_1, r_2$.
+So, any sequence of the forms $c \cdot r_1^{n}$ or $c \cdot r_2^{n}$ satisfies the recrrence.
+But by linearity, any linear combination of solutions is also a solution!
+
+This works in general for any linear recurrence, even ones whose ``characteristic polynomials'' have complex roots.
+If there are repeated roots, then we have multiple terms corresponding to that root, each of which differs by a factor of $n$.
+
+All of this is summarized below.
+
+\begin{theorem}[Closed form of a linear recurrence]
+    A $t$-th order linear recurrence whose characteristic polynomial has roots $r_1, \ldots, r_t$ (with no repeated roots), then
+    \[ a_n = c_1 r_1^{n} + c_2 r_2^{n} + \cdots + c_t r_t^{n}. \]
+    If there is a repeated root $r$ with multipicity $m$, then some of the terms in the above equation have the form $k r^{n}, k n r^{n}, \ldots, k n^{m} r^{n}$.
+\end{theorem}
+
+We could've come to this same conclusion via the manipulation of generating functions, exemplified below.
+
+\begin{example}[Closed form via generating functions]
+    The recurrence
+    \[ a_n = 5a_{n-1} - 6a_{n-2} \]
+    has the generating function
+    \[ a(x) = \sum_{n \geq 0} a_n x^{n} = 1 + 7x + 29x^2 + 103x^3 + \cdots. \]
+    We can view $a(x)$ as the power series of some simpler function.
+    We'll start by determining what that function is using some clever algebraic manipulation.
+    \begin{align*}
+        a(x) &= \sum_{n \geq 0} a_n x^{n} \\
+        \intertext{Since this is a second-order recurrence, we'll take out the first two terms and expand the rest.}
+        &= 1 + 7x + \sum_{n \geq 2} a_n x^{n} \\
+        &= 1 + 7x + \sum_{n \geq 2} (5a_{n-1} - 6a_{n-2}) x^{n} \\
+        &= 1 + 7x + 5x \sum_{n \geq 2} a_{n-1} x^{n-1} - 6x^2 \sum_{n \geq 2} a_{n-2} x^{n_-2} \\
+        \intertext{The first sum is $a(x)$, minus the first term, while the second one is precisely $a(x)$.}
+        a(x) &= 1 + 7x + 5x \big( a(x) - 1 \big) - 6x^2 a(x)
+    \end{align*}
+    Solving for $a(x)$ gives
+    \[ a(x) = \frac{1 + 2x}{1 - 5x + 6x^2} = \frac{5}{1 - 3x} - \frac{4}{1 - 2x}. \]
+    Each of these is a geometric series with common ratio $2x$ and $3x$, respectively.
+    So the closed form of the sequence is
+    \[ a_n = 5 \cdot 3^{n} - 4 \cdot 2^{n}, \]
+    as expected.
+\end{example}
 
 \end{document}
