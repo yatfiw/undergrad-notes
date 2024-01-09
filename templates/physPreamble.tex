@@ -1,0 +1,23 @@
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}  % custom enumerate labels
+\usepackage{parskip}   % add vertical space between paragraphs
+
+\renewcommand{\familydefault}{\sfdefault}  % sans serifs text
+\setlength{\parindent}{0pt}                % no paragraph indentation
+
+% region TITLE CONSTRUCTION
+\newlength\mywidth
+\setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
+\mywidth=\wd0
+\renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
+% endregion
+
+% region NEW COMMANDS
+\newcommand{\ds}{\displaystyle}
+\newcommand{\pfn}[1]{\textrm{#1}}  % enables new functions
+\newcommand{\mbf}[1]{\mathbf{#1}}  % mathbf
+% endregion
