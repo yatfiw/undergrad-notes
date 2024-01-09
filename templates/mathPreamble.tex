@@ -3,11 +3,12 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{enumitem}  % custom enumerate labels
-\usepackage{parskip}   % add vertical space between paragraphs
+\usepackage{enumitem}                       % custom enum labels
+\usepackage{parskip}                        % add vertical paragraph space
+\usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
 
-\renewcommand{\familydefault}{\sfdefault}  % sans serifs text
-\setlength{\parindent}{0pt}                % no paragraph indentation
+\renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
+\setlength{\parindent}{0pt}                	% no paragraph indentation
 
 % region TITLE CONSTRUCTION
 \newlength\mywidth
@@ -17,7 +18,6 @@
 % endregion
 
 % region FRAMED ENVIRONMENTS
-\usepackage[framemethod=TikZ]{mdframed}
 \newcounter{theo}[chapter]\setcounter{theo}{0}
 \newcommand{\numTheo}{\arabic{chapter}.\arabic{theo}}
 \newcommand{\mdftheo}[3]{
