@@ -1,0 +1,230 @@
+\documentclass[../p052main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Wave Mechanics}
+\section{Introduction}
+Our exploration of quantum mechanics began after a variety of experiments suggested that light behaves as both a wave and a particle.
+The particles that compose light are called photons.
+Each photon has energy $E = h\nu$, where $\nu$ is the photon's frequency and $h$ is Planck's constant.
+The inherently probabilistic nature of the photon is described by complex numbers called probability amplitudes.
+
+Using these probability amplitudes, we were able to describe the results of the double-slit experiment.
+Suppose light with wavenumber $k = \frac{2\pi}{\lambda}$ passes through two infinitesimal slits spaced a distance $d$ apart; the probability amplitude of detecting a photon an angle $\theta$ above the slits is given by
+\[ z = re^{ikd_1} \left( 1 + e^{ikd \sin \theta} \right), \]
+where $d_1$ is the total distance traveled by light coming from the top slit and $r$ is the probability amplitude for light diffracting in the correct direction.
+This gives the probability of detection
+\[ z^*z = 4r^2 \cos^2 \left( \frac{kd \sin \theta}{2} \right). \]
+Using a similar line of reasoning (and some calculus), for a single slit of width $a$, the detection probability is
+\[ z^*z = r^2 \frac{\sin^2 \alpha}{\alpha^2}, \]
+where $\alpha = \frac{1}{2}ka\sin\theta$.
+
+Shockingly, both of these results hold for massive particles!
+In order to describe the interference that leads to these equations, though, we need a wavelength.
+Taking inspiration from the fact that an individual photon has energy $E = h\nu = pc$ and thus wavelength $\lambda = h/p$, we can define a particle's de Broglie wavelength as
+\[ \lambda_\text{dB} = \frac{h}{p} = \frac{h}{mv}. \]
+Mathematically, this wavelength correctly predicts the way in which matter behaves in the double-slit experiment and others.
+This suggests that the wave-particle duality is not just true for light, but also for matter.
+
+An immediate application of this revelation comes in the form of crystal diffraction.
+In an ideal crystal, there are many very thin layers of atoms that are spaced a very small distance $d$ apart.
+Each layer of atoms acts as a mirror that reflects some incident atoms and reflects others.
+
+If a stream of, say, electrons is incident on a two-layer crystal at an angle $\theta$ above the horizontal, then some electrons are reflected off of the top layer and some off of the bottom layer.
+The bottom electrons travel an extra $2d\sin\theta$, so in order for the top and bottom electrons to leave the crystal in phase with each other, this number must be an integer number of wavelengths.
+Mathematically,
+\[ 2d \sin\theta = n \lambda. \]
+This is called the Bragg relation.
+
+\section{The Schrödinger Equation}%<3
+We've seen that light (i.e., an electroamgnetic field) obeys the wave equation
+\[ \frac{\partial^2 \mathcal{E}_z}{\partial x^2} = \frac{1}{c^2} \frac{\partial^2 \mathcal{E}_z}{\partial t^2}, \]
+where $\mathcal{E}_z$ is the $z$-component of the electric field.
+Solutions to this equation include linear combinations of the oscillating functions $\cos (kx \pm \omega t)$ and $\sin (kx \pm \omega t)$, where $k = \frac{2\pi}{\lambda}$ and $\omega = \frac{2\pi}{T}$ are the light's spatial and temporal angular frequencies, respectively.
+We can't just pick any values of $k$ and $\omega$, however; specifically, the quantities must satisfy the equation
+\[ \omega = ck. \]
+This is called the dispersion relation for the photon wave equation.
+If we can find such a relation for matter waves, it would be very useful in finding a matter wave equation.
+
+Recall from quantum optics that, for light, $E = h\nu$ and $p = \frac{h}{\lambda}$.
+Taking inspiration from de Broglie (whose hypothesis we know to be sound), suppose that these relations also hold for massive particles.
+If we define the reduced Planck constant $\hbar = \frac{h}{2\pi}$, we can write
+\[ E = \hbar \omega \,\text{ and }\, p = \hbar k. \]
+We relate the (kinetic) energy and momentum of the particle via the equation
+\[ E = \frac{mv^2}{2} = \frac{p^2}{2m}; \]
+substituting our de Broglie relations gives the dispersion relation
+\[ \omega = \frac{\hbar k^2}{2m}. \]
+Any matter wave equation we construct must have oscillatory solutions that satisfy this equation.
+As it turns out, the correct equation is the Schrödinger equation,
+\[ -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} + V(x) \Psi(x,t) = i \hbar \frac{\partial \Psi(x,t)}{\partial t}, \]
+where $V(x)$ is the particle's potential energy (not potential!).
+$\Psi(x,t)$ is called the wave function, and it encodes the wave property of the particle.
+
+For a free particle ($V = 0$),
+\[ -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} = i \hbar \frac{\partial \Psi(x,t)}{\partial t}. \]
+Something like $\Psi(x,t) = \cos (kx - \omega t)$ doesn't quite work as a solution since it doesn't have any imaginary parts to it.
+There's no way it satisfies our dispersion relation.
+However, a complex exponential
+\[ \Psi(x,t) = e^{i(kx - \omega t)} \]
+works just fine!
+But this means solutions to the Schrödinger equation are irreducibly complex, so there's no immediate physical interpretation for them.
+So what do they represent?
+
+\section{Wave Functions}
+Recall that the behavior of photons is characterized by complex probability amplitudes.
+When we take the magnitude of an amplitude, we get real probabilities.
+
+Wave functions are probability amplitude \textit{density} functions.
+So $|\Psi (x,t)|^2$ is a probability density function, that is, a probability per unit length.
+Specifically, $|\Psi(x,t)|^2$ gives the probability of measuring a particle in $[x, x + dx]$.
+Mathematically, we have the Born rule,
+\[ dP(x,t) = |\Psi(x,t)|^2 dx. \]
+It follows that the units of $\Psi(x,t)$ are $L^{-1/2}$.
+
+So we can calculate the probability of finding a particle in an interval of space using the integral
+\[ P(a \leq x \leq b, t) = \int_a^b |\Psi(x,t)|^2dx. \]
+Also, we must find the particle \textit{somewhere}, so
+\[ 1 = \int_{-\infty}^\infty |\Psi(x,t)|^2dx. \]
+This means the wave function goes to zero in the infinite limits.
+(This is not a consequence of the Schrödinger equation, but rather the physical interpretation of the wave function.)
+
+\begin{example}[Wave function normalization]
+    Suppose we want to normalize the wave function
+    \[ \psi(x) = \begin{cases} Nx(L-x) & 0 < x < L \\ 0 & \text{elsewhere}. \end{cases} \]
+    We know that
+    \begin{align*}
+        \int_{-\infty}^\infty |\Psi(x,t)|^2dx = 1 \\
+        \int_0^L |N|^2 x^2 (L^2 - 2xL + x^2)dx = 1 \\
+        |N|^2 L^5 \cdot \frac{1}{30}
+    \end{align*}
+    Therefore, $N = \sqrt{\frac{30}{L^5}} e^{i\theta}$, where $\theta \in \mathbb{R}$ is an arbitrary phase.
+\end{example}
+
+We can use the Schrödinger equation to show that probability is conserved both locally and globally.
+Let's start by finding the time derivative of probability density:
+\[ \frac{\partial |\Psi|^2}{\partial t} = \frac{\partial (\Psi^*\Psi)^2}{\partial t} = \Psi^* \frac{\partial \Psi}{\partial t} + \Psi \frac{\partial \Psi^*}{\partial t}. \]
+From the Schrödinger equation we get
+\begin{align*}
+    \frac{\partial \Psi}{\partial t} &= \frac{1}{i\hbar} \left( -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi}{\partial x^2} + V(x) \Psi \right), \\
+    \frac{\partial \Psi^*}{\partial t} &= \frac{-1}{i\hbar} \left( -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi^*}{\partial x^2} + V(x) \Psi^* \right).
+\end{align*}
+Substituting gives
+\begin{align*}
+    \frac{\partial |\Psi|^2}{\partial t} &= \frac{i\hbar}{2m} \left( \Psi^* \frac{\partial^2 \Psi}{\partial x^2} - \Psi \frac{\partial^2 \Psi^*}{\partial x^2} \right) \\
+    &= \frac{\partial}{\partial x} \left[ \frac{i\hbar}{2m} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right) \right]. \\
+    \intertext{When we rewrite this as}
+    &= -\frac{\partial}{\partial x} \left[ \frac{\hbar}{2mi} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right) \right],
+\end{align*}
+it becomes more clear that we've just written an equation describing a local conservation of probability!
+Recall the local conservation of charge equation, $d\rho/dt = -\nabla \cdot \mbf{J}$, where $\rho$ is charge density and $\mbf{J}$ is current density.
+In a similar fashion, we can define a probability current
+\[ j_x(x,t) = \frac{\hbar}{2mi} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right) \]
+that describes the flow of probability throughout space.
+So any change in probability density at a point in space is matched with an inward flow of probability.
+
+We can use this to show that probability is conserved globally:
+\[ \frac{d}{dt} \int_{-\infty}^{\infty} |\Psi(x,t)|^2 dx = -\int_{-\infty}^{\infty} \frac{\partial j_x}{\partial x}dx = -j_x \Big|_{-\infty}^\infty = 0. \]
+(The last step follows from the fact that $\Psi(x,t) \to 0$ as $x \to \pm \infty$.)
+
+\section{Physical Wave Solutions}
+We've seen that $\Psi(x,t) = Ae^{i(kx - \omega t)}$ is a solution to the Schrödinger equation.
+However, it's easy to show that this wave function cannot be normalized!
+So this solution doesn't align with our physical interpretation of $\Psi$ very well.
+
+We can exploit the fact that the Schrödinger equation is linear to write a solution of the form
+\[ \Psi(x,t) = \sum_{n}^{} A_n \sin (k_n x - \omega t). \]
+But this still doesn't work, because for any finite number of terms we'll still have some overall periodic behavior which does not converge.
+So instead, we need an infinite number of terms, which we can express using an integral (for now at a snapshot in time):
+\[ \Psi(x,0) = \int_{-\infty}^{\infty} A(k) e^{i(kx - 0)}dk. \]
+This integral produces a wave packet, a localized ``bump'' of probability.
+
+\begin{example}[Wave packets]
+    Suppose we want to find $\Psi(x,0)$ for
+    \[ A(k) = \begin{cases} A & k_0 - \frac{\Delta k}{2} < k < k_0 + \frac{\Delta k}{2}, \\ 0 & \text{elsewhere}. \end{cases} \]
+    We simply integrate:
+    \begin{align*}
+        \Psi(x,0) &= \int_{k_0 - \frac{\Delta k}{2}}^{k_0 + \frac{\Delta k}{2}} Ae^{ikx}dk \\
+        &= \frac{A}{ix} \left( e^{i(k_0 + \frac{\Delta k}{2})x} - e^{i(k_0 - \frac{\Delta k}{2})x} \right) \\
+        &= \frac{2Ae^{ik_0x}}{x} \sin\left( \frac{\Delta k x}{2} \right)
+    \end{align*}
+    We can show that this results in a probability density function that converges:
+    \[ |\Psi|^2 = \frac{4|A|^2}{x^2} \sin^2 \left( \frac{\Delta k}{2}x \right). \]
+\end{example}
+
+Notice that there is an inverse relationship between the width $\Delta x$ of the wave packet and the range $\Delta k$ of wavenumbers we're integrating over.
+It can be shown that, in general, this relationship is
+\[ \Delta x \Delta k \geq \frac{1}{2}. \]
+In quantum mechanics we have $p = \hbar k$, so we get the Heisenberg uncertainty principle
+\[ \Delta x \Delta p_x \geq \frac{\hbar}{2}. \]
+Here we can interpret $\Delta x$ and $\Delta p$ as uncertainties in a particle's position and momentum, respectively, when we take a measurement.
+
+Let's allow time to move forward again.
+We'd like for the speed of $\Psi(x,t)$ to be the same as the speed of the particle it represents.
+We have two options: the velocity of the individual wavelengths (the phase velocity) and the velocity of the envelope enclosing them (the group velocity).
+These are given by
+\[ v_\textrm{p}= \frac{\omega}{k} \;\text{ and }\; v_\textrm{g} = \lim_{\Delta \to 0} \frac{\Delta \omega}{\Delta k} = \frac{d\omega}{dk}, \]
+respectively.
+(Recall how, when we superpose two waves, the resulting envelope has wavenumber $\Delta k$ and frequence $\Delta \omega$; to find the group velocity, we take the speed of the envelope enclosing the superposition two very closely-spaced wavelengths.)
+The phase velocity doesn't work because, applying the dispersion relation,
+\[ v_\textrm{p} = \frac{\omega}{k} = \frac{\hbar k}{2m} = \frac{p}{2m} = \frac{1}{2}v. \]
+However, the group velocity gives
+\[ v_\textrm{g} = \frac{d\omega}{dk} = \frac{\hbar k}{m} = \frac{p}{m} = v, \]
+so this is the velocity we seek!
+
+\section{Quantum Averages and the Classical Limit}
+Recall how, for discrete variables, we define the expectation value
+\[ \left< n \right> = \sum_{n=0}^{\infty} nP(n) \]
+and uncertainty (standard deviation)
+\begin{align*}
+    (\Delta n)^2 &= \sum_{n=0}^{\infty} (n - \left< n \right>)^2P(n). \\
+    \intertext{We can do some simplification to make this a bit less unwieldy:}
+    &= \sum_{n=0}^{\infty} P(n) n^2 - \sum_{n=0}^{\infty} P(n) 2n\left< n \right> + \sum_{n=0}^{\infty}P(n) \left< n \right>^2 \\
+    &= \left< n^2 \right> - 2\left< n \right>^2 + \left< n \right>^2 \\
+    (\Delta n)^2 &= \left< n^2 \right> - \left< n \right>^2.
+\end{align*}
+These definitions and results generalize nicely to the continuous case:
+\[ \left< x^{\alpha} \right> = \int_{-\infty}^{\infty} x^{a} |\Psi(x,t)|^2 dx, \qquad (\Delta x)^2 = \left< x^2 \right> - \left< x \right>^2. \]
+
+\begin{example}[Expectation value and uncertainty]
+    Determine $\left< x \right>$, $\Delta x$ for
+    \[ \Psi(x) = \begin{cases} \sqrt{\frac{30}{L^{5}}} x (L - x) & 0 < x < L, \\ 0 & \text{elsewhere}. \end{cases} \]
+    By symmetry, we can see that $\left< x \right> = L/2$.
+    To calculate $\Delta x$, we also need to know $\left< x^2 \right>$.
+    Integrating:
+    \begin{align*}
+        \left< x^2 \right> &= \int_{-\infty}^{\infty} x^2 |\Psi|^2dx \\
+        &= \int_{0}^{L}x^2 \frac{30}{L^{5}} x^2 (L - x)^2 dx \\
+        &= \frac{2}{7}L^2
+    \end{align*}
+    Finally, we can calculate the square of the uncertainty
+    \[ (\Delta x)^2 = \left< x^2 \right> - \left< x \right>^2 = \frac{1}{28}L^2. \]
+    This gives $\Delta x = \frac{1}{\sqrt{28}}L$.
+\end{example}
+
+We've seen how microscopic objects like photons and atoms obey the principles of quantum mechanics, but for this to be a truly accurate theory it must also apply to macroscopic objects in some limit.
+This is called the principle of correspondence.
+
+For large systems, the average position and momentum should obey the classical relationship between momentum and velocity; that is, we expect to see that
+\[ \left< p_x \right> = m \frac{d \left< x \right>}{dt}. \]
+This allows us to find an expression for average momentum!
+But first, we must integrate to determine $\frac{d \left< x \right>}{dt}$.
+\begin{align*}
+    \frac{d\left< x \right>}{dt} &= \frac{d}{dt} \int_{-\infty}^{\infty} x |\Psi|^2 dx \\
+    &= \int_{-\infty}^{\infty} x \frac{\partial |\Psi|^2}{\partial t}dx \\
+    \intertext{By conservation of probability:}
+    &= -\int_{-\infty}^{\infty} x \frac{\partial j_x}{\partial x} dx \\
+    \intertext{Proceeding with integration by parts:}
+    &= -\left( x j_x \Big|_{-\infty}^\infty - \int_{-\infty}^{\infty} j_x \,dx \right) \\
+    \intertext{Since $j_x$ goes to zero in the infinite limits, that first term disappears. Substituting the probability current gives}
+    &= \frac{\hbar}{2mi} \int_{-\infty}^{\infty} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right) dx \\
+    &= \frac{\hbar}{2mi} \left( \int_{-\infty}^{\infty} \Psi^* \frac{\partial \Psi}{\partial x} dx - \int_{-\infty}^{\infty} \Psi \frac{\partial \Psi^*}{\partial x} dx \right) \\
+    \intertext{Proceeding again with integration by parts on the second term::}
+    &= \frac{\hbar}{2mi} \left[ \int_{-\infty}^{\infty} \Psi^* \frac{\partial \Psi}{\partial x} dx - \left( \Psi \Psi^* \Big|_{-\infty}^\infty - \int_{-\infty}^{\infty} \frac{\partial \Psi}{\partial x} \Psi^* dx \right) \right] \\
+    &= \frac{\hbar}{mi} \int_{-\infty}^\infty \Psi^* \frac{\partial \Psi}{\partial x} dx
+\end{align*}
+Multiplying by $m$ gives us an expression for $\left< p_x \right>$!
+We could follow a similar line of reasoning for $\left< p_x^2 \right>$, but doing it here is unproductive so we just state
+\[ \left< p_x \right> = \int_{-\infty}^\infty \Psi^* \frac{\hbar}{i} \frac{\partial \Psi}{\partial x} dx, \qquad \left< p_x^2 \right> = -\int_{-\infty}^\infty \Psi^* \hbar^2 \frac{\partial^2 \Psi}{\partial x^2}. \]
+
+\end{document}
