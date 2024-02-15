@@ -1,0 +1,168 @@
+\documentclass[../p052main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{The Time-Indpendent Schrödinger Equation}
+\section{Separation of Variables}
+With a solid foundation in wave mechanics, we can now move into actually producing solutions to the Shrödinger equation.
+
+We begin with an ansatz, a guess as to what our solution might look like.
+Specifically, suppose a function of the form $\Psi(x,t) = f(t) \psi(x)$ solves the Schrödinger equation.
+(Not every solution is of this form, but it'll give us the building blocks we need to create other ones!)
+
+What follows from this assumption?
+Substituting our ansatz into Schrödinger's equation gives
+\[ -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} f(t) + V(x)f(t)\psi(x) = i\hbar \psi(x) \frac{df(t)}{dt}. \]
+Obviously this holds when $f(t) = \psi(x) = 0$, but this is a pretty boring solution.
+To find some others, we can separate variables: dividing by $f(t)\psi(x)$ gives
+\[ -\frac{1}{\psi(x)}\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) = \frac{i\hbar}{f(t)} \frac{df(t)}{dt}, \]
+an equation in which the left side is in $x$ and the right side is in $t$.
+Now, the only way for these two sides to be equal for all $x,t$ is for both of them to be constant; call this constant $E$.
+(As we'll see later, this is the energy in our system.)
+This generates two, entirely disjoint ordinary differential equations:
+\begin{align*}
+    \frac{i\hbar}{f(t)}\frac{df}{dt} &= E & -\frac{1}{\psi(x)}\frac{\hbar^2}{2m} + V(x) &= E \\
+    \frac{df(t)}{dt} &= -\frac{iE}{\hbar} f(t) & -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) \psi(x) &= E \psi (x)
+\end{align*}
+The time equation is easy enough to solve.
+Clearly,
+\[ f(t) = f(0) e^{-\frac{iE}{\hbar}t} = f(0) e^{-i \omega t}, \quad \omega = \frac{E}{\hbar}. \]
+(Usually we ignore the coefficient $f(0)$ because it'll probably change when we go to normalize the wave function anyway.)
+The bottom right equation, on the other hand, is much more difficult.
+It is known as the time-independent Schrödinger equation, and it requires a specific choice of $V(x)$ to solve.
+Once we have this, though, we may be able to solve for $\psi(t)$ to get the wave function
+\[ \Psi(x,t) = e^{-i \omega t} \psi(x). \]
+This function solves the Schrödinger equation!
+It is often referred to as a stationary state since its associated probability density is time-independent.
+$E = \hbar \omega$ is the energy of this state.
+
+\section{The Infinite Square Well}
+To begin our study of the time-independent Schrödinger equation, let's pick the most ideal potential energy function we can: the infinite square well (also known as the particle in a box).
+It is defined as follows:
+\[ V(x) = \begin{cases} 0 & 0 \leq x \leq L, \\ \infty & \text{elsewhere}. \end{cases} \]
+We can imagine our particle being ``trapped'' in the region in which $V$ is finite.
+Infinite energy and momentum is bad.
+Let's solve the time-independent Schrödinger equation under these conditions!
+
+Outside the bounds of the box we have $V(x) = \infty$, so here $\psi(x) = 0$.
+Inside the box, however, $V(x) = 0$, which gives the equation
+\[ -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} = E \psi (x). \]
+Define $k^2 = \frac{2mE}{\hbar^2}$, so this turns into
+\[ \frac{d^2 \psi}{dx^2} = -k^2 \psi, \]
+which has the general solution
+\[ \psi(x) = A \sin (kx) + B \cos (kx). \]
+Now, when we go to pick our boundary conditions, note that the function must be continuous for its second derivative to exist in the first place.
+So we must have $\psi(0) = 0$ and $\psi(L) = 0$.
+The former immediately gives $B = 0$; the latter,
+\[ 0 = A \sin kL. \]
+The only way we get interesting solutions from this is to take
+\[ kL = n \pi, \quad n = 1, 2, \ldots \]
+Negative values of $n$ don't lead to new (linearly indpendent) solutions, and $n = 0$ is just boring.
+The allowed values of $k$ can be labeled based on what integers they use:
+\[ k_n = \frac{n \pi}{L}. \]
+From how we defined $k$, though, this also means we only have certain allowed energies:
+\[ E_n = \frac{\hbar^2 k_n^2}{2m} = \frac{n^2 \hbar^2 \pi^2}{2mL^2}. \]
+The wave functions corresponding to these energies are
+\[ \psi_n(x) = A_n \sin \frac{n \pi x}{L}, \quad 0 \leq x \leq L, \]
+where $A = \sqrt{2/L}$ is found via normalization.
+So, in summary,
+\[ \psi_n(x) = \begin{cases} \sqrt{\frac{2}{L}} \sin \frac{n \pi x}{L} & 0 \leq x \leq L, \\ 0 & \text{elsewhere}, \end{cases} \qquad n = 1, 2, \ldots \]
+Notice some things about this solution.
+\begin{itemize}
+    \item The associated wave function
+    \[ \Psi_n(x,t) = e^{-i \omega t} \psi_n(x), \]
+    appears to evolve in precisely the same way as, say, a guitar string would---all of the $n$ sinusoidal extrema periodcially wriggle up and down with a set amplitude.
+    \item Each wave function $\Psi_n$ is associated with a different amount of energy $E_n$; since these wave functions are ``discrete'', only supporting a half-integer number of wavelengths, their associated energy levels are also discrete!
+    \item There is no $E = 0$ state.
+    Even in the ground state $n=1$, the wave function still needs to oscillate so that it's connected to each wall of the well.
+    (We don't consider $n=0$ because it isn't normalizable.)
+\end{itemize}
+
+\section{Time Evolution and Measurement Properties}
+In general, the time-independent Schrödinger equation gives a discrete set of solutions $\psi_n$, each of which is associated with a quantized energy level $E_n$ and phase factor $e^{-i E_n t / \hbar}$.
+Though the wave functions $\Psi_n(x,t)$ are stationary states (i.e., $|\Psi_n(x,t)|^2$ is time-independent), we can combine them together to get solutions that do evolve in time.
+
+\begin{example}[]
+    Suppose we construct a wave function using the linear combination
+    \begin{align*}
+        \Psi(x,t) &= \frac{1}{\sqrt{2}} \Psi_1(x,t) + \frac{1}{\sqrt{2}} \Psi_2(x,t) \\
+        &= \frac{1}{\sqrt{2}} e^{-i E_1 t / \hbar} \psi_1(x) + \frac{1}{\sqrt{2}} e^{-i E_2 t / \hbar} \psi_2(x) \\
+        &= \frac{1}{\sqrt{2}} e^{-i E_1 t /\hbar} \left[ \psi_1 + e^{-i (E_2 - E_1) t / \hbar} \psi_2 \right].
+    \end{align*}
+    The corresponding probability density function described turns out to be
+    \begin{align*}
+        |\Psi(x,t)|^2 &= \frac{1}{2} |\psi_1|^2 + \frac{1}{2}|\psi_2|^2 + \frac{1}{2} \psi_2^* \psi_1 e^{i (E_2 - E_1) t /\hbar} + \frac{1}{2} \psi_1^* \psi_2 e^{i (E_2 - E_1) t /\hbar} \\
+        &= \frac{1}{2} \psi_1^2 + \frac{1}{2} \psi_2^2 + \psi_2 \psi_1 \cos \frac{(E_2 - E_1) t}{\hbar},
+    \end{align*}
+    where the last step is valid because $\psi_n$ are real-valued.
+    Notice that this function is composed of two parts, one constant and one time-varying, and the time-varying portion has frequency $\omega = (E_2 - E_1) / \hbar$.
+\end{example}
+
+As it turns out, the wave functions produced by the time-independent Schrödinger equation form an orthonormal set!
+The vector space spanned by these functions is called a Hilbert space.
+
+We can use this to our advantage to determine how initial wave functions evolve through time.
+First, we write the wave function as a linear combination of stationary states:
+\[ \Psi(x,0) = \sum_{n=1}^{\infty} c_n(0) \psi_n(x). \]
+To incorporate time-dependence, we simply multiply each stationary state by its phase factor; these factors vary the coefficients of the linear combination through time.
+\begin{align*}
+    \Psi(x,t) &= \sum_{n=1}^{\infty} c_n(t) \psi_n(x) = \Psi(x,t) \\
+    &= \sum_{n=1}^{\infty} c_n(0) e^{-iE_nt/\hbar} \psi_n(x)
+\end{align*}
+Now, to determine the coefficients $c_n(0)$, we calculate the inner product
+\begin{align*}
+    \big< \Psi(x,0), \psi_n(x) \big> &= \int_{-\infty}^{\infty} \Psi^*(x,0)\psi_n(x) \,dx \\
+    \intertext{To see how this is useful, let's decompose $\Psi$ into stationary states:}
+    &= \int_{-\infty}^{\infty} \big( c_1(0) \psi_1^*(x) + c_2(0) \psi_2^*(x) + \cdots \big) \psi_n(x) \,dx \\
+    &= \int_{-\infty}^{\infty} c_1(0)\psi_1^*(x)\psi_n(x) \,dx + \int_{-\infty}^{\infty} c_2(0)\psi_2^*(x)\psi_n(x) \,dx + \cdots \\
+    \intertext{Notice that, by the orthogonality of stationary states, all but one of these integrals cancel:}
+    &= \int_{-\infty}^{\infty} c_n(0) \psi_n^*(x) \psi_n(x) \,dx = c_n(0)
+\end{align*}
+As a side note, it will be useful to us to characterize cancellations like these using the Kronecker delta:
+\[ \delta_{mn} = \begin{cases} 1 & m = n, \\ 0 & m \neq n. \end{cases} \]
+For example, if $\psi_m$ and $\psi_n$ are normalized, then we can write
+\[ \int_{-\infty}^{\infty} \psi_m^*\psi_n \,dx = \delta_{mn}. \]
+Now, aside from being the coefficients in the linear combination for $\Psi$, $c_n$ have another very important interpretation: they describe the probability of measuring a particle as having a certain energy!
+Specifically,
+\[ P(E_n) = |c_n|^2. \]
+So we can write expectation values for energy:
+\begin{align*}
+    \left< E \right> &= \sum_{n=1}^{\infty} |c_n(0)|^2 E_n \\
+    \left< E^2 \right> &= \sum_{n=1}^{\infty} |c_n(0)|^2 E_n^2
+\end{align*}
+
+\section{The Energy Operator}
+The expression for $\left< E \right>$ above (via linear combination) is a good start, but it requires that we know \textit{all} of the $c_n$ ahead of time, which in general we won't.
+
+To fix this, let's take a look at the expressions for the other expectation values we know:
+\begin{align*}
+    \left< x \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) x \Psi(x,t) \,dx & \left< p_x \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) \left( \frac{\hbar}{i} \frac{\partial}{\partial x} \right) \Psi(x,t) \,dx \\
+    \left< x^2 \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) x^2 \Psi(x,t) \,dx & \left< p_x^2 \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) \left( \frac{\hbar}{i} \frac{\partial}{\partial x} \right)^2 \Psi(x,t) \,dx
+\end{align*}
+This notation allows us to understand these integrals in a new light.
+We are not, in fact, just doing multiplcations and derivatives in these integrals.
+Instead, we are applying the position and momentum operators
+\[ x_\textrm{op} = x \,\text{ and }\, x_\textrm{op} = \frac{\hbar}{i} \frac{\partial}{\partial x} \]
+to $\Psi$, and then doing stuff with the result.
+So we expect that there is some energy operator $E_\textrm{op}$ that we can use to determine $\left< E \right>$.
+We call this operator the Hamiltonian $H$ and, as we might expect, it is the sum of the kinetic and potential energy operators!
+\begin{align*}
+    H &= \frac{p_\textrm{op}^2}{2m} + V(x_\textrm{op}) \\
+    &= -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)
+\end{align*}
+So the important expectation values for $E$ are
+\[ \left< E \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H \Psi(x,t) \,dx \,\text{ and }\, \left< E^2 \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H^2 \Psi(x,t) \,dx. \]
+Importantly, we can also write the time-independent Schrödinger equation as
+\[ H \psi(x) = E \psi(x). \]
+This reveals that the eigenfunctions of $H$ are the $\psi_n$ found via separation of variabes, and its eigenvalues are their corresponding energies $E_n$!
+This is why we'll often refer to $\psi_n$ as energy eigenfunctions and $E_n$ as energy eigenvalues.
+
+In fact, every observable has an associated operator whose eigenvalues are precisely the possible outcomes of a measurement!
+Take the momentum operator, for example.
+A particle's momentum is (indirectly) given by its wavelength $\lambda$ or, equivalently, its wavenumber $k$; applying $p_\textrm{op}$ to a wave function with this wavenumber gives
+\[ p_\textrm{op} e^{ikx} = \frac{\hbar}{i} \frac{\partial}{\partial x} e^{ikx} = \hbar k e^{ikx}. \]
+So $e^{ikx}$ is an eigenfunction of $p_\textrm{op}$, and its corresponding eigenvalue is the momentum $\hbar k$.
+Since $k$ can vary continuously, this tells us that momentum is continuous (unlike energy!).
+
+\end{document}

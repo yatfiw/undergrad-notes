@@ -11,7 +11,7 @@ Each photon has energy $E = h\nu$, where $\nu$ is the photon's frequency and $h$
 The inherently probabilistic nature of the photon is described by complex numbers called probability amplitudes.
 
 Using these probability amplitudes, we were able to describe the results of the double-slit experiment.
-Suppose light with wavenumber $k = \frac{2\pi}{\lambda}$ passes through two infinitesimal slits spaced a distance $d$ apart; the probability amplitude of detecting a photon an angle $\theta$ above the slits is given by
+Suppose light with wavenumber $k = 2\pi / \lambda$ passes through two infinitesimal slits spaced a distance $d$ apart; the probability amplitude of detecting a photon an angle $\theta$ above the slits is given by
 \[ z = re^{ikd_1} \left( 1 + e^{ikd \sin \theta} \right), \]
 where $d_1$ is the total distance traveled by light coming from the top slit and $r$ is the probability amplitude for light diffracting in the correct direction.
 This gives the probability of detection
@@ -47,9 +47,9 @@ We can't just pick any values of $k$ and $\omega$, however; specifically, the qu
 This is called the dispersion relation for the photon wave equation.
 If we can find such a relation for matter waves, it would be very useful in finding a matter wave equation.
 
-Recall from quantum optics that, for light, $E = h\nu$ and $p = \frac{h}{\lambda}$.
+Recall from quantum optics that, for light, $E = h\nu$ and $p = h / \lambda$.
 Taking inspiration from de Broglie (whose hypothesis we know to be sound), suppose that these relations also hold for massive particles.
-If we define the reduced Planck constant $\hbar = \frac{h}{2\pi}$, we can write
+If we define the reduced Planck constant $\hbar = h / 2\pi$, we can write
 \[ E = \hbar \omega \,\text{ and }\, p = \hbar k. \]
 We relate the (kinetic) energy and momentum of the particle via the equation
 \[ E = \frac{mv^2}{2} = \frac{p^2}{2m}; \]
@@ -187,7 +187,7 @@ These definitions and results generalize nicely to the continuous case:
 \[ \left< x^{\alpha} \right> = \int_{-\infty}^{\infty} x^{a} |\Psi(x,t)|^2 dx, \qquad (\Delta x)^2 = \left< x^2 \right> - \left< x \right>^2. \]
 
 \begin{example}[Expectation value and uncertainty]
-    Determine $\left< x \right>$, $\Delta x$ for
+    Suppose we want to determine $\left< x \right>$, $\Delta x$ for
     \[ \Psi(x) = \begin{cases} \sqrt{\frac{30}{L^{5}}} x (L - x) & 0 < x < L, \\ 0 & \text{elsewhere}. \end{cases} \]
     By symmetry, we can see that $\left< x \right> = L/2$.
     To calculate $\Delta x$, we also need to know $\left< x^2 \right>$.
@@ -208,7 +208,7 @@ This is called the principle of correspondence.
 For large systems, the average position and momentum should obey the classical relationship between momentum and velocity; that is, we expect to see that
 \[ \left< p_x \right> = m \frac{d \left< x \right>}{dt}. \]
 This allows us to find an expression for average momentum!
-But first, we must integrate to determine $\frac{d \left< x \right>}{dt}$.
+But first, we must differentiate to determine $\frac{d \left< x \right>}{dt}$.
 \begin{align*}
     \frac{d\left< x \right>}{dt} &= \frac{d}{dt} \int_{-\infty}^{\infty} x |\Psi|^2 dx \\
     &= \int_{-\infty}^{\infty} x \frac{\partial |\Psi|^2}{\partial t}dx \\
@@ -225,6 +225,10 @@ But first, we must integrate to determine $\frac{d \left< x \right>}{dt}$.
 \end{align*}
 Multiplying by $m$ gives us an expression for $\left< p_x \right>$!
 We could follow a similar line of reasoning for $\left< p_x^2 \right>$, but doing it here is unproductive so we just state
-\[ \left< p_x \right> = \int_{-\infty}^\infty \Psi^* \frac{\hbar}{i} \frac{\partial \Psi}{\partial x} dx, \qquad \left< p_x^2 \right> = -\int_{-\infty}^\infty \Psi^* \hbar^2 \frac{\partial^2 \Psi}{\partial x^2}. \]
+\[ \left< p_x \right> = \int_{-\infty}^\infty \Psi^* \frac{\hbar}{i} \frac{\partial \Psi}{\partial x} dx, \qquad \left< p_x^2 \right> = -\int_{-\infty}^\infty \Psi^* \hbar^2 \frac{\partial^2 \Psi}{\partial x^2} dx. \]
+Finally, we can use the correspondence principle to motivate a quantum analog of Newton's second law:
+\[ \frac{dp_{x,\textrm{cl}}}{dt} = -\frac{\partial V}{\partial x_\textrm{cl}} \;\Longleftrightarrow\; \frac{d \left< p_x \right>}{dt} = -\left< \frac{\partial V}{\partial x} \right>. \]
+This is known as Ehrenfest's theorem.
+(Going through the derivation here is not productive.)
 
 \end{document}
