@@ -1,0 +1,704 @@
+\documentclass[../m131main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+%<3
+\begin{document}
+
+\chapter{Basic Topology}
+\section{Cardinality}
+In this first part of the course we'll talk about sets, structure for sets, and the consequences of this structure.
+Let's start with the natural numbers $\N = \left\{ 1, 2, 3, \ldots \right\}$; the rules that precisely define the natural numbers are specified by the Peano axioms.
+
+\begin{definition}[Peano axioms]
+    Let $\N$ be a set containing the element 1.
+    Define a successor function $S : \N \to \N$, with the requirements
+    \begin{itemize}
+        \item $S(x) \neq 1$ for all $x \in \N$.
+        \item If $S(x) = S(y)$, then $x = y$ for all $x,y \in \N$.
+        \item Let $A$ be any subset of $\N$ which contains 1 and is closed under $S$, so $S(x) \in A$ for all $x \in A$.
+    \end{itemize}
+    Then $A = \N$.
+\end{definition} %<3
+
+These axioms together ensure that there is a first element in $\N$, and that for each element in $\N$ there is a ``next'' element.
+This implies all of the basic properties of the natural numbers!
+We give one without proof.
+
+\begin{theorem}[Well-ordering principle]
+    Every nonempty subset of $\N$ has a smallest element.
+\end{theorem}
+
+The Peano axioms also form the basis of mathematical induction.
+Specifically, let $P(n)$ be a set of statements indexed by $n \in \N$, and define $S = \left\{ n : P(n) \text{ is true} \right\}$.
+To show that $P(n)$ is true for all $n$, it suffices to show that $S$ satisfies the Peano axioms!
+Specifically, we must show that
+\begin{itemize}
+    \item $P(1)$ is true, meaning the first element of $S$ is 1 (the base case); and that
+    \item $P(k) \implies P(k+1)$, so each element in $S$ has a successor (the inductive step).
+\end{itemize}
+If we can do both of these things, then $S = \N$ by the Peano axioms, and $P(n)$ is true for all $n$.
+One common variant on this principle is called strong induction, in which the inductive step assumes the truth of all $P(1), P(2), \ldots, P(k)$ rather than just $P(k)$.
+
+We can leverage our definition of the natural numbers to rigorously define the size of a set.
+
+\begin{definition}[Cardinality]
+    Suppose $J_n = \left\{ 1, 2, \ldots, n \right\} \subseteq \N$.
+    If $A$ is in one-to-one correspondence with $J_n$, then $A$ has cardinality (or size) $n$ and we write $|A| = n$.
+    If $A = \emptyset$, we define $|A| = 0$.
+\end{definition}
+
+Most interesting sets, however, are far too large to have such a correspondence.
+This is what we usually mean by ``infinity''.
+
+\begin{definition}[Finite and infinite]
+    We say $A$ is finite if there is a bijection between $A$ and $J_n$.
+    Otherwise, $A$ is infinite.
+\end{definition}
+
+To begin our characterization of infinity, we stick with what we know: sets that are structurally similar to the natural numbers.
+
+\begin{definition}[Countable]
+    A set $A$ is countable if $A$ is in one-to-one correspondence with $\N$.
+\end{definition}
+
+We have two powerful theorems that we can use to determine the cardinalities of sets built using countable sets.
+They're both pretty untintuitive at first glance.
+
+\begin{theorem}[]
+    Every infinite subset of a countable set is countable.
+\end{theorem}
+
+\begin{proof}
+    Suppose $A$ is a countable set, so $A = \left\{ x_1, x_2, \ldots \right\}$.
+
+    Consider a subset $E \subseteq A$.
+    By the well-ordering principle, $E$ has a smallest element; index this element as $n_1$.
+    The next element recieves index $n_2$, then $n_3$, and so on, so $E = \left\{ x_{n_1}, x_{n_2}, \ldots \right\}$.
+    This process creates the bijection $f(k) = x_{n_k}$ between $E$ and $\N$, so $E$ is countable.
+\end{proof}
+
+\begin{theorem}[Hilbert's hotel]
+    The union of a countable set of countable sets is countable.
+\end{theorem}
+
+\begin{proof}
+    Suppose $E_n = \left\{ x_{n_1}, x_{n_2}, \ldots \right\}$ is an uncountable set, so
+    \[ S = \bigcup_{i=1}^\infty E_i \]
+    is a union of a countable set of countable sets.
+    We can list out the elements in $S$ as an infinite grid:
+    \[ \begin{matrix}  
+        x_{11} & x_{12} & x_{13} & \cdots \\
+        x_{21} & x_{22} & x_{23} & \cdots \\
+        x_{31} & x_{32} & x_{33} & \cdots \\
+        \vdots & \vdots & \vdots & \ddots
+    \end{matrix} \]
+    We can create a bijection with $\N$ just by slithering across the diagonals of this grid!
+    For example, the first six instances of this bijection are
+    \begin{alignat*}{2}
+        x_{11} &\mapsto 1 &\qquad x_{31} &\mapsto 4 \\
+        x_{12} &\mapsto 2 &\qquad x_{22} &\mapsto 5 \\
+        x_{21} &\mapsto 3 &\qquad x_{13} &\mapsto 6
+    \end{alignat*}
+    Therefore, there is a bijection between $S$ and $\N$, and $S$ is countable.
+\end{proof}
+
+We can use these to show, for example, that the rational numbers are countable, even if it seems like there should be many more of them.
+This might suggest that we can't get any bigger than countable, but we can!
+
+\begin{theorem}[Cantor's diagonalization argument]
+    The set $(0,1) \subset \R$ is uncountable.
+\end{theorem}
+
+\begin{proof}
+    Construct an arbitrary mapping $f : \N \to (0,1)$:
+    \begin{align*}
+        1 &\mapsto x_1, \quad x_1 = 0.x_{11}x_{12}x_{13} \cdots \\
+        2 &\mapsto x_2, \quad x_2 = 0.x_{21}x_{22}x_{23} \cdots \\
+        3 &\mapsto x_3, \quad x_3 = 0.x_{31}x_{32}x_{33} \cdots \\
+        &\;\;\vdots
+    \end{align*}
+    Now construct the real number $r = 0.r_1r_2r_3 \cdots$ by assigning each decimal place as follows:
+    \[ r_i = \begin{cases} 1 & \text{if } x_{ii} \neq 1 \\ 2 & \text{if } x_{ii} = 1 \end{cases} \]
+    This construction guarantees that $r$ differs from $x_1$ in its first decimal place, from $x_2$ in its second decimal place, and so on.
+    So $r$ is not in the range of $f$ for any $f : \N \to (0,1)$, meaning there is no bijection between $(0,1)$ and $\N$.
+    Therefore, $(0,1)$ is uncountable.
+\end{proof}
+
+This shows that the set of real numbers between 0 and 1 is somehow larger than the set of all natural numbers.
+We can go even larger than this!
+
+\begin{definition}[Power set]
+    The power set $P(A)$ of a set $A$ is the set of all subsets of $A$.
+\end{definition}
+
+\begin{theorem}[Cantor's theorem]
+    There is a function $f : A \to P(A)$ that is injective, but there is no such surjective function.
+\end{theorem}
+
+\begin{proof}
+    It is easy to show that there is an injection $f: A \to P(A)$---one example is $f(x) = \left\{ x \right\}$.
+
+    Now, for contradiction, suppose that there is a surjection $g : A \to P(A)$.
+    So by the definition of $P(A)$, for any $B \subseteq A$, there exists a $y \in A$ such that $g(y) = B$.
+    In this case, $y \in B$ if and only if $y \in g(y)$.
+
+    But we can construct a $B$ that is not in the range of $g$!
+    Specifcially, consider the subset of all elements in $A$ that, under $g$, do not map to themselves; that is,
+    \[ B = \left\{ x \in A : x \not\in g(x) \right\}. \]
+    By definition, $y \in B$ if and only if $y \not\in g(y)$, but this contradicts our previous conclusion about $B$.
+    Therefore, there is no such surjection $g$.
+\end{proof}
+
+This proof is really just a slicker version of Cantor's diagonal argument.
+Imagine we're constructing $B$ by going element by element in $A$---we include $x \in A$ if it maps to a subset that does not contain itself, and we otherwise exclude it.
+This new subset $B$ differs from all others in $\pfn{range}(g)$.
+Any $x \in A$ satisfying $x \not\in g(x)$ mustn't map to $B$ because $x \in B$.
+We can make the reverse argument for $y \in A$ satisfying $y \in g(y)$.
+
+Cantor's theorem provides a way to construct arbitrarily large infinities by contructing arbitrarily large power sets, so there is no ``biggest'' infinity.
+Another natural question is whether or not there's is a set whose cardinality falls between these infinities.
+This is called the continuum hypothesis, and it has been shown to be undecidable under today's standard axioms for set theory!
+
+\section{Order and Fields}
+Right now our sets are nothing more than collections of things.
+A reasonable first step in giving them some structure is to assign an order to the elements.
+
+\begin{definition}[Order]
+    An order on a set $S$ is a relation $<$ satisfying the following.
+    \begin{itemize}
+        \item (Trichotomy) If $x,y \in S$, then exactly one is true: $x < y$, $x = y$, or $y < x$.
+        \item (Transitivity) If $x,y,z \in S$ and if $x < y$ and $y < z$, then $x < z$.
+    \end{itemize}
+    Writing $x > y$ is equivalent to writing $y < x$.
+    Also, $x \leq y$ is equivalent to ``$x < y$ or $x = y$'', and $x \geq y$ is defined similarly.
+\end{definition}
+
+We can also slap on a couple of reasonable operations so we can start doing some algebra.
+
+\begin{definition}[Field]
+    A field $F$ is a set with two operations $+,\times$ that each satisfies the following axioms.
+    \begin{itemize}
+        \item (Closure) $x + y \in F$ and $xy \in F$.
+        \item (Commutativity) $x + y = y + x$ and $xy = yx$.
+        \item (Associativity) $(x + y) + z = x + (y + z)$ and $(xy)z = x(yz)$
+        \item (Identity) $F$ contains 0 such that $0 + x = x$ and contains 1 such that $1x = x$.
+        \item (Inverse) For every $x \in F$ there is a $-x \in F$ such that $x + (-x) = 0$, and if $x \neq 0$ then there is a $x^{-1} \in F$ such that $x x^{-1} = 1$.
+    \end{itemize}
+    The operations also satisfy the distributive law, $x(y + z) = xy + xz$.
+\end{definition}
+
+We can put both of these ideas together in such a way that they complement each other very nicely.
+
+\begin{definition}[Ordered field]
+    Suppose $F$ is a field and has an order.
+    Let $x,y,z \in F$;
+    we say $F$ is an ordered field if the following hold.
+    \begin{itemize}
+        \item If $y < z$, then $y + x < z + x$.
+        \item If $y < z$ and $x > 0$, then $xy < xz$.   
+    \end{itemize}
+\end{definition}
+
+With this, we can talk about what it means for a set to be restricted in the context of some larger set.
+
+\begin{definition}[Upper and lower bound]
+    Let $E \subseteq S$ be an ordered set.
+    If there is an element $\beta \in S$ such that for all $x \in E$ we have $x \geq \beta$, then $\beta$ is an upper bound for $E$.
+    In this case we say $E$ is bounded above.
+    We can similarly we can define lower bound, in which case $E$ is bounded below.
+\end{definition}
+
+\begin{definition}[Supremum and infimum]
+    Again consider $E \subseteq S$.
+    If there exists an $\alpha \in S$ that satisfies
+    \begin{itemize}
+        \item $\alpha$ is an upper bound of $E$, and
+        \item if $\gamma < \alpha$ then $\gamma$ is not an upper bound of $E$,
+    \end{itemize}
+    then $\alpha$ is the least upper bound or supremum for $E$.
+    We write $\alpha = \sup E$.
+    We can similarly define the greatest lower bound or infimum of $E$.
+\end{definition}
+
+Note that the supremum and the maximum are not the same thing---maxima have the additional requirement that they must actually be in the set they're describing.
+The same goes for infima and minima.
+
+We'll focus on suprema from here on, but all of the statements we make for suprema have analogs for infima.
+The supremum has some intuitive properties, many of which we can state without proof.
+
+\begin{theorem}[Properties of supremum] \label{sup_props}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\gamma$ is an upper bound for $A$ if and only if $\sup A \leq \gamma$.
+        \item $a \leq \gamma$ for all $a \in A$ if and only if $\sup A \leq \gamma$.
+        \item $a < \gamma$ for all $a \in A$ if and only if $\sup A \leq \gamma$.
+        \item If $\gamma < \sup A$, then there exists $a \in A$ such that $\gamma < a \leq \sup A$.
+        \item If $\sup A \leq \sup B$ and $\sup B \leq \sup A$, then $\sup A = \sup B$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[]
+    If $A \subseteq B$ and both suprema exist, then $\sup A \leq \sup B$.
+\end{theorem}
+
+\begin{proof}
+    Because $A \subseteq B$, all $a \in A$ satisfy $a \in B$.
+    So by definition, $a \leq \sup B$.
+    From Theorem 1.\ref{sup_props}(b), we get $\sup A \leq \sup B$.
+\end{proof}
+
+Not every set that has an upper bound has a least upper bound.
+It is, however, very nice when they do!
+
+\begin{definition}[Axiom of completeness]
+    A set $S$ satisfies the axiom of completeness (or the least upper bound property) if every nonempty subset of $S$ that has an upper bound has a supremum in $S$.
+\end{definition}
+
+As it turns out, this property is the defining feature of $\R$.
+We state this without proof for now, but we'll come back to it later.
+
+\begin{theorem}[Completeness of $\R$]
+    There exists an ordered field $\R$ which both satisfies the completeness axiom and contains $\Q$ as a subfield.
+\end{theorem}
+
+Quite a few interesting facts follow from this!
+For example, it is the reason why every real number has a decimal expansion, and why every real number has an $n$th root.
+There are a couple of other consequences which we'll find useful.
+
+\begin{theorem}[Archimedean property]
+    If $x,y \in \R$ and $x > 0$, the there exists a positive integer $n$ such that $nx > y$.
+    (Equivalently, if $x > 0$, then there exists $n \in \N$ such that $\frac{1}{n} < x$.)
+\end{theorem}
+
+\begin{proof}
+    Consider a set $A = \left\{ nx : n \in N \right\}$.
+    For contradiction, suppose $A$ were bounded above by $y$, that is, $nx < y$ for all $n$.
+    But we know $A \subset \R$ has a supremum by the axiom of completeness.
+
+    Call this least upper bound $\sup A = \alpha$.
+    Then $\alpha - x$ is not an upper bound for $A$.
+    But then there exists an $m \in \N$ such that $\alpha - x < mx$, which implies that $\alpha < mx + x = (m+1)x$.
+    Thus, $\alpha$ is not an upper bound for $A$, a contradiction.
+    Therefore, $nx > y$, as desired.
+\end{proof}
+
+\pagebreak
+
+\begin{theorem}[$\Q$ is dense in $\R$]
+    Suppose we have $x,y \in \R$ with $x < y$. Then there exists at $q \in \Q$ such that $x < q < y$.
+\end{theorem}
+
+\begin{proof}
+    Choose $n \in \N$ satisfying $1 / n < y - x$; such an $n$ exists by the Archimedean property.
+    Consider multiples of $1 / n$; again, by the Archimedean property, these multiples are unbounded so we can choose the first multiple such that $m / n > x$.
+
+    Now we show that $m / n < y$.
+    Suppose not: then $(m-1) / n < x$ and $m / n > y$.
+    But combining these implies that $1 / n > y - x$, a contradiction.
+\end{proof}
+
+The first theorem here roughly states that there are no ``infinitely large'' or ``infinitely small'' real numbers to the point of being inaccessible.
+This second theorem hints at one of three equivalent chatacteristics of what we call dense sets, which we'll look more into later.
+
+\section{Metric Spaces}
+Let's keep adding structure to our sets by introducing distance.
+
+\begin{definition}[Metric space]
+    A set $X$ is a metric space if there exists a metric $d : X \times X \to \R$ such that the following are satisfied for all $p,q,r \in X$.
+    \begin{itemize}
+        \item (Nonnegativity) $d(p,q) \geq 0$, and $d = 0 \iff p = q$.
+        \item (Symmetry) $d(p,q) = d(q,p)$.
+        \item (Triangle inequality) $d(p,q) \leq d(p,r) + d(r,q)$.
+    \end{itemize}
+\end{definition}
+
+We can use this to define the notion of a point's ``closeness'' to another point!
+
+\begin{definition}[Neighborhood]
+    A neighborhood of a point $x$ with radius $r$ is the set $N_r(x) = \left\{ y : d(x,y) < r \right\}$.
+    This is also known as an open ball of radius $r$; if we allow $d = r$ then we have a closed ball, denoted by $\overline{N_r(x)}$.
+\end{definition}
+
+Neighborhoods are useful in classifying the different types of points that arise when we construct subsets.
+
+\begin{definition}[Limit, interior, and isolated point]
+    Let $X$ be a metric space and $E \subseteq X$.
+    Consider a point $p \in X$.
+    \begin{itemize}
+        \item $p$ is a limit point of $E$ if every neighborhood of $p$ contains a point $p \in E$ where $p \neq q$.
+        \item $p$ is an interior point of $E$ if there exists a neighborhood $N(p)$ such that $N \subseteq E$.
+        \item $p$ is an isolated point of $E$ if $p \in E$ and $p$ is not a limit point of $E$.
+    \end{itemize}
+\end{definition}
+
+Note that a limit point need not be in the subset it is characterized by!
+It just provides a definite ``edge'' to the subset.
+Interestingly, the neighborhoods around these limit points are infinite.
+
+\begin{theorem}[Neighborhoods of limit points]
+    If $p$ is a limit point of $E$, then every neighborhood of $p$ contains infinitely many points of $E$.
+\end{theorem}
+
+\begin{proof}
+    Consider a limit point $p$ of a set $E$.
+    For contradiction, suppose there exists a neighborhood $N$ of $p$ that contains only finitely many points $e_1, e_2, \ldots, e_N$.
+
+    Let $r$ be the minimum nonzero distance between $p$ and one of the points in the neighborhood.
+    We know this minimum exists because the set of distances is finite.
+    We can then construct a new neighborhood of size $r$, which contains no points except $p$, which is a contradiction since $p$ is a limit point.
+\end{proof}
+
+A key motivator behind classifying points like we have is the definition of two very important types of sets.
+
+\begin{definition}[Open and closed sets ]
+    Suppose $X$ is a metric space and $E \subseteq X$.
+    \begin{itemize}
+        \item $E$ is open if every point in $E$ is an interior point of $E$.
+        \item $E$ is closed if $E$ contains all of its limit points.
+    \end{itemize}
+\end{definition}
+
+Importantly, open and closed sets are not opposites!
+It is possible to have a set that falls into neither category, or even both of them.
+Not all is lost though---there is still a nice relationship between open and closed sets.
+
+\begin{lemma}[Neighborhoods are open sets]
+    A neighborhood $N(p)$ of a point $p$ is an open set.
+\end{lemma}
+
+\begin{proof}
+    Recall that $N(p)$ is defined by some radius $r$.
+    Therefore, if a point $q \in N(p)$, then $d(p,q) < r$.
+
+    Let $r' - d(p,q)$ be the distance from $q$ to the edge of the neighborhood, and construct a smaller neighborhood $N(q)$ with this radius.
+    By the triangle inequality, any point $x \in N(q)$ must satisfy
+    \[ d(x,y) \leq d(x,q) + d(q,p) < r' + d(q,p) = r. \]
+    So $d(x,p) < r$ and $q$ is an interior point of $N(p)$.
+    Therefore, $N(p)$ is open.
+\end{proof}
+
+\begin{theorem}[Complement of an open set is closed]
+    $E$ is open if and only if its complement $E^c$ is closed.
+\end{theorem}
+
+\begin{proof}
+    We provide a chain of equivalent statements.
+    \begin{align*}
+        \text{$E$ is open} &\iff \text{any $x \in E$ is an interior point} \\
+        &\iff \text{for all $x \in E$ there exists a neighborhood of $x$ that is disjoint from $E^c$} \\
+        &\iff \text{$x \in E$ is not a limit point of $E^c$} \\
+        &\iff \text{$E^c$ contains all of its limit points} \\
+        &\iff \text{$E^c$ is closed},
+    \end{align*}
+    as desired.
+\end{proof}
+
+We'll consider what happens when we take unions and intersections of these sets.
+Finite unions and intersections lead to fairly intuitive results; infinite sets, as usual, are a little strange!
+
+\begin{lemma}[De Morgan's Law]
+    Suppose we have a (potentially uncountable) collection of sets $\left\{ E_\alpha \right\}$ (where $\alpha$ labels the sets).
+    Then
+    \[ \left( \bigcup_\alpha E_\alpha \right)^c = \bigcap_\alpha E_\alpha^c. \]
+\end{lemma}
+
+\begin{proof}
+    Consider an element $y \in \left( \bigcup_\alpha E_\alpha \right)^{c}$, so $y \not\in \bigcup_\alpha E_\alpha$.
+    Then $y$ is not in $E_\alpha$ for any $a$, meaning $y \in E_\alpha$ for all $a$ and $y \in \bigcap_\alpha E_\alpha^c$.
+    This argument holds in reverse.
+\end{proof}
+
+\begin{theorem}[Unions and intersections of open and closed sets]
+    \begin{enumerate}[label=(\alph*)]
+        \item Arbitrary unions of open sets are open.
+        \item Finite intersections of open sets are open.
+        \item Finite unions of closed sets are closed.
+        \item Arbitrary intersections of closed sets are closed.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We'll prove each part in turn.
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose $x \in \bigcup_{i=1}^\infty A_i$, where all $A_i$ are open.
+        Then $x \in A_i$ for some $i$ and $x$ has a neighborhood $N(x) \subset A_i$.
+        But $A_i \subseteq \bigcup_{i=1}^\infty A_i$, meaning $x$ is an interior point of the union and the union is open.
+
+        \item Suppose $x \in \bigcup_{i=1}^n A_i$, where all $A_i$ are open.
+        For each $A_i$, there exists a neighborhood $N_{r_i}(x) \subseteq A_i$.
+        Let $r$ be the minimum radius of these neighborhoods; then $N_r(x)$ is contained in the intersection and the intersection is open.
+
+        \item Consider a collection of closed sets $B_1, \ldots, B_n$; by (b), the intersection of their complements is open.
+        The complement of this intersection is closed, so by De Morgan's Law, $\bigcup_{i_=1}^n B_i$ is closed.
+
+        \item Consider a collection of closed sets $B_1, B_2 \ldots$; by (a), the union of their complements is open.
+        The complement of this union is closed, so by De Morgan's law, $\bigcap_{i=1}^\infty$ is closed.
+    \end{enumerate}
+    This completes the proof.
+\end{proof}
+
+Let's look a little more closely at closed sets by defining the closure of a set.
+
+\begin{definition}[Closure]
+    The closure of a set $A$ is $\overline{A} \equiv A \cup A'$, where $A'$ is the set of limit points of $A$.
+\end{definition}
+
+\begin{theorem}[]
+    A set is closed if and only if it is equal to its closure.
+\end{theorem}
+
+\begin{proof}
+    Consider a set $E$ and the set $E'$ of its limit points.
+    $\overline{E} = E \cup E'$ is the closure of $E$.
+
+    ($\Rightarrow$)
+    Assume $E$ is closed.
+    By definition, $E' \subset E$, so $\overline{E} \subset E$.
+    Also, since $E \subset \overline{E}$, we conclude $\overline{E} = E$.
+    \smallskip
+
+    ($\Leftarrow$)
+    Assume $E = \overline{E}$.
+    Then $E = E \cup E'$, and so it contains all of its limit points and is closed.
+\end{proof}
+
+Another natural property of the closure is that, when a ``parent set'' is known to be closed, then any of its subsets remains in the parent set after being closed.
+
+\begin{theorem}[]
+    If $E \subset F$, where $F$ is closed, then $\overline{E} \subset F$.
+\end{theorem}
+
+\begin{proof}
+    If $F$ is closed then it contains all of its limit points.
+    In particular, it must contain all limit points of a subset of itself.
+    So $F \subset E'$, meaning $\overline{E} \subset F$.
+\end{proof}
+
+A nice corollary of this theorem is that the smallest closed superset of $E$ is its closure $\overline{E}$.
+Finally, we can put all this together to get a pretty unintuitive theorem---our first result related to sequences.
+
+\begin{theorem}[Nested interval property of $\R$]
+    For each $n \in \N$, consider $I_n = \left\{ x \in \R : a_n \leq x \leq b_n \right\}$.
+    If each $I_{n+1} \subseteq I_n$, then $\bigcap_{i=1}^n I_i$ is nonempty.
+\end{theorem}
+
+\begin{proof}
+    Let $A = \left\{ a_1, a_2, \ldots \right\}$ be the left-endpoints of $\left\{ I_n \right\}$.
+    $A \in \R$ is bounded above by $b_1$, so $x = \sup A$ exists.
+    So $a_n \leq x \leq b_n$ for all $n$.
+    Therefore, $x \in \bigcup_{n=1}^\infty$, and the intersection is nonempty.
+\end{proof}
+
+This can, in fact, be generalized to closed sets in $\R^n$.
+
+\section{Dense and Compact Sets}
+We are now ready to formally define density, as we alluded to before, and to explore its properties.
+
+\begin{definition}[Dense set]
+    Consider a metric space $X$.
+    A set $E \subseteq X$ is dense in $X$ if
+    \begin{itemize}
+        \item every point of $X$ is in $E$ or is a limit point of $E$,
+        \item $\overline{E} = X$, or
+        \item every open set of $X$ contains a point of $E$.
+    \end{itemize}
+\end{definition}
+
+We'll kick things off with a direct application of the nested interval theorem.
+
+\begin{lemma}[]
+    A countable intersection of dense, open sets in $\R$ is not empty.
+\end{lemma}
+
+\begin{proof}
+    Let $\left\{ G_1, G_2, \ldots \right\}$ be a collection of dense, open sets in $\R$.
+    First, by definition, every open set in $\R$ contains a point in $G_1$.
+    Consider an arbitrary nonempty closed interval $I_1= [a_1, b_1]$; this is the closure of the open interval $A_1 = (a_1, b_1)$, which must contain a point in $G_1$.
+
+    We continue on to construct a closed interval $I_2 \subseteq I_1$, which is the closure of the open interval $A_2$.
+    $A_2$ must contain a point in $G_2$, and also one in $G_1$.
+    Continuing on, we get a countable sequence of nested, closed intervals, all of which we know to be nonempty by the nested interval property of $\R$.
+
+    Each $I_n$ is the closure of the open interval $A_n$, so we have also constructed a countable nested sequence of nonempty open intervals.
+    Thus the intersection of these open sets is nonempty and contains a point in every $G_n$, so the intersection of all $G_n$ is nonempty.
+\end{proof}
+
+Now consider, for a moment, the set of positive rationals.
+This set is obviously not dense in $\R$, but we might say that it's at least dense \textit{somewhere} in $\R$, particularly in the positive reals.
+The set of integers, on the other hand, isn't dense anywhere in $\R$.
+We'll find this characterization useful in proving our next theorem.
+
+\begin{definition}[Nowhere-dense set]
+    A set $E$ is nowhere-dense in a metric space $X$ if $\overline{E}$ contains no nonempty open intervals.
+\end{definition}
+
+We might re-interpet this definition to mean that there are no open sets of $X$ contained in $\overline{E}$, or that $E$ is not dense in any nonempty open subset of $X$.
+Intuitively, nowhere-dense sets are very ``thin'', so countable unions of nowhere-dense subsets represent a very small type of infinite set (called meager sets).
+This allows for another perspective on the cardinality of $\R$---given what we know already, we expect that $\R$ is not a meager set, and does turn out to be the case!
+
+\begin{theorem}[Baire's theorem]
+    $\R$ cannot be written as the countable union of nowhere-dense sets.
+\end{theorem}
+
+\begin{proof}
+    Let $S = \left\{ S_1, S_2, \ldots \right\}$ be a countable set of nowhere-dense (in $\R$) sets, so each $\overline{S_n}$ contains no nonempty open intervals.
+
+    For contradiction, suppose $\bigcup_{n=1}^\infty \overline{S_n} = \R$.
+    By de Morgan's law, $\bigcap_{n=1}^\infty \overline{S_n}^c = \emptyset$.
+    Now, each $\overline{S_n}^c$ is dense and open, and their countable intersection is empty---which contradicts the previous lemma.
+
+    Therefore, $\bigcup_{n=1}^\infty \overline{S_n} \neq \R$, and since $S_n \subset \overline{S_n}$, we also have $\bigcup_{n=1}^\infty S_n \neq \R$, as desired.
+\end{proof}
+
+Now we'll turn our attention to a different kind of set, one that has much in common with finite sets.
+We need to make a couple of other definitions first.
+
+\begin{definition}[Cover]
+    Let $X$ be a metric space.
+    An open cover (or, simply, cover) of $E$ in $X$ is a collection of open sets $\left\{ G_\alpha \right\}$ whose union contains (``covers'') $E$.
+    If there is a subcollection of $\left\{ G_\alpha \right\}$ that still covers $E$, we call this subcollection a subcover.
+\end{definition}
+
+\begin{definition}[Compact set]
+    We say a set $K$ is compact in $X$ if every open cover of $K$ contains a finite subcover.
+\end{definition}
+
+\begin{theorem}[]
+    Finite sets are compact.
+\end{theorem}
+
+\begin{proof}
+    Consider a finite set $\left\{ x_1, \ldots, x_n \right\}$ and some arbitrary open cover $\left\{ G_\alpha \right\}$.
+    For each $x_i$, choose a $G_{\alpha_i}$ that contains $x_i$.
+    Then these $G_{\alpha_i}$ cover the set and comprise a finite subcover of $\left\{ G_\alpha \right\}$.
+\end{proof}
+
+The definition we've provided for compact sets isn't exactly abstract, but it isn't super well-motivated either.
+We'll dedicate the remainder of this section to characterizing these sets, starting with a couple of theorems.
+
+\begin{definition}[Bounded set]
+    Let $K$ be a set in a metric space $X$.
+    $K$ is bounded if $K \subset N_r(x)$ for some $x \in X$.
+\end{definition}
+
+\begin{theorem}[Compact sets are bounded]
+    If $K$ is compact then $K$ is bounded.
+\end{theorem}
+
+\begin{proof}
+    Let $K$ be a compact set and $B(x)$ a unit ball about a point $x$.
+    Then $\left\{ B(x) \right\}_{x \in K}$ is a cover of $K$, and there exists some finite subcover $\left\{ B(x_i) \right\}_{i=1}^N$.
+    Arbitrarily select one of these unit balls, say $B(x_1)$, and define $M = \max \left\{ d(x_1, x_i) \right\}_{i=1}^N$ to be the maximum distance to the center of another unit ball.
+    Then the neighborhood $N_{M+2}(x_1)$ contains the subcover $\left\{ B(x_i) \right\}_{i=1}^N$ and thus contains $K$.
+    Therefore, $K$ is bounded.
+\end{proof}
+
+\begin{theorem}[Compact sets are closed]
+    If $K$ is compact then $K$ is closed.
+\end{theorem}
+
+\begin{proof}
+    Let $K$ be compact and consider $p \not\in K$; we will show that there exists a $N(p) \subseteq K^c$.
+
+    For all $q \in K$ let $V_q = N_r(q)$ and $U_q = N_r(p)$, where $r = \frac{1}{2} d(p,q)$ so that $V_q \cap U_q = \emptyset$.
+    Notice that $\left\{ V_q \right\}$ is a cover of $K$, so there exists a finite subcover $\left\{ V_{q_1} , \ldots, V_{q_n}\right\}$.
+    Also, the intersection of all $U_{q_i}$ is open because it's the intersection of finitely many open sets; in fact, $W$ is a ball of radius $\hat r = \min \left\{ r_1, \ldots, r_n \right\}$.
+
+    Notice that $W \cap V_{q_i} = \emptyset$ for all $i$ because $W \subset U_{q_i}$.
+    Thus $W$ is contained completely in $K^c$, $K^c$ is open, and $K$ is closed.
+\end{proof}
+
+These results provide necessary conditions for compactness: the set must be closed and bounded.
+The next two, however, provide sufficient conditions.
+
+\begin{theorem}[]
+    A closed subset of a compact set is compact.
+\end{theorem}
+
+\begin{proof}
+    Let $K$ be a compact set and $B \subseteq K$ be a closed subset.
+    Consider an open cover $\left\{ U_\alpha \right\}$ of $B$.
+    The set $B^c$ is open, so $\left\{ U_\alpha \right\}$ is also open.
+    This union is a cover of $K$.
+
+    By the compactness of $K$, there exists a finite subcover $\left\{ U_{\alpha_1}, \ldots, U_{\alpha_n}, B^c \right\}$ of $K$.
+    But $B^c$ is not necessary to cover $B$, so $\left\{ U_{\alpha_1}, \ldots, U_{\alpha_n} \right\}$ is a finite subcover for any cover and $B$ is compact.
+\end{proof}
+
+\begin{corollary}[]
+    Suppose $F$ is closed and $K$ is compact.
+    Then $F \cap K$ is compact.
+\end{corollary}
+
+\begin{proof}
+    $K$ is compact, so it is closed.
+    Hence the intersection $F \cap K \subseteq K$ is closed and thus compact.
+\end{proof}
+
+Continuing in our quest for sufficient conditions, we prove compactness for a particular type of set: closed intervals in $\R$.
+This will prove to be very useful in our final theorems of this section.
+
+\begin{theorem}[]
+    The closed interval $[a,b]$ is compact in $\R$.
+\end{theorem}
+
+\begin{proof}
+    Suppose, for contradiction, that $[a,b]$ is not compact, so there exists an open cover $\left\{ G_\alpha \right\}$ that has no finite subcover.
+    Divide this interval at the halfway point; then $\left\{ G_\alpha \right\}$ covers both subintervals and at least one of them, say $I_1$ contains no finite subcover.
+
+    Then divide $I_1$ in half in a similar manner.
+    One of the resulting halves $I_2$ has no finite subcover.
+    Continue doing this to obtain a sequence of nested close intervals where each interval is smaller than the last and has no finite subcover.
+
+    By the nested closed interval theorem, there is an $x \in I_n$ for all $n$.
+    So $x$ is in a set $G_{\hat \alpha} \in \left\{ G_\alpha \right\}$ and there is a neighborhood $N(x) \subseteq G_{\hat \alpha}$.
+    Since the intervals can get arbitrarily small, there is an $I_n \subseteq N(x)$.
+    Hence $G_{\hat \alpha}$ is a finite subcover for $I_n$, a contradiction.
+\end{proof}
+
+Now for what is perhaps the best characterization of compact sets in $\R$!
+
+\begin{theorem}[Heine-Borel theorem]
+    A set $K \subset \R$ is compact if and only if $K$ is closed and bounded.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$)
+    We already have two individual theorems showing that, if $K$ is compact, then it is closed and bounded.
+    \smallskip
+
+    ($\Leftarrow$)
+    Let $K \subset \R$ be closed and bounded.
+    So there exists an $r > 0$ such that $K \subseteq [-r, r]$.
+    Hence $K$ is a closed subset of a compact set and $K$ is compact.
+\end{proof}
+
+In fact, this result applies to any Euclidean space $\R^n$.
+The more general proof has a very similar structure to the one above.
+We have another theorem that applies to all metric spaces, but it is weaker.
+
+\begin{theorem}[]
+    $K$ is compact if and only if every infinite subset $E$ of $K$ has a limit point in $K$.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$)
+    Assume $K$ is compact.
+    Suppose, for contradiction, that no point of $K$ is a limit point of some infinite $E \subseteq K$.
+    Then each $q \in K$ has a neighborhood $N(q)$ containing at most one point of $E$ (namely, $q$, if $q \in E$).
+    But then, $\left\{ N(q) \right\}$ is a cover of $E$ with no finite subcover, a contradiciton.
+
+    ($\Leftarrow$) Exercise.
+\end{proof}
+
+Finally, we can use this to prove something that we probably already knew intuitively, but it's nice to get some closure.
+
+\begin{corollary}[Bolzano-Weierstrass theorem]
+    Every bounded infinite subset of $\R$ has a limit point in $\R$.
+\end{corollary}
+
+\begin{proof}
+    Consider an infinite, bounded set $E \subset \R$.
+    $E$ is contained in some compact interval $[a,b]$, so it has a limit point in $[a,b]$ and thus in $\R$.
+\end{proof}
+
+    %<3
+\end{document}
