@@ -6,7 +6,7 @@
 \chapter{Wave Mechanics}
 \section{Introduction}
 Our exploration of quantum mechanics began after a variety of experiments suggested that light behaves as both a wave and a particle.
-The particles that compose light are called photons.
+The massless particles that compose light are called photons.
 Each photon has energy $E = h\nu$, where $\nu$ is the photon's frequency and $h$ is Planck's constant.
 The inherently probabilistic nature of the photon is described by complex numbers called probability amplitudes.
 
@@ -23,7 +23,7 @@ where $\alpha = \frac{1}{2}ka\sin\theta$.
 Shockingly, both of these results hold for massive particles!
 In order to describe the interference that leads to these equations, though, we need a wavelength.
 Taking inspiration from the fact that an individual photon has energy $E = h\nu = pc$ and thus wavelength $\lambda = h/p$, we can define a particle's de Broglie wavelength as
-\[ \lambda_\text{dB} = \frac{h}{p} = \frac{h}{mv}. \]
+\[ \lambda_\textrm{dB} = \frac{h}{p} = \frac{h}{mv}. \]
 Mathematically, this wavelength correctly predicts the way in which matter behaves in the double-slit experiment and others.
 This suggests that the wave-particle duality is not just true for light, but also for matter.
 
@@ -37,11 +37,19 @@ Mathematically,
 \[ 2d \sin\theta = n \lambda. \]
 This is called the Bragg relation.
 
+\begin{summary}
+    Light is comprised of massless packets called photons, each with energy $E = h\nu$.
+    The probabilistic behavior of these photons are described by complex numbers called probablity amplitudes, and they accurately predict double- and single-slit interference patterns.
+
+    It turns out that matter exhibits interference, too; to quantify it, we define the de Broglie wavelength $\lambda_\textrm{dB} = h / mv$.
+    An application is the Bragg relation $2d \sin \theta = n \lambda$, where matter of de Broglie wavelength $\lambda$ is incident at an angle $\theta$ upon a two-layer crystal with spacing $d$.
+\end{summary}
+
 \section{The Schrödinger Equation}%<3
 We've seen that light (i.e., an electroamgnetic field) obeys the wave equation
 \[ \frac{\partial^2 \mathcal{E}_z}{\partial x^2} = \frac{1}{c^2} \frac{\partial^2 \mathcal{E}_z}{\partial t^2}, \]
 where $\mathcal{E}_z$ is the $z$-component of the electric field.
-Solutions to this equation include linear combinations of the oscillating functions $\cos (kx \pm \omega t)$ and $\sin (kx \pm \omega t)$, where $k = \frac{2\pi}{\lambda}$ and $\omega = \frac{2\pi}{T}$ are the light's spatial and temporal angular frequencies, respectively.
+Solutions to this equation include linear combinations of the oscillating functions $\cos (kx \pm \omega t)$ and $\sin (kx \pm \omega t)$, where $k = 2\pi / \lambda$ and $\omega = 2\pi / T$ are the light's spatial and temporal angular frequencies.
 We can't just pick any values of $k$ and $\omega$, however; specifically, the quantities must satisfy the equation
 \[ \omega = ck. \]
 This is called the dispersion relation for the photon wave equation.
@@ -60,7 +68,6 @@ As it turns out, the correct equation is the Schrödinger equation,
 \[ -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} + V(x) \Psi(x,t) = i \hbar \frac{\partial \Psi(x,t)}{\partial t}, \]
 where $V(x)$ is the particle's potential energy (not potential!).
 $\Psi(x,t)$ is called the wave function, and it encodes the wave property of the particle.
-
 For a free particle ($V = 0$),
 \[ -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} = i \hbar \frac{\partial \Psi(x,t)}{\partial t}. \]
 Something like $\Psi(x,t) = \cos (kx - \omega t)$ doesn't quite work as a solution since it doesn't have any imaginary parts to it.
@@ -70,6 +77,15 @@ However, a complex exponential
 works just fine!
 But this means solutions to the Schrödinger equation are irreducibly complex, so there's no immediate physical interpretation for them.
 So what do they represent?
+
+\begin{summary}
+    De Broglie's matter wave hypothesis immediately leads to the equations $E = \hbar \omega$ and $p = \hbar k$.
+    An application of the classical energy-momentum relation gives the dispersion relation $\omega = \hbar k^2 / 2m$.
+    Given this, one might deduce that the correct equation for nonrelativistic matter waves is the Schrödinger equation
+    \[ -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} + V(x) \Psi(x,t) = i \hbar \frac{\partial \Psi(x,t)}{\partial t}, \]
+    where the complex-valued wave function $\Psi$ encodes the wave property of a particle.
+    The complex exponential $\Psi(x,t) = e^{i(kx - \omega t)}$ is one important solution to this equation.
+\end{summary}
 
 \section{Wave Functions}
 Recall that the behavior of photons is characterized by complex probability amplitudes.
@@ -87,19 +103,8 @@ So we can calculate the probability of finding a particle in an interval of spac
 Also, we must find the particle \textit{somewhere}, so
 \[ 1 = \int_{-\infty}^\infty |\Psi(x,t)|^2dx. \]
 This means the wave function goes to zero in the infinite limits.
-(This is not a consequence of the Schrödinger equation, but rather the physical interpretation of the wave function.)
-
-\begin{example}[Wave function normalization]
-    Suppose we want to normalize the wave function
-    \[ \psi(x) = \begin{cases} Nx(L-x) & 0 < x < L \\ 0 & \text{elsewhere}. \end{cases} \]
-    We know that
-    \begin{align*}
-        \int_{-\infty}^\infty |\Psi(x,t)|^2dx = 1 \\
-        \int_0^L |N|^2 x^2 (L^2 - 2xL + x^2)dx = 1 \\
-        |N|^2 L^5 \cdot \frac{1}{30}
-    \end{align*}
-    Therefore, $N = \sqrt{\frac{30}{L^5}} e^{i\theta}$, where $\theta \in \mathbb{R}$ is an arbitrary phase.
-\end{example}
+These are not consequences of the Schrödinger equation, but rather the physical interpretation of the wave function.
+Given an arbitrary wave function that decays to zero, we can normalize it by determining the coefficient that makes its integral equal to one.
 
 We can use the Schrödinger equation to show that probability is conserved both locally and globally.
 Let's start by finding the time derivative of probability density:
@@ -121,11 +126,21 @@ Recall the local conservation of charge equation, $d\rho/dt = -\nabla \cdot \mbf
 In a similar fashion, we can define a probability current
 \[ j_x(x,t) = \frac{\hbar}{2mi} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right) \]
 that describes the flow of probability throughout space.
-So any change in probability density at a point in space is matched with an inward flow of probability.
+So any change in probability density at a point in space is matched with an inward or outward flow of probability.
 
 We can use this to show that probability is conserved globally:
 \[ \frac{d}{dt} \int_{-\infty}^{\infty} |\Psi(x,t)|^2 dx = -\int_{-\infty}^{\infty} \frac{\partial j_x}{\partial x}dx = -j_x \Big|_{-\infty}^\infty = 0. \]
 (The last step follows from the fact that $\Psi(x,t) \to 0$ as $x \to \pm \infty$.)
+
+\begin{summary}
+    The wave function is a probability amplitude density function: the Born rule states that $dP(x,t) = |\Psi(x,t)|^2 dx$, and we can determine the probability of detection in some spatial interval by integrating this differential over that interval.
+    Any meaningful wave function must be normalized so that its integral over all space is equal to one.
+
+    Probability is conserved locally---if the probability in a particular interval changes, there must be an equal and opposite change somewhere else.
+    The flow of probability is described by the probability current
+    \[ j_x(x,t) = \frac{\hbar}{2mi} \left( \Psi^* \frac{\partial \Psi}{\partial x} - \Psi \frac{\partial \Psi^*}{\partial x} \right). \]
+    Probability is also conserved globally, so the wave function remains normalized for all time.
+\end{summary}
 
 \section{Physical Wave Solutions}
 We've seen that $\Psi(x,t) = Ae^{i(kx - \omega t)}$ is a solution to the Schrödinger equation.
@@ -157,13 +172,13 @@ It can be shown that, in general, this relationship is
 \[ \Delta x \Delta k \geq \frac{1}{2}. \]
 In quantum mechanics we have $p = \hbar k$, so we get the Heisenberg uncertainty principle
 \[ \Delta x \Delta p_x \geq \frac{\hbar}{2}. \]
-Here we can interpret $\Delta x$ and $\Delta p$ as uncertainties in a particle's position and momentum, respectively, when we take a measurement.
+Here we can interpret $\Delta x$ and $\Delta p_x$ as uncertainties in a particle's position and momentum, respectively, when we take a measurement.
 
 Let's allow time to move forward again.
 We'd like for the speed of $\Psi(x,t)$ to be the same as the speed of the particle it represents.
 We have two options: the velocity of the individual wavelengths (the phase velocity) and the velocity of the envelope enclosing them (the group velocity).
 These are given by
-\[ v_\textrm{p}= \frac{\omega}{k} \;\text{ and }\; v_\textrm{g} = \lim_{\Delta \to 0} \frac{\Delta \omega}{\Delta k} = \frac{d\omega}{dk}, \]
+\[ v_\textrm{p} = \frac{\omega}{k} \;\text{ and }\; v_\textrm{g} = \lim_{\Delta \to 0} \frac{\Delta \omega}{\Delta k} = \frac{d\omega}{dk}, \]
 respectively.
 (Recall how, when we superpose two waves, the resulting envelope has wavenumber $\Delta k$ and frequence $\Delta \omega$; to find the group velocity, we take the speed of the envelope enclosing the superposition two very closely-spaced wavelengths.)
 The phase velocity doesn't work because, applying the dispersion relation,
@@ -171,6 +186,14 @@ The phase velocity doesn't work because, applying the dispersion relation,
 However, the group velocity gives
 \[ v_\textrm{g} = \frac{d\omega}{dk} = \frac{\hbar k}{m} = \frac{p}{m} = v, \]
 so this is the velocity we seek!
+
+\begin{summary}
+    We can get a normalizabile solution to the Schrödinger equation by linearly combining a continuum of complex exponentials.
+    Such a solution is called a wave packet, and the speed at which it propagates is the group velocity $d \omega / dk$.
+    By considering the width of this packet and the range of integrated wavenumbers, we can make a crude argument for the Heisenberg uncertainty principle
+    \[ \Delta x \Delta p_x \geq \frac{\hbar}{2}, \]
+    where $\Delta x$ and $\Delta p_x$ are uncertainties in a particle's position and momentum, respectively.
+\end{summary}
 
 \section{Quantum Averages and the Classical Limit}
 Recall how, for discrete variables, we define the expectation value
@@ -186,29 +209,13 @@ and uncertainty (standard deviation)
 These definitions and results generalize nicely to the continuous case:
 \[ \left< x^{\alpha} \right> = \int_{-\infty}^{\infty} x^{a} |\Psi(x,t)|^2 dx, \qquad (\Delta x)^2 = \left< x^2 \right> - \left< x \right>^2. \]
 
-\begin{example}[Expectation value and uncertainty]
-    Suppose we want to determine $\left< x \right>$, $\Delta x$ for
-    \[ \Psi(x) = \begin{cases} \sqrt{\frac{30}{L^{5}}} x (L - x) & 0 < x < L, \\ 0 & \text{elsewhere}. \end{cases} \]
-    By symmetry, we can see that $\left< x \right> = L/2$.
-    To calculate $\Delta x$, we also need to know $\left< x^2 \right>$.
-    Integrating:
-    \begin{align*}
-        \left< x^2 \right> &= \int_{-\infty}^{\infty} x^2 |\Psi|^2dx \\
-        &= \int_{0}^{L}x^2 \frac{30}{L^{5}} x^2 (L - x)^2 dx \\
-        &= \frac{2}{7}L^2
-    \end{align*}
-    Finally, we can calculate the square of the uncertainty
-    \[ (\Delta x)^2 = \left< x^2 \right> - \left< x \right>^2 = \frac{1}{28}L^2. \]
-    This gives $\Delta x = \frac{1}{\sqrt{28}}L$.
-\end{example}
-
 We've seen how microscopic objects like photons and atoms obey the principles of quantum mechanics, but for this to be a truly accurate theory it must also apply to macroscopic objects in some limit.
 This is called the principle of correspondence.
 
 For large systems, the average position and momentum should obey the classical relationship between momentum and velocity; that is, we expect to see that
 \[ \left< p_x \right> = m \frac{d \left< x \right>}{dt}. \]
 This allows us to find an expression for average momentum!
-But first, we must differentiate to determine $\frac{d \left< x \right>}{dt}$.
+But first, we must differentiate to find $d \left< x \right> / dt$.
 \begin{align*}
     \frac{d\left< x \right>}{dt} &= \frac{d}{dt} \int_{-\infty}^{\infty} x |\Psi|^2 dx \\
     &= \int_{-\infty}^{\infty} x \frac{\partial |\Psi|^2}{\partial t}dx \\
@@ -230,5 +237,21 @@ Finally, we can use the correspondence principle to motivate a quantum analog of
 \[ \frac{dp_{x,\textrm{cl}}}{dt} = -\frac{\partial V}{\partial x_\textrm{cl}} \;\Longleftrightarrow\; \frac{d \left< p_x \right>}{dt} = -\left< \frac{\partial V}{\partial x} \right>. \]
 This is known as Ehrenfest's theorem.
 (Going through the derivation here is not productive.)
+
+\begin{summary}
+    Despite the unintuitive natue of quantum mechanics, it must correctly describe the behavior of macroscopic objects.
+    We can capture the ``classical limit'' using expectation values; the relevant ones for position and momentum are given below.
+    \begin{align*}
+        \left< x \right> &= \int_{-\infty}^{\infty} x |\Psi(x,t)|^2dx & \left< p_x \right> &= \int_{-\infty}^\infty \Psi^* \frac{\hbar}{i} \frac{\partial \Psi}{\partial x} dx \\
+        \left< x^2 \right> &= \int_{-\infty}^{\infty} x^2 |\Psi(x,t)|^2dx & \left< p_x^2 \right> &= -\int_{-\infty}^\infty \Psi^* \hbar^2 \frac{\partial^2 \Psi}{\partial x^2} dx
+    \end{align*}
+    These can be used to calculate the uncertainties in position and momenutm:
+    \begin{align*}
+        (\Delta x)^2 &= \left< x^2 \right> - \left< x \right>^2 \\
+        (\Delta p_x)^2 &= \left< p_x^2 \right> - \left< p_x \right>^2
+    \end{align*}
+    According to Ehrenfest's theorem, we can write the quantum analog of Newton's second law,
+    \[ \frac{d \left< p_x \right>}{dt} = -\left< \frac{\partial V}{\partial x} \right>. \]
+\end{summary}
 
 \end{document}

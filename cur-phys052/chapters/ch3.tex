@@ -66,6 +66,12 @@ There is also a finite number of energies this time, with a higher $\xi_0$ corre
 This hopefully makes some intuitive sense: $\xi_0$ is a function of the well's size, and we'd expect that potential wells produce more bound states.
 Finally, when we take the limit $V_0 \to \infty$, we get an infinite number of allowed energies determined by $\xi = n\pi / 2$ and we recover the infinite potential well energies, as we'd hope.
 
+\begin{summary}
+    The finite square well has oscillatory solutions on its interior and exponential ones on its exterior.
+    To determine precisely the behavior of these solutions, we apply continuity and differentiability boundary conditions, requiring that we eliminate any divergent terms which would otherwise ruin normalizability.
+    We eventually get a pair of equations that lack analytic solutions, but together they show that the allowed energies are once again quantized and that there are finitely many of them. 
+\end{summary}
+
 \section{General Potential Wells}
 Before moving on to other particular potentials, let's determine some qualitative characteristics of wave functions subject to potential wells in general.
 %<3
@@ -97,6 +103,20 @@ whose derivative is
 Suppose the potential $V$ abruptly rises at this point, so $k$ decreases; to maintain differentiability, the amplitude $A$ of the wave function must increase.
 Thus there is an inverse relationship between $k$ and $A$, meaning the wave function has larger amplitudes in places with higher $V$.
 This is perhaps counterintuitive from a classical standpoint since a higher potential energy corresponds to a lower kinetic energy and thus a lower amplitude, which goes to show how we can't lean so heavily on existing intuition here.
+
+\begin{summary}
+    Given a state with energy $E$, there are two key regions to consider.
+    \begin{itemize}
+        \item In the $E > V$ regions, solutions are oscillatory.
+        As $E-V$ increases, the frequency of ocillation increases and the amplitude decreases.
+        If $E > V$ everywhere then we have a continuum of solutions that we can combine to create a normalizable wave packet.
+        \item In the $E < V$ regions, solutions are exponential.
+        As $V-E$ increases, the ``decay length'' decreases.
+        If $E < V$ everywhere then there are no solutions because $\psi$ will diverge.
+    \end{itemize}
+    At $E = V$ we often see inflection points; this is where we apply continuity and differentiability boundary conditions to get quantized solutions and energies.
+    The $n$th bound state has $n-1$ nodes.
+\end{summary}
 
 \section{The Quantum Harmonic Oscillator}
 Recall, from Newtonian mechanics, that any smooth potential energy in the vicinity of a minimum looks like a harmonic oscillator and can be approximated by $V(x) \approx \frac{1}{2} kx^2$.
@@ -170,9 +190,15 @@ Now, each $\psi_n$ is a stationary state.
 Their magnitudes do not evolve in time.
 However, there \textit{is} a linear combination of these states that exhibits the same kind of oscillatory behavior we'd expect from a classical standpoint, which is pretty cool!
 
+\begin{summary}
+    According to the Heisenberg uncertainty principle, the quantum harmonic oscillator must have a nonzero minimum allowed energy.
+    In particular, $E_0 = \hbar \omega_0 / 2$, and $\psi_0(x) = A_0 e^{-m \omega_0 x^2 / 2\hbar}$.
+    The other energies are evenly-spaced up the potential well, but their associated eigenfunctions take a more complex form involving Hermite polynomials.
+\end{summary}
+
 \section{Delta Function Potentials}
 We'll look at a new potential in this section, but first, let's talk about the Dirac delta function.
-Firstly, the word ``function'' is an incredible misnomer---the Dirac delta function is not a funciton at all, but rather a distribution that only has meaning when integrated over.
+Firstly, the word ``function'' is an incredible misnomer---the Dirac delta function is not a function at all, but rather a distribution that only has meaning when integrated over.
 If we define it as the limit of normalized Gaussians,
 \[ \delta (x) = \lim_{b \to \infty} \sqrt{\frac{b}{\pi}} e^{-bx^2} = \begin{cases} 0 & x \neq 0 \\ \infty & x = 0 \end{cases}, \]
 then the integral over a delta spike is one.
@@ -236,6 +262,13 @@ This is another transcendental equation, but since $\tanh (\kappa a)$ we'll alwa
 So this double well is more tightly bound than the single well!
 Interpreted as a crude model for diatomic molecules, this explains why molecules are more stable than individual atoms.
 
+\begin{summary}
+    The Dirac delta potential has exponential solutions on either side of the spike.
+    These solutions piece together to create a continuous solution.
+    There is also a differentiabilty boundary condition that is uncovered by integrating either side of the Schrödinger equation over an infinitesimal neighborhood around the potential spike.
+    If we do a similar thing with a double delta well we get a solution that is more tightly bound (i.e., one that has a lower energy).
+\end{summary}
+
 \section{Quantum Scattering}
 Now we'll step into the world of unbound states, which have continuous energy eigenvalues and non-normalizable energy eigenfunctions.
 While we study the potentials of bound states using spectroscopy, we use scattering to study those of unbound states.
@@ -281,6 +314,14 @@ The solution of this equation is real-valued, meaning its probability current is
 So there is no transmitted probability and the reflection coefficient is one!
 (Note that there is still a decaying probability of detection beyond the step---this probability just doesn't ``propagate''.)
 
+\begin{summary}
+    When a wave function is incident on some sudden step in potential satisfying $V_0 < E$, some probability is transmitted through the step and the rest is reflected.
+    These amounts are quantified by the reflection and transmission coefficients
+    \[ R = \frac{j_\textrm{ref}}{j_\textrm{inc}}, \qquad T = \frac{j_\textrm{trans}}{j_\textrm{inc}}, \]
+    where each $j$ is the relevant component of the probability current.
+    When $V_0 > E$, the region within the potential step has no probability current because the wave function is real-valued there.
+\end{summary}
+
 \section{Quantum Tunneling}
 Now consider the finite barrier
 \[ V(x) = \begin{cases} V_0 & 0 < x < a \\ 0 & \text{elsewhere} \end{cases} \]
@@ -317,6 +358,11 @@ If we use $N$ pieces then the total transmission coefficient is approximately
 In the limit, this turns into
 \[ T \propto \exp \left[ -2 \int_{a}^{b} \kappa (x) \,dx \right] = \exp \left[ -\frac{2\sqrt{2m}}{\hbar} \int_{a}^{b} \sqrt{V(x) - E} \,dx \right], \]
 where the constant of proportionality is some other polynomial in $k$.
+
+\begin{summary}
+    When a wave function is incident on a potential barrier (rather than a simple step) satisfying $V_0 > E$, then there is some transmitted probability.
+    Using the same analysis as before, we can find that the transmission coefficient through the barrier goes to 1 in the thin limit and to 0 in the thick limit.
+\end{summary}
 
 \end{document}
 
