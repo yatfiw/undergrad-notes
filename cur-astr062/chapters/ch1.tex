@@ -4,11 +4,12 @@
 \begin{document}
 
 \chapter{The Tools of Astronomy}
-\section{Celestial Coordinate Systems}
+\section{Positions in Space}
 We'll begin by studying how we can measure the position of an astronomical object in space.
 There are two dimensions to consider: where the object appears in the night sky, and how far away it is from Earth.
 We'll tackle each of these, starting with the first.
 
+\subsection*{Celestial Coordinate Systems}
 For now, it will be useful for us to imagine the sky as a ``\textbf{celestial sphere}'' that revolves around us, the radius of which is of no concern.
 In order to specify the position of an object on this sphere we will need two coordinates: one that specifies the horizontal angle at which the object can be found, and another that specifies its height on the sphere.
 
@@ -45,7 +46,7 @@ A better reference plane would be one defined by Earth's orbit around the Sun---
 For consistency, we usually record positions as they were at noon on January 1, 2000.
 (We call this the \textbf{J2000.0 epoch}, using J for the Julian calendar whch astronomers use for its simplicity.)
 
-\section{Angular Separation and Trigonometric Parallax}
+\subsection*{Angular Separation}
 With this understanding of the equatorial coordinate system, we can do some trigonometry to calculate the \textbf{angular separation} $\Delta \theta$ between two objects in the night sky.
 Spherical trigonometry is hard, but if the objects we're considering are close enough together, we can approximate the triangle formed by $\Delta \theta$, $\Delta \delta$, and $\Delta \alpha$ as a planar right triangle that we can do trig with.
 
@@ -63,7 +64,8 @@ So the leg we really want is $R \cos \delta \,\Delta \alpha$, and by the Pythago
 where $\delta$ and $\alpha$ have the same units (usually degrees or arcseconds).
 This gives the angular separation between the objects!
 
-We'll now turn to the second question we posed at the beginning of the first section, the question of distance.
+\subsection*{Trigonometric Parallax}
+We'll now turn to the second question we posed at the beginning of this section, the question of distance.
 We can measure distances to relatively nearby stars using the method of \textbf{stellar parallax}.
 As the Earth orbits around the Sun, these stars appear to move back and forth very slightly relative to background stars, as shown below.
 \begin{center}
@@ -81,7 +83,8 @@ So the conversion from radians to arcseconds gives
 \[ \boxed{d = \frac{1}{p} \text{ pc}}, \]
 where $p$ is measured in arcseconds.
 
-\section{The Planar Restricted 2-Body Problem}
+\section{The Two-Body Problem}
+\subsection*{The Planar Restricted Two-Body Problem}
 Consider a star with mass $M_\star$ about which a planet with mass $m$ orbits.
 The star is positioned at the origin, and the planet has position $\mbf{r}$ and velocity $\mbf{v}$.
 Notice that all of the interactions between the star and planet occur in the same plane, so treating this as a planar problem does not sacrifice any generality.
@@ -188,7 +191,6 @@ More specfically:
 \end{tabular}
 \end{center}
 
-\section{The General 2-Body Problem}
 Another important property of energy in these systems is given by the \textbf{virial theorem}.
 Recall how, for circrular orbits,
 \[ \frac{GM_\star}{r^2} = \frac{v^2}{r}, \]
@@ -199,6 +201,7 @@ In a slightly more general sense, we can make the following statement for any gr
 \[ \boxed{\left< K \right> = -\frac{\left< U \right>}{2}}, \]
 where quantities in the angle brackets are time averages (usually over one period).
 
+\subsection*{The General Two-Body Problem}
 Now we can tackle the general two-body problem---that is, the two-body problem with two finite masses $m_1$ and $m_2$
 Because the system's total momentum is conserved, our analysis will be easiest in the center-of-mass reference frame.
 
@@ -248,7 +251,7 @@ where $\mbf{v} \equiv d\mbf{r}/dt$.
 Lastly, we give an alternative relation between $\mbf{r}$ and the position vectors.
 \[ \boxed{\mbf{r}_1 = \frac{\mu}{m_1} (-\mbf{r}), \quad \mbf{r}_2 = \frac{\mu}{m_2} \mbf{r}}. \]
 
-\section{Detection of Exoplanets}
+\subsection*{Detection of Exoplanets}
 As an application, let's discuss the detection of planets in extrasolar systems.
 The most obvious way of doing this is via direct imaging.
 We cover up the light coming from a star so that its brightness doesn't overpower that of any orbiting bodies, and we see what we can see.
@@ -292,6 +295,7 @@ Since $\sin i$ never exceeds 1, this expression gives us a lower bound for the m
 We've spent plenty of time analyzing the positions and motions of objects in the sky.
 Now we'll turn to the question of how bright something is, in both relative terms and absolute ones.
 
+\subsection*{Luminosity, Flux, and Magnitude}
 The most fundamental measure of brightness we can define is the \textbf{luminosity} $L = dE / dt$, which is simply the energy emitted per unit time.
 We could call this ``power'' like we do elsewhere in physics, but we normally don't to distinguish the production of radiative energy from other phenomena.
 
@@ -341,7 +345,8 @@ The distance $d$ to the object is related to these quantities by the equation
 \end{align*}
 This is often called the \textbf{distance modulus}.
 
-Anwyay, all of our definitions here are great for point sources that emit light isotropicallly in all directions.
+\subsection*{Solid Angles and Intensity}
+All of our definitions here are great for point sources that emit light isotropicallly in all directions.
 But what if this isn't the case?
 As a step toward accounting for this, we'll define a quantity that, in a sense, indicates direction: the \textbf{solid angle} $\Omega$.
 
@@ -369,7 +374,8 @@ If the sky is uniformly bright, then $I$ is constant and the flux from all light
 \[ F = \int_{0}^{\pi / 2} I \cos\theta (\sin\theta \,d\theta) \int_{0}^{2\pi}d\varphi = \pi I. \]
 This result is useful in determining the total (observed) emitted flux from an isotropic emitter, like we'd see on the surface of a star!
 
-To finish things off, we'll split each of our quantities in one more way.
+\subsection*{Speciific Brightness}
+We can split up each of our quantities in one more way.
 We're often only concerned with the brightness of an object in one wavelength or frequency.
 For example, we can define the specific luminosity
 \[ L_\lambda = \frac{dL}{d\lambda} \,\text{ or } L_\nu = \frac{dL}{d\nu}, \]
@@ -380,9 +386,10 @@ respectively, which suggests the relationship
 \[ L_\lambda |d\lambda| = L_\nu |d\nu| \]
 and thus
 \[ \boxed{L_\nu = \left| \frac{d\lambda}{d\nu} \right| L_\lambda} \implies \boxed{\nu L_\nu = \lambda L_\lambda}. \]
-We can do something similar with specific flux, which is often useful.
+We can do something similar with specific flux and luminosity, which is often useful.
 
 \section{Blackbody Radiation}
+\subsection*{Blackbody Radiation}
 Armed with these definitions, we can get back into some astrophysics!
 We'll start by talking about blackbodies, which are objects that are completely opaque, nonreflective, and in thermal equilibrium.
 Of course, such a body does not exist, but this model approximates the properties of objects like stars to a surprising degree.
@@ -418,6 +425,7 @@ This gives the total luminosity
 where $R$ is the radius of the blackbody.
 This equation is particularly useful when dealing with thermal equilibria, which are characterized by $L_\textrm{abs} = L_\textrm{em}$.
 
+\subsection*{Albedo and Color Magnitudes}
 Now, what happens when we relax one of our assumptions by allowing our bodies to be reflective?
 We'll define \textbf{albedo} $a$ as the fraction of incident light that is reflected rather than absorbed.
 This fraction is generally a function of wavelength.
@@ -427,12 +435,14 @@ Expressed in terms of wavelength,
     I_\textrm{abs}(\lambda) &= \left[ 1 - a(\lambda) \right] I_\textrm{inc} \\
     I_\textrm{em}(\lambda) &= \left[ 1 - a(\lambda) \right] B_\lambda
 \end{align*}
-We might use this information to estimate the equilibrium temperature of a planet by setting $I_\textrm{abs} = I_\textrm{em}$ and considering only the wavelengths of maximum absorbtion and emission.
+We might use this information to estimate the equilibrium temperature of a planet by setting $I_\textrm{abs} = I_\textrm{em}$ and considering only the wavelengths of maximum absorption and emission.
 This approximation, however, does not account for atmospheres and so may be cooler than reality.
 
-\section{Color Magnitudes}
+We now have several different ways of estimating temperature from a blackbody spectrum, but they all require information spanning a wave range of wavelengths, which can be quite challenging to obtain.
+We'll give one much cruder, but still effective, method for measuring these temperatures.
+
 Thus far we've been talking about bolometric (total) magnitudes, that is, magnitudes across all wavelengths.
-However, telescops make observations through filters for very small bands of wavelengths (like Ultraviolet, Blue, Visual, Red, and Infrared).
+However, telescopes make observations through filters for very small bands of wavelengths (like Ultraviolet, Blue, Visual, Red, and Infrared).
 The flux through a filter $X$ is given by
 \[ F_X = \int_{0}^{\infty} F_\lambda S_X(\lambda) \,d\lambda, \]
 where $S_X(\lambda)$ is the probability that a photon of wavelength $\lambda$ passes through filter $X$.
