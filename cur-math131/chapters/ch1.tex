@@ -158,7 +158,7 @@ Cantor's theorem provides a way to construct arbitrarily large infinities by con
 Another natural question is whether or not there's is a set whose cardinality falls between these infinities.
 This is called the continuum hypothesis, and it has been shown to be undecidable under today's standard axioms for set theory!
 
-\section{Order and Fields}
+\section{Order, Fields, and Bounds}
 Right now our sets are nothing more than collections of things.
 A reasonable first step in giving them some structure is to assign an order to the elements.
 
@@ -221,11 +221,10 @@ With this, we can talk about what it means for a set to be restricted in the con
 
 Note that the supremum and the maximum are not the same thing---maxima have the additional requirement that they must actually be in the set they're describing.
 The same goes for infima and minima.
-
 We'll focus on suprema from here on, but all of the statements we make for suprema have analogs for infima.
 The supremum has some intuitive properties, many of which we can state without proof.
 
-\begin{theorem}[Properties of supremum] \label{sup_props}
+\begin{theorem}[Properties of suprema] \label{sup_props}
     \begin{enumerate}[label=(\alph*)]
         \item $\gamma$ is an upper bound for $A$ if and only if $\sup A \leq \gamma$.
         \item $a \leq \gamma$ for all $a \in A$ if and only if $\sup A \leq \gamma$.
@@ -264,7 +263,7 @@ For example, it is the reason why every real number has a decimal expansion, and
 There are a couple of other consequences which we'll find useful.
 
 \begin{theorem}[Archimedean property]
-    If $x,y \in \R$ and $x > 0$, the there exists a positive integer $n$ such that $nx > y$.
+    If $x,y \in \R$ and $x > 0$, then there exists a positive integer $n$ such that $nx > y$.
     (Equivalently, if $x > 0$, then there exists $n \in \N$ such that $\frac{1}{n} < x$.)
 \end{theorem}
 
@@ -298,7 +297,7 @@ There are a couple of other consequences which we'll find useful.
 The first theorem here roughly states that there are no ``infinitely large'' or ``infinitely small'' real numbers to the point of being inaccessible.
 This second theorem hints at one of three equivalent chatacteristics of what we call dense sets, which we'll look more into later.
 
-\section{Metric Spaces}
+\section{Metric Spaces, Open Sets, and Closed Sets}
 Let's keep adding structure to our sets by introducing distance.
 
 \begin{definition}[Metric space]
@@ -489,7 +488,7 @@ Finally, we can put all this together to get a pretty unintuitive theorem---our 
 
 This can, in fact, be generalized to closed sets in $\R^n$.
 
-\section{Dense and Compact Sets}
+\section{Dense Sets}
 We are now ready to formally define density, as we alluded to before, and to explore its properties.
 
 \begin{definition}[Dense set]
@@ -548,6 +547,7 @@ This allows for another perspective on the cardinality of $\R$---given what we k
     Therefore, $\bigcup_{n=1}^\infty \overline{S_n} \neq \R$, and since $S_n \subset \overline{S_n}$, we also have $\bigcup_{n=1}^\infty S_n \neq \R$, as desired.
 \end{proof}
 
+\section{Compact Sets}
 Now we'll turn our attention to a different kind of set, one that has much in common with finite sets.
 We need to make a couple of other definitions first.
 
@@ -606,6 +606,7 @@ We'll dedicate the remainder of this section to characterizing these sets, start
     Thus $W$ is contained completely in $K^c$, $K^c$ is open, and $K$ is closed.
 \end{proof}
 
+\subsection*{Sufficient Conditions for Compactness}
 These results provide necessary conditions for compactness: the set must be closed and bounded.
 The next two, however, provide sufficient conditions.
 
@@ -699,6 +700,8 @@ Finally, we can use this to prove something that we probably already knew intuit
     Consider an infinite, bounded set $E \subset \R$.
     $E$ is contained in some compact interval $[a,b]$, so it has a limit point in $[a,b]$ and thus in $\R$.
 \end{proof}
+
+This theorem also generalizes to $\R^k$.
 
     %<3
 \end{document}
