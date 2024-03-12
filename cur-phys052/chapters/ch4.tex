@@ -1,0 +1,173 @@
+\documentclass[../p052main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Principles of Quantum Mechanics}
+\section{Hermitian Operators}
+So far we've talked about position, momentum, and energy operators.
+We'll now add a fourth to our collection: the parity operator $\Pi$, defined by
+\[ \Pi \psi(x) = \psi(-x). \]
+The eigenvalues $\lambda = \pm 1$ of $\Pi$ are clearly real.
+The eigenfunctions corresponding to $\lambda = 1$ are the even functions, and those corresponding to $\lambda = -1$ are the odd functions.
+It follows that eigenfunctions corresponding to distinct eigenvalues are orthogonal.
+Also, the eigenfunctions are complete---that is, any function $\psi(x)$ can be written as a super position of even and odd functions.
+For example, we might write
+\[ \psi (x) = \frac{1}{2} \left[ \psi(x) + \psi(-x) \right] + \frac{1}{2} \left[ \psi(x) - \psi(-x) \right]. \]
+All of these properties are characteristic of a general class of linear operators called Hermitian operators.
+Such an operator $A$ is defined by the equation
+\[ \int_{-\infty}^{\infty} \Phi^* \left( A \Psi \right) \,dx = \int_{-\infty}^{\infty} \left( A \Phi \right)^* \Psi \,dx, \]
+whhere $\Phi$ and $\Psi$ are physical wave functions.
+This looks pretty abstract, but notice that in the special case $\Phi = \Psi$ it turns into
+\begin{align*}
+    \int_{-\infty}^{\infty} \Psi^* \left( A \Psi \right) \,dx &= \int_{-\infty}^{\infty} \left( A \Psi \right)^* \Psi \,dx \\
+    \int_{-\infty}^{\infty} \Psi^* \left( A \Psi \right) \,dx &= \left( \int_{-\infty}^{\infty} \Psi^* \left( A \Psi \right) \,dx \right)^* \\
+    \left< A \right> &= \left< A \right>^*
+\end{align*}
+So a Hermitian operator is just one that yields real expectation values!
+In fact, every Hermitian operator corresponds to an observable (something we can measure), which we'd certainly hope to be real.
+
+Consider the eigenvalue equation $A \psi_a = a \psi_a$, where $\psi_a$ is a normalized eigenfunction of $A$ with eigenvalue $a$.
+We can show that the expectation values of $A$ are also its eigenvalues:
+\[ \left< A \right> = \int_{-\infty}^{\infty} \psi_a^* A \psi_a \,dx = \int_{-\infty}^{\infty} \psi_a^* a \psi_a \,dx = a. \]
+Thus $A$ has also real eigenvalues.
+If $\psi_1$ and $\psi_2$ are eigenfunctions corresponding to distinct eigenvalues $a_1$ and $a_2$, respectively, then we have
+\begin{align*}
+    \int_{-\infty}^{\infty} \psi_2^* (A \psi_1) \,dx &= \int_{-\infty}^{\infty} (A \psi_2)^* \psi_1 \,dx \\
+    a_1 \int_{-\infty}^{\infty} \psi_2^* \psi_1 \,dx &= a_2 \int_{-\infty}^{\infty} \psi_2^* \psi_1 \,dx
+\end{align*}
+The only way for this equation to be true is for the integral to be zero.
+Thus eigenfunctions that correspond to different eigenvalues are orthogonal.
+
+Proving the completeness of these eigenfunctions is difficult, but completeness is a very important part of quanutm mechanics.
+Without it, we could not make the argument that
+\[ \Psi = \sum_{n=1}^{\infty} c_n \psi_n \implies 1 = \sum_{n=1}^{\infty} |c_n|^2, \]
+and thus we would not identify $|c_n|^2$ as the probability of obtaining the eigenvalue $a_n$ upon a measurement of $A$.
+Given an arbitrary wave function $\Psi$, we could find the coefficient $c_n$ on the $n$th eigenfunction using
+\[ c_n = \int_{-\infty}^{\infty} \psi_n^* \Psi \,dx \]
+and use these coefficients to compute the expectation values
+\[ \int_{-\infty}^{\infty} \Psi^* A \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n \;\text{ and }\; \int_{-\infty}^{\infty} \Psi^* A^2 \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n^2. \]
+
+\begin{summary}
+    The parity operator $\Pi$ simply reflects its inputs over the vertical axis.
+    Its eigenfunctions are the even and odd functions, which respectively correspond to eigenvalues of $1$ and $-1$.
+
+    This, along with the operators we've discussed so far, is an example of a Hermitian operator $A$, which is one that satisfies
+    \[ \int_{-\infty}^{\infty} \Phi^* \left( A \Psi \right) \,dx = \int_{-\infty}^{\infty} \left( A \Phi \right)^* \Psi \,dx. \]
+    For our purposes, Hermitian operators are ones that have real eigenvalues, meaning $\left< A \right> = \left< A \right>^*$.
+    The eigenfunctions of Hermitian operators are mutually orthogonal, and they form a basis for the set of all wave functions.
+    The coefficients on a linear combination of eigenfunctions are given by
+    \[ c_n = \int_{-\infty}^{\infty} \psi_n^* \Psi \,dx, \]
+    and each $|c_n|^2$ represents the probability of finding the eigenvalue $a_n$ upon a measurement of $A$.
+    The relevant expectation values are
+    \[ \int_{-\infty}^{\infty} \Psi^* A \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n \;\text{ and }\; \int_{-\infty}^{\infty} \Psi^* A^2 \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n^2. \]
+\end{summary}
+
+\section{Operator Commutation and Uncertainty}
+Suppose we have two Hermitian operators $A$ and $B$.
+We define their commutator $[A,B] = AB - BA$ as a quantity that is equal to zero if and only if the two operators commute, that is, if $AB = BA$.
+As we'll see here, the commutativity of two operators is of utmost importance in quantum mechanics!
+
+Let's start with the case in which $[A,B] = 0$.
+We know, from linear algebra, that the eigenspaces spanned by each operator's eigenfunctions are the same.
+But if all eigenvalues are nondegenerate---that is, if each corresponds to exactly one eigenfunction---then we can make an even stronger statement.
+In this case, the eigenvalues of $A$ and $B$ are precisely the same!
+One nice implication of this fact is that, because the parity operator commutes with even Hamiltonians, the eigenfunctions of such Hamiltonians must be even or odd.
+
+If two operators commute, then we can simultaneously know both of their associated observables without uncertainty.
+Conversely, if two operators do not commute, it is not possible to have definitive values for both obsevabels at the same time.
+This leads to uncertainty!
+For example, consider a particle in a box in its ground state; a measurement of its position causes the wave function to collapse into a non-eigenstate, so we are not guaranteed to get the ground-state energy upon a subsequent measurement.
+
+This uncertainty is quantified by the value of the commutator.
+Specifically, if $[A, B] = iC$, then we have the generalized uncertainty principle
+\[ \Delta A \Delta B \geq \frac{|\left< C \right>|}{2}. \]
+Not only does this lead to the familiar Heisenberg uncertainty principle (via $[x, p_x] = i\hbar$), but it can also be used to derive many other important uncertainty relations.
+One very important one is
+\[ \Delta E \Delta t \geq \frac{\hbar}{2}, \]
+which might make sense given how the relativistic relationship between time and energy is analogous to that between position and momentum.
+But there's a problem here: there is no time operator, so $\Delta t$ can't represent the uncertainty in an observable.
+So what is it?
+
+The answer has something to do with the rate at which an operator's expectation value changes.
+Let $A$ be a time-independent Hermitian operator; the derivative of its expectation value is
+\begin{align*}
+    \frac{d \left< A \right>}{dt} &= \frac{d}{dt} \int_{-\infty}^{\infty} \Psi^*(x,t) A \Psi (x,t) dx \\
+    &= \int_{-\infty}^{\infty} \left( \frac{\partial \Psi^*}{\partial t} A \Psi + \Psi^* A \frac{\partial \Psi}{\partial t} \right) dx \\
+    \intertext{By the time-independent Schrödinger equation, we can substitute $d\Psi / dt = (1 / i\hbar) H \Psi$ and its conjugate.}
+    &= \frac{i}{\hbar} \int_{-\infty}^{\infty} (H \Psi)^* A \Psi \,dx - \frac{i}{\hbar} \int_{-\infty}^{\infty} \Psi^* A H \Psi \,dx \\
+    &= \frac{i}{\hbar} \left( \int_{-\infty}^{\infty} \Psi^* H A \Psi \,dx - \int_{-\infty}^{\infty} \Psi^* A H \Psi \,dx \right) \\
+    \frac{d \left< A \right>}{dt} &= \frac{i}{\hbar} \left< [H, A] \right>
+\end{align*}
+So if $A$ commutes with the Hamiltonian, then its expectation value is conserved!
+Otherwise, $[A, H] = iC$ and $\left< C \right> = \left< [H, A] \right> / i = \hbar (d \left< A \right> / dt)$, so
+\[ \Delta A \Delta E \geq \frac{|\left< C \right>|}{2} \,\implies\, \Delta A \Delta E \geq \frac{\hbar}{2} \left| \frac{d \left< A \right>}{dt} \right| \]
+One possible interpretation of this is that, in a stationary state, there is no energy uncertainty.
+But otherwise there is a distribution of possible energies and we can interpret
+$\Delta t = \Delta A / |d \left< A \right> / dt|$ to get
+\[ \Delta t \Delta E \geq \frac{\hbar}{2}. \]
+Here, $\Delta t$ is the time it takes $\left< E \right>$ to change by an amount equal to its uncertainty.
+Any smaller change is statistically insignificant.
+
+\begin{summary}
+    The commutator $[A,B] = AB - BA$ of two Hermitian operators is equal to zero if and only if they commute.
+    In this case, the operators have the same eigenspaces; further, if their eigenvalues are nondegenerate, then they have the same eigenfunctions.
+    Uncertainty arrises when the commutator is nonzero---in particular, if $[A,B] = iC$, then we have the generalized uncertainty principle
+    \[ \Delta A \Delta B \geq \frac{|\left< C \right>|}{2}. \]
+    We also have
+    \[ \Delta E \Delta t \geq \frac{\hbar}{2}, \]
+    where $\Delta t$ is the amount of time it takes $\left< E \right>$ to change by an amount equal to its uncertainty.
+\end{summary}
+
+\section{Quantum Entanglement and Measurement}
+We're now in a position to address some of the fundamental ``paradoxes'' that come with quantum mechanics.
+
+Consider a two-particle state involving particles $A$ and $B$.
+If these particles have postitions $x_A$ and $x_B$, respectively, then the wave function describing their combined state is $\Psi(x_A, x_B)$.
+We say that such a state is entangled if this $\Psi$ cannot be expressed as a product of independent wave functions for $A$ and $B$; in this case, the Born rule looks like $dP = |\Psi(x_A, x_B)|^2 dx_A dx_B$.
+
+One source of entangled states is nuclear decay.
+Connsider, for example, an unstable particle of mass $m$ in the fifth energy state of the infinite square well.
+It decays into two particles with masses $m_A = m / 5$ and $m_B = 4m / 5$.
+We can show, by conservation of energy, that
+\[ 5n_A^2 + \frac{5}{4}n_B^2 = 25. \]
+This equation has two solutions: $(n_A, n_B) = (1, 4)$ and $(n_A, n_B) = (2, 2)$.
+Hence the two-particle system has the wave function
+\[ \Psi(x_A, x_B) = c_1 \psi_1(x_A) \psi_4(x_B) + c_2 \psi_2(x_A) \psi_2(x_B). \]
+Suppose we measure the energy of $A$ and get $E_1$.
+Then the wave function for the multiparticle state collapses: without even observing it, we know by conservation of energy that the energy of $B$ is $E_4$.
+
+The strange thing about this is that there's no limit to how far apart these entangled particles can be.
+No matter what, the wave functions collapse simultaneously.
+This troubled many physicists, including Einstein, who hypothesized that the energies of both particles at the moment we're produced---we just don't know what they are until we measure them.
+This is called the Realist view of quantum mechanics, which is contrary to the Orthodox view we've been learning.
+
+Running with this view, Einstein and two of his colleagues devised the Einstein-Podolsky-Rosen (EPR) ``paradox''.
+Consider, again, two particles $A$ and $B$ that interact for a short time and then never again.
+The positions and momenta of the particles are individually equal in magnitude and opposite in direction.
+So if we measure the position of $A$, then we also get the position of $B$; this is consistent with the Realist view that these states were predetermined when the particles stopped intereacting.
+Similarly, a measurement of the momentum of $A$ allows us to determine that of $B$, which is again consistent with Realism.
+
+But then the position and momentum of $B$ were both determined when its interaction with $A$ ceased meaning both quantities can be known precisely, a clear violation of the Heisenberg uncertainty principle.
+So we are left with two possibilities:
+\begin{itemize}
+    \item Quantum mechanics is complete.
+    The measurement of $A$'s properties affects the state of $B$, no matter how far apart they are.
+    \item Quantum mechanics is incomplete.
+    There are some ``hidden variables'' that encode the simultaneous values of position and momentum.
+\end{itemize}
+Subsequent experiments with other noncommutative properties like photon polarization have shown, to the extent of 250 standard deviations, that there are no such hidden variables.
+
+We should be careful not to take this superposition interpretation too far, though.
+Suppose a cat is confined to a chamber equipped with a mechanism to kill the cat if a particular quantum event occurs, say the decay of a radioactive atom.
+Within our current understanding of multiparticle systems the the survival of the cat is entangled with the atomic decay, but this is clearly ridiculous because that would mean the cat is in a superposition of ``survival states'', not definitely alive or dead!
+
+Out best guess for why this superposition breaks dowm for macroscopic objects is that environmental interactions cause wave functions to lose the relative phase information that is essential to quantum phenomena like interference.
+Perhaps this so-called decoherence somehow leads to the collapse of the system into one of the states comprising the initial superposition.
+But this seems inconsistent with the Schrödinger equation which, as a linear differential equation, should conserve superpositions over time.
+This question of what, exactly, happens when a wave function collapses (if anything) is the crux of the measurement problem.
+
+\end{document}
+%<3
+%<3
+%<3
