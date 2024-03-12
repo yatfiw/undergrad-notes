@@ -114,8 +114,8 @@ Below, we derive a general solution to DEs of this form.
         (y' - \lambda_1 y)' - \lambda_2 (y' - \lambda_1 y) &= 0
     \end{align*}
     Define $u = y' - \lambda_1 y$ to get the DE $u' - \lambda_2 u = 0$, which has the solution $u = Ae^{\lambda_2 x}$.
-    This in turn yields the DE $y' - \lambda_1 y = Ae^{\lambda_2 x}$, the solution of which is $\displaystyle y = e^{\lambda_1 x} \int Ae^{(\lambda_2 - \lambda_1)x} dx$.
-    This leaves us with two possibilities.
+    This in turn yields $y' - \lambda_1 y = Ae^{\lambda_2 x}$, the solution of which is $\displaystyle y = e^{\lambda_1 x} \int Ae^{(\lambda_2 - \lambda_1)x} dx$.
+    We're left with two possibilities.
     \begin{align*}
         \lambda_1 \neq \lambda_2&:\quad y(x) = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x} \\
         \lambda_1 = \lambda_2&:\quad y(x) = C_1e^{\lambda_1 x} + C_2 x e^{\lambda_1 x}
@@ -225,6 +225,8 @@ This will be very useful for our next definition, which gives us the two cases t
 Generally, the case in which $x_0$ is an ordinary point is easier to deal with than the singular point case.
 They're both relatively straightforward, however.
 First, the case of the ordinary point is summarized below.
+
+\pagebreak
 
 \begin{theorem}[Analytic solution theorem]
     If $x_0$ is an ordinary point, then the general solution of

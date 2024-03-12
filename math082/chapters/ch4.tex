@@ -178,6 +178,8 @@ We'll do this below.
 We can compute some matrix exponentials simply using the power series definition, but this can get a bit tedious.
 We'll give a few useful properties that can make computing matrix exponentials a little easier.
 
+\pagebreak
+
 \begin{theorem}[Selected matrix exponentials]
     \begin{enumerate}[label=(\alph*)]
         \item Let $A$ be a diagonal matrix with diagonal entries $\lambda_1, \lambda_2, \ldots, \lambda_n$.
@@ -236,7 +238,6 @@ Now we can solve the general constant-coefficient linear system $\mbf{x}' = A \m
     \begin{align*}
         e^{-At} \mbf{x}' - e^{-At} A \mbf{x} &= e^{-At} \mbf{F} \\
         \frac{d}{dt} \left[ e^{-At} \mbf{x} \right] &= e^{-At} \mbf{F} \\
-        \int_0^t \frac{d}{ds} \left[ e^{-As} \mbf{x} \right] \;ds &= \int_0^t e^{-As} \mbf{F} \;ds \\
         e^{-At}\mbf{x} - \mbf{x}_0 &= \int_{0}^{t} e^{-As} \mbf{F} \;ds \\
         \mbf{x}(t) &= e^{At} \mbf{x}_0 + e^{At} \int_0^t e^{-As} \mbf{F} \;ds
     \end{align*}
