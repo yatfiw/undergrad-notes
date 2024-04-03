@@ -1,0 +1,644 @@
+\documentclass[../m131main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+%<3
+\begin{document}
+
+\chapter{Sequences and Series}
+\section{Sequences}
+Our attention, now, shifts to sequences of elements.
+We'll begin with a rigorous definition for these objects.
+
+\begin{definition}[Sequence]
+    A sequence $\left\{ p_n \right\}$ in a metric space $X$ is a function $f : \N \to X$ which maps $n \mapsto p_n$.
+\end{definition}
+
+Oftentimes we'll encounter sequences that seem to end up arbitrarily close to a particular point, whereas others never seem to settle anywhere.
+We can capture this intuition with the following definition.
+
+\begin{definition}[Convergence]
+    A sequence $\left\{ p_n \right\}$ converges if there is a $p \in X$ such that for any $\epsilon > 0$ there exists an $N \in \N$ such that $n \geq N$ implies $d(p_n, p) < \epsilon$.
+\end{definition}
+
+In this case we say ``$p_n$ converges to $p$'' or ``$p$ is the limit of the sequence'', and we write $p_n \to p$ or $\ds \lim_{n \to \infty} p_n = p$.
+
+\vspace{-3pt}
+If we're trying to prove the convergence of a given sequence, we may do so directly by determining a value for $N$ (usually as a function of $\epsilon$) for which the sequence becomes contstrained to a radius-$\epsilon$ neighborhood.
+Some of the following properties might also be useful.
+
+\begin{theorem}[Convergence properties]
+    \begin{enumerate}[label=(\alph*)]
+        \item If $p_n \to p$ and $p_n \to q$ then $p = q$.
+        \item If $p_n$ converges then $p_n$ is bounded.
+        \item If $p$ is a limit point of $E \subset X$ then there exists a sequence $\left\{ p_n \right\}$ in $E$ such that $p_n \to p$.
+        \item $p_n \to p$ if and only if every neighborhood of $p$ contains all but finitely many $p_n$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We prove each part in turn.
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose $p_n \to p$ and $p_n \to q$ and let $\epsilon = d(p,q)$.
+        Assume, for contradiciton, that $p \neq q$, so $\epsilon > 0$.
+        By the definition of convergence, there exist $N_p, N_q$ such that $n \geq N_p \implies d(p_n, p) < \epsilon / 2$ and $n \geq N_q \implies d(p_n, q) < \epsilon / 2$.
+        Let $N = \max \left\{ N_p, N_q \right\}$; by the triangle inequality,
+        \[ \epsilon = d(p,q) \leq d(p_n, p) + d(p_n, q) < \epsilon, \]
+        a contradiction.
+
+        \item Let $\epsilon = 1$.
+        Then there exists an $N$ such that $n > N \implies d(p_n, p) < 1$.
+        All $p_n$ are contained in the ball $B_{R+1}(p)$, where $R = \max \left\{ 1, d(p_1, p), \ldots, d(p_N, p) \right\}$, so $p_n$ is bounded.
+
+        \item If $p$ is a limit point of $E$ then every neighborhood contains a point $p_n \neq p$ such that $p_n \in E$.
+        So we can construct a convergent sequence $\left\{ p_n \right\}$ where $p_n \in B_{1 / n}(p)$.
+
+        \item ($\Rightarrow$)
+        Consider an $\epsilon > 0$.
+        Then there exists an $N$ such that $n > N \implies d(p_n, p) < \epsilon$.
+        There are finitely many natural numbers satisfying $n \leq N$, so there are finitely many $p_n$ outside this neighborhood.
+
+        ($\Leftarrow$)
+        Consider a neighborhood $N_\epsilon (p)$ that contains all but $M$ points.
+        Then $d(p_n, p) < \epsilon$ for all $n \geq M + 1$.
+    \end{enumerate}
+    This completes the proof.
+\end{proof}
+
+Notably, bounded sequences do not necessarily converge, and points of convergence are not necessarily limit points of a sequence's range.
+
+Convergent sequences in $\C$ also play nicely with the field operations, giving us a few more useful rules.
+
+\begin{theorem}[Convergence properties in $\C$]
+    Suppose we have two sequences $\left\{ s_n \right\}, \left\{ t_n \right\} \in \C$, where $s_n \to s$ and $t_n \to t$.
+    Then:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\lim_{n \to \infty} (s_n + t_n) = s + t$.
+        \item $\lim_{n \to \infty} (cs_n) = cs$ for scalar $c$. 
+        \item $\lim_{n \to \infty} (c + s_n) = c + s$ for scalar $c$.
+        \item $\lim_{n \to \infty} (s_n t_n) = st$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    For each of the proofs below we consider $\left\{ s_n \right\} \to s$ and $\left\{ t_n \right\} \to t$.
+    Suppose $c$ is a scalar.
+    \begin{enumerate}[label=(\alph*)]
+        \item Fix $\epsilon > 0$.
+        There exist $N_1$ such that $n > N_1 \implies |s_n - s| < \epsilon / 2$ and $N_2$ such that $n > N_2 \implies |t_n - t| < \epsilon / 2$.
+        Let $N = \max \left\{ N_1, N_2 \right\}$; then for $n > N$ we have, by the triangle inequality,
+        \[ |(s_n + t_n) - (s + t)| \leq |s_n - s| + |t_n - t|, \]
+        which is less than $\epsilon$, as desired.
+
+        \item Fix $\epsilon > 0$.
+        There exists an $N$ such that $n > N \implies |s_n - s| < \epsilon / c$.
+        So
+        \[ |cs_n - cs| = |c| |s_n - s|, \]
+        which is less than $\epsilon$, as desired.
+
+        \item This is a simple combination of the previous two arguments.
+
+        \item Fix $\epsilon > 0$ and let $k = \max \left\{ s, t, 1, \epsilon \right\}$.
+        There exist $N_1$ such that $n > N_1 \implies |s_n - s| < \epsilon / 2$ and $N_2$ such that $n > N_2 \implies |t_n - t| < \epsilon / 2$.
+        Let $N = \max \left\{ N_1, N_2 \right\}$; then for $n > N$ we have
+        \begin{align*}
+            |s_n t_n - st| &= |(s_n - s)(t_n - t) + s(t_n - t) + t(s_n - s)|,
+            \intertext{and by the triangle inequality,}
+            &\leq |(s_n - s)(t_n - t)| + |s(t_n - t) + t(s_n - s)| \\
+            &< \frac{\epsilon}{3k} \cdot \frac{\epsilon}{3k} + |s| \cdot \frac{\epsilon}{3k} + |t| \cdot \frac{\epsilon}{3k} \\
+            \intertext{Since $k \geq 1$, replacing it with a 1 will not make the expression smaller, meaning}
+            &\leq \frac{\epsilon^2}{9} + \frac{\epsilon}{3} + \frac{\epsilon}{3},
+        \end{align*}
+        which is less than $\epsilon$, as desired.
+    \end{enumerate}
+    This completes the proof.
+\end{proof}
+
+\subsection*{Subsequences, Bounded Sequences, and Cauchy Sequences}
+Just as we can have subsets embedded within potentially larger sets, we can have subsequences embedded within potentially larger sequences.
+
+\begin{definition}[Subsequence]
+    Consider a sequence $\left\{ p_n \right\}$.
+    If there is an increasing sequence $n_1 < n_2 < \cdots$ in $\N$, then $\left\{ p_{n_i} \right\}$ is a subsequence.
+\end{definition}
+
+\begin{theorem}[Subsequences of convergent sequences]
+    If $p_n \to p$ then every subsequence $p_{n_i} \to p$.
+\end{theorem}
+
+\begin{proof}
+    Every neighborhood of $p$ contains all but finitely many points of $p_n$, so it also contains all but finitely many points of $p_{n_i}$.
+\end{proof}
+
+Of course, if a sequence does not converge, then its subsequences may not all converge to the same value.
+We'll introduce some vocabulary that describes this.
+
+\begin{definition}[Subsequential limit]
+    If a subsequence of $\left\{ p_n \right\}$ converges to $p$ then $p$ is a subsequential limit.
+\end{definition}
+
+\begin{definition}[Upper and lower limits]
+    Let $E$ be the set of all subsequential limits of $\left\{ s_n \right\}$, including possibly $\pm \infty$.
+    Then the upper and lower limits are, respectively,
+    \[ S^* = \sup E = \limsup_{n \to \infty} s_n \quad\text{ and }\quad S_* = \inf E = \liminf_{n \to \infty} s_n. \]
+\end{definition}
+
+We can also talk about bounded sequences, that is, sequences whose ranges are bounded.
+In particular, we can make a nice statement about bounded sequences that are everywhere-increasing or -decreasing.
+
+\begin{definition}[Monotonic sequence]
+    A sequence $\left\{ s_n \right\}$ is monotonoically increasing if $s_n \leq s_{n+1}$ for all $n$.
+    It is monotonically decreasing if $s_n \geq s_{n+1}$.
+    Either could be called monotonic.
+\end{definition}
+
+\begin{theorem}[]
+    A monotonic sequence in $\R$ is bounded if and only if it converges.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$) Suppose $\left\{ s_n \right\}$ is bounded and monotonically increasing.
+    Let $s = \sup (\pfn{range} \left\{ s_n \right\})$.
+    (Note that $s$ exists because $\left\{ s_n \right\}$ is a bounded, nonempty set in the reals.)
+
+    By definition, $s_N < s$ for any $N$ because $s$ is the supremum.
+    Also, for any $\epsilon > 0$ there exists an $N$ such that $s - \epsilon < S_N$.
+    Since the sequence is increasing, $s_n \geq s_N$ for all $n > N$, so $\left\{ s_n \right\}$ converges so its supremum $s$.
+    (We could make the same for the infimum of a monotonically decreasing sequence.)
+
+    ($\Leftarrow$) Suppose $\left\{ s_n \right\}$ converges.
+    Then it is bounded.
+\end{proof}
+
+If a sequence is not bounded, we say it is unbounded.
+We can be a little more specific with the behavior of this unboundedness, though.
+
+\begin{definition}[Unbounded sequence]
+    If for all $M \in \R$ there exists an $N \in \N$ such that $n > N$ implies...
+    \begin{itemize}
+        \item ... $s_n > M$, then $s \to \infty$.
+        \item ... $s_n < M$, then $s \to -\infty$.
+    \end{itemize}
+\end{definition}
+
+Finally, our intuition for convergence seems to imply that, after a point, a sequence's terms are all really ``close'' to each other.
+Unfortunately this is not the same as convergence, but the two ideas are related.
+
+\begin{definition}[Cauchy sequence]
+    A sequence $\left\{ p_n \right\}$ is Cauchy if for all $\epsilon > 0$ there exists an $N$ such that $m,n \geq N$ implies $d(p_n, p_m) < \epsilon$.
+\end{definition}
+
+\begin{theorem}[]
+    If $\left\{ p_n \right\}$ converges then $\left\{ p_n \right\}$ is Cauchy.
+\end{theorem}
+
+\begin{proof}
+    Let $\left\{ p_n \right\}$ be a convergent sequence.
+    Given $\epsilon > 0$, there exists $N$ such that $n > N$ implies $d(p_n, p) , \epsilon / 2$.
+    In this case $n,m > N$ implies
+    \[ d(p_n, p_m) \leq d(p_n, p) + d(p_m, p) \]
+    by the triangle inequality.
+    So $d(p_m, p_n) < \epsilon$, as desired.
+\end{proof}
+
+\section{Compactness and Completeness}
+We can draw a surprisingly tight connection between subsequences and compact sets, starting with a theorem that we may use to restate something familiar,
+
+\begin{theorem}[]
+    Every sequence in a compact metric space $X$ has a subsequence converging to a point in $X$.
+\end{theorem}
+
+\begin{proof}
+    Let $R = \pfn{range} \left\{ p_n \right\}$.
+    If $R$ is finite, then some $p \in \left\{ p_n \right\}$ appears infinitely many times and there is a subsequence that converges to $p$.
+
+    If $R$ is infinite, then it is an infinite subset of a compact set and thus has a limit point $p$ in the broader metric space $X$.
+    Take a point $p_i$ within a neighborhood $N_r(p)$; then, reduce $r < d(p_i, p)$ and pick another point with index greater than $i$.
+    Continuing this process indefinitely constructs a sequence converging to $p$.
+\end{proof}
+
+\begin{corollary}[Bolzano-Weierstrass theorem]
+    Every bounded sequence in $\R^k$ contains a convergent subsequence.
+\end{corollary}
+
+But we can do better!
+Without proof, we'll use an equivalent notion of compactness to generalize further.
+
+\begin{definition}[Sequentially compact]
+    A metric space $X$ is sequentially compact if every sequence has a convergent subsequence in $X$.
+\end{definition}
+
+\begin{theorem}[]
+    A metric space is compact if and only if it is sequentially compact.
+\end{theorem}
+
+\begin{corollary}[Bolzano-Weierstrass theorem]
+    A subset of $\R^k$ is sequentially compact if and only if it is closed and bounded.
+\end{corollary}
+
+But this is just the Heine-Borel theorem!
+We can use this development to list a few equivalent properties of subsets of $\R^k$.
+
+\begin{theorem}[Big exciting theorem about $\R$]
+    Let $E \subset \R^k$.
+    The following are equivalent.
+    \begin{itemize}[topsep=0pt]
+        \item $E$ is closed and bounded.
+        \item $E$ is compact.
+        \item $E$ is sequentially compact.
+        \item Every sequence in $E$ has a convergent subsequence.
+    \end{itemize}
+\end{theorem}
+
+We've seen that another important property of $\R$ involves completion, which we can define using sequences.
+
+\begin{definition}[Complete]
+    A metric space $X$ is complete if every Cauchy sequence in $X$ converges to a point in $X$.
+\end{definition}
+
+\begin{theorem}[Completion] \label{thmCompletion}
+    Every metric space $(X, d)$ has a completion $(X^*, d)$.
+    That is, there is a way to define $X^* \supseteq X$ such that $X^*$ is complete and has the same metric as $X$.
+\end{theorem}
+
+We'll start with the particular case of $\Q$ to outline how we might construct such a completion.
+This will give us a new way to think about the completeness of the reals: $\R$ is the completion of $\Q$, meaning it's a metric space in which every Cauchy sequence converges!
+
+\section{Constructing the Reals}
+Up to this point we've essentially been treating the set of real numbers as given.
+But we're now in a position to rigorously construct $\R$ from the ground up as the completion of the rationals!
+First, let's make a slight revision to our definitions of Cauchy sequences and convergence.
+
+\begin{definition}[Cauchy and convergence in $\Q$]
+    A sequence $\left\{ a_n \right\}$ is a Cauchy sequence if for any positive $\omega \in \Q$ there exists an $n \in \N$ such that $n,m > N$ implies $|a_n - a_m| < \omega$.
+
+    A sequence $\left\{ a_n \right\}$ converges to $a \in \Q$ if for any positive $\omega \in \Q$ there exists an $n \in \N$ such that $n > N$ implies $|a_n - a| < \omega$.
+\end{definition}
+
+The only significant change we've made is ensuring that the $\epsilon$ we've given (now called $\omega$) is rational.
+
+The idea is to define a real number as a Cauchy sequence of rational numbers.
+But for any Cauchy sequence, there are infinitely many others that ``converge'' to the same number.
+To avoid this ambiguity, we instead define each real number as an equivalence class of Cauchy sequences.
+
+\begin{definition}[Real numbers]
+    Let $\left\{ a_n \right\}$ and $\left\{ b_n \right\}$ be Cauchy sequences in $\Q$.
+    We say they are equivalent if $a_n - b_n \to 0$.
+
+    The real numbers $\R$ is the set of all equivalence classes of these Cauchy sequences.
+\end{definition}
+
+Showing that the above relation is an equivalence relation involves a relatively straightforward application of the definition of convergence and the triangle inequality.
+Now let's add some structure to this set we've created!
+
+\begin{definition}[Algebraic operations of $\R$]
+    Let $a,b \in \R$, so there are Cauchy sequences of rational numbers $\left\{ a_n \right\}, \left\{ b_n \right\}$ that represent the equivalence classes for $a$ and $b$.
+    \begin{itemize}
+        \item (Addition)
+        Define $a+b$ to be the equivalence class of $\left\{ a_n + b_n \right\}$.
+        \item (Multiplication)
+        Define $a \cdot b$ to be the equivalence class of $\left\{ a_n \cdot b_n \right\}$.
+    \end{itemize}
+\end{definition}
+
+We have to make sure these operations are well-defined---that is, the result of performing them shouldn't depend on which representatives of the equivalence classes we choose.
+We'll prove that our definition for addition is well-defined; we'll skip multiplication for brevity's sake.
+
+\begin{theorem}[Addition is well-defined]
+    Addition in $\R$ is well-defined.
+\end{theorem}
+
+\begin{proof}
+    Choose two members $\left\{ a_n \right\}, \left\{ \alpha_n \right\}$ of the same equivalence class, so $a_n - \alpha_n \to 0$.
+    Also choose two members $\left\{ b_n \right\}, \left\{ \beta_n \right\}$ of a different equivalence class, so $b_n - \beta_n \to 0$.
+    We want to show that $\left\{ a_n + b_n \right\}$ is equivalent to $\left\{ \alpha_n + \beta_n \right\}$.
+
+    Consider $(a_n + b_n) - (\alpha_n + \beta_n)$.
+    We can rewrite ths as $(a_n - \alpha_n) + (b_n - \beta_n)$.
+    By our definition of Cauchy equivalence, for rational $\omega > \Q$ there exist $N_1, N_2$ such that $n > N_1$ implies $|(a_n - \alpha_n) - 0| < \omega / 2$ and $n > N_2$ implies $|(b_n - \beta_n) - 0| < \omega / 2$.
+    So for $N = \max \left\{ N_1, N_2 \right\}$ we have, for $n > N$,
+    \[ |(a_n - \alpha_n) + (b_n - \beta_n)| \leq \frac{\omega}{2} + \frac{\omega}{2} = \omega. \]
+    So $(a_n + b_n) - (\alpha_n + \beta_n) \to 0$, as desired.
+\end{proof}
+
+The next step would be to show that $\R$ with these operations is a field, but this is a relatively painful and unenlightening process so we'll omit that, too.
+Now let's add an order!
+
+\begin{definition}[Order of $\R$]
+    A number $a \in \R$ is positive if $a \neq 0$ and it is represented by a Cauchy sequence such that for some $N$, $n > N$ implies $a_n > 0$.
+    We say that $a > b$ (for $b \in \R$) if $a-b$ is positive.
+\end{definition}
+
+To prove that this is an order we'd need to show that it satisfies trichotomy and transitivity.
+We must also show that the order is well-defined!
+Again, we'll omit the details of these arguments.
+
+Lastly, we must show that we've created an ordered field.
+Again, we'll only show this for the additive axiom.
+
+\begin{theorem}[Additive ordered field axiom]
+    Let $a,b,c \in \R$ with $b < c$.
+    Then $a + b < a + c$.
+\end{theorem}
+
+\begin{proof}
+    Let $a = [\left\{ a_n \right\}]$, $b = [\left\{ b_n \right\}]$, $c = [\left\{ c_n \right\}]$, where the brackets denote equivalence classes.
+    Suppose $c > b$, so by the definition of order there exists an $N$ so that $n > N$ implies $c_n - b_n > 0$.
+    Then $c_n > b_n$, and we can add another rational number $a_n$ to both sides of the inequality and rearrange to get
+    \[ (a_n + c_n) - (a_n + b_n) > 0 \]
+    for any $n > N$.
+    Thus $(a + c) - (a + b) > 0$ and $a + c > a + b$, as desired.
+\end{proof}
+
+From here, we could prove all the other cool stuff we know to be true about real numbers!
+We'll list three big properties here, leaving the proofs as exercises.
+
+\begin{theorem}[Archimedean property]
+    $\R$ has the Archimedean property.
+\end{theorem}
+
+\begin{theorem}[Density of $\Q$ in $\R$]
+    $\Q$ is dense in $\R$.
+\end{theorem}
+
+\begin{theorem}[Completeness]
+    $\R$ has the least upper bound property.
+\end{theorem}
+
+We could use this construction as a template for proving Theorem 2.\ref{thmCompletion}.
+The distance between two elements in a completion $X^*$, which are equivalence classes of Cauchy sequences in $X$, is given by the limit of the distance between their terms.
+This ensures that $X$ is truly embedded within $X^*$---in particular, there exists a distance-preserving mapping $\varphi : X \to X^*$; we call such a mapping an isometry.
+(We may interpret $\varphi(X)$ as the set $X$ equipped with the new metric.)
+It turns out that $X^*$ with this metric is complete!
+Two important corollaries are that $\varphi(X)$ is dense in $X^*$ and $\varphi(X) = X^*$ for complete $X$.
+
+% \section{Completion of Metric Spaces (14b)} % FINISH! (TODO)
+% Now we'll provide a general proof for Theorem 2.\ref{thmCompletion}, following our construction for $\R$.
+
+% Consider a metric space $(X,d)$.
+% We say that two Cauchy sequences $\left\{ p_n \right\}, \left\{ q_n \right\}$ in $X$ are equivalent if
+% \[ \lim_{n \to \infty} d(p_n, q_n) = 0. \]
+% It is, again, relatively straightforward to show that this is an equivalence relation.
+% We'll define $X^\star$ as the set of the corresponding equivalence classes; now we just need to put a metric on this set.
+
+% Let $P,Q \in X^*$ have representative sequences $\left\{ p_n \right\}, \left\{ q_n \right\}$, and define the metric
+% \[ \Delta (P, Q) = \lim_{n \to \infty} d(p_n, q_n). \]
+% We could prove that $\Delta$ is both well-defined and a metric on $X^*$, but those proofs would clutter the flow here so we'll omit them.
+% Now, in order for this metric to be sensible, we must ensure that $X$ is truly embedded within $X^*$.
+% In particular, the distance between two elements in $X$ must be the same as between the two equivalent elements in $X^*$.
+% Let $p,q \in X$ have equivalents $P,Q \in X^*$ with representatives $\left\{ p_n \right\}, \left\{ q_n \right\}$.
+% So
+% \[ \Delta (P,Q)  = \lim_{n \to \infty} d(p_n,q_n) = \lim_{n \to \infty} d(p,q) = d(p,q), \]
+% as desired.
+% Thus there exists a distance-preserving mapping $\varphi : X \to X^*$; we call such a mapping an isometry.
+% We may interpret $\varphi(X)$ as the set $X$ equipped with the new metric $\Delta$.
+
+% Finally, we'll show in class that $X^*$ is complete. % TODO
+% As a corollary, we'll also show that a complete metric space is its own completion.
+
+% \begin{corollary}[]
+%     If a metric space $X$ is complete and there exists an isometry $\varphi : X \to X^*$, where $X^*$ is the completion of $X$, then $\varphi(X) = X^*$.
+% \end{corollary}
+
+% \begin{proof}
+%     Coming soon... % TODO
+% \end{proof}
+
+% We have one last result.
+
+% \begin{corollary}[]
+%     $\varphi(X)$ is dense in $X^*$.
+% \end{corollary}
+
+% \begin{proof}
+%     We'll show that every point $P \in X^*$ is in $\varphi(X)$ or is a limit point of $\varphi(X)$. 
+
+%     It suffices to show that every $P \not\in X^*$ is a limit point of $\varphi(X)$.
+%     Let $\left\{ p_n \right\}$ be a representative of the equivalence class $P$; since this sequence is Cauchy, for any $N_\epsilon (P)$, $\epsilon > 0$, there exists $N \in \N$ such that $m,n > N$ implies $d(p_m,p_n) < \epsilon$.
+%     Now, let $Q = \varphi(p_m)$, so
+%     \[ \Delta (P,Q) = \lim_{n \to \infty} d(p_n, p_m) < \epsilon. \]
+%     So $Q \in \varphi(X)$ and $P \not\in \varphi(X)$, meaning we have $Q \neq P$ where $Q \in N_\epsilon (P)$ and $Q \in X^*$ for any $\epsilon > 0$.
+%     Thus $P$ is a limit point of $\varphi(X)$ and $\varphi(X)$ is dense in $X^*$, as desired.
+% \end{proof}
+
+\section{Series}
+We'll shift our attention, now, to adding up successive terms in a sequence.
+
+\begin{definition}[Series]
+    Suppose $q > p$.
+    Given $\left\{ a_n \right\}$, the sum
+    \[ \sum_{n=p}^{q} a_n = a_p + a_{p+1} + \cdots + a_q. \]
+    is called a series, and each $a_n$ is called a term.
+    We may have an infinite number of terms, in which case the sum is called an infinite series.
+\end{definition}
+
+But we can frame series in such a way that they just become sequences in disguise!
+To make this more clear, we'll define the terms in such a sequence.
+
+\begin{definition}[Partial sum]
+    The $n$th partial sum of a series is the sum of the first $n$ terms in the series.
+\end{definition}
+
+So determining the behavior of a series is equivalent to determining the behavior of the sequence of its partial sums.
+We're particularly interested in the convergence of infinite series; we'll spend some time developing criteria to determine this convergence.
+Let's start by taking advantage of the completeness of $\R$.
+
+\pagebreak
+
+\begin{theorem}[Cauchy criterion]
+    Suppose $a_n \in \R$ and $m > n \in \N$.
+    Then $\sum_{n=1}^{\infty} a_n$ converges if and only if for all $\epsilon > 0$ there exists an $N$ such that $n,m > N$ implies $\left| \sum_{k=n}^{m} a_k \right| < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+    Consider the sequence of partial sums $\left\{ s_n \right\}$ where $s_k = \sum_{n=1}^{k} a_n$ and $a_n \in \R$.
+    The distance between two terms in this sequence is given by
+    \[ d(s_{k-1}, s_m) = \left| \sum_{n=1}^{m} a_n - \sum_{n=1}^{k-1} a_n \right| = \left| \sum_{n=k}^{m} a_n \right|. \]
+
+    ($\Rightarrow$) Suppose $\sum_{n=1}^{\infty} a_n$ converges.
+    Then the corresponding sequence of partial sums converges and thus is Cauchy.
+    So for all $\epsilon > 0$ there exists an $N$ such that $n,m > N$ implies $\left| \sum_{n=k}^{m} a_n \right| < \epsilon$, as desired.
+
+    ($\Leftarrow$) Suppose there exists an $N$ such that $m,n > N$ implies $\left| \sum_{n=k}^{m} a_n \right| < \epsilon$ for any $\epsilon > 0$.
+    Then $\left\{ s_n \right\}$ is Cauchy, and because the terms in the sequence are real it also converges.
+    Thus $\sum_{n=1}^{\infty} a_n$ converges.
+\end{proof} % TODO: change indices?
+
+In the special case $m=n$, then we get a corollary about the terms of a convergent series.
+
+\begin{corollary}[Term test]
+    If $\sum_{n=1}^{\infty} a_n$ converges then $a_n \to 0$.
+\end{corollary}
+
+The converse of this statement is false, but the contrapositive provides a useful sufficient condition for divergence.
+There's another theorem we can prove that relates a series' terms to its convergence.
+
+\begin{theorem}[Nonnegative test]
+    Let $a_n \in \R$.
+    If $a_n \geq 0$ for all $n$ then $\sum_{n=1}^{\infty} a_n$ converges if and only if its partial sums are bounded.
+\end{theorem}
+
+\begin{proof}
+    Consider an infinite series with nonnegative terms.
+    Then the corresponding sequence of partial sums is monotonic, meaning it is bounded if and only if it converges.
+\end{proof}
+
+We're now in a position to make a statement about the convergence of a particular class of series that appears in many applications.
+
+\begin{definition}[Geometric series]
+    Let $x \in \R$.
+    The series of the form
+    \[ \sum_{n=0}^{\infty} x^{n} = 1 + x + x^2 + \cdots \]
+    is called a geometric series.
+\end{definition}
+
+\begin{theorem}[Geometric series convergence]
+    The sum $\sum_{n=0}^{\infty} x^{n}$ converges to $1 / (1-x)$ if and only if $|x| < 1$.
+\end{theorem}
+
+\begin{proof}
+    If $|x| \geq 1$ then the terms do not approach zero and the series diverges.
+    If $|x| < 1$ then the $n$th partial sum $s_n$ of the series obeys
+    \begin{align*}
+        s_n &= 1 + x + \cdots + x^{n}, \\
+        (1-x)s_n &= (1 + x + \cdots + x^{n}) - (x + x^2 + \cdots + x^{n+1}) \\
+        &= 1 - x^{n+1}.
+    \end{align*}
+    Since $x \neq 1$ we have $s_n = (1 - x^{n+1}) / (1-x)$, which we can show converges to $1 / (1 - x)$.
+\end{proof}
+
+Once we know about the convergence of relatively simple series, we can use them to determine the behavior of somewhat more complex series.
+
+\begin{theorem}[Comparison test]
+    \begin{enumerate}[label=(\alph*)]
+        \item If $|a_n| \leq c_n$ for sufficiently large $n$ and $\sum_{n=1}^{\infty}c_n$ converges, then $\sum_{n=1}^{\infty}a_n$ converges.
+        \item If $a \geq d_n \geq 0$ for sufficiently large $n$ and $\sum_{n=1}^{\infty}d_n$ diverges, then $\sum_{n=1}^{\infty}a_n$ diverges.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Coming soon... % TODO
+\end{proof}
+
+We also have two more closely-related tests that once again concern the behavior of the individual terms in their limit.
+
+\begin{theorem}[Root test]
+    Given $\sum_{n=1}^{\infty} a_n$, let $\alpha = \limsup_{n \to \infty} \sqrt[n]{|a_n|}$.
+    Then:
+    \begin{itemize}
+        \item If $\alpha < 1$, the series converges.
+        \item If $\alpha > 1$, the series diverges.
+        \item If $\alpha = 1$, the test is inconclusive.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    We have three things to prove.
+    \begin{itemize}
+        \item ($\alpha = 1$)
+        Consider the divergent $\sum_{n=1}^{\infty} \frac{1}{n}$.
+        By Rudin 3.20 $\sqrt[n]{n} \to 1$, so $\alpha = \limsup_{n \to \infty} \sqrt[n]{1 / n} = 1$.
+
+        Now consider the convergent (by Rudin 3.28) $\sum_{n=1}^{\infty} \frac{1}{n^2}$.
+        We have $\alpha = \limsup_{n \to \infty} \sqrt[n]{1 / n^2} = 1$.
+        So $\alpha = 1$ cannot give us any information about the convergence of a series!
+
+        \item ($\alpha < 1$)
+        There exists a $\beta$ such that $\alpha < \beta < 1$ and, by the definition of limsup, an $N$ such that $n > N$ implies $\sqrt[n]{|a_n|} < \beta$ for all $n$.
+        So $|a_n| < \beta^{n}$.
+        By the comparison test, $\sum_{n=1}^{\infty} a_n$ converges.
+        
+        \item ($\alpha > 1$)
+        We have $\limsup_{n \to \infty} \sqrt[n]{|a_n|} > 1$, so $\limsup_{n \to \infty} a_n > 1$.
+        Now consider the subsequence $\sqrt[n]{|a_{n_k}|} \to \alpha$; there exists an $N$ such that $k > N$ implies $|a_{n_k}| > 1$.
+        Thus $\sum_{n=1}^{\infty} a_n$ diverges by the term test.
+    \end{itemize}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Ratio test]
+    The sum $\sum_{n=1}^{\infty} a_n$ converges if $\limsup_{n \to \infty} |a_{n+1} / a_n| < 1$ and diverges if there is an $N$ such that $n \geq N$ implies $|a_{n+1} / a_n| \geq 1$.
+\end{theorem}
+
+The proof of the ratio test is very similar to that of the root test, so we omit it.
+
+\subsection*{Algebraic Manipulations of Series}
+Sums of convergent series are relatively simple.
+If we have $\sum_{n=0}^{\infty} a_n \to A$ and $\sum_{n=0}^{\infty} b_n \to B$, then
+\[ \sum_{n=0}^{\infty} a_n + \sum_{n=0}^{\infty} b_n = \sum_{n=0}^{\infty} (a_n + b_n) = A + B. \]
+Products are a little more interesting!
+The product of the above series is
+\[ \sum_{n=0}^{\infty} c_n = (a_0b_0) + (a_1b_0 + b_0a_1) + (a_2b_0 + a_1b_1 + a_0b_2) + \cdots, \]
+with terms grouped based on the sums of their indices.
+So the $n$th term in the series is the sum of all the products whose terms add to $n$:
+\[ c_n = \sum_{k=0}^{n} a_k b_{n-k}. \]
+This is called the Cauchy product (and is the discrete analog of convolution).
+We'll come back to this---first, let's see what we can say about products of terms.
+
+\begin{theorem}[Summation by parts]
+    Let $A_n = \sum_{k=1}^{n} a_k$ and define $A_0 = 0$.
+    Then
+    \[ \sum_{n=p}^{q} a_n b_n = A_qb_q - A_{p-1}b_p + \sum_{n=p}^{q-1} A_n (b_n - b_{n+1}). \]
+\end{theorem}
+
+There's a straightforward algebraic proof for this, but a geometric picture is much more enlightening.
+Construct a rectangle with length $a_1 + \cdots + a_q$ and height $b_q$, and inside it draw smaller $a_n \times b_n$ rectangles.
+The area covered by the rectangles from $p$ onward is equal to the total area $A_q b_q$ of the big rectangle minus the area not included in the $p$-$q$ rectangles!
+This comes with a nice couple of corollaries.
+
+\begin{theorem}[]
+    If $A_n = \sum_{k=1}^{n} a_k$ is bounded for all $n$, $b_n > 0$ is decreasing, and $b_n \to 0$, then $\sum_{n=1}^{\infty} a_n b_n$ converges.
+\end{theorem}
+
+\begin{proof}
+    Choose $M$ such that $|A_n| \leq M$ for all $n$.
+    Given $\epsilon > 0$, there is an integer $N$ such that $b_N \leq (\epsilon / 2M)$.
+    So for $N \leq p \leq q$ we have
+    \begin{align*}
+        \left| \sum_{n=p}^{q}a_nb_n \right| &= \left| \sum_{n=p}^{q-1} A_n (b_n - b_{n+1}) + A_q b_q - A_{p-1} b_p \right| \\
+        &\leq M \left| \sum_{n=p}^{q-1} (b_n - b_{n+1}) + b_q - b_p \right| \\
+        &= 2Mb_p \leq 2Mb_N \leq \epsilon.
+    \end{align*}
+    Convergence now follows from the Cauchy criterion.
+\end{proof}
+
+\begin{corollary}[Alternating term test]
+    $\sum_{n=1}^{\infty} c_n$ converges if the $|c_i|$ are decreasing, the $c_i$ are alternating in sign, and $c_i \to 0$.
+\end{corollary}
+
+\begin{proof}
+    In the previous theorem let $a_n = (-1)^{n+1}$ and $b_n = |c_n|$.
+\end{proof}
+
+Sometimes we'll have a diverging series that becomes convergent if we allow its terms to alternate signs.
+To formalize this behavior, we'll define a slightly more restrictive type of convergence.
+
+\begin{definition}[Absolute convergence]
+    A series $\sum_{n=0}^{\infty} a_n$ converges absolutely if $\sum_{n=0}^{\infty} |a_n|$ converges.
+\end{definition}
+
+\begin{theorem}[]
+    If $\sum_{n=0}^{\infty}$ converges absolutely, then $\sum_{n=0}^{\infty} a_n$ converges.
+\end{theorem}
+
+\begin{proof}
+    We know that $|a_n| \leq |a_n|$ and $\sum_{n=1}^{\infty} |a_n|$ converges, so by comparison $\sum_{n=1}^{\infty} a_n$ converges.
+\end{proof}
+
+As it turns out, this stronger notion of absolute convergence is exactly what we need to guarantee that the product of two series converges!
+We'll omit the proof here.
+
+\begin{theorem}[]
+    If $\sum_{n=0}^{\infty} a_n \to A$ and $\sum_{n=0}^{\infty} b_n \to B$, both converging absolutely, then
+    \[ AB = \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} a_k b_{n-k} \right). \]
+\end{theorem}
+
+We'll finish off with a shocking result about rearrangements of series.
+We'll omit this proof too, but it's in Rudin.
+
+\begin{theorem}[Riemann rearrangement theorem]
+    Consider $a_n, \alpha, \beta \in \R$ with $\alpha \leq \beta$.
+    If $\sum_{n=0}^{\infty} a_n$ converges, but not absolutely, then there exists a rearrangement of the series such that $\alpha$ and $\beta$ are the lower and upper limits of the series, meaning the series can converge to any desired real number.
+
+    However, if the series converges absolutely then all rearrangements converge to the same limit.
+\end{theorem}
+
+\end{document}
