@@ -33,20 +33,20 @@ Just $c$.
     \includegraphics[width=0.9\textwidth]{transLightClock.png}
 \end{center}
 Is the time between ticks for the observer on Earth the same as it is for the observer on the spaceship?
-To determine this, note that, by the Pythagorean theorem, the beam of light bounces back and forth between the mirrors with vertical speed $\sqrt{c^2 - V^2}$.
+To determine this, note that the beam of light bounces back and forth between the mirrors with vertical speed $\sqrt{c^2 - V^2}$.
 Using the same $d = rt$ relationship, we can find the time $\Delta t_m$ between these new ticks:
 \[ 2D_0 = \sqrt{c^2 - V^2} \cdot \Delta t_m \implies \Delta t_m = 2D_0 \cdot \frac{1}{\sqrt{c^2 - V^2}}. \]
 We can see right away that this expression doesn't match the one for $\Delta t_s$, but how do the two compare?
 To find out, let's do a bit of algebraic manipulation.
 \begin{align*}
     \Delta t_m &= 2D_0 \cdot \frac{1}{\sqrt{c^2 - V^2}} \\
-    &= \frac{2D_0}{c} \cdot \frac{1}{\sqrt{1 - \left( \frac{V}{c} \right)^2}} \\
-    &= \Delta t_s \cdot \frac{1}{\sqrt{1 - \left( \frac{V}{c} \right)^2}}
+    &= \frac{2D_0}{c} \cdot \frac{1}{\sqrt{1 - \left( V / c \right)^2}} \\
+    &= \Delta t_s \cdot \frac{1}{\sqrt{1 - \left( V / c \right)^2}}
 \end{align*}
-The expression $\sqrt{1 - \left( \frac{V}{c} \right)^2}$ is clearly less than one for $V < c$, making the above fraction greater than one.
+The expression $\sqrt{1 - \left( V / c \right)^2}$ is clearly less than one for $V < c$, making the above fraction greater than one.
 Therefore, $\Delta t_m > \Delta t_s$.
 Moving light clocks literally take longer to tick than stationary ones---even if they're otherwise identical!
-Logical consistency requires that all accurate clocks, regardless of type, tick at the same speed, so we can make a generalization: moving clocks tick slowly by a factor of $\sqrt{1 - \left( \frac{V}{c} \right)^2}$.
+Logical consistency requires that all accurate clocks, regardless of type, tick at the same speed, so we can make a generalization: moving clocks tick slowly by a factor of $\sqrt{1 - \left( V / c \right)^2}$.
 
 This effect is called \textit{time dilation}---from the Earth's perspective, time itself runs slowly on the moving spaceship.
 More precisely, if an undilated amount of time $t_0$ passes in our ``rest'' frame, then we perceive a moving object to have experienced the dilated time
@@ -54,7 +54,7 @@ More precisely, if an undilated amount of time $t_0$ passes in our ``rest'' fram
 Of course, the observer on the spaceship perceives themself to be the one at rest, so to them it is really our clock that is moving and thus running slowly.
 
 \begin{summary}
-    A clock that appears to move at a speed $V$ ticks slowly by a factor of $\sqrt{1 - \left( \frac{V}{c} \right)^2}$.
+    A clock that appears to move at a speed $V$ ticks slowly by a factor of $\sqrt{1 - \left( V / c \right)^2}$.
     That is, if it takes a time $t_0$ for a stationary clock to tick, the time it takes for a moving clock to tick is
     \[ t = t_0 \sqrt{1 - \left( \frac{V}{c} \right)^2}. \]
 \end{summary}
@@ -82,20 +82,20 @@ Since the total time $\Delta t_m = \Delta t_d + \Delta t_w$,
     \Delta t_m &= \Delta t_d + \Delta t_u \\
     &= \frac{D}{c - V} + \frac{D}{c + V} \\
     &= \frac{2Dc}{c^2 - V^2} \\
-    &= \frac{2D}{c} \cdot \frac{1}{1 - \left( \frac{V}{c} \right)^2}
+    &= \frac{2D}{c} \cdot \frac{1}{1 - \left( V / c \right)^2}
 \end{align*}
-Lastly, let $\Delta t_s = \frac{2D_0}{c}$ be the time it takes a stationary light clock to tick.
+Lastly, let $\Delta t_s = 2D_0 / c$ be the time it takes a stationary light clock to tick.
 By time dilation,
 \begin{align*}
-    \Delta t_m &= \Delta t_s \cdot \frac{1}{\sqrt{1 - \left( \frac{V}{c} \right)^2}} \\
-    \frac{2D}{c} \cdot \frac{1}{1 - \left( \frac{V}{c} \right)^2} &= \frac{2D_0}{c} \cdot \frac{1}{\sqrt{1 - \left( \frac{V}{c} \right)^2}} \\
+    \Delta t_m &= \Delta t_s \cdot \frac{1}{\sqrt{1 - \left( V / c \right)^2}} \\
+    \frac{2D}{c} \cdot \frac{1}{1 - \left( V / c \right)^2} &= \frac{2D_0}{c} \cdot \frac{1}{\sqrt{1 - \left( V / c \right)^2}} \\
     D &= D_0 \sqrt{1 - \left( \frac{V}{c} \right)^2}
 \end{align*}
 This effect is called \textit{length contraction}---from a stationary point of view, space itself becomes compressed for moving objects.
 Note, however, that this only happens in the direction of motion, which is why length contraction was not a factor in our other setup.
 
 \begin{summary}
-    A length that appears to move at a speed $V$ is compressed by a factor of $\sqrt{1 - \left( \frac{V}{c} \right)^2}$ in the direction of motion.
+    A length that appears to move at a speed $V$ is compressed by a factor of $\sqrt{1 - \left( V / c \right)^2}$ in the direction of motion.
     That is, if the length is $D_0$ when it is at rest, it becomes
     \[ D = D_0 \sqrt{1 - \left( \frac{V}{c} \right)^2} \]
     when it moves in a direction parallel to iself.
@@ -115,7 +115,7 @@ But what if we instead perceive the clocks to be moving, one following immediate
     \includegraphics[width=0.8\textwidth]{movingClockSync.png}
 \end{center}
 One immediate change we see is the distance between the two clocks.
-By length contraction, the distance between the moving clocks is $D = \sqrt{1 - \left( \frac{V}{c} \right)^2}$.
+By length contraction, the distance between the moving clocks is $D = \sqrt{1 - \left( V / c \right)^2}$.
 Not only that, but the beam of light will obviously reach the following (left) clock first, and \textit{then} the leading (right) one---these events, although simultaneous in one reference frame, are not simultaneous in another!
 This is the relativity of simultaneity.
 Now, let's quantify it.
@@ -133,16 +133,16 @@ From our perspective, the time difference between the two events is $\Delta t_0 
     \Delta t_0 &= t_l - t_f \\
     &= \frac{D}{2 (c - V)} - \frac{D}{2 (c + V)} \\
     &= \frac{DV}{c^2 - V^2} \\
-    &= \frac{DV}{c^2 \left( 1 - \left( \frac{V}{c} \right)^2  \right)} \\
-    \intertext{Since $D = D_0\sqrt{1 - \left( \frac{V}{c} \right)^2}$, this becomes}
-    &= \frac{D_0 V \, \sqrt{ 1 - \left( \frac{V}{c} \right)^2 }}{c^2 \left( 1 - \left( \frac{V}{c} \right)^2  \right)} \\
-    &= \frac{D_0 V}{c^2 \,\sqrt{ 1 - \left( \frac{V}{c} \right)^2 }}
+    &= \frac{DV}{c^2 \left( 1 - \left( V / c \right)^2  \right)} \\
+    \intertext{Since $D = D_0\sqrt{1 - \left( V / c \right)^2}$, this becomes}
+    &= \frac{D_0 V \, \sqrt{ 1 - \left( V / c \right)^2 }}{c^2 \left( 1 - \left( V / c \right)^2  \right)} \\
+    &= \frac{D_0 V}{c^2 \,\sqrt{ 1 - \left( V / c \right)^2 }}
 \end{align*}
 Finally, we must consider that the clocks are moving, and therefore tick slowly due to time dilation.
 Therefore, the difference between the displayed times is
 \begin{align}
     \Delta t &= \Delta t_0 \, \sqrt{ 1 - \left( \frac{V}{c} \right)^2} \\
-    &= \frac{D_0 V \, \sqrt{ 1 - \left( \frac{V}{c} \right)^2}}{c^2 \, \sqrt{ 1 - \left( \frac{V}{c} \right)^2}} \\
+    &= \frac{D_0 V \, \sqrt{ 1 - \left( V / c \right)^2}}{c^2 \, \sqrt{ 1 - \left( V / c \right)^2}} \\
     &= \frac{D_0 V}{c^2}
 \end{align}
 Note that this quantity is additive rather than multiplicative.
@@ -150,7 +150,7 @@ For example, if the following clock displays $t = \frac{D_0V}{c^2}$, then the le
 
 \begin{summary}
     Events that occur simultaneously in one reference frame do not necessarily occur simultaneously in another frame.
-    This is quantified by how, for two clocks moving at a speed $V$, the leading clock lags behind the other by an additive amount of $\frac{D_0V}{c^2}$, where $D_0$ is the rest length between the clocks.
+    This is quantified by how, for two clocks moving at a speed $V$, the leading clock lags behind the other by an additive amount of $D_0V / c^2$, where $D_0$ is the rest length between the clocks.
 \end{summary}
 
 \section{The Lorentz Transformation}
@@ -178,11 +178,11 @@ In the figure above, we are observing $E$ from within the $S$ frame.
 We can decompose the $x$-coordinate of $E$ into two parts: the origin-to-origin distance between $S$ and $S$, and the distance from the $S'$ origin to $E$.
 
 We know that the origin-to-origin distance is $Vt$, since the $S'$ frame has been traveling at a speed $V$ for a time $t$.
-the distance between the $S'$ origin and $E$ appears to be $x'$, but recall that cooordiantes in the moving $S'$ frame are contracted, giving us $x' \sqrt{1 - \left( \frac{V}{c} \right)^2}$ for our distance.
+the distance between the $S'$ origin and $E$ appears to be $x'$, but recall that cooordiantes in the moving $S'$ frame are contracted, giving us $x' \sqrt{1 - \left( V / c \right)^2}$ for our distance.
 Putting these two together, the $x$-coordinate of $E$ is
 \[ x = Vt + x'\sqrt{1 - \left( \frac{V}{c} \right)^2}. \]
 Solving for $x'$ gives the spatial transformation
-\[ x' = \frac{x - Vt}{\sqrt{1 - \left( \frac{V}{c} \right)^2}}. \]
+\[ x' = \frac{x - Vt}{\sqrt{1 - \left( V / c \right)^2}}. \]
 The $y$ and $z$ axes lay perpendicular to the direction of motion, so they aren't impacted by relativistic effects.
 Their transformations are simply $y' = y$ and $z' = z$.
 
@@ -191,7 +191,7 @@ The $S$ frame, along with the spatial location of $E$, is moving in the negative
 Also, the moment the two origins coincide, clocks stationed at each origin are synchronized with each other.
 These are, in turn, used to synchronize all other clocks in their respective frames.
 
-An observer at the origin of the $S'$ frame notices that a clock at the spatial position of $E$ ticks $\frac{Vx}{c^2}$ ahead of a clock at the origin of the $S$ frame.
+An observer at the origin of the $S'$ frame notices that a clock at the spatial position of $E$ ticks $Vx / c^2$ ahead of a clock at the origin of the $S$ frame.
 (Remember---leading clocks lag.)
 \begin{center}
     \includegraphics[width=0.4\textwidth]{movFramesTemp1.png}
@@ -201,12 +201,12 @@ As the $S$ frame continues to move, the event $E$ occurs at a time $t'$.
     \includegraphics[width=0.5\textwidth]{movFramesTemp2.png}
 \end{center}
 Time in the moving $S$ frame is dilated, but we must be careful when we dilate---the phenomenon is only valid for clocks that have been previously synchronized, which in this case are the two clocks at the origns.
-So, the clock at the origin of the $S$ frame reads $t' \sqrt{1 - \left( \frac{V}{c} \right)^2}$.
-Finally, leading clcoks lag, meaning a clock present for the event $E$ would read a time that is $\frac{Vx}{c^2}$ ahead of the origin clock.
+So, the clock at the origin of the $S$ frame reads $t' \sqrt{1 - \left( V / c \right)^2}$.
+Finally, leading clcoks lag, meaning a clock present for the event $E$ would read a time that is $Vx / c^2$ ahead of the origin clock.
 So, in the $S$ frame, the event $E$ occurs at the time
 \[ t = t' \sqrt{1 - \left( \frac{V}{c} \right)^2} + \frac{Vx}{c^2}. \]
 Solving for $t'$ gives the temporal transformation
-\[ t' = \frac{t - \frac{Vx}{c^2}}{\sqrt{1 - \left( \frac{V}{c} \right)^2}}. \]
+\[ t' = \frac{t - Vx / c^2}{\sqrt{1 - \left( V / c \right)^2}}. \]
 Taken together, all these relationships comprise the Lorentz transformation.
 This gives another, more formal way to analyze the behavior of spacetime, albeit less immediately intuitive.
 
@@ -216,9 +216,9 @@ Transforming velocities is easy---we can just differentiate the Lorentz transfor
 Specifically, we'd like to relate the velocities $\left( \frac{dx}{dt}, \frac{dy}{dt}, \frac{dz}{dt} \right)$ and $\left( \frac{dx'}{dt'}, \frac{dy'}{dt'}, \frac{dz'}{dt'} \right)$ in the $S$ and $S'$ frames, respectively.
 To do this, we simply take advantage of the chain rule for derivatives:
 \begin{gather*}
-    v_x' = \frac{dx'}{dt'} = \frac{dx'/dt}{dt'/dt} = \frac{v_x - V}{1 - \frac{Vv_x}{c^2}} \\
-    v_y' = \frac{dy'}{dt'} = \frac{dy'/dt}{dt'/dt} = \frac{v_y\sqrt{1 - \left( \frac{V}{c} \right)^2}}{1 - \frac{Vv_x}{c^2}} \qquad
-    v_z' = \frac{dz'}{dt'} = \frac{dz'/dt}{dt'/dt} = \frac{v_z\sqrt{1 - \left( \frac{V}{c} \right)^2}}{1 - \frac{Vv_z}{c^2}}
+    v_x' = \frac{dx'}{dt'} = \frac{dx'/dt}{dt'/dt} = \frac{v_x - V}{1 - Vv_x / c^2} \\
+    v_y' = \frac{dy'}{dt'} = \frac{dy'/dt}{dt'/dt} = \frac{v_y\sqrt{1 - \left( V / c \right)^2}}{1 - Vv_x / c^2} \qquad
+    v_z' = \frac{dz'}{dt'} = \frac{dz'/dt}{dt'/dt} = \frac{v_z\sqrt{1 - \left( V / c \right)^2}}{1 - Vv_x / c^2}
 \end{gather*}
 Take great care when using this velocity transformation!
 It is assumed that the $S'$ frame moves to the right with respect to the $S$ frame.
@@ -233,12 +233,12 @@ It is assumed that the $S'$ frame moves to the right with respect to the $S$ fra
         y' &= y \\
         z' &= z
     \end{align*}
-    where $\gamma = \frac{1}{\sqrt{1 - \left( \frac{V}{c} \right)^2}}$ is the Lorentz factor.
+    where $\gamma = \frac{1}{\sqrt{1 - \left( V / c \right)^2}}$ is the Lorentz factor.
     Differentiating these equations gives the velocity transformation:
     \begin{gather*}
-        v_x' = \frac{dx'}{dt'} = \frac{dx'/dt}{dt'/dt} = \frac{(v_x - V)}{1 - \frac{Vv_x}{c^2}} \\
-        v_y' = \frac{dy'}{dt'} = \frac{dy'/dt}{dt'/dt} = \frac{v_y}{\gamma \left( 1 - \frac{Vv_x}{c^2} \right)} \qquad
-        v_z' = \frac{dz'}{dt'} = \frac{dz'/dt}{dt'/dt} = \frac{v_z}{\gamma \left( 1 - \frac{Vv_x}{c^2} \right)}
+        v_x' = \frac{dx'}{dt'} = \frac{dx'/dt}{dt'/dt} = \frac{(v_x - V)}{1 - Vv_x / c^2} \\
+        v_y' = \frac{dy'}{dt'} = \frac{dy'/dt}{dt'/dt} = \frac{v_y}{\gamma \left( 1 - Vv_x / c^2 \right)} \qquad
+        v_z' = \frac{dz'}{dt'} = \frac{dz'/dt}{dt'/dt} = \frac{v_z}{\gamma \left( 1 - Vv_x / c^2 \right)}
     \end{gather*}
 \end{summary}
     

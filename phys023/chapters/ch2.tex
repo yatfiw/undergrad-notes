@@ -84,21 +84,21 @@ Four-vectors must transform according to the Lorentz transformation:
 So it follows that, for any four-vector, the quantity
 \[ -A_0^2 + A_x^2 + A_y^2 + A_z^2 \]
 is invariant under the Lorentz transformation.
-(This makes it a \textit{four=-scalar}, a number whose value does not change after a Lorentz transformation.)
+(This makes it a \textit{four-scalar}, a number whose value does not change after a Lorentz transformation.)
 
 Now, consider a particle floating around in spacetime.
 The simplest four-vector describing the particle is the four-position
-\[ z_\mu = (ct, x, y, z). \]
+\[ x_\mu = (ct, x, y, z). \]
 We can define the four-momentum as
-\[ p_\mu \equiv m \frac{dx\mu}{d\tau}; \]
+\[ p_\mu \equiv m \frac{dx_\mu}{d\tau}; \]
 where $m$ is the mass of the particle and $\tau$ is its proper time---that is, the time read by a clock moving alongside the particle.
-The quantity $\frac{dx\mu}{d\tau}$ is called the four-velocity, and we differentiate it with respect to $\tau$ because it is a four-scalar.
+The quantity $dx_\mu / d\tau$ is called the four-velocity, and we differentiate it with respect to $\tau$ because it is a four-scalar.
 (Otherwise, it would give us something different in each reference frame!)
 
 We can expand our expression a bit:
 \[ p_\mu = m \left( c \frac{dt}{d\tau}, \frac{dx}{d\tau}, \frac{dy}{d\tau}, \frac{dz}{d\tau} \right). \]
 Due to time dilation,
-\[ \frac{dt}{d\tau} = \frac{1}{\sqrt{1 - \left( \frac{v}{c} \right)^2}}, \]
+\[ \frac{dt}{d\tau} = \frac{1}{\sqrt{1 - \left( v / c \right)^2}}, \]
 where $v$ is the speed at which the particle is observed to move.
 We'll call this quantity $\gamma$.
 (Notice how this $\gamma$ is subtly different from the one we defined previously, in which $V$ was a relative speed between reference frames; we can reconcile this by interpreting $v$ as the speed between our frame and the particle's rest frame.)
@@ -138,7 +138,7 @@ The unit discrepancy is no problem---we can just multiply by $c$ to get units of
 
 To see if this makes sense, consider the series expansion of $p_0c$:
 \begin{align*}
-    p_0c &= \frac{mc^2}{\sqrt{ 1 - \left( \frac{v}{c} \right)^2 }} \\
+    p_0c &= \frac{mc^2}{\sqrt{ 1 - \left( v / c \right)^2 }} \\
     &= mc^2 \left( 1 + \frac{1}{2} \left( \frac{v}{c} \right)^2 + \cdots \right) \\
     &= mc^2+ \frac{1}{2}mv^2 + \cdots
 \end{align*}
