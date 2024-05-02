@@ -39,7 +39,7 @@ The solution is to develop a \textbf{galactic distance ladder}---a series of mea
     For Polaris we have $a = 2.8$ and $b = 1.43$.
 \end{itemize}
 We can readily measure some other stellar properties, like metallicity, which is defined
-\[ \left[ \frac{\textrm{Fe}}{\textrm{H}} \right] = \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right] - \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right]_\odot. \]
+\[ \boxed{\left[ \frac{\textrm{Fe}}{\textrm{H}} \right] = \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right] - \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right]_\odot}. \]
 A star with a positive metallicity is metal-rich.
 We might use this as a rough proxy for age, as metal-rich stars tend to be younger since their high metallicities derive from supernovae.
 (We use iron as a proxy for the rest of the metals, since it's relatively abundant and has lots of spectral lines  the optical band.)
@@ -119,7 +119,7 @@ So the ``lookback time'' for the Universe is around 13 billion years.
 As light propagates, it gets redshifted by the expansion of the Universe.
 Cosmologists use this redshift as a proxy for the distance to an object, defining $z = \Delta \lambda / \lambda$.
 We've seen that at small recession velocities this reduces to $v_r / c$; substituting $v_r = H_0d$ and then $H_0 / c = 1 / R_H$ gives
-\[ z = \frac{d}{R_H}. \]
+\[ \boxed{z = \frac{d}{R_H}}. \]
 This relationship is invalid for very nearby galaxies since they have non-negligible velocities independent of spacetime expansion.
 It's also invalid for galaxies exceeding $z \approx 2$ since the Hubble constant actually changes over time---the subscript zero indicates that $H_0$ is the present value---and light will have traveled far enough to take this into consideration.
 
@@ -145,7 +145,7 @@ But we also see periodic variability in the brightness of the quasar.
 Assuming this is due to periodic contractions and expansions in its literal size, we also have an upper bound
 \[ R_\textrm{max} \sim c \Delta t \sim 2.6 \times 10^{13} \textrm{ m} = 173 \textrm{ AU}. \]
 More sophisticated modeling has suggested that $M_\textrm{3C273} \sim 6 \times 10^{9} M_\odot$, giving a luminosity that's about 10\% of the Eddington.
-This leaves a surprisingly small amount of wriggle room, given the Schwarzchild bound.
+This leaves a surprisingly small amount of wriggle room, given the Schwarzschild bound.
 
 Today, these quasars (``quasi-stars'') are thought to derive their luminosities from accretion disks around supermassive black holes.
 A typical quasar's emission spectrum suggests a huge amount of line broadening, and if this is really due to Doppler broadening then there is matter moving around at 2.5\% the speed of light.
@@ -182,11 +182,11 @@ Thus we have three broad possibilities for how $r(t)$ behaves as $t \to \infty$.
 \end{itemize}
 The sign of $E$ is determined by $M$ and, by extension, $r$.
 The critical density $\rho_c$ is found by substituting $E = 0$ and our expression for $M$; this gives
-\[ \rho_c(t) = \frac{3}{8\pi G} \left[ \frac{v(t)}{r(t)} \right]^2. \]
+\[ \boxed{\rho_c(t) = \frac{3}{8\pi G} \left[ \frac{v(t)}{r(t)} \right]^2}. \]
 Notice that if we define $H(t) = \sqrt{8\pi G \rho_c(t) / 3}$, then we recover Hubble's law
 \[ v(t) = H(t) r(t). \]
 Now, we'll find it useful to define the fraction
-\[ \Omega(t) = \frac{\rho(t)}{\rho_c(t)}. \] 
+\[ \boxed{\Omega(t) \equiv \frac{\rho(t)}{\rho_c(t)}}. \] 
 Based on our current understanding of $H_0$, the present-day critical density is $\rho_{c,0} \simeq 1.3 \times 10^{11} M_\odot / \textrm{Mpc}$, about one Milky Way per cubic megaparsec.
 And it turns out we know the present-day value of $\Omega$ pretty well!
 It's around $\Omega = 0.29$, with about $0.24$ of that being from dark matter.
@@ -208,7 +208,7 @@ which can be easily solved via separation of variables to get
 \[ r(t) = \left( \frac{3}{2} \sqrt{2GM} \,t \right)^{2 / 3}. \]
 This solution is a little unsatisfying, though, since it depends on the details of the shell we're looking at.
 To generalize, define the \textbf{scale factor}
-\[ R(t) \equiv \frac{r(t)}{r(t_0)}, \]
+\[ \boxed{R(t) \equiv \frac{r(t)}{r(t_0)}}, \]
 where $t_0$ is the present time.
 Substituting our solution $r(t)$ gives
 \[ R(t) = \left( \frac{3}{2} \sqrt{\frac{2GM}{r(t_0)}} \frac{t}{r(t_0)} \right)^{2 / 3} = \left( \frac{3}{2} \frac{v(t_0)}{r(t_0)} t \right)^{2 / 3} = \left( \frac{3}{2} H_0 t \right)^{2 / 3}, \]
@@ -223,7 +223,7 @@ This implies an empty universe---what gives?
 Consider, again, the expanding shell of mass.
 When Einstein was thinking about this problem he figured that the Universe was static, meaning there must be an extra ``repulsive''  potential $U_\Lambda$ that stops it from expanding or contracting.
 In particular,
-\[ U_\Lambda = -\frac{1}{6} \Lambda mc^2 r^2, \]
+\[ \boxed{U_\Lambda = -\frac{1}{6} \Lambda mc^2 r^2}, \]
 where $\Lambda$ is called the \textbf{cosmological constant}.
 Obviously Einstein's intentions were wrong, but it turns out that this is precisely the term we need to predict an older, expanding universe.
 Noting that
