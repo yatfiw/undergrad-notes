@@ -1,0 +1,436 @@
+\documentclass[../a062main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Stellar Properties}
+\section{Spectral Formation}
+If we were to zoom into the blackbody spectrum of a star like the Sun we'd notice some deviations from the ideal blackbody spectrum.
+Specifically, there are many wavelengths where the emission is smaller than we'd expect from a blackbody.
+These features are called \textbf{absorption lines}.
+But some objects like planetary nebulae are characterized more by \textbf{emission lines}, which are spikes of emission in a sea of none.
+In this section we'll try to explain these phenomena!
+
+\subsection*{Quantized Energy States}
+We'll start with \textbf{Kirchhoff's laws}, which is a set of empirical laws that seem to predict spectral formation.
+\begin{enumerate}
+    \item[0.] Each chemical element produces a unique pattern of spectral lines that have the same wavelengths in emission and absorption.
+    \item[1.] A hot, dense gas or solid object produces a continuous spectrum with no dark spectral lines.
+    (This is a blackbody spectrum!)
+    \item[2.] A hot, diffuse gas produces bright spectral lines (emission lines).
+    \item[3.] A cold, diffuse gas in front of a hotter continuous-spectrum source produces dark spectral lines (absorption lines) in the continuous spectrum.
+\end{enumerate}
+The first solar spectrum was published by Fraunhofer in the early nineteenth century.
+A few decades later, Balmer discovered an empirical formula for hydrogen absorption lines, now called \textbf{Balmer lines:}
+\[ \frac{1}{\lambda} = R_H \left( \frac{1}{4} - \frac{1}{n^2} \right), \quad n = 3,4, \ldots, \]
+where $R_H$ is called the Rydberg constant.
+
+The explanation for all these empirical observations is quantum mechanical.
+The energy in electromagnetic radiation comes in discrete packets called photons, each with energy $E_\gamma = h\nu = hc / \lambda$.
+Electrons can only occupy predetermined, discrete energy levels within atoms.
+When an electron absorbs or emits a photon it transitions to a different energy state; the resulting change in the electron's energy is equal to the photon's energy, meaning electrons can only interact with photons of certain wavelengths.
+
+In the early twentieth century Bohr devised the first model of the hydrogen atom that correctly predicted the quantized energy levels for an electron.
+We now know this model to be completely wrong, but it remains a useful tool for our analysis.
+He proposed that the electron orbits around the proton (due to the electrostatic force) at radii $r_n$ that are multiples of its de Broglie wavelength, $\lambda_\textrm{dB} = h / m_e v$.
+This led to the energies
+\[ \boxed{E_n = -\frac{m_e e^{4}}{8 \varepsilon_0^2 h^2 n^2} = -\frac{E_1}{n^2}}, \]
+where $e$ is the charge of an electron and $E_1 = 2.18 \times 10^{-18} \textrm{ J} = 13.6 \textrm{ eV}$.
+
+This can be used to recover a more general version of Balmer's equation!
+Suppose that a photon with energy $E_\gamma$ is emitted as an electron moves between its $k$th and $n$th energy states.
+So $E_\gamma = hc / \lambda = E_n - E_k$ and
+\[ \frac{1}{\lambda} = \frac{m_e e^{4}}{8 \varepsilon_0^2 h^3 c} \left( \frac{1}{k^2} - \frac{1}{n^2} \right). \]
+The constant in front evaluates to the Rydberg constant, and setting $k=2$ gives the Balmer equation!
+
+Originally stars were classified by letter (A, B, C, etc.) based on the strength of their hydrogen lines.
+A few decades later, the spectra were reunderstood as a temperature sequence: from hottest to coolest,
+\begin{center}
+    O B A F G K M
+\end{center}
+Nowadays each spectral type is subdivided into ten subtypes (e.g., B0, B1, ..., B9).
+Each type corresponds to a very specfic pattern of spectral lines, their relative strengths, and thus a variety of elements and molecules!
+
+\subsection*{Excitation and Ionization}
+So a star's spectrum is a function of its temperature.
+Now, in order for a spectral line to form, there must be a large enough number of atoms in both the proper excitation and ionization states---that is, it must have an electron at the proper energy level, and it must also have the proper amount of electrons.
+How can we quantify these things in terms of temperature?
+
+Generally, excitations and ionizations are caused by high-speed collisions between atoms.
+These velocities are related to temperature by the equation
+\[ \left< \frac{1}{2}mv^2 \right> = \frac{3}{2} kT, \]
+where $m$ is the mass of an emitter.
+So whatever we end up with should give us higher excitation and ionization states with increasing temperature.
+
+Let's start with excitation states.
+Consider two energy levels $a$ and $b$ inside an atom such that $E_B > E_a$.
+Let $P(a)$ is the probability that an electron occupies level $a$, and let $N_a$ be the number of electrons in this level.
+Using statistical mechanics one could show that
+\[ \frac{N_b}{N_a} = \frac{P(b)}{P(a)} = \frac{e^{-E_b / kT}}{e^{-E_a / kT}} = e^{-\Delta E / kT}, \]
+where $\Delta E = E_b - E_a$.
+Notice that we have $N_a > N_b$ for all $\Delta E > 0$, meaning higher energy states will never have a higher probability that lower ones.
+
+But this doesn't quite tell the whole story because energy levels can be degenerate---that is, there can be several states with the same energy.
+For example, hydrogen has two ground-state levels (2s) and eight first excited-state levels (2s + 6p).
+Let $g_a$ be the number of states with energy $E_a$ (for hydrogen $g_n = 2n^2$); making a slight modification to our equation to account for degeneracy gives the \textbf{Boltzmann equation}:
+\[ \boxed{\frac{N_b}{N_a} = \frac{P(b)}{P(a)} = \frac{g_b e^{-E_b / kT}}{g_a e^{-E_a / kT}} = \frac{g_b}{g_a} e^{-\Delta E / kT}}. \]
+Now let's talk ionization.
+We represent ionization states using Roman numerals---for example, the first three ionization states for calcium are Ca I, Ca II, and Ca III, in which zero, one, and two electrons have been removed, respectively.
+Let $N_i$ be the number of atoms in their $i$th ionization state and $\chi_i$ the energy required to bring an atom from its $i$th ionization state to its $(i+1)$th state; we might expect that $N_{i+1} / N_i \propto e^{-\chi_i / kT}$.
+This will actually be the case!
+To account for degeneracy, we define the partition function
+\[ Z_i = \sum_{k=1}^{\infty} g_k e^{-(E_k - E_1) / kT}. \]
+This is a weighted average of all the (infinitely many) degeneracies, with the Boltzmann factor there to give more weight to the higher-probability energies.
+Using statistical mechanics magic we get the \textbf{Saha equation},
+\[ \boxed{\frac{N_{i+1}}{N_i} = \frac{2}{n_e} \left( \frac{2\pi m_e kT}{h^2} \right)^{\frac{3}{2}} \frac{Z_{i+1}}{Z_i} e^{-\chi_i / kT}}, \]
+where $n_e$ is the number density of electrons in space.
+Note that a larger $T$ corresponds to more collisions and thus a higher $N_{i+1}$, and that a larger $n_e$ implies more recombinations and thus a lower $N_{i+1}$. % TODO what is chi?
+
+The Boltzmann and Saha equations together describe why spectral lines appear and then disappear again as temperature increases!
+Take the H$\upalpha$ line for example, which corresponds to a transition between the first and second excited states of a neutral hydrogen atom.
+At low temperatures there are no excited hydrogens, so the line is invisible; as temperature increases, more hydrogens become excited and H$\upalpha$ becomes stronger; but as temperature increases further the hydrogens begin to ionize and the line fades.
+
+\section{Radiative Transfer}
+Let's get to work on a physical model for stars, starting with \textbf{radiative transfer}---the production of radiation in the stellar atmosphere and its path to Earth.
+We'll focus on absorption for now.
+
+\subsection*{Absorption}
+Suppose a photon passes through a cloud on its way to an observer.
+If we want to determine the probability that this photon gets absorbed along the way, we need only consider the electrons in the cloud---only high-energy gamma rays can interact directly with atomic nuclei and other elementary particles.
+Let's say our cloud contains $n_e$ electrons per unit volume, and a photon gets absorbed if it comes within the \textbf{cross section} $\sigma_\lambda$ (the ``target area'') of an electron.
+This cross section is a function of the photon's wavelength.
+
+We can simplify this scenario slightly by thinking of the electrons as point particles and of the photon as having an effective cross section $\sigma_\lambda$.
+In a time $\Delta t$, the photon sweeps out a cylinder that contains $N = n_e \sigma_\lambda \,c\Delta t$ electrons, so the collision rate is
+\[ R = \frac{N}{\Delta t} = \sigma c n_e. \]
+We can use this to define the \textbf{mean free time} and \textbf{mean free path} between collisions:
+\[ t_\textrm{mf} = \frac{1}{R} = \frac{1}{\sigma_\lambda c n_e} \qquad l_\textrm{mf} = ct_\textrm{mf} = \frac{1}{n \sigma_\lambda}. \]
+In practice things will not be so simple.
+The medium in which the photon travels may have many absorbing species, each with their own number densities $n$.
+So rather than deal with the cross section $\sigma_\lambda$ (an effective area per absorber), we'll often work with the \textbf{opacity}
+\[ \boxed{\kappa_\lambda = \sigma_\lambda \frac{n}{\rho}}, \]
+which is an effective area per unit mass.
+(In this equation $\rho$ is the mass density of absorbers.)
+A particularly convenient property of this quantity is that, when working with several absorbing species, we can determine the total opacity just by summing up the individual opacities!
+
+We're now in a position to determine the effect of absorption on light as it propagates through space.
+We choose intensity as our measure of brightness because, according to \textbf{Liouville's theorem}, it remains constant as radiation propagrates from source to observer.
+To show this, consider a source that creates a solid angle $\Omega = A / d^2$, where $A$ is the area that ``fits'' inside the solid angle at a distance $d$ from the observer.
+For a small source, $I_\textrm{obs} = F / \Omega = Fd^2 / A$; but flux is proportional to $A / d^2$, so $I_\textrm{obs}$ is constant over $d$!
+
+Consider a very short distance $ds$ in the absorptive medium.
+The probability that a photon gets absorbed in this length is $ds / l_\textrm{mf}$, so the expected change in intensity
+\[ dI_\lambda = -I_\lambda(s) \frac{ds}{l_\textrm{mf}}. \]
+This is a separable differential equation whose solution is
+\[ \boxed{I_\lambda(s) = I_\lambda(0) e^{-\int_{0}^{s} ds / l_\textrm{mf}} = I_\lambda(0) e^{-s / l_\textrm{mf}}}, \]
+where the last expression represents the special case in which the mean free length is constant.
+The dimensionless quantity in the exponent is of huge importance---we call it the \textbf{optical depth} $\tau_\lambda = s / l_\textrm{mf}$, and we might interpret it as the number of collisions a photon will experience if it travels in a straight line.
+We usually define $\tau_\lambda = 0$ on the side of the medium facing the observer.
+So we can repackage this intensity equation as
+\[ d\tau_\lambda =-\frac{ds}{l_\textrm{mf}} \implies \boxed{I_\lambda(0) = I_\lambda(\tau_{\lambda,c}) e^{-\tau_\lambda}}, \]
+where $\tau_{\lambda,c}$ is the optical depth at the side of the medium opposite the observer.
+In the optically thick limit $\tau_\lambda \gg 1$ most of the light is absorbed so $I_\lambda(0) \approx 0$, but in the optically thin limit $\tau_\lambda \ll 1$ a Taylor approximation gives $I_\lambda(0) \approx I_\lambda(\tau_{\lambda,c}) (1 - \tau_\lambda)$.
+
+\subsection*{The Equation for Radiative Transfer}
+We take a similar path to account for emission.
+Define the \textbf{emission coefficient} $j_\lambda$
+as the energy emitted per unit time, per unit solid angle, per unit mass, per unit wavelength.
+In order to go from an emission coefficient to an intensity, we'll have to multiply by a mass and divide by an area to get the right units:
+\[ dI_\lambda = j_\lambda \frac{\rho A \,ds}{A} = j_\lambda \rho \,ds. \]
+Combined with absorption
+, we get the differential equation
+\[ dI_\lambda = -I_\lambda \frac{ds}{l_\textrm{mf}} + j_\lambda \rho ds \;\implies\; dI_\lambda = I_\lambda d\tau_\lambda - \frac{j_\lambda}{\kappa_\lambda} d\tau_\lambda \]
+The local quantity $S_\lambda = j_\lambda / \kappa_\lambda$, called the \textbf{source function}, describes the removal and replacement of traveling photons.
+So we can write
+\[ \boxed{\frac{dI_\lambda}{d\tau_\lambda} = I_\lambda - S_\lambda}. \]
+One could solve this differential equation via multiplication by the integrating factor $e^{-\tau_\lambda}$.
+This gives the observed intensity
+\begin{empheq}[box=\fbox]{align*}
+    I_\lambda(0) &= I_\lambda (\tau_\lambda) e^{-\tau_\lambda} + \int_{0}^{\tau_\lambda} S_\lambda e^{-\tau_\lambda'} d\tau_\lambda' \\
+    &= I_\lambda (\tau_\lambda) e^{-\tau_\lambda} - S_\lambda \left( e^{-\tau_\lambda} - 1 \right),
+\end{empheq}
+where the last expression is the special case in which $S_\lambda$ is constant.
+The first term in each accounts for the absorption
+of some initial intensity, while the second accounts for emission and the potential for re-absorption.
+
+In the optically thick limit we can see that $I_\lambda(0) = S_\lambda$.
+But if the cloud is in thermal equilibrium then it acts like a blackbody, meaning $S_\lambda = B_\lambda(T)$.
+(In fact, since $S_\lambda$ is a local property, this relationship holds for \textit{any} cloud in thermal equilibrium!)
+In the optically thin limit, a Taylor expansion gives
+\[ I_\lambda(0) = I_\lambda(\tau_\lambda) (1-\tau_\lambda) + S_\lambda(\tau_\lambda) \tau_\lambda. \]
+
+\subsection*{Kirchhoff's Laws and Line Widths}
+We can use this to prove Kirchhoff's second and third laws quite easily.
+Suppose we have an optically thick star sitting behind an optically thin cloud at temperatures $T_B$ and $T_C$, respectively.
+The observed intensity is
+\begin{align*}
+    I_\lambda(0) &= B_\lambda(T_B)(1-\tau_\lambda) + B_\lambda(T_C)\tau_\lambda \\
+    &= B_\lambda(T_B) + [B_\lambda (T_C)- B_\lambda(T_B)] \tau_\lambda.
+\end{align*}
+If $T_C > T_B$ then the stuff in the brackets is positive.
+Also, $\tau_\lambda$ peaks at atomic transition wavelengths, so overall we get an intensity spectrum with spikes at particular wavelengths, which we recognize as emission lines.
+If $T_B < T_C$, then by an analogous argument we get absorption lines.
+
+It is important to note that these spectral lines are not infinitely thin as one might expect.
+In fact, they are roughly Gaussian in shape.
+Three big reasons for this are given below.
+\begin{itemize}
+    \item \textbf{Natural broadening}.
+    Excited states have finite lifetimes $\Delta t$, and there is an uncertainty relation in quantum mechanics which relates this to the uncertainty in energy $\Delta E$ (which is easily related to $\Delta \lambda$):
+    \[ \Delta E \Delta t \geq \frac{\hbar}{2}. \]
+
+    \item \textbf{Doppler broadening}.
+    If an object's velocity has a radial component with respect to an observer then the light it gives off will be redshifted or blueshifted.
+    Specifically,
+    \[ \frac{\Delta \lambda}{\lambda} \approx \frac{\left< v_r \right>}{c} = \frac{2}{c} \sqrt{\frac{2kT \ln 2}{m}}. \]
+
+    \item \textbf{Pressure broadening}.
+    As atoms run into each other, they distort each others' electron orbitals and thus their energy eigenvalues.
+    The effects of these collisions are captured by the equation
+    \[ \Delta \lambda \approx \frac{\lambda^2}{c} \frac{n\sigma}{\pi} \sqrt{\frac{2kT}{m}}. \]
+\end{itemize}
+In a group of stars that all have the same surface temperatures, larger stars have lower densities near their photospheres and thus narrower lines.
+So we can use a star's stellar spectrum not only to determine its spectral type, but also to determine its luminosity class!
+(Some common classes are V for the main sequence, III for giants, and I for supergiants; the Sun is a G2V star.)
+
+\subsection*{The Photosphere}
+All stellar spectra have absorption lines, which might suggest that stars have some emitting surface upon which there is a cooler atmosphere.
+But reality is much more complicated---mainly, stars have no well-defined surface.
+So where does their light come from?
+
+Let's imagine the simplest possible source function that is monotonically increasing: $S_\lambda = a + b\tau_\lambda$.
+(We might think of this as a Taylor approximation for a more complex source function.)
+Let $\tau_\lambda^*$ be some point deep inside the star, so we have
+\[ I_\lambda(0) = I_\lambda(\tau_\lambda^*)e^{-\tau_\lambda^*} + \int_{0}^{\tau_\tau^*} (a + b\tau_\lambda)e^{-\tau_\lambda} d\tau_\lambda. \]
+But stars are opaque, so $\tau_\lambda^*$ is a very goood approximation.
+This gives
+\[ I_\lambda(0) = \int_{0}^{\infty} (a + b\tau_\lambda) e^{-\tau_\lambda} d\tau_\lambda = a + b. \]
+So the observed intensity is $I_\lambda(0) = S_\lambda(\tau_\lambda = 1)$.
+We can, therefore, interpret $\tau_\lambda$ as the ``surface'' of the star, called the \textbf{photosphere}.
+
+The precise configuration of the photosphere is relative to the observer.
+Consider our view of the Sun as a disk in the sky.
+If we pick a point near the center of this circle and go $\tau_\lambda$ inward, we'll end up deeper within the Sun than if we had picked a point near the disk's edge.
+Thus the photosphere actually gets more shallow as the distance from the center of the solar disk increases, and the solar temperature and intensity of emitted light decrease similarly.
+This phenomenon in which the solar disk gets redder and darker near its edges is called \textbf{limb darkening}.
+
+\section{Stellar Interiors}
+All this describes what goes on in the ``atmosphere'' of a star, and it's pretty easy to observe since this is precisely where the light reaching us comes from.
+We cannot, however, see into the inside of a star, so we'll have to construct a reasonable model to describe it.
+
+\subsection*{Hydrostatic Equilibrium}
+Let's start with the fairly reasonable requirement that the star does not collapse in on itself due to gravity.
+The only thing that stops this from happening is pressure---to quantify it, consider a cylindrical chunk of mass whose axis is aligned with the star's radius.
+The chunk is at a distance $r$ from the center of the star and has mass
+\[ dm = A \,dr \,\rho(r), \]
+where $\rho$ is the mass density of the star and $A$ and $dr$ are the base area and height of the chunk, respectively.
+If $P$ is the pressure acting on the cylinder, then the equation of the cylinder's radial motion is
+\[ F_\textrm{net} = P(r) A - \left[ P(r + dr)A + dm\,g(r) \right], \]
+where $g$ is the local acceleration due to gravity.
+(We need not concern ourselves with the perpendicular directions because those forces cancel each other out.)
+In equilibrium $F_\textrm{net} = 0$, and we can rearrange to get the \textbf{hydrostatic equilibrium equation}
+\[ \boxed{\frac{dP}{dr} = -\rho(r) g(r)}. \]
+Note that we can use Newton's shell theorem to write $g(r) = GM_r(r) / r^2$, where $M_r(r)$ is the mass contained within a distance $r$ of the star's center.
+But either way we have three unknowns and only one equation.
+We can add another, the \textbf{conservation of mass equation}
+\[ \boxed{\frac{dM_r}{dr} = 4\pi r^2 \rho(r)}, \]
+but we're still one short.
+We'll take some time to discuss other stellar behaviors with the aim of writing down more equations that, hopefully, will comprise a complete model for the interiors of stars.
+
+Let's start with pressure.
+We know that pressure can arise from the thermal motions of gas molecules, and that their behavior is (with few exceptions) described by the ideal gas law $PV = NkT$, where $N$ is the number of gas molecules.
+Written in terms of number density, this is
+\[ P_\textrm{gas} = nkT. \]
+To avoid introducing $n$ as a new variable, we can write $n = \rho / \overline m$, with the average mass per particle $\overline m = \mu m_p$.
+($m_p$ is the proton mass and $\mu$ is the mean molecular mass).
+So we have
+\[ \boxed{P_\textrm{gas}(r) = \frac{\rho(r) kT(r)}{\mu m_p}}. \]
+This is the equation of state that's most relevant to main sequence stars.
+But photons, too, carry momentum and can thus produce pressures that, in the brightest and most massive stars, can be even greater than that produced by gas molecules.
+As a slight simplification, suppose $N$ photons are incident upon a reflective area $A$ in the star, each with initial momentum $p_\gamma$ and collision time $\Delta t$.
+The total pressure on the area is
+\[ P_\textrm{rad} = \frac{\textrm{force}}{A} = \frac{N \cdot 2p_\gamma}{A \,\Delta t}. \]
+Now, by the energy-momentum relation $p_\gamma = E_\gamma / c$ and the definition of flux $N E_\gamma = F A \,\Delta t$,
+\[ P_\textrm{rad} = \frac{N \cdot 2E_\gamma}{c A \,\Delta t} = \frac{2F}{c}. \]
+In terms of temperature, this is $P_\textrm{rad} = 2 \sigma T^{4} / c$.
+If we were to take into account the different directions from which a photon may collide with the surface, we would instead get
+\[ \boxed{P_\textrm{rad} = \frac{4}{3} \frac{\sigma T^{4}(r)}{c}}. \]
+Which of these \textbf{equations of state} we use depends on the scenario.
+For some objects, the effects of gas pressure and radiation pressure are comparable enough to use both equations (by adding them).
+
+\subsection*{Energy Generation}
+We now have a new equation to work with, but we've also introduced a new unknown: temperature.
+A reasonable next step, then, is to work out where this kinetic energy comes from.
+
+For a while the leading theory was \textbf{gravitational contraction}.
+Stars would start out large and over time shrink to smaller radii, converting gravitational potential energy to kinetic energy in the process.
+It can be shown that the potential energy of a uniform sphere of mass $M$ and radius $R$ is given by
+\[ U(R) = -\frac{3}{5} \frac{GM^2}{R}, \]
+and by the virial theorem the total mechanical energy is
+\[ E(R) = -\frac{3}{10} \frac{GM^2}{R}. \]
+So if a star shrinks from radius $R_i$ to $R_f$ (where $R_i \gg R_f$), then the amount of energy liberated is $\Delta E_g = -E(R_f)$.
+But there's a problem with this: assuming a roughly constant luminosity over the Sun's lifetime, it implies that the estimated age of the Sun is
+\[ t_\textrm{KH} = \frac{\Delta E_g}{L_\odot} \sim 10^{7} \text{ yr}. \]
+This is called the Kelvin-Helmholtz timescale, and it's at least four hundred times smaller than even the estimated age of Earth.
+So clearly gravitational contraction cannot play a major role in energy production in main-sequence stars, though it is important in earlier and later stages of life.
+
+Today we know that the main source of energy is \textbf{nuclear fusion}.
+Specifically, in the nuclear process
+\[ \ch{4 H + 2 e^- -> He} \]
+some amount $\Delta m$ of it is converted to energy according to $\Delta E = \Delta m \,c^2$.
+We define the \textbf{efficiency parameter} $\eta = \Delta m / m_i$ to quantify this conversion.
+
+Since only about ten percent of the Sun is hot enough to do fusion, we have the nuclear timescale
+\[ t_\textrm{nuc} = \frac{E_\textrm{em}}{L_\odot} = \frac{\Delta m}{4m_p} \frac{0.1 M_\odot c^2}{L_\odot} \sim 10^{10} \text{ yr}, \]
+ignoring the negligible mass of the electrons.
+This lines up much more nicely with observations on Earth---nuclear fusion, unlike gravitational contraction, works as a mechanism for energy production!
+
+The fusion is not a simple as four protons smashing together to create a helium nucleus.
+The main reaction chain in Sun-like stars is called the \textbf{proton-proton chain}, and it is described below.
+\begin{align*}
+    \ch{^11H + ^11H &-> ^21H + e^+ + \nu_e} \\
+    \ch{^21H + ^11H &-> ^32H + \gamma} \\
+    \ch{^32He + ^32He &-> ^42He + 2 ^11H}
+\end{align*}
+Here $\gamma$ is a photon, $e^+$ is a positron (the antiparticle of an electron), and $\nu_e$ is called an electron neutrino.
+% Neutrinos interact via the weak force and gravity, but the weak force has a very short range and neutrinos have a very small mass so they typically pass through matter unimpeded and undetected.
+Putting all these together gives
+\[ \ch{4 ^11H -> ^42He + 2 e^+ + 2 \nu_e + 2 \gamma}. \]
+Note that the positrons will be annihilated with electrons, creating more photons.
+Reactions like these follow five key conservation laws: conservation of nucleons, charge, lepton number, momentum, and energy.
+(Neutrinos have a lepton number of $1$, and positrons $-1$.)
+
+How hot must it be for this fusion to occur?
+The rate-limiting step is the first one, in which an incoming proton must overcome the Coulomb potential of another to enter the strong force's domain of influence.
+In particular, the kinetic energy of the incoming proton must satisfy
+\[ K \geq \frac{e^2}{4\pi \varepsilon_0 r_0}, \]
+where the strong force dominates for $r < r_0$.
+But $\left< K \right> = (3/2) kT$, so on average we have
+\[ T \geq \frac{e^2}{6\pi \varepsilon_0 r_0} \sim 10^{10} \textrm{ K}. \]
+But it's known that the core temperature of the Sun is closer to $10^{7} \textrm{ K}$, so what gives?
+Quantum tunneling!
+The incoming proton is likely to tunnel through the Coulomb potential at temperatures above $T \sim 10^{6} \text{ K}$, which the Sun satisfies.
+
+All this leads us to another equation for our stellar model.
+Define $\varepsilon$ as the energy generated by fusion per unit mass per unit time.
+In general $\varepsilon$ has a very complex form, but for Sun-like cores we can approimate $\varepsilon_\textrm{ppc} \propto \rho T^{4}$.
+So we get the \textbf{energy conservation} (or \textbf{luminosity gradient}) \textbf{equation}
+\[ \boxed{\frac{dL_r}{dr} = 4\pi r^2 \rho(r) \varepsilon(\rho, T)}, \]
+where $L_r(r)$ is the net energy flow through a sphere of radius $r$.
+
+\subsection*{Energy Transport}
+Let's consider one last aspect of stars that will yield an equation that introduces no new unknowns.
+There are three broad mechanisms by which energy can be transported:
+\begin{itemize}
+    \item conduction, in which energy is transferred via particle-particle interactions;
+    \item radiation, in which energy is transferred via photon absorption and emission; and
+    \item convection, which is facilitated by the motion of macroscopic parts of the system.
+\end{itemize}
+In regular stars conduction is not important, but the other two play major roles.
+Let's start with radiative transport.
+Consider a cylindrical parcel of gas somewhere inside the star with its axis aligned in the radial direction.
+For energy to be transported outward, there is a net flux through the caps that changes as a function of photon absorption.
+(Emission is not a factor because it is isotropic.)
+In particular,
+\begin{align*}
+    F_\textrm{net}(r + dr) - F_\textrm{net}(r) &= F_\textrm{net}(r) \left( e^{-d\tau} - 1 \right),
+    \intertext{where $d\tau = dr / l_\textrm{mf}$ is the optical depth through the parcel. A first-order Taylor expansion gives}
+    F_\textrm{net}(r + dr) - F_\textrm{net}(r) &= -F_\textrm{net}(r) \frac{dr}{l_\textrm{mf}} \\
+    \frac{dF_\textrm{net}}{dr} &= -F_\textrm{net}(r) \kappa \rho,
+    \intertext{where $\kappa$ is the opacity. Now, the radiation pressure on an absorbing surface is $P_\textrm{rad} = F_\textrm{net} / c$; substituting the derivative gives}
+    \frac{dP_\textrm{rad}}{dr} &= -\frac{\kappa \rho}{c} F_\textrm{net}(r) \\
+    \frac{dP_\textrm{rad}}{dr} &= -\frac{\kappa \rho}{c} \frac{L_r(r)}{4\pi r^2} \\
+    \intertext{Finally, substituting the derivative of $P = (4 / 3)(\sigma T^{4} / c)$ gives}
+    \Aboxed{\frac{dT}{dr} &= -\frac{3}{16} \frac{\kappa \rho}{\sigma T^{3}} \frac{L_r(r)}{4\pi r^2}}
+\end{align*}
+This is the \textbf{radiative energy transport equation}.
+The relationships between all these variables should make sense: a large $L_r(r)$ causes a large $dT / dr$ to drive more radiation outward, and a large opacity requires a large $dT / dr$ to drive the same $L_r$.
+(Opacity acts as the ``friction'' for radiation.)
+
+Let's move on to convection. % Kayla was here
+Consider another cylindrical bubble of gas with density and temperature $\rho_B, T_B$; the surroundings have $\rho_S, T_S$.
+Our gaseous equation of state says that $P \propto \rho T$, so in order for the bubble to maintain a constant pressure relative to its surroundings, any change in temperature must be matched with a multiplicatively equal and opposite change in density.
+If $T_B > T_S$, then $\rho_B < \rho_S$ and the bubble rises. % oooo gas
+
+As the bubble rises, we have three scenarios for the relative changes in temperature and density.
+\begin{itemize}
+    \item Vigorous convection.
+    The bubble's temperature drops more slowly than that of its surroundings, so it continues to rise with increasing speed.
+
+    \item Limited convection.
+    The bubble's temperature drops more quickly than that of its surroundings, so its rise eventually slows to a stop.
+
+    \item Marginal convection.
+    The bubble's temperature drops at the same rate as that of its surroundings.
+\end{itemize}
+But all forms of convection move heat around in such a way that promotes marginal convection, so we can take
+\[ \frac{dT_B}{dr} = \frac{dT_s}{dr}. \]
+Now, from thermodynamics it is known that $P_B = a T_B^{\gamma / (\gamma - 1)}$, where $a$ is some constant and $\gamma$ is called the adiabatic expoent of the gas, which depends only on its composition---no heat is exchanged with its surroundings.
+(For a monatomic ideal gas, $\gamma = 5 / 3$.)
+We can differentiate this expression to get
+\[ \frac{dP_B}{dr} = a \left( \frac{\gamma}{\gamma - 1} \right) \frac{T_B^{\gamma / (\gamma - 1)}}{T_B} \frac{dT_B}{dr} = \frac{P_B}{T_B} \frac{\gamma}{\gamma - 1} \frac{dT_B}{dr}. \]
+Since the bubble is always in pressure equilibrium with its surroundings, we can define $P = P_B = P_S$.
+Also, in practice our bubble is only going to be slightly hotter than its surroundings, so we can approximate $T = T_B \approx T_S$ to get
+\[ \boxed{\frac{dP}{dr} = \frac{P}{T} \frac{\gamma}{\gamma - 1} \frac{dT}{dr}}. \]
+This is the \textbf{convection energy transport equation}, and it's the last one we need to get a complete set of differential equations.
+
+Convection, of course, will not always occur---the temperature gradient in the star must be greater than that in a bubble.
+In particular,
+\begin{align*}
+    \frac{dT}{dr} &< \frac{\gamma - 1}{\gamma} \frac{T}{P} \frac{dP}{dr} \\
+    \frac{dT}{T} &< \frac{\gamma - 1}{\gamma} \frac{dP}{P} \\
+    d(\ln T) &< \frac{\gamma - 1}{\gamma} d(\ln P) \\
+    \intertext{Since both differentials are negative,}
+    \Aboxed{\frac{d(\ln P)}{d(\ln T)} &< \frac{\gamma}{\gamma - 1}}
+\end{align*}
+Convection occurs if and only if this condition is satisfied.
+In this case, since convection is much more efficient than radiation, we may use only the convection equation.
+Otherwise, we'll have to stick to radiation.
+
+\section{Building Stellar Models}
+We now have a complete set of equations that can be solved to obtain functional forms for the key properties of a star.
+At $r=0$ we have the initial conditions $M_r = L_r = 0$ and at $r = R$ we have $\rho = T = 0$.
+
+According to the \textbf{Vogt-Russel theorem}, the mass and composition structure of a star completely determines its radius, luminosity, internal structure, and subsequent evolution.
+For example, the mass determines the energy transport structure of a star.
+\begin{itemize}
+    \item Smaller and cooler stars tend to have more neutral atoms and thus higher opacities in their outer layers.
+    This leads to a steeper temperature gradient and thus convection.
+    The coolest stars exhibit full convection over its entire radius.
+
+    \item More massive stars tend to have higher luminosities and thus higher temperatures in their cores.
+    This once again leads to a steeper temperature gradient and convection in the inner layers.
+\end{itemize}
+Mass also determines the nature of the nuclear fusion in stellar cores.
+High temperatures facilitate the carbon-nitrogen-oxygen cycle, which fuses hydrogen into helium with a much higher energy generation rate.
+
+We can even predict the lifetime of a star using its mass!
+For main-sequence stars we have the relations
+\[ \frac{L}{L_\odot} = \left( \frac{M}{M_\odot} \right)^{3.5} \,\text{ and }\, t_\textrm{nuc} = \frac{0.1 \eta M c^2}{L}, \]
+where $\eta$ is the efficiency of nuclear fusion in a mass-$M$ star with luminosity $L$.
+If we take the star's nuclear lifetime $t_\textrm{nuc}$ and divide by that of the Sun we get
+\[ \frac{t_\textrm{nuc}}{t_{\textrm{nuc, }\odot}} = \frac{M}{M_\odot} \frac{L_\odot}{L} = \left( \frac{M}{M_\odot} \right)^{-2.5}. \]
+So the star's fusion lifetime is inversely related to its mass!
+
+It will be fruitful to put bounds on what a star's mass can physically be.
+On the lower end the limiting factor is temperature---a main-sequence star must be hot enough to facilitate nuclear fusion.
+This depends a bit on composition.
+Let $Z$ be the mass proportion of ``metals'' in a star (so $X$ and $Y$ are the hydrogen and helium proportions); a metal-rich star with $Z = 0.02$ has $M_\textrm{min} \approx 0.072M_\odot$, while a metal-poor one with $Z = 0.0$ has $M_\textrm{min} \approx 0.09M_\odot$.
+
+The upper bound is set by radiation pressure.
+Consider another cylindrical parcel of gas that contains only $N$ hydrogen atoms.
+For a very massive star, temperatures are high enough for hydrogen gas to be completely ionized at all radii.
+The gravitational force on the parcel, significant only for the protons, is
+\[ F_\textrm{g} = \frac{GM(Nm_p)}{R^2}, \]
+and the force due to radiation pressure, applicable only to the electrons, is
+\[ F_\textrm{rad} = \frac{4}{3} \frac{F}{c} \sigma_\textrm{tot} = \frac{4}{3} \frac{L}{4\pi R^2 c} N \sigma_T, \]
+where the Thompson cross section $\sigma_T$ is that for the interaction between electrons and photons.
+Though these two forces act on different sets of particles, the protons and electrons are bound together by the Coulomb force, so they move as a unit.
+
+For the star to stay together we must have $F_\textrm{rad} < F_\textrm{g}$, so
+\[ \frac{L}{3 \pi R^2 c} N\sigma_T < \frac{GM_\star N m_p}{R^2} \implies L < \frac{3\pi G c m_pM}{\sigma_T}. \]
+This is called the \textbf{Eddington luminosity}.
+Any brigter star will blow material off from its surface.
+Skipping many details, it follows that $M_\textrm{max} \sim 70M_\odot$.
+
+\end{document}

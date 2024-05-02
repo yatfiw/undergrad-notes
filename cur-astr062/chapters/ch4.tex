@@ -1,0 +1,271 @@
+\documentclass[../a062main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Galaxies and Cosmology}
+\section{Galactic Properties}
+It's time to move up in scale once again and talk about galaxies!
+The first order of business is to establish a coordinate system that makes sense in this context.
+For convenience we'll once again define our solar system as the origin; the planar \textbf{galactic longitude} $l$ will be measured counterclockwise from the galactic center, and the \textbf{galactic latitude} will be the angle an object makes with the galactic disk.
+Analyzing the coordinates of different bodies in our galaxy can tell us a lot about its structure---for example, the distribution of positions for certain clusters of stars was the first evidence that the Sun is not at the center of the Universe.
+
+\subsection*{Stars in Galaxies}
+It's relatively easy to determine the galactic longitude and latitude of an object within our galaxy.
+The harder problem, of course, is determining how far away that object is.
+The solution is to develop a \textbf{galactic distance ladder}---a series of measurement methods that work on progressively larger distances.
+\begin{itemize}
+    \item We begin with the tried-and-true trigonometric parallax.
+    If the observed parallax angle of an object $p$ is measured in arcseconds, then the distance to the object in parsecs is given by $d = 1 / p$.
+
+    \item For stars at slightly larger distances we instead use spectroscopic parallax, which makes use of the distance modulus
+    \[ m - M = 5 \log_{10} \frac{d}{10 \textrm{ pc}}, \]
+    where $m$ and $M$ are the relative and absolute magnitudes of the star.
+    $M$ is inferred from the star's spectral type.
+
+    \item We can use the results here to infer distances to farther-away groups of stars via \textbf{main-sequence fitting}.
+    The idea is to plot both groups on an HR diagram and determine the vertical shift required to fit one main sequence onto the other; this corresponds to the difference $m_1 - m_2$ between the relative magnitudes of ``equivalent'' stars in each group.
+    We then have
+    \[ m_1 - m_2 = 5 \log_{10} \frac{d_1}{d_2}, \]
+    so if we know the distance to one group we can calculate that to the other.
+
+    \item The next method up is called the moving cluster method.
+    We won't go into detail here, but it has to do with comparing radial and tangential velocities.
+
+    \item To measure the farthest objects in our galaxy (and even in other galaxies) we take advantage of pulsating stars, particularly Cepheid variables.
+    The absolute magnitude of such a star is related to its pulsation period by
+    \[ M_V \approx -a \log P_\textrm{days} - b, \]
+    where the constants depend on the object and the wavelength band of observation.
+    For Polaris we have $a = 2.8$ and $b = 1.43$.
+\end{itemize}
+We can readily measure some other stellar properties, like metallicity, which is defined
+\[ \left[ \frac{\textrm{Fe}}{\textrm{H}} \right] = \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right] - \log_{10} \left[ \frac{N_\textrm{Fe}}{N_\textrm{H}} \right]_\odot. \]
+A star with a positive metallicity is metal-rich.
+We might use this as a rough proxy for age, as metal-rich stars tend to be younger since their high metallicities derive from supernovae.
+(We use iron as a proxy for the rest of the metals, since it's relatively abundant and has lots of spectral lines  the optical band.)
+
+\subsection*{Holistic Properties}
+Now we can get into some properties of galaxies as a whole.
+The distribution of mass in the galaxy is a good place to start, and there are a couple of ways to measure this.
+For one, we may count up visible emission from matter in the galaxy and use some models to infer a mass of $\lesssim 10^{11} M_\odot$.
+Alternatively, we can analyze how orbital velocities change as a function of radius.
+
+Consider all of the matter with galactic longitude $l$ and latitude 0.
+The mass with the highest velocity $v$ is a distance $R = R_0 \sin l$ from the galactic center, where $R_0$ is the Earth-center distance.
+Doing this for many different $l$ allows us to relate radii to orbital velocities, and a plot would reveal that $v(R) \propto R$ for $R \lesssim 0.5 \text{ kpc}$ and is constant otherwise!
+We can relate all this to the mass distribution by assuming circular orbits, so
+\[ \frac{mv^2}{r} = \frac{GM_r(R) m}{r^2}. \]
+Now, let $r_0$ be the radius after which the velocity plateaus at $v_0$.
+Then the cumulative mass before and after the critical radius is given by
+\[ M_r(r) = \frac{v_0^2 r^2}{G r_0^2}, \qquad M_r(r) = \frac{v_0^2 r}{G}, \]
+respectively.
+But if we take $v_0 = 220 \text{ km/s}$ and $r = 50 \text{ kpc}$, we get $M_r \approx 5 \times 10^{11} M_\odot$, which is five times larger than what we determined previously using visible light!
+This is the first evidence we have for the existence of dark matter: there must be something that interacts with gravity, but not with light.
+
+This also brings us to some of the key properties distinguishing different types of galaxies.
+Broadly speaking, we say there are three types: elliptical galaxies, spiral galaxies, and irregular galaxies.
+When the \textbf{Hubble sequence} was first developed, elliptical galaxies were called ``early types'' and spiral ones ``late type''; however, we now believe that elliptical galaxies are the results of interacting spiral galaxies.
+\begin{itemize}
+    \item \textbf{Elliptical galaxies} generally have mass-light ratios of around 1-100 $M_\odot / L_\odot$, so they tend to be dominated by dark matter.
+    Their total baryonic (``normal'') masses fall between $10^{7} M_\odot$ and $10^{14} M_\odot$.
+
+    \item \textbf{Spiral galaxies} generally have $M / L_B$ of around 2-50 $M_\odot / L_\odot$, so they fall in a tighter range than ellipticals.
+    The same goes for baryonic mass, which falls between $10^{9} M_\odot$ and $10^{12} M_\odot$.
+
+    \item \textbf{Irregular galaxies} have $M / L_B \approx 1$ and baryonic mass between $10^{8} M_\odot$ and $10^{10} M_\odot$.
+    So not only do they have less dark matter, but they're much smaller on average.
+\end{itemize}
+The kinematics of stellar orbits also differ between galactic types.
+In spiral galaxies the orbits are generally circular---using $v_0 = 200 \text{ km/s}$ we get the characteristic orbital time
+\[ P_\textrm{orb} \sim \frac{2\pi r}{v_0} \simeq (30 \textrm{ Myr}) \left( \frac{r}{1 \textrm{ kpc}} \right) \left( \frac{200 \textrm{ km/s}}{v_0} \right) \]
+at $r = 1 \textrm{ kpc}$.
+This doesn't quite tell the whole story since the non-spherical distribution of mass in the galaxy causes stars to bob up and down as they orbit, but this is close enough.
+In elliptical galaxies things are even weirder---the general triaxial ellipsoid has no mass symmetries, so orbit shapes take some very exotic forms!
+
+Despite this, there is a constant: $\left< v_r \right> = 0$ in the rest frame of the galaxy.
+So the standard deviation of these radial velocities is
+\[ \sigma_r = \sqrt{\frac{1}{N} \sum_{\textrm{stars}}^{} \left( v_r - \left< v_r \right> \right)^2} = \sqrt{\left< v_r^2 \right> - \left< v_r \right>^2} = \sqrt{\left< v_r^2 \right>}. \]
+Now, in spherical coordinates it happens that $\left< v^2 \right> = \left< v_r^2 \right> + \left< v_\theta^2 \right> + \left< v_\phi^2 \right>$, and for reasonably isotropic velocity distributions we have $\left< v^2 \right> \simeq 3\left< v_r^2 \right>$; thus $\sigma_r = \sqrt{\left< v^2 \right> / 3}$.
+
+Recall that the width of a spectral line is proportional to the spread $\sigma_r$ of velocities, so $\sigma_r$ can be measured directly from spectra!
+We can use this with the virial theorem to estimate galactic masses.
+For a spherical, uniform clump of stars with total mass $M$ we have
+\[ \left< K \right> = \frac{M \left< v^2 \right>}{2}, \qquad \left< U \right> \approx -\frac{3}{5} \frac{GM^2}{R}, \]
+and an application of the virial theorem gives
+\[ M \sim \frac{5}{3} \frac{\left< v^2 \right> R}{G} = \frac{5 \sigma_r^2 R}{G}. \]
+Finally, we can also estimate the mass of the central object of most galaxies: a supermassive black hole.
+Assuming a circular orbit, we once again get
+\[ \frac{mv^2}{r} = \frac{GM_\textrm{BH} m}{r^2} \implies M_\textrm{BH} = \frac{v^2 r}{G}. \]
+
+\section{Intergalactic Properties}
+Now we'll take another step up and discuss intergalactic space.
+This necessitates an extension of the galactic distance ladder, and this can be done quite easily simply by looking at brighter objects like type Ia supernovae, which are reliable up to around a gigaparsec.
+
+\subsection*{Hubble's Law}
+The final rung on the distance ladder has to do \textbf{Hubble's law}, the observation that all galaxies (except for Andromeda) are receding from the Milky Way.
+In particular, a galaxy's recessional velocity is given by
+\[ \boxed{v = H_0 d}, \]
+where $d$ is the distance to the galaxy and $H_0$ is called the \textbf{Hubble constant}.
+The accepted value for this constant has changed drastically overtime, but the values seem to converge to around 70 km/s/Mpc.
+
+It's tempting to interpret Hubble's law as evidence that the Milky Way is at the center of the Universe, but we know better---the Copernican principle guides us away from conclusions suggesting that our place in the Universe is special in any way.
+Instead, we go with the more sophisticated conclusion that the observed recession is an artifact of the expansion of spacetime itself.
+
+Because the recession has nothing to do with physical movement, there exists a distance past which objects recede faster than the speed of light and can no longer be detected.
+All of the space contained within this distance is called the Hubble sphere, and it has radius
+\[ R_H = \frac{c}{H_0} \sim 4.3 \textrm{ Gpc} = 13.2 \textrm{ Gly}. \]
+So the ``lookback time'' for the Universe is around 13 billion years.
+
+As light propagates, it gets redshifted by the expansion of the Universe.
+Cosmologists use this redshift as a proxy for the distance to an object, defining $z = \Delta \lambda / \lambda$.
+We've seen that at small recession velocities this reduces to $v_r / c$; substituting $v_r = H_0d$ and then $H_0 / c = 1 / R_H$ gives
+\[ z = \frac{d}{R_H}. \]
+This relationship is invalid for very nearby galaxies since they have non-negligible velocities independent of spacetime expansion.
+It's also invalid for galaxies exceeding $z \approx 2$ since the Hubble constant actually changes over time---the subscript zero indicates that $H_0$ is the present value---and light will have traveled far enough to take this into consideration.
+
+Redshift surveys have shown that the distribution of galaxies in the Universe is not uniform.
+About 20\% of all galaxies are contained within clusters, which are collections of fifty to thousands of galaxies contained within a region of 2-10 Mpc.
+We can determine the mass of such a cluster in precisely the same way as we would for an elliptical galaxy---if $\sigma_r^2 = \left< v^2 \right> / 3$ is the dispersion of radial velocities in the rest frame of the cluster, then $M = 5 \sigma_r^2 R / G$, where $R$ is the radius of the cluster portion.
+
+% galactic types as a function of mass density?
+
+\subsection*{Active Galactic Nuclei}
+The $v \ll c$ approximation is invalid for very faraway objects, but it's generally still okay for gauging the distance's order of magnitude.
+In this spirit, consider 3C273, a quasar with $z = 0.158$; using our conversion to distance as is gives $d \simeq 680 \textrm{ Mpc}$.
+Despite this great distance, the relative magnitude in the visible band is $V = 12.8$, which corresponds to an absolute magnitude of $M_V = -26.6$.
+This is about the relative magnitude of the Sun from our perspective---in terms of luminosity,
+\[ L_V = 10^{(M_\odot - M_V) / 2.5} L_\odot = 1.4 \times 10^{39} \textrm{ J/s}. \]
+And this is just in the visible.
+The bolometric luminosity is $\sim 10^{40} \textrm{ J/s}$, concentrated mostly in the x-ray.
+Assuming 3C273 is exactly at its Eddington luminosity, we get a lower bound on its mass:
+\[ L_\textrm{bol} \sim 10^{4} \left( \frac{M_\textrm{crit}}{M_\odot} \right) L_\odot \implies M_\textrm{crit} \sim (6 \times 10^{8}) M_\odot. \]
+The Schwarzschild radius provides a lower bound for the object's size:
+\[ R_\textrm{sch} \gtrsim (3 \textrm{ km}) \left( \frac{M_\textrm{crit}}{M_\odot} \right) = 1.8 \times 10^{9} \textrm{ km} = 12 \textrm{ AU}. \]
+But we also see periodic variability in the brightness of the quasar.
+Assuming this is due to periodic contractions and expansions in its literal size, we also have an upper bound
+\[ R_\textrm{max} \sim c \Delta t \sim 2.6 \times 10^{13} \textrm{ m} = 173 \textrm{ AU}. \]
+More sophisticated modeling has suggested that $M_\textrm{3C273} \sim 6 \times 10^{9} M_\odot$, giving a luminosity that's about 10\% of the Eddington.
+This leaves a surprisingly small amount of wriggle room, given the Schwarzchild bound.
+
+Today, these quasars (``quasi-stars'') are thought to derive their luminosities from accretion disks around supermassive black holes.
+A typical quasar's emission spectrum suggests a huge amount of line broadening, and if this is really due to Doppler broadening then there is matter moving around at 2.5\% the speed of light.
+So the quasar must be a compact object like a black hole.
+
+In order to estimate the mass of a black hole at the center of a quasar we use a clever technique called \textbf{reverberation mapping}.
+Surrounding the black hole are clouds of ionized gas; radiation from the accretion disk interacts with these clouds on a delay, and the amount $\tau$ of delay gives us information about the scope of these clouds.
+In particular,
+\[ R_\textrm{BLR} \simeq f \tau c,  \]
+where $f$ is a factor containing information about the clouds' geometry.
+BLR stands for broad-line region, and we can use the width of these broad emission lines to infer the orbital speed $v$ of the clouds.
+Assuming circular orbits, we have
+\[ M_\textrm{BH} \simeq \frac{v^2 R_\textrm{BLR}}{G} = \frac{v^2 f \tau c}{G}. \]
+
+\section{Newtonian Cosmology}
+Our understanding of the Universe on the largest of scales is based on the \textbf{cosmological principle}: the Universe is homogeneous and isotropic.
+With this and some sketchy Newtonian mechanics, we can learn a great deal about the past, future, and present of the Universe!
+
+Consider a dust-filled universe with spatially constant density $\rho(t)$, and construct a mass-$m$ shell with radius $r(t)$ that encloses a mass $M$.
+Note that we have $M = \rho(t) \cdot (4 / 3)\pi r(t)^3$.
+Also, by conservation of energy,
+\[ \frac{1}{2}mv(t)^2 - \frac{GMm}{r(t)} = E \;\implies\; v(t)^2 = \frac{2E}{m} + \frac{2GM}{r(t)}, \]
+where $v = dr / dt$.
+Thus we have three broad possibilities for how $r(t)$ behaves as $t \to \infty$.
+\begin{itemize}
+    \item Unbound universe ($E > 0$).
+    $v(t) > 0$ always, the universe expands forever, and $v(\infty) = \sqrt{2E / m}$.
+    
+    \item Critical universe ($E = 0$).
+    $v(t) > 0$ always, the universe expands forever, and $v(\infty) = 0$.
+
+    \item Closed universe ($E < 0$).
+    Gravity wins and the universe eventually recollapses.
+\end{itemize}
+The sign of $E$ is determined by $M$ and, by extension, $r$.
+The critical density $\rho_c$ is found by substituting $E = 0$ and our expression for $M$; this gives
+\[ \rho_c(t) = \frac{3}{8\pi G} \left[ \frac{v(t)}{r(t)} \right]^2. \]
+Notice that if we define $H(t) = \sqrt{8\pi G \rho_c(t) / 3}$, then we recover Hubble's law
+\[ v(t) = H(t) r(t). \]
+Now, we'll find it useful to define the fraction
+\[ \Omega(t) = \frac{\rho(t)}{\rho_c(t)}. \] 
+Based on our current understanding of $H_0$, the present-day critical density is $\rho_{c,0} \simeq 1.3 \times 10^{11} M_\odot / \textrm{Mpc}$, about one Milky Way per cubic megaparsec.
+And it turns out we know the present-day value of $\Omega$ pretty well!
+It's around $\Omega = 0.29$, with about $0.24$ of that being from dark matter.
+(This is consistent with our observation that baryonic matter comprises a small fraction of the total matter in the Universe.)
+
+If we throw some general relativity into the mix, we'd expect that different values of $\Omega$ correspond to different spacetime geometries.
+\begin{itemize}
+    \item If $\Omega = 1$ then the Universe is flat and Euclidean.
+    \item If $\Omega > 1$ then the Universe is open and sphere-like.
+    \item If $\Omega < 1$ then the Universe is closed and saddle-like.
+\end{itemize}
+To the best of our abilities, it appears that the Universe is flat.
+This seriously contradicts our previous conclusion about $\Omega$, so what's going on?
+
+In our search for reconciliation, we begin by considering the time evolution of a flat dust universe.
+Setting $E = 0$, we immediately get the differential equation
+\[ \frac{1}{2} mv(t)^2 = \frac{GMm}{r(t)}, \]
+which can be easily solved via separation of variables to get
+\[ r(t) = \left( \frac{3}{2} \sqrt{2GM} \,t \right)^{2 / 3}. \]
+This solution is a little unsatisfying, though, since it depends on the details of the shell we're looking at.
+To generalize, define the \textbf{scale factor}
+\[ R(t) \equiv \frac{r(t)}{r(t_0)}, \]
+where $t_0$ is the present time.
+Substituting our solution $r(t)$ gives
+\[ R(t) = \left( \frac{3}{2} \sqrt{\frac{2GM}{r(t_0)}} \frac{t}{r(t_0)} \right)^{2 / 3} = \left( \frac{3}{2} \frac{v(t_0)}{r(t_0)} t \right)^{2 / 3} = \left( \frac{3}{2} H_0 t \right)^{2 / 3}, \]
+where $H_0$ is the current Hubble constant.
+We can use this result to determine the age of our universe by looking at $R(t_0)$:
+\[ 1 = \left[ \frac{3}{2} H_0 t_0 \right]^{2 / 3} \implies t_0 = \frac{2}{3} \frac{1}{H_0} = \frac{2}{3} t_H, \]
+defining the Hubble time $t_H = 1 / H_0 \simeq 13.6 \textrm{ Gyr}$.
+So now we have another problem---we've observed globular clusters that are much older than $t_0$, so this cannot be the correct age of the Universe.
+Worse, even though an open universe would give us a larger age, the value of $\Omega$ that gets us closest to the accepted age is $\Omega = 0$.
+This implies an empty universe---what gives?
+
+Consider, again, the expanding shell of mass.
+When Einstein was thinking about this problem he figured that the Universe was static, meaning there must be an extra ``repulsive''  potential $U_\Lambda$ that stops it from expanding or contracting.
+In particular,
+\[ U_\Lambda = -\frac{1}{6} \Lambda mc^2 r^2, \]
+where $\Lambda$ is called the \textbf{cosmological constant}.
+Obviously Einstein's intentions were wrong, but it turns out that this is precisely the term we need to predict an older, expanding universe.
+Noting that
+\[ \frac{1}{2} mv^2 = \frac{GMm}{r} + \frac{1}{6} \Lambda mc^2 r^2 \]
+in a flat universe, we notice that the $r^2$ term dominates at late times, leading to long-term exponential expansion that looks like $R(t) \propto r(t) \propto e^{\Lambda ct / 3}$.
+(As a side note, from this we can also get $\rho_\Lambda = \Lambda c^2 / 8\pi G$ and an associated $\Omega_\Lambda$.)
+This is where the idea of dark energy originates!
+
+\section{The Big Bang}
+In an expanding universe, it's reasonable to extrapolate that it started out much smaller and denser than it is now.
+We have a general idea about some of the first stages it went through.
+\begin{itemize}
+    \item In the initial bit of expansion the Universe cooled enough to facilitate the existence of quarks, then protons and neutrons, then electrons and positrons.
+    All these particles lived together in some equilibrium exceeding $T \gtrsim 10^{10} \textrm{ K}$.
+    Of particular importance is the constant creation and destruction of neutrons in this stage due to interactions with other particles.
+
+    \item Eventually temperatures fall and neutrons can no longer be created.
+    Given their relatively short half-life, the existing neutrons either decay or are incorporated into nuclei with protons and other neutrons.
+    This is primordial nucleosynthesis, and it's where the first hydrogen, helium, and lithium were created.
+
+    \item All this has happened within about twenty minutes of the Big Bang.
+    Hundreds of thousands of years later, things cooled down enough to facilitate the creation of full-blown atoms.
+    The Universe suddenly became transparent to photons which were then free to propagate forevermore.
+    These photons, once very high-energy, have been redshifted into the microwave, and we call their remnants the \textbf{cosmic microwave background} (CMB).
+\end{itemize}
+The CMB is remarkably homogeneous, which leads us to wonder---when electrons joined with nuclei (upon ``recombination''), how big was the largest region that could have been in contact with itself?
+
+In a radiation-dominated fluid, perturbations propagate at the speed of sound $c / \sqrt{3}$.
+The horizon distance we desire is given by
+\[ d_h(t_\textrm{rec}) = \int_{0}^{t_\textrm{rec}} \frac{c}{\sqrt{3}} dt\, \frac{R(t_\textrm{rec})}{R(t)}, \]
+where the scale factor fraction is tacked on to account for expansion.
+Assuming $R(t) = \left( \frac{3}{2} t H_0 \right)^{\frac{2}{3}}$ like we derived, we get
+\[ \frac{R(t_\textrm{rec})}{R(t)} = \left( \frac{t_\textrm{rec}}{t} \right)^{\frac{2}{3}} \]
+and the integral
+\[ d_h(t_\text{rec}) = \frac{c}{\sqrt{3}} t_\text{rec}^{2 / 3} \int_{0}^{t_\text{rec}} t^{-2 / 3}dt = \sqrt{3} \,c t_\text{rec}. \]
+Taking $t_\textrm{rec} \simeq 380,000 \text{ yr}$, we get $d_h = 200 \textrm{ kpc}$.
+As an angular distance relative to Earth this is $\theta_h = d_h / D \simeq 0.017 \textrm{ rad} \simeq 1^\circ$.
+Portions of the CMB that are more than this angular distance apart could never have talked to one another, so we're still left wondering how it's so consistent throughout the Universe.
+
+There is a simple solution: inflation.
+When the Universe was around $10^{-36} \textrm{ s}$ old, it expanded by a factor of $\sim 10^{43}$ over a period $\Delta t \sim 10^{-34} \textrm{ s}$.
+Thus any quantum fluctuations that existed at the smallest of scales were suddenly blown up to the macroscopic scale, and they persisted as the Universe continued to expand.
+This hypothesis also explains why the Universe appears to be so flat---as an analogy, we might consider a marble that's been blown up to the size of a galaxy; a person standing on this huge marble would say that it's basically flat.
+
+\end{document}

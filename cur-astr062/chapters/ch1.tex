@@ -11,14 +11,14 @@ We'll tackle each of these, starting with the first.
 
 \subsection*{Celestial Coordinate Systems}
 For now, it will be useful for us to imagine the sky as a ``\textbf{celestial sphere}'' that revolves around us, the radius of which is of no concern.
-In order to specify the position of an object on this sphere we will need two coordinates: one that specifies the horizontal angle at which the object can be found, and another that specifies its height on the sphere.
+To specify the position of an object on this sphere we will need two coordinates: one for the horizontal angle at which the object can be found, and another for its height on the sphere.
 
 There's a couple of natural ways in which we can assign these coordinates.
-One is the \textbf{altitude-azimuth coordinate system}, which is defined with respect to the observer's local horizon.
-The object's horizontal position, its \textbf{azimuth} $A$, is specified by the eastward angle from geographic north; its vertical position, its \textbf{altitude} $h$, is its angle above the horizon.
-(Sometimes height is specified using the \textbf{zenith distance} $z$, which is measured downward from the highest point in the sky. $h + z = 90^\circ$.)
+One is the \textbf{altitude-azimuth coordinate system}, which is defined with respect to the observer's local horizon---below are drawn the horizontal \textbf{azimuth} $A$ and the vertical \textbf{altitude} $h$ (or \textbf{zenith distance} $z$).
 All angles are measured in degrees.
-
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{coordinateSystems.png}
+\end{center}
 This coordinate system is great for casual observations, but not so much for cataloging---an object's altitude-azimuth coordinates will change over time due to movements of the Earth!
 To combat this we can define a coordinate system with respect to Earth's equator, with quantities that are analagous to the familiar geographic coordiante system.
 We can extend the equator outward onto the celestial sphere to create a \textbf{celestial equator}; similarly extending the poles gives the \textbf{celestial poles}.
@@ -30,8 +30,7 @@ Objects that are above the celestial equator get a positive $\delta$ while those
 We usually write declinations using degrees, arcminutes, and arcseconds: there are sixty arcminutes in a degree ($1^\circ = 60'$) and sixty arcseconds in a arcminute ($1' = 60''$).
 
 Right ascension is a little frustrating.
-Looking down from the north celestial pole, we measure $\alpha$ counterclockwise (westward) from some reference point that we'll define soon.
-We write right ascensions using hours, minutes, and seconds---which are distinct from arcseconds!
+We write it using hours, minutes, and seconds---which are distinct from arcseconds!
 The celestial sphere is divided into 24 hours, so $1^\text{h} = 15^\circ$.
 From there we again divide by sixty for each subdivision, so $1^\text{m} = 15'$ and $1^\text{s} = 15''$.
 The logic here is to mirror the way we measure time as Earth rotates, but we just end up with needlessly confusing units.
@@ -52,36 +51,34 @@ Spherical trigonometry is hard, but if the objects we're considering are close e
 
 Suppose the celestial sphere has radius $R$.
 (The choice of $R$ doesn't matter since we hope it'll cancel out in the end anyway.)
-Obviously, the hypotenuse of this triangle is $R \Delta \theta$ and one of the legs is $R \Delta \delta$.
+Obviously, the hypotenuse of our triangle is $R \Delta \theta$ and one of the legs is $R \Delta \delta$.
 The leg due to the right ascension, however, is not $R \Delta \alpha$ because the rings of right ascension get smaller as they get closer to the poles.
 The radius of this ring is $R \cos \delta$, where $\delta$ is any declination between the two objects we're considering.
 (The precise value is unimportant in our approximation.)
 So the leg we really want is $R \cos \delta \,\Delta \alpha$, and by the Pythagorean theorem we can write
 \begin{align*}
     (R \Delta \theta)^2 &= (R \Delta \delta)^2 + (R \cos \delta \,\Delta \alpha)^2 \\
-    (\Delta \theta)^2 &= (\Delta \delta)^2 + (\cos \delta \,\Delta \alpha)^2,
+    \Aboxed{(\Delta \theta)^2 &= (\Delta \delta)^2 + (\cos \delta \,\Delta \alpha)^2},
 \end{align*}
 where $\delta$ and $\alpha$ have the same units (usually degrees or arcseconds).
-This gives the angular separation between the objects!
+This gives the angular separation!
 
 \subsection*{Trigonometric Parallax}
 We'll now turn to the second question we posed at the beginning of this section, the question of distance.
 We can measure distances to relatively nearby stars using the method of \textbf{stellar parallax}.
-As the Earth orbits around the Sun, these stars appear to move back and forth very slightly relative to background stars, as shown below.
+As the Earth orbits around the Sun, these stars appear to move back and forth very slightly relative to background stars.
 \begin{center}
-    \includegraphics[width=0.55\textwidth]{stellarParallax.png}
+    \includegraphics[width=0.45\textwidth]{stellarParallax.png}
 \end{center}
 The angle $p$ is called the \textbf{parallax angle}.
 The distance between the Earth and the Sun is known to be one astronomical unit (AU), so we can use trigonometry to determine the distance $d$ to the star:
-\[ \tan p = \frac{1 \text{ AU}}{d}. \]
+\[ \tan p = \frac{1 \textrm{ AU}}{d}. \]
 Applying the small-angle approximation $\tan p \approx p$ gives
-\[ \boxed{d = \frac{1}{p} \text{ AU}}, \]
-where $p$ is measured in radians.
+\[ \boxed{d = \frac{1}{p} \textrm{ AU}}, \text{ $p$ in radians.} \]
 However, $p$ is often given in arcseconds, which is a little unweildy here.
 To make things simpler, we can define the \textbf{parsec} (pc), which is the distance to a star whose parallax angle is $1''$.
 So the conversion from radians to arcseconds gives
-\[ \boxed{d = \frac{1}{p} \text{ pc}}, \]
-where $p$ is measured in arcseconds.
+\[ \boxed{d = \frac{1}{p} \textrm{ pc}}, \text{ $p$ in arcseconds.} \]
 
 \section{The Two-Body Problem}
 \subsection*{The Planar Restricted Two-Body Problem}
@@ -91,12 +88,12 @@ Notice that all of the interactions between the star and planet occur in the sam
 However, for now we will restrict ourselves to the case in which $m$ is negligibly small relative to $M_\star$; that is, we'll take $m \to 0$.
 This arrangement is called the \textbf{planar restricted 2-body problem}.
 
-The acceleration of the star is a function of the planet's mass, so our restriction makes it negligible.
+The acceleration of the star is proportional to the planet's mass, so our restriction makes it negligible.
 The planet's acceleration, however, yields the equation of motion
 \[ \ddot{\mbf{r}} = -\frac{GM_\star}{r^2} \hat{r}, \]
 which takes the initial conditions $\mbf{r}(0) = \mbf{r}_0$ and $\dot{\mbf{r}}(0) = \mbf{v}_0$.
 We could go into mathematical detail about what kind of orbit this equation leads to, but it isn't super useful for the purposes of this class.
-Instead, we'll jump straight to the punch.
+Instead, we'll jump straight to the result.
 
 \textbf{Kepler's first law} states that the orbit of our planet is an ellipse, with its star at one of its foci.
 (The other focus is just empty space.)
@@ -127,11 +124,11 @@ Each of these four curves describes a different type of celestial motion (we'll 
 
 Now, the orbital elements $a$, $e$, and $\theta$ (also called $f$) are enough to characterize an ellipse and an object's position on it.
 However, it says nothing about the ellipse's orientation in space.
-So we introduce three more orbital elements to describe it:
+So we introduce three more orbital elements to describe it.
 \begin{itemize}
     \item The inclination $i$ is the angle between the orbital plane and a reference plane, like the equatorial plane.
     \item The longitude of ascending node $\Omega$ is the horizontal angle (longitude) from a point in the reference plane, like the vernal equinox, to the point at which the orbit intersects the reference point going northward (the ascending node).
-    \item The argument of pericenter $\omega$ is the angle (argument) from the ascendng node to pericenter.
+    \item The argument of pericenter $\omega$ is the angle (argument) from the ascending node to pericenter.
 \end{itemize}
 Unsurprisingly, there is a one-to-one mapping between the initial conditions $\mbf{r}_0, \mbf{v}_0$ and the six obital elements we've defined; we won't describe that mapping here.
 What we \textit{will} describe, however, is the connection between some of these orbital elements to the system's main conserved quantities.
@@ -144,7 +141,7 @@ It turns out that, by solving the initial-value problem that governs the plane's
 (This is another one of those things that we'll take for granted.)
 So we have the relationship
 \[ \frac{h^2}{GM_\star} = a (1 - e^2) \implies \boxed{h^2 = GM_\star a (1 - e^2)}. \]
-Similarly, the energy $\mathcal{E} = \frac{1}{2}v^2 - \frac{GM_\star}{r}$ is conserved since gravity is the only force acting on the planet, and we can define the \textbf{specific energy}
+Similarly, the energy $\mathcal{E} = v^2 / 2 - GM_\star / r$ is conserved since gravity is the only force acting on the planet, and we can define the \textbf{specific energy}
 \[ \mathcal{E} = \frac{1}{2}v^2 - \frac{GM_\star}{r}. \]
 We can derive a relationship for this one on our own.
 Consider the state of the planet at pericenter---it has position $a(1 - e)$ and velocity $v_p$.
@@ -156,7 +153,6 @@ Using this to calculate the specific energy:
     &= \frac{GM_\star a (1 - e^2)}{2a^2 (1-e)^2} - \frac{GM_\star}{a (1-e)} \\
     \Aboxed{\mathcal{E} &= -\frac{GM_\star}{2a}}.
 \end{align*}
-
 We're now in a position to derive Kepler's other laws with ease.
 
 \textbf{Kepler's second law} states that the rate at which a planet's orbit sweeps out area is constant.
@@ -175,9 +171,18 @@ Squaring gives
 \[ \boxed{P^2 = \frac{4 \pi^2}{GM_\star} a^3}. \]
 That's it for Kepler's laws!
 These are valid for bound orbits, which are ones that keep the planet (or other astronomical object) within the grasp of a parent star.
+Another important property of energy in bound systems is the \textbf{virial theorem}.
+Recall how, for circrular orbits,
+\[ \frac{GM_\star}{r^2} = \frac{v^2}{r}, \]
+so $v^2 = GM/r$.
+This gives the kinetic energy
+\[ K = \frac{GM_\star m}{2r} = -\frac{U}{2}. \]
+In a slightly more general sense, we can make the following statement for any gravitationally bound system in equilibrium:
+\[ \boxed{\left< K \right> = -\frac{\left< U \right>}{2}}, \]
+where quantities in the angle brackets are time averages (usually over one period).
 
 To determine if an orbit is bound or unbound we look at the amount of energy an object possesses.
-If its energy is positive (or zero) then it will always have \textit{some} kinetic energy, so its orbit is unbound.
+If its energy is positive (or zero) then it has enough energy to escape the star's potential energy well, so its orbit is unbound.
 Negative energies, on the other hand, correspond to bound orbits.
 More specfically:
 
@@ -190,16 +195,6 @@ More specfically:
     Circle & Yes & $E < 0$ & $a > 0$ & $e = 0$
 \end{tabular}
 \end{center}
-
-Another important property of energy in these systems is given by the \textbf{virial theorem}.
-Recall how, for circrular orbits,
-\[ \frac{GM_\star}{r^2} = \frac{v^2}{r}, \]
-so $v^2 = GM/r$.
-This gives the kinetic energy
-\[ K = \frac{GM_\star m}{2r} = -\frac{U}{2}. \]
-In a slightly more general sense, we can make the following statement for any gravitationally bound system in equilibrium:
-\[ \boxed{\left< K \right> = -\frac{\left< U \right>}{2}}, \]
-where quantities in the angle brackets are time averages (usually over one period).
 
 \subsection*{The General Two-Body Problem}
 Now we can tackle the general two-body problem---that is, the two-body problem with two finite masses $m_1$ and $m_2$
@@ -225,7 +220,7 @@ We've just taken our general two-body problem and reduced it to an equivalent on
 So all of the equations that we've derived for the restricted two-body problem also apply here, after a few substitutions.
 
 We don't need to change anything about the eccentricity of the orbit.
-It should make sense for example, that a highly eccentric two-body system would stay highly eccentric in our equivalent reduced model.
+It should make sense, for example, that a highly eccentric two-body system would stay highly eccentric in our equivalent reduced model.
 To see what happens to the semimajor axis, we exploit the fact that the distance $r$ between $\mu$ and $M$ is the sum of the objects' distances to the center of mass.
 At perihelion we have
 \begin{align*}
@@ -260,20 +255,27 @@ This generally only works with very large planets with very large orbits.
 
 Alternatively, we can use our newfound knowledge of orbital mechanics!
 Suppose we have a planet-star system orbiting around a common center of mass; let $\mbf{v}_\star$ be the star's orbital velocity and let $\mbf{v}_r$ be the component of this velocity that is in the observer's direction.
-\begin{center}
-    \includegraphics[width=0.3\textwidth]{exoplanetDoppler.png}
-\end{center}
+
 As the star moves toward or away from us, the light it emits experiences a Doppler shift---it is blueshifted and redshifted, respectively.
 For $v_r \ll c$, this shift is quantified by
 \[ \frac{\lambda_\textrm{obs} - \lambda_\textrm{em}}{\lambda_\textrm{em}} = \frac{\Delta \lambda}{\lambda_\textrm{em}} = \frac{v_r}{c}. \]
-So clearly $v_r$ is an important quantity.
-We can relate it to known values using some simple trigonometry!
-If $\theta$ is the angle between $\mbf{v}_\star$ and $\mbf{v}_r$, then we have $v_r = v_\star \cos \theta$.
-If we define a time $t=0$ at the angle $\theta=0$, then the relationship is
-\[ v_r = v_\star \cos \left( \frac{2\pi t}{P} \right), \]
-where $P$ is the orbital period of the star.
-But in general, we won't be looking at planetary systems edge-on, but rather at some inclination $i$.
-If $i=90^\circ$ corresponds to the edge-on view, then we have
+
+\parbox{0.675\textwidth}{
+    So clearly $v_r$ is an important quantity.
+    We can relate it to known values using some simple trigonometry!
+    If $\theta$ is the angle between $\mbf{v}_\star$ and $\mbf{v}_r$, then we have $v_r = v_\star \cos \theta$.
+    If we define a time $t=0$ at the angle $\theta=0$, then the relationship is
+    \[ v_r = v_\star \cos \left( \frac{2\pi t}{P} \right), \]
+    where $P$ is the orbital period of the star.
+    But in general, we won't be looking at planetary systems edge-on, but rather at some inclination $i$.
+    If
+}\parbox{0.375\textwidth}{
+    \quad\;
+    \includegraphics[width=0.25\textwidth]{exoplanetDoppler.png}
+}
+
+\vspace{-4pt}
+$i=90^\circ$ corresponds to the edge-on view, then we have
 \[ \boxed{v_r = (v_\star \sin i) \cos \left( \frac{2\pi t}{P} \right)}. \]
 From here we can do a couple of things.
 For one, we could observe the change in the star's spectrum over time to determine its mass; we'll do more of that later on.
@@ -320,7 +322,7 @@ Also:
     \item This definition is innherently relative---in isolation it is only meaningful when we compare the magnitudes of two stars.
     So if we want to assign each object its own unique magnitude we must agree on a standard value of $F$ that corresponds to $m=0$; Vega is the usual choice for this.
 
-    \item This definition is also relative in another sense: it depends on the distance from the object, just like $F$.
+    \item This definition is also relative in another sense: it depends on distance, just like $F$.
     To distinguish it from the absolute magnitude (which we'll define shortly), we call $m$ an apparent magnitude.
 
     \item Finally, the magnitude scale runs opposite of how we might expect it to.
@@ -331,7 +333,7 @@ Now, if apparent magnitude is defined in terms of flux, we might expect that the
 Specifically, if we define the \textbf{absolute magnitude} $M$ as the apparent magnitude of an object seen at a distance of $d = 10 \text{ pc}$, we get
 \begin{align*}
     M_1 - M_2 &= 2.5 \log_{10} \left( \frac{F_2 (d)}{F_1 (d)} \right) \\
-    &= 2.5 \log_{10} \left( \frac{L_2}{4 \pi d^2} \cdot \frac{L_1}{4 \pi d^2} \right) \\
+    &= 2.5 \log_{10} \left( \frac{L_2}{4 \pi d^2} \cdot \frac{4\pi d^2}{L_1} \right) \\
     \Aboxed{M_1 - M_2 &= 2.5 \log_{10} \frac{L_2}{L_1}}
 \end{align*}
 Again, we usually use Vega as our standard $M=0$.
@@ -339,9 +341,9 @@ We can take advantage of our two definitions here to approximate the distance to
 We know how to measure $m$ directly, and we can often make a pretty good guess for $M$ based on other characteristics (we'll see how later).
 The distance $d$ to the object is related to these quantities by the equation
 \begin{align*}
-    m - M &= 2.5 \log_{10} \left( \frac{F (10 \text{ pc})}{F (d)} \right) \\
-    &= 2.5 \log_{10} \left( \frac{L}{4 \pi (10 \text{ pc})^2} \cdot \frac{4\pi d^2}{L} \right) \\
-    \Aboxed{m - M &= 5 \log_{10} \frac{d}{10 \text{ pc}}}
+    m - M &= 2.5 \log_{10} \left( \frac{F (10 \textrm{ pc})}{F (d)} \right) \\
+    &= 2.5 \log_{10} \left( \frac{L}{4 \pi (10 \textrm{ pc})^2} \cdot \frac{4\pi d^2}{L} \right) \\
+    \Aboxed{m - M &= 5 \log_{10} \frac{d}{10 \textrm{ pc}}}
 \end{align*}
 This is often called the \textbf{distance modulus}.
 
@@ -349,14 +351,12 @@ This is often called the \textbf{distance modulus}.
 All of our definitions here are great for point sources that emit light isotropicallly in all directions.
 But what if this isn't the case?
 As a step toward accounting for this, we'll define a quantity that, in a sense, indicates direction: the \textbf{solid angle} $\Omega$.
-
-A solid angle is just an angle in three dimensions.
-Just like how we have $d\theta = ds/r$ in two dimensions, in 3D we have
+A solid angle is just an angle in three dimensions---just like how we have $d\theta = ds/r$ in two dimensions, in 3D we have
 \[ \boxed{d \Omega = \frac{dA}{r^2} = d\theta \sin \theta \,d\varphi}, \]
 where $dA = r\,d\theta \cdot r \sin \theta \,d\phi$ is a differential area on the celestial sphere.
 ($\varphi$ is the angle in the $xy$-plane while $\theta$ is the angle from the $z$-axis.)
 Solid angles are measured in steradians (sr) which, like radians, \textit{technically} aren't real units but we usually write them down for bookkeping purposes.
-We could show, by integrating $d\Omega$ over the entire celestial sphere, that there are $4\pi \text{ sr}$ in a full sphere.
+We could show, by integrating $d\Omega$ over the entire celestial sphere, that there are $4\pi \textrm{ sr}$ in a full sphere.
 
 Now we're ready to define the ``directional brightness'' that we initially desired.
 Taking into account that an observer may detect incoming light at an angle $\theta$ (where $\theta = 0$ corresponds to observing the light straight-on), we define the \textbf{intensity} as
@@ -365,7 +365,7 @@ where $dA \cos \theta$ is the differential normal area of some detector.
 This is the energy detected (or emitted!) per unit time, per unit solid angle, per unit normal area.
 
 There's a pretty straightforward relationship between $F$ and $I$ that we can determine just by inspecting their definitions:
-\[ F = \int_{\Omega}^{} I \cos \theta \,\Omega. \]
+\[ F = \int_{\Omega}^{} I \cos \theta \,d\Omega. \]
 The extra factor of $\cos \theta$ ensures that light incident at a relatively large $\theta$ contributes less to the overall flux than light from other directions.
 There are a couple of assumptions that we can often take to make the integral much easier.
 First, if the observer is looking directly at the object then $\theta \approx 0$ for all light, so $\cos \theta \approx 1$ and
@@ -374,7 +374,7 @@ If the sky is uniformly bright, then $I$ is constant and the flux from all light
 \[ F = \int_{0}^{\pi / 2} I \cos\theta (\sin\theta \,d\theta) \int_{0}^{2\pi}d\varphi = \pi I. \]
 This result is useful in determining the total (observed) emitted flux from an isotropic emitter, like we'd see on the surface of a star!
 
-\subsection*{Speciific Brightness}
+\subsection*{Specific Brightness}
 We can split up each of our quantities in one more way.
 We're often only concerned with the brightness of an object in one wavelength or frequency.
 For example, we can define the specific luminosity
@@ -401,19 +401,18 @@ Here $k = k_B$ is the Boltzmann constant, $h$ is the Planck constant, and $c$ is
 Like with luminosity, we can convert between these quantities using the equation $I_\lambda |d\lambda| = I_\nu |d\nu|$.
 
 Notice that an object's Planck function depends \textit{only} on its temperature.
-Objects at higher temperatures have higher intensities at all wavelengths, but their peak wavelengths are lower than cooler counterparts.
+Objects at higher temperatures have higher intensities at all wavelengths, but their peak wavelengths are lower than in cooler counterparts.
 The plot below illustrates this at three different temperatures (incuding the Sun's, at 5777 K).
 \begin{center}
     \includegraphics[width=0.55\textwidth]{blackbodyCurves.png}
 \end{center}
 To determine what this peak wavelength is, one could solve the equation $dB_\lambda / d\lambda = 0$ to find that
-\[ \boxed{\lambda_\textrm{peak} = \frac{b}{T}}, \]
-where $b = 0.29 \text{ cm K}$.
-This is called \textbf{Wien's displacement law}, and it explains why bodies with different temperatures appear to be different colors!
+\[ \boxed{\lambda_\textrm{peak} = \frac{b}{T}}, \text{ with $b = 0.29 \textrm{ cm K}$.} \]
+This is \textbf{Wien's displacement law}, and it explains why bodies with different temperatures are different colors!
 
 When we integrate across all wavelengths, we get the total intensity
 \begin{align*}
-    I = B &= \int_{0}^{\infty} B_\lambda d\lambda \\
+    I = B &= \int_{0}^{\infty} B_\lambda \,d\lambda \\
     &= \int_{0}^{\infty} \frac{2hc^2 d\lambda}{\lambda^{5} (e^{hc/kT\lambda} - 1)} \\
     I = B &= \frac{\sigma T^{4}}{\pi},
 \end{align*}
@@ -465,7 +464,7 @@ Subtracting these equations,
 \end{align*}
 But the second is the B-V of Vega, which we define to be zero.
 This gives us the \textbf{color index}
-\[ \boxed{B - V = 2.5 \log_{10} \left( \frac{F_{\lambda} (\lambda_V)}{F_{\lambda} (\lambda_B)} \right) = 2.5 \log_{10} \left( \frac{L_V}{L_B} \right)}. \]
+\[ \boxed{B - V = 2.5 \log_{10} \left( \frac{F_{\lambda} (\lambda_V)}{F_{\lambda} (\lambda_B)} \right)}. \]
 Notice that the color magnitude is a function only of temperature, not distance!
 Also note that a larger $F_\lambda (\lambda_B)$ compared to $F_\lambda (\lambda_V)$ corresponds to a higher temperature, so B-V decreases with increasing temperature.
 

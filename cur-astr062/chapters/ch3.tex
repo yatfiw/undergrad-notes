@@ -1,0 +1,436 @@
+\documentclass[../a062main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Stellar Evolution}
+\section{Pre-main-sequence Evolution}
+Now we'll turn our attention to stellar evolution before the main-sequence stage.
+The most basic prerequisite for these processes is the presence of matter that is not already bound up in stars.
+This matter comprises the \textbf{interstellar medium}, and it is mostly made up of hydrogen and helium with a very small amount of metals.
+
+\subsection*{The Interstellar Medium}
+Studying the properties of the interstellar medium is a first step toward understanding stellar formation.
+We can do this by focusing on the obscuration of light, produced by interstellar dust particles.
+These particles, usually on the order of 100 nanometers, are composed mostly of silicon and carbon.
+These particles absorb starlight; the amount of absorption is quantified by the \textbf{extinction}
+\[ A_\lambda = m_\lambda - m_{\lambda,0}, \]
+where $m_\lambda$ is the observed magnitude and $m_{\lambda,0}$ is the magnitude that would've been observed without absorption.
+We refer to extinction in magnitudes---for example, $A_\lambda = 10$ corresponds to ``extinction of ten magnitudes''.
+By definition,
+\[ A_\lambda = 2.5 \log_{10} \left( \frac{F_{\lambda,0}}{F_\lambda} \right). \]
+The cloud is cold, so we can ignore emission and approximate $I_\lambda = I_{\lambda,0} e^{-\tau_\lambda}$.
+Now, if nothing special is happening at each solid angle when we also have $F_\lambda = F_{\lambda,0} e^{-\tau_\lambda}$; substituting gives
+\[ A_\lambda = \tau_\lambda (2.5 \log_{10} e) \simeq 1.086\tau_\lambda. \]
+We'll just say that $A_\lambda \simeq \tau_\lambda$.
+But $\tau_\lambda = \int_{0}^{s_c} n_d(s') \sigma_\lambda ds'$, where $n_d$ is the number density of dust particles and $\sigma_\lambda$ is the cross-section of one dust particle; assuming constant $\sigma$, this gives $A_\lambda \simeq \sigma_\lambda N_d$, where $N_d$ is the ``column density'' of dust grains.
+
+Since we can't directly measure the hypothetical $m_{\lambda,0}$, to measure extinction we must rely on the fact that it depends on $\lambda$.
+In particular, the cross section of a size-$a$ dust particle looks like
+\[ \sigma_\lambda \propto \begin{cases} a^2 & \lambda \ll a \\ a^2 \left( \frac{a}{\lambda} \right) & \lambda \sim a \\ 0 & \lambda \gg a \end{cases} \]
+Given the size of a typical interstellar dust particle, $\sigma_\lambda$ varies as $1 / \lambda$ in the visible and near-IR range.
+There's a couple of notable consequences of this fact.
+First, blue light is more readily scattered than red light, so stars behind dust clouds look reddened.
+Second, dust clouds next to bright sources look blue since they redirect scattered light toward us; such clouds are called reflection nebulae.
+
+Aside frrom thermal emission from dust and atomic emission lines from hot regions around stars, there are three key ways emission can occur in the interstellar medium.
+All have their origins in quantum mechanics.
+\begin{itemize}
+    \item Molecular bonds can be modeled using a quantum harmonic oscillator.
+    Each energy level here is separated by an amount $\hbar \omega_0$, where $\omega_0 = \sqrt{k / \mu}$ is a physical property of the potential well.
+    So this is the energy of a photon emitted after a fall between adjacent states, called a \textbf{vibrational transition}.
+
+    \item A molecule's angular momentum is quantized, meaning its rotational energy is also quantized with
+    \[ E = \frac{j(j+1)\hbar^2}{2I}, \]
+    where $j = 0,1,\ldots$ and $I$ is the rotational inertia.
+    A fall between adjacent states (called a \textbf{rotational transition}) involves the emission of a photon with energy $E_\gamma = \hbar^2 (j+1) / I$, where $j$ indexes the lower state.
+    Note that rotational transitions can only occur in asymmetric molecules---that is, molecules with a permanent electric dipole moment.
+
+    \item The energy of an individual hydrogen atom is influenced by its spin configuration.
+    A state in which the spins of the proton and electron match has a higher energy than one in which the spins differ.
+    The excited state has a lifetime of $\sim 10^{6}$ years, but when a transition does occur it emits a 21-cm photon.
+\end{itemize}
+
+Combining extinction and emission information allows us to determine the ratio of gas and dust in the galaxy.
+In particular, the ratio of hydrogen atoms to dust grains is on the order of $10^{11}$.
+Note that this is a number ratio---a mass ratio would be much smaller.
+
+Clouds in the interstellar medium can be broken up by radius into three relatively fuzzy zones.
+\begin{itemize}
+    \item In the inner zone, matter is shielded from starlight and cosmic rays and molecules are allowed to form---this is where density is the highest and temperature is the lowest.
+    Emission here is dominated by molecular lines.
+
+    \item The outer zone is dominated by HII, fully ionized hydrogen.
+    Here density is at its lowest, temperature at its highest, and atomic emission lines at their strongest.
+
+    \item In the middle we see mostly HI and dust.
+    Emission is dominated by the 21-cm line and blackbody emission from warm dust.
+\end{itemize}
+
+The formation rate of carbon monoxide is a very sensitive function of density and temperature, so we can infer the total mass of a cloud's core based on CO observations.
+
+\subsection*{Gravitational Collapse}
+New stars form from these interstellar clouds via \textbf{gravitational collapse}.
+Consider a uniform cloud with mass $M$ and radius $R$; in the spirit of the virial theorem, we say that a cloud will collapse in on itself if
+\[ \left< K \right> < -\frac{\left< U \right>}{2}. \]
+In other words, gravity wins out over the thermal motions of the cloud's molecules.
+We can rewrite this:
+\begin{align*}
+    \frac{3}{2} NkT &< \frac{3}{5} \frac{GM^2}{2R} \\
+    \frac{M}{\mu m_p} kT &< \frac{1}{5} \frac{GM^2}{R} \\
+    \intertext{But this $R$ secretly has an $M$ in it. Specifically , $R^3 = 3M / (4\pi \rho)$, so}
+    5 \left( \frac{3M}{4\pi \rho} \right)^{\frac{1}{3}} \frac{kT}{\mu m_p G} &< M
+\end{align*}
+Solving for $M$,
+\begin{align*}
+    M^{\frac{2}{3}} &> \frac{5kT}{\mu m_p G} \left( \frac{3}{4\pi \rho} \right)^{\frac{1}{3}} \\
+    \Aboxed{M &> \left( \frac{5kT}{\mu m_p G} \right)^{\frac{3}{2}} \left( \frac{3}{4\pi \rho} \right)^{\frac{1}{2}}}
+\end{align*}
+This is called the \textbf{Jeans mass} $M_J$.
+Any higher and we expect to see gravitational collapse.
+But not all the collapsing mass goes into the same star---instead, \textbf{fragmentation} occurs.
+As gravitational collapse takes its course, density increases and the Jeans mass decreases.
+Thus smaller pockets of matter begin to collapse in on themselves individually, which themselves spawn smaller collapsing pockets, and so on.
+Many of these pockets eventually become hot enough to facilitate nuclear fusion and become main-sequence stars!
+
+\section{Post-main-sequence Evolution}
+We've qualitatively described how stellar formation works, and we've spent plenty of time talking about main-sequence stars.
+Now it's time to get into stellar evolution after a star leaves the main sequence!
+We'll see that this evolution is driven almost entirely by stellar cmposition.
+
+The big changes begin in the core.
+At some point, it runs out of hydrogen and is no longer able to facilitate nuclear burning.
+But the core is still hotter than it surroundings and so loses energy to the outside; to maintain equilibrium, gravitational contraction ensues.
+By the virial theorem, about half of the liberated energy goes into the kinetic energy of the core and the rest gets absorbed by the envelope, making it less dense and cooler.
+
+The gravitational contraction of the core leads to increased temperatures, which facilitates new nuclear reactions that produce heavier elements.
+For example, we have the triple-$\alpha$ process:
+\begin{align*}
+    \ch{^42He + ^42He &<-> ^84Be} \\
+    \ch{^84Be + ^42He &-> ^{12}6C + \gamma}
+\end{align*}
+This berylium is incredibly unstable and it decays very quickly, so this reaction essentially requires three things to collide with each other in very short succession.
+Thus energy is released according to $\varepsilon \propto \rho^2 T^{41}$.
+But after this things are much simpler---once we obtain \ch{^{12}6C} we can keep adding \ch{^42He} nuclei to make heavier elements like oxygen-16 and neon-20.
+
+The amount of energy involved in a nuclear reaction is determined by the \textbf{binding energy}
+\[ E_B = [Zm_p + (A - Z)m_n - m_\text{nuc}]c^2. \]
+As we move up the chain of nuclear fusion, the amount of binding energy gained per nucleon decreases until we get to iron-56.
+This is where $E_B / A$ reaches a maximum---there is nothing else the star can do to release energy, so this is where fusion really stops.
+
+\subsection*{Low-mass Evolution}
+With this big picture out of the way, we can track the specifics of post-main-sequence evolution in low-mass stars (ones with masses smaller than $8M_\odot$).
+We'll focus in particular on a star with mass $5M_\odot$.
+
+After hydrogen burning in the core ceases, gravitational contraction takes over as the primary means of energy release.
+This energy goes into increasing the temperature of the surrounding envelope, so there is a shell of hydrogen burning surrounding the core.
+This increases the mass of the inert helium core.
+
+At this point there is no fusion supplying a temperature gradient, so the only thing supporting the core against itself is a density gradient.
+This is a precarious situation to be in, and eventually the core becomes massive enough to begin collapsing in on itself and the star enters the \textbf{subgiant branch}.
+At first the entire star contracts---density and temperature increase together, which causes an abrupt increase in fusion energy output.
+But this energy can't be transported to the exterior of the star quickly enough, so it goes back into envelope expansion.
+This results in a much larger, much redder star.
+
+Eventually the stellar envelope becomes convective again, expansion slows, and the star enters the \textbf{red giant branch}.
+Most things continue as they have---the inert helium core continues to contract and hydrogen continues to burn in a surrounding shell.
+The envelope continues to expand in such a way that its temperature remains basically constant, and the increased energy transport increases the luminosity of the star.
+
+The core eventually reaches a high enough temperature and density that helium fusion can begin.
+The threshold is accompanied by a spectacular flash of light lasting for only a few seconds.
+So the core begins expanding once again, the hydrogen-burning shell cools, and the star's luminosity decreases in response to envelope contraction.
+The star then enters the \textbf{horizontal branch}, which is essentially the hydrogen-burning analog of the main sequence.
+
+But eventually the core becomes exhausted of helium, too, and the remaining carbon-oxygen core begins to contract.
+The helium-burning shell expands; so does the hydrogen-burning shell, but fusion there eventually stops altogether.
+
+So the star enters the \textbf{asymptotic giant branch}, which is full of activity.
+As the envelope temperature rises, the hydrogen burning shell eventually reignites.
+The narrowing helium shell, however, turns on and off somewhat periodically.
+Ignitions are accompanied by shell flashes and the temporary turning-off of the hydrogen shell.
+The resulting thermal pulses also cause convection to reach deep into the star, dredging up carbon-rich material toward the surface.
+
+As this occurs, the core continues to contract and the envelope continues to expand.
+Eventually the envelope is lost completely and becomes a \textbf{planetary nebula}, a beautiful cloud of (optically thin) glowing gas named for its visual similarity to giant gaseous planets when viewed through small telescopes.
+The carbon-oxygen core is left to cool off and become a \textbf{white dwarf}---more on that later.
+
+\subsection*{High-mass Evolution}
+Evolution in higher-mass stars looks very similar until the carbon-oxygen core forms.
+Rather than decay into a white dwarf, a high-mass core is hot and dense enough to facilitate more fusion.
+The subsequent evolution is much more dramatic!
+
+In very late stages of life these stars develop an onion-like structure.
+The deeper layers harbor less efficient nucleosynthesis as the binding curve gets more shallow for heavier elements.
+As a result, the timescales for each burning stage decrease rapidly---for a $20M_\odot$ star, the main-sequence timescale is $10^{7}$ years while the silicon-burning timescale is just two days!
+
+As this fusion declines, pressure is no longer enough to hold the star up against its own gravity and \textbf{electron degeneracy pressure} takes over.
+Qualitatively, as the core continues to heat and shrink as energy leaks out to the rest of the star, all the electrons become much more tightly packed together; this reduces the uncertainty in a given electron's position, thus increasing that in its momentum.
+We'll revisit this in more detail later.
+
+While all this is happening, the silicon-burning shell is depositing more mass onto the iron core.
+Once it grows to around $2M_\odot$, not even degeneracy can keep it stable.
+Two important processes take over.
+\begin{itemize}
+    \item \textbf{Photodisintegration}.
+    When an iron or helium atom absorbs a high-energy $\gamma$-ray, one of the following two decay reactions occurs.
+    \begin{align*}
+        \ch{^{56}26Fe + \gamma &-> 13 ^42He + 2 n} \\
+        \ch{^42He + \gamma &-> 2 p + 2 n}
+    \end{align*}
+    In this way, millions of years of nucleosynthesis are undone in an instant.
+
+    \item \textbf{Neutronization}.
+    At high densities, a proton may ``capture'' an electron and fuse according to
+    \[ \ch{p + e -> n + \nu_e}, \]
+    where $\nu_e$ is an electron neutrino.
+\end{itemize}
+All of these reactions are endothermic, but most of the converted energy escapes the star via neutrinos.
+Also note that neutronization rids the core of all of its electrons, meaning there's nothing left to support the core against itself---the result is an immediate collapse of the core over the course of several seconds.
+
+Neutron degeneracy provides one final line of defense.
+If the core's mass is large enough to overcome this degeneracy, collapse continues until we have a black hole.
+(More on that later.)
+If degeneracy does its job, though, we end up with a \textbf{neutron star}.
+This is an extremely high-density object comprised entirely of neutrons (with a smattering of protons and neutrons) held together by gravity.
+This neutron star is very ``stiff'', though, so the infalling layers of the dying star bounce back.
+The collapse becomes an expansion.
+Further, the near-core layers are dense enough to capture a significant amount of neutrino energy as kinetic energy, turning the expansion into a shockwave that completely disrupts the rest of the star.
+This is a \textbf{supernova}!
+
+This process describes the formation of type II, Ic, and Ib supernovae.
+The difference resides in whether its progenitor retained its hydrogen envelope before exploding.
+Type Ia supernovae are completely different---they're formed via the collision of stars in a binary system, one of which is a white dwarf.
+
+Once a supernova forms, its magnitude decreases linearly over time.
+In particular,
+\[ \log_{10} L \propto -\lambda t \implies L \propto e^{-\lambda t}. \]
+It turns out that radioactive decay is what keeps supernovae alight for years to come.
+We can even use the lightcurve of the supernova to determine what element dominates the decay!
+
+\section{Tests of Stellar Evolution}
+Our discussion of stellar evolution so far has been based primarily in theory.
+There's a variety of ways in which we might test our theories against observations!
+
+Take, for example, \textbf{spectroscopic binaries}.
+We've already discussed how to get the oscillation period, orbital velocities, masses, and semimajor axes from spectroscopic data.
+But if we observe eclipses, too, that means we're observing the binary basically edge-on and there is no longer any ambiguity in the stars' masses!
+From there we can get stellar radii and temperatures to check against our models.
+
+We also have neutrinos, whose characteristic lack of significant interaction with matter provides a nice glimpse into the central regions of stars.
+Neutrinos are produced whenever a proton is converted into a neutron or vice versa, in order to converse lepton number.
+They are highly relativistic particles whose energies vary depending on the reaction.
+The lower-energy neutrinos ($E_\nu \leq 0.4 \text{ MeV}$) produced by the proton-proton chain can be detected using gallium or chlorine, but higher-energy ones ($\sim 10 \text{ MeV}$) produced by less likely reaction pathways can interact directly with electrons, so we can simply use water!
+But no matter what the detector is made out of, it needs to be huge---otherwise we might miss out on the very few neutrinos that reach Earth after, say, a supernova.
+
+Observations of solar neutrinos turn out to detect roughly half of the expected number.
+This resulted in a decade-long fight between astronomers and particle physicists that culminated in the discovery of \textbf{neutrino oscillations}.
+As it turns out, while neutrinos travel they are in a quantum superposition of three flavors that individually evolve on scales of thousands of kilometers.
+The cross sections of muon and tau neutrinos are each smaller than that of an electron neutrino, there is an observed deficit of the first two flavors.
+
+Moving along, it turns out that stars expand and contract periodically as a whole.
+These \textbf{solar oscillations} come in many modes, the simplest of which is the fundamental mode: a very simple pattern of expansion and contraction.
+The period of this oscillation is $t_\text{osc} = 2R_\odot / v_s$, where $v_s$ is the gaseous speed of sound.
+Now,
+\[ \frac{1}{2} m_p v_s^2 \sim \frac{3}{2} kT \implies v_s \sim \sqrt{\frac{3kT}{m_p}}. \]
+For the Sun, the frequency of this oscillation is on the order of $1 \text{ mHz}$.
+(Higher-order oscillations have higher frequencies.)
+In general, oscillations can be decomposed into spherical harmonics $Y_{l,m_l}$, where $l$ represents the number of nodes in latitude and $m$ represents that in latitude.
+
+Finally, we can consider the abundance of elements in the solar photosphere.
+(These are by numbers of atoms, but by mass.)
+Elements with masses below nickel are produced through nuclear fusion in stellar cores, mostly in massive stars---even atomic numbers are emphasized since fusion involves the capture of a helium nucleus.
+Heavier elements are produced in the envelopes of asymptotic giants and during supernovae via neutron capture and $\beta$-decay.
+This process can be visualized particularly well using an isotope table, which has proton number on the vertical axis and neutron number on the horizontal.
+A nuclear process is represented by a jump between entries on the table---neutron capture causes horizontal movement while $\beta$ decay causes diagonal movement.
+
+% \section{Degenerate Stellar Remains}
+\section{White Dwarfs and Neutron Stars}
+Immediately after collapse a star may turn into a white dwarf, a neutron star, or a black hole.
+
+\subsection*{White Dwarfs}
+White dwarfs are hot and incredibly dense objects.
+We'll try to understand the electron degeneracy pressure supporting them against gravity.
+Let's start by computing the density at the center of the star using the equation
+\[ \frac{dP}{dt} = -\rho g = -\rho \frac{GM_r}{r^2}. \]
+Assuming constant density gives $M_r = \rho (4 / 3) \pi r^3$.
+Substituting this and solving with $P(R) = 0$ gives
+\[ \boxed{P(0) = \frac{2}{3} \pi \rho^2 G R^2}. \]
+Applying the ideal gas law $\rho k T / \mu m_p$ gives $T \sim 10^{9} \text{ K}$, which is way too big for a carbon-oxygen interior.
+This confirms that gas pressure cannot be the source of pressure here.
+
+Now we'll determine the energy associated with this degeneracy.
+The average value of an electron's momentum $p_x$ can't be much larger than the uncertainty, so by the Heisenberg uncertainty principle $p_x \sim \hbar / 2 \Delta x$.
+Now, we may interpret the Pauli exclusion principle as saying that the electrons' wave functions cannot overlap and that $\Delta x$ is on the order of the separation between an electron's nearest neighbors.
+Thus
+\[ \Delta x \sim \sqrt[3]{\frac{L^3}{N_e}} = n_e^{-1 / 3}, \]
+where $n_e$ is the number density of electrons, and the total electron momentum is on average $p \sim \hbar n_e^{1 / 3}$.
+Thus the average energy $\overline{\mathcal{E}} = p^2 / 2m$
+\[ \boxed{\overline{\mathcal{E}} \sim \frac{\hbar^2}{2m} n_e^{2 / 3}}. \]
+A more careful quantum mechanical calculation gives the maximum and average energies
+\[ \mathcal{E}_F = \frac{\hbar^2}{2m} \left( 3\pi^2 n_e \right)^{2 / 3}, \quad \overline{\mathcal{E}} = \frac{3}{5} \mathcal{E}_F. \]
+$\mathcal{E}_F$ is called the \textbf{Fermi energy}.
+But $n_e = (Z / A)(\rho / m_p)$, where $Z / A$ is the ratio of atomic number to mass number, so
+\[ \mathcal{E}_F = \frac{\hbar^2}{2m_e} \left( 3\pi^2 \frac{Z}{A} \frac{\rho}{m_p} \right)^{2 / 3}. \]
+(For a carbon-oxygen interior, $Z / A = 1 / 2$.)
+If the Fermi energy is much larger than the the thermal energy of an electron---that is, if $\mathcal{E}_F \gg (3 / 2) kT$---then the electron cannot transition into an unoccupied quantum state and most of the gas's pressure comes from degeneracy.
+In this case, it is called a \textbf{degenerate gas}.
+
+The pressure in this gas is proportional to $\overline{\mathcal{E}} n_e \propto n_e^{5 / 3}\propto \rho^{5 / 3}$.
+An exact calculation would give
+\[ \boxed{P_\textrm{deg,e} = \frac{(3\pi^2)^{2 / 3}}{5} \frac{\hbar^2}{m_e} \left( \frac{Z}{A} \frac{\rho}{m_p} \right)^{5 / 3}}. \]
+We can use this result to get some more information about the structure of the white dwarf!
+Substituting it into the equation of hydrostatic equilibrium gives a differential equation that has no analytic solution, but if we assume constant $\rho = M / (\frac{4}{3}\pi R^3)$ we can take $P_\textrm{deg,e} = P(0)$, so
+\[ \frac{(3\pi^2)^{2 / 3}}{5} \frac{\hbar^2}{m_e} \left( \frac{Z}{A} \frac{\rho}{m_p} \right)^{5 / 3} = \frac{2}{3} \pi \rho^2 G R^2. \]
+Substituting the density and solving for $R$ gives the \textbf{mass-radius relation}
+\[ \boxed{R_\textrm{WD} = \frac{(18\pi)^{2 / 3}}{10} \frac{\hbar^2}{m_e G} \left( \frac{Z}{A} \frac{1}{m_p} \right)^{5 / 3} M_\textrm{WD}^{-1 / 3}}. \]
+So counterintuitively, there is an inverse relationship between the mass and radius of a white dwarf!
+This prediction seems to fit with the data pretty well, but white dwarfs also seem to have a maximum mass above which none have been observed.
+
+In high-mass white dwarfs ($\sim 1M_\odot$) the average energy of an electron is comparable to the the electron mass energy, meaning relativistic effects must be accounted for.
+Unfortunately this is difficult to do unless the electron is ultra-relativistic, in which case the relativistic mass-energy relation gives $\mathcal{E} = pc \sim \hbar c n_e^{1 / 3}$.
+Thus $P_\textrm{deg,e} \sim \hbar c n_e^{4 / 3}$.
+Another careful calculation would have given
+\[ P_\textrm{deg,e} = \frac{(3\pi^2)^{1 / 3}}{5} \hbar c \left( \frac{Z}{A} \frac{\rho}{m_p} \right)^{4 / 3}, \]
+which we could use with the equation of hydrostatic equilibrium to get
+\[ M_\textrm{ch} = \frac{3 \sqrt{2\pi}}{8} \left( \frac{\hbar c}{G} \right)^{3 / 2} \left( \frac{Z}{A m_p} \right)^2 \approx 0.44M_\odot. \]
+An even better calculation would have taken into account variable density to get a different constant out front, and from that the \textbf{Chandrasekhar mass} $M_\textrm{ch} = 1.4 M_\odot$.
+This is the maximum allowed mass for the white dwarf.
+The fact that the radius is absent here indicates that any perturbation toward a smaller radius will not result in sufficient restoring force to counteract the perturbation, so the star begins to collapse.
+
+\subsection*{Neutron Stars}
+During this collapse, neutronization occurs and we're left with a neutron star held up by neutron degeneracy.
+The resulting degeneracy pressure is analagous to what we saw with electrons:
+\[ P_\textrm{deg,n} = \frac{(3\pi^2)^{2 / 3}}{5} \frac{\hbar^2}{m_n} \left( \frac{\rho}{m_n} \right)^{5 / 3}. \]
+The mass-radius relation, too, is similar:
+\[ R_\textrm{NS} = \frac{(18\pi)^{2 / 3}}{10} \frac{\hbar^2}{G m_n^{8 / 3}} M_\textrm{NS}^{-1 / 3}. \]
+For $M_\textrm{NS} \sim M_\textrm{ch}$ we get $R_\textrm{NS} \sim 4.4 \text{ km}$, which is again too small due to the constant-density approximation.
+Current theories estimate radii around 10 or 20 km, which still gives $\overline{\rho}_\textrm{NS} \sim 7 \times 10^{17} \text{ kg/m}^3$.
+This is an absurdly high density comparable to that of an atomic nucleus, just with $10^{19}$ the radius.
+But there's once again an upper limit to the mass.
+Beyond this, nothing can stop the collapse and we get a black hole, which we'll discuss later.
+
+Neutron stars provide some of the most extreme conditions in the Universe.
+For example, they come with very high escape velocities.
+Consider a neutron star with mass $M_\textrm{NS}$ and radius-$R_\textrm{NS}$; the critical velocity $v_\textrm{esc}$ required for a mass $m$ to escape the star's gravitational pull satisfies
+\[ \frac{mv_\textrm{esc}^2}{2} - \frac{GM_\textrm{NS}m}{R_\textrm{NS}} \implies v_\textrm{esc} = \sqrt{\frac{2GM_\textrm{NS}}{R_\textrm{NS}}}. \]
+For some neutron stars, this amounts to $v_\textrm{esc} \simeq 0.7c$.
+By symmetry, this also means that an incoming object with negligible initial velocity is accelerated to this speed by the time it hits the surface!
+The efficiency parameter of the energy generated upon impact is $K_\textrm{imp} / mc^2 \simeq 0.2$, so if the neutron star is accompanied by another star the two can form a powerful source of x-rays.
+
+Neutron stars can also have some very low rotational periods.
+We'll first put an upper bound on the translational speed $v_\textrm{crit}$ can have before flying off of a mass-$M$, radius-$R$ body:
+\[ \frac{GMm}{R^2} = \frac{mv_\textrm{crit}^2}{R} \implies v_\textrm{crit} = \sqrt{\frac{GM}{R}}. \]
+Thus the lowest rotation period an object can have without breaking up is
+\[ P_\textrm{min} = 2\pi \sqrt{\frac{R^3}{GM}}. \]
+For the above neutron star this is $0.5 \textrm{ ms}$; for an equivalent-mass white dwarf, it's more like $5\textrm{ s}$.
+To find a more reasonable estimate of the average neutron star's rotational period, though, we can investigate the conservation of angular momentum during a white dwarf's collapse.
+This would give
+\[ \frac{\omega_f}{\omega_i} = \frac{P_\textrm{WD}}{P_\textrm{NS}} = \frac{f_i}{f_f} \frac{M_i}{M_f} \left( \frac{R_i}{R_f} \right)^2, \]
+where each $f$ is some mass distribution factor.
+If the differences between the two factors and the two masses are negligible, then we're just left with the radii.
+Taking $P_\textrm{WD} = 2.6 \times 10^{3} \textrm{ s}$, $R_\textrm{WD} = 5 \times 10^{6} \textrm{ m}$, and $R_\textrm{NS} = 10^{4} \textrm{ m}$ gives $10 \textrm{ ms}$.
+Still very fast, but a little less extreme.
+
+One final extremity can be seen in magnetic fields.
+When stellar cores collapse, another conserved quantity is magnetic flux.
+A combination of the decreased neutron star radius and some other amplification processes can produce magnetic fields on the order of $10^{7} \text{ T}$ to $10^{11} \text{ T}$.
+Gamma rays are produced at the magnetic poles, and since these poles aren't quite aligned with the spin axis, the pulse around at a steady frequency.
+
+\section{Black Holes and General Relativity}
+Let's return to escape velocity.
+The radius at which the escape velocity exceeds the speed of light is called the \textbf{Schwarzschild radius}, and it is given by
+\[ c = \sqrt{\frac{2GM}{R_\textrm{sch}^2}} \implies \boxed{R_\textrm{sch} = \frac{2GM}{c^2}}. \]
+A more careful calculation would require some general relativity, but it turns out to give us the same numerical factor out front.
+Note that $R_\textrm{sch} = 3\textrm{ km}$ for a solar mass, and that $R_\textrm{sch}$ grows linearly in $M$.
+When a neutron star collapses into a black hole its mass simply seems to accumulate in a singularity, so we interpret $R_\textrm{sch}$ as the radius of the black hole's \textbf{event horizon}.
+No information from the interior can escape.
+
+To understand this better we must discuss general relativity, starting with the \textbf{equivalence principle}.
+The idea is that acceleration is indistinguishable from gravity---a person in a spaceship accelerating at $g$ would feel the exact same thing as if they were sitting at rest on the surface of the Earth.
+This is a very simple and reasonable idea, but the consequences are stunning!
+
+Consider a length-$h$ rocket that is initially at rest and begins accelerating with magnitude $a$.
+At the same time, a frequency-$\nu_\textrm{em}$ laser beam is shot from the following end of the rocket toward an observer on the other end.
+If the rocket is very long, then the beam is detected a time $\Delta t = h / c$ after emission, and by this time the observer has velocity $a \Delta t = ah / c$.
+But the light, of course, is redshifted according to $\Delta / \lambda \simeq v / c$, so we have
+\[ \frac{\nu_\textrm{em} - \nu_\textrm{obs}}{\nu_\textrm{em}} = \frac{ah}{c^2} \implies \nu_\textrm{obs} = \nu_\textrm{em} \left( 1 - \frac{ah}{c^2} \right). \]
+This is just the first-order approximation of the full picture, though, which is $\nu_\textrm{obs} = \nu_\textrm{em} \left( 1 - 2ah / c^2 \right)^{1 / 2}$.
+But by the equivalence principle, this is also true at rest in a gravitational field!
+Thus
+\[ \boxed{\frac{\nu_\infty}{\nu_0} = \left( 1 - \frac{2GM}{R_0c^2} \right)^{1 / 2} = \left( 1 - \frac{R_\textrm{sch}}{R_0} \right)^{1 / 2}}, \]
+where $R_0$ is the radius from the gravity well's center at which the beam is emitted or detected.
+This phenomenon is known as \textbf{gravitational redshift}---light loses energy as it goes up a gravity well.
+
+Now, the oscillations in the laser beam provide a convenient way to measure time!
+At $R_0$ the period of oscillation is $\Delta t_0 = 1 / \nu_0$, and at $R = \infty$ it's $\Delta t_\infty = 1 / \nu_\infty$.
+Substituting these gives
+\[ \boxed{\frac{\Delta t_0}{\Delta t_\infty} = \left( 1 - \frac{2GM}{R_0c^2} \right)^{1 / 2} = \left( 1 - \frac{R_\textrm{sch}}{R_0} \right)^{1 / 2}}, \]
+the expression for \textbf{gravitational time dilation}.
+Since this expression is less than one, cycles higher up along the gravity well are longer than those deeper in the well.
+
+The observer at infinity, looking down at an object deep in the well, would see time for that object pass in slow motion.
+Once the object reaches the event horizon, its time simply appears to stop.
+But for the observer at the event horizon nothing special is happening, aside from the tidal forces that would be ripping them to shreds (in the case of low-mass black holes).
+
+It will be fruitful to understand how, exactly, black holes affect spacetime.
+These objects can be completely characterized by two quantities: mass and angular momentum.
+Any other properties' effects are contained within the event horizon so they don't influence the rest of the universe.
+
+In the simplest case we assume that there is zero mass and angular momentum.
+This reduces our problem to special relativity, which uses the \textbf{Minkowski metric}
+\[ ds^2 = -(c\,d\tau)^2 = -(c\,dt)^2 + dx^2 + dy^2 + dz^2, \]
+where $\tau$ is the proper time between two events separated by a spacetime interval $ds$.
+From here we immediately get an equation describing special relativistic time dilation: $d\tau = dt \sqrt{1 - v^2 / c^2}$.
+
+If we generalize slightly and only require that there is no angular momentum, then we get the \textbf{Schwarzschild metric}
+\[ ds^2 = -(c\,d\tau)^2 = -\left( 1 - \frac{R_\textrm{sch}}{r} \right)(c\,dt)^2 + \frac{(dr)^2}{1 - R_\textrm{sch} / r} + (r\,d\theta)^2 + (r\sin\theta\,d\phi)^2, \]
+this time in spherical coordinates.
+Note that in this case the proper time $\tau$ between two events is not unique because there can be different world lines connecting them.
+Also, when $dr = d\theta = d\phi = 0$ we recover the equation describing gravitational time dilation (with $\tau = t_0$ and $t = t_\infty$)!
+
+It appears that $r = R_\textrm{sch}$ produces a singularity, but this is just a quirk of our coordinate system.
+It's analagous to how the latitude-longitude system on Earth breaks down at the poles.
+But when $r < R_\textrm{sch}$ the signs on $c\,dt$ and $dr$ swap, so the roles of space and time effectively switch places!
+Thus the singularity becomes more of a time than a place, and there's no choice but to move toward it.
+This explains why black holes collapse to singularities.
+
+All of the above describe \textbf{Schwarzschild black holes}, which have no angular momentum.
+If we add angular momentum to the picture we get a \textbf{Kerr black hole} and the metric becomes much more complex.
+The important pointers are that $L_\textrm{max} = GM^2 / c$ is the maximum allowed angular momentum, the horizon radius is smaller, and there is an ``ergosphere'' in which matter must rotate with the black hole.
+
+\subsection*{Detecting Black Holes}
+Black holes can be difficult to detect since we can't directly observe them, but there are some indirect ways to study them.
+
+One obvious method is to observe matter that may be orbiting the black hole in an accretion disk.
+Over time this matter loses gravitational energy and slowly spirals inward.
+Assuming $r_\textrm{in} \ll r_\textrm{out}$, by the virial theorem this energy loss is quantified by
+\[ \Delta E = -\frac{GM_\textrm{BH}m}{2r_\textrm{in}}. \]
+The highest radius for which orbits around the black hole can be stable is known to be $r_\textrm{in} = 3R_\textrm{sch}$.
+Now, half of this $\Delta E$ goes into heating the disk and the rest is radiated.
+Thus
+\[ E_\textrm{rad} = \frac{GM_\textrm{BH}m}{2 (3 \cdot 2GM_\textrm{BH} / c^2)} = \frac{mc^2}{12}. \]
+So matter ends up radiating about 8\% of its mass energy.
+The matter in the accretion disk thus emits the luminosity
+\[ L = \frac{\Delta E}{\Delta t} \sim \frac{(\Sigma m) c^2}{12 \Delta t} \sim \frac{1}{12} \dot M_\textrm{disk} c^2, \]
+where $\dot M_\textrm{disk}$ is called the mass accretion rate.
+This rate has a limit---if the accretion disk becomes too massive, then pressure from its luminosity is going to blow off matter.
+It turns out that we have a similar Eddington limit as with stars:
+\[ L_\textrm{edd} = (4.2 \times 10^{4}) \frac{M_\textrm{BH}}{M_\odot} L_\odot. \]
+Another method has to do with looking at the gravitational influence black holes have on orbiting stars.
+The tidal forces distort the shape of the star, so the percieved area $A_\textrm{obs}$ of the star changes as it orbits.
+So the luminosity we detect is
+\[ L_\textrm{obs} = A_\textrm{obs} \sigma T^{4}. \]
+This allows us to determine some properties of the star and black hole.
+
+Finally, we can take advantage of the measurable ripples that propogate through spacetime when bodies move.
+These are called \textbf{gravitational waves}, and they are especially prominent when two massive objects undergo a merger.
+This will eventually happen to any black holes that are orbiting each other; upon merging at $a \sim R_s$, we can use Kepler's third law to solve for the orbital frequency.
+If they have total mass $M$, we first have
+\[ P^2 \sim \frac{4\pi^2}{GM} a^3 \implies \nu = \frac{2}{P} = \frac{1}{\pi} \sqrt{\frac{GM}{R_S^3}}. \]
+Substituting the Schwarzschild radius gives
+\[ \nu = \frac{1}{2\pi \sqrt{2}} \frac{c^3}{GM} \]
+upon merging.
+
+% this is where we left off in class, but there's another page in the lecture notes.
+
+\end{document}
