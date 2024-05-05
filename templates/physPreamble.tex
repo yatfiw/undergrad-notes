@@ -7,6 +7,7 @@
 \usepackage{mathtools}						% Aboxed
 \usepackage{empheq}							% box multiple lines
 \usepackage{parskip}                        % add vertical paragraph space
+\usepackage{tocloft}						% modify toc positioning
 \usepackage{upgreek}
 \usepackage{chemformula}
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
@@ -18,6 +19,8 @@
 \newlength\mywidth
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
 \mywidth=\wd0
+\setlength{\cftbeforetoctitleskip}{0em}
+\setlength{\cftaftertoctitleskip}{1em}
 \renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
 % endregion
 

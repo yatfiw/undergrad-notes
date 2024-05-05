@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{enumitem}                       % custom enum labels
 \usepackage{parskip}                        % add vertical paragraph space
+\usepackage{tocloft}						% modify toc positioning
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
 
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
@@ -14,6 +15,8 @@
 \newlength\mywidth
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
 \mywidth=\wd0
+\setlength{\cftbeforetoctitleskip}{0em}
+\setlength{\cftaftertoctitleskip}{1em}
 \renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
 % endregion
 
