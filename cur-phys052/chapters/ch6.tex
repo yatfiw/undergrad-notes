@@ -1,0 +1,279 @@
+\documentclass[../p052main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Identical Particles}
+\section{Multiparticle Systems}
+The Hamiltonian of a one-dimensional system of two distinguishable, non-interacting particles looks like
+\[ \hat H = -\frac{\hbar^2}{2m_1} \frac{\partial^2}{\partial x_1^2} + V(x_1) - \frac{\hbar^2}{2m_2} \frac{\partial^2}{\partial x_2^2} + V(x_2). \]
+As usual, we have the eigenvalue equation and Born rule
+\[ \hat H \Psi(x_1,x_2) = E \Psi(x_1, x_2), \qquad dP = |\Psi(x_1,x_2)|^2 dx_1dx_2. \]
+We could use separation of variables to get the wave function and energy
+\[ \Psi(x_1,x_2) = \psi_{n_1}(x_1)\psi_{n_2}(x_2), \quad E = E_{n_1} + E_{n_2}, \]
+and this wave function is normalized if it satisfies
+\[ \iint_{\mathbb{R}^2} |\Psi(x_1,x_2)|^2 dx_1dx_2 = 1. \]
+But in quantum mechanics identical particles are indistinguishable, and the wave function must reflect this.
+To formalize this requirement we introduce the exchange operator, which essentially swaps all the ``labels'' for particle 1 with those for particle 2:
+\[ \hat P_{12} \Psi(1,2) = \Psi(2,1). \]
+For indistinguishable particles we require that $|\Psi(1,2)|^2 = |\Psi(2,1)|^2$, so
+\[ \hat P_{12} \Psi(1,2) = e^{i\delta} \Psi(1,2). \]
+We immediately get eigenfunctions---the eigenvalues can be found by noting that $\hat P_{12}^2 \Psi(1,2) = \Psi(1,2)$, so $e^{i\delta} = \pm 1$.
+Taking $+1$ corresponds to a symmetric state and $-1$ corresponds to an antisymmetric state.
+\begin{itemize}
+    \item When a multiparticle state is symmetric under the exchange of any two identical particles, such particles are called bosons.
+    Bosons have integral intrinsic spin. %<3
+    
+    \item When a multiparticle state is antisymmetric under the exchange of any two identical particles, such particles are called fermions.
+    Fermions have half-integral intrinsic spin.
+\end{itemize}
+Note that, if two identical fermions were in the same quantum state, then the terms of the overall wave function would cancel and 
+there would be no particle at all.
+So no two identical fermions can be in the same quantum state---this is known as the Pauli exclusion principle.
+
+This discussion has important implications for atoms with multiple electrons.
+Consider a helium atom---if we ignore the kinetic energy of the nucleus and the repulsion between electrons, we have the Hamiltonian
+\[ \hat H = -\frac{\hbar^2}{2m} \nabla_1^2 - \frac{Ze^2}{4\pi \epsilon_0 r_1} - \frac{\hbar^2}{2m} \nabla_2^2 - \frac{Ze^2}{4\pi \epsilon_0 r_2}. \]
+Solving the corresponding Schrödinger equation via separation of variables shows that the energy eigenfunctions can each be written as a product of the single-electron hydrogenic energy eigenfunctions.
+But since electrons are fermions, we must be careful that their overall state is antisymmetric.
+So, the ground state must be
+\[ \Psi(1,2) = \frac{1}{\sqrt{2}} \psi_{1s}(\mbf{r}_1) \psi_{1s}(\mbf{r}_2) \left[ \chi_+(1) \chi_-(2) - \chi_-(1) \chi_+(2) \right]. \]
+Notice that the spatial part of the wave function is symmetric and that the spin state is antisymmetric, so the overall state is antisymmetric.
+This is an example of a singlet state---that is, a state whose overall spin quantum number is $s = 0$.
+We could verify this by computing $\hat{\mbf{S}}^2 \Psi = (\hat{\mbf{S}}_1^2 + \hat{\mbf{S}}_2^2) \Psi$, where $\hat{\mbf{S}}_1^2$ and $\hat{\mbf{S}}_2^2$ only act on particle-1 and particle-2 eigenstates, respectively.
+
+The first-excited state of the helium atom also has a singlet state:
+\[ \Psi(1,2) = \frac{1}{\sqrt{2}} \left[ \psi_{1s}(\mbf{r}_1)\psi_{2s}(\mbf{r}_2) + \psi_{2s}(\mbf{r}_1)\psi_{1s}(\mbf{r}_2) \right] \left[ \chi_+(1) \chi_-(2) - \chi_-(1) \chi_+(2) \right]. \]
+But there are also three triplet states, which have $s = 1$:
+\begin{align*}
+    \Psi(1,2) &= \frac{1}{\sqrt{2}} \left[ \psi_{1s}(\mbf{r}_1)\psi_{2s}(\mbf{r}_2) - \psi_{2s}(\mbf{r}_1)\psi_{1s}(\mbf{r}_2) \right] \chi_+(1) \chi_+(2), \\
+    \Psi(1,2) &= \frac{1}{\sqrt{2}} \left[ \psi_{1s}(\mbf{r}_1)\psi_{2s}(\mbf{r}_2) - \psi_{2s}(\mbf{r}_1)\psi_{1s}(\mbf{r}_2) \right] \chi_-(1) \chi_-(2), \\
+    \Psi(1,2) &= \frac{1}{\sqrt{2}} \left[ \psi_{1s}(\mbf{r}_1)\psi_{2s}(\mbf{r}_2) - \psi_{2s}(\mbf{r}_1)\psi_{1s}(\mbf{r}_2) \right] \left[ \chi_+(1) \chi_-(2) + \chi_-(1) \chi_+(2) \right].
+\end{align*}
+It's common to label states using the spectroscopic notation $^{2S+1}L_{J}$ where $S$, $L$, and $J$ are the spin, orbital, and total angular momentum quantum numbers in the eigenvalue equations
+\[ \hat{\mbf{S}}^2 \Psi = S(S+1)\hbar^2, \quad \hat{\mbf{L}}^2 \Psi = L(L+1)\hbar^2, \quad \hat{\mbf{J}}^2 \Psi = J(J+1)\hbar^2. \]
+So in spectroscopic notation the above singlet states fall under $^1S_0$, while the triplet states look like $^3S_1$.
+(We use the letters S, P, D, F, etc. to denote orbital angular momentum.)
+
+When we account for Coulomb repulsion, different spectroscopic labels correspond to different energies.
+For example, notice that the triplet states vanish when $\mbf{r}_1 = \mbf{r}_2$ while they don't in singlet states.
+So singlet electrons are more likely to overlap than triplet electrons, meaning the Coulomb repulsion contributes more to the singlet energies than the triplet energies.
+
+If we add another electron into the mix and try writing down a ground state of the form
+\[ \Psi(1,2,3) = \psi_{1s}(\mbf{r}_1)\psi_{1s}(\mbf{r}_2)\psi_{1s}(\mbf{r}_3) X(1,2,3), \]
+we notice that it isn't possible to create an overall-antisymmetric state.
+Thus we are forced to push one of the electrons into the $2s$, and chemistry is born!%<3
+
+\section{Quantum Statistics}
+We'll turn our attention, now, to very large multiparticle systems.
+A consequence of the Pauli exclusion principle is that the wave function for an entangled state of $N$ fermions will have $N!$ terms, so if we have, say, an Avogadro's number of particles, then writing down a wave function is hopeless.
+The Fermi energy provides an alternative for ground-state systems, but for excited states we'll need to do some statistics.
+
+Define $n(E)$ to be the average number of particles in a quantum state with energy $E$ (we allow fractional $n$ for superpositions), so
+\[ N = \sum_{i}^{} n(E_i) \simeq \int_{0}^{\infty} n(E) D(E) \,dE, \]
+where $D(E) \,dE$ is the number of states in an energy interval $dE$.
+The integral is valid in the large-$N$ limit.
+The total energy is
+\[ E = \sum_{i}^{} E_i n(E_i) \simeq \int_{0}^{\infty} E \,n(E) D(E) \,dE. \]
+So what, exactly, does $n(E)$ look like for excited states?
+It depends on temperature!
+Before continuing, though, we should clarify what we mean by ``temperature''.
+It is the property of a system that determines the direction of likely energy transfer when in contact with another surface---energy flows from high to low temperatures, and there is no flow at all if both surface temperatures are the same.
+The ``excess'' energy that one system can lose to another is quantified by $k_B T$, where $k_B$ is the Boltzmann constant.
+(For example, a degenerate Fermi gas would be very cold because it already has the smallest allowed energy.)
+
+Suppose we have some particles in a potential well.
+If the system is in thermal equilibrium, we can now put some constraints on $n(E)$.
+\begin{itemize}
+    \item For bosons and fermions, $n(E) \geq 0$.
+    \item For fermions, $0 \leq n(E) \leq 1$.
+    \item For bosons and fermions, $N = \sum_{i}^{} n(E_i) \simeq \int_{0}^{\infty} n(E) D(E) \,dE$.
+    \item $n(E)$ decreases monotonically in $E$.
+\end{itemize}
+In particular, we can quote two results from statistical mechanics:
+\[ n_\textrm{BE}(E) = \frac{1}{e^{\alpha}e^{E / k_BT} - 1}, \quad n_\textrm{FD}(E) = \frac{1}{e^{\alpha}e^{E / k_BT} + 1}. \]
+These are the Bose-Einstein distribution (for bosons) and Fermi-Dirac distribution (for fermions), respectively.
+$\alpha$ is just a normalization constant; by convention we set $\alpha = -\mu / k_BT$, where $\mu$ is called the chemical potential.
+Graphically, the Fermi-Dirac distribution looks something like a logistic curve while the Bose-Einstein looks more exponential.
+
+\section{Cavity Radiation}
+We'll use this idea of an energy distribution to describe why hot things glow.
+In more technical terms, we'll investigate the origins of cavity (or blackbody) radiation.
+
+Take a bunch of photons (spin-1 bosons) and plop them into a metal box with side length $L$.
+The electric field in the box satisfies
+\[ \nabla^2 \boldsymbol{\mathcal{E}} = \frac{1}{c} \frac{\partial^2}{\partial t^2} \boldsymbol{\mathcal{E}}. \]
+We can break this into three separate equations for three individual components, each of which can be solved via separation of variables.
+Imposing the boundary conditions $\nabla \cdot \boldsymbol{\mathcal{E}} = 0$ (from Gauss's law) and $\mathcal{E}_{||} = 0$ at the box boundary (since the box is conducting), we would find that, in the $x$-direction,
+\[ \mathcal{E}_x = \mathcal{E}_{0x} \cos\left( \frac{n_x \pi x}{K} \right) \sin\left( \frac{n_y \pi x}{K} \right) \sin\left( \frac{n_z \pi x}{K} \right) \sin \omega t, \]
+where $n_x,n_y,n_z \in \mathbb{N}$.
+The same goes for $\mathcal{E}_y$ and $\mathcal{E}_z$, just with the cosine shuffled around.
+Substituting this into the wave equation gives
+\[ \omega^2 = c^2 \frac{\pi^2}{L^2} \left( n_x^2 + n_y^2 + n_z^2 \right), \]
+and the photon energy is
+\[ E = \hbar \omega = \frac{\hbar c \pi}{L} \sqrt{n_x^2 + n_y^2 + n_z^2} = \frac{\hbar c \pi}{L} r, \]
+where $r$ is a distance in $n$-space.
+
+We'll set up an integral for the total energy inside the box in order to determine the density of states for photons.
+It turns out that photons cannot have spin projection 0, so for each ``box'' in $n$-space we have two polarizations.
+Thus the number of states in a width-$dr$ shell in this space is $2 \cdot (1/8) \cdot 4\pi r^2dr$, so the total energy of all the states in all shells is
+\begin{align*}
+    E_\textrm{tot} &= \int_{0}^{\infty} E(r) \,n_\textrm{BE}(E(r)) \,\pi r^2 dr \\
+    \intertext{The change of variables $E = (\hbar c\pi / L)r$ gives}
+    &= \int_{0}^{\infty} E \,n_\textrm{BE}(E) \,\pi \left( \frac{L^2}{\hbar^2 c^2 \pi^2} E^2 \right) \left( \frac{L}{\hbar c \pi} dE \right) \\
+    &= \int_{0}^{\infty} E n_\textrm{BE}(E) \frac{L^3 E^2}{\hbar^3 c^3 \pi^2} \,dE \\
+    \intertext{From here we can pick out the density of states $D(E) = (L^3 E^2) / (\hbar^3 c^3 \pi^2)$. (We may also write this as $D(\nu) = 8\pi L^3 \nu^2 / c^3$.) But we'll go a little further and substitute $E = h\nu$ to get}
+    &= \int_{0}^{\infty} \frac{L^3 \nu^2 8\pi}{c^3} n_\textrm{BE}(\nu) h\nu \,d\nu, \\
+    \intertext{where $\mu = 0$ for photons. Finally substituting the Bose-Einstein distribution gives}
+    &= \int_{0}^{\infty} \frac{8\pi hL^3}{c^3} \frac{\nu^3}{e^{h\nu / k_B T} - 1} d\nu,
+\end{align*}
+and we pick out the Planck function
+\[ \rho(\nu) = \frac{8\pi h\nu^3}{c^3 \left( e^{h\nu / k_B T} - 1 \right)} \]
+as an energy density per unit frequency.
+Thus higher temperatures are associated with higher frequencies!
+We can also write the Planck function in terms of wavelength,
+\[ \rho(\lambda) = \frac{8\pi hc}{\lambda^{5} \left( e^{hc / \lambda k_BT} - 1 \right)}, \]
+and solving the equation $d\rho / d\lambda = 0$ tells us that we should expect the energy density to peak at
+\[ \lambda_\textrm{max} = \frac{2.9 \times 10^{-3} \textrm{ m K}}{T}. \]
+This is known as Wien's law.
+It'll also be useful to know the energy density inside our cavity.
+A quick substitution $x = h\nu / k_BT$ gives
+\[ \frac{E_\textrm{tot}}{L^3} = \int_{0}^{\infty} \frac{8\pi hL}{c^3} \frac{\nu^3}{e^{h\nu / k_B T} - 1} d\nu = \frac{8\pi k_B^{4}T^{4}}{c^3h^3} \int_{0}^{\infty} \frac{x^3}{e^{x} - 1}dx = \frac{8\pi k_B^{4}T^{4}}{c^3h^3} \frac{\pi^{4}}{15}. \]
+We'll define $a$ such that $E_\textrm{tot} / L^3 = aT^{4}$.
+
+We should note, at this point, that all this stuff we've done relies on the validity of the integral approximation, which itself hinges on $\lambda_\textrm{peak} \ll L$.
+If $\lambda > 2L$, then none of this would have any hope at working.
+But if we keep running with this premise, we'll arrive at a pretty neat result!
+
+Suppose, now, that our metal box is a perfect absorber (a blackbody).
+The box has temperature $T$ and the blackbody has temperature $T_{BB}$.
+At equilibrium we expect to see no net energy flow, meaning
+\[ R_{T,\textrm{inc}} = R_{T,\textrm{em}} \]
+for the blackbody, where the radiancy $R(\nu)$ is the power per area per frequency.
+We claim that the radiancy incident on the box walls is the same everywhere.
+
+Suppose we put a little area-$A$ hole in one of the box's walls.
+To determine the energy per frequency that escapes this hole, we'll integrate over a hemisphere inside the box:
+\[ R_T(\nu) \cdot A \cdot \Delta t = \int \rho (\nu) f_\textrm{esc} dV, \]
+where $f_\text{esc} = A \cos \theta / 4\pi r^2$ is the fraction of photons that escape and where $\theta$ corresponds to approaching the hole head-on.
+So in spherical coordinates we have
+\begin{align*}
+    R_T A \Delta t &= \iiint \rho(\nu) \frac{A \cos \theta}{4\pi r^2} \,r^2\sin\theta \,dr d\theta d\phi \\
+    &= \frac{\rho(\nu) A}{4\pi} \int_{0}^{c\Delta t} dr \int_{0}^{2\pi} d\phi \int_{0}^{\frac{\pi}{2}} \sin\theta \cos\theta \,d\theta \\
+    &= \frac{\rho(\nu) A}{4\pi} \cdot c \Delta t \cdot 2\pi \cdot \frac{1}{2} \\
+    R_T &= \frac{\rho(\nu)c}{4}
+\end{align*}
+This is the radiancy incident on the walls of the cavity!
+By conservation of energy, it's also the radiancy absorbed and emitted by the blackbody.
+To finish things off, we calculate the total radiancy (the flux) from a blackbody:
+\[ F = \int_{0}^{\infty} R_T(\nu) d\nu = \frac{c}{4} \int_{0}^{\infty} \rho(\nu) d\nu = \frac{ca}{4} T^{4}, \]
+where $a$ is the quantity defined earlier.
+This gives us the Stefan-Boltzmann constant,
+\[ \sigma = \frac{ca}{4} = \frac{2\pi^{5} k_B^{4}}{15c^2 h^3}, \]
+and the total power (the luminosity)
+\[ P = FA = A\sigma T^{4}. \]
+
+\section{Bose-Einstein Condensation}
+Now we'll take a gas of bosons confined to a length-$L$ box and determine the ``critical temperature'' below which most of the bosons are in their ground state.
+This turns out to have some really interesting consequences for the matter's properties!
+
+Our first thought might be to define $k_B T_C = \Delta E$, where $\Delta E$ is the gap between a boson's ground and first-excited states.
+Any lower $T_C$ and most of the atoms won't have enough energy to be excited.
+But this produces a critical temperature that's about a thousand times lower than the observed value, so we'll need to be a little more careful about things!
+
+Let's begin with our expression for the total number of bosons in the gas:
+\begin{align*}
+    N &= \int_{0}^{\infty} n_\textrm{BE}(E) \cdot (2s+1) \cdot \frac{1}{8} \cdot 4\pi r^2 dr. \\
+    \intertext{Taking $s=0$ for simplicity, substituting $n_\textrm{BE}(E)$, and changing variables to $E = (\hbar^2\pi^2 / 2mL^2)r^2$ gives}
+    &= \frac{V(2m)^{3 / 2}}{4\hbar^3 \pi^2} \int_{0}^{\infty} \frac{E^{1 / 2} dE}{e^{(E - \mu)/k_BT} - 1}.
+\end{align*}
+But there's an issue here: the integrand is physically undefined for $E < \mu$, which is a problem if $\mu$ is positive.
+Thankfully we can work around this by estimating the value of $\mu$ when we're close enough to the critical temperature.
+For a very large number $N_0$ of bosons in the ground state, we can make the Taylor approximation
+\[ N_0 = n_\textrm{BE}(E_0) = \frac{1}{e^{(E_0 - \mu) / k_BT} - 1} \simeq \frac{k_BT}{E_0 - \mu}. \]
+Thus $\mu \simeq E_0 - k_BT / N_0 \simeq E_0$ when enough bosons are in the ground state, meaning writing the integral as
+\begin{align*}
+    N &= N_0 + \frac{V(2m)^{3 / 2}}{4\hbar^3 \pi^2} \int_{E_0}^{\infty} \frac{E^{1 / 2} dE}{e^{(E - \mu)/k_BT} - 1} \\
+    \intertext{makes it valid. It evaluates to}
+    &= N_0 + 2.6V \left( \frac{mk_BT}{2\pi\hbar^2} \right)^{3 / 2}.
+\end{align*}
+It turns out that if we define the critical temperature $T_C$ to be that at which $\mu(T_C) = 0$, then evaluating our original integral (before fixing the $\mu > 0$ issue) gives
+\[ N = 2.6V \left( \frac{mk_BT_C}{2\pi\hbar^2} \right)^{3 / 2}; \]
+we can thus rewrite our general result as
+\[ N = N_0 + N \left( \frac{T}{T_C} \right)^{3 / 2}, \quad T_C = \frac{2\pi\hbar^2}{mk_B} \left( \frac{N}{2.6V} \right)^{2 / 3}. \]
+This is the temperature below which a large fraction of bosons settle into the ground state; this fraction can be found by solving the above equation for $N_0 / N$, and is zero for $T > T_C$.
+
+The state of matter that the bosons take on below this temperature is called a \textbf{Bose-Einstein condensate} since it's reminiscent of the transition that occurs when a gas cools and condenses to a liquid.
+The process described here, however, is very different since it has nothing to do with attractive interactions between atoms and molecules.
+The critical temperature is miniscule---for dilute gases it's on the order of nanokelvin and microkelvin, respectively.
+In liquid helium, however, the separation between atoms is comparable to the de Broglie wavelength, meaning these quantum effects take place much more quickly (at around 2.2 K).
+
+% Recall the de Broglie wavelength $\lambda_\text{dB} = h / p$.
+% Say, for sake of calculations, that $p^2 / 2m = k_BT$, so at $T_0$
+% \[ \lambda_\text{dB} = \frac{h}{\sqrt{2mk_BT_0}} = \frac{h}{\sqrt{2mk_B \frac{3\hbar^2 \pi^2}{2mk_BV^{2 / 3}}}} = \frac{h}{\hbar \pi \sqrt{3}}V^{1 / 3} = \frac{2}{\sqrt{3}} L. \]
+% So the de Broglie wavelength of our bosons is about the size of the box.
+% This condition is much too restrictive---each boson doesn't need to ``fill'' the entire box to start interacting.
+% Perhaps they should, all together, fill the box!
+% So our condition becomes
+% \begin{align*}
+%     V &= N \lambda_\text{dB}^3 \\
+%     \lambda_\text{dB} &= \left( \frac{V}{N} \right)^{1 / 3} = \frac{h}{\sqrt{2mk_BT_c}} \\
+%     T_c &= \frac{h^2}{2mk_B} \left( \frac{N}{V} \right)^{2 / 3}
+% \end{align*}
+% This has the same ``shape'' as the $T_0$ we derived earlier, just with an $N^{2 / 3}$ in the numerator.
+% Thus for $N \gg 1$ we see $T_c \gg T_0$.
+
+\section{Lasers and Masers}
+Let's go back to working with photons.
+We know that atomic transitions can absorb and emit photons at particular wavelengths, but it turns out that there are multiple ways for this emission to occur.
+On one hand there's the familiar spontaneous emission, where an excited electron falls to a lower energy level.
+On the other hand we have stimulated emission, where an existing photon interacts with the electron and spurs the transition to a lower energy and the emission of a new, ``coherent'' (identical) photon.
+
+Suppose the walls of a cavity are comprised of atoms with two energy levels $E_1$ and $E_2$, and let $\rho(\nu,T)$ be the energy density of photons in the cavity with energy $E_2-E_1$.
+Define $B_{12} \rho(\nu,T)$ and $B_{21} \rho(\nu)$ as the probability of absorption and stimulated emission, respectively, per atom per unit time.
+Also define $A_{21}$ as that probability of spontaneous emission.
+Then we have the differential equation
+\[ \frac{dN_2}{dt} = -\frac{dN_1}{dt} = B_{12} \rho(\nu, T) N_1 - A_{21} N_2 - B_{21}\rho(\nu,T)N_2, \]
+where $N_1$ and $N_2$ are the numbers of electrons in $E_1$ and $E_2$, respectively.
+In thermal equilibrium these derivatives are zero and
+\[ B_{12} \rho(\nu,T) N_1 = [A_{21} + B_{21} \rho(\nu,T)] N_2. \]
+Also, from statistical mechanics
+\[ \frac{N_2}{N_1} = -e^{(E_2 - E_1) / k_BT} = e^{-h\nu / k_BT} \]
+in equilibrium, so together we get
+\[ \rho(\nu,T) = \frac{A_{21}}{B_{12} e^{h\nu / k_BT} - B_{21}}. \]
+If we map this to the known Planck function for cavity radiation we get
+\begin{align*}
+    A_{21} &= (8h\pi \nu^3 / c^3) B, \\
+    B &= B_{21} = B_{12}.
+\end{align*}
+The rate of emission is thus given by
+\begin{align*}
+    \left[ A_{21} + B \rho(\nu,T) \right] N_2 &= N_2 \left[ A_{21} + \frac{8\pi h\nu^3 / c^3 \cdot B}{e^{h\nu / k_BT} - 1} \right] \\
+    &= N_2 A_{21} \left[ 1 + N_\textrm{BE}(h\nu) \right]
+\end{align*}
+So the rate of emission is enhanced by the presence of photons!
+To quantify this enhancement, suppose we have some photons incident at $x=0$ on a volume with some atoms in it.
+If we ignore the effects of spontaneous emission, the evolution of the excited states is governed by
+\begin{align*}
+    \frac{dN_2}{dt} &= B \,\rho(\nu) (N_1 - N_2). \\
+    \intertext{Noting that $d / dt (\rho(\nu)\Delta \nu) = -d / dt (N_2 h \nu / V)$, we can rewrite this as}
+    \frac{d\rho(\nu)}{dt} &= \frac{h\nu}{V \Delta\nu} B\,\rho(\nu) (N_2-N_1). \\
+    \intertext{Using $dx / dt$ in the chain rule gives}
+    \frac{d\rho(\nu)}{dc} &= \frac{h\nu}{cV \Delta\nu} B\,\rho(\nu) (N_2-N_1),
+    \intertext{and absorbing everything into a constant gives}
+    \frac{d\rho(\nu)}{dx} &= \alpha\,\rho(\nu).
+\end{align*}
+So we get the exponential solution
+\[ \rho(\nu,x) = \rho(\nu,0) e^{\alpha x}, \quad \alpha = B \frac{h\nu}{cV\Delta\nu}, \]
+where $\alpha$ is called the gain constant.
+When $\alpha > 0$, we get exponential growth in the amount of energy in our beam of light!
+(In other words, the Light is Amplified via the Stimulated Emission of Radiation.)
+
+In practice many lasers have three energy levels.
+Atoms are transitioned from the ground state into a highly unstable excited state, and then they fall into an intermediate metastable state with a longer lifetime.
+This metastable state is what we need to sustain $N_2 > N_1$ and thus lasing.
+
+\end{document}
+%<3
+%<3
+%<3

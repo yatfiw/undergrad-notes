@@ -11,7 +11,7 @@ Let's start with the finite square well:
 We're interested in bound states, ones that satisfy $E < V_0$ (so that they're restricted to the well's interior).
 
 The key difference between this arrangement and the infinite square well is that the particle \textit{can} exist in a state of finite energy.
-It is now possible to detect the particle outside the bounds of our box, so our boundary contitions are going to change a bit.
+It is now possible to detect the particle outside the bounds of our box, so our boundary conditions are going to change a bit.
 We'll still require that $\psi$ be normalizable, so it must go to zero in its infinite limits.
 It should also be continuous, but now that we're dealing with a finite potential, we also want $\psi$ to be smooth (so its first derivative is continuous).
 
@@ -94,7 +94,7 @@ These differential equations have oscillatory and exponential solutions, respect
 If $E = V$ then $\psi''(x) = 0$ and we have an inflection point.
 These are where we can apply continuity and differentiability boundary conditions to stitch together the exponential and oscillatory solutions.
 This is also how energies get quantized---there are only so many energies that produce well-behaved, normalizable wave functions beyond these inflection points.
-Each energy corresponds to a different number of half-ocsillations; the $n$th bound state has $n-1$ nodes (zeroes).
+Each energy corresponds to a different number of half-oscillations; the $n$th bound state has $n-1$ nodes (zeroes).
 
 At any particular point in the bound region, the wave function ``instantaneously'' looks like the sinusoid
 \[ \psi(x) = A \sin (kx + \phi), \]
@@ -108,7 +108,7 @@ This is perhaps counterintuitive from a classical standpoint since a higher pote
     Given a state with energy $E$, there are two key regions to consider.
     \begin{itemize}
         \item In the $E > V$ regions, solutions are oscillatory.
-        As $E-V$ increases, the frequency of ocillation increases and the amplitude decreases.
+        As $E-V$ increases, the frequency of oscillation increases and the amplitude decreases.
         If $E > V$ everywhere then we have a continuum of solutions that we can combine to create a normalizable wave packet.
         \item In the $E < V$ regions, solutions are exponential.
         As $V-E$ increases, the ``decay length'' decreases.
@@ -217,7 +217,7 @@ Anyway, now we'll consider the point potential
 where $\alpha$ is dimensionless and tells us about the strength of the potential, and $a$ is some other constant with units of length.
 (The unitless space integral of $\delta$ implies that $\delta$ has units of inverse length.)
 In order for a state to be bound in this potential it must have $E < 0$, so on either side of the origin we have $E < V$.
-This gives the time-independent Schdödinger equation
+This gives the time-independent Schrödinger equation
 \[ \frac{d^2 \psi}{d x^2} = -\frac{2mE}{\hbar^2} \psi \implies \frac{d^2 \psi}{d x^2} = \kappa^2 \psi, \]
 the solution of which is
 \[ \psi(x) = \begin{cases} Ae^{\kappa x} & x < 0, \\ Be^{-\kappa x} & x > 0, \end{cases} \]
@@ -226,7 +226,7 @@ Now let's apply the boundary conditions.
 Since $\psi$ is continuous, $A = B$.
 But since we have an infinity here, $\psi$ need not be differentiable.
 We can still determine a relationship between the one-sided derivatives at $x=0$.
-First, we have the time-indendent Schrödinger equation
+First, we have the time-independent Schrödinger equation
 \begin{align*}
     \frac{d^2 \psi}{d x^2} &= \frac{2m}{\hbar^2} \left( V(x) - E \right) \psi \\
     \frac{d}{dx} \frac{d\psi}{dx} &= \frac{2m}{\hbar^2} \left( -\frac{\hbar^2 \alpha}{2ma} \delta(x) - E \right) \psi(x)
@@ -265,7 +265,7 @@ Interpreted as a crude model for diatomic molecules, this explains why molecules
 \begin{summary}
     The Dirac delta potential has exponential solutions on either side of the spike.
     These solutions piece together to create a continuous solution.
-    There is also a differentiabilty boundary condition that is uncovered by integrating either side of the Schrödinger equation over an infinitesimal neighborhood around the potential spike.
+    There is also a differentiability boundary condition that is uncovered by integrating either side of the Schrödinger equation over an infinitesimal neighborhood around the potential spike.
     If we do a similar thing with a double delta well we get a solution that is more tightly bound (i.e., one that has a lower energy).
 \end{summary}
 
@@ -325,7 +325,7 @@ So there is no transmitted probability and the reflection coefficient is one!
 \section{Quantum Tunneling}
 Now consider the finite barrier
 \[ V(x) = \begin{cases} V_0 & 0 < x < a \\ 0 & \text{elsewhere} \end{cases} \]
-If a particle has energy $E > V_0$ then we'll still get reflection and trasmission, it'll just happen locally at each ``interface''.
+If a particle has energy $E > V_0$ then we'll still get reflection and transmission, it'll just happen locally at each ``interface''.
 What we're really interested in is the $E < V_0$ case!
 
 In the left, center, and right regions we have the respective time-independent Schrödinger equations
@@ -339,7 +339,7 @@ Now we'll apply the continuity and differentiability boundary conditions:
     A + B &= F + G & Fe^{\kappa a} + Ge^{-\kappa a} &= Ce^{ika} \\
     ik (A - B) &= \kappa (F - G) & \kappa (Fe^{\kappa a} - Ge^{-\kappa a}) &= ik C e^{ika}
 \end{align*}
-From here we could show, with some nasty algebra, that the transmission coefficent through the barrier is
+From here we could show, with some nasty algebra, that the transmission coefficient through the barrier is
 \[ T = \frac{k_\textrm{trans}}{k_\textrm{inc}} \frac{|C|^2}{|A|^2} = \left[ 1 + \frac{(k^2 + \kappa^2)^2}{4k^2\kappa^2} \sinh^2 (\kappa a) \right]^{-1}. \]
 To make some sense of this expression, let's consider the limits as the barrier gets very thin ($\kappa a \ll 1$) or very thick ($\kappa a \gg 1$).
 In the thin limit $\sinh^2 \kappa a \approx \kappa^2 a^2$ is negligibly small, so

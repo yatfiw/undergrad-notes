@@ -17,7 +17,7 @@ For example, we might write
 All of these properties are characteristic of a general class of linear operators called Hermitian operators.
 Such an operator $A$ is defined by the equation
 \[ \int_{-\infty}^{\infty} \Phi^* \left( A \Psi \right) \,dx = \int_{-\infty}^{\infty} \left( A \Phi \right)^* \Psi \,dx, \]
-whhere $\Phi$ and $\Psi$ are physical wave functions.
+where $\Phi$ and $\Psi$ are physical wave functions.
 This looks pretty abstract, but notice that in the special case $\Phi = \Psi$ it turns into
 \begin{align*}
     \int_{-\infty}^{\infty} \Psi^* \left( A \Psi \right) \,dx &= \int_{-\infty}^{\infty} \left( A \Psi \right)^* \Psi \,dx \\
@@ -75,7 +75,7 @@ In this case, the eigenvalues of $A$ and $B$ are precisely the same!
 One nice implication of this fact is that, because the parity operator commutes with even Hamiltonians, the eigenfunctions of such Hamiltonians must be even or odd.
 
 If two operators commute, then we can simultaneously know both of their associated observables without uncertainty.
-Conversely, if two operators do not commute, it is not possible to have definitive values for both obsevabels at the same time.
+Conversely, if two operators do not commute, it is not possible to have definitive values for both observable at the same time.
 This leads to uncertainty!
 For example, consider a particle in a box in its ground state; a measurement of its position causes the wave function to collapse into a non-eigenstate, so we are not guaranteed to get the ground-state energy upon a subsequent measurement.
 
@@ -112,7 +112,7 @@ Any smaller change is statistically insignificant.
 \begin{summary}
     The commutator $[A,B] = AB - BA$ of two Hermitian operators is equal to zero if and only if they commute.
     In this case, the operators have the same eigenspaces; further, if their eigenvalues are nondegenerate, then they have the same eigenfunctions.
-    Uncertainty arrises when the commutator is nonzero---in particular, if $[A,B] = iC$, then we have the generalized uncertainty principle
+    Uncertainty arises when the commutator is nonzero---in particular, if $[A,B] = iC$, then we have the generalized uncertainty principle
     \[ \Delta A \Delta B \geq \frac{|\left< C \right>|}{2}. \]
     We also have
     \[ \Delta E \Delta t \geq \frac{\hbar}{2}, \]
@@ -123,11 +123,11 @@ Any smaller change is statistically insignificant.
 We're now in a position to address some of the fundamental ``paradoxes'' that come with quantum mechanics.
 
 Consider a two-particle state involving particles $A$ and $B$.
-If these particles have postitions $x_A$ and $x_B$, respectively, then the wave function describing their combined state is $\Psi(x_A, x_B)$.
+If these particles have positions $x_A$ and $x_B$, respectively, then the wave function describing their combined state is $\Psi(x_A, x_B)$.
 We say that such a state is entangled if this $\Psi$ cannot be expressed as a product of independent wave functions for $A$ and $B$; in this case, the Born rule looks like $dP = |\Psi(x_A, x_B)|^2 dx_A dx_B$.
 
 One source of entangled states is nuclear decay.
-Connsider, for example, an unstable particle of mass $m$ in the fifth energy state of the infinite square well.
+Consider, for example, an unstable particle of mass $m$ in the fifth energy state of the infinite square well.
 It decays into two particles with masses $m_A = m / 5$ and $m_B = 4m / 5$.
 We can show, by conservation of energy, that
 \[ 5n_A^2 + \frac{5}{4}n_B^2 = 25. \]
@@ -145,7 +145,7 @@ This is called the Realist view of quantum mechanics, which is contrary to the O
 Running with this view, Einstein and two of his colleagues devised the Einstein-Podolsky-Rosen (EPR) ``paradox''.
 Consider, again, two particles $A$ and $B$ that interact for a short time and then never again.
 The positions and momenta of the particles are individually equal in magnitude and opposite in direction.
-So if we measure the position of $A$, then we also get the position of $B$; this is consistent with the Realist view that these states were predetermined when the particles stopped intereacting.
+So if we measure the position of $A$, then we also get the position of $B$; this is consistent with the Realist view that these states were predetermined when the particles stopped interacting.
 Similarly, a measurement of the momentum of $A$ allows us to determine that of $B$, which is again consistent with Realism.
 
 But then the position and momentum of $B$ were both determined when its interaction with $A$ ceased meaning both quantities can be known precisely, a clear violation of the Heisenberg uncertainty principle.
@@ -162,7 +162,7 @@ We should be careful not to take this superposition interpretation too far, thou
 Suppose a cat is confined to a chamber equipped with a mechanism to kill the cat if a particular quantum event occurs, say the decay of a radioactive atom.
 Within our current understanding of multiparticle systems the the survival of the cat is entangled with the atomic decay, but this is clearly ridiculous because that would mean the cat is in a superposition of ``survival states'', not definitely alive or dead!
 
-Out best guess for why this superposition breaks dowm for macroscopic objects is that environmental interactions cause wave functions to lose the relative phase information that is essential to quantum phenomena like interference.
+Out best guess for why this superposition breaks down for macroscopic objects is that environmental interactions cause wave functions to lose the relative phase information that is essential to quantum phenomena like interference.
 Perhaps this so-called decoherence somehow leads to the collapse of the system into one of the states comprising the initial superposition.
 But this seems inconsistent with the Schrödinger equation which, as a linear differential equation, should conserve superpositions over time.
 This question of what, exactly, happens when a wave function collapses (if anything) is the crux of the measurement problem.

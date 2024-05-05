@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\chapter{The Time-Indpendent Schrödinger Equation}
+\chapter{The Time-Independent Schrödinger Equation}
 \section{Separation of Variables}
 With a solid foundation in wave mechanics, we can now move into actually producing solutions to the Schrödinger equation.
 
@@ -65,7 +65,7 @@ The former immediately gives $B = 0$; the latter,
 \[ 0 = A \sin kL. \]
 The only way we get interesting solutions from this is to take
 \[ kL = n \pi, \quad n = 1, 2, \ldots \]
-Negative values of $n$ don't lead to new (linearly indpendent) solutions, and $n = 0$ is just boring.
+Negative values of $n$ don't lead to new (linearly independent) solutions, and $n = 0$ is just boring.
 The allowed values of $k$ can be labeled based on what integers they use:
 \[ k_n = \frac{n \pi}{L}. \]
 From how we defined $k$, though, this also means we only have certain allowed energies:
@@ -79,7 +79,7 @@ Notice some things about this solution.
 \begin{itemize}
     \item The associated wave function
     \[ \Psi_n(x,t) = e^{-i \omega t} \psi_n(x), \]
-    appears to evolve in precisely the same way as, say, a guitar string would---all of the $n$ sinusoidal extrema periodcially wriggle up and down with a set amplitude.
+    appears to evolve in precisely the same way as, say, a guitar string would---all of the $n$ sinusoidal extrema periodically wriggle up and down with a set amplitude.
     \item Each wave function $\Psi_n$ is associated with a different amount of energy $E_n$; since these wave functions are ``discrete'', only supporting a half-integer number of wavelengths, their associated energy levels are also discrete!
     \item There is no $E = 0$ state.
     Even in the ground state $n=1$, the wave function still needs to oscillate so that it's connected to each wall of the well.
@@ -162,7 +162,7 @@ To fix this, let's take a look at the expressions for the other expectation valu
     \left< x^2 \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) x^2 \Psi(x,t) \,dx & \left< p_x^2 \right> &= \int_{-\infty}^{\infty} \Psi^*(x,t) \left( \frac{\hbar}{i} \frac{\partial}{\partial x} \right)^2 \Psi(x,t) \,dx
 \end{align*}
 This notation allows us to understand these integrals in a new light.
-We are not, in fact, just doing multiplcations and derivatives in these integrals.
+We are not, in fact, just doing multiplications and derivatives in these integrals.
 Instead, we are applying the position and momentum operators
 \[ x_\textrm{op} = x \;\text{ and }\; p_\textrm{op} = \frac{\hbar}{i} \frac{\partial}{\partial x} \]
 to $\Psi$, and then doing stuff with the result.
@@ -173,7 +173,7 @@ So the important expectation values for $E$ are
 \[ \left< E \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H \Psi(x,t) \,dx \,\text{ and }\, \left< E^2 \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H^2 \Psi(x,t) \,dx. \]
 Importantly, we can also write the time-independent Schrödinger equation as
 \[ H \psi(x) = E \psi(x). \]
-So the eigenfunctions of $H$ are the $\psi_n$ found via separation of variabes, and its eigenvalues are their corresponding energies $E_n$!
+So the eigenfunctions of $H$ are the $\psi_n$ found via separation of variables, and its eigenvalues are their corresponding energies $E_n$!
 We'll often refer to $\psi_n$ as energy eigenfunctions and $E_n$ as energy eigenvalues.
 
 In fact, every observable has an associated operator whose eigenvalues are precisely the possible outcomes of a measurement!
