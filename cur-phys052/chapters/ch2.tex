@@ -37,12 +37,12 @@ This function solves the Schrödinger equation!
 It is often referred to as a stationary state since its associated probability density is time-independent.
 $E = \hbar \omega$ is the energy of this state.
 
-\begin{summary}
-    Using separation of variables on the Schrödinger equation gives $\Psi(x,t) = e^{-i\omega t} \psi(x)$, where $\psi$ is a solution to the time-independent Schrödinger equation
-    \[ -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) \psi(x) = E \psi (x). \]
-    These $\Psi$ are not the only solutions to the Schrödinger equation, but they are the building blocks for all others.
-    Since their $|\Psi|^2$ are time-independent, these solutions are often called stationary states. 
-\end{summary}
+% \begin{summary}
+%     Using separation of variables on the Schrödinger equation gives $\Psi(x,t) = e^{-i\omega t} \psi(x)$, where $\psi$ is a solution to the time-independent Schrödinger equation
+%     \[ -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) \psi(x) = E \psi (x). \]
+%     These $\Psi$ are not the only solutions to the Schrödinger equation, but they are the building blocks for all others.
+%     Since their $|\Psi|^2$ are time-independent, these solutions are often called stationary states. 
+% \end{summary}
 
 \section{The Infinite Square Well}
 To begin our study of the time-independent Schrödinger equation, let's pick the most ideal potential energy function we can: the infinite square well (also known as the particle in a box).
@@ -86,12 +86,12 @@ Notice some things about this solution.
     (We don't consider $n=0$ because it isn't normalizable.)
 \end{itemize}
 
-\begin{summary}
-    The infinite square well is a very simple choice of $V(x)$.
-    Applying continuity boundary conditions gives the quantized stationary states and energies
-    \[ \psi_n(x) = \begin{cases} \sqrt{\frac{2}{L}} \sin \frac{n \pi x}{L} & 0 \leq x \leq L, \\ 0 & \text{elsewhere}, \end{cases} \qquad E_n = \frac{n^2 \hbar^2 \pi^2}{2mL^2}, \]
-    for positive integers $n$.
-\end{summary}
+% \begin{summary}
+%     The infinite square well is a very simple choice of $V(x)$.
+%     Applying continuity boundary conditions gives the quantized stationary states and energies
+%     \[ \psi_n(x) = \begin{cases} \sqrt{\frac{2}{L}} \sin \frac{n \pi x}{L} & 0 \leq x \leq L, \\ 0 & \text{elsewhere}, \end{cases} \qquad E_n = \frac{n^2 \hbar^2 \pi^2}{2mL^2}, \]
+%     for positive integers $n$.
+% \end{summary}
 
 \section{Time Evolution and Measurement Properties}
 In general, the time-independent Schrödinger equation gives a discrete set of solutions $\psi_n$, each of which is associated with a quantized energy level $E_n$ and phase factor $e^{-i E_n t / \hbar}$.
@@ -143,16 +143,16 @@ Specifically,
 So we can write expectation values for energy:
 \[ \left< E \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n \qquad \left< E^2 \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n^2 \]
 
-\vspace{-5pt}
-\begin{summary}
-    In general, the time-independent Schrödinger equation gives a discrete set of mutually orthonormal solutions $\psi_n$, each with an associated energy $E_n$ and phase factor $e^{-i \omega_n t}$.
-    We can linearly combine these stationary states to get solutions that evolve in time.
-    The coefficients of such a linear combination is given by the inner product
-    \[ c_n(0) = \int_{-\infty}^{\infty} \Psi^*(x,0)\psi_n(x) \,dx. \]
-    Each $|c_n|^2$ represents the probability of finding $E_n$ upon a measurement of a particle's energy.
-    So we have
-    \[ \left< E \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n, \qquad \left< E^2 \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n^2. \]
-\end{summary}
+% \vspace{-5pt}
+% \begin{summary}
+%     In general, the time-independent Schrödinger equation gives a discrete set of mutually orthonormal solutions $\psi_n$, each with an associated energy $E_n$ and phase factor $e^{-i \omega_n t}$.
+%     We can linearly combine these stationary states to get solutions that evolve in time.
+%     The coefficients of such a linear combination is given by the inner product
+%     \[ c_n(0) = \int_{-\infty}^{\infty} \Psi^*(x,0)\psi_n(x) \,dx. \]
+%     Each $|c_n|^2$ represents the probability of finding $E_n$ upon a measurement of a particle's energy.
+%     So we have
+%     \[ \left< E \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n, \qquad \left< E^2 \right> = \sum_{n=1}^{\infty} |c_n(0)|^2 E_n^2. \]
+% \end{summary}
 
 \section{The Energy Operator}
 The expression for $\left< E \right>$ above (via linear combination) is a good start, but it requires that we know \textit{all} of the $c_n$ ahead of time, which in general we won't.
@@ -183,13 +183,13 @@ A particle's momentum is determined by its wavenumber $k$; applying $p_\textrm{o
 So $e^{ikx}$ is an eigenfunction of $p_\textrm{op}$, and its corresponding eigenvalue is the momentum $\hbar k$.
 Since $k$ can vary continuously, this tells us that momentum is continuous (unlike energy!).
 
-\begin{summary}
-    We have the position, momentum, and energy operators:
-    \[ x_\textrm{op}= x \qquad p_\textrm{op} = \frac{\hbar}{i}\frac{\partial}{\partial x} \qquad H = \frac{p_\textrm{op}^2}{2m} + V(x_\textrm{op}) \]
-    The time-independent Schrödinger equation can be written as $H \psi = E \psi$, so the eigenvectors of the Hamiltonian $H$ are stationary states and the eigenvalues are their associated energies.
-    In general, the eigenvalues of an operator correspond to the possible outcomes of the measurement of some observable.
-    Here are the relevant expectation values for energy:
-    \[ \left< E \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H \Psi(x,t) \,dx \qquad \left< E^2 \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H^2 \Psi(x,t) \,dx \]
-\end{summary}
+% \begin{summary}
+%     We have the position, momentum, and energy operators:
+%     \[ x_\textrm{op}= x \qquad p_\textrm{op} = \frac{\hbar}{i}\frac{\partial}{\partial x} \qquad H = \frac{p_\textrm{op}^2}{2m} + V(x_\textrm{op}) \]
+%     The time-independent Schrödinger equation can be written as $H \psi = E \psi$, so the eigenvectors of the Hamiltonian $H$ are stationary states and the eigenvalues are their associated energies.
+%     In general, the eigenvalues of an operator correspond to the possible outcomes of the measurement of some observable.
+%     Here are the relevant expectation values for energy:
+%     \[ \left< E \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H \Psi(x,t) \,dx \qquad \left< E^2 \right> = \int_{-\infty}^{\infty} \Psi^*(x,t) H^2 \Psi(x,t) \,dx \]
+% \end{summary}
 
 \end{document}

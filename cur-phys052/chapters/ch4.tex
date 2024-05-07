@@ -48,20 +48,20 @@ Given an arbitrary wave function $\Psi$, we could find the coefficient $c_n$ on 
 and use these coefficients to compute the expectation values
 \[ \int_{-\infty}^{\infty} \Psi^* A \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n \;\text{ and }\; \int_{-\infty}^{\infty} \Psi^* A^2 \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n^2. \]
 
-\begin{summary}
-    The parity operator $\Pi$ simply reflects its inputs over the vertical axis.
-    Its eigenfunctions are the even and odd functions, which respectively correspond to eigenvalues of $1$ and $-1$.
+% \begin{summary}
+%     The parity operator $\Pi$ simply reflects its inputs over the vertical axis.
+%     Its eigenfunctions are the even and odd functions, which respectively correspond to eigenvalues of $1$ and $-1$.
 
-    This, along with the operators we've discussed so far, is an example of a Hermitian operator $A$, which is one that satisfies
-    \[ \int_{-\infty}^{\infty} \Phi^* \left( A \Psi \right) \,dx = \int_{-\infty}^{\infty} \left( A \Phi \right)^* \Psi \,dx. \]
-    For our purposes, Hermitian operators are ones that have real eigenvalues, meaning $\left< A \right> = \left< A \right>^*$.
-    The eigenfunctions of Hermitian operators are mutually orthogonal, and they form a basis for the set of all wave functions.
-    The coefficients on a linear combination of eigenfunctions are given by
-    \[ c_n = \int_{-\infty}^{\infty} \psi_n^* \Psi \,dx, \]
-    and each $|c_n|^2$ represents the probability of finding the eigenvalue $a_n$ upon a measurement of $A$.
-    The relevant expectation values are
-    \[ \int_{-\infty}^{\infty} \Psi^* A \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n \;\text{ and }\; \int_{-\infty}^{\infty} \Psi^* A^2 \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n^2. \]
-\end{summary}
+%     This, along with the operators we've discussed so far, is an example of a Hermitian operator $A$, which is one that satisfies
+%     \[ \int_{-\infty}^{\infty} \Phi^* \left( A \Psi \right) \,dx = \int_{-\infty}^{\infty} \left( A \Phi \right)^* \Psi \,dx. \]
+%     For our purposes, Hermitian operators are ones that have real eigenvalues, meaning $\left< A \right> = \left< A \right>^*$.
+%     The eigenfunctions of Hermitian operators are mutually orthogonal, and they form a basis for the set of all wave functions.
+%     The coefficients on a linear combination of eigenfunctions are given by
+%     \[ c_n = \int_{-\infty}^{\infty} \psi_n^* \Psi \,dx, \]
+%     and each $|c_n|^2$ represents the probability of finding the eigenvalue $a_n$ upon a measurement of $A$.
+%     The relevant expectation values are
+%     \[ \int_{-\infty}^{\infty} \Psi^* A \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n \;\text{ and }\; \int_{-\infty}^{\infty} \Psi^* A^2 \Psi = \sum_{n=1}^{\infty} |c_n|^2 a_n^2. \]
+% \end{summary}
 
 \section{Operator Commutation and Uncertainty}
 Suppose we have two Hermitian operators $A$ and $B$.
@@ -109,15 +109,15 @@ $\Delta t = \Delta A / |d \left< A \right> / dt|$ to get
 Here, $\Delta t$ is the time it takes $\left< E \right>$ to change by an amount equal to its uncertainty.
 Any smaller change is statistically insignificant.
 
-\begin{summary}
-    The commutator $[A,B] = AB - BA$ of two Hermitian operators is equal to zero if and only if they commute.
-    In this case, the operators have the same eigenspaces; further, if their eigenvalues are nondegenerate, then they have the same eigenfunctions.
-    Uncertainty arises when the commutator is nonzero---in particular, if $[A,B] = iC$, then we have the generalized uncertainty principle
-    \[ \Delta A \Delta B \geq \frac{|\left< C \right>|}{2}. \]
-    We also have
-    \[ \Delta E \Delta t \geq \frac{\hbar}{2}, \]
-    where $\Delta t$ is the amount of time it takes $\left< E \right>$ to change by an amount equal to its uncertainty.
-\end{summary}
+% \begin{summary}
+%     The commutator $[A,B] = AB - BA$ of two Hermitian operators is equal to zero if and only if they commute.
+%     In this case, the operators have the same eigenspaces; further, if their eigenvalues are nondegenerate, then they have the same eigenfunctions.
+%     Uncertainty arises when the commutator is nonzero---in particular, if $[A,B] = iC$, then we have the generalized uncertainty principle
+%     \[ \Delta A \Delta B \geq \frac{|\left< C \right>|}{2}. \]
+%     We also have
+%     \[ \Delta E \Delta t \geq \frac{\hbar}{2}, \]
+%     where $\Delta t$ is the amount of time it takes $\left< E \right>$ to change by an amount equal to its uncertainty.
+% \end{summary}
 
 \section{Quantum Entanglement and Measurement}
 We're now in a position to address some of the fundamental ``paradoxes'' that come with quantum mechanics.
