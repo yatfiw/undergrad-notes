@@ -9,10 +9,10 @@ Here is a list of the courses that have been added so far, along with informatio
   * Missing proofs for all theorems
 * MATH082 Differential Equations (SU23)
 * PHYS023 Special Relativity (FA22)
+* PHYS052 Quantum Physics (SP24)
 
 I'm currently taking the following courses, so they'll be incomplete until the end of April 2024 at the earliest.
 * MATH131 Mathematical Analysis I (SP24)
-* PHYS052 Quantum Physics (SP24)
 
 These are some other courses I'd like to add in the future, in order of decreasing priority.
 * PHYS051 Electromagnetic Theory and Optics (FA23)
