@@ -5,13 +5,13 @@
 \usepackage{amssymb}
 \usepackage{enumitem}                       % custom enum labels
 \usepackage{parskip}                        % add vertical paragraph space
-\usepackage{tocloft}						% modify toc positioning
+\usepackage{tocloft}						% modify toc position
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
 
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
 \setlength{\parindent}{0pt}                	% no paragraph indentation
 
-% region TITLE CONSTRUCTION
+% region TITLE
 \newlength\mywidth
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
 \mywidth=\wd0
@@ -20,7 +20,7 @@
 \renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
 % endregion
 
-% region FRAMED ENVIRONMENTS
+% region ENVIRONMENTS
 \newcounter{theo}[chapter]\setcounter{theo}{0}
 \newcommand{\numTheo}{\arabic{chapter}.\arabic{theo}}
 \newcommand{\mdftheo}[3]{
@@ -90,7 +90,7 @@
 \textit{Proof. }}{\qed \end{mdframed}}
 % endregion
 
-% region NEW COMMANDS
+% region COMMANDS
 \newcommand{\ds}{\displaystyle}
 \newcommand{\pfn}[1]{\textrm{#1}}  % enables new functions
 \newcommand{\mbf}[1]{\mathbf{#1}}  % mathbf
