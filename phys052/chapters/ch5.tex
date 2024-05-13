@@ -78,7 +78,7 @@ Converting from rectangular to spherical coordinates,
 \end{align*}
 This naturally leads to another operator,
 \begin{align*}
-    \hat{\mbf{L}} &= \hat L_x^2 + \hat L_y^2 + \hat L_z^2 \\
+    \hat{\mbf{L}}^2 &= \hat L_x^2 + \hat L_y^2 + \hat L_z^2 \\
     &= -\hbar^2 \left[ \frac{1}{\sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial}{\partial \theta} \right) + \frac{1}{\sin^2 \theta} \frac{\partial^2}{\partial \phi^2} \right]
 \end{align*}
 But this is precisely what we see in the spherical time-independent Schrödinger equation!
@@ -134,7 +134,7 @@ These are called the spherical harmonics, and they satisfy the two equations
     \hat{\mbf{L}}^2 Y_{l,m_l} (\theta, \phi) &= l(l+1)\hbar^2 \, Y_{l,m_l} (\theta, \phi), \quad l = 0, 1, \ldots
 \end{align*}
 The spherical harmonics are complete and orthogonal under the inner product
-\[ \int_{0}^{2\pi} \int_{0}^{\pi} Y^*_{l,m_l} Y_{l'',m_l} \sin\theta \,d\theta d\phi = \delta_{l,l'} \delta_{m_l,m_l'}, \]
+\[ \int_{0}^{2\pi} \int_{0}^{\pi} Y^*_{l,m_l} Y_{l,m_l} \sin\theta \,d\theta d\phi = \delta_{l,l'} \delta_{m_l,m_l'}, \]
 and we normalize one by integrating over the entire unit sphere:
 \[ \int_{0}^{2\pi} \int_{0}^{\pi} |Y_{l,m_l}|^2 \sin \theta \,d\theta d\phi = 1. \]
 The radial portion of $\psi$ is customarily normalized separately.
@@ -250,13 +250,13 @@ The current $I = qv / (2\pi r)$ associated with this particle corresponds to a m
 But $L = rmv$, so we can write this as $\boldsymbol\mu = (q / 2m) \mbf{L}$.
 If this particle is in a magnetic field $\mbf{B} = B \hat z$, then the energy of interaction is
 \[ -\boldsymbol\mu \cdot \mbf{B} = -\frac{q}{2m} \mbf{L} \cdot \mbf{B} = -\frac{qB}{2m}L_z. \]
-This suggests that if we were to immerse a hydrogenic atom in an external magnetic field in the $z$-direction, then we will need to add an extra $(eB / 2m) \hat L_z$ term to the Hamiltonian.
+This suggests that if we were to immerse a hydrogenic atom in an external magnetic field in the $z$-direction, then we will need to add an extra $(q_e B / 2m) \hat L_z$ term to the Hamiltonian.
 So we have
-\[ \hat H = \left( -\frac{\hbar^2}{2m} \nabla^2 - \frac{Ze^2}{4\pi \epsilon_0 r} \right) + \frac{eB}{2m} \hat L_z. \]
+\[ \hat H = \left( -\frac{\hbar^2}{2m} \nabla^2 - \frac{Ze^2}{4\pi \epsilon_0 r} \right) + \frac{q_e B}{2m} \hat L_z. \]
 The eigenfunctions for the old Hamiltonian still hold here---they are eigenfunctions for $\hat L_z$, so the new term doesn't change anything.
 The new eigenvalues are simply
-\[ E_{n,m_l} = E_n + \frac{eB}{2m} m_l \hbar = E_n + \mu_B m_l B, \]
-where $E_n$ are the energies without the magnetic field and $\mu_B = e\hbar / 2m$ is the very small ``Bohr magneton'' correction.
+\[ E_{n,m_l} = E_n + \frac{q_e B}{2m} m_l \hbar = E_n + \mu_B m_l B, \]
+where $E_n$ are the energies without the magnetic field and $\mu_B = q_e \hbar / 2m$ is the very small ``Bohr magneton'' correction.
 This breaks the degeneracy of each energy level with respect to $m_l$, which can be observed in emission lines.
 A transition from $l=1$ to $l=0$, for example, would result in three very slightly different frequencies for emitted light.
 
@@ -268,7 +268,7 @@ This splitting cannot be explained using the quantum mechanics we've done so far
 \section{Intrinsic Spin}
 Spin angular momentum $\mbf{S}$ is a completely new property of particles with no classical equivalent.
 For an electron, its associated magnetic moment is
-\[ \boldsymbol\mu = -g \frac{e}{2m} \mbf{S}, \]
+\[ \boldsymbol\mu = -g \frac{q_e}{2m} \mbf{S}, \]
 where $g$ is a ``fudge factor'' introduced to provide agreement with experiment.
 The total magnetic moment can be found by adding the individual moments from orbital and spin angular momentum.
 
