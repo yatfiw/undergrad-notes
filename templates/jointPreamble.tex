@@ -6,6 +6,10 @@
 \usepackage{enumitem}                       % custom enum labels
 \usepackage{parskip}                        % add vertical paragraph space
 \usepackage{tocloft}						% modify toc position
+\usepackage{mathtools}						% Aboxed
+\usepackage{empheq}							% box multiple lines
+\usepackage{upgreek}
+\usepackage{chemformula}
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
 
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
@@ -18,6 +22,19 @@
 \setlength{\cftbeforetoctitleskip}{0em}
 \setlength{\cftaftertoctitleskip}{1em}
 \renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
+% endregion
+
+% region COMMANDS
+\newcommand{\ds}{\displaystyle}
+\newcommand{\pfn}[1]{\textrm{#1}}	% enables new functions
+\newcommand{\mbf}[1]{\mathbf{#1}}	% mathbf
+\newcommand{\C}{\mathbb{C}}			% fancy C
+\newcommand{\R}{\mathbb{R}}			% fancy R
+\newcommand{\Q}{\mathbb{Q}}			% fancy Q
+\newcommand{\Z}{\mathbb{Z}}			% fancy Z
+\newcommand{\N}{\mathbb{N}}			% fancy N
+\newcommand{\from}{\leftarrow}
+\newcommand{\qed}{$\square$}
 % endregion
 
 % region ENVIRONMENTS
@@ -79,26 +96,18 @@
 	\begin{mdframed}[]\relax
 }{\end{mdframed}}
 
+\newenvironment{proof}[1][]{
+	\mdfproof{black!15}
+	\begin{mdframed}[]\relax
+\textit{Proof. }}{\qed \end{mdframed}}
+
 \newenvironment{example}[1][]{
 	\mdfnontheo{Example}{#1}{yellow!40}
 	\begin{mdframed}[]\relax
 }{\end{mdframed}}
 
-\newenvironment{proof}[1][]{
-	\mdfproof{black!15}
+\newenvironment{summary}[1][]{
+	\mdfnontheo{Summary}{#1}{green!70!black!30}
 	\begin{mdframed}[]\relax
-\textit{Proof. }}{\qed \end{mdframed}}
-% endregion
-
-% region COMMANDS
-\newcommand{\ds}{\displaystyle}
-\newcommand{\pfn}[1]{\textrm{#1}}  % enables new functions
-\newcommand{\mbf}[1]{\mathbf{#1}}  % mathbf
-\newcommand{\C}{\mathbb{C}}        % fancy C
-\newcommand{\R}{\mathbb{R}}        % fancy R
-\newcommand{\Q}{\mathbb{Q}}        % fancy Q
-\newcommand{\Z}{\mathbb{Z}}        % fancy Z
-\newcommand{\N}{\mathbb{N}}        % fancy N
-\newcommand{\from}{\leftarrow}
-\newcommand{\qed}{$\square$}
+}{\end{mdframed}}
 % endregion
