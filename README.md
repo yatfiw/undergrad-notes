@@ -2,7 +2,7 @@
 
 This is an incomplete compilation of notes from all the mathematics and physics courses I've taken at Harvey Mudd College.
 
-Here is a list of the courses that have been added so far, along with information about how close to completion they are.
+Here is a list of the courses that have been added so far, along with any relevant information about their status.
 * ASTR062 Intro. to Astrophysics (SP24)
 * MATH055 Discrete Mathematics (FA23)
 * MATH073 Linear Algebra (SP23)
