@@ -16,12 +16,10 @@
 \setlength{\parindent}{0pt}                	% no paragraph indentation
 
 % region TITLE
-\newlength\mywidth
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
-\mywidth=\wd0
 \setlength{\cftbeforetoctitleskip}{0em}
 \setlength{\cftaftertoctitleskip}{1em}
-\renewcommand{\contentsname}{\hangindent=\mywidth \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
+\renewcommand{\contentsname}{\hangindent=\wd0 \strut \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
 % endregion
 
 % region COMMANDS
