@@ -234,7 +234,7 @@ Euclid gave a very simple proof of this, a variation on which is given below.
     Either way, this contradicts our assumption that $p$ is the largest prime.
 \end{proof}
 
-Despire this, it can also be shown that, for any number $n$, there exists a list of $n$ consecutive prime numbers.
+Despite this, it can also be shown that, for any number $n$, there exists a list of $n$ consecutive prime numbers.
 Namely, $(n+1)! + 2, \; (n+1)! + 3, \; \ldots, (n+1)! + (n+1)$.
 
 It can be shown, by strong induction, that every number can be expressed as the product of primes.
@@ -272,8 +272,6 @@ Now, the centerpiece of the section.
 \end{proof}
 
 We can use this fundamental theorem to solve a pretty neat counting problem.
-
-\pagebreak
 
 \begin{theorem}[Number of positive divisors from prime factorization]
     Let $a = \prod\limits_{i=1}^r p_i^{\alpha_i}$, where $p_1, \cdots, p_r$ are distinct primes and $\alpha_i \geq 0$.
@@ -532,6 +530,8 @@ This leads to one other nice property of totients, given below.
 Finally, we have one more ``pure'' result, also related to totients.
 It is a generalization of Fermat's theorem.
 
+\pagebreak
+
 \begin{theorem}[Euler's theorem]
     If $(a,m) = 1$, then $a^{\phi (m)} \equiv_m 1$.
 \end{theorem}
@@ -564,8 +564,6 @@ Some of these IGPs, of course, are composite; such numbers are called Carmichael
 We will, however, give a couple of practical methods for computing $a^n \bmod m$ for large $n$.
 First, if $(a,m) = 1$ and $\phi (m)$ are known, we may be able to exploit Euler's theorem in some way (often using the division algorithm).
 This method is simple, but it has limited use; the next one is much more widely applicable.
-
-\pagebreak
 
 \begin{example}[Seed planting]
     Suppose we want to compute $6^{83} \bmod 79$.

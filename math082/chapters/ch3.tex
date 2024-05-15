@@ -19,7 +19,7 @@ We begin this new chapter by extending our discussion of existence and uniquenes
 
 Note that Theorem 3.1 is simply Theorem 2.3 recast in terms of order $n$ instead of order 1.
 This gives one example of how results for relatively simple differential equations can often be generalized quite easily to higher-order DEs.
-In a similar vein, the remainder of this section will focus on the theory of linear second-order differential equations, but all of the definitions and results can be easiy generalized to the $n$-th order.
+In a similar vein, the remainder of this section will focus on the theory of linear second-order differential equations, but all of the definitions and results can be easily generalized to the $n$-th order.
 
 \begin{theorem}[Solution spaces as vector spaces]
     Let the coefficients $a_0$, $a_1$, and $a_2$ be continuous on an interval $I$.
@@ -43,6 +43,8 @@ Rewrite the linear combination as $\displaystyle \frac{g(t)}{f(t)} = -\frac{c_1}
 Therefore, if $f$ and $g$ are linearly dependent, then $f(t)g'(t) - g(t)f'(t) = 0$ for all $t \in I$.
 We'll give this difference a special name and state the result's contrapositive as a theorem.
 
+\pagebreak
+
 \begin{definition}[Wronskian]
     The Wronskian $W$ of two functions $y_1$ and $y_2$ is the determinant
     \[ W[y_1, y_2] = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix}. \]
@@ -56,7 +58,7 @@ Note that the converse is not true: if $W[y_1, y_2] = 0$ for all $t \in I$, the 
 Things are simpler, however, when the functions are solutions to a linear DE.
 
 Suppose $y_1$ and $y_2$ solve the DE $y'' + py' + qy = 0$.
-When we differentiate the Wronskian $W[y_1, y_2]$, we find that $\dfrac{dW}{dt} = -pW$, which is a separable DE.
+When we differentiate the Wronskian $W[y_1, y_2]$, we find that $dW / dt = -pW$, which is a separable DE.
 Solving this DE gives the following.
 
 \begin{theorem}[Abel's theorem]
@@ -137,7 +139,7 @@ We'll describe two of these methods here, the first of which simply boils down t
 
 \begin{definition}[Undetermined coefficients]
     Consider the DE $p_2(x)y'' + p_1(x)y' + p_0(x)y = f(x)$.
-    The method of undetermined coefficients may be used to find a particular solutoin to this DE; the procedure is as follows.
+    The method of undetermined coefficients may be used to find a particular solution to this DE; the procedure is as follows.
     \begin{itemize}
         \item Use $f(t)$ to guess a particular solution as a linear combination of some related functions.
         \item Plug the guess (a.k.a. ansatz) into the DE and determine the unknown constants.
@@ -150,11 +152,11 @@ We'll describe two of these methods here, the first of which simply boils down t
 \textit{Remarks.}
 The ansatz should take into account any of the functions that the forcing term cycles through under differentiation; for example, if $f(x)$ is sinusoidal, then we might guess that the solution is a linear combination of a sine and a cosine.
 The ansatz also depends on the DE's homogeneous solution.
-We want a guess that is linearly independent of the correspoding homogeneous DE's fundamental solution set, because otherwise the DE will map the ansatz to zero and no progress will have been made.
+We want a guess that is linearly independent of the corresponding homogeneous DE's fundamental solution set, because otherwise the DE will map the ansatz to zero and no progress will have been made.
 Based on the repeated roots case of the previous solution method, if $f(x)$ shows up in the homogeneous solution, we might tack an extra $x$ onto the guess and try again.
 
 An advantage of this solution method is that it can involve minimal work to find an answer.
-However, this relies on the forcing funciton being nice to work with.
+However, this relies on the forcing function being nice to work with.
 If this is not the case, we might appeal to the other solution method in this section, described below.
 
 \begin{example}[Solving a second-order linear DE via variation of parameters]
@@ -197,7 +199,7 @@ If this is not the case, we might appeal to the other solution method in this se
 \end{example}
 
 \begin{theorem}[Variation of parameters]
-    Consider the DE $y'' + p_1(t)y' + p_2(t)y = f(t)$, and let $y_1$ and $y_2$ be linearly independent solutions to the associated homogenenous DE.
+    Consider the DE $y'' + p_1(t)y' + p_2(t)y = f(t)$, and let $y_1$ and $y_2$ be linearly independent solutions to the associated homogeneous DE.
     Then the general solution to the inhomogeneous DE is
     \[ y(t) = -y_1 \int \frac{y_2(t)f(t)}{W[y_1,y_2](t)} dx + y_2 \int \frac{y_1(t)f(t)}{W[y_1y_2](t)} dx. \]
 \end{theorem}
@@ -226,22 +228,18 @@ Generally, the case in which $x_0$ is an ordinary point is easier to deal with t
 They're both relatively straightforward, however.
 First, the case of the ordinary point is summarized below.
 
-\pagebreak
-
 \begin{theorem}[Analytic solution theorem]
-    If $x_0$ is an ordinary point, then the general solution of
-    \[ y'' + p(x)y' + q(x)y = 0 \]
-    has the form
+    If $x_0$ is an ordinary point, then the general solution of $y'' + p(x)y' + q(x)y = 0$ has the form
     \[ y(x) = \sum_{n=0}^\infty a_n x^n = a_0 y_1(x) + a_1 y_2(x) \]
     where $a_0 = y(0)$ and $a_1 = y'(0)$ are arbitrary constants and $y_1, y_2$ are linearly independent analytic functions.
-    The radius of convergence of $y_1$ and $y_2$ is at least the minimum radious of convergence for $p(x)$ and $q(x)$.
+    The radius of convergence of $y_1$ and $y_2$ is at least the minimum radius of convergence for $p(x)$ and $q(x)$.
 \end{theorem}
 
 When we apply this theorem to a problem, the solution boils down to a few key steps.
 \begin{enumerate}
     \item Assume the solution can be represented by a power series centered at zero.
     \item Differentiate the solution term-by-term and substitute it into the DE.
-    \item Simplify any terms and redindex series to have common powers.
+    \item Simplify any terms and reindex series to have common powers.
     \item Determine a recurrence relation for the coefficients $a_n$.
 \end{enumerate}
 Usually, we will obtain two linearly independent power series solutions, each with an infinite number of terms.

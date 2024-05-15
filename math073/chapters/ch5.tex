@@ -4,7 +4,6 @@
 \begin{document}
 
 \chapter{Orthogonality}
-
 \section{Orthogonality in $\R^n$}
 Here, we extend the notion of orthogonality from pairs of vectors to sets of vectors.
 
@@ -25,8 +24,8 @@ For this reason, orthogonal sets often make a convenient choice of basis for sub
 	An orthogonal basis for a subspace $W$ of $\R^n$ is a basis of $W$ that is an orthogonal set.
 \end{definition}
 
-Of course, any vector in $W$ can be written as a linear combniation of these orthognal vectors.
-Another convenience that comes with orthogonal sets is that the coefficients of this linear combination are easy to find.
+Of course, any vector in $W$ can be written as a linear combination of these orthogonal vectors.
+Another convenience that comes with orthogonal sets is that the coFefficients of this linear combination are easy to find.
 
 \begin{theorem}[Coefficients of an orthogonal linear combination]
 	Let $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ be an orthogonal basis for a subspace $W$ of $\R^n$ and let $\mbf{w}$ be any vector in $W$.
@@ -43,6 +42,8 @@ Things are even more convenient if our orthogonal set consists entirely of unit 
 	A set of vectors in $\R^n$ is an orthonormal set if it is an orthogonal set of unit vectors.
 	An orthonormal basis for a subspace $W$ of $\R^n$ is a basis of $W$ that is an orthonormal set.
 \end{definition}
+
+\pagebreak
 
 \begin{theorem}[Coefficients of an orthonormal linear combination]
 	Let $\{\mbf{q}_1, \mbf{q}_2, \ldots, \mbf{q}_k\}$ be an orthonormal basis for a subspace $W$ of $\R^n$ and let $\mbf{w}$ be any vector in $W$.
@@ -126,7 +127,7 @@ The orthogonal complement of a subspace has some fairly intuitive properties.
 
 Using orthogonal complements, we can make describe some fundamental relationships between the subspaces associated with a matrix.
 To relate the row space to the null space, notice that for $A \mbf{x} = \mbf{0}$ to be true, we must have $\mbf{r} \cdot \mbf{x}$ for every row $\mbf{r}$ in $A$; therefore, all rows in $A$ are orthogonal to vectors in $\pfn{null}(A)$.
-A simmilar line of reasoning relates $\pfn{col}(A)$ to $\pfn{null}(A^T)$. 
+A similar line of reasoning relates $\pfn{col}(A)$ to $\pfn{null}(A^T)$. 
 
 \begin{theorem}[Fundamental spaces and orthogonality]
 	Let $A$ be a matrix.
@@ -147,9 +148,10 @@ We can use orthogonal projections to decompose a vector into orthogonal componen
 
 \begin{theorem}[Orthogonal decomposition]
 	Let $W$ be a subspace of $\R^n$ and let $\mbf{v}$ be a vector in $\R^n$.
-	Then there are unique vectors $\mbf{w}$ in $W$ and $\mbf{w}^\perp$ in $W^\perp$ such that
-	\[ \mbf{v} = \mbf{w} + \mbf{w}^\perp. \]
+	Then there are unique vectors $\mbf{w}$ in $W$ and $\mbf{w}^\perp$ in $W^\perp$ such that $\mbf{v} = \mbf{w} + \mbf{w}^\perp$.
 \end{theorem}
+
+\pagebreak
 
 Lastly, we have a relationship between the dimensions of a subspace and its orthogonal complement.
 

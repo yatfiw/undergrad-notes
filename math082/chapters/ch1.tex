@@ -11,34 +11,55 @@
 \end{definition}
 
 This is in contrast with partial differential equations (PDEs), which involve functions with more than one independent variable and their partial derivatives.
-We will not discuss PDEs in any detail here, so the initialisms "ODE" and "DE" will be interchangebale in these notes.
+We will not discuss PDEs in any detail here, so the initialisms "ODE" and "DE" will be interchangeable in these notes.
 
 There are many different ways we can classify differential equations.
 We list four of them below.
 
-\begin{definition}[Order of an ODE]
-    The order of a DE is that of the highest-order derivative it contains.
+\begin{definition}[Classifications of an ODE]
+    \begin{itemize}
+        \item The order of a DE is that of the highest-order derivative it contains.
+
+        \item An autonomous DE is one in which the independent variable does not appear explicitly in the DE.
+        A DE that is not autonomous is called nonautonomous.
+
+        \item A linear DE in $y$ is one of the form
+        \[ a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = b(x), \]
+        where $a_0, a_1, \ldots, a_n, b$ are differentiable functions of the independent variable $x$.
+        A DE that is not linear is called nonlinear.
+
+        \item A driven (or forced, non-homogeneous) DE includes a nonzero term that does not contain the dependent variable.
+        A DE that is not driven is called undriven (or unforced, homogeneous).
+    
+        \medskip
+        \textit{Note: The terms "driven" and "undriven" are usually reserved for linear DEs.}
+    \end{itemize}
 \end{definition}
 
-\begin{definition}[Autonomous ODE]
-    An autonomous DE is one in which the independent variable does not appear explicitly in the DE.
-    A DE that is not autonomous is called nonautonomous.
-\end{definition}
 
-\begin{definition}[Linear ODE]
-    A linear DE in $y$ is one of the form
-    \[ a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = b(x), \]
-    where $a_0, a_1, \ldots, a_n, b$ are differentiable functions of the independent variable $x$.
-    A DE that is not linear is called nonlinear.
-\end{definition}
+% \begin{definition}[Order of an ODE]
+%     The order of a DE is that of the highest-order derivative it contains.
+% \end{definition}
 
-\begin{definition}[Driven ODE]
-    A driven (or forced, non-homogeneous) DE includes a nonzero term that does not contian the dependent variable.
-    A DE that is not driven is called undriven (or unforced, homogeneous).
+% \begin{definition}[Autonomous ODE]
+%     An autonomous DE is one in which the independent variable does not appear explicitly in the DE.
+%     A DE that is not autonomous is called nonautonomous.
+% \end{definition}
 
-    \medskip
-    \textit{Note: The terms "driven" and "undriven" are usually reserved for linear DEs.}
-\end{definition}
+% \begin{definition}[Linear ODE]
+%     A linear DE in $y$ is one of the form
+%     \[ a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = b(x), \]
+%     where $a_0, a_1, \ldots, a_n, b$ are differentiable functions of the independent variable $x$.
+%     A DE that is not linear is called nonlinear.
+% \end{definition}
+
+% \begin{definition}[Driven ODE]
+%     A driven (or forced, non-homogeneous) DE includes a nonzero term that does not contain the dependent variable.
+%     A DE that is not driven is called undriven (or unforced, homogeneous).
+
+%     \medskip
+%     \textit{Note: The terms "driven" and "undriven" are usually reserved for linear DEs.}
+% \end{definition}
 
 When we solve a differential equation, there are two ways we can express the solution.
 Which we use depends on the complexity of the solution.
@@ -56,7 +77,7 @@ If we want to pinpoint a specific solution with specific parameters, we might im
     A boundary-value problem (BVP) is a pairing of a differential equation with conditions specified at the extremes of the independent variable.
 \end{definition}
 
-In general, after we solve a DE and obtain a family of solutions, we can impose on the solutions whatver condition we are given to yield a specific solution to the DE.
+In general, after we solve a DE and obtain a family of solutions, we can impose on the solutions whatever condition we are given to yield a specific solution to the DE.
 Sometimes, however, we aren't concerned with any particular initial condition or boundary condition and just want a general solution.
 
 \end{document}

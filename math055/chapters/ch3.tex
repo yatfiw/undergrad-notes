@@ -9,7 +9,7 @@
 Just as the central objects of previous chapters were combinations and integers, the central object of this chapter is the graph.
 
 \begin{definition}[Graph]
-    A graph $G = (V,E)$ consists of a finite vertex set $V$ and an edge set $E$ where $E$ contains size-2 subsets of $V$.
+    A graph $G = (V,E)$ consists of finite vertex and edge sets $V,E$, where $E$ contains size-2 subsets of $V$.
 \end{definition}
 
 This definition is precise, but it isn't very nice to work with.
@@ -54,9 +54,9 @@ Now we can get into some basic properties of graphs.
     If we count the edges leaving each vertex, then every edge is counted exactly twice. 
 \end{proof}
 
-This result's namesake is its application to gatherings of people.
+This result's namesake is its application to social gatherings.
 If partygoers go around and shake hands with each other, each handshake increases the partygoers' ``degree sum'' by two.
-Therefore, this degree sum must always be even.
+So this quantity is always even.
 
 \begin{corollary}[Oddballs]
     In any graph, the number of vertices with odd degree must be even.
@@ -143,9 +143,9 @@ We'll start simple with $K_6$.
     Case (b) can be proved in the same way.
 \end{proof}
 
-A follow-up question that we could ask in response to this is whether we can state a similar theorem for, say, $K_5$.
+A follow-up question that we could ask is whether we can state a similar theorem for, say, $K_5$.
 It turns out that we can't; finding a counterexample is relatively straightforward.
-Thus, 6 is known as the third Ramsey number---it describes the smallest complete graph that contains either a red $K_3$ or a blue $K_3$ after edge coloring.
+Thus, 6 is called the third Ramsey number---it describes the smallest complete graph that contains either a red or blue $K_3$ after edge coloring.
 
 We'll now discover a similar number for a red $K_3$ or blue $K_4$.
 
@@ -256,13 +256,13 @@ We have a couple more definitions along the same lines as the previous ones.
     A cycle is a closed trail such that removing the last vertex also yields a path.
 \end{definition}
 
-We can use this vocabulary to formalize an characteristic of graphs that is immediately obvious when looking at one.
+We can use this vocabulary to formalize a characteristic that is immediately obvious when looking at a graph.
 
 \begin{definition}[Connected graph]
     A graph is connected if, for all vertices $x$ and $y$, a path exists from $x$ to $y$.
 \end{definition}
 
-Another immediate application of all this vocabulary comes in defining a couple other important classes of graphs.
+Another immediate application of this vocabulary comes in defining a couple other important classes of graphs.
 
 \begin{definition}[Eulerian graph]
     An Eulerian trail is one that visits all edges of a graph at least once.
@@ -351,7 +351,7 @@ Now we'll describe a couple of other types of graphs.
 
 \begin{definition}[Tree]
     A tree is a connected graph with no cycles.
-    A disconnected graph whose components are trees is called a forest.
+    A forest is a disconnected graph with component trees.
 \end{definition}
 
 A quick aside: Cayley's theorem states that, for $n \geq 1$,the number of distinct (unlabeled) trees with $n$ vertices is $n^{n-2}$.
@@ -368,7 +368,7 @@ We'll show, now, that all trees have leaves!
 \end{theorem}
 
 \begin{proof}
-    We give an extermal argument.
+    We give an external argument.
     Consider the longest path in $T$, which has $v_1$ as its first vertex.
     We claim that $v_1$ must be a leaf.
 
@@ -487,7 +487,6 @@ The next theorem gives an edge-related condition that a graph must satisfy to ev
 \end{proof}
 
 We can use this to quickly show that the complete graph $K_5$ is nonplanar.
-
 Another important graph that turns out to be nonplanar is $K_{3,3}$, which is drawn below.
 
 % TODO: make this look better
@@ -587,7 +586,7 @@ Creating a condition for 2-colorability is slightly more interesting!
 We'll now consider colorings of planar graphs in particular.
 This has an important application in mapmaking!
 Every map (in the colloquial sense) can be represented equivalently using using its dual graph.
-This is the graph whose vertices are regions on the map, and whose edges represent boundaires between regions.
+This is the graph whose vertices are regions on the map, and whose edges represent boundaries between regions.
 
 The four-color theorem states that any map can be ``properly colored'' using only four colors.
 That is, using four colors, one can color a map such that no adjacent regions have the same color.
@@ -660,7 +659,7 @@ Now, onto the theorems!
 
 \section{Tournaments and Spanning Trees}
 We'll finish this chapter by making two variations on the graphs we've been talking about so far.
-Specifically, we'll dicuss a kind of graph whose edges are oriented, and we'll also talk about a problem that involves ``weighting'' each edge of a graph.
+Specifically, we'll discuss a kind of graph whose edges are oriented, and we'll also talk about a problem that involves ``weighting'' each edge of a graph.
 Let's start with the former.
 
 \begin{definition}[Tournament]
@@ -686,7 +685,7 @@ We call such a graph a tournament because we may interpret each edge of the grap
     \begin{enumerate}[label=(\alph*)]
         \item If $v_n \to v_{n+1}$, then $v_1 \to v_2 \to \cdots \to v_{n+1}$ is a directed Hamiltonian path.
         \item If $v_{n+1} \to v_1$, then $v_{v+1} \to v_1 \to v_2 \to \cdots \to v_n$ is a directed Hamiltonian path.
-        \item Oherwise, $v_1 \to v_{n+1} \to v_n$.
+        \item Otherwise, $v_1 \to v_{n+1} \to v_n$.
         We know that $v_{n+1}$ has beaten at least one player, so let $v_f$ be the first player satisfying $v_{n+1} \to v_f$.
         Thus $v_{f-1} \to v_{n+1} \to v_f$, and we can simply insert $v_{n+1}$ into the path at this point.
     \end{enumerate}

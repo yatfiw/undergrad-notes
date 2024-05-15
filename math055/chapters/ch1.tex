@@ -9,7 +9,7 @@
 We begin our discussion of combinatorics by giving two basic rules that will govern how we count things.
 
 \begin{theorem}[Rule of sum]
-    If $A_1, A_2, \ldots, A_n$ are disjoint sets, then
+    If $A_1, \ldots, A_n$ are disjoint sets, then
     \[ \bigcup_{i=0}^n A_i = \sum_{i=0}^n |A_i|. \]
 \end{theorem}
 
@@ -39,8 +39,6 @@ First, we can count the number of ways we can arrange a set of objects.
     By the rule of product, there are $n \cdot (n-1) \cdot (n-2) \cdots 1 = n!$ ways to permute the elements in $S$.
 \end{proof}
 
-\pagebreak
-
 We can also count the number of subsets we can create using a set of objects, regardless of arrangement order.
 This type of problem is so fundamental that it gets a special name and symbol, given below.
 
@@ -49,6 +47,8 @@ This type of problem is so fundamental that it gets a special name and symbol, g
     The number of size-$k$ subsets of $S$ is called ``$n$ choose $k$'' and is denoted by ${n \choose k}$.
     For $k < 0$ or $k > n$, we define ${n \choose k} = 0$.
 \end{definition}
+
+\pagebreak
 
 \begin{theorem}[Counting subsets]
     For $0 \leq k \leq n$,
@@ -81,7 +81,8 @@ This will be a useful (and enlightening!) technique when proving other statement
 But first, we have one more result that may illustrate the surprisingly far-reaching power of combinatorics.
 
 \begin{theorem}[]
-    For $n \geq 1$, $\ds \frac{n(n+1)}{2} = {n+1 \choose 2}$.
+    For $n \geq 1$,
+    \[ \frac{n(n+1)}{2} = {n+1 \choose 2}. \]
 \end{theorem}
 
 \begin{proof}
@@ -126,9 +127,8 @@ Surprisingly, there is a simple closed form for the $n$th Fibonacci number!
 
 \begin{theorem}[Binet's formula]
     For $n \geq 0$,
-    \[ F_n = \frac{1}{\sqrt{5}} \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n} - \left( \frac{1 - \sqrt{5}}{2} \right)^{n} \right]. \]
-    If we define $\varphi = \frac{1 + \sqrt{5}}{2}$ and $\bar{\varphi} = \frac{1 - \sqrt{5}}{2}$, this turns into
-    \[ F_n = \frac{\varphi^{n} - \bar{\varphi}^{n}}{\sqrt{5}}. \]
+    \[ F_n = \frac{1}{\sqrt{5}} \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n} - \left( \frac{1 - \sqrt{5}}{2} \right)^{n} \right] = \frac{\varphi^{n} - \bar{\varphi}^{n}}{\sqrt{5}}, \]
+    where $\varphi = (1 + \sqrt{5}) / 2$ and $\bar{\varphi} = (1 - \sqrt{5}) / 2$.
 \end{theorem}
 
 \begin{proof}
@@ -148,7 +148,7 @@ Surprisingly, there is a simple closed form for the $n$th Fibonacci number!
     as desired.
 \end{proof}
 
-To prove our last property, we introduce a slight variation to the principle of mathematical induction that we'll use more later.
+To prove our last property, we introduce a slight variation to induction that we'll use more later.
 
 \begin{theorem}[Fibonacci decomposition]
     Every positive integer can be expressed as the sum of distinct Fibonacci numbers.
@@ -187,11 +187,7 @@ Define $f_n$ as the total number of ways we can do this tiling; as it turns out,
     Now suppose as our inductive hypothesis that $f_{n-1} = F_n$ and $f_n = F_{n+1}$.
     To determine $f_{n+1}$, we observe that all length-$(n+1)$ tilings can be broken into two categories: ones that end with a domino (there are $f_{n-1}$ of these), and ones that don't ($f_n$).
     Adding these together gives
-    \begin{align*}
-        f_{n+1} &= f_{n-1} + f_n \\
-        &= F_n + F_{n+1} \\
-        &= F_{n+2},
-    \end{align*}
+    \[ f_{n+1} = f_{n-1} + f_n = F_n + F_{n+1} = F_{n+2}, \]
     as desired.
 \end{proof}
 
@@ -225,9 +221,9 @@ In fact, we can even use combinatorics to prove something like Theorem 1.\ref{pa
 One of the most widely recognizable objects in combinatorics is Pascal's triangle, an infinite arrangement of combinations.
 \begin{gather*}
     {0 \choose 0} \\
-    {0 \choose 1} \qquad {1 \choose 1} \\
-    {0 \choose 2} \qquad {1 \choose 2} \qquad {2 \choose 2} \\
-    {0 \choose 3} \qquad {1 \choose 3} \qquad {2 \choose 3} \qquad {3 \choose 3} \\
+    {1 \choose 0} \qquad {1 \choose 1} \\
+    {2 \choose 0} \qquad {2 \choose 1} \qquad {2 \choose 2} \\
+    {3 \choose 0} \qquad {3 \choose 1} \qquad {3 \choose 2} \qquad {3 \choose 3} \\
     \vdots
 \end{gather*}
 There's a lot of different patterns to uncover in this triangle.
@@ -256,8 +252,6 @@ We'll start with an identity that many would call the defining feature of Pascal
 
 Now we'll examine two patterns that exist within each row of the triangle.
 
-\pagebreak
-
 \begin{theorem}[Row sums] \label{rowSums}
     For $n \geq 0$,
     \[ \sum_{k=0}^{n} {n \choose k} = 2^{n}. \]
@@ -268,7 +262,7 @@ Now we'll examine two patterns that exist within each row of the triangle.
     \smallskip
 
     (i) We can simply add up the number of subsets of each size between 0 and $n$; this gives $\sum\limits_{k=0}^{n} {n \choose k}$.
-    \smallskip
+    \vspace{-3pt}
 
     (ii) We can also ``iterate'' through the elements in the set and, for each one, decide whether or not to include it in the subset.
     There are $2^{n}$ ways to do this.
@@ -277,17 +271,19 @@ Now we'll examine two patterns that exist within each row of the triangle.
     Both of the expressions we've found count the same thing, so they must be equal.
 \end{proof}
 
+\pagebreak
+
 \begin{theorem}[Same-parity row sums] \label{parityRowSums}
     For $n \geq 1$,
-    \[ \sum_{k\text{ even}} {n \choose k} = 2^{n-1} = \sum_{k\text{ odd}} {n \choose k}. \]
+    \[ \sum_{k\textrm{ even}} {n \choose k} = 2^{n-1} = \sum_{k\textrm{ odd}} {n \choose k}. \]
 \end{theorem}
 
 \begin{proof}
     We give a combinatorial proof by counting the number of even-sized subsets that can be created using a set of $n$ elements.
     \smallskip
 
-    (i) We can simply add up the number of subsets of each even size between 0 and $n$; this gives $\sum\limits_{k\text{ even}} {n \choose k}$.
-    \smallskip
+    (i) We can simply add up the number of subsets of each even size between 0 and $n$; this gives $\sum\limits_{k\textrm{ even}} {n \choose k}$.
+    \vspace{-10pt}
 
     (ii) We can also ``iterate'' through the first $n-1$ elements in the set and, for each one, decide whether or not to include it in the subset.
     When we arrive at element $n$, whether we include or exclude it is predetermined by the parity of the subset we've already created, so there's no decision to be made.
@@ -302,17 +298,14 @@ Now consider a version of Pascal's triangle that is left-aligned, with the numer
 \begin{align*}
     & 1 \quad \\
     & 1 \quad 1 \\
-    & 1 \quad 2 \quad \phantom{1}1 \\
-    & 1 \quad 3 \quad \phantom{1}3 \quad \phantom{1}1 \\
-    & 1 \quad 4 \quad \phantom{1}6 \quad \phantom{1}4 \quad 1 \\
-    & 1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1 \\
-    & \phantom{1 \quad 5 \quad 10 \;\,} \vdots
+    & 1 \quad 2 \quad 1 \\
+    & 1 \quad 3 \quad 3 \quad 1 \\
+    & 1 \quad 4 \quad 6 \quad 4 \quad 1 \\
+    & \phantom{1 \quad 4 \quad\,} \vdots
 \end{align*}
 Notice that, when we start at the top of a column and sum the first few terms, we get the number immediately down and to the right of the last addend.
 (This forms a hockey stick-like shape.)
 We formalize and prove this observation below.
-
-\pagebreak
 
 \begin{theorem}[Hockey stick theorem]
     For $0 \leq k \leq n$,
@@ -390,20 +383,20 @@ Here, we'll extend our discussions into creating \textit{multisets}---that is, s
 
 \begin{definition}[Multichoose]
     Consider a set $S$ that has size $n$.
-    The number of size-$k$ multisets that can be created using the elements in $S$ is called ``$n$ multichoose $k$'' and is denoted by $\left( {n \choose k} \right)$.
+    The number of size-$k$ multisets that can be created using the elements in $S$ is called ``$n$ multichoose $k$'' and is denoted by $\mchoose{n}{k}$.
 \end{definition}
 
 We can quickly establish a nice connection to normal combinations that illuminates a different way of looking at the multichoose function.
 
 \begin{theorem}[Multichoose theorem]
-    \[ \left( {n \choose k} \right) = {n+k-1 \choose k}. \]
+    \[ \mchoose{n}{k} = {n+k-1 \choose k}. \]
 \end{theorem}
 
 \begin{proof}
     Suppose we have a set of $n$ integers and want to create a size-$k$ multiset using them.
     \smallskip
 
-    (i) By definition, we can create $\left( {n \choose k} \right)$ multisets.
+    (i) By definition, we can create $\mchoose{n}{k}$ multisets.
     \smallskip
 
     (ii) We have $k$ slots in the multiset, each of which is represented below by an asterisk.
@@ -424,15 +417,15 @@ We can quickly establish a nice connection to normal combinations that illuminat
 We can exploit this connection to state a Pascal-like theorem for the multichoose.
 
 \begin{theorem}[]
-    \[ \left( {n \choose k} \right) = \left( {n-1 \choose k} \right) + \left( {n \choose k-1} \right). \]
+    \[ \mchoose{n}{k} = \mchoose{n-1}{k} + \mchoose{n}{k-1}. \]
 \end{theorem}
 
 \begin{proof}
     A simple algebraic proof using Pascal's identity:
     \begin{align*}
-        \left( {n-1 \choose k} \right) + \left( {n \choose k-1} \right) &= {n+k-2 \choose k} + {n+k-2 \choose k-1} \\
+        \mchoose{n-1}{k} + \mchoose{n}{k-1} &= {n+k-2 \choose k} + {n+k-2 \choose k-1} \\
         &= {n+k-1 \choose k} \\
-        &= \left( {n \choose k} \right),
+        &= \mchoose{n}{k},
     \end{align*}
     as desired.
 \end{proof}
@@ -441,7 +434,7 @@ The multichoose describes allocations of $k$ multiset slots to $n$ elements.
 (In class, we allocated kandies to ninjas.)
 We can place restrictions on this restriction by saying, for example, that each element must appear in the multiset at least once; in this case, we simply subtract $n$ from the available multiset slots.
 
-To use another restriction we might impise, we must first describe the principle of inclusion and exclusion.
+To use another restriction we might impose, we must first describe the principle of inclusion and exclusion.
 Suppose we want to count the number of elements in the union $A_1 \cup A_2 \cup A_3$.
 We do so in three steps:
 \begin{enumerate}
@@ -453,7 +446,7 @@ Combining all of these together gives the size of $A_1 \cup A_2 \cup A_3$.
 We generalize this below.
 
 \begin{theorem}[Principle of inclusion and exclusion]
-    Let $A_1, A_2, \ldots, A_n$ be subsets of $S$, and let the indicies $i,j,k$ satisfy $1 \leq i \leq j \leq k \leq n$.
+    Let $A_1, A_2, \ldots, A_n$ be subsets of $S$, and let the indices $i,j,k$ satisfy $1 \leq i \leq j \leq k \leq n$.
     Then
     \begin{align*}
         |A_1 \cup A_2 \cup \cdots \cup A_n| =& \phantom{+}\sum_{i} |A_i| \\
@@ -472,10 +465,8 @@ We generalize this below.
     as desired.
 \end{proof}
 
-\pagebreak
-
 So if we wanted to construct multisets such that no element is repeated more than $r$ times, we simply apply the principle of inclusion and exclusion:
-\[ \left( {n \choose k} \right) - n \left( {n \choose k - r} \right) + {n \choose 2} \left( {n \choose k - 2r} \right) - \cdots \]
+\[ \mchoose{n}{k} - n \mchoose{n}{k-r} + {n \choose 2} \mchoose{n}{k-2r} - \cdots \]
 Another application comes in the form of derangements, defined below.
 
 \begin{definition}[Derangement]
@@ -515,7 +506,7 @@ We can test this on a second-order recurrence:
     0 &= r^2 - k_1 r - k_2
 \end{align*}
 This equation has solutions $r_1, r_2$.
-So, any sequence of the forms $c \cdot r_1^{n}$ or $c \cdot r_2^{n}$ satisfies the recrrence.
+So, any sequence of the forms $c \cdot r_1^{n}$ or $c \cdot r_2^{n}$ satisfies the recurrence.
 But by linearity, any linear combination of solutions is also a solution!
 
 This works in general for any linear recurrence, even ones whose ``characteristic polynomials'' have complex roots.
@@ -526,7 +517,7 @@ All of this is summarized below.
 \begin{theorem}[Closed form of a linear recurrence]
     A $t$-th order linear recurrence whose characteristic polynomial has roots $r_1, \ldots, r_t$ (with no repeated roots), then
     \[ a_n = c_1 r_1^{n} + c_2 r_2^{n} + \cdots + c_t r_t^{n}. \]
-    If there is a repeated root $r$ with multipicity $m$, then some of the terms in the above equation have the form $k r^{n}, k n r^{n}, \ldots, k n^{m} r^{n}$.
+    If there is a repeated root $r$ with multiplicity $m$, then some of the terms in the above equation have the form $k r^{n}, k n r^{n}, \ldots, k n^{m} r^{n}$.
 \end{theorem}
 
 We could've come to this same conclusion via the manipulation of generating functions, exemplified below.

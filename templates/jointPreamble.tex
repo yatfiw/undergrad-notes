@@ -15,11 +15,16 @@
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
 \setlength{\parindent}{0pt}                	% no paragraph indentation
 
-% region TITLE
+% region TITLES
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
 \setlength{\cftbeforetoctitleskip}{0em}
 \setlength{\cftaftertoctitleskip}{1em}
 \renewcommand{\contentsname}{\hangindent=\wd0 \strut \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\Huge\normalfont\bfseries}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0em}{0em}{2em}
+% \titlespacing*{\chapter}{0pt}{-50pt}{40pt}
 % endregion
 
 % region COMMANDS

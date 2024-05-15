@@ -38,7 +38,7 @@ Now, we'll extend some familiar terminology to these new problems.
 \end{definition}
 
 \begin{definition}[Autonomous system of DEs]
-    A system of differential equations $\mbf{x}' = \mbf{f}(t, \mbf{x})$ is autonomous if $\mbf{f}$ does not depend explicitly on the variable $t$, that is, if $\frac{\partial f}{\partial t} = \mbf{0}$.
+    A system of differential equations $\mbf{x}' = \mbf{f}(t, \mbf{x})$ is autonomous if $\mbf{f}$ does not depend explicitly on the variable $t$, that is, if $\partial f / \partial t = \mbf{0}$.
     Otherwise, it is nonautonomous.
 \end{definition}
 
@@ -54,7 +54,7 @@ It is an extension of Theorem 2.3.
 
 \begin{theorem}[Existence and uniqueness of solutions]
     Let $\mbf{f}(x)$ have components $f_1, f_2, \ldots, f_n$.
-    If $f_i$ and $\frac{\partial f_i}{\partial x_j}$ ($1 \leq i,j \leq n$) are continuous in a neighborhood of $\mbf{x}_0$ then there exists $\varepsilon > 0$ such that the initial-value problem
+    If $f_i$ and $\partial f_i / \partial x_j$ ($1 \leq i,j \leq n$) are continuous in a neighborhood of $\mbf{x}_0$ then there exists $\varepsilon > 0$ such that the initial-value problem
     \[ \mbf{x}' = \mbf{f}(\mbf{x}), \quad \mbf{x}(t_0) = \mbf{x}_0. \]
     has a unique solution $\mbf{x}(t)$, defined for $t \in (t_0 - \varepsilon, t_0 + \varepsilon)$.
 \end{theorem}
@@ -82,7 +82,7 @@ Therefore, the general solution of $\mbf{x}' = A \mbf{x}$ has the form
 \[ \mbf{x}(t) = c_1 \mbf{x}_1(t) + c_2 \mbf{x}_2 + \cdots + c_n \mbf{x}_n (t) = \begin{bmatrix} | & | &  & | \\ \mbf{x}_1(x) & \mbf{x}_2(x) & \cdots & \mbf{x}_n(t) \\ | & | &  & | \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix} \]
 where $\mbf{x}_1, \mbf{x}_2, \ldots, \mbf{x}_n$ are linearly independent solutions and $c_i$ are arbitrary constants.
 
-The matrix of linearly independent solution vectors is important enough to warrant a defintion.
+The matrix of linearly independent solution vectors is important enough to warrant a definition.
 
 \begin{definition}[Fundamental matrix]
     A fundamental matrix $\Psi (t)$ of the system $\mbf{x}' = A \mbf{x}$ is one whose columns are linearly independent solutions of the system.
@@ -178,8 +178,6 @@ We'll do this below.
 We can compute some matrix exponentials simply using the power series definition, but this can get a bit tedious.
 We'll give a few useful properties that can make computing matrix exponentials a little easier.
 
-\pagebreak
-
 \begin{theorem}[Selected matrix exponentials]
     \begin{enumerate}[label=(\alph*)]
         \item Let $A$ be a diagonal matrix with diagonal entries $\lambda_1, \lambda_2, \ldots, \lambda_n$.
@@ -221,7 +219,7 @@ So, similar to how we compute powers of matrices like $A^{10}$, we can compute m
 
 \subsection{Inhomogeneous Systems}
 The matrix exponential gives us an important insight into how to solve linear systems with a forcing term.
-Key to this insight is that the derivative of a matrix exponential is analagous to that of a scalar exponential.
+Key to this insight is that the derivative of a matrix exponential is analogous to that of a scalar exponential.
 
 \begin{lemma}[Derivative of a matrix exponential]
     If $A \in M_n (\R)$, then $\dfrac{d}{dt} \left[ e^{At} \right] = A e^{At} = e^{At} A$.
@@ -251,7 +249,7 @@ Now we can solve the general constant-coefficient linear system $\mbf{x}' = A \m
     \[ \mbf{x}(t) = \Psi(t) \Psi^{-1}(0) \mbf{x}_0 + \Psi(t) \int_0^t \Psi^{-1}(s) \mbf{F}(s) \;ds. \]
 \end{theorem}
 
-Notice how this solution can be interpreted as the sum of a homogeneous solution $\mbf{x}_h$ and a parituclar one $\mbf{x}_p$.
+Notice how this solution can be interpreted as the sum of a homogeneous solution $\mbf{x}_h$ and a particular one $\mbf{x}_p$.
 $\mbf{x}_h$ is the system's response to the initial conditions, and $\mbf{x}_p$ is the cumulative response to the forcing.
 
 \subsection{Phase Portraits}
@@ -351,7 +349,7 @@ Informally:
 \begin{itemize}
     \item A stable equilibrium point is one where starts that start close will stay close for all future time.
     \item An asymptotically stable equilibrium point is on where states that start close will asymptotically converge back to the equilibrium point as time increases.
-    \item An unstbale equilibrium point is where where there are states that start close but do not stay close.
+    \item An unstable equilibrium point is where where there are states that start close but do not stay close.
 \end{itemize}
 In most cases, a system's linearization gives us an accurate understanding of how the system will behave near an equilibrium point.
 However, this won't always be true; a condition for this is below.

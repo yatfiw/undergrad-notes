@@ -4,14 +4,13 @@
 \begin{document}
 
 \chapter{Vector Spaces}
-
 \section{Vector Spaces and Subspaces}
 So far, we have treated vectors as ordered tuples of real numbers.
 However, there are plenty of other obejcts (like matrices) that behave similarly.
 We use the familiar properties of vectors in $\R^n$ to motivate a more general definition for a vector, one that encapsulates this characteristic behavior.
 
 \begin{definition}[Vector space]
-	Let $V$ be a set on which two operations, called addition and scalar multipliation, have been defined.
+	Let $V$ be a set on which two operations, called addition and scalar multiplication, have been defined.
 	If $\mbf{u}$ and $\mbf{v}$ are in $V$, the sum of $\mbf{u}$ and $\mbf{v}$ is denoted by $\mbf{u} + \mbf{v}$.
 	If $c$ is a scalar, the scalar multiple of $\mbf{u}$ by $c$c is denoted by $c \mbf{u}$.
 	If the following axioms hold for all $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ in $V$ and for all scalars $c$ and $d$, then $V$ is called a vector space and its elements are called vectors.
@@ -265,7 +264,7 @@ The most important property of a linear transformation $T : V \to W$ is that $T$
 	Then $T(\mathcal{B}) = \{T(\mbf{v}_1), \ldots, T(\mbf{v}_n)\}$ spans the range of $T$.
 \end{theorem}
 
-Analagous to matrix multiplication, we can compose linear transformations.
+Analogous to matrix multiplication, we can compose linear transformations.
 The result is a new linear transformation that ``skips'' over the intermediate space.
 
 \begin{definition}[Composition of linear transformations]
@@ -383,7 +382,7 @@ There is a very easy way to check if two spaces are isomorphic, as this final th
 \end{theorem}
 
 \section{The Matrix of a Linear Transformation}
-We can exploit the fact that all $n$-dimensional vector spaces are isomorphic to $\R^n$ to represent linear tFransformations as matrices.
+We can exploit the fact that all $n$-dimensional vector spaces are isomorphic to $\R^n$ to represent linear transformations as matrices.
 Rather than transform directly between vector spaces, we will transform between spaces of \textit{coordinate} vectors, as the first theorem of this section shows.
 
 \begin{theorem}[Matrix of a linear transformation]

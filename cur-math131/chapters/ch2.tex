@@ -22,7 +22,7 @@ We can capture this intuition with the following definition.
 In this case we say ``$p_n$ converges to $p$'' or ``$p$ is the limit of the sequence'', and we write $p_n \to p$ or $\ds \lim_{n \to \infty} p_n = p$.
 
 \vspace{-3pt}
-If we're trying to prove the convergence of a given sequence, we may do so directly by determining a value for $N$ (usually as a function of $\epsilon$) for which the sequence becomes contstrained to a radius-$\epsilon$ neighborhood.
+If we're trying to prove the convergence of a given sequence, we may do so directly by determining a value for $N$ (usually as a function of $\epsilon$) for which the sequence becomes constrained to a radius-$\epsilon$ neighborhood.
 Some of the following properties might also be useful.
 
 \begin{theorem}[Convergence properties]
@@ -52,12 +52,12 @@ Some of the following properties might also be useful.
         So we can construct a convergent sequence $\left\{ p_n \right\}$ where $p_n \in B_{1 / n}(p)$.
 
         \item ($\Rightarrow$)
-        Consider an $\epsilon > 0$.
+        Consider $\epsilon > 0$.
         Then there exists an $N$ such that $n > N \implies d(p_n, p) < \epsilon$.
-        There are finitely many natural numbers satisfying $n \leq N$, so there are finitely many $p_n$ outside this neighborhood.
+        There are finitely many natural numbers satisfying $n \leq N$, so there are finite $p_n$ outside this neighborhood.
 
         ($\Leftarrow$)
-        Consider a neighborhood $N_\epsilon (p)$ that contains all but $M$ points.
+        Consider an $N_\epsilon (p)$ that contains all but $M$ points.
         Then $d(p_n, p) < \epsilon$ for all $n \geq M + 1$.
     \end{enumerate}
     This completes the proof.
@@ -145,7 +145,7 @@ We can also talk about bounded sequences, that is, sequences whose ranges are bo
 In particular, we can make a nice statement about bounded sequences that are everywhere-increasing or -decreasing.
 
 \begin{definition}[Monotonic sequence]
-    A sequence $\left\{ s_n \right\}$ is monotonoically increasing if $s_n \leq s_{n+1}$ for all $n$.
+    A sequence $\left\{ s_n \right\}$ is monotonically increasing if $s_n \leq s_{n+1}$ for all $n$.
     It is monotonically decreasing if $s_n \geq s_{n+1}$.
     Either could be called monotonic.
 \end{definition}
@@ -288,6 +288,8 @@ To avoid this ambiguity, we instead define each real number as an equivalence cl
 
 Showing that the above relation is an equivalence relation involves a relatively straightforward application of the definition of convergence and the triangle inequality.
 Now let's add some structure to this set we've created!
+
+\pagebreak
 
 \begin{definition}[Algebraic operations of $\R$]
     Let $a,b \in \R$, so there are Cauchy sequences of rational numbers $\left\{ a_n \right\}, \left\{ b_n \right\}$ that represent the equivalence classes for $a$ and $b$.
@@ -440,8 +442,6 @@ To make this more clear, we'll define the terms in such a sequence.
 So determining the behavior of a series is equivalent to determining the behavior of the sequence of its partial sums.
 We're particularly interested in the convergence of infinite series; we'll spend some time developing criteria to determine this convergence.
 Let's start by taking advantage of the completeness of $\R$.
-
-\pagebreak
 
 \begin{theorem}[Cauchy criterion]
     Suppose $a_n \in \R$ and $m > n \in \N$.

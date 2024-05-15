@@ -4,7 +4,6 @@
 \begin{document}
 
 \chapter{Eigenvalues and Eigenvectors}
-
 \section{Determinants}
 We have already encountered determinants in our study of inverse matrices, albeit not by name.
 Here, we generalize the determinant to square matrices of any size.
@@ -112,7 +111,7 @@ We now begin investigating one of the most central problems to linear algebra: t
 	Let $A$ be a square matrix.
 	A scalar $\lambda$ is called an eigenvalue of $A$ if there is a nonzero vector $\mbf{x}$ such that $A \mbf{x} = \lambda \mbf{x}$.
 	Such a vector $\mbf{x}$ is called an eigenvector of $A$ corresponding to $\lambda$.
-	The set of all eigenvectors corersponding to $\lambda$, including the zero vector, is called the eigenspace of $\lambda$ and is denoted by $E_\lambda$.
+	The set of all eigenvectors corresponding to $\lambda$, including the zero vector, is called the eigenspace of $\lambda$ and is denoted by $E_\lambda$.
 \end{definition}
 
 The study of eigenvectors is the study of vectors whose directions are invariant under a matrix transformation.
@@ -148,7 +147,9 @@ Firstly, just like with determinants, when our matrix is triangular, our job tur
 	The eigenvalues of a triangular matrix are the entries on its main diagonal.
 \end{theorem}
 
-Similarly, the eigenvalues of a matirix raised to a power relate to those of the original matrix.
+Similarly, the eigenvalues of a matrix raised to a power relate to those of the original matrix.
+
+\pagebreak
 
 \begin{theorem}[Eigenvalues after exponentiation]
 	Let $A$ be a square matrix with an eigen-pair $(\lambda, \mbf{x})$.
@@ -209,7 +210,7 @@ Here, we consider another type of transformation that preserves eigenvalues and 
 \end{definition}
 
 Similarity can be interpreted as a kind of equivalence between matrices.
-We thus call similarity an equivalence relation, meaning it has the following famiiar properties.
+We thus call similarity an equivalence relation, meaning it has the following familiar properties.
 
 \begin{theorem}[Similarity as an equivalence relation]
 	Let $A$, $B$, and $C$ be square matrices of the same size.
@@ -241,7 +242,7 @@ This is true of similar matrices, and some of these properties are below.
 The best possible situation is when a square matrix is similar to a diagonal matrix, because these are really nice to work with.
 
 \begin{definition}[Diagonalizable matrix]
-	A square matrix $A$ is diagonalizible if there is a diagonal matrix $D$ such that $A$ is similar to $D$---that is, if there is an invertible matrix $P$ such that $P^{-1}AP = D$.
+	A square matrix $A$ is diagonalizable if there is a diagonal matrix $D$ such that $A$ is similar to $D$---that is, if there is an invertible matrix $P$ such that $P^{-1}AP = D$.
 \end{definition}
 
 The idea of diagonalization is intimately related to eigenvalues and eigenvectors.
@@ -249,7 +250,7 @@ Not only do they give us a condition for diagonalizability, but they help us do 
 
 \begin{theorem}[Condition and method for diagonalization]
 	Let $A$ be an $n \times n$ matrix.
-	Then $A$ is diagonalizible if and only if $A$ has $n$ linearly independent eigenvectors.
+	Then $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors.
 
 	More precisely, there exist an invertible matrix $P$ and a diagonal matrix $D$ such that $P^{-1}AP = D$ if and only if the columns of $P$ are $n$ linearly independent eigenvectors of $A$ and the diagonal entries of $D$ are the eigenvalues of $A$ corresponding to the eigenvectors in $P$ in the same order.
 \end{theorem}
@@ -266,10 +267,10 @@ This shows that linear independence is preserved when the bases of different eig
 So when we have $n$ different eigenspaces, each of dimension one, we automatically have a diagonalizable matrix.
 
 \begin{theorem}[Distinct eigenvalues imply diagonalizibility]
-	If $A$ is an $n \times n$ matrix with $n$ distinct eigenvalues, then $A$ is diagonalizible.
+	If $A$ is an $n \times n$ matrix with $n$ distinct eigenvalues, then $A$ is diagonalizable.
 \end{theorem}
 
-When this theorem isn't applicable, there's still a way we can use eigenvalues to determine diagonalizibility.
+When this theorem isn't applicable, there's still a way we can use eigenvalues to determine diagonalizability.
 It requires a preliminary definition.
 
 \begin{definition}[Algebraic and geometric multiplicity]
@@ -278,16 +279,16 @@ It requires a preliminary definition.
 \end{definition}
 
 \begin{lemma}[Diagonalizibility from multiplicities]
-	If $A$ is a square matrix, then the geometric mutiplicity of each eigenvalue is less than or equal to its algebraic multiplicity.
+	If $A$ is a square matrix, then the geometric multiplicity of each eigenvalue is less than or equal to its algebraic multiplicity.
 \end{lemma}
 
-We summarize the different ways to check for diagonalizibility in one final theorem.
+We summarize the different ways to check for diagonalizability in one final theorem.
 
 \begin{theorem}[Conditions for diagonalizibility]
 	Let $A$ be an $n \times n$ matrix.
 	The following statements are equivalent.
 	\begin{enumerate}[label=(\alph*)]
-		\item $A$ is diagonalizible.
+		\item $A$ is diagonalizable.
 		\item The union $\mathcal{B}$ of the bases of the eigenspaces of $A$ contains $n$ vectors.
 		\item The algebraic multiplicity of each eigenvalue equals its geometric multiplicity.
 	\end{enumerate}

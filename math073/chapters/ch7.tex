@@ -4,7 +4,6 @@
 \begin{document}
 
 \chapter{Distance and Approximation}
-
 \section{Inner Product Spaces}
 We begin this chapter by continuing our generalization of Euclidean vector spaces.
 Here, we define the inner product as a generalization of the dot product.
@@ -88,7 +87,7 @@ Provided that $V$ is equipped with an inner product, our problem has a simple so
 We can use this pair of ideas to determine approximate solutions to inconsistent linear systems.
 
 \begin{definition}[Least squares solution]
-	If $A$ is an $m \times n$ matrix and $\mbf{b}$ is in $\R^m$, a least squares soution of $A \mbf{x} = \mbf{b}$ is a vector $\overline{\mbf{x}}$ in $\R^n$ such that
+	If $A$ is an $m \times n$ matrix and $\mbf{b}$ is in $\R^m$, a least squares solution of $A \mbf{x} = \mbf{b}$ is a vector $\overline{\mbf{x}}$ in $\R^n$ such that
 	\[ \|\mbf{b} - A \overline{\mbf{x}}\| \leq \|\mbf{b} - A \mbf{x}\| \]
 	for all $\mbf{x}$ in $\R^n$.
 \end{definition}
@@ -117,13 +116,13 @@ However, if we have a $QR$ factorization of $A$, our job is made much easier.
 
 \begin{theorem}[Least squares via $QR$ factorization]
 	Let $A$ be an $m \times n$ matrix with linearly independent columns and let $\mbf{b}$ be in $\R^m$.
-	If $A = QR$ is a $QR$ factorization of $A$, then the unique least square ssolution $\overline{\mbf{x}}$ of $A \mbf{x} = \mbf{v}$ is
+	If $A = QR$ is a $QR$ factorization of $A$, then the unique least square solution $\overline{\mbf{x}}$ of $A \mbf{x} = \mbf{v}$ is
 	\[ \overline{\mbf{x}} = R^{-1} Q^T \mbf{b}. \]
 \end{theorem}
 
 \section{The Singular Value Decomposition}
-In this final section, we will briefly investigate one last matrix decomposition.
-These have to do with the singular values of a matrix, deifned below.
+In this final section, we will briefly investigate one last defined decomposition.
+These have to do with the singular values of a matrix, defined below.
 
 \begin{definition}[Singular values]
 	If $A$ is an $m \times n$ matrix, the singular values of $A$ are the square roots of the eigenvalues of $A^T A$ and are denoted by $\sigma_1, \ldots, \sigma_n$. It is conventional to arrange the singular values so that $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n$.
@@ -134,7 +133,7 @@ We can use these singular values, along with the matrix's eigenvectors, to const
 
 \begin{theorem}[Singular value decomposition]
 	Let $A$ be an $m \times n$ matrix with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0$ and $\sigma_{r+1} = \sigma_{r+2} = \cdots = \sigma_n = 0$.
-	Then there eixst an $m \times m$ orthogonal matrix $U$, an $n \times n$ orthogonal matrix $V$, and an $m \times n$ matrix $\Sigma$ such that
+	Then there exist an $m \times m$ orthogonal matrix $U$, an $n \times n$ orthogonal matrix $V$, and an $m \times n$ matrix $\Sigma$ such that
 	\[ A = U \Sigma V^T. \]
 	The matrix $\Sigma$ contains the ordered singular values of $A$ along its main diagonal.
 	The matrices other $V$ and $U$ are of the following forms:

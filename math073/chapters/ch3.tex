@@ -4,7 +4,6 @@
 \begin{document}
 
 \chapter{Matrices}
-
 \section{Matrix Operations}
 Now we turn our attention to matrices in their own right, rather than as a means to understand vectors and linear equations.
 
@@ -85,7 +84,7 @@ We'll also find it helpful to define something completely new and different: fli
 	That is, the $i$th column of $A^T$ is the $i$th row of $A$ for all $i$, or $(A^T)_{ij} = A_{ji}$ for all $i, j$.
 \end{definition}
 
-This allows us to define another special, usuallly non-diagonal type of matrix that exhibit symmetry with respect to transposition.
+This allows us to define another special, usually non-diagonal type of matrix that exhibit symmetry with respect to transposition.
 
 \begin{definition}[Symmetric matrix]
 	A square matrix $A$ is symmetric if $A^T = A$.
@@ -99,7 +98,7 @@ It's minor in the context of this course, but still sometimes useful.
 
 \begin{definition}[Outer product]
 	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $\R^m$ and $\R^n$, respectively.
-	Then their outer product is defined as the matrix product $\mbf{u}\mbf{v}^T$.
+	Then their outer product is defined as $\mbf{u}\mbf{v}^T$.
 \end{definition}
 
 \section{Matrix Algebra}
@@ -155,6 +154,8 @@ Finally, let's talk about matrix transposition.
 \end{theorem}
 
 We can use some of these to show what happens when we add or multiply a matrix by its own transpose.
+
+\pagebreak
 
 \begin{theorem}[Adding or multiplying by a transpose]
 	We have two relationships.
@@ -215,7 +216,7 @@ As a side note, property (e) allows us to define negative integer powers of a ma
 	\[ A^{-n} = (A^{-1})^n = (A^n)^{-1}. \]
 \end{definition}
 
-We're now in a positon to introduce a new type of matrix that will lead us to the inverse algorithm.
+We're now in a position to introduce a new type of matrix that will lead us to the inverse algorithm.
 
 \begin{definition}[Elementary matrix]
 	An elementary matrix is any matrix that can be obtained by performing an elementary row operation on an identity matrix.
@@ -254,6 +255,8 @@ This allows us to begin formulating what is arguably the most important theorem 
 This is a powerful theorem!
 It gives us everything we need to prove these last two very important theorems, the first a stepping stone for the next.
 
+\pagebreak
+
 \begin{theorem}[Condition for matrix invertibility]
 	Let $A$ be a square matrix.
 	If $B$ is a square matrix such that either $AB = I$ or $BA = I$, then $A$ is invertible and $B = A^{-1}$.
@@ -264,7 +267,7 @@ It gives us everything we need to prove these last two very important theorems, 
 	If a series of elementary row operations reduces $A$ to $I$, then the same series of elementary row operations transforms $I$ into $A^{-1}$.
 \end{theorem}
 
-Therefore, in order to invert a matrix, we simply reduce it to the identity matrx while simultaneously performing the same sequence of row operations on the identity matrix.
+Therefore, in order to invert a matrix, we simply reduce it to the identity matrix while simultaneously performing the same sequence of row operations on the identity matrix.
 
 \section{Subspaces, Basis, Dimension, and Rank}
 Now, we'll introduce the ideas of spaces and subspaces, and we'll see how they relate to matrices.
@@ -305,6 +308,8 @@ Drawing a connection to something we already know, we can note that a matrix's r
 
 As for the third space of interest, we should also know that the solution set of a homogeneous linear system is a subspace.
 This subspace, like the row and column spaces, has a special name.
+
+\pagebreak
 
 \begin{theorem}[Solution space of a homogeneous linear system]
 	Let $A$ be an $m\times n$ matrix and let $S$ be the set of solutions of the homogeneous linear system $A\mbf{x} = \mbf{0}$.

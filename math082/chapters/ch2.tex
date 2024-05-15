@@ -76,13 +76,13 @@ The first of these is below.
 \begin{definition}[Slope field]
 Consider the first-order differential equation
 \[ \frac{dy}{dx} = f(x, y). \]
-The slope field of this DE encodes the value of $\frac{dy}{dx}$ at each point $(x, y)$ as line segments that lay tangent to a solution curve $y(x)$ at each point on a grid.
+The slope field of this DE encodes the value of $dy / dx$ at each point $(x, y)$ as line segments that lay tangent to a solution curve $y(x)$ at each point on a grid.
 \end{definition}
 
 Slope fields help us visualize the general trend that solutions to a differential equation follow.
 
 \begin{example}[Slope field of a logistic DE]
-    The slope field of the logistic DE $\displaystyle \frac{dy}{dx} = y\left( 1 - \frac{y}{5} \right)$ is shown below.
+    The slope field of the logistic DE $dy / dx = y\left( 1 - y / 5 \right)$ is shown below.
     \begin{center}
         \includegraphics[width=7.5cm]{logisticSlopeField.png}
     \end{center}
@@ -91,12 +91,12 @@ Slope fields help us visualize the general trend that solutions to a differentia
 
 Notice the behavior of the slope field at $y = 0$ and $y = 5$.
 At each of these locations we have a series of horizontal line segments.
-If a solution curve $y(x)$ ever reaches either of these $y$-values, it will stay there for the rest of its existence because there $\frac{dy}{dx} = 0$.
+If a solution curve $y(x)$ ever reaches either of these $y$-values, it will stay there for the rest of its existence because there $dy / dx = 0$.
 Despite this similarity, the two "equilibria" are fundamentally different: while solutions tend to converge at $y = 5$, they tend to diverge at $y = 0$.
 We summarize these observations below.
 
 \begin{definition}[Equilibrium solution of a first-order DE]
-    A solution $y = y(x)$ to a first-order differential equation is called an equilibrium solution to the DE if its derivative $\frac{dy}{dx} = 0$ for all $x$.
+    A solution $y = y(x)$ to a first-order differential equation is called an equilibrium solution to the DE if its derivative $dy / dx = 0$ for all $x$.
     If other solutions tend to converge to an equilibrium, the equilibrium is stable; if other solutions tend to diverge, the equilibrium is unstable.
 \end{definition}
 
@@ -116,9 +116,9 @@ Next, we give a way to actually compute approximations for initial-value problem
     
 \end{definition}
 
-Euler's method is a notoriously inaccurate method for approximating solutions to differential equations.
-However, it is very simple, based only on a series of tangent line approximations.
-The smaller the step size, the better the approximation.
+Euler's method is a very bad method for approximating solutions to differential equations.
+But it is very simple, based only on a series of tangent line approximations.
+Smaller step sizes lead to better approximations.
 
 \section{Existence and Uniqueness of Solutions}
 We give two theorems relating to whether or not a sole solution exists for a given DE.
@@ -133,12 +133,12 @@ There is a trade-off here: the first theorem gives a stronger result but works o
 \begin{theorem}[Existence and uniqueness of solutions to a first-order IVP]
     Consider the IVP for the first-order DE:
     \[ y'(t) = f(t, y) \;\text{ with }\; y(t_0) = y_0. \]
-    If $f(t, y)$ and $\frac{\partial f}{\partial y}(t, y)$ are continuous on the rectagle $t \in (\alpha, \beta)$ and $y \in (\gamma, \delta)$ containing $(t_0, y_0)$, then the solution to the IVP exists and is unique on some interval $t \in (t_0 - h, t_0 + h)$ for some $h > 0$.
+    If $f(t, y)$ and $\frac{\partial f}{\partial y}(t, y)$ are continuous on the rectangle $t \in (\alpha, \beta)$ and $y \in (\gamma, \delta)$ containing $(t_0, y_0)$, then the solution to the IVP exists and is unique on some interval $t \in (t_0 - h, t_0 + h)$ for some $h > 0$.
 \end{theorem}
 
 Both of these boil down to the functions in the DE being "well-behaved."
 It's reasonable that continuity should be a condition for both of these.
-The $\frac{\partial f}{\partial y}$ condition in Theorem 2.3 ensures a smooth transition between two solution curves in the same neighborhood.
+The $\partial f / \partial y$ condition in Theorem 2.3 ensures a smooth transition between two solution curves in the same neighborhood.
 In fact, this theorem allows us to state something significant about the solution curves of a DE.
 
 \begin{corollary}[Solution curves do not intersect]

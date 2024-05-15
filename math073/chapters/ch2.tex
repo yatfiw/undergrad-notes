@@ -4,7 +4,6 @@
 \begin{document}
 
 \chapter{Systems of Linear Equations}
-
 \section{Systems of Linear Equations}
 We now turn our attention to systems of simultaneous linear equations.
 (Vectors will make a return later.)
@@ -14,7 +13,7 @@ We must first define what, exactly, a linear equation is, and what it means to s
 	A linear equation in the $n$ variables $x_1, x_2, \ldots, x_n$ is an equation that can be written in the form
 	\[ a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b \]
 	where the coefficients $a_1, a_2, \ldots, a_n$ and the constant term $b$ are constants.
-	A solution of this equation is a vector $\begin{bmatrix} s_1 & s_2 & \cdots & s_n \end{bmatrix}$ whose components satisfy the equaton when we substitute $x_i = s_i$ for all $i = 1, 2, \ldots, n$.
+	A solution of this equation is a vector $\begin{bmatrix} s_1 & s_2 & \cdots & s_n \end{bmatrix}$ whose components satisfy the equation when we substitute $x_i = s_i$ for all $i = 1, 2, \ldots, n$.
 \end{definition}
 
 Now that we've defined linear equations, we can define what a system of linear equations is.
@@ -85,7 +84,7 @@ Rather, we can use the following condition.
 \end{theorem}
 
 All this gives us a powerful way to solve linear systems.
-The algorithm is decribed below.
+The algorithm is described below.
 
 \begin{definition}[Gaussian elimination]
 	The process of Gaussian elimination is as follows.
@@ -103,6 +102,8 @@ When this happens, the system's solution set is defined in terms of a certain nu
 	The leading variables of a linear system correspond to the leading entries of its augmented matrix.
 	The other variables are the free variables.
 \end{definition}
+
+\pagebreak
 
 \begin{theorem}[Number of free variables from REF]
 	Let $A$ be the coefficient matrix of a linear system with $n$ variables.
@@ -142,7 +143,7 @@ Given either of these simplified forms for a matrix, if the corresponding system
 \section{Spanning Sets and Linear Independence}
 The study of vectors frequently intersects with that of matrices.
 This section lists out some of the introductory definitions and results of this intersection, developing important theory about both objects.
-We begin with a conditition for the consistency of a linear system.
+We begin with a condition for the consistency of a linear system.
 
 \begin{theorem}[Condtion for consistency]
 	A linear system with augmented matrix $\begin{bmatrix} A \;|\; \mbf{b} \end{bmatrix}$ is consistent if and only if $\mbf{b}$ is a linear combination of the columns of $A$.

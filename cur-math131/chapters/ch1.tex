@@ -61,7 +61,7 @@ To begin our characterization of infinity, we stick with what we know: sets that
 \end{definition}
 
 We have two powerful theorems that we can use to determine the cardinalities of sets built using countable sets.
-They're both pretty untintuitive at first glance.
+They're both pretty unintuitive at first glance.
 
 \begin{theorem}[]
     Every infinite subset of a countable set is countable.
@@ -72,7 +72,7 @@ They're both pretty untintuitive at first glance.
 
     Consider a subset $E \subseteq A$.
     By the well-ordering principle, $E$ has a smallest element; index this element as $n_1$.
-    The next element recieves index $n_2$, then $n_3$, and so on, so $E = \left\{ x_{n_1}, x_{n_2}, \ldots \right\}$.
+    The next element receives index $n_2$, then $n_3$, and so on, so $E = \left\{ x_{n_1}, x_{n_2}, \ldots \right\}$.
     This process creates the bijection $f(k) = x_{n_k}$ between $E$ and $\N$, so $E$ is countable.
 \end{proof}
 
@@ -88,7 +88,6 @@ They're both pretty untintuitive at first glance.
     \[ \begin{matrix}  
         x_{11} & x_{12} & x_{13} & \cdots \\
         x_{21} & x_{22} & x_{23} & \cdots \\
-        x_{31} & x_{32} & x_{33} & \cdots \\
         \vdots & \vdots & \vdots & \ddots
     \end{matrix} \]
     We can create a bijection with $\N$ just by slithering across the diagonals of this grid!
@@ -113,7 +112,6 @@ This might suggest that we can't get any bigger than countable, but we can!
     \begin{align*}
         1 &\mapsto x_1, \quad x_1 = 0.x_{11}x_{12}x_{13} \cdots \\
         2 &\mapsto x_2, \quad x_2 = 0.x_{21}x_{22}x_{23} \cdots \\
-        3 &\mapsto x_3, \quad x_3 = 0.x_{31}x_{32}x_{33} \cdots \\
         &\;\;\vdots
     \end{align*}
     Now construct the real number $r = 0.r_1r_2r_3 \cdots$ by assigning each decimal place as follows:
@@ -142,7 +140,7 @@ We can go even larger than this!
     In this case, $y \in B$ if and only if $y \in g(y)$.
 
     But we can construct a $B$ that is not in the range of $g$!
-    Specifcially, consider the subset of all elements in $A$ that, under $g$, do not map to themselves; that is,
+    Specifically, consider the subset of all elements in $A$ that, under $g$, do not map to themselves; that is,
     \[ B = \left\{ x \in A : x \not\in g(x) \right\}. \]
     By definition, $y \in B$ if and only if $y \not\in g(y)$, but this contradicts our previous conclusion about $B$.
     Therefore, there is no such surjection $g$.
@@ -154,7 +152,7 @@ This new subset $B$ differs from all others in $\pfn{range}(g)$.
 Any $x \in A$ satisfying $x \not\in g(x)$ mustn't map to $B$ because $x \in B$.
 We can make the reverse argument for $y \in A$ satisfying $y \in g(y)$.
 
-Cantor's theorem provides a way to construct arbitrarily large infinities by contructing arbitrarily large power sets, so there is no ``biggest'' infinity.
+Cantor's theorem provides a way to construct arbitrarily large infinities by constructing arbitrarily large power sets, so there is no ``biggest'' infinity.
 Another natural question is whether or not there's is a set whose cardinality falls between these infinities.
 This is called the continuum hypothesis, and it has been shown to be undecidable under today's standard axioms for set theory!
 
@@ -279,8 +277,6 @@ There are a couple of other consequences which we'll find useful.
     Therefore, $nx > y$, as desired.
 \end{proof}
 
-\pagebreak
-
 \begin{theorem}[$\Q$ is dense in $\R$]
     Suppose we have $x,y \in \R$ with $x < y$. Then there exists at $q \in \Q$ such that $x < q < y$.
 \end{theorem}
@@ -295,7 +291,7 @@ There are a couple of other consequences which we'll find useful.
 \end{proof}
 
 The first theorem here roughly states that there are no ``infinitely large'' or ``infinitely small'' real numbers to the point of being inaccessible.
-This second theorem hints at one of three equivalent chatacteristics of what we call dense sets, which we'll look more into later.
+This second theorem hints at one of three equivalent characteristics of what we call dense sets, which we'll look more into later.
 
 \section{Metric Spaces, Open Sets, and Closed Sets}
 Let's keep adding structure to our sets by introducing distance.
@@ -396,6 +392,7 @@ Finite unions and intersections lead to fairly intuitive results; infinite sets,
 \begin{lemma}[De Morgan's Law]
     Suppose we have a (potentially uncountable) collection of sets $\left\{ E_\alpha \right\}$ (where $\alpha$ labels the sets).
     Then
+    \vspace{-2pt}
     \[ \left( \bigcup_\alpha E_\alpha \right)^c = \bigcap_\alpha E_\alpha^c. \]
 \end{lemma}
 
@@ -529,7 +526,7 @@ We'll find this characterization useful in proving our next theorem.
     A set $E$ is nowhere-dense in a metric space $X$ if $\overline{E}$ contains no nonempty open intervals.
 \end{definition}
 
-We might re-interpet this definition to mean that there are no open sets of $X$ contained in $\overline{E}$, or that $E$ is not dense in any nonempty open subset of $X$.
+We might re-interpret this definition to mean that there are no open sets of $X$ contained in $\overline{E}$, or that $E$ is not dense in any nonempty open subset of $X$.
 Intuitively, nowhere-dense sets are very ``thin'', so countable unions of nowhere-dense subsets represent a very small type of infinite set (called meager sets).
 This allows for another perspective on the cardinality of $\R$---given what we know already, we expect that $\R$ is not a meager set, and does turn out to be the case!
 
@@ -685,7 +682,7 @@ We have another theorem that applies to all metric spaces, but it is weaker.
     Assume $K$ is compact.
     Suppose, for contradiction, that no point of $K$ is a limit point of some infinite $E \subseteq K$.
     Then each $q \in K$ has a neighborhood $N(q)$ containing at most one point of $E$ (namely, $q$, if $q \in E$).
-    But then, $\left\{ N(q) \right\}$ is a cover of $E$ with no finite subcover, a contradiciton.
+    But then, $\left\{ N(q) \right\}$ is a cover of $E$ with no finite subcover, a contradiction.
 
     ($\Leftarrow$) Exercise.
 \end{proof}
