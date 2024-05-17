@@ -3,7 +3,7 @@
 %<3
 \begin{document}
 
-\chapter{Sequences and Series}
+\chapter{Sequences and Series} \label{ch:seqser}
 \section{Sequences}
 Our attention, now, shifts to sequences of elements.
 We'll begin with a rigorous definition for these objects.
@@ -38,7 +38,7 @@ Some of the following properties might also be useful.
     We prove each part in turn.
     \begin{enumerate}[label=(\alph*)]
         \item Suppose $p_n \to p$ and $p_n \to q$ and let $\epsilon = d(p,q)$.
-        Assume, for contradiciton, that $p \neq q$, so $\epsilon > 0$.
+        Assume, for contradiction, that $p \neq q$, so $\epsilon > 0$.
         By the definition of convergence, there exist $N_p, N_q$ such that $n \geq N_p \implies d(p_n, p) < \epsilon / 2$ and $n \geq N_q \implies d(p_n, q) < \epsilon / 2$.
         Let $N = \max \left\{ N_p, N_q \right\}$; by the triangle inequality,
         \[ \epsilon = d(p,q) \leq d(p_n, p) + d(p_n, q) < \epsilon, \]
@@ -254,7 +254,7 @@ We've seen that another important property of $\R$ involves completion, which we
     A metric space $X$ is complete if every Cauchy sequence in $X$ converges to a point in $X$.
 \end{definition}
 
-\begin{theorem}[Completion] \label{thmCompletion}
+\begin{theorem}[Completion] \label{thm:completion}
     Every metric space $(X, d)$ has a completion $(X^*, d)$.
     That is, there is a way to define $X^* \supseteq X$ such that $X^*$ is complete and has the same metric as $X$.
 \end{theorem}
@@ -287,7 +287,7 @@ To avoid this ambiguity, we instead define each real number as an equivalence cl
 \end{definition}
 
 Showing that the above relation is an equivalence relation involves a relatively straightforward application of the definition of convergence and the triangle inequality.
-Now let's add some structure to this set we've created!
+Now let's add some structure to our set!
 
 \pagebreak
 
@@ -353,73 +353,20 @@ Again, we'll only show this for the additive axiom.
 From here, we could prove all the other cool stuff we know to be true about real numbers!
 We'll list three big properties here, leaving the proofs as exercises.
 
-\begin{theorem}[Archimedean property]
-    $\R$ has the Archimedean property.
+\begin{theorem}[Properties of $\R$]
+    \begin{enumerate}[label=(\alph*)]
+        \item $\R$ has the Archimedean property.
+        \item $\Q$ is dense in $\R$.
+        \item $\R$ has the least upper bound property.
+    \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[Density of $\Q$ in $\R$]
-    $\Q$ is dense in $\R$.
-\end{theorem}
-
-\begin{theorem}[Completeness]
-    $\R$ has the least upper bound property.
-\end{theorem}
-
-We could use this construction as a template for proving Theorem 2.\ref{thmCompletion}.
+We could use this construction as a template for proving Theorem \ref{ch:seqser}.\ref{thm:completion}.
 The distance between two elements in a completion $X^*$, which are equivalence classes of Cauchy sequences in $X$, is given by the limit of the distance between their terms.
 This ensures that $X$ is truly embedded within $X^*$---in particular, there exists a distance-preserving mapping $\varphi : X \to X^*$; we call such a mapping an isometry.
-(We may interpret $\varphi(X)$ as the set $X$ equipped with the new metric.)
+(We may interpret $\varphi(X)$ as the set $X$ equipped with a new metric $\Delta$.)
 It turns out that $X^*$ with this metric is complete!
 Two important corollaries are that $\varphi(X)$ is dense in $X^*$ and $\varphi(X) = X^*$ for complete $X$.
-
-% \section{Completion of Metric Spaces (14b)} % FINISH! (TODO)
-% Now we'll provide a general proof for Theorem 2.\ref{thmCompletion}, following our construction for $\R$.
-
-% Consider a metric space $(X,d)$.
-% We say that two Cauchy sequences $\left\{ p_n \right\}, \left\{ q_n \right\}$ in $X$ are equivalent if
-% \[ \lim_{n \to \infty} d(p_n, q_n) = 0. \]
-% It is, again, relatively straightforward to show that this is an equivalence relation.
-% We'll define $X^\star$ as the set of the corresponding equivalence classes; now we just need to put a metric on this set.
-
-% Let $P,Q \in X^*$ have representative sequences $\left\{ p_n \right\}, \left\{ q_n \right\}$, and define the metric
-% \[ \Delta (P, Q) = \lim_{n \to \infty} d(p_n, q_n). \]
-% We could prove that $\Delta$ is both well-defined and a metric on $X^*$, but those proofs would clutter the flow here so we'll omit them.
-% Now, in order for this metric to be sensible, we must ensure that $X$ is truly embedded within $X^*$.
-% In particular, the distance between two elements in $X$ must be the same as between the two equivalent elements in $X^*$.
-% Let $p,q \in X$ have equivalents $P,Q \in X^*$ with representatives $\left\{ p_n \right\}, \left\{ q_n \right\}$.
-% So
-% \[ \Delta (P,Q)  = \lim_{n \to \infty} d(p_n,q_n) = \lim_{n \to \infty} d(p,q) = d(p,q), \]
-% as desired.
-% Thus there exists a distance-preserving mapping $\varphi : X \to X^*$; we call such a mapping an isometry.
-% We may interpret $\varphi(X)$ as the set $X$ equipped with the new metric $\Delta$.
-
-% Finally, we'll show in class that $X^*$ is complete. % TODO
-% As a corollary, we'll also show that a complete metric space is its own completion.
-
-% \begin{corollary}[]
-%     If a metric space $X$ is complete and there exists an isometry $\varphi : X \to X^*$, where $X^*$ is the completion of $X$, then $\varphi(X) = X^*$.
-% \end{corollary}
-
-% \begin{proof}
-%     Coming soon... % TODO
-% \end{proof}
-
-% We have one last result.
-
-% \begin{corollary}[]
-%     $\varphi(X)$ is dense in $X^*$.
-% \end{corollary}
-
-% \begin{proof}
-%     We'll show that every point $P \in X^*$ is in $\varphi(X)$ or is a limit point of $\varphi(X)$. 
-
-%     It suffices to show that every $P \not\in X^*$ is a limit point of $\varphi(X)$.
-%     Let $\left\{ p_n \right\}$ be a representative of the equivalence class $P$; since this sequence is Cauchy, for any $N_\epsilon (P)$, $\epsilon > 0$, there exists $N \in \N$ such that $m,n > N$ implies $d(p_m,p_n) < \epsilon$.
-%     Now, let $Q = \varphi(p_m)$, so
-%     \[ \Delta (P,Q) = \lim_{n \to \infty} d(p_n, p_m) < \epsilon. \]
-%     So $Q \in \varphi(X)$ and $P \not\in \varphi(X)$, meaning we have $Q \neq P$ where $Q \in N_\epsilon (P)$ and $Q \in X^*$ for any $\epsilon > 0$.
-%     Thus $P$ is a limit point of $\varphi(X)$ and $\varphi(X)$ is dense in $X^*$, as desired.
-% \end{proof}
 
 \section{Series}
 We'll shift our attention, now, to adding up successive terms in a sequence.
@@ -452,7 +399,6 @@ Let's start by taking advantage of the completeness of $\R$.
     Consider the sequence of partial sums $\left\{ s_n \right\}$ where $s_k = \sum_{n=1}^{k} a_n$ and $a_n \in \R$.
     The distance between two terms in this sequence is given by
     \[ d(s_{k-1}, s_m) = \left| \sum_{n=1}^{m} a_n - \sum_{n=1}^{k-1} a_n \right| = \left| \sum_{n=k}^{m} a_n \right|. \]
-
     ($\Rightarrow$) Suppose $\sum_{n=1}^{\infty} a_n$ converges.
     Then the corresponding sequence of partial sums converges and thus is Cauchy.
     So for all $\epsilon > 0$ there exists an $N$ such that $n,m > N$ implies $\left| \sum_{n=k}^{m} a_n \right| < \epsilon$, as desired.
@@ -485,9 +431,7 @@ We're now in a position to make a statement about the convergence of a particula
 
 \begin{definition}[Geometric series]
     Let $x \in \R$.
-    The series of the form
-    \[ \sum_{n=0}^{\infty} x^{n} = 1 + x + x^2 + \cdots \]
-    is called a geometric series.
+    The series of the form $\sum_{n=0}^{\infty} x^{n}$ is called a geometric series.
 \end{definition}
 
 \begin{theorem}[Geometric series convergence]
@@ -515,7 +459,12 @@ Once we know about the convergence of relatively simple series, we can use them 
 \end{theorem}
 
 \begin{proof}
-    Coming soon... % TODO
+    The second statement is the contrapositive of the first, so need only prove the first.
+    Fix $\epsilon > 0$; since $\sum_{n=1}^{\infty} c_n$ converges, there exists an $N_1$ such that $m,n \geq N_1$ implies $|\sum_{k=n}^{m} c_k| < \epsilon$ for $m > n$.
+    Now suppose there exists some $N_2$ such that $|a_n| \leq c_n$ for $n > N_2$.
+    If $N = \max \left\{ N_1, N_2 \right\}$, then for $m,n > N$ we have
+    \[ \left| \sum_{k=n}^{m} a_k \right| \leq \sum_{k=n}^{m} |a_k| \leq \sum_{k=n}^{m} c_k < \epsilon. \]
+    Thus $\sum_{k=1}^{\infty} a_k$ converges, as desired.
 \end{proof}
 
 We also have two more closely-related tests that once again concern the behavior of the individual terms in their limit.
@@ -573,6 +522,8 @@ So the $n$th term in the series is the sum of all the products whose terms add t
 This is called the Cauchy product (and is the discrete analog of convolution).
 We'll come back to this---first, let's see what we can say about products of terms.
 
+\pagebreak
+
 \begin{theorem}[Summation by parts]
     Let $A_n = \sum_{k=1}^{n} a_k$ and define $A_0 = 0$.
     Then
@@ -626,13 +577,15 @@ To formalize this behavior, we'll define a slightly more restrictive type of con
 As it turns out, this stronger notion of absolute convergence is exactly what we need to guarantee that the product of two series converges!
 We'll omit the proof here.
 
+\pagebreak
+
 \begin{theorem}[]
     If $\sum_{n=0}^{\infty} a_n \to A$ and $\sum_{n=0}^{\infty} b_n \to B$, both converging absolutely, then
     \[ AB = \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} a_k b_{n-k} \right). \]
 \end{theorem}
 
 We'll finish off with a shocking result about rearrangements of series.
-We'll omit this proof too, but it's in Rudin.
+We'll omit this proof too.
 
 \begin{theorem}[Riemann rearrangement theorem]
     Consider $a_n, \alpha, \beta \in \R$ with $\alpha \leq \beta$.

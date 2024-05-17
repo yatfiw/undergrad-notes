@@ -1,0 +1,340 @@
+\documentclass[../m131main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+%<3
+\begin{document}
+
+\chapter{Functions} \label{ch:funcs}
+\section{Limits and Continuity}
+With all this groundwork about topology and sequences, from here on we'll begin a rigorous construction of all the calculus we've taken for granted in the past.
+Limits of functions will be at the core of this study, so let's start there!
+
+\begin{definition}[Limits of functions]
+    Let $X$ and $Y$ be metric spaces with metrics $d_X$ and $d_Y$, respectively.
+    Suppose we have $E \subseteq X$, where $p$ is a limit point of $E$.
+    Consider $f : E \to Y$.
+    
+    $\lim_{x \to p} f(x) = q$ for some $q \in Y$ if for all $\epsilon > 0$ there exists a $\delta > 0$ such that $0 < d_X(x,p) < \delta$ implies $d_Y(f(x),q) < \epsilon$ for all $x \in E$.
+\end{definition}
+
+Put more plainly, we must be able to take any $\epsilon$ and find a corresponding $\delta$ such that any point within a distance $\delta$ of $p$ has an image within $\epsilon$ of $q$.
+This is very similar to our strategy for proving sequence convergence, and in fact we can make the link even stronger!
+
+\begin{theorem}[Sequence characterization of the limit]
+    $\lim_{x \to p} f(x) = q$ if and only if $f(p_n) \to q$ for all convergent sequences $\left\{ p_n \right\} \in E$ with $p_n \neq p$.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$) Suppose $\lim_{x \to p} f(x) = q$.
+    Given $\epsilon > 0$, by definition there exists a $\delta > 0$ such that $0 < d(x,p) < \delta$ implies $d(f(x), q) < \epsilon$.
+    Also, for a given sequence $\left\{ p_n \right\}$ with $p_n \to p$, there exists an $N$ such that $n > N$ implies $d(p_n,p) < \delta$.
+    Thus $n> N$ implies $d(f(p_n), q) < \epsilon$ and $f(p_n) \to q$, as desired.
+
+    ($\Leftarrow$) Suppose $\lim_{x \to p} f(x) \neq q$.
+    We will prove that there exists a sequence as described such that $f(p_n)$ does not converge to $q$.
+
+    There exists an $\epsilon > 0$ such that, for all $ > 0$, there is an $x \in E$ where $d(x,p) < \delta$ but $d(f(x),q) \geq \epsilon$.
+    If we let $\delta_n = 1 / n$, then we can construct a sequence $x_n$ by choosing points that satisfy this condition.
+    Then $x_n \to p$ but $d(f(x_n),q) \geq \epsilon$ by construction, so $f(x_n)$ does not converge to $q$, which proves the contrapositive.
+\end{proof}
+
+With this, we can carry over a lot of the results we proved with sequences.
+
+\begin{corollary}[Limits are unique]
+    If $f$ has a limit at $p$ then this limit is unique.
+\end{corollary}
+
+\begin{corollary}[Algebraic properties of limits]
+    If a function's codomain is $\C$ then the algebraic rules for limits analogous to those for sequences apply.
+\end{corollary}
+
+Now we can use limits to characterize the continuity of a function.
+
+\begin{definition}[Continuity]
+    Suppose $X$ and $Y$ are metric spaces, $p \in E \subseteq X$, and $f : E \to Y$.
+    $f$ is continuous at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ such that $d(x,p) < \delta$ implies $d(f(x),f(p)) < \epsilon$ for all $x \in E$.
+\end{definition}
+
+This is quite a natural definition, but it has a strange consequence: any function that maps from a discrete matric space to an arbitrary metric space is vacuously continuous!
+For any point $p$ in the domain we can draw a small $\delta$-ball that only contains $p$.
+More naturally, we also have the following theorem.
+
+\begin{theorem}[]
+    \begin{enumerate}[label=(\alph*)]
+        \item If $p$ is a limit point of $E$, then $f$ is continuous at $p$ if and only if $\lim_{x \to p} f(x) = f(p)$.
+        \item If $\left\{ x_n \right\}$ converges, then $f$ is continuous if and only if $\lim_{n \to \infty} f(x_n) = f(\lim_{n \to \infty}x_n)$.
+
+    \end{enumerate}
+\end{theorem}
+
+We have two more corollaries that follow directly from previous results.
+
+\begin{corollary}[]
+    Sums and products of continuous functions are continuous.
+\end{corollary}
+
+\begin{corollary}[]
+    Suppose $f,g : X \to \R^k$ such that $f = (f_1, \cdots, f_k)$, similarly for $g$.
+    Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $f$ is continuous if and only if each $f_i$ is continuous, and
+        \item sums $f+g$ and dot products $f \cdot g$ of vectors are continuous if $f,g$ are continuous.
+    \end{enumerate}
+\end{corollary}
+
+It will be useful to draw one last characterization for continuity, this time in terms of open and closed sets.
+
+\begin{definition}[]
+    $f : X \to Y$ is continuous if and only if for all open $U \in Y$ the preimage $f^{-1}(U)$ is open in $X$.
+\end{definition}
+
+\begin{corollary}[]
+    $f : X \to Y$ is continuous if and only if for all closed $K \in Y$ the preimage $f^{-1}(K)$ is closed in $X$.
+\end{corollary}
+
+The definition comes from the fact that the image $U$ contains an $\epsilon$-neighborhood, so there must also be an open set in the domain (containing a $\delta$-neighborhood).
+The corollary is an application of previously-shown facts about complements of sets.
+This gives us a bunch of useful results, some of which are listed below.
+
+\begin{theorem}[Composition of continuous functions]
+    Suppose $X,Y,Z$ are metric spaces.
+    If $f,g$ are continuous functions with $f : X \to Y$ and $g : Y \to Z$, then the composition $g \circ f$ is continuous.
+\end{theorem}
+
+\begin{proof}
+    If $U \in Z$ is open, then $g^{-1}(U)$ is open in $Y$ by the continuity of $g$.
+    Similarly, $f^{-1}(g^{-1}(U)) = (g \circ f)^{-1}(U) \in X$ is open, meaning $g \circ f$ is continuous.
+\end{proof}
+
+\begin{theorem}[Continuity and compactness]
+    Suppose $X$ is a compact metric space.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $f : X \to Y$ is continuous then $f(X)$ is compact.
+        \item If $f : X \to \R^k$ is continuous then $f(X)$ is closed and bounded.
+        \item If $f : X \to \R$ is continuous then $f$ achieves its maximum and minimum.
+        \item If $f : X \to Y$ is a continuous bijection then $f^{-1}$ is continuous.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We prove each part in turn.
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $\left\{ V_\alpha \right\}$ be a cover of $f(X)$.
+        Define $U_\alpha = f^{-1}(V_\alpha)$; since there exists a finite subcover $\left\{ U_1, \ldots, U_n \right\}$ of $X$, $\left\{ V_1, \ldots, V_n \right\}$ must be a cover for $f(X)$ and is a finite subcover.
+
+        \item Apply the Heine-Borel theorem to the previous result.
+
+        \item $f(X)$ is bounded so it has a supremum and infimum, and by compactness it contains both.
+
+        \item Consider an open set $U \in X$.
+        Then $U^C$ is closed, and as a closed subset of a compact set it is also compact.
+        Then $f(U^C)$ is compact and thus closed, so $f(U)$ is open and $f^{-1}$ is continuous.
+    \end{enumerate}
+    This completes the proof.
+\end{proof}
+
+There's one last fairly intuitive property that's preserved by continuous functions, and it brings us to one of the most basic results of introductory calculus.
+
+%<3 <3 <3 <3 <3
+\begin{definition}[Connected set]
+    Two sets $A,B \subset X$ are separated if $A \cap \overline{B}$ and $\overline{A} \cap B$ are both empty.
+    A set $E \subset X$ is connected if it is not a union of two nonempty separated sets.
+\end{definition}
+
+\begin{theorem}[]
+    Suppose $f : X \to Y$ is continuous and $E \subset X$ is connected.
+    Then $f(E)$ is also connected.
+\end{theorem}
+
+\begin{theorem}[Intermediate value theorem]
+    If $f : [a,b] \to \R$ is continuous and $f(a) < c < f(b)$, then there exists an $x \in (a,b)$ such that $f(x) = c$.
+\end{theorem}
+
+\begin{proof}
+    $[a,b]$ is connected, so $f([a,b])$ is connected.
+    We have $c \in (f(a), f(b)) \subset f([a,b])$, meaning there exists an $x \in [a,b]$ such that $f(x) = c$.
+    Since $c \neq f(a)$ and $c \neq f(b)$, $x \in (a,b)$.
+\end{proof}
+
+\section{Differentiation}
+Let's continue with the calculus and introduce another familiar object, one that's closely tied to continuity.
+
+\begin{definition}[Derivative]
+    A function $f : [a,b] \to \R$ is differentiable at $x_0 \in [a,b]$ if the following limit exists:
+    \vspace{-2pt}
+    \[ f'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}, \quad x \in (a,b), \; x \neq x_0. \]
+    \vspace{-2pt}
+    $f'(x_0)$ is called the derivative of $f$ at $x$.
+    If $f$ is differentiable at every point of a set $E \subseteq [a,b]$, we simply say that $f$ is differentiable on $E$.
+\end{definition}
+
+\begin{theorem}[Differentiability implies continuity] \label{thm:diff_imp_cont}
+    Let $f$ be defined on $[a,b]$.
+    If $f$ is differentiable at a point $x \in [a,b]$ then $f$ is continuous at $x$.
+\end{theorem}
+
+\begin{proof}
+    Using some properties of limits we have, as $x \to x_0$,
+    \vspace{-2pt}
+    \[ f(x) - f(x_0) = \frac{f(x) - f(x_0)}{x - x_0} \cdot (x - x_0) \to f'(x) \cdot 0 = 0. \]
+    \vspace{-2pt}
+    Thus $\lim_{x \to x_0} f(x) = f(x_0)$ and $f$ is continuous, as desired.
+\end{proof}
+
+We can use this to get some more familiar results about combinations of functions.
+
+\begin{theorem}[]
+    Suppose that $f,g$ are defined on $[a,b]$ and that $f'(x), g'(x)$ exist.
+    Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $(f+g)'(x)= f'(x) + g'(x)$ and
+        \item $(fg)'(x) = f'(x) g(x) + f(x)g'(x)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (a) follows immediately from properties of limits, so we focus on (b).
+    Define $h = fg$, so
+    \[ h(x) - h(x_0) = f(x) [g(x) - g(x_0)] + g(x_0) [f(x) - f(x_0)]. \]
+    Dividing by $x - x_0$ and taking $x \to x_0$ gives the expression we desire.
+\end{proof}
+
+Now we arrive at another pair of familiar theorems from calculus: the mean value theorem and its supporting lemma, Rolle's theorem.
+
+\begin{lemma}[Rolle's theorem]
+    Suppose $f$ is continuous on $[a,b]$.
+    If $f$ has a local extremum at $c \in [a,b]$ and $f'(c)$ exists, then $f'(c) = 0$.
+\end{lemma}
+
+\begin{proof}
+    Consider the quotient $[f(x) - f(c)] / (x-c)$.
+    If $f(c)$ is a maximum then $f(x) - f(c) \leq 0$ for all $x$; if $x > c$ this difference is negative, and if $x < c$ it's positive.
+    Since $f'(c)$ exists, it must be that $f'(c) = 0$.
+    We could make a similar argument for minima, completing the proof.
+\end{proof}
+
+\begin{theorem}[Mean value theorem]
+    If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, then there exists a $c \in (a,b)$ such that
+    \[ f(b) - f(a) = (b-a) f'(c). \]
+\end{theorem}
+
+\begin{proof}
+    Define $h(x) = [f(b) - f(a)]x - [b-a]f(x)$.
+    Since $h(a) = h(b)$, by Rolle's theorem we have $h'(c) = 0$ for some $c \in (a,b)$.
+    Now, the derivative is
+    \[ h'(x) = [f(b) - f(a)] - [b-a]f'(x). \]
+    Thus there exists a $c$ such that $f(b) - f(a) = (b-a) f'(c)$, as desired.
+\end{proof}
+
+As our last result from differential calculus, we generalize the mean value theorem to get a powerful way of approximating functions near a point.
+
+\begin{theorem}[Taylor's theorem]
+    Let
+    \[ P_{n-1}(x) = \sum_{k=0}^{n-1} \frac{f^{(k)}}{k!} (x-a)^k. \]
+    If $f^{(n-1)}$ is continuous on $[a,b]$ and $f^{(n)}$ exists on $(a,b)$ then $P_{n-1}$ approximates $f(x)$ and
+    \[ f(x) = P_{n-1}(x) + \frac{f^{(n)}(c)}{n!} (x-a)^n \]
+    for some $c \in (a,x)$.
+\end{theorem}
+
+\begin{proof}
+    There is an $M$ such that
+    \[ f(b) = P_{n-1}(b) + M(b-a)^{n}. \]
+    Define
+    \[ g(x) = f(x) - P_{n-1}(x) - M(x-a)^{n}, \]
+    so $g^{(n)}(x) = f^{(n)}(x) - n!M$.
+    Now we must show that there exists a $c \in [a,b]$ such that $g^{(n)}(c) = 0$.
+    Notice that $P^{(k)}(a) = f^{(k)}(a)$ for $k = 0, \ldots, n-1$ by construction, so similarly $g^{(k)}(a) = 0$.
+
+    Now we iteratively apply the mean value theorem.
+    With how we've defined $M$ we have $g(b) = 0$, so there exists a $c_1 \in [a,b]$ such that $g'(c_1) = 0$.
+    Since $g'(a) = 0$, $g''(c_2) = 0$ for some $c \in [a, c_1]$.
+    Continuing this way, we conclude that $g^{(n)}(c_n) = 0$ for some $c_n \in [a, c_{n-1}] \subset [a,b]$, as desired.
+\end{proof}
+
+\section{Sequences of Functions}
+Branching off into a new direction, not only can we use sequence to study functions, but we can study sequences of functions in their own right.
+The most obvious way we might define convergence for such a sequence is to fix $x$ and immediately leverage the definition we're already familiar with.
+
+\begin{definition}[Pointwise convergence]
+    Let $\left\{ f_n \right\}$ be a sequence of functions defined on a set $E$.
+    We say that $\left\{ f_n \right\}$ converges pointwise to $f$ if
+    \[ f(x) = \lim_{n \to \infty} f_n(x) \]
+    for all $x \in E$.
+\end{definition}
+
+Unfortunately, this definition isn't particularly useful.
+It doesn't preserve any of the properties we'd want it to preserve---for example, a sequence can have continuous terms without its limit being continuous.
+The same goes for derivatives and integrals.
+
+To remedy this we need a stronger notion of convergence.
+Rather than considering each $x$-value in isolation, we might imagine a width-$\epsilon$ ribbon around a function, and that a sequence converges to that function if all of the terms are eventually contained within that ribbon.
+
+\begin{definition}[Uniform convergence]
+    Define the uniform norm (or sup norm) $\| f \| = \sup_{x \in E} |f(x)|$.
+We say $\left\{ f_n \right\}$ converges uniformly to $f$ on $E$ if for all $\epsilon > 0$ there exists an $N$ such that $n > N$ implies $\| f_n - f \| < \epsilon$.
+\end{definition}
+
+We'll give a few reasons as to why this is a useful definition to have in our pocket.
+First, it preserves continuity, just like we wanted.
+
+\begin{theorem}[Uniform convergence preserves continuity]
+    If $f_n \to f$ uniformly and $f_n$ is continuous for all $n$, then $f$ is continuous.
+\end{theorem}
+
+\begin{proof}
+    We'll begin with an application of the triangle inequality:
+    \[ |f(x) - f(y)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + |f_n(y) - f(y)|. \]
+    For any $\epsilon > 0$ there exist $N,\delta$ such that by uniform convergence $|x - y| < \delta$ implies the first and third terms are less than $\epsilon / 3$.
+    By continuity, the middle term is also less than $\epsilon / 3$, and by transitivity $|f(x) - f(y)| < \epsilon$.
+    So $f$ is continuous, as desired.
+\end{proof}
+
+The supremum norm behind uniform convergence also creates a complete metric space of functions.
+
+\pagebreak
+
+\begin{theorem}[]
+    Let $X$ be a metric space and consider the set $\mathcal{C}(X)$ of continuous, bounded functions $f : X \to \R$.
+    $\mathcal{C}(X)$ with the supremum norm is a complete metric space.
+\end{theorem}
+
+\begin{proof}
+    Consider an arbitrary Cauchy sequence $\left\{ f_n \right\} \in \mathcal{C}(X)$.
+    By definition there exists $N_1 \in \N$ such that $m,k > N_1$ implies $\| f_m - f_k \| < \epsilon$, and in turn $|f_m(x) - f_k(x)| < \epsilon$ for all $x \in X$.
+
+    If we fix $x \in X$ then $\left\{ f_n(x) \right\}$ is a Cauchy sequence of real numbers, and so it converges to some $p_x \in \R$ with ``cutoff'' $N_2$.
+    Define the function $f : X \to \R$ as $f(x) = p_x$.
+
+    Let $N = \max \left\{ N_1, N_2 \right\}$, so $n > N$ implies
+    \[ |f_n(x) - p_x| = |f_n(x) - f(x)| < \epsilon \]
+    for all $x \in X$.
+    Thus $\| f_n - f \| < \epsilon$ for $n > N$ and $f_n \to f$ uniformly.
+    $f$ is continuous by Theorem \ref{ch:funcs}.\ref{thm:diff_imp_cont}, meaning every Cauchy sequence $\left\{ f_n \right\} \subset \mathcal{C}(X)$ converges to a function $f \in \mathcal{C}(X)$, as desired.
+\end{proof}
+
+This leads us right into a convergence test for functions that are defined via infinite sums.
+
+\begin{theorem}[Weierstrass M-test]
+    Let $X$ be a metric space.
+    For each $n \in \N$, consider $f_n : X \to \R$ where for each $n$ there exists $M_n > 0$ such that
+    \[ |f_n(x)| \leq M_n \]
+    for all $x \in X$.
+    If the series $\sum_{n=1}^{\infty} M_n$ converges, then the series $\sum_{n=1}^{\infty} f_n$ converges uniformly on $X$.
+\end{theorem}
+
+\begin{proof}
+    Let $\epsilon > 0$.
+    Since $M_n \in \R$ and $\sum_{n=1}^{\infty}$ converges, we have $|\sum_{k=n}^{m} M_k| < \epsilon$ for all $m,n \geq N$.
+    So
+    \[ \left| \sum_{k=n}^m{ f_k(x)} \right| \leq \sum_{k=n}^{m} M_k < \epsilon. \]
+    So the sequence of partial sums of $\sum_{n=1}^{\infty} f_n$ satisfies the Cauchy criterion for functions and, by completion, the series converges.
+\end{proof}
+
+When used in conjunction with our previous finding about continuity, we can prove some strange things about certain functions.
+We might show, for example, that the infamous Weierstrass function
+\[ f(x) = \sum_{n=1}^{\infty} b^n \cos (a^n \pi x) \]
+is continuous everywhere but differentiable nowhere if $a \in \Z$ is odd, $0 < b < 1$. and $ab > 1 + 3\pi / 2$.
+Stranger, this is not an edge-case function!
+It turns out that the set $D(X)$ of functions that are differentiable at at least one point is meager, while $\mathcal{C}(X)$ is not.
+In other words, $D(X)$ is vanishingly small compared to $\mathcal{C}(X)$, meaning it's actually the norm for a continuous function to be differentiable nowhere.
+
+\end{document}

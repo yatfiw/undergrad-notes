@@ -3,16 +3,16 @@
 %<3
 \begin{document}
 
-\chapter{Basic Topology}
+\chapter{Basic Topology} \label{ch:topology}
 \section{Cardinality}
 In this first part of the course we'll talk about sets, structure for sets, and the consequences of this structure.
 Let's start with the natural numbers $\N = \left\{ 1, 2, 3, \ldots \right\}$; the rules that precisely define the natural numbers are specified by the Peano axioms.
 
 \begin{definition}[Peano axioms]
     Let $\N$ be a set containing the element 1.
-    Define a successor function $S : \N \to \N$, with the requirements
+    Define a successor function $S : \N \to \N$, with the following:
     \begin{itemize}
-        \item $S(x) \neq 1$ for all $x \in \N$.
+        \item $S(x) \neq 1$ for all $x \in \N$
         \item If $S(x) = S(y)$, then $x = y$ for all $x,y \in \N$.
         \item Let $A$ be any subset of $\N$ which contains 1 and is closed under $S$, so $S(x) \in A$ for all $x \in A$.
     \end{itemize}
@@ -41,12 +41,12 @@ One common variant on this principle is called strong induction, in which the in
 We can leverage our definition of the natural numbers to rigorously define the size of a set.
 
 \begin{definition}[Cardinality]
-    Suppose $J_n = \left\{ 1, 2, \ldots, n \right\} \subseteq \N$.
+    Suppose $J_n = \left\{ 1, 2, \ldots, n \right\} \subset \N$.
     If $A$ is in one-to-one correspondence with $J_n$, then $A$ has cardinality (or size) $n$ and we write $|A| = n$.
     If $A = \emptyset$, we define $|A| = 0$.
 \end{definition}
 
-Most interesting sets, however, are far too large to have such a correspondence.
+Most interesting sets, however, have far too many elements to have such a correspondence.
 This is what we usually mean by ``infinity''.
 
 \begin{definition}[Finite and infinite]
@@ -166,8 +166,10 @@ A reasonable first step in giving them some structure is to assign an order to t
         \item (Trichotomy) If $x,y \in S$, then exactly one is true: $x < y$, $x = y$, or $y < x$.
         \item (Transitivity) If $x,y,z \in S$ and if $x < y$ and $y < z$, then $x < z$.
     \end{itemize}
-    Writing $x > y$ is equivalent to writing $y < x$.
-    Also, $x \leq y$ is equivalent to ``$x < y$ or $x = y$'', and $x \geq y$ is defined similarly.
+
+    \medskip
+    \textit{Note: Writing $x > y$ is equivalent to writing $y < x$.
+    Also, $x \leq y$ is equivalent to ``$x < y$ or $x = y$'', and $x \geq y$ is defined similarly.}
 \end{definition}
 
 We can also slap on a couple of reasonable operations so we can start doing some algebra.
@@ -184,7 +186,7 @@ We can also slap on a couple of reasonable operations so we can start doing some
     The operations also satisfy the distributive law, $x(y + z) = xy + xz$.
 \end{definition}
 
-We can put both of these ideas together in such a way that they complement each other very nicely.
+Both of these ideas fit together in such a way that they complement each other very nicely.
 
 \begin{definition}[Ordered field]
     Suppose $F$ is a field and has an order.
@@ -200,9 +202,9 @@ With this, we can talk about what it means for a set to be restricted in the con
 
 \begin{definition}[Upper and lower bound]
     Let $E \subseteq S$ be an ordered set.
-    If there is an element $\beta \in S$ such that for all $x \in E$ we have $x \geq \beta$, then $\beta$ is an upper bound for $E$.
+    If there is an element $\beta \in S$ such that for all $x \in E$ we have $x \leq \beta$, then $\beta$ is an upper bound for $E$.
     In this case we say $E$ is bounded above.
-    We can similarly we can define lower bound, in which case $E$ is bounded below.
+    We can similarly define lower bound, in which case $E$ is bounded below.
 \end{definition}
 
 \begin{definition}[Supremum and infimum]
@@ -222,7 +224,7 @@ The same goes for infima and minima.
 We'll focus on suprema from here on, but all of the statements we make for suprema have analogs for infima.
 The supremum has some intuitive properties, many of which we can state without proof.
 
-\begin{theorem}[Properties of suprema] \label{sup_props}
+\begin{theorem}[Properties of suprema] \label{thm:sup_props}
     \begin{enumerate}[label=(\alph*)]
         \item $\gamma$ is an upper bound for $A$ if and only if $\sup A \leq \gamma$.
         \item $a \leq \gamma$ for all $a \in A$ if and only if $\sup A \leq \gamma$.
@@ -239,7 +241,7 @@ The supremum has some intuitive properties, many of which we can state without p
 \begin{proof}
     Because $A \subseteq B$, all $a \in A$ satisfy $a \in B$.
     So by definition, $a \leq \sup B$.
-    From Theorem 1.\ref{sup_props}(b), we get $\sup A \leq \sup B$.
+    From Theorem \ref{ch:topology}.\ref{thm:sup_props}(b), we get $\sup A \leq \sup B$.
 \end{proof}
 
 Not every set that has an upper bound has a least upper bound.
@@ -262,7 +264,7 @@ There are a couple of other consequences which we'll find useful.
 
 \begin{theorem}[Archimedean property]
     If $x,y \in \R$ and $x > 0$, then there exists a positive integer $n$ such that $nx > y$.
-    (Equivalently, if $x > 0$, then there exists $n \in \N$ such that $\frac{1}{n} < x$.)
+    (Equivalently, if $x > 0$, then there exists $n \in \N$ such that $1 / n < x$.)
 \end{theorem}
 
 \begin{proof}
@@ -299,7 +301,7 @@ Let's keep adding structure to our sets by introducing distance.
 \begin{definition}[Metric space]
     A set $X$ is a metric space if there exists a metric $d : X \times X \to \R$ such that the following are satisfied for all $p,q,r \in X$.
     \begin{itemize}
-        \item (Nonnegativity) $d(p,q) \geq 0$, and $d = 0 \iff p = q$.
+        \item (Nonnegativity) $d(p,q) \geq 0$, with $d = 0 \iff p = q$.
         \item (Symmetry) $d(p,q) = d(q,p)$.
         \item (Triangle inequality) $d(p,q) \leq d(p,r) + d(r,q)$.
     \end{itemize}
@@ -459,13 +461,13 @@ Let's look a little more closely at closed sets by defining the closure of a set
 Another natural property of the closure is that, when a ``parent set'' is known to be closed, then any of its subsets remains in the parent set after being closed.
 
 \begin{theorem}[]
-    If $E \subset F$, where $F$ is closed, then $\overline{E} \subset F$.
+    If $E \subseteq F$, where $F$ is closed, then $\overline{E} \subseteq F$.
 \end{theorem}
 
 \begin{proof}
     If $F$ is closed then it contains all of its limit points.
     In particular, it must contain all limit points of a subset of itself.
-    So $F \subset E'$, meaning $\overline{E} \subset F$.
+    So $F \subseteq E'$, meaning $\overline{E} \subseteq F$.
 \end{proof}
 
 A nice corollary of this theorem is that the smallest closed superset of $E$ is its closure $\overline{E}$.
@@ -536,12 +538,10 @@ This allows for another perspective on the cardinality of $\R$---given what we k
 
 \begin{proof}
     Let $S = \left\{ S_1, S_2, \ldots \right\}$ be a countable set of nowhere-dense (in $\R$) sets, so each $\overline{S_n}$ contains no nonempty open intervals.
-
     For contradiction, suppose $\bigcup_{n=1}^\infty \overline{S_n} = \R$.
     By de Morgan's law, $\bigcap_{n=1}^\infty \overline{S_n}^c = \emptyset$.
     Now, each $\overline{S_n}^c$ is dense and open, and their countable intersection is empty---which contradicts the previous lemma.
-
-    Therefore, $\bigcup_{n=1}^\infty \overline{S_n} \neq \R$, and since $S_n \subset \overline{S_n}$, we also have $\bigcup_{n=1}^\infty S_n \neq \R$, as desired.
+    So $\bigcup_{n=1}^\infty \overline{S_n} \neq \R$, and since $S_n \subset \overline{S_n}$, we also have $\bigcup_{n=1}^\infty S_n \neq \R$, as desired.
 \end{proof}
 
 \section{Compact Sets}
@@ -582,10 +582,10 @@ We'll dedicate the remainder of this section to characterizing these sets, start
 
 \begin{proof}
     Let $K$ be a compact set and $B(x)$ a unit ball about a point $x$.
-    Then $\left\{ B(x) \right\}_{x \in K}$ is a cover of $K$, and there exists some finite subcover $\left\{ B(x_i) \right\}_{i=1}^N$.
-    Arbitrarily select one of these unit balls, say $B(x_1)$, and define $M = \max \left\{ d(x_1, x_i) \right\}_{i=1}^N$ to be the maximum distance to the center of another unit ball.
+    Then $\left\{ B(x) \right\}_{x \in K}$ is a cover of $K$, and there exists a finite subcover $\left\{ B(x_i) \right\}_{i=1}^N$.
+    Take one of these unit balls, say $B(x_1)$, and define $M = \max \left\{ d(x_1, x_i) \right\}_{i=1}^N$ to be the maximum distance to the center of another unit ball.
     Then the neighborhood $N_{M+2}(x_1)$ contains the subcover $\left\{ B(x_i) \right\}_{i=1}^N$ and thus contains $K$.
-    Therefore, $K$ is bounded.
+    So $K$ is bounded.
 \end{proof}
 
 \begin{theorem}[Compact sets are closed]
@@ -599,13 +599,12 @@ We'll dedicate the remainder of this section to characterizing these sets, start
     Notice that $\left\{ V_q \right\}$ is a cover of $K$, so there exists a finite subcover $\left\{ V_{q_1} , \ldots, V_{q_n}\right\}$.
     Also, the intersection of all $U_{q_i}$ is open because it's the intersection of finitely many open sets; in fact, $W$ is a ball of radius $\hat r = \min \left\{ r_1, \ldots, r_n \right\}$.
 
-    Notice that $W \cap V_{q_i} = \emptyset$ for all $i$ because $W \subset U_{q_i}$.
-    Thus $W$ is contained completely in $K^c$, $K^c$ is open, and $K$ is closed.
+    Now, $W \cap V_{q_i} = \emptyset$ for all $i$ since $W \subset U_{q_i}$.
+    Thus $K^c$ contains $W$, $K^c$ is open, and $K$ is closed.
 \end{proof}
 
 \subsection*{Sufficient Conditions for Compactness}
-These results provide necessary conditions for compactness: the set must be closed and bounded.
-The next two, however, provide sufficient conditions.
+Now we'll move on from necessary conditions for compactness to find sufficient conditions.
 
 \begin{theorem}[]
     A closed subset of a compact set is compact.
