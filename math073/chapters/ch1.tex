@@ -20,13 +20,12 @@ However, we define addition and scalar multiplication in the same way.
 
 \begin{definition}[Vector operations]
 	Let $\mbf{u}$ and $\mbf{v}$ be vectors in $\R^n$ and let $c$ be a scalar.
-	Then the sum of $\mbf{u}$ and $\mbf{v}$ is defined componentwise:
-	\[ \mbf{u} + \mbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}. \]
-	Similarly, scalar multiplication between $c$ and $\mbf{v}$ is defined componentwise:
-	\[ c \mbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}. \]
+	Then addition and subtraction are defined componentwise:
+	\[ \mbf{u} + \mbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}, \quad c \mbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}. \]
 \end{definition}
 
 Since we've defined these two operations in familiar ways, it might not be surprising that many of their properties are also familiar.
+Their proofs are straightforward applications of the definition, so we omit them.
 
 \begin{theorem}[Algebraic properties of vectors]
 	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in $\R^n$ and let $c$ and $d$ be scalars.
@@ -65,6 +64,7 @@ This time, we'll take a pair of two vectors and associate it with a scalar in th
 \end{definition}
 
 The dot product turns out to have some very natural properties, many of which are reminiscent of the multiplication of real numbers.
+We once again omit the proofs.
 
 \begin{theorem}[Algebraic properties of the dot product]
 	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in $\R^n$ and let $c$ be a scalar.
@@ -80,19 +80,18 @@ The dot product turns out to have some very natural properties, many of which ar
 The real importance of the dot product is that it us to define things like length in higher dimensions.
 
 \begin{definition}[Length]
-	The length (or norm) of a vector $\mbf{v}$ in $\R^n$ is the nonnegative scalar $\|\mbf{v}\|$ defined by
-	\[ \|\mbf{v}\| = \sqrt{\mbf{v} \cdot \mbf{v}} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}. \]
+	The length (or norm) of a vector $\mbf{v}$ in $\R^n$ is the nonnegative scalar $\|\mbf{v}\| = \sqrt{\mbf{v} \cdot \mbf{v}}$.
 \end{definition}
 
 Vectors that have a length of 1 are, in general, nice to work with.
 These vectors are especially nice when they describe the typical coordinate axes.
 
-\pagebreak
-
 \begin{definition}[Unit vector]
 	A vector of length 1 is called a unit vector.
-	The standard unit vectors in $\R^n$ are
-	\[ \mbf{e}_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \quad \mbf{e}_2 = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \quad \ldots, \quad \mbf{e}_n = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}. \]
+	The standard unit vectors in $\R^n$ are denoted by $\mbf{e}_1, \ldots, \mbf{e}_n$,
+	where $\mbf{e}_k$ has a one in its $k$th component and zeros elsewhere.
+
+	% \[ \mbf{e}_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \quad \mbf{e}_2 = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \quad \ldots, \quad \mbf{e}_n = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}. \]
 \end{definition}
 
 Given how natural the notion of length is, a couple of its basic properties might be expected.
@@ -107,16 +106,37 @@ Given how natural the notion of length is, a couple of its basic properties migh
 \end{theorem}
 
 Now, we have a pair of perhaps less expected but still very important inequalities.
+These proofs are not trivial, so we'll detail them.
 
 \begin{theorem}[Cauchy-Schwarz inequality]
 	For all vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
 	\[ |\mbf{u} \cdot \mbf{v}| \leq \|\mbf{u}\| \|\mbf{v}\|. \]
 \end{theorem}
 
+\begin{proof}
+	Consider the vector $\| \mbf{u} \| \mbf{v} - \| \mbf{v} \| \mbf{u}$.
+	We have
+	\[ 0 \leq (\| \mbf{u} \| \mbf{v} - \| \mbf{v} \| \mbf{u}) \cdot (\| \mbf{u} \| \mbf{v} - \| \mbf{v} \| \mbf{u}) = 2 \| \mbf{u} \|^2 \| \mbf{v} \|^2 - 2 \| \mbf{u} \| \| \mbf{v} \| (\mbf{u} \cdot \mbf{v}); \]
+	after applying transitivity, we might rearrange to get $\mbf{u} \cdot \mbf{v} \leq \| \mbf{u} \|  \| \mbf{v} \|$.
+	We could use a similar argument with the addition of scaled vectors to show that $-\mbf{u} \cdot \mbf{v} \leq \| \mbf{u} \|  \| \mbf{v} \|$, and thus $\| \mbf{u} \cdot \mbf{v} \| \leq \| \mbf{u} \|  \| \mbf{v} \|$, as desired.
+\end{proof}
+
 \begin{theorem}[Triangle inequality]
 	For all vectors $\mbf{u}$ and $\mbf{v}$ in $\R^n$,
 	\[ \|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|. \]
 \end{theorem}
+
+\begin{proof}
+	We'll start by expanding the left-hand side, using the nonnegativity property and Cauchy-Schwarz inequality along the way:
+	\begin{align*}
+		\| \mbf{u} + \mbf{v} \|^2 &= (\mbf{u} + \mbf{v}) \cdot (\mbf{u} + \mbf{v}) \\
+		&= \mbf{u} \cdot \mbf{u} + 2(\mbf{u} \cdot \mbf{v}) + \mbf{v} \cdot \mbf{v} \\
+		&\leq \| \mbf{u} \|^2 + 2|\mbf{u} \cdot \mbf{v}| + \| \mbf{v} \|^2 \\
+		&\leq \| \mbf{u} \|^2 + 2 \| \mbf{u} \|  \| \mbf{v} \| + \| \mbf{v} \|^2 \\
+		&= (\| \mbf{u} \| + \| \mbf{v} \|)^2,
+	\end{align*}
+	as desired.
+\end{proof}
 
 Moving along, not only does the dot product allow us to define the length of a vector, but it also allows us to define such other geometric concepts as the distance or angle between two vectors.
 
@@ -145,7 +165,12 @@ If we imagine that two orthogonal vectors are the two legs of a right triangle, 
 	if and only if $\mbf{u}$ and $\mbf{v}$ are orthogonal.
 \end{theorem}
 
-Finally, we can imagine what happens when one vector $\mbf{v}$ casts a ``shadow'' onto another vector $\mbf{v}$.
+\begin{proof}
+	We have $\|\mbf{u} + \mbf{v}\|^2 = \| \mbf{u} \|^2 + 2 (\mbf{u} \cdot \mbf{v}) + \| \mbf{v} \|^2$ with $\mbf{u} \cdot \mbf{v}$ by perpendicularity.
+\end{proof}
+
+With all this, we can define an object that encapsulates what happens when one vector $\mbf{v}$ casts a ``shadow'' onto another vector $\mbf{v}$.
+This definition will come in handy later.
 
 \begin{definition}[Projection onto a vector]
 	If $\mbf{u}$ and $\mbf{v}$ are vectors in $\R^2$ and $\mbf{u} \neq \mbf{0}$, then the projection of $\mbf{v}$ onto $\mbf{u}$ is the vector defined by

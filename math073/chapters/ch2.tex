@@ -7,7 +7,7 @@
 \section{Systems of Linear Equations}
 We now turn our attention to systems of simultaneous linear equations.
 (Vectors will make a return later.)
-We must first define what, exactly, a linear equation is, and what it means to solve one.
+First, we need to be quite a bit more precise about what a linear equation is, what a system of such equation entails, and what it means to solve one.
 
 \begin{definition}[Linear equation]
 	A linear equation in the $n$ variables $x_1, x_2, \ldots, x_n$ is an equation that can be written in the form
@@ -16,14 +16,10 @@ We must first define what, exactly, a linear equation is, and what it means to s
 	A solution of this equation is a vector $\begin{bmatrix} s_1 & s_2 & \cdots & s_n \end{bmatrix}$ whose components satisfy the equation when we substitute $x_i = s_i$ for all $i = 1, 2, \ldots, n$.
 \end{definition}
 
-Now that we've defined linear equations, we can define what a system of linear equations is.
-
 \begin{definition}[System of linear equations]
 	A system of linear equations (or a linear system) is a finite set of linear equations, each with the same variables.
 	A solution of a linear system is a vector that is simultaneously a solution of each equation in the system; the solution set of a linear system is the set of all solutions of the system.
 \end{definition}
-
-Finally, we establish some terminology regarding the solutions to a linear system.
 
 \begin{definition}[Consistent system]
 	A linear system is consistent if it has at least one solution.
@@ -32,41 +28,39 @@ Finally, we establish some terminology regarding the solutions to a linear syste
 
 \section{Solving Linear Systems}
 Our general technique for solving systems of linear equations will be to gradually simplify the system to the point where the solution is easy to find.
-We first give a condition for this simplification.
+We first give a condition that will guide this simplification.
 
 \begin{definition}[Equivalent systems]
 	Two linear systems are equivalent if they have the same solution set.
 \end{definition}
 
-Now, when we're working with a linear system, all that really matters are the coefficients and constants of the linear system.
+Now, when we're working with a linear system, all that really matters are its coefficients and constants.
 Extracting these numbers and arranging them in a grid makes solution a bit less cumbersome.
 It also allows us to analyze linear systems in a more sophisticated way, which we'll see later.
 
 \begin{definition}[Matrix of a linear system]
 	A linear system's coefficient matrix contains the coefficients of the variables.
-	A system's augmented matrix consists of its coefficient matrix, along with an extra column containing the system's constant terms.
+	A system's augmented matrix consists of its coefficient matrix and an extra column containing the system's constant terms.
 \end{definition}
 
 There's a couple of ways we can define the ``simplest'' form of a system's matrix, coefficient or augmented.
-The first of these is given below.
+The first of these, along with steps that we might take to get there based on our knowledge of linear systems, is given below.
 
 \begin{definition}[Row echelon form]
 	A matrix is in row echelon form (REF) if it satisfies the following properties.
-	\begin{enumerate}
+	\begin{itemize}
 		\item Any rows consisting entirely of zeros are at the bottom.
 		\item In each nonzero row, the first nonzero entry (called the leading entry) is in a column to the left of any leading entries below it.
-	\end{enumerate}
+	\end{itemize}
 \end{definition}
-
-Based on how each row of a system's matrix represents one of the equations in the system, we get a few rules governing how we can convert a matrix into a row echelon form.
 
 \begin{definition}[Elementary row operations]
 	The following elementary row operations (EROs) can be performed on a matrix.
-	\begin{enumerate}
+	\begin{itemize}
 		\item Interchange two rows.
 		\item Multiply a row by a nonzero constant.
 		\item Add a multiple of a row to another row.
-	\end{enumerate}
+	\end{itemize}
 	The process of applying elementary row operations to bring a matrix into REF is called row reduction.
 \end{definition}
 
@@ -76,8 +70,8 @@ These rules help us reason what it means for two matrices to represent equivalen
 	Two matrices are row equivalent if there is a series of EROs that converts one into the other.
 \end{definition}
 
-We don't need to find such a series every time we want to determine whether two matrices are row equivalent.
-Rather, we can use the following condition.
+We don't need to find such a series every time we want to determine whether two matrices are row equivalent, though.
+Rather, we can exploit the reversibility of each ERO to intuit the following condition.
 
 \begin{theorem}[Condition for row equivalence]
 	Matrices $A$ and $B$ are row equivalent if and only if they can be reduced to the same row echelon form.
@@ -96,14 +90,13 @@ The algorithm is described below.
 \end{definition}
 
 In many cases, a linear system will have infinitely many solutions.
-When this happens, the system's solution set is defined in terms of a certain number of parameters.
+When this happens, the system's solution set is defined in terms of a certain number of arbitrary parameters.
+The following association between leading entries and nonzero rows leads us naturally to a simple relationship between nonzero rows and free variables.
 
 \begin{definition}[Leading and free variables]
 	The leading variables of a linear system correspond to the leading entries of its augmented matrix.
 	The other variables are the free variables.
 \end{definition}
-
-\pagebreak
 
 \begin{theorem}[Number of free variables from REF]
 	Let $A$ be the coefficient matrix of a linear system with $n$ variables.
@@ -116,11 +109,11 @@ A certain class of row echelon forms is particularly useful in our study of syst
 
 \begin{definition}[Reduced row echelon form]
 	A matrix is in reduced row echelon form (RREF) if it satisfies the following properties.
-	\begin{enumerate}
+	\begin{itemize}
 		\item It is in row echelon form.
 		\item The leading entry in each nonzero row is a 1.
 		\item Each column containing a leading 1 has zeros everywhere else.
-	\end{enumerate}
+	\end{itemize}
 \end{definition}
 
 One advantage that comes with working with a reduced row echelon form is that it is unique.
@@ -131,19 +124,19 @@ Not only that, but reducing a matrix to its RREF gives us an immediate solution 
 \end{definition}
 
 Given either of these simplified forms for a matrix, if the corresponding system takes a certain form, it is easy to tell whether or not a system will have infinitely many solutions.
+The following is an immediate consequence of the relationship between leading and free variables.
 
 \begin{definition}[Homogeneous system of linear equations]
 	A system of linear equations is homogeneous if the constant term in each equation is zero.
 \end{definition}
 
 \begin{theorem}[Solutions of a homogeneous system]
-	A homogeneous linear system of $m$ linear equations in $n$ variables has infinitely many solutions if $m < n$.
+	A homogeneous linear system of $m$ equations in $n$ variables has infinitely many solutions if $m < n$.
 \end{theorem}
 
 \section{Spanning Sets and Linear Independence}
 The study of vectors frequently intersects with that of matrices.
-This section lists out some of the introductory definitions and results of this intersection, developing important theory about both objects.
-We begin with a condition for the consistency of a linear system.
+We'll begin our overview of the introductory definitions and results of this intersection with a condition for the consistency of a linear system, a trivial consequence of how we might translate systems of equations into vector equations.
 
 \begin{theorem}[Condtion for consistency]
 	A linear system with augmented matrix $\begin{bmatrix} A \;|\; \mbf{b} \end{bmatrix}$ is consistent if and only if $\mbf{b}$ is a linear combination of the columns of $A$.
@@ -157,11 +150,10 @@ The first of these gives a name to the vectors that a set of vectors can ``reach
 	If $\pfn{span}(S) = \R^n$, then the $S$ is called a spanning set for $\R^n$.
 \end{definition}
 
-Building off of this, the next definition and the following theorem together define what it means for a vector to be entirely ``separate'' from another set of vectors.
+Building off of this, the next definition and the following theorem together characterize what it means for a vector to be entirely ``separate'' from another set of vectors.
 
 \begin{definition}[Linear dependence]
-	A set of vectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ is linearly dependent if there are scalars $c_1, c_2, \ldots, c_k$, at least one of which is not zero, such that
-	\[ c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k = \mbf{0}. \]
+	A set of vectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ is linearly dependent if there are scalars $c_1, c_2, \ldots, c_k$, at least one of which is not zero, such that $c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k = \mbf{0}$.
 	A set of vectors that is not linearly dependent is called linearly independent.
 \end{definition}
 
@@ -169,7 +161,7 @@ Building off of this, the next definition and the following theorem together def
 	Vectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$ in $\R^n$ are linearly dependent if and only if at least one of the vectors can be expressed as a linear combination of the others.
 \end{theorem}
 
-With this, we can now draw a couple of new connections between linear systems, matrices, and sets of vectors.
+This immediately brings us to a couple of new connections between linear systems, matrices, and sets of vectors.
 The first theorem works with a matrix's column vectors, while the second works with row vectors.
 
 \begin{theorem}[Condition for linearly independent columns]
@@ -177,15 +169,35 @@ The first theorem works with a matrix's column vectors, while the second works w
 	Then $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$ are linearly dependent if and only if the homogeneous linear system with augmented matrix $\begin{bmatrix} A \;|\; \mbf{0} \end{bmatrix}$ has a nontrivial solution.
 \end{theorem}
 
+\begin{proof}
+	The $\mbf{v}_i$ are linearly dependent if and only if there are scalars $c_i$, not all zero, such that $c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_m \mbf{v}_m = \mbf{0}$.
+	This is equivalent to saying that the vector whose components are the $c_i$ is a solution of the system whose augmented matrix has columns $\mbf{v}_i$ and $\mbf{0}$.
+\end{proof}
+
 \begin{theorem}[Condition for linearly independent rows]
 	Let $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$ be vectors in $\R^n$ and let $A$ be the $m \times n$ matrix with these vectors as its rows.
 	Then $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$ are linearly dependent if and only if the row echelon form of $A$ has less than $m$ nonzero rows.
 \end{theorem}
+
+\begin{proof}
+	($\Rightarrow$) Suppose the $\mbf{v}_i$ are linearly dependent and, without loss of generality, that $\mbf{v}_m$ can be written as a linear combination of the other $m-1$ vectors with coefficients $c_i$.
+	Then the elementary row operations $R_m - c_1 R_1, \ldots, R_m - c_{m-1} R_{m-1}$ applied to $A$ will create a zero row in row $m$.
+	Thus $A$ has less than $m$ nonzero rows.
+
+	($\Leftarrow$) If $A$ has less than $m$ nonzero rows, then there exists a sequence of row operations that creates a zero row.
+	Thus $\mbf{0}$ is a nontrivial linear combination of the $\mbf{v}_i$, and the vectors are linearly dependent.
+\end{proof}
 
 Finally, we have a powerful sufficient (but not necessary!) condition for linear dependence.
 
 \begin{theorem}[Condition for linear dependence]
 	Any set of $m$ vectors in $\R^n$ is linearly dependent if $m > n$.
 \end{theorem}
+
+\begin{proof}
+	Let $\mbf{v}_1, \ldots, \mbf{v}_m \in \R^n$ be column vectors and let $A$ be the matrix with these vectors as its columns.
+	If $A$ is a coefficient matrix, then the corresponding homogeneous linear system has more equations than unknowns and thus has infinitely many solutions.
+	So the $\mbf{v}_i$ are linearly dependent, as desired.
+\end{proof}
 
 \end{document}
