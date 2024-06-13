@@ -12,6 +12,7 @@
 \usepackage{upgreek}
 \usepackage{chemformula}
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
+\usepackage[hang,flushmargin]{footmisc}		% remove footnote indentation
 
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
 \setlength{\parindent}{0pt}                	% no paragraph indentation
@@ -22,10 +23,17 @@
 \setlength{\cftaftertoctitleskip}{1em}
 \renewcommand{\contentsname}{\hangindent=\wd0 \strut \courseid: \coursetitle \\ \medskip \LARGE{Connor Neely, \semester}}
 
+\let\footnoterule\relax
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 \usepackage{titlesec}
 \titleformat{\chapter}{\Huge\normalfont\bfseries}{\thechapter}{1em}{}
 \titlespacing*{\chapter}{0em}{0em}{2em}
-% \titlespacing*{\chapter}{0pt}{-50pt}{40pt}
 % endregion
 
 % region COMMANDS
