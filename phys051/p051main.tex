@@ -1,0 +1,21 @@
+\documentclass[10pt,a4paper,oneside]{book}
+
+% course info (for title)
+\newcommand{\courseid}{PHYS 51}
+\newcommand{\coursetitle}{Electromagnetism and Optics}
+\newcommand{\semester}{Fall 2023}
+\newcommand{\credit}{Adapted from 
+    FA23 lectures.}
+
+\input{../Templates/jointPreamble.tex}
+\graphicspath{{figures/}}
+
+\usepackage{subfiles}
+
+\begin{document}
+\tableofcontents
+\blfootnote{* \credit}
+
+\subfile{chapters/ch1} % electrostatics
+
+\end{document}
