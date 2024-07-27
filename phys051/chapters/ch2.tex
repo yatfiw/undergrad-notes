@@ -148,7 +148,98 @@ This current-carrying ring will actually become our model for a magnetic dipole.
 Just as we had the electric dipole moment $qd$, we have the magnetic dipole moment $iA$ where $A$ is the area enclosed by the ring.
 We can see that the magnetic field due to such a dipole obeys $B \propto iA / r^3$ for $r \gg R$, just like we saw with electric dipoles (in which case it was $E \propto qd / r^3$).
 
-% \section{Ampere's Law}
-% thing here
+\section{Ampere's Law}
+Just like with electric fields, this direct integration can get a little unwieldy.
+There's a cleaner way to determine magnetic fields in high-symmetry scenarios, but it'll be a bit different from Gauss's law.
+The main thing is that we have never detected any magnetic monopoles.
+This isn't a fundamental law of the universe or anything, it's just that every magnet we've encountered has had both a north pole and a south pole.
+Thus
+\[ \oiint_S \mbf{B} \cdot d\mbf{A} = 0, \qquad \nabla \cdot \mbf{B} = 0. \]
+Not very helpful for our purposes.
+But note that static magnetic fields are known for their twisty behavior about moving charges rather than the electric field's outward spray around point charges.
+So we can instead write down Ampere's law,
+\[ \oint_C \mbf{B} \cdot d\mbf{l} = \mu_0 i_\textrm{enc}, \]
+where $i_\textrm{enc}$ is the net current puncturing an area enclosed by $C$.
+Once again, this statement holds for all scenarios involving magnetic fields, but it's only useful in a select few with the proper symmetries.
+
+\begin{example}[Magnetic field due to a solenoid]
+    Consider an infinite coil (or solenoid) of wire with radius $R$, current $i$, and $n$ loops per unit length.
+    We'll determine the magnetic field at some distance $r$ from the central axis of the solenoid.
+
+    Let $\hat z$ represent the direction in which the magnetic field points, in accordance with the Biot-Savart law.
+    The solenoid exhibits symmetry with respect to the cylindrical coordinates $\phi$ and $z$, so the magnetic field is only a function of $r$.
+    Thus $\mbf{B} = B(r) \,\hat z$.
+
+    Choose, as our Amperian loop, a length-$r$ rectangle whose height $h$ coincides with the solenoid's central axis.
+    The loop is oriented such that it is parallel to $\hat z$ on the inside of the solenoid and antiparallel to $\hat z$ on the outside.
+
+    There are two regions to consider.
+    For $r < R$, we have $i_\textrm{enc} = 0$.
+    Also, since the lengths of the Amperian loop are orthogonal to the magnetic field, only the heights are relevant:
+    \begin{align*}
+        \oint_C \mbf{B} \cdot d\mbf{l} &= \int_\textrm{up} B(0) \,\hat z \cdot dl \,\hat z + \int_\textrm{down} B(r) \,\hat z \cdot dl (-\hat z) \\
+        \intertext{Now, it can be shown by a direct integration of $\mbf{B}_\textrm{ring}$ that the magnetic field at the center of an infinite solenoid is $\mbf{B}(0) = \mu_0 ni$. Thus by Ampere's law}
+        0 &= \mu_0 ni h - B(r) h \;\implies\; \mbf{B}_\textrm{in}(r) = \mu_0 ni \,\hat z.
+    \end{align*}
+    So the magnetic field inside of a solenoid is constant.
+    For $r > R$ the setup is the same, only now we have $i_\textrm{enc} = nhi$.
+    ($i_\textrm{enc}$ is positive here due to how we've oriented our Amperian loop.)
+    Thus by Ampere's law,
+    \[ \mu_0 nih - B(r)h = \mu_0 nhi \;\implies\; \mbf{B}_\textrm{out}(r) = \mbf{0}. \]
+\end{example}
+
+\section{Frames of Reference}
+At this point we have developed a complete theory of statics.
+Everything we've done so far can be derived from Maxwell's time-independent equations in their integral and differential forms:
+\begin{align*}
+    \oiint \mbf{E} \cdot d\mbf{A} &= \frac{q}{\epsilon_0} & \nabla \cdot \mbf{E} &= \frac{\rho}{\epsilon_0} \\
+    \oint \mbf{E} \cdot d\mbf{l} &= 0 & \nabla \times \mbf{E} &= \mbf{0} \\
+    \oiint \mbf{B} \cdot d\mbf{A} &= 0 & \nabla \cdot \mbf{B} &= 0 \\
+    \oint \mbf{B} \cdot d\mbf{l} &= \mu_0 & \nabla \times \mbf{B} &= \mu_0 \,\mbf{j}
+\end{align*}
+There is more to the theory of electromagnetism---we'll soon examine what happens when $\mbf{E}$ and $\mbf{B}$ are allowed to vary with time---but first we'll take a closer look at how these two fields are related, and why we so often see them lumped together as a unified electromagnetic field.
+
+Consider the scenario illustrated below, on the left.
+In a neutral wire with cross-sectional area $A$ electrons are free to move with drift velocity $\mbf{v}$, generating a current density $\mbf{j}$ in the opposite direction.
+We could use Ampere's law to show that the magnetic field due to this wire is $B = \mu_0 jA / 2\pi r$, with direction determined by the right-hand rule.
+
+Outside of the wire there is an electron that also has velocity $\mbf{v}$.
+The force on this electron is purely magnetic in nature; specifically, taking the standard $x$-$y$ coordinate system,
+\[ \mbf{F}_B = -q_e \mbf{v} \times \mbf{B} = q_e v \left( \frac{\mu_0 jA}{2\pi r} \right) (-\hat{\mbf{y}}) = \frac{q_e v^2 \mu_0 \rho_- A}{2\pi r} (-\hat{\mbf{y}}), \]
+where we've defined the density of negative charge $\rho_-$, a positive quantity, for later convenience.
+Let us call this scenario the $S$ frame.
+
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{wireFrames.png}
+\end{center}
+
+Now suppose we, the observer, started walking with velocity $\mbf{v}$.
+We now observe the electrons to be (in net) at rest, and it is the positive charges that are actually moving.
+Reason dictates that the isolated electron should still experience the same downward force, but this force cannot be magnetic since it's no longer in motion.
+We must therefore uncover some sort of hidden electric force in this new $S'$ frame.
+
+Special relativity, specifically length contraction, provides an answer!
+When compared to the $S$ frame, in the $S'$ frame the positive charges are contracted while the electrons are uncontracted.
+So while in the unprimed frame we had $\rho_\textrm{net} = \rho_+ - \rho_- = 0$, in the primed frame we see
+\[ \rho_\textrm{net}' = \rho_+' - \rho_-' = \gamma \rho_+ - \gamma^{-1} \rho_- = \gamma \frac{v^2}{c^2} \rho_-, \]
+where $\gamma$ is the Lorentz factor $\left( 1 - v^2 / c^2 \right)^{-1 / 2}$.
+So the lone electron will at least experience an attractive force, which is promising.
+To find its magnitude we appeal to Gauss's law: a Gaussian cylinder with radius $r'$ and length $l'$ encloses a charge $\rho' A' l' / \epsilon_0$ which generates a flux $E'(2\pi rl')$, meaning
+\[ E' = \frac{\rho' A'}{2\pi \epsilon_0 r'} = \gamma \frac{v^2 \rho_- A}{2\pi \epsilon_0 c^2 r} \;\implies\; \mbf{F}_E' = \gamma \frac{q_e v^2 \rho_- A}{2\pi \epsilon_0 c^2 r} (-\hat{\mbf{y}}). \]
+Now we can compare the two forces.
+We could use time dilation to argue that $\mbf{F}_E = \gamma^{-1} \mbf{F}_E'$, so we have
+\[ \mbf{F}_B = \mu_0 \frac{q_e v^2 \rho_- A}{2\pi r} (-\hat{\mbf{y}}), \qquad \mbf{F}_E = \frac{1}{\epsilon_0 c^2} \frac{q_e v^2 \rho_- A}{2\pi r} (-\hat{\mbf{y}}). \]
+We can see that these expressions are equivalent if $\epsilon_0 \mu_0 = 1 / c^2$ and, remarkably, experimental evidence suggests that this is actually the case!
+Thus a force that appeared as purely magnetic in the $S$ frame is actually purely electric in the $S'$ frame.
+
+So it doesn't really make sense to speak about electric and magnetic fields as two separate entities.
+They are, in fact, two facets of a more fundamental electromagnetic field, related to each other via a Lorentz transformation:
+\begin{align*}
+    \mbf{E}_{||}' &= \mbf{E}_{||} \\
+    \mbf{E}_\perp' &= \gamma \left( \mbf{E}_\perp + \mbf{v} \times \mbf{B} \right) \\
+    \mbf{B}_{||}' &= \mbf{B}_{||} \\
+    \mbf{B}_\perp' &= \gamma \left( \mbf{B}_\perp - \frac{1}{c^2} \mbf{v} \times \mbf{E} \right)
+\end{align*}
+Visually, at relativistic frame velocities the electric and magnetic fields get compressed along the direction of motion, similar to how lengths are contracted at these speeds.
 
 \end{document}
