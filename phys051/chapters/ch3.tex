@@ -1,0 +1,131 @@
+\documentclass[../p051main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Electrodynamics}
+\section{Faraday's Law}
+Now it's time to bring time-dependence into the picture by allowing electric and magnetic fields to change over time.
+Before we begin, though, we should take a closer look at the actual phenomenon responsible for current in wires.
+
+There are two things that contribute to driving current around a loop of wire: a source $\mbf{f}$ that does the pushing and an electrostatic field that smooths the current flow throughout the wire.
+The source can take a variety of forms---we often think of it as a chemical force confined to the inside of a battery---but whatever it is, its net effect is characterized by the electromotive force (or emf),
+\[ \mathcal{E} = \oint \mbf{f} \cdot d\mbf{l}. \]
+Note that, confusingly, $\mathcal{E}$ is not a force but rather the integral of a force per unit charge.
+This means emf has units of potential, and we can often interpret it as such, like in the case of an ideal battery.
+The following example illustrates a case in which this is not so.
+
+\begin{example}[Motional emf]
+    Consider a height-$h$ rectangular loop of wire whose left half is enveloped by a uniform magnetic field $\mbf{B}$ pointing into the page.
+    Suppose we pull the loop toward the right with velocity $\mbf{v}$; an upward magnetic force acts on the charges in the ``vertical wire segment'', generating a clockwise current.
+
+    The magnetic force has done no work here (the extra energy comes from our pull), it still creates an emf
+    \[ \mathcal{E} = \oint_\textrm{wire} \hspace{-5pt} (\mbf{v} \times \mbf{B}) \cdot d\mbf{l} = vBh. \]
+\end{example}
+
+This simple example is indicative of a more general rule.
+Whenever the magnetic flux $\Phi$ through a loop of wire changes, we have
+\[ \mathcal{E} = -\frac{d\Phi}{dt} = -\frac{d}{dt} \iint \mbf{B} \cdot d\mbf{A}. \]
+It turns out that this is our new, time-dependent version of Faraday's law.
+We'll come back to this in a moment.
+Now, although the above equation leaves no ambiguity regarding the direction of the induced emf (it is determined by the right-hand rule), the signs can get confusing.
+To get the directions right, we introduce Lenz's law: the induced current will flow in such a way that opposes the change in magnetic flux.
+If, for example, a magnetic field into the page is increasing in magnitude, then current will flow counterclockwise to create a magnetic field out of the page.
+
+The above form of Faraday's law makes sense if the emf is induced by the wire's motion through space, but experiment shows that it also holds for stationary wires in changing magnetic fields.
+In this case the emf cannot be magnetic in nature, so it must be electric.
+Specifically, a changing magnetic field $\mbf{B}$ induces an electric field $\mbf{E}$ that satisfies
+\[ \oint_{\partial S} \mbf{E} \cdot d\mbf{l} = -\frac{d}{dt} \iint_S \mbf{B} \cdot d\mbf{A}. \]
+This is the modified version of Faraday's law that we'll include in Maxwell's equations.
+We could use Stokes's theorem to get the differential form,
+\[ \nabla \times \mbf{E} = -\frac{\partial \mbf{B}}{\partial t}. \]
+
+\section{Inductors}
+One surprising consequence of Faraday's law is that it allows a circuit to induce an emf in itself.
+Consider an open, clockwise-oriented circuit that is isolated from any external magnetic fields; when the circuit is closed, current flows around the wire and generates a magnetic flux into the page.
+But this generation isn't instantaneous, meaning there is a period where $d\Phi / dt$ is nonzero and, consequentially, where there is an emf opposing the change in current.
+
+This phenomenon is called self-inductance, and the opposing emf is called back-emf.
+The magnitude of the back-emf is determined by the inductance $L$ of the circuit, defined by
+\[ \mathcal{E} = -L \frac{di}{dt}. \]
+Inductance is measured in henries (H) and depends on the relevant circuit's material and geometric properties.
+
+\begin{example}[Inductance of a solenoid]
+    Consider a radius-$r$ solenoid with $n$ turns per unit length, spanning a length $l$.
+    A current $i$ flows through the solenoid.
+    The resulting magnetic flux is given by
+    \[ \Phi = \iint_\textrm{sol} \mbf{B} \cdot d\mbf{A} = nl \iint_\textrm{loop} \hspace{-5pt} \mbf{B} \cdot d\mbf{A} = nl \cdot \mu_0 ni \cdot \pi r^2. \]
+    By Faraday's law, the induced emf produced by a changing current has magnitude
+    \[ |\mathcal{E}| = \left| \frac{d}{dt} \left( nl \cdot \mu_0 ni \cdot \pi r^2 \right) \right| = \mu_0 n^2 (\pi r_s^2 l) \cdot \left| \frac{di}{dt} \right|. \]
+    Thus the inductance of the solenoid is
+    \[ L_\textrm{sol} = \mu_0 n^2 \left( \pi r_s^2 l \right), \]
+    where $A$ is the area of each loop.
+\end{example}
+
+Solenoid-like objects often make appearances in electrical circuits as inductors---they serve to increase the effective area enclosed by the circuit, generating a stronger back-emf in responses to changes in current.
+Since the area created by an inductor is usually much greater than the other area enclosed by the circuit, for our purposes we can model the entire circuit's inductance with a single inductor.
+
+Like every other circuit element, inductors have potential differences across their terminals.
+It is simply given by $\mathcal{E}$---when the current is increasing there is a potential drop, and when current is decreasing there is a rise.
+Like we have in the past, we can use this with conservation of energy to construct a differential equation that describes the current dynamics in a circuit.
+
+Inductors store energy in the magnetic field in a fashion analogous to how capacitors store energy in the electric field.
+The flow of energy into an inductor is given by
+\[ P = i\mathcal{E}_\textrm{ind} = iL \frac{di}{dt}, \]
+so the overall work done in charging the conductor is
+\[ W = \int P \,dt = \frac{1}{2} Li^2. \]
+This is equivalent to the amount of "magnetic" potential energy $U_B$ stored in the inductor.
+We can also define an energy density by determining the energy per unit volume stored in a solenoid:
+\[ u_B = \frac{\frac{1}{2} L_\textrm{sol} i^2}{\pi r_\textrm{sol}^2 l_\textrm{sol}} = \frac{1}{2\mu_0}B^2. \]
+This gives us another way to determine the inductance of an object---given a magnetic field and a current, we can integrate an energy density over the object's volume to find its stored energy and solve for its inductance.
+
+\section{Maxwell's Equations}
+We've found that changing magnetic fields generate electric fields.
+But in order to preserve the relativistic symmetry between the two fields, we should also expect that changing electric fields generate magnetic fields.
+We'll use a thought experiment to resolve this discrepancy!
+
+Suppose a current $i$ charges a standard parallel-plate capacitor.
+We'll draw an Amperian circle around the current, accompanied by two different surfaces $S_1$ and $S_2$ with that circle as their mutual boundary.
+\begin{itemize}
+    \item $S_1$ is simply the filled-in disk corresponding to the Amperian circle.
+    It encloses a current $i$, so by Ampere's law we have $B = \mu_0 i / 2\pi r$, where $r$ is the radius of the Amperian circle.
+
+    \item $S_2$ is an open cylinder whose cap is between the plates of the capacitor.
+    Since this surface encloses no current, our version of Ampere's law gives $B = 0$.
+\end{itemize}
+These two cases are clearly at odds with each other---Ampere's law should give the same result no matter what surface we use.
+We might propose that the capacitor's time-varying electric flux can solve the problem.
+This would give an equation of the form
+\[ \oint_{\partial S} \mbf{B} \cdot d\mbf{l} = \mu_0 i_\textrm{enc} \,+\; ? \frac{d}{dt} \iint_S \mbf{E} \cdot d\mbf{A}, \]
+where $?$ represents a constant that we'll now solve for.
+Noting that the electric field between the capacitor plates is $E = q / (A \epsilon_0)$, where $A$ is the area of each plate, using $S_2$ as our surface we get from the above
+\begin{align*}
+    B(r) \cdot 2 \pi r &= \;?\, \frac{d}{dt} \iint_\textrm{cap} \mathbf{E} \cdot d\mathbf{A} = \;?\, \frac{d}{dt} \frac{q}{A \varepsilon_0} A = \frac{?}{\varepsilon_0} \frac{dq}{dt}. \\
+    B(r) &= \frac{?\, i}{\varepsilon_0 \cdot 2 \pi r}
+\end{align*}
+So $B(r) = (? i) / (2\pi r \epsilon_0)$, and in order to be consistent with our result for $S_1$ we must have $? = \mu_0 \epsilon_0$.
+We've resolved the discrepancy!
+From here we could again use Stokes's theorem to derive the differential form.
+Note that Ampere's law can be written as
+\[ \oint_{\partial S} \mbf{B} \cdot d\mbf{l} = \mu_0 \left( i_\textrm{enc} \,+\; \epsilon_0 \frac{d}{dt} \iint_S \mbf{E} \cdot d\mbf{A} \right), \]
+so the latter term in the parentheses has units of current.
+Confusingly, this term is called the displacement current despite having nothing to do with actual current at all.
+Another example of vestigial jargon.
+
+Anyway, we've finally arrived at the complete set of Maxwell's equations, the fundamental principles of classical electromagnetism.
+\begin{align*}
+    \oiint_S \mathbf{E} \cdot d\mathbf{A} &= \frac{q_\text{enc}}{\varepsilon_0} & \nabla \cdot \mbf{E} &= \frac{\rho}{\epsilon_0} \\
+    \oint_{\partial S} \mathbf{E} \cdot d\mathbf{l} &= -\frac{d}{dt} \iint_S \mathbf{B} \cdot d\mathbf{A} & \nabla \times \mbf{E} &= -\frac{\partial \mbf{B}}{\partial t} \\
+    \oiint_S \mathbf{B} \cdot d\mathbf{A} &= 0 & \nabla \cdot \mbf{B} &= \mbf{0} \\
+    \oint_{\partial S} \mathbf{B} \cdot d\mathbf{l} &= \mu_0 i_\text{enc} + \mu_0 \varepsilon_0 \frac{d}{dt}\iint_S \mathbf{E} \cdot d\mathbf{A} & \nabla \times \mbf{B} &= \mu_0 \mbf{j} + \mu_0 \epsilon_0 \frac{\partial \mbf{E}}{\partial t}
+\end{align*}
+Everything we know about electricity and magnetism is embedded in these laws.
+For example, we can take the divergence of Ampere's law to get charge conservation:
+\begin{align*}
+    \nabla \cdot \nabla \times \mathbf{B} &= \nabla \cdot \left( \mu_0 \mathbf{j} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right) \\
+    0 &= \nabla \cdot \mu_0 \mathbf{j} +  \nabla \cdot \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \\
+    0 &= \nabla \cdot \mathbf{j} + \frac{\partial \rho}{\partial t}
+\end{align*}
+In words, the current density flowing into or out of a point is equal and opposite the change in charge density.
+
+\end{document}
