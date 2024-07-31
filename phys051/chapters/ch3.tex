@@ -128,4 +128,106 @@ For example, we can take the divergence of Ampere's law to get charge conservati
 \end{align*}
 In words, the current density flowing into or out of a point is equal and opposite the change in charge density.
 
+\section{Electromagnetic Waves}
+Let's see what happens when we take the curl of Faraday's law.
+Applying a vector calculus identity gives
+\begin{align*}
+    \nabla \times \nabla \times \mbf{E} &= -\frac{\partial}{\partial t} (\nabla \times \mbf{B}) \\
+    \nabla (\nabla \cdot \mbf{E}) - \nabla^2 \mbf{E} &= -\frac{\partial}{\partial t} \left( \mu_0 \epsilon_0 \frac{\partial \mbf{E}}{\partial t} \right) \\
+    \nabla^2 \mbf{E} &= \frac{1}{c^2} \frac{\partial^2 \mbf{E}}{\partial t^2}
+\end{align*}
+We recognize this as the wave equation in $\mbf{E}$!
+(A similar line of reasoning for magnetic fields gives the wave equation in $\mbf{B}$.)
+Recall that solutions to this equation take the form $\mbf{E}(x,y,z,t) = \mbf{E}_0 f(x \pm ct)$, which corresponds to a wave propagating in the $\mp x$-direction with speed $c$.
+This is what we call light!
+
+These electromagnetic waves come with some nice properties.
+If we have an electric field $\mbf{E} = \mbf{E}_0 f(x - ct)$, then
+\[ \nabla \cdot \mbf{E} = E_{0x} \frac{\partial}{\partial x} f(x - ct) = E_{0x} f'(x - ct). \]
+By Gauss's law this must evaluate to zero.
+It doesn't really make sense for a wave in motion to have $f'(x - ct) = 0$, so we must have $E_{0x}$.
+Thus $\mbf{E}$ cannot have a component along the direction of wave propagation!
+A similar analysis would show that $\mbf{B}$ cannot have such a component, either.
+
+Let's take a closer look at the relationship between the two fields.
+If we take $\mbf{E}$ to point in the $\hat y$ direction, then we'd get a curl
+\[ \nabla \times \mbf{E} = \hat z \,\frac{\partial}{\partial z} E_0 f(x - ct); \]
+by Faraday's law this is equivalent to $-\partial \mbf{B} / \partial t$, meaning the electric and magnetic fields are orthogonal to one another!
+Specifically, if we have $\mbf{B} = B_0 \hat z \,f(x - ct)$, then taking a time derivative yields
+\[ \frac{\partial \mbf{B}}{\partial t} = -\hat z \,cB_0 f'(x - ct), \]
+just as we got above.
+Since $\hat y \times \hat z = \hat x$, this means $\mbf{E} \times \mbf{B}$ points in the electromagnetic wave's direction of propagation.
+We also get a relationship between the amplitudes of the fields,
+\[ B_0 = \frac{E_0}{c}. \]
+If we wanted, we could verify that all this theory has remained consistent with Maxwell's equations.
+To verify Faraday's integral law we might take a tall, thin loop in the plane of $\mbf{E}$ and qualitatively argue that the sign of the line integral about the loop is opposite that of the corresponding change in magnetic flux.
+For Ampere's law we'd do something similar with a loop in the plane of $\mbf{B}$.
+
+\section{The Poynting Vector}
+Aided by a general understanding of electromagnetic waves, we're ready to take a more detailed look at how energy fits into the broad picture of electrodynamics.
+We'll begin with the simple observation that the total energy stored by the electromagnetic field is given by
+\[ U_T = \iiint(u_E + u_B) \,d(\textrm{vol.}) = U_E + U_B = \frac{1}{2} \left( \epsilon_0 E^2 + \frac{1}{\mu_0} B^2 \right). \]
+In the special case of an electromagnetic wave we have $B^2 = \mu_0 \epsilon_0 E^2$, which gives $U_T = \epsilon_0 E^2$.
+So in such a wave, the field energy is equally electric and magnetic!
+
+Now we'll look at the dynamics of this total field energy.
+We'll first dot the electric field onto both sides of Ampere's law and apply a couple of vector identities:
+\begin{align*}
+    \mathbf{E} \cdot (\nabla \times \mathbf{B}) &= \mu_0 \varepsilon_0 \,\mathbf{E} \cdot \frac{\partial \mathbf{E}}{\partial t}, \\
+    \mathbf{B} \cdot (\nabla \times \mathbf{E}) - \nabla \cdot (\mathbf{E} \times \mathbf{B}) &= \frac{\mu_0 \varepsilon_0}{2} \frac{\partial}{\partial t} E^2. \\
+    \intertext{By Faraday's law,}
+    -\nabla \cdot (\mathbf{E} \times \mathbf{B}) &= \frac{1}{2} \mu_0 \varepsilon_0 \frac{\partial}{\partial t} E^2 + \mathbf{B} \cdot \left( \frac{\partial}{\partial t} \mathbf{B} \right), \\
+    -\nabla \cdot \left( \frac{\mathbf{E} \times \mathbf{B}}{\mu_0} \right) &= \frac{1}{2} \varepsilon_0 \frac{\partial}{\partial t} E^2 + \frac{1}{2\mu_0} \frac{\partial}{\partial t} B^2. \\
+    \intertext{We might recognize this as}
+    -\nabla \cdot \left( \frac{\mathbf{E} \times \mathbf{B}}{\mu_0} \right) &= \frac{\partial}{\partial t} u_T, \\
+    \intertext{which we can integrate to get}
+    \oiint_{\partial V} \left( \frac{\mathbf{E} \times \mathbf{B}}{\mu_0} \right) \cdot (-d\mathbf{A}) &= \frac{d}{dt} \iiint_V u_T \;d(\textrm{vol.}).
+\end{align*}
+If we look closely, we might see that this is a statement about conservation of energy!
+The right side is the rate at which the ``electromagnetic energy'' inside a volume $V$ changes, so we can infer that the left side describes the inward flux of energy through the boundary $\partial V$.
+Thus the integrand
+\[ \mbf{S}_P = \frac{\mbf{E} \times \mbf{B}}{\mu_0}, \]
+called the Poynting vector, describes the energy transported by the electromagnetic field per unit time, per unit area.
+(We might call $\mbf{S}$ an energy flux density.)
+This relationship is fundamental to the study of energy in electrodynamics, so naturally we can use it to do some pretty cool things!
+For example, we could use it to prove that the power emitted by a resistor is given by $i^2 R$.
+
+Electromagnetic waves, of course, carry energy, so the Poynting vector naturally coincides with an such a wave's direction of propagation.
+But while we usually think of a light beam as having a fixed energy, in reality the magnitude of $\mbf{S}_P$ oscillates rapidly between extrema.
+So we define the intensity $I$ of an electromagnetic wave as the magnitude of its time-averaged Poynting vector; since $\left< \sin^2 (x - ct) \right> = 1 / 2$, we have
+\[ I = \left< S_P \right> = \left< \frac{EB}{\mu_0} \right> = \left< \frac{E_0^2 \sin^2(x - ct)}{\mu_0c} \right> = \frac{1}{2\mu_0} \frac{E_0^2}{c} = \frac{1}{2} \epsilon_0 cE_0^2. \]
+More surprisingly, we know from special relativity that light carries a momentum $p = E / c$.
+We can use this to define radiation pressure, the force $F$ an electromagnetic wave exerts on a surface per unit area $A$.
+By Newton's second law,
+\[ \textrm{pressure} = \frac{1}{A} \frac{dp}{dt} = \frac{1}{cA} \frac{dE}{dt} = \begin{cases} S / c \textrm{ (absorber)} \\ 2S / c \textrm{ (reflector)} \end{cases}. \]
+The separate cases here arise from conservation of momentum.
+Absorbers simply take on the momentum of any incident light, while reflectors must double that amount in order to turn the light around.
+
+\section{Magnetism in Materials}
+We'll cap off our study of electrodynamics by looking at how magnetic fields interact with matter.
+So far we've studied these fields in the context of macroscopic charge movements---through a wire, for example---but we know from real-world experience that magnets also arise when there is no obvious movement of charge.
+In cases like these, we must zoom in to the microscopic level.
+
+Electrons are known to have spin angular momentum.
+For our purposes, we may model this by having each electron spin about a central axis, generating a little loop of current $i$ and thus a dipole moment $\boldsymbol{\mu} = i\mbf{A}$.
+Electrons that are ``paired'' with one another cancel each others' dipole moments, but unpaired electrons are left to act as permanent dipole moments.
+
+When a collection of these permanent dipoles is isolated from external magnetic fields, they all point in random directions that tend to cancel each other out, so no magnetism arises.
+But under the influence of a uniform field $\mbf{B}$, there is a net torque that tries to orient each loop such that $\boldsymbol{\mu}$ coincides with the direction of $\mbf{B}$.
+We could show (quite easily for rectangles) that the torque on each loop is given by $\boldsymbol{\tau} = \boldsymbol{\mu} \times \mbf{B}$, which gives the configuration energy $U_B = -\boldsymbol{\mu} \cdot \mbf{B}$ if the loop does not move.
+In practice the loop does move, and all of the dipoles become aligned with the external magnetic field in a phenomenon called paramagnetism.
+
+Now, electrons are known to also have orbital angular momentum, which we'll model as literal orbits generating slightly larger loops of current.
+Paired electrons are modeled by two loops of wire with equal opposite currents, producing no net magnetic dipole in isolation.
+When influenced by an external magnetic field, by Lenz's law the loops of wire together create a magnetic field that opposes the induced field; in aggregate, this phenomenon is called diamagnetism.
+
+Magnetic fields are reduced in diamagnetic materials.
+To quantify this reduction, we can define a ``diamagnetic constant'' $\kappa_m$ in a similar fashion to the dielectric constant: if $\mbf{B}_0$ is the applied field and $\mbf{B}$ is the resultant field, then $\mbf{B} = \kappa_m \mbf{B}_0$.
+For diamagnetic materials we have $\kappa_m < 1$, while for paramagnetic materials $\kappa_m > 1$.
+(Note that all materials are at least somewhat diamagnetic, but its effect is often very weak.)
+
+Finally, when we take a paramagnet and allow the permanent dipoles to interact with one another in such a way that they remain aligned after removing the external magnetic field, we get a ferromagnet.
+These materials have $\kappa_m \gg 1$.
+Since interactions between atoms tend to decrease with temperature, each ferromagnet has a Curie temperature above which they become paramagnetic.
+
 \end{document}
