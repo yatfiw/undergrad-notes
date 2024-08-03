@@ -1,0 +1,93 @@
+\documentclass[../p051main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Optics}
+\section{Light and Materials}
+Now we'll turn our attention to a study of light in its own right.
+To begin, we'll need to modify Maxwell's equations a little bit.
+Recall that they were constructed in free space, so in order to make them valid in materials we must substitute $\epsilon_0 \to \kappa_E \epsilon_0$ and $\mu_0 \to \kappa_B \mu_0$.
+Consequentially, in matter we have the wave equation
+\[ \nabla^{2} \mathbf{E} = (\kappa_e \kappa_m) \mu_0 \varepsilon_0 \frac{\partial^{2} \mbf{E}}{\partial t^2}. \]
+If we define the material's index of refraction $n = \sqrt{\kappa_e \kappa_m}$, then we find that light travels at
+\[ v = \frac{1}{\sqrt{\kappa_e \kappa_m}} \frac{1}{\sqrt{\mu_0 \epsilon_0}} = \frac{c}{n} \]
+when in a medium.
+It follows that electromagnetic waves satisfy $B_0 = E_0 n / c$, and that their intensities are given by $I = E_0^2 n / 2\mu_0 c$.
+
+A point at which materials with different refractive indices meet is called an interface.
+When an electromagnetic wave is incident on an interface, it gets split into a reflected wave and a transmitted wave.
+For normal incidence, the equations describing this split are
+\begin{align*}      
+    \mathbf{E}_i &= E_i \,\hat{y}\, \cos (k_1 x - \omega_1 t), & \mathbf{B}_i &= \frac{E_i n_1}{c} \,\hat{z}\, \cos (k_1 x - \omega_1 t), \\
+    \mathbf{E}_r &= E_r \,\hat{y}\, \cos (-k_1 x - \omega_1 t), & \mathbf{B}_r &= \frac{E_r n_1}{c} \,(-\hat{z})\, \cos (-k_1 x - \omega_1 t), \\
+    \mathbf{E}_t &= E_t \,\hat{y}\, \cos (k_2 x - \omega_2 t), & \mathbf{B}_t &= \frac{E_t n_2}{c} \,\hat{z}\, \cos (k_2 x - \omega_2 t),
+\end{align*}
+where $n_1$ is the refractive index of the first material and $n_2$ is that of the second.
+We can relate all of these equations using Ampere's law and Faraday's law; if we take thin loops that are parallel to $\mbf{E}$ and $\mbf{B}$, respectively, we get
+\[ \oint \mbf{E} \cdot d\mbf{l} = 0, \qquad \oint \mbf{B} \cdot d\mbf{l} = 0. \]
+So if we have an interface at $x=0$, then the relationship between the electric fields is
+\[ E_i \cos(-\omega_1 t) + E_r \cos(-\omega_1 t) - E_t \cos (-\omega_2 t) = 0. \]
+The only way for this equation to be true for all $t$ is if $\omega_1 = \omega_2 - \omega$. meaning the frequency of light does not change in a medium!
+All that changes, then, is the wavenumber $k = \omega / v = 2\pi n / \lambda_\textrm{vac}$.
+
+Anyway, cancelling the cosines gives $E_i + E_r = E_t$.
+A similar analysis for magnetic fields would give $E_i n_1 - E_r n_1 = E_t n_2$, and solving the resulting system of equations gives
+\[ E_r = \left( \frac{n_1 - n_2}{n_1 + n_2} \right) E_i, \qquad E_t = \left( \frac{2n_1}{n_1 + n_2} \right) E_i.  \]
+Note that $E_r$ is negative when $n_1 < n_2$, so in this case the reflected wave is out of phase with the transmitted wave.
+Otherwise the waves are in phase.
+Here's a handy mnemonic to keep track:
+\begin{center}
+    "Low to high, add a $\pi$." \qquad "High to low, let it go."
+\end{center}
+For scenarios with multiple interfaces we simply apply these rules several times, often ignoring light that bounces back and forth between interfaces many times.
+
+\section{Polarization}
+The orientation of an electromagnetic wave, called its polarization, can be described entirely by the direction in which its electric field points.
+Most common sources of light produce unpolarized light, in which the direction of $\mbf{E}$ is basically random and time-varying.
+When light is polarized, though, it can come in three different forms: linear, circular, and elliptical.
+\begin{itemize}
+    \item For light that is linearly polarized, $\mbf{E}$ points in a constant direction as the wave propagates.
+    A wave propagating in the $x$-direction may be polarized along $\hat y$, $\hat z$, or some linear combination of the two.
+
+    \item Circularly polarized light is comprised of two identical components that are out of phase by precisely a quarter-cycle, so that the electric field appears to trace out a circle in space.
+    Confusingly, optics people tend to specify the ``handedness'' of this tracing with respect to the receiving end of the light, so we point our thumb opposite the direction of propagation and curl our fingers in such a way that matches the twist of the $\mbf{E}$-field.
+    This gives us the following parameterizations.
+    \begin{align*}
+        \textrm{RHCP: } \mathbf{E} &= E_0 \,\hat{y} \cos(kx - \omega t) + E_0 \,\hat{z} \sin(kx - \omega t) \\
+        \textrm{LHCP: } \mathbf{E} &= E_0 \,\hat{y} \sin(kx - \omega t) - E_0 \,\hat{z} \cos(kx - \omega t)
+    \end{align*}
+    \vspace{-18pt}
+
+    \item Elliptical polarization occurs we have two identical components that are out of phase by a different amount, so that the electric field appears to trace out an ellipse in space.
+    Linear and circular polarization can be seen as special cases of elliptical polarization.
+\end{itemize}
+The polarization of light can be controlled using filters called polarizers.
+In the case of a linear polarizer, the incident electric field is split into two components $\mbf{E}_\textrm{in} = \mbf{E}_\parallel + \mbf{E}_\perp$ which are parallel and perpendicular to the direction of polarization, respectively.
+As $\mbf{E}_\textrm{in}$ passes through, $\mbf{E}_\parallel$ is transmitted entirely while $\mbf{E}_\perp$ is absorbed entirely.
+So if $\mbf{E}_\textrm{in}$ is polarized at an angle $\theta$ with respect to the polarization direction, then $E_\textrm{out} = E_\textrm{in} \cos \theta$ and we have Malus's law
+\[ I_\textrm{out} = I_\textrm{in} \cos^2 \theta. \]
+Linear polarizers are the basis for a host of technologies, like polarizing sunglasses and LCD screens!
+They also exhibit some strange behavior due to Malus's law.
+Two polarizers oriented perpendicular to one another will block out all light, but if a third is added at a $45^\circ$ angle to both of them, then suddenly some light will pass through.
+
+There are other ways light can be polarized, too.
+One is through scattering: if some light traveling in the $\hat z$-direction and is incident on a collection of dust, then this dust is excited and begins to vibrate in the $xy$-plane (i.e., in the plane of the electromagnetic field).
+When light is emitted its propagation direction and polarization direction both remain in this plane and, of course, are orthogonal to each other.
+
+Polarization by reflection may also occur when light reflects on an interface between materials.
+Define the light's plane of incidence to be that spanned by the vector normal to the interface and that which points in the direction of incident light.
+For any interface, the incidence-plane component of the reflected electromagnetic wave is dependent not only on the materials' refraction indices, but also on the angle of incidence.
+Thus there is a critical angle, called the Brewster's angle, such that all light polarized in the plane of incidence is transmitted.
+(This also happens to be the angle at which the reflected and transmitted light are orthogonal to one other.)
+As a result, the reflected light is polarized orthogonal to the plane of incidence.
+
+Finally, polarization can occur when light passes through a birefringent material, the details of which don't concern us.
+In the big picture, some materials have refractive indices that depend on the direction in which light propagates through them.
+Such a material has an intrinsic optic axis with index $n_o$, while the perpendicular axis has $n_e$; the perpendicular components of the normally incident wave (the $o$- and $e$-rays) undergo a relative phase shift
+\[ \Delta \phi = \frac{2\pi}{\lambda} (n_o - n_e)d, \]
+where $\lambda$ is the light's wavelength and $d$ is the width of the material.
+If $\Delta \phi = \pi / 4$ or a coterminal equivalent, then we have a quarter-wave plate that can be used to convert $45^\circ$-incident linearly polarized light into circularly polarized light, or vice versa.
+In the case of $\Delta = \pi / 2$ we have a half-wave plate which ``mirrors'' the polarization of the incident light.
+
+\end{document}
