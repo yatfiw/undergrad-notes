@@ -49,6 +49,14 @@ Contents are below, including planned but incomplete notes.
     <td>FA24</td>
  </tr>
  <tr>
+    <td>PHYS051</td>
+    <td>E&M and Optics</td>
+    <td>FA23</td>
+    <td></td>
+    <td></td>
+    <td></td>
+ </tr>
+ <tr>
     <td>PHYS052</td>
     <td>Quantum Physics</td>
     <td>SP24</td>
@@ -68,6 +76,5 @@ Contents are below, including planned but incomplete notes.
 
 Note that MATH073 is missing all proofs.
 These are some other courses I'd like to add in the future, in order of decreasing priority.
-* PHYS051 Electromagnetic Theory and Optics (FA23)
 * PHYS024 Mechanics and Wave Motion (SP23)
 * MATH019 Single and Multivariable Calculus (FA22)

@@ -90,4 +90,147 @@ where $\lambda$ is the light's wavelength and $d$ is the width of the material.
 If $\Delta \phi = \pi / 4$ or a coterminal equivalent, then we have a quarter-wave plate that can be used to convert $45^\circ$-incident linearly polarized light into circularly polarized light, or vice versa.
 In the case of $\Delta = \pi / 2$ we have a half-wave plate which ``mirrors'' the polarization of the incident light.
 
+\section{The Photon}
+In classical optics, light is comprised of electromagnetic waves and has intensity given by the electric field, vacuum permeability, and speed of light.
+But we now know light to exhibit a kind of wave-particle duality---in quantum optics it is comprised of photons, each of which has an energy $E = h\nu$, where $\nu$ is the frequency of the light and $h$ is called Planck's constant.
+So if a beam of $N$ photons is incident on an area $A$ in a time $\Delta t$, then the intensity of the light beam they comprise is given by
+\[ I = \frac{N h\nu}{A\Delta t}. \]
+The quantum nature of light has been experimentally verified several times using various experiments.
+One examined the photoelectric effect, the observation that electromagnetic radiation can ``kick'' electrons off the surface of a metal.
+These electrons leave the metal with, at most, a kinetic energy $K_\textrm{max} = h\nu - W$, where $W$ is the energy expended in escaping the metal to begin with, called the metal's work function.
+In the historical experiment, the metal is the high-potential terminal of an uncharged parallel-plate capacitor held in a vacuum chamber.
+This capacitor is part of a larger circuit so that, if the ejected electrons have a high enough kinetic energy, they can make it to the other side of the capacitor and drive a current.
+The critical potential where no electrons make it to the other terminal is called the stopping potential $V_\textrm{stop}$, and we have
+\[ q_e V = h\nu - W. \]
+Experiments have verified this, meaning the stopping potential has absolutely nothing to do with the intensity of the incident light.
+This opposes the classical theory that would have $V_\textrm{stop}$ increase with intensity.
+
+In another experiment, high-energy light is scattered off of a graphite target.
+Assuming light is quantized, we'll see a photon with wavelength $\lambda$ collide with an electron of mass $m_e$; the photon is deflected by an angle $\theta$ with a new wavelength $\lambda'$, while the electron is sent off at an angle $\phi$ with momentum $p_e$.
+Using relativistic conservation of momentum and energy we get the equations
+\begin{gather*}
+    \frac{h}{\lambda} = \frac{h}{\lambda'} \cos \theta + p_e \cos \phi, \qquad 0 = \frac{h}{\lambda'} \sin \theta - p_e \sin \phi, \\
+    m_e c^2 + \frac{hc}{\lambda} = \frac{hc}{\lambda'} + \left( p_e^2 c^2 + m_e^2c^4 \right)^{1/2}.
+\end{gather*}
+Solving this system would yield
+\[ \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta) \]
+which, again, is consistent with experiment.
+This phenomenon is known as Compton scattering.
+\vspace{1pt}
+
+\parbox{0.65\textwidth}{
+    At this point we're confident that light comes in discrete quanta, so we might wonder now how these quanta behave.
+    We can investigate this using a Mach-Zehnder interferometer, illustrated at right.
+    
+    \vspace{6pt}
+    Elements B and C are mirrors, while the semicircles are detectors.
+    Elements A and D are beam splitters, which reflect half of any incident light and transmit the rest.
+    If a single photon is incident, though, that photon doesn't get cut in half and take both paths; rather, it picks one path and sticks with it.
+    This pick is random, too---there is no way to deterministically predict which way the photon will go.
+    The best we can do is work in probabilities.
+
+    \vspace{6pt}
+    It \hfill turns \hfill out \hfill that \hfill these \hfill probabilities \hfill aren't \hfill as \hfill simple \hfill as \hfill flipping \hfill a \hfill coin
+}\parbox{0.35\textwidth}{
+    \quad\;
+    \includegraphics[width=0.3\textwidth]{machZehnder.png}
+}
+
+\vspace{-4pt}
+for each splitter.
+Assuming photons are sent into splitter A at a constant rate, experiments show that the rate at which either of the detectors receives photons varies sinusoidally with distance.
+This suggests that the relevant quantity is not just a probability, but also an associated phase.
+Complex numbers happen to describe this behavior in just the right way!
+
+In our theory of quantum optics, each event has an associated complex number $z$ called a probability amplitude.
+There are three fundamental rules that these probability amplitudes abide by, and they're surprisingly intuitive.
+\begin{enumerate}
+    \item If an event has probability amplitude $z$ with complex conjugate $z^*$, then the probability of the event occurring is given by
+    \[ P = |z|^2 = z^*z. \]
+
+    \item If an event can be broken down ito a series of steps, then its probability amplitude is the product of those for each step:
+    \[ z = z_1 z_2 z_3 \cdots. \]
+
+    \item If an event can happen in multiple independent ways, then its probability amplitude is the sum of those for each way:
+    \[ z = z_1 + z_2 + z_3 + \cdots. \]
+\end{enumerate}
+Below is a table of probability amplitudes for some events that are relevant to our discussion.
+\begin{center}
+    \def\arraystretch{1.3}
+    \begin{tabular}{c|c}
+        Event & Amplitude \\ \hline
+        travel & $z = e^{ikd}, \;k = 2\pi n / \lambda$ \\
+        transmission & $z = \sqrt{P_\textrm{trans}}$ \\
+        reflection & $z = \pm \sqrt{P_\textrm{ref}}$
+    \end{tabular}
+\end{center}
+Here $d$ is the distance a photon travels in a medium with refractive index $n$.
+(Note that $n = 1$ for a vacuum.)
+The probability amplitude for photon reflection has a $\pm$ to account for the phase shift that occurs at interfaces with higher-index materials.
+
+\section{Multiple-slit Diffraction}
+Consider a laser that shines through two very narrow slits and onto a faraway wall.
+On the wall we may expect to see two bright peaks of light, but instead there's a row of bright bands that peak right between the slits.
+There are both classical and quantum explanations for this phenomenon; we will, of course, focus on the quantum one here.
+
+There are two paths light can take to get to any given point on the wall, one for each slit.
+Let $d$ be the small distance between the slits, $d_0$ the distance from the laser to the slits, and $d_1, d_2$ the distances from each slit to the wall.
+So we have the probability amplitudes
+\[ z_1 = e^{ikd_0} r e^{ikd_1} \quad\textrm{and}\quad z_2 = e^{ikd_0} r e^{ikd_2}, \]
+where $r$ is the probability amplitude of the light going in the proper direction to reach the point on the wall.
+(Strictly speaking $r$ depends on the deflection angle $\theta$, which is different for the two slits.
+The difference is so slight, though, that they're approximately equal.)
+Adding these amplitudes gives
+\[ z = z_1 + z_2 = r e^{ikd_0} e^{ikd_1} \left( 1 + e^{ik(d_2 - d_1)} \right), \]
+and the probability
+\[ P = 4r^2 \cos^2 \left( \frac{k(d_2-d_1)}{2} \right). \]
+If the wall is very far away then we have $d_2 - d_1 = d \sin \theta$ and
+\[ P = 4r^2 \cos^2 \left( \frac{kd\sin \theta}{2} \right) = 4r^2 \cos^2 \left( \frac{\pi d \sin \theta}{\lambda} \right). \]
+Notice that this probability is maximized when the phase difference $kd \sin \theta$ is an integer, so that the each slit produces light perfectly in phase.
+Similarly, the probability is minimized when the phase difference is at midpoints between integers.
+Thus we see
+\[ \textrm{maxima at } d \sin \theta = 0\lambda,\, 1\lambda,\, 2\lambda,\, \ldots \quad\textrm{ and }\quad \textrm{minima at } d \sin \theta = \frac{1}{2}\lambda,\, \frac{3}{2}\lambda,\, \frac{5}{3}\lambda,\, \ldots\,. \]
+As we increase the number of slits, the width of each bright spot decreases to a point.
+This is because, as we increase the number of slits, there are more values of $\theta$ that can cause destructive interference.
+To see this, note how the probability for $n$ slits is given by
+\[ P = r e^{ikd_0} e^{ikd_1} \left( 1 + e^{i\theta} + e^{i(2\theta)} + \cdots + e^{i(n\theta)} \right). \]
+We might model each slit's complex exponential as a phasor, and that all of these phasors are being summed to get the total probability for a point on the wall.
+If for a particular $\theta$ the phasors sum to zero (which manifests itself in phasor space as a regular $n$-gon), then there will be perfect destructive interference there.
+
+\section{Single-slit Diffraction}
+Now suppose that, instead of being faced with a row of infinitesimal slits, we have a single slit of finite width $a$ that is parallel with a faraway wall.
+Suddenly, the path of an incident photon can no longer be entirely described by its angle of deflection!
+
+Consider an infinitesimal bit $dx$ of the slit, located a distance $x$ from one of its edges.
+The probability amplitude associated with a photon passing through this bit and landing on a particular spot on the wall is
+\[ dz = dr \,e^{ik(d_1 + x \sin \theta)}, \]
+where $d_1$ is the distance between the edge of the slit and the spot on the wall, $\theta$ is the direction in which a photon must be deflected to hit this spot, and $dr$ is the probability amplitude associated with this deflection.
+
+The probability amplitude for the entire slit is the integral of $dz$ over the entire slit.
+We'll take $dr = (r / a) dx$ in order to normalize our probabilities (where we've assumed that $dr$ is independent of where we are on the slit), so we have
+\[ z = \int_{0}^{a} \frac{r}{a} dx \,e^{ik(d_1 + \sin\theta)} = \frac{r e^{ik(d_1 + (a/2)\sin \theta)}}{ika\sin \theta} \left( e^{\frac{1}{2}ika\sin \theta} - e^{-\frac{1}{2}ika\sin \theta} \right) = \frac{r e^{i(\cdots)}}{\frac{ka}{2}\sin \theta} \sin \left( \frac{ka}{2}\sin \theta \right). \]
+Defining $\alpha = (ka / 2)\sin \theta$ gives
+\[ P = \frac{r^2}{\alpha^2} \sin^2 \alpha. \]
+On our faraway wall we would see one bright peak at the center of the slit, and then a bunch of much dimmer peaks going off to the side.
+(About ninety percent of the intensity of the light is concentrated within this central bump.)
+We see perfect destructive interference at integer multiples of $\pi$ for $\alpha$, meaning the first minima $\pm\theta_1$ occur where $\sin\theta_1 = \lambda / a$.
+
+This actually gives us a criterion for determining whether or not two objects, say headlights on a car, are distinguishable from a distance!
+Specifically, according to the Rayleigh criterion two objects are ``barely resolvable'' when the center of one diffraction pattern is at the minimum of the other.
+Any closer and they mesh together into one.
+
+Now, in this entire discussion of quantum optics we've ignored one glaring issue: for any point in space, there's actually an infinite number of paths a photon can take to get there!
+There's no obvious reason light should prefer traveling in straight lines over, anything else.
+The principle of least time resolves this issue: if there is a continuous range of paths that light can take between two points in space, the only path that contributes significantly to the probability of detection at the end point is that of minimum time (or, more importantly, minimum phase).
+At a high level, this is because the shorter paths are only marginally different in phase and so tend to constructively interfere, while longer paths are quite different from one another and tend to cancel one another out.
+
+Finally, we cap everything off with one more disturbing revelation.
+Everything we've just discussed--diffraction, interference, all that--also works with massive particles like helium atoms.
+This strongly suggests that matter, too, has wave-like properties that can be described in terms of probability amplitudes.
+We might make a leap in logic and define the (nonrelativistic) de Broglie wavelength
+\[ \lambda_\textrm{dB} = \frac{h}{mv}, \]
+inspired by how $E = h\nu = pc$ for a photon, meaning it has $\lambda = h / p$.
+In principle every bit of matter has a de Broglie wavelength, but at the macroscopic level the wavelengths are far too small relative to the apertures we face in real life to cause any diffraction.
+Despite that oddity, this leap is a good one, and it turns out to be exactly what we need to facilitate a proper study of quantum mechanics.
+
 \end{document}
