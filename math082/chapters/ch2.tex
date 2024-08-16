@@ -6,7 +6,7 @@
 \chapter{First-Order Differential Equations}
 
 \section{Separable Differential Equations}
-The first class of differential equations we'll discuss involves those first-order differential equations that can, broadly, be "separated" into its independent and dependent variables.
+The first class of differential equations we'll discuss involves those first-order differential equations that can, broadly, be ``separated'' into its independent and dependent variables.
 
 \begin{definition}[Separable differential equation]
     An ordinary differential equation is separable if it can be written in the form
@@ -86,13 +86,13 @@ Slope fields help us visualize the general trend that solutions to a differentia
     \begin{center}
         \includegraphics[width=7.5cm]{logisticSlopeField.png}
     \end{center}
-    Given a boundary (or in another case, initial) condition $y(x_0) = y_0$, we could use this slope field to sketch a solution curve, using the sloped line segments to "push" the curve in the right direction.
+    Given a boundary (or in another case, initial) condition $y(x_0) = y_0$, we could use this slope field to sketch a solution curve, using the sloped line segments to ``push'' the curve in the right direction.
 \end{example}
 
 Notice the behavior of the slope field at $y = 0$ and $y = 5$.
 At each of these locations we have a series of horizontal line segments.
 If a solution curve $y(x)$ ever reaches either of these $y$-values, it will stay there for the rest of its existence because there $dy / dx = 0$.
-Despite this similarity, the two "equilibria" are fundamentally different: while solutions tend to converge at $y = 5$, they tend to diverge at $y = 0$.
+Despite this similarity, the two ``equilibria'' are fundamentally different: while solutions tend to converge at $y = 5$, they tend to diverge at $y = 0$.
 We summarize these observations below.
 
 \begin{definition}[Equilibrium solution of a first-order DE]
@@ -107,7 +107,7 @@ Next, we give a way to actually compute approximations for initial-value problem
     \[ \frac{dy}{dx} = f(x, y), \quad y(x_0) = y_0. \]
     To approximate the value of $y$ at a different $x$-value, we iterate through the following algorithm a sufficient number of times.
 
-    Let $v_0 = y(x_0) = y_0$, and let $\Delta x$ be some small "step."
+    Let $v_0 = y(x_0) = y_0$, and let $\Delta x$ be some small ``step.''
     Then $v_n$ is an approximation for $y(x_n)$, where
     \begin{align*}
         x_{n+1} &= x_n + \Delta x \\
@@ -136,7 +136,7 @@ There is a trade-off here: the first theorem gives a stronger result but works o
     If $f(t, y)$ and $\frac{\partial f}{\partial y}(t, y)$ are continuous on the rectangle $t \in (\alpha, \beta)$ and $y \in (\gamma, \delta)$ containing $(t_0, y_0)$, then the solution to the IVP exists and is unique on some interval $t \in (t_0 - h, t_0 + h)$ for some $h > 0$.
 \end{theorem}
 
-Both of these boil down to the functions in the DE being "well-behaved."
+Both of these boil down to the functions in the DE being ``well-behaved.''
 It's reasonable that continuity should be a condition for both of these.
 The $\partial f / \partial y$ condition in Theorem 2.3 ensures a smooth transition between two solution curves in the same neighborhood.
 In fact, this theorem allows us to state something significant about the solution curves of a DE.
