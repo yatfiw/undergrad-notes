@@ -44,15 +44,15 @@ This type of problem is so fundamental that it gets a special name and symbol, g
 
 \begin{definition}[Combination]
     Consider a set $S$ that has size $n$.
-    The number of size-$k$ subsets of $S$ is called ``$n$ choose $k$'' and is denoted by ${n \choose k}$.
-    For $k < 0$ or $k > n$, we define ${n \choose k} = 0$.
+    The number of size-$k$ subsets of $S$ is called ``$n$ choose $k$'' and is denoted by $\binom{n}{k}$.
+    For $k < 0$ or $k > n$, we define $\binom{n}{k} = 0$.
 \end{definition}
 
 \pagebreak
 
 \begin{theorem}[Counting subsets]
     For $0 \leq k \leq n$,
-    \[ {n \choose k} = \frac{n!}{k! (n-k)!}. \]
+    \[ \binom{n}{k} = \frac{n!}{k! (n-k)!}. \]
 \end{theorem}
 
 \begin{proof}
@@ -63,16 +63,16 @@ This type of problem is so fundamental that it gets a special name and symbol, g
     (i) We first use the rule of product to directly compute the number of permutations:
     \[ n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) = \frac{n!}{(n-k)!}. \]
 
-    (ii) There are ${n \choose k}$ ways to choose the $k$ letters we're permuting.
+    (ii) There are $\binom{n}{k}$ ways to choose the $k$ letters we're permuting.
     For each of these choices, there are $k!$ ways to arrange them.
     So, there are
-    \[ k! \cdot {n \choose k} \]
+    \[ k! \cdot \binom{n}{k} \]
     size-$k$ permutations of the elements in $S$.
     \smallskip
 
     Both of the expressions we've found count the same thing, so they must be equal.
     That is,
-    \[ k! \cdot {n \choose k} = \frac{n!}{(n-k)!} \implies {n \choose k} = \frac{n!}{k!(n-k)!}, \]
+    \[ k! \cdot \binom{n}{k} = \frac{n!}{(n-k)!} \implies \binom{n}{k} = \frac{n!}{k!(n-k)!}, \]
     as desired.
 \end{proof}
 
@@ -82,7 +82,7 @@ But first, we have one more result that may illustrate the surprisingly far-reac
 
 \begin{theorem}[]
     For $n \geq 1$,
-    \[ \frac{n(n+1)}{2} = {n+1 \choose 2}. \]
+    \[ \frac{n(n+1)}{2} = \binom{n+1}{2}. \]
 \end{theorem}
 
 \begin{proof}
@@ -91,8 +91,8 @@ But first, we have one more result that may illustrate the surprisingly far-reac
 
     Now add one more row (of length $n+1$) to the bottom of the triangle.
     There is a one-to-one correspondence between pairs of circles in the bottom row and individual circles in the upper $n$ rows---we might illustrate this by drawing diagonal lines from any dot in the upper rows to a pair of dots in the bottom row.
-    There are ${n+1 \choose 2}$ ways to pick pairs of circles from the bottom row, so 
-    \[ \frac{n(n+1)}{2} = {n+1 \choose 2}, \]
+    There are $\binom{n+1}{2}$ ways to pick pairs of circles from the bottom row, so 
+    \[ \frac{n(n+1)}{2} = \binom{n+1}{2}, \]
     as desired.
 \end{proof}
 
@@ -220,10 +220,10 @@ In fact, we can even use combinatorics to prove something like Theorem 1.\ref{pa
 \section{Pascal's Triangle}
 One of the most widely recognizable objects in combinatorics is Pascal's triangle, an infinite arrangement of combinations.
 \begin{gather*}
-    {0 \choose 0} \\
-    {1 \choose 0} \qquad {1 \choose 1} \\
-    {2 \choose 0} \qquad {2 \choose 1} \qquad {2 \choose 2} \\
-    {3 \choose 0} \qquad {3 \choose 1} \qquad {3 \choose 2} \qquad {3 \choose 3} \\
+    \binom{0}{0} \\
+    \binom{1}{0} \qquad \binom{1}{1} \\
+    \binom{2}{0} \qquad \binom{2}{1} \qquad \binom{2}{2} \\
+    \binom{3}{0} \qquad \binom{3}{1} \qquad \binom{3}{2} \qquad \binom{3}{3} \\
     \vdots
 \end{gather*}
 There's a lot of different patterns to uncover in this triangle.
@@ -232,19 +232,19 @@ We'll start with an identity that many would call the defining feature of Pascal
 
 \begin{theorem}[Pascal's identity]
     For $0 < k \leq n$,
-    \[ {n \choose k} = {n-1 \choose k-1} + {n-1 \choose k}. \]
+    \[ \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}. \]
 \end{theorem}
 
 \begin{proof}
     We give a combinatorial proof by counting the number of size-$k$ subsets that can be created using a set of $n$ elements.
     \smallskip
 
-    (i) By definition, ${n \choose k}$ subsets can be created.
+    (i) By definition, $\binom{n}{k}$ subsets can be created.
     \smallskip
 
     (ii) Each subset can be categorized based on the presence of element $n$.
-    There are ${n-1 \choose k-1}$ size-$k$ subsets that do contain $n$, and ${n-1 \choose k}$ that don't.
-    So there are ${n-1 \choose k-1} + {n-1 \choose k}$ size-$k$ subsets in all.
+    There are $\binom{n-1}{k-1}$ size-$k$ subsets that do contain $n$, and $\binom{n-1}{k}$ that don't.
+    So there are $\binom{n-1}{k-1} + \binom{n-1}{k}$ size-$k$ subsets in all.
     \smallskip
 
     Both of the expressions we've found count the same thing, so they must be equal.
@@ -254,14 +254,14 @@ Now we'll examine two patterns that exist within each row of the triangle.
 
 \begin{theorem}[Row sums] \label{rowSums}
     For $n \geq 0$,
-    \[ \sum_{k=0}^{n} {n \choose k} = 2^{n}. \]
+    \[ \sum_{k=0}^{n} \binom{n}{k} = 2^{n}. \]
 \end{theorem}
 
 \begin{proof}
     We give a combinatorial proof by counting the number of subsets (of any size) that can be created using a set of $n$ elements.
     \smallskip
 
-    (i) We can simply add up the number of subsets of each size between 0 and $n$; this gives $\sum\limits_{k=0}^{n} {n \choose k}$.
+    (i) We can simply add up the number of subsets of each size between 0 and $n$; this gives $\sum\limits_{k=0}^{n} \binom{n}{k}$.
     \vspace{-3pt}
 
     (ii) We can also ``iterate'' through the elements in the set and, for each one, decide whether or not to include it in the subset.
@@ -275,14 +275,14 @@ Now we'll examine two patterns that exist within each row of the triangle.
 
 \begin{theorem}[Same-parity row sums] \label{parityRowSums}
     For $n \geq 1$,
-    \[ \sum_{k\textrm{ even}} {n \choose k} = 2^{n-1} = \sum_{k\textrm{ odd}} {n \choose k}. \]
+    \[ \sum_{k\textrm{ even}} \binom{n}{k} = 2^{n-1} = \sum_{k\textrm{ odd}} \binom{n}{k}. \]
 \end{theorem}
 
 \begin{proof}
     We give a combinatorial proof by counting the number of even-sized subsets that can be created using a set of $n$ elements.
     \smallskip
 
-    (i) We can simply add up the number of subsets of each even size between 0 and $n$; this gives $\sum\limits_{k\textrm{ even}} {n \choose k}$.
+    (i) We can simply add up the number of subsets of each even size between 0 and $n$; this gives $\sum\limits_{k\textrm{ even}} \binom{n}{k}$.
     \vspace{-10pt}
 
     (ii) We can also ``iterate'' through the first $n-1$ elements in the set and, for each one, decide whether or not to include it in the subset.
@@ -309,25 +309,25 @@ We formalize and prove this observation below.
 
 \begin{theorem}[Hockey stick theorem]
     For $0 \leq k \leq n$,
-    \[ \sum_{j=k}^{n} {j \choose k} = {n+1 \choose k+1}. \]
+    \[ \sum_{j=k}^{n} \binom{j}{k} = \binom{n+1}{k+1}. \]
 \end{theorem}
 
 \begin{proof}
     We count the number of size-$(k+1)$ subsets that can be created using a set of $n+1$ elements.
     \smallskip
 
-    (i) By definition, ${n+1 \choose k+1}$ such subsets can be created.
+    (i) By definition, $\binom{n+1}{k+1}$ such subsets can be created.
     \smallskip
 
     (ii) Each subset can be categorized based on which elements are required or disallowed to be in it.
     \begin{itemize}
-        \item There are ${n \choose k}$ ways to construct a subset that requires the presence of element $n+1$.
-        \item There are ${n-1 \choose k}$ ways to construct a subset that requires element $n$, but forbids $n+1$.
-        \item There are ${n-2 \choose k}$ ways to construct a subset that requires $n-1$ but forbids $n$ and $n+1$.
+        \item There are $\binom{n}{k}$ ways to construct a subset that requires the presence of element $n+1$.
+        \item There are $\binom{n-1}{k}$ ways to construct a subset that requires element $n$, but forbids $n+1$.
+        \item There are $\binom{n-2}{k}$ ways to construct a subset that requires $n-1$ but forbids $n$ and $n+1$.
         \item[$\vdots$]
-        \item There are ${k \choose k}$ ways to construct a subset that requires $k+1$ but forbids anything greater.
+        \item There are $\binom{k}{k}$ ways to construct a subset that requires $k+1$ but forbids anything greater.
     \end{itemize}
-    In all, this gives $\sum\limits_{j=k}^{n} {j \choose k}$ distinct subsets.
+    In all, this gives $\sum\limits_{j=k}^{n} \binom{j}{k}$ distinct subsets.
 
     Both of the expressions we've found count the same thing, so they must be equal.
 \end{proof}
@@ -337,7 +337,7 @@ Doing this for many rows reveals an even more interesting pattern!
 
 \begin{theorem}[Diagonal sums]
     For $n \geq 0$,
-    \[ \sum_{k \geq 0} {n-k \choose k} = f_n. \]
+    \[ \sum_{k \geq 0} \binom{n-k}{k} = f_n. \]
 \end{theorem}
 
 \begin{proof}
@@ -348,8 +348,8 @@ Doing this for many rows reveals an even more interesting pattern!
     \smallskip
 
     (ii) Consider a tiling that has exactly $k$ dominoes (and $n-2k$ squares).
-    So there are $n-k$ tiles in all, and there are ${n-k \choose k}$ ways to arrange the tiles.
-    Adding these up for all possible values of $k$ gives $\sum\limits_{k \geq 0} {n-k \choose k}$.
+    So there are $n-k$ tiles in all, and there are $\binom{n-k}{k}$ ways to arrange the tiles.
+    Adding these up for all possible values of $k$ gives $\sum\limits_{k \geq 0} \binom{n-k}{k}$.
 
     Both of the expressions we've found count the same thing, so they must be equal.
 \end{proof}
@@ -359,12 +359,12 @@ In order to uncover these, though, we need another theorem.
 
 \begin{theorem}[Binomial theorem]
     For $n \geq 0$,
-    \[ (x+y)^{n} = \sum_{k=0}^{n} {n \choose k} x^{k} y^{n-k}. \]
+    \[ (x+y)^{n} = \sum_{k=0}^{n} \binom{n}{k} x^{k} y^{n-k}. \]
 \end{theorem}
 
 \begin{proof}
     The expanded form of $(x+y)^{n}$ includes $n$ factors of the form $(x+y)$.
-    To create an $x^{k} y^{n-k}$ term, we pick $k$ factors to pull an $x$ from, and the rest contribute $y$'s; there are ${n \choose k}$ ways to do this.
+    To create an $x^{k} y^{n-k}$ term, we pick $k$ factors to pull an $x$ from, and the rest contribute $y$'s; there are $\binom{n}{k}$ ways to do this.
 \end{proof}
 
 Using this, some proofs almost become trivial!
@@ -373,9 +373,9 @@ For example, to prove Theorem 1.\ref{rowSums} we can simply write $2^{n}$ as the
 
 We can also prove new identities!
 For example, we can differentiate both side of the equation
-\[ (1+x)^{n} = \sum_{k=0}^{n} {n \choose k} x^{k} \]
+\[ (1+x)^{n} = \sum_{k=0}^{n} \binom{n}{k} x^{k} \]
 and substitute $x=1$ to show that
-\[ n \cdot 2^{n-1} = \sum_{k=0}^{n} k {n \choose k}. \]
+\[ n \cdot 2^{n-1} = \sum_{k=0}^{n} k \binom{n}{k}. \]
 
 \section{Multisets and Inclusion-Exclusion}
 So far we've been using combinations, which count the number of subsets that can be created from a set.
@@ -389,7 +389,7 @@ Here, we'll extend our discussions into creating \textit{multisets}---that is, s
 We can quickly establish a nice connection to normal combinations that illuminates a different way of looking at the multichoose function.
 
 \begin{theorem}[Multichoose theorem]
-    \[ \mchoose{n}{k} = {n+k-1 \choose k}. \]
+    \[ \mchoose{n}{k} = \binom{n+k-1}{k}. \]
 \end{theorem}
 
 \begin{proof}
@@ -407,7 +407,7 @@ We can quickly establish a nice connection to normal combinations that illuminat
     For example, the above represents the construction of a multiset that contains one instance of element 1, six instances of element 2, three instances of element 3, and no instances of element 4.
 
     In general, we'll always have $k$ stars and $n-1$ bars; these objects can be arranged in
-    \[ {n+k-1 \choose k} = {n+k-1 \choose n-1} \]
+    \[ \binom{n+k-1}{k} = \binom{n+k-1}{n-1} \]
     different ways.
     \smallskip
 
@@ -423,8 +423,8 @@ We can exploit this connection to state a Pascal-like theorem for the multichoos
 \begin{proof}
     A simple algebraic proof using Pascal's identity:
     \begin{align*}
-        \mchoose{n-1}{k} + \mchoose{n}{k-1} &= {n+k-2 \choose k} + {n+k-2 \choose k-1} \\
-        &= {n+k-1 \choose k} \\
+        \mchoose{n-1}{k} + \mchoose{n}{k-1} &= \binom{n+k-2}{k} + \binom{n+k-2}{k-1} \\
+        &= \binom{n+k-1}{k} \\
         &= \mchoose{n}{k},
     \end{align*}
     as desired.
@@ -460,13 +460,13 @@ We generalize this below.
 \begin{proof}
     We'll show that each element $x$ in the union is counted exactly once.
     Suppose $x$ is in exactly $m$ of the $n$ sets (and, without loss of generality, these sets are $A_1, \ldots, A_m$).
-    The first sum counts $x$ $m$ times, the second \textit{un}counts it ${m \choose 2}$ times, the third counts it ${m \choose 3}$ times, and so on; altogether, the number of times $x$ is counted is
-    \[ {m \choose 1} - {m \choose 2} + {m \choose 3} - {m \choose 4} + \cdots \pm {m \choose m} = \sum_{k\text{ odd}} {m \choose k} - \sum_{k\text{ even}} {m \choose k} = {m \choose 0} = 1, \]
+    The first sum counts $x$ $m$ times, the second \textit{un}counts it $\binom{m}{2}$ times, the third counts it $\binom{m}{3}$ times, and so on; altogether, the number of times $x$ is counted is
+    \[ \binom{m}{1} - \binom{m}{2} + \binom{m}{3} - \binom{m}{4} + \cdots \pm \binom{m}{m} = \sum_{k\text{ odd}} \binom{m}{k} - \sum_{k\text{ even}} \binom{m}{k} = \binom{m}{0} = 1, \]
     as desired.
 \end{proof}
 
 So if we wanted to construct multisets such that no element is repeated more than $r$ times, we simply apply the principle of inclusion and exclusion:
-\[ \mchoose{n}{k} - n \mchoose{n}{k-r} + {n \choose 2} \mchoose{n}{k-2r} - \cdots \]
+\[ \mchoose{n}{k} - n \mchoose{n}{k-r} + \binom{n}{2} \mchoose{n}{k-2r} - \cdots \]
 Another application comes in the form of derangements, defined below.
 
 \begin{definition}[Derangement]
