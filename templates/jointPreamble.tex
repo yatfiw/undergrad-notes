@@ -4,24 +4,15 @@
 \usepackage{amssymb}
 \usepackage{enumitem}                       % custom enum labels
 \usepackage{parskip}                        % add vertical paragraph space
-\usepackage{tocloft}						% modify toc position
-\usepackage{xr}								% cross-references
-\usepackage{mathtools}						% Aboxed
-\usepackage{empheq}							% box multiple lines
-\usepackage{upgreek}
-\usepackage{chemformula}
-\usepackage{esint}							% oiint
-\usepackage{cancel}
 \usepackage[framemethod=TikZ]{mdframed}     % graphics and framed envs
 \usepackage[hang,flushmargin]{footmisc}		% remove footnote indentation
-\usepackage[hyperfootnotes=false,
-					hidelinks]{hyperref}	% create clickable table of contents
-
 
 \renewcommand{\familydefault}{\sfdefault}  	% sans serifs text
 \setlength{\parindent}{0pt}                	% no paragraph indentation
 
 % region TITLES
+\usepackage{tocloft}
+\usepackage[hyperfootnotes=false,hidelinks]{hyperref}
 \setbox0=\hbox{\Huge{\textbf{\textsf{\courseid: }}}}
 \setlength{\cftbeforetoctitleskip}{0em}
 \setlength{\cftaftertoctitleskip}{1em}
@@ -107,15 +98,15 @@
 	\begin{mdframed}[]\relax
 }{\end{mdframed}}
 
-\newenvironment{definition}[1][]{
-	\mdfnontheo{Definition}{#1}{blue!20}
-	\begin{mdframed}[]\relax
-}{\end{mdframed}}
-
 \newenvironment{proof}[1][]{
 	\mdfproof{black!15}
 	\begin{mdframed}[]\relax
 \textit{Proof. }}{\qed \end{mdframed}}
+
+\newenvironment{definition}[1][]{
+	\mdfnontheo{Definition}{#1}{blue!20}
+	\begin{mdframed}[]\relax
+}{\end{mdframed}}
 
 \newenvironment{example}[1][]{
 	\mdfnontheo{Example}{#1}{yellow!40}

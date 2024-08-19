@@ -1,23 +1,22 @@
-\documentclass[10pt,a4paper,oneside]{book}
-
-% course info (for title)
 \newcommand{\courseid}{MATH 73}
 \newcommand{\coursetitle}{Linear Algebra}
 \newcommand{\semester}{Spring 2023}
 \newcommand{\credit}{Adapted from 
-    David Poole, \textit{Linear Algebra: A Modern Introduction} (2015) and 
-    SP23 lectures.}
+    David Poole, \textit{Linear Algebra: A Modern Introduction} (2015) and SP23 lectures.}
 
+% ------------------------ %
+
+\documentclass[10pt,a4paper,oneside]{book}
 \input{../Templates/jointPreamble.tex}
 \graphicspath{{figures/}}
 
+% ------------------------ %
+
 \usepackage{subfiles}
 
-\begin{document}
+\begin{document}    % TODO: write proofs for ch 3-7
 \tableofcontents
 \blfootnote{* \credit}
-
-% TODO: write proofs for ch 3-7
 
 \subfile{chapters/ch1} % vectors
 \subfile{chapters/ch2} % systems of linear equations
