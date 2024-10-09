@@ -1,0 +1,322 @@
+\documentclass[../m157main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Multivariate Distributions}
+\section{Joint Probability Functions}
+So far we've been talking about distributions of individual variables.
+Now we'll look at the slightly more general case of two variables.
+
+\begin{definition}[Joint probability mass function]
+    Let $X$ and $Y$ be discrete random variables.
+    The function $P(X = x, \, Y = y)$ is a joint PMF if
+    \begin{itemize}
+        \item $P(X = x, \; Y = y) \geq 0$ for all $x,y$ and
+        \item $\sum_{x,y} P(X = x, \, Y = y) = 1$.
+    \end{itemize}
+    The marginal PMF for $X$ is
+    \[ P(X = x) = \sum_{y} P(X = x, \, Y = y); \]
+    $X$ and $Y$ are independent if $P(X = x, \, Y = y) = P(X = x) P(Y = y)$ for all $x,y$.
+\end{definition}
+
+\begin{definition}[Joint probability density function]
+    Let $X$ and $Y$ be continuous random variables.
+    The function $f_{X,Y}(x,y)$ is a joint PDF if
+    \begin{itemize}
+        \item $f_{X,Y}(x,y) \geq 0$ for all $x,y$ and
+        \item $\iint_{\R^2} f_{X,Y}(x,y) \,dxdy = 1$.
+    \end{itemize}
+    the marginal PDF for $X$ is
+    \[ f_X(x) = \int_\R f_{X,Y}(x,y) \,dy; \]
+    $X$ and $Y$ are independent if $f_{X,Y}(x,y) = f_X(x) f_Y(y)$ for all $x,y$.
+\end{definition}
+
+Also, note that knowing the marginals of two random variables is not necessarily enough to obtain their full joint PF.
+To do this, we must also require that $X$ and $Y$ are independent.
+
+\begin{definition}[Conditional probability distribution]
+    Let $X$ and $Y$ be random variables.
+    For discrete and continuous variables we have, respectively,
+    \[ P(Y = y \,|\, X = x) = \frac{P(Y = y, \, X = x)}{P(X = x)}, \qquad f_{Y|X}(y \,|\, x) = \frac{f_{X,Y}(x,y)}{f_X(x)}. \]
+\end{definition}
+
+\section{Multivariate Distributions}
+We can generalize the above discussion to probability functions of several random variables.
+Rather than give a general treatment for the discrete case, though, we'll focus on one particularly important distribution.
+
+\pagebreak
+
+\begin{definition}[Multinomial distribution]
+    If an experiment with $m$ outcomes (with probabilities $p_1, \ldots, p_m$) is independently performed $n$ times and $X_i$ is the number of times outcome $i$ occurs, then
+    \[ P(X_1 = x_1, \, \ldots, \, X_m = x_m) = \binom{n}{x_1,\, \ldots,\, x_m} \; p_1^{x_1} \cdots p_m^{x_m}, \qquad \binom{n}{x_1,\, \ldots,\, x_m} = \frac{n!}{x_1! \cdots x_m!}, \]
+    where the coefficient is called a multinomial coefficient.
+\end{definition}
+
+We'll spend much more time looking at the continuous case.
+
+\begin{definition}[Continuous multivariate distributions]
+    If $X_1, \ldots, X_n$ have joint pdf $f_{X_1, \ldots, X_n}$ then
+    \[ P \big( (x_1, \ldots, x_n) \in A \big) = \int_A f_{X_1, \ldots, X_n} (x_1, \ldots, x_n) \, dx_1 \cdots dx_n. \]
+    The marginal density of $X_1$ is found by ``integrating out'' $X_2, \ldots, X_n$.
+    $X_1, \ldots, X_n$ are independent if
+    \[ f_{X_1, \ldots, X_n} (x_1, \ldots, x_n) = f_{X_1}(x_1) \cdots f_{X_n}(x_n) \]
+    with a rectangular feasible region.
+\end{definition}
+
+When working with univariate distributions we were often tasked with transforming from one variable to another.
+We'll see the same problems with multivariate distributions, and the procedure generalizes nicely.
+When transforming from several variables to one variable we simply write the cdf for the new variable and differentiate to get its pdf---the methods for doing this might be more involved, but the general idea is there.
+
+We can do the same when we transform to several variables.
+In the single-variable case, if $Y = g(X)$ and $g$ is invertible then
+\[ f_Y(y) = f_X \big( g^{-1}(y) \big) \left| \frac{d}{dy} g^{-1}(y) \right| = f_X(x) \left| \frac{dx}{dy} \right|. \]
+More generally, say we want to transform from some $\mbf{X}$ to some $\mbf{Y}$ given a $\mbf{y} = \mbf{g}(\mbf{x})$.
+We start by inverting $\mbf{g}$ and writing $\mbf{x} = \mbf{h}(\mbf{y})$, use this to rewrite the pdf of $\mbf{X}$ in terms of $\mbf{h}(\mbf{y})$, and compute
+\[ \mbf{f}_\mbf{Y}(\mbf{y}) = \mbf{f}_\mbf{X} \big( \mbf{h}(\mbf{y}) \big) \,|J|. \]
+Here $J = \det (d\mbf{h} / d\mbf{y})$ is the Jacobian determinant of the transformation from $\mbf{Y}$ to $\mbf{X}$:
+\[ J = \begin{vmatrix} \frac{\partial x_1}{\partial y_1} & \frac{\partial x_1}{\partial y_2} & \cdots & \frac{\partial x_1}{\partial y_n} \\[6pt] \frac{\partial x_2}{\partial y_1} & \frac{\partial x_2}{\partial y_2} & \cdots & \frac{\partial x_2}{\partial y_n} \\ \vdots & \vdots & \ddots & \vdots \\ \frac{\partial x_n}{\partial y_1} & \frac{\partial x_n}{\partial y_2} & \cdots & \frac{\partial x_n}{\partial y_n} \end{vmatrix}. \]
+Finally, don't forget the feasible region!
+
+So far we've seen a very natural generalization of the two-variable case discussed earlier.
+We can get similarly natural results about expected value.
+
+\begin{definition}[Expected value]
+    If $\mbf{X} = (X_1, \ldots, X_n)$ have joint PDF $f_\mbf{X}$ and $g : \R^n \to \R$ is a real-valued function, we define
+    \[ E[g(\mbf{x})] = \int_{\R^n} g(\mbf{x}) f_{\mbf{X}}(\mbf{x}) \,dx_1 \cdots dx_n. \]
+\end{definition}
+
+\begin{theorem}[Expected value of a sum]
+    For any random variables $X_1, \ldots, X_n$,
+    \[ E[X_1 + \cdots + X_n] = E[X_1] + \cdots + E[X_n]. \]
+\end{theorem}
+
+Note that this holds when $X_1, \ldots, X_n$ are not independent.
+If they are independent, then we get something familiar.
+
+\begin{theorem}[Expected value of a product]
+    If $X_1, \ldots, X_n$ are independent, then
+    \[ E(X_1 \cdots X_n) = E(X_1) \cdots E(X_n). \]
+\end{theorem}
+
+We can leverage these results to solve some neat problems.
+
+\begin{example}[The matching problem]
+    Suppose $n$ students do an assignment and their instructor wants them to grade each other's work.
+    We'd like to find the expected number of students who get their own submission back, assuming random distribution (under the condition that each student grades one submission).
+
+    We can define an ``indicator variable''
+    \[ X_i = \begin{cases} 1 & \textrm{student $i$ gets own submission}, \\ 0 & \textrm{otherwise}, \end{cases} \]
+    so $E(X_i) = 1 / n$.
+    We might think of the assignment distribution process as a sequence of $X_i$s.
+    The $X_i$ are not independent, but we can still say that
+    \[ E(X) = E(X_1 + \cdots + X_n) = E(X_1) + \cdots + E(X_n) = 1, \]
+    where $X$ is the number of students who get their own submission.
+\end{example}
+
+We could follow a very similar line of reasoning to prove what our intuition previously told us about the binomial expected value.
+
+\section{Variance and Covariance}
+Now we seek similarly convenient results about variance.
+To make this happen, we'll need some scaffolding.
+
+\begin{definition}[Covariance]
+    The covariance of $X$ and $Y$ is
+    \[ \pfn{cov}(X,Y) = E[(X - \mu_X)(Y - \mu_Y)], \]
+    where $E(X) = \mu_X$ and $E(Y) = \mu_Y$.
+\end{definition}
+
+\begin{theorem}[Covariance via expected value]
+    For any random variables $X$ and $Y$,
+    \[ \pfn{cov}(X,Y) = E(XY) - E(X) E(Y). \]
+\end{theorem}
+
+It follows that the covariance of two independent variables is zero, and that the covariance of a variable with itself (a scenario with maximum dependence) is simply its variance.
+
+This suggests some intuition as to what the covariance is quantifying.
+If $\pfn{cov} (X,Y) > 0$ then we say $X,Y$ are positively correlated, meaning higher values of $X$ are likely to correspond to higher $Y$.
+If $\pfn{cov}(X,Y) < 0$ then we analogously have negative correlation, and if $\pfn{cov}(X,Y) = 0$ then $X,Y$ are uncorrelated.
+
+We'll come back to this in a moment.
+First, let's look at some of the nice results covariance gives us.
+
+\begin{theorem}[Covariance is bilinear]
+    For any random variables $X,Y,Z$,
+    \begin{enumerate}[label=(\alph*)]
+        \item $\pfn{cov}(aX, bY) = ab \,\pfn{cov}(X,Y)$ and
+        \item $\pfn{cov} (X, Y+Z) = \pfn{cov}(X,Y) + \pfn{cov}(X,Z)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Variance of a sum]
+    For any random variables $X_1, \ldots, X_n$,    \vspace{-6pt}
+    \[ \pfn{var} (X_1 + \cdots + X_n) = \sum_{i=1}^{n} \sum_{j=1}^{n} \pfn{cov}(X_i, X_j) \]
+\end{theorem}
+
+\begin{corollary}[]
+    For independent random variables $X_1, \ldots, X_n$,
+    \[ \pfn{var}(X_1 + \cdots + X_n) = \pfn{var}(X_1) + \cdots + \pfn{var}(X_n). \]
+\end{corollary}
+
+At this point we could use indicator variables to show that, for the matching problem, $\pfn{var}(X) = 1$.
+We could similarly derive the variance of a binomial random variable.
+More novel, though, is a connection we can make to correlation.
+
+\begin{definition}[Correlation]
+    Let $X,Y$ have variances $\sigma_X^2,\sigma_Y^2$.
+    The correlation between $X$ and $Y$ is
+    \[ \rho(x,y) = \frac{\pfn{cov}(X,Y)}{\sigma_X \sigma_Y}. \]
+\end{definition}
+
+\begin{theorem}[Restrictions on correlations]
+    For any random variables $X,Y$,
+    \begin{enumerate}[label=(\alph*)]
+        \item $|\rho(X,Y)| \leq 1$ and
+        \item $\rho(X,Y) = \pm 1$ if and only if $Y$ is a linear function of $X$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Variance is strictly non-negative, so we have
+    \begin{align*}
+        0 &\leq \pfn{var} \left( \frac{X}{\sigma_X} + \frac{Y}{\sigma_Y} \right) \\
+        &= \frac{1}{\sigma_X^2} \pfn{var}(X) + \frac{1}{\sigma_Y^2} \pfn{var}(Y) + \frac{2 \pfn{cov}(X,Y)}{\sigma_X \sigma_Y} \\
+        &= 1 + 1 + 2\rho(X,Y),
+    \end{align*}
+    meaning $\rho(X,Y) \geq -1$.
+    If we instead started with $\pfn{var}(X / \sigma_X - Y / \sigma_Y)$ we'd get $\rho(X,Y) \leq 1$.
+    This proves statement (a).
+    If we'd used equalities rather than inequalities we'd get the forward direction for (b); the reverse is just some algebra.
+\end{proof}
+
+\section{Moment Generating Functions}
+We'll look at one last really important characteristic of random variables.
+We state uniqueness without proof.
+
+\begin{definition}[Moment generating function]
+    A random variable $X$ has moment generating function
+    \[ M_X(t) = E [e^{tX}]. \]
+\end{definition}
+
+\begin{theorem}[Uniqueness of an MGF]
+    If $M_{X_1}(t) = M_{X_2}(t)$ then $f_{X_1}(x) = f_{X_2}(x)$.
+\end{theorem}
+
+Notice, in general, that
+\[ M_X^{(n)}(t) = E[X^{n} e^{tX}] \;\text{ and }\; M_X^{(n)}(0) = E[X^{n}] \]
+for $n \geq 0$.
+We will sometimes refer to $E[X^n]$ as the $n$th moment of $X$.
+
+It'll be important for later to know that the MGF corresponding to $X \sim n(0,1)$ is $M_X(t) = e^{t^2 / 2}$.
+We could use this next result to quickly obtain the MGF for a general normal distribution.
+
+\begin{theorem}[]
+    If $Y = aX + b$ then $M_Y(t) = e^{bt} M_X(at)$.
+\end{theorem}
+
+Finally, a way to find the MGF of a sum of independent variables.
+
+\begin{theorem}[MGF of a sum]
+    If $X_1, \ldots, X_n$ are independent, where $X_i$ has MGF $M_{X_i}(t)$, then $Y = X_1 + \cdots + X_n$ has MGF
+    \[ M_Y(t) = \prod_{i=1}^{n} M_{X_i}(t). \]
+\end{theorem}
+
+We could use this result with indicator variables to determine the MGF of, say, the binomial distribution.
+We could also use it to prove the claim we made earlier about summing independent normal random variables.
+
+\section{Theoretical Results}
+To finish things off, we'll look at some of the more important theoretical results that are accessible to us now.
+
+\begin{theorem}[Markov's inequality]
+    For any non-negative random variable $X$, and for any real $t > 0$,
+    \[ P(X \geq t) \leq \frac{E(X)}{t}. \]
+\end{theorem}
+
+\begin{proof}
+    Fix $t > 0$ and write, for a discrete random variable,
+    \[ E(x) = \sum_{k \geq 0}^{} k \,P(X = k) \geq \sum_{k \geq t}^{} k \, P(X = k) \geq \sum_{k \geq t}^{} t \, P(X = k) = t \,P(X \geq t). \]
+    So $P(X \geq t) \leq E(X) / t$, as desired.
+    The continuous case is completely analogous.
+\end{proof}
+
+\begin{theorem}[Chebyshev's inequality]
+    If $E(X) = \mu$, then for any $t > 0$,
+    \[ P(|X - \mu| \geq t) \leq \frac{\pfn{var}(X)}{t^2}. \]
+\end{theorem}
+
+\begin{proof}
+    Let $Y = (X-\mu)^2$.
+    Note that $Y \geq 0$ and $E(Y) = \pfn{var}(X)$, so using Markov's inequality we can write
+    \[ P(|x - \mu| \geq t) = P(Y \geq t^2) \leq \frac{E(Y)}{t^2} = \frac{\pfn{var}(X)}{t^2}, \]
+    as desired.
+\end{proof}
+
+We were able to get this slightly more powerful result from a less powerful one because of our added assumption that the variance exists.
+Chebyshev's inequality is a workhorse in probability theory, but we can also prove something much more familiar.
+
+\begin{definition}[Sample mean]
+    Let $X_1, \ldots, X_n$ be independent and identically distributed random variables.
+    Their sample mean is
+    \[ \overline{X}_n = \frac{X_1 + \cdots + X_n}{n}. \]
+\end{definition}
+
+\begin{theorem}[EV and variance of a sample mean]
+    Let $X_1, \ldots, X_n$ be independent and identically distributed random variables, each with mean $\mu$ and variance $\sigma^2$.
+    Then
+    \[ E(\overline{X}_n) = \mu, \qquad \pfn{var}(\overline{X}_n) = \frac{\sigma^2}{n}. \]
+\end{theorem}
+
+\begin{theorem}[Law of large numbers]
+    $\overline{X}_n$ converges to $\mu$ in probability ($\overline{X}_n \overset{P}{\to} \mu$).
+    That is, for any $\epsilon > 0$,
+    \[ \lim_{n \to \infty} P \Big( |\overline{X}_n - \mu| < \varepsilon \Big) = 1. \]
+\end{theorem}
+
+\begin{proof}
+    For $\epsilon > 0$, by Chebyshev's inequality
+    \[ P \Big( |\overline{X}_n - \mu| \geq \epsilon \Big) \leq \frac{\pfn{var}(\overline{X}_n)}{\epsilon^2} = \frac{\sigma^2}{N \epsilon^2}. \]
+    and
+    \[ P \Big( |\overline{X}_n - \mu| < \epsilon \Big) = 1 - \frac{\sigma^2}{N\epsilon^2}. \]
+    Thus
+    \[ \lim_{n \to \infty} P \Big( |\overline{X}_n - \mu| < \varepsilon \Big) = \lim_{n \to \infty} \left( 1 - \frac{\sigma^2}{N \epsilon^2} \right) = 1, \]
+    as desired.
+\end{proof}
+
+\pagebreak
+
+\section{The Central Limit Theorem}
+For our last theoretical result, we have one of the foundational theorems of probability and statistics.
+
+\begin{theorem}[Central limit theorem]
+    Suppose the random variables $X_1, \ldots, X_n$ are independent and identically distributed with mean $\mu$ and variance $\sigma^2$.
+    The sample mean $\overline{X}_n$ is normally distributed with mean $\mu$ and variance $\sigma^2 / n$.
+\end{theorem}
+
+\begin{proof}
+    Define
+    \[ Y = \frac{\overline{X}_n - \mu}{\sigma / \sqrt{n}}. \]
+    We will show that $M_Y(t) \to e^{t^2 / 2}$ as $n \to \infty$ so that $Y$ is a standard normal random variable.
+    To this end, let $Y_i = (X_i - \mu) / \sigma$ so that
+    \[ \sum_{i=1}^{n} \frac{Y_i}{\sqrt{n}} = \frac{\sum X_i - n\mu}{\sigma \sqrt{n}} = \frac{\overline{X}_n - \mu}{\sigma / \sqrt{n}} = Y. \]
+    Now we need only find the moment generating function of each $Y_i$.
+    We can easily show that $E(Y_i) = 0$ and $\pfn{var}(Y_i) = 1$, meaning $E(Y_i^2) = 1$ and by Taylor's theorem the MGF of $Y_i$ is
+    \begin{align*}
+        M(t) &= M(0) + M'(0) t + M''(0) \frac{t^2}{2} + M'''(c) \frac{t^3}{6} \\
+        &= 1 + E(Y_i) t + E(Y_i^2) \frac{t^2}{2} + M'''(c) \frac{t^3}{6} \\
+        &= 1 + \frac{t^2}{2} + M'''(c) \frac{t^3}{6}
+    \end{align*}
+    for some $0 < c < t$.
+    Now note that a random variable $X / a$ has MGF $M_X(t / a)$ for any constant $a$, so we can write
+    \begin{align*}
+        M \left( \frac{t}{\sqrt{n}} \right) &= 1 + \frac{(t / \sqrt{n})^2}{2} + \frac{M'''(c_n)}{6} (t / \sqrt{n})^3 \\
+        &= 1 + \frac{t^2}{2n} + \frac{d_n t^3}{n \sqrt{n}} \\
+        &= 1 + \frac{t^2 / 2 + d_n t^3 / \sqrt{n}}{n},
+    \end{align*}
+    where we'de defined $d_n = M'''(c_n) / 6$.
+    We could show that $d_n$ is bounded, meaning the numerator above tends to $t^2 / 2$ as $n \to \infty$.
+    Thus
+    \[ M_Y(t) = \left( 1 + \frac{t^2 / 2}{n} \right)^{n} = e^{t^2 / 2}, \]
+    as desired.
+\end{proof}
+
+\end{document}
