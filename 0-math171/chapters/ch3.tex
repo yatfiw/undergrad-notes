@@ -1,0 +1,206 @@
+\documentclass[../m171main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Group Actions}
+\section{Action by Left Multiplication}
+We've already seen how groups can act on themselves by left multiplication, but they can also act on their own left cosets by left multiplication.
+If $H \leq G$ then $G$ acts on the left cosets of $H$ in $G$ by setting
+\[ a \cdot bH = abH \]
+for all $a,b \in G$.
+We might view this as a generalization of $G$ acting on itself---if $H = \left\{ 1 \right\}$ then there is a bijection between its cosets and the elements of $G$.
+
+\begin{theorem}[]
+    Consider the above action of $G$ on $G / H$, and let $\pi_H : G \to S_{G / H}$ denote the permutation representation of $G$ on $G / H$.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item The action is transitive---that is, for any $x,y \in G / H$ there is a $g \in G$ such that $g \cdot x = y$.
+        \item The stabilizer $G_{1H} = H$.
+        \item $\ker \pi_G = \bigcap_{x \in G} xHx^{-1}$, which is the largest normal subgroup of $G$ contained in $H$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We'll just prove (c).
+    By definition,
+    \begin{align*}
+        \ker \pi_H &= \left\{ g \in G \;|\; g \cdot xH = xH \textrm{ for all $x \in G$} \right\} \\
+        &= \left\{ g \in G \;|\; x^{-1} gx \textrm{ for all $x \in G$} \right\} \\
+        &= \left\{ g \in G \;|\; g \in xHx^{-1} \textrm{ for all $x \in G$} \right\} \\
+        &= \bigcap_{x \in G} xHx^{-1}.
+    \end{align*}
+    Now, if $N \trianglelefteq G$ and $N \leq H$ then $N = xNx^{-1} \leq xHx^{-1}$ for all $x \in G$.
+    Thus
+    \[ N \leq \bigcap_{x \in G} xHx^{-1} = \ker \pi_H \leq H, \]
+    so $\ker \pi_H$ is the largest normal subgroup of $G$ contained in $H$.
+\end{proof}
+
+We can use this to formalize an observation we made much earlier on, about being able to view some groups through the lens of permuting their elements.
+
+\begin{corollary}[Cayley's theorem]
+    Every group is isomorphic to a subgroup of some symmetric group.
+\end{corollary}
+
+\begin{proof}
+    Let $G$ act on itself by left multiplication.
+    This is equivalent to having $G$ act on the left cosets of $H = \left\{ 1 \right\}$, and the associated permutation representation $\pi_H : G \to S_{G / H}$ has a trivial kernel.
+    Thus by the first isomorphism theorem
+    \[ G \cong G / \left\{ 1 \right\} \cong \pi_H(G) \leq S_{G / H} \]
+    and $G$ is isomorphic to a subgroup of $S_{G / H}$.
+\end{proof}
+
+We can also generalize our result about subgroups of index 2 being normal.
+
+\begin{corollary}[]
+    If $|G| = n$ and $p$ is the smallest prime factor of $n$, then any subgroup $H$ of index $p$ is normal in $G$.
+\end{corollary}
+
+\begin{proof}
+    Let $K = \ker \pi_H$ and let $k = |H : K|$.
+    Then
+    \[ |G : K| = |G : H| |H : K| = pk. \]
+    By the first isomorphism theorem $G / K$ is isomorphic to $\pi_H(G)$, a subgroup of $S_{G / H} = S_p$.
+    So by Lagrange's theorem $|G / K| = pk$ must divide $|S_p| = p!$, and $k \,|\, (p-1)!$.
+
+    Now, the prime divisors of $(p-1)!$ are all less than $p$.
+    But the prime divisors of $k$ are all greater than or equal to $p$ by the minimality of $p$.
+    Thus $k$ has no prime divisors, $k = 1$, and $H = K \trianglelefteq G$.
+\end{proof}
+
+\section{Action by Conjugation}
+Groups can also act on themselves by conjugation.
+
+\begin{definition}[Conjugacy class]
+    The elements $a,b \in G$ are conjugate in $G$ if there is some $g \in G$ such that $gag^{-1} = b$.
+    In other words, $a,b$ are conjugate if they are in the same orbit under conjugation; these orbits are called conjugacy classes.
+\end{definition}
+
+% in symmetric groups the conjugacy classes are determined by "cycle types"
+
+We'll make a general statement about group actions and apply it to conjugation.
+If we have a group acting on a set $X$, then in order to determine how many elements can be ``reached'' by acting on an $x \in X$, in a rough sense we can divide out the symmetries that leave $x$ fixed.
+
+\begin{theorem}[Orbit-stabilizer theorem]
+    Let $G$ be a group acting on a nonempty set $X$.
+    For each $x \in X$, the orbit containing $x$ has size $|G : G_x|$.
+\end{theorem}
+
+\begin{proof}
+    Consider the map from the orbit of $x$ to the left cosets of $G_x$, where
+    \[ g \cdot x \mapsto g G_x. \]
+    This map is well-defined: if $g \cdot x = h \cdot x$ then $h^{-1}g$ stabilizes $x$, meaning $h^{-1} g \in G_x$ and $gG_x = hG_x$.
+    We can trace this argument in reverse to show that the map is injective.
+    It is clearly also surjective, meaning the map is a bijection and
+    \[ \big| \left\{ g \cdot x \;|\; g \in G \right\} \big| = |G / G_x| = |G : G_x|, \]
+    as desired.
+\end{proof}
+
+\begin{corollary}[]
+    If $a \in G$ then $a$ has $|G : C_G(a)|$ conjugates.
+\end{corollary}
+
+\begin{proof}
+    Under conjugation, $G_a = \left\{ g \in G \;|\; gag^{-1} = a \right\} = C_G(a)$.
+\end{proof}
+
+Now, if an element commutes with every element in $G$, it's in its own conjugacy class.
+Considering how the singleton classes together comprise $Z(G)$, and that the conjugacy classes partition $G$, we ge the following.
+
+\pagebreak
+
+\begin{theorem}[Class equation]
+    Let $g$ be a finite group and $g_1, \ldots, g_r$ be representatives of the conjugacy classes that are not in the center $Z(G)$.
+    Then
+    \[ |G| = |Z(G)| + \sum_{j=1}^{r} | G : C_G(g_j) |. \]
+\end{theorem}
+
+Notice how each of the summands here must divide $|G|$ by Lagrange's theorem.
+This can put some useful constraints on the structure of the group we're working with.
+
+\begin{theorem}[]
+    If $P$ is a group of prime-power order $p^{a}$ for some $a \geq 1$, then $Z(P) \neq \left\{ 1 \right\}$.
+\end{theorem}
+
+\begin{proof}
+    We have the class equation
+    \[ |P| = |Z(P)| + \sum_{j=1}^{r} | P : C_P(g_j) |, \]
+    where the $g_i$ are representatives of distinct non-central conjugacy classes.
+    So $C_P(g_i) \neq P$ by definition, and $p$ divides $|P : C_P(g_i)|$.
+    It follows that $p$ also divides $|Z(P)|$, meaning the center is nontrivial.
+\end{proof}
+
+Finally, we have a nice application of this theory to combinatorics---in plain terms, if a group $G$ acts on a set $X$ then the associated number of orbits is equal to the average number of $x \in X$ fixed by the $g \in G$.
+
+\begin{theorem}[Cauchy-Frobenius lemma]   % "the lemma that's not burnside's"
+    Let $G$ be a finite group acting on a nonempty finite set $X$.
+    For each $g \in G$, let
+    \[ \pfn{fix}(g) = \big| \left\{ x \in X \;|\; g \cdot x = x \right\} \big|. \]
+    Then the number of orbits of the action of $G$ on $X$ is
+    \[ \frac{1}{|G|} \sum_{g \in G}^{} \pfn{fix}(g). \]
+\end{theorem}
+
+\begin{proof}
+    First note that
+    \[ \sum_{g \in G}^{} \pfn{fix}(g) = \big| \left\{ (g,x) \in G \times X \;|\; g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
+    Any $x \in X$ has an orbit of size $|G : G_X|$, meaning the total number of orbits is
+    \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \pfn{fix}(g), \]     % the 1/size thing is prof. o's favorite trick in this class!
+    as desired.
+\end{proof}
+
+Suppose we want to count the number of ways we can color the vertices of a 3-cycle using two colors.
+We can see that there are eight ways to color the vertices, but there are two triplets that are the same up to rigid symmetry.
+To formalize this observation, let $D_6$ act on the eight colorings---if we go through each $g \in D_6$, sum the $\pfn{fix}(g)$, and divide by 6 we get 4, the number of orbits for this action.
+
+\section{The Sylow Theorems}
+As mentioned before, the first of the Sylow theorems offer a ``sharp'' partial converse to Lagrange's theorem.
+It turns out to be useful in a wide variety of contexts, including in classifying groups and, in particular, in showing when a group is not simple---that is, when a group is not trivial and has no nontrivial normal subgroups.
+(The simple groups can be thought of as the ``prime'' groups, the unique building blocks of all others.)
+We'll define some things before getting into the rest of the theorems.
+
+\begin{definition}[$p$-group]
+    Let $G$ be a finite group and let $p$ be prime.
+    \begin{itemize}[topsep=0pt]
+        \item A group of order $p^{a}$ with $a \geq 0$ is called a $p$-group.
+        Subgroups of $G$ that are $p$-groups are called $p$-subgroups.
+
+        \item If $|G| = p^{a} m$ where $p \nmid m$ then a subgroup of $G$ of order $p^{a}$ is a Sylow $p$-subgroup of $G$.
+        
+        \item The set of Sylow $p$-subgroups of $G$ is denoted by $Syl_p(G)$, and the number of these subgroups is denoted by $n_p(G)$.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[Sylow theorems]
+    Let $G$ be a finite group of order $p^{a}m$ where $p$ is prime and $p \nmid m$.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item $Syl_p(G)$ is nonempty.
+        \item If $P \in Syl_p(G)$ and $Q$ is a $p$-subgroup of $G$ then $Q$ is contained in a conjugate of $P$.
+        \item $n_p(G) \equiv 1 \bmod p$.
+        \item If $P \in Syl_p(G)$ then $n_p(G) = |G : N_G(P)|$, implying that $n_p(G)$ divides $m$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We'll prove part (a) using strong induction.
+    If $|G| = 1$ then we're done; otherwise, suppose every group with order less than $|G|$ has a Sylow $p$-subgroup.
+    We have two cases.
+
+    If $p$ divides $|Z(G)|$ then by Cauchy's theorem $Z(G)$ contains a subgroup $N$ of order $p$.
+    So $|G / N| = p^{a-1} m$ and, by the inductive hypothesis, $G / N$ has a Sylow $p$-subgroup $\overline P$ of order $p^{a-1}$.
+    By the fourth isomorphism theorem there is a subgroup $P$ of $G$ such that $P / N = \overline P$ and $|P| = p^{a}$.
+    Thus $P$ is a Sylow $p$-subgroup of $G$.
+
+    If $p$ does not divide $|Z(G)|$ then consideration of the class equation
+    \[ |G| = |Z(G)| + \sum_{i=1}^{r} |G : C_G(g_i)| \]
+    reveals that there must be some $g_i$ such that $p$ does not divide $|G : C_G(g_)i| = p^{a} k$ where $p$ does not divide $k < m$.
+    By the inductive hypothesis $C_G(g_i)$ has a Sylow $p$-subgroup $P$ of order $p^{a}$, and $P$ is also a Sylow $p$-subgroup of $G$.
+\end{proof}
+
+\begin{corollary}[]
+    $P$ is the unique $p$-subgroup of $G$ if and only if $P \trianglelefteq G$.
+\end{corollary}
+
+\begin{corollary}[]
+    If $P,P' \in Syl_p(G)$ then $P$ is conjugate to $P'$.
+\end{corollary}
+
+\end{document}

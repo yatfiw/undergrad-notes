@@ -7,17 +7,20 @@
 % ------------------------ %
 
 \documentclass[10pt,a4paper,oneside]{book}
-\input{../Templates/jointPreamble.tex}
+\input{../Templates/jointPreamble.tex} %<3
 \graphicspath{{figures/}}
 
 % ------------------------ %
 
 \usepackage{subfiles}
-
+%<3
 \begin{document}
 \tableofcontents
 \blfootnote{* \credit}
-
-\subfile{chapters/ch1} % groups
-
+%<3
+\subfile{chapters/ch1} % groups and subgroups
+\subfile{chapters/ch2} % quotient groups
+\subfile{chapters/ch3} % group actions
+% \subfile{chapters/ch4} % unsorted notes
+%<3 ur a nerd
 \end{document}

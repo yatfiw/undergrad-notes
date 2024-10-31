@@ -1,0 +1,328 @@
+\documentclass[../m171main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Quotient Groups}
+\section{Fibers and Kernels}
+At this point we've gotten a broad overview of groups and the subgroups embedded within them.
+Now we'll do something a little more sophisticated---we'll take a group and collapse it into a smaller group based on a set of characteristics decided ahead of time.
+We'll begin this discussion in the context of fibers and kernels.
+
+\begin{definition}[Fiber]
+    Let $\varphi : G \to H$ be a homomorphism.
+    We can define an equivalence relation $\sim$ on $G$ where if $x,y \in G$, then
+    \[ x \sim y \;\textrm{ iff }\; \varphi(x) = \varphi(y). \]
+    The resulting equivalence classes are called fibers.
+\end{definition}
+
+\begin{theorem}[]
+    Let $\varphi : G \to H$ be a homomorphism with kernel $K$, and let $x,y \in G$.
+    The following statements are equivalent.
+    We have the equivalent statements
+    \[ \varphi(x) = \varphi(y) \;\iff\; y^{-1} x \in K \;\iff\; xy^{-1} \in K \;\iff\; x^{-1}y \in K \;\iff\; yx^{-1} \in K. \]
+\end{theorem}
+
+The latter two bits here can be used to show something important about what fibers have to do with kernels.
+
+\begin{theorem}[]
+    Let $\varphi : G \to H$ be a homomorphism with kernel $K$.
+    The fiber containing $x \in G$ can be expressed in two different ways:
+    \[ xK = \left\{ xk \;|\; k \in K \right\}, \qquad Kx = \left\{ kx \;|\; k \in K \right\}. \]
+    In particular, note that
+    \begin{enumerate}[label=(\alph*)]
+        \item $xK = Kx$ (so $x$ is in the normalizer of $K$) and
+        \item $\varphi(x) = \varphi(y)$ if and only if $xK = yK$.
+    \end{enumerate}
+\end{theorem}
+
+In this way, each fiber of a homomorphism $\varphi$ is a ``translate'' of $\ker(\varphi)$, and these fibers partition $G$.
+It turns out that they interact in a very nice way!
+
+\begin{definition}[]
+    Let $\varphi : G \to H$ be a homomorphism with kernel $K$.
+    The set of associated fibers, called ``$G$ mod $K$'', is denoted by
+    \[ G / K = \left\{ gK \;|\; g \in G \right\}. \]
+\end{definition}
+
+\begin{theorem}[]
+    Let $\varphi : G \to H$ be a homomorphism with kernel $K$.
+    Then $G / K$ forms a group where the binary operation is given by
+    \[ (uK)(vK) = (uv)K. \]
+\end{theorem}
+
+\begin{proof}
+    Showing that the binary operation satisfies the group axioms is straightforward, but we must also show that it is well-defined---that is, it shouldn't depend on which elements we take from $uK$ and $vK$.
+
+    Say $uK = u'K$ and $vK = v'K$, so $\varphi(u) = \varphi(u')$ and $\varphi(v) = \varphi(v')$, and
+    \[ \varphi(uv) = \varphi(u) \varphi(v) = \varphi(u') \varphi(v') = \varphi(u'v'). \]
+    Thus $(uK)(vK) = (uv)K = (u'v')K = (u'K)(v'K)$ and the binary operation is well-defined.
+\end{proof}
+
+As a concrete example, consider $\varphi : D_8 \to \Z / 2\Z$ where $\varphi(s^{i} r^{j}) = \bar i$.
+We can see that $\ker(\varphi) = \left< r \right>$ and
+\[ D_8 / \left< r \right> \cong \varphi(D_8) = Z / 2\Z. \]
+Note that we'll sometimes write $\bar u$ to denote the fiber $uK$, in which case we have $\bar u \bar v = \overline{uv}$.
+
+\section{Quotients}
+We can generalize much of the above discussion to any subgroup of the group we're working with, rather than just the kernel of some homomorphism.
+
+\begin{definition}[Coset]
+    Let $N \leq G$.
+    If $g \in G$, then
+    \[ gN = \left\{ gn \;|\; n \in N \right\} \;\text{ and }\; Ng = \left\{ ng \;|\; g \in N \right\} \]
+    are left and right cosets of $N$ in $G$, respectively.
+\end{definition}
+
+Note that this time, the left and right cosets are not necessarily equal.
+We will make statements mostly about left cosets, but bear in mind that every such statement has an analog for right cosets.
+
+\begin{theorem}[]
+    If $N \leq G$ then the left cosets of $N$ in $G$ partition $G$.
+    Furthermore, for $u,v \in G$ then $uN = vN$ if and only if $v^{-1} u \in N$.
+    % "we're in the same coset if our 'difference' is in N".
+\end{theorem}
+
+\begin{proof}
+    First note that $1 \in N$, meaning $g \in gN$ for all $g \in G$ and the set of all $gN$ ``covers'' $G$.
+    Now suppose $uN \cap vN \neq \varnothing$ for some $u,v \in G$; we will show that $uN = vN$.
+
+    Let $x \in uN \cap vN$, so $x = un = vm$ for some $n,m \in N$ and $u = v \cdot mn^{-1}$.
+    Thus for a $t \in N$ we can write $ut = v \cdot mn^{-1} t$, meaning $uN \subseteq vN$.
+    By a symmetric argument we also have $vN \subseteq uN$ and $uN = vN$.
+    It follows that the left cosets of $N$ in $G$ partition $G$.
+
+    Finally, by what we saw above, $uN = vN$ if and only if $u = vn$ for some $n \in N$.
+    This happens if and only if $v^{-1} u \in N$.
+\end{proof}
+
+For the next two theorems, let $G / N$ (read aloud as ``$G$ mod $N$'') denote the left cosets of $N$ in $G$.
+
+\begin{theorem}[] \label{thm:cosets_well_defined}
+    If $N \leq G$ then the binary operation
+    \[ (uN) \cdot (vN) = (uv)N \]
+    defined on $G / N$ is well-defined if and only if $gNg^{-1} \subseteq N$ for all $g \in G$.
+\end{theorem}
+
+\pagebreak
+
+\begin{proof}
+    ($\Rightarrow$)
+    Suppose the binary operation is well-defined.
+    Then both $1,n \in N$ are representatives of the same coset, so for $g \in G$ the expression
+    \[ (1N) \cdot (g^{-1} N) = g^{-1}  \]
+    must be equivalent to
+    \[ (nN) \cdot (g^{-1} N) = (ng^{-1}) N. \]
+    Hence $\left( g^{-1} \right)^{-1} = gng^{-1} \in N$.
+    It follows that $gNg^{-1} \subseteq N$ for all $g \in G$.
+    \medskip
+
+    ($\Leftarrow$)
+    Suppose $gNg^{-1} \subseteq N$ for all $g \in G$, and let $uN = vN$ and $xN = yN$.
+    So $u = nv$ and $x = ym$ for some $m,n \in N$, and
+    \[ ux = vn \cdot ym = vy \cdot \left( y^{-1} ny \right) m, \]
+    and since the parenthetical is in $N$ we have $(ux)N = \left[ vy \cdot \left( y^{-1} ny \right) m \right] N = (vy)N$.
+\end{proof}
+
+\begin{theorem}[]
+    If the binary operation above is well defined on $G / N$, then $G / N$ forms a group with this binary operation.
+    The identity is $N = 1N$, and $(gN)^{-1} = g^{-1} N$.
+\end{theorem}
+
+We'll often refer to $G / N$ as the quotient of $G$ by $N$.
+Now, notice that the condition in Theorem 2.\ref{thm:cosets_well_defined} is stronger than it seems because conjugation is bijective.
+So really, our binary operation is well defined if and only if $gNg^{-1} = N$ for all $g \in G$.
+This evokes the normalizer we discussed earlier!
+
+\begin{definition}[Normal subgroup]
+    If $N \leq G$, we say $N$ is normal in $G$ if $gNg^{-1} = N$ for all $g \in G$.
+    In this case we write $N \trianglelefteq G$.
+\end{definition}
+
+And now, a result that ties the structure we've built here to the theory from earlier.
+
+\begin{theorem}[]   \label{thm:normal_kernel}
+    $N \trianglelefteq G$ if and only if $N$ is the kernel of some homomorphism.
+\end{theorem}
+
+\begin{proof}
+    ($\Rightarrow$)
+    If $N \trianglelefteq G$ then $N$ is the kernel of the ``natural projection'' homomorphism $\varphi : G \to G / N$ where $\varphi(g) = gN$.
+    \medskip
+
+    ($\Leftarrow$)
+    If $N$ is the kernel of some homomorphism then $gN = Ng$ and $gNg^{-1} = N$ for all $g \in G$.
+\end{proof}
+
+\section{More on Cosets}
+We'll begin here with a powerful result about the structure of cosets in a group and a couple of corollaries.
+
+\begin{theorem}[Lagrange's theorem]
+    If $G $is a finite group and $H \leq G$, then $|H|$ divides $|G|$ and there are $|G| / |H|$ left cosets of $H$ in $G$.
+\end{theorem}
+
+\begin{proof}
+    Suppose there are $k$ left cosets of $H$ in $G$; these left cosets partition $G$.
+    Now, the map $H \to gH$ defined by $h \mapsto gh$ is a surjection, and it is injective since $gh_1 = gh_2$ implies $h_1= h_2$.
+    So there is a bijection form $H$ to $gH$ and $|H| = |gH|$.
+
+    $G$ is partitioned into $k$ disjoint subsets, each of cardinality $|H|$, so $|G| = k|H|$.
+    Thus $k = |G| / |H|$.
+\end{proof}
+
+\begin{corollary}[]
+    If $G$ is a finite group and $x \in G$, then $|x|$ divides $|G|$ and $x^{|G|} = 1$.
+    % because |x| = |<x>|
+\end{corollary}
+
+\begin{corollary}[]
+    If $G$ is a finite group of prime order $p$, then $G$ is cyclic and $G \cong \Z / p\Z$.
+\end{corollary}
+
+Note that the converse to Lagrange's theorem is not, in general, true.
+Before we give a counterexample, we'll make another straightforward statement about cosets.
+
+\begin{definition}[Index of a subgroup]
+    If $G$ is a (potentially infinite) group and $H \leq G$, then the number of left cosets of $H$ in $G$ is the index of $H$ in $G$.
+    It is denoted by $|G : H|$.
+\end{definition}
+
+\begin{theorem}[]
+    If $H \leq G$ and $|G : H| = 2$ then $H \trianglelefteq G$.
+\end{theorem}
+
+\begin{proof}
+    The left and right cosets of $H$ and $G$ are equal.
+    In particular, if $g \in G - H$, then the set of left cosets of $H$ in $G$ is $\left\{ H, gH \right\}$, the set of right cosets is $\left\{ G, Hg \right\}$.
+\end{proof}
+
+Now let $A$ be the group of symmetries of a regular tetrahedron (so $|A| = 12$), and suppose $A$ had a subgroup of order 6.
+Then $|A : H| = 2$, meaning $H$ is a normal subgroup of $A$ and $A / H \cong Z / 2\Z$.
+It follows that $(aH)^2 = H$ for all $a \in A$, implying that $a^2 H = H$ and $a^2 \in H$ for all such $a$.
+But if $|a| = 3$ then $a = (a^2)^2$ and $a \in H$, so $H$ contains all elements in $A$ of order $3$.
+The fact that $A$ has at least eight elements of order 3 brings us to a contradiction.
+
+Happily, Lagrange's theorem has some good partial converses, neither of which we will prove now.
+
+\begin{theorem}[Cauchy's theroem]
+    If $G$ is a finite group and $p$ is a prime divisor of $|G|$, then $G$ has an element of order $p$.
+\end{theorem}
+
+\begin{theorem}[First Sylow theorem]
+    If $G$ is a finite group of order $p^{\alpha} m$ where $p$ is prime and $p$ does not divide $m$,    % so this looks like the prime factorization of |G|
+    then $G$ has a subgroup of order $p^{\alpha}$.
+\end{theorem}
+
+It turns out that this result from Sylow is provably the strongest partial converse to Lagrange's theorem.
+We'll come back to this it later---for now, we'll finish off the section with some more useful facts about cosets.
+
+\begin{theorem}[]
+    Let $H$ and $K$ be subgroups of $G$, and define $HK = \left\{ hk \,|\, h \in H, \, k \in K \right\}$.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $H$ and $K$ are finite then $|HK| = |H| |K| / |H \cap K|$.
+        \item $HK$ is a subgroup of $G$ if and only if $HK = KH$.
+        \item If $H \leq N_G(K)$ then $HK \leq G$.
+        \item If $K \trianglelefteq G$ then $HK \leq G$ for any $H \leq G$.
+    \end{enumerate}
+\end{theorem}
+
+\section{The Isomorphism Theorems}
+Here we'll give a few important results surrounding quotient groups and homomorphisms.
+The first is essentially a formalization of the ideas we started the chapter with.
+
+\begin{theorem}[First isomorphism theorem]
+    If $\varphi : G \to H$ is a homomorphism then
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ker(\varphi) \trianglelefteq G$ and
+        \item $G / \ker(\varphi) \cong \varphi(G)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (Sketch)
+    We've already proved (a) as Theorem 1.\ref{thm:normal_kernel}.
+    For (b), define $\Phi : G / \ker (\varphi) \to \varphi(G)$ via $\Phi(g \ker (\varphi)) = \varphi(g)$.
+    We'd show, from here, that $\Phi$ is well-defined and is a bijective homomorphism.
+\end{proof}
+
+For our next theorem, let $B$ normalize a subgroup $A$ of $G$ and suppose we want to say something about the ``quotient'' of $A$ by $B$.
+Since $B$ isn't necessarily a subgroup of $A$, we have to do one of two things first: expand $A$ to include the elements in $B$, or contract $B$ to exclude elements not in $A$.
+
+\begin{theorem}[Second isomorphism theorem]
+    Let $A,B$ be subgroups of a group $G$, where $A \leq N_G(B)$.
+    Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $B \trianglelefteq AB$ and $A \cap B \trianglelefteq A$.
+        \item $AB / B \cong A / (A \cap B)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    The first part of (a) will be proved soon.
+    For the second part, if $c \in A \cap B$ and $A \in A$ then $aca^{-1} \in A$ (because $c \in A$) and $aca^{-1} \in B$ (because $a \in N_G(B)$).
+    Thus $aca^{-1} \in A \cap B$, so $A \cap B \trianglelefteq A$.
+
+    For (b), define a map $\varphi : AB \to A / (A \cap B)$ via
+    \[ \varphi(ab) = a (A \cap B), \quad a \in A, \; b \in B. \]
+    We quickly show that $\varphi$ is well-defined: if $ab = a_1b_1$ then $a_1^{-1} a = b_1b^{-1}$, meaning $a_1^{-1} a \in A \cap B$ and $a (A \cap B) = a_1 (A \cap B)$.
+    Now, $\varphi$ is a homomorphism because
+    \begin{align*}
+        \varphi \big( (ab) (a_1 b_1) \big) &= \varphi \big( aa_1 \cdot a_1^{-1} b a_1 \cdot b_1 \big) \\
+        &= aa_1 (A \cap B) \\
+        &= \big( a (A \cap B) \big) \big( a_1 (A \cap B) \big) \\
+        &= \varphi(ab) \varphi(a_1 b_1).
+    \end{align*}
+    The kernel of $\varphi$ is, by definition,
+    \[ \ker(\varphi) = \left\{ ab \,|\, a \in A, \, b \in B, \, a \in A \cap B \right\} = B. \]
+    Finally, $\varphi(AB) = A / (A \cap B)$ because each coset of $A \cap B$ has a representative in $A$.
+    So by the first isomorphism theorem, $B \trianglelefteq AB$ and $AB / B \cong A / (A \cap B)$.
+\end{proof}
+
+Our third theorem concerns taking quotients of quotients and is a bit more intuitive.
+
+\begin{theorem}[Third isomorphism theorem]
+    Let $H$ and $K$ be normal subgroups of a group $G$ where $H \leq K$.
+    Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $K / H \trianglelefteq G / H$.
+        \item $(G / H) / (K / H) \cong G / K$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Define $\varphi : G / H \to G / K$ by $\varphi(gH) = gK$.
+    Notice that $gH = g_1H$ implies $g_1^{-1} g \in H \leq K$, meaning $gK = g_1 K$ and $\varphi$ is well-defined.
+    It is easy to see that $\varphi$ is surjective, and the kernel is
+    \begin{align*}
+        \ker(\varphi) &= \left\{ gH \in G / H \;|\; gK = K \right\} \\
+        &= \left\{ gH \in G / H \;|\; g \in K \right\} \\
+        &= K / H.
+    \end{align*}
+    Both (a) and (b) follow from the first isomorphism theorem.
+\end{proof}
+
+The final theorem here relates the subgroup structure of $G$ to that of $G / N$.
+In particular, the subgroups of $G / N$ have the same structure as the subgroups of $G$ containing $N$.
+
+\begin{theorem}[Fourth isomorphism theorem]
+    Let $G$ be a group and let $N$ be a normal subgroup of $G$.
+    Then there is a bijection from the set of subgroups $A$ of $G$ containing $N$ onto the set of subgroups $\overline A = A / N$ of $\overline G = G / N$.
+    This bijection has the following properties: for all $A,B \leq G$ with $N \leq A$ and $N \leq B$,
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item $A \leq B$ if and only if $\overline A \leq \overline B$,
+        \item if $A \leq B$ then $|B : A| = |\overline B : \overline A|$,
+        \item $\overline{\left< A,B \right>} = \left< \overline A, \overline B \right>$,
+        \item $\overline{A \cap B} = \overline A \cap \overline B$, and
+        \item $A \trianglelefteq G$ if and only if $\overline A \trianglelefteq \overline G$.
+    \end{enumerate}
+\end{theorem}
+
+%<3
+% QUOTES
+% "Let's get your mathematical spleen going here."
+% "Sylow's theorem-- *sledgehammer noise*"
+% "Every time I hear `coset' I think of Cosette from Les Mis"
+% "If this were a hike you'd still be able to see the parking lot. And we're about to turn a corner, so you need to rest up."
+% "So wouldn't it be cool, and the answer is yes, ..."
+
+\end{document}
