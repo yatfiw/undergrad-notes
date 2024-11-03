@@ -1,0 +1,153 @@
+\documentclass[../p111main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Oscillators}
+\section{Oscillations about Equilibria}
+Now we'll spend some time developing the theory of small oscillations about equilibria.
+It turns out to be incredibly powerful and far-reaching, as far as physics goes!
+
+The general form of a one-dimensional Lagrangian is
+\[ L = \frac{1}{2} M(q) \dot q^2 - U(q). \]
+We know, by now, that every equilibrium point $q_0$ looks like a harmonic oscillator when we look closely enough; when we define the displacement $\delta \equiv q - q_0$ from equilibrium and do a second-order (to preserve the kinetic energy) Taylor expansion our Lagrangian becomes
+\begin{align*}
+    L &= \frac{1}{2} M(q_0 + \delta) \dot \delta^2 - U(q_0 + \delta) \\
+    &\approx \frac{1}{2} M(q_0) \dot \delta^2 - \frac{1}{2}U''(q_0) \delta^2,
+\end{align*}
+plus a constant that vanishes upon finding the Euler-Lagrange equation
+\[ M(q_0) \ddot \delta = -U''(q_0) \delta \;\implies\; \ddot \delta = \frac{U''(q_0)}{M(q_0)} \delta. \]
+For $U''(q_0) < 0$ we get exponential solutions and our implicit $|\delta| \ll q_0$ assumption quickly goes invalid.
+But $U''(q_0) > 0$ gives oscillations with
+\[ \omega^2 = \frac{U''(q_0)}{M(q_0)}. \]
+This idea of determining the behavior of the system will reappear in our discussion of more complex oscillators.
+
+\section{Two Coupled Oscillators}
+Consider two masses $m$ in a space between two walls.
+Each mass is connected to its respective wall with a spring $k$, and the masses are connected to one another with a spring $k$'.
+The masses' rightward displacements from equilibrium are given by $x_1, x_2$.
+The Lagrangian of this setup is
+\[ L = \frac{1}{2} m \left( \dot x_1^2 + \dot x_2^2 \right) - \frac{1}{2} k \left( x_1^2 + x_2^2 \right) - \frac{1}{2} k' \left( x_1 - x_2 \right)^2, \]
+and the Euler-Lagrange equations are
+\begin{align*}
+    m \ddot x_1 &= -k x_1 - k' x_1 + k' x_2, \\
+    m \ddot x_2 &= -k x_2 - k' x_2 + k' x_1.
+\end{align*}
+If we define $x_+ \equiv x_1 + x_2$ and $x_- \equiv x_1 - x_2$ then we can decouple these equations:
+\[ m \ddot x_+ = -kx_+, \qquad m\ddot x_- = -(k + 2k') x_-. \]
+So our solutions are
+\begin{align*}
+    x_+(t) &= A_+ \cos (\omega_+ t + \delta_+), \quad \omega_+^2 \equiv k / m, \\
+    x_-(t) &= A_- \cos (\omega_- t + \delta_-), \quad \omega_-^2 \equiv (k + 2k') / m.
+\end{align*}
+We can write this in a way that's a bit more suggestive of what this is hinting at.
+If we define a vector $\mbf{X}(t)$ whose components are $x_1(t)$ and $x_2(t)$ then we have
+\[ \mbf{X}(t) = \begin{bmatrix} (x_+ + x_-) / 2 \\ (x _+ - x_-) / 2 \end{bmatrix} = \frac{A_+}{2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} \cos (\omega_+ t + \delta_+) + \frac{A_-}{2} \begin{bmatrix} 1 \\ -1 \end{bmatrix} \cos (\omega_- t + \delta_-). \]
+Each term here corresponds to an eigenmode of our system: the first represents the ``together'' motion of the two masses, while the second corresponds to the ``apart'' motion.
+
+It will soon become useful for us to have this solution in complex form.
+We can write
+\begin{align*}
+    \mbf{X}(t) &= \pfn{Re} \left( \frac{A_+}{2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} e^{i \omega_+ t} e^{i \delta_+} + \frac{A_-}{2} \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{i \omega_- t} e^{i \delta_-} \right), \\
+    \intertext{and if we define $C_+ = (A_+ / 2) e^{i\delta_+}$ with the first normal mode $\mbf{Z}_+$ (along with analogous quantities $C_-, \mbf{Z}_-$),}
+    &= \pfn{Re} \Big( C_+ \mbf{Z}_+ e^{i\omega_+ t} + C_- \mbf{Z}_- e^{i\omega_- t} \Big).
+\end{align*}
+We've gone from four free parameters to just two!
+(This is just taking advantage of the fact that one complex number encodes the same amount of information as two real numbers.)
+
+\subsection*{An Eigenvalue Problem}
+Now, we could've come to all the same conclusions in a much more streamlined way using some linear algebra.
+Notice that we could've written our original (coupled) Euler-Lagrange equations as
+\[ \ddot{\mbf{X}} = -\frac{1}{m} \mbf{K} \mbf{X}, \qquad \mbf{K} = \begin{bmatrix} k + k' & -k' \\ -k' & k + k' \end{bmatrix}. \]
+Rather than solve this problem directly, we'll say that $\mbf{X}(t) = \pfn{Re}(\mbf{Z(t)})$ for some complex-valued function $\mbf{Z}$ and focus on $\ddot{\mbf{Z}} = -(1 / m) \mbf{K} \mbf{Z}$.
+Substituting the ansatz $\mbf{Z}(t) = \mbf{Z}_0 e^{i \omega t}$ for some constant vector $\mbf{Z}_0$ gives
+\begin{align*}
+    (i\omega)^2 \mbf{Z}_0 e^{i\omega t} &= -\frac{1}{m} \mbf{K} \mbf{Z}_0 e^{i\omega t}, \\
+    m \omega^2 \mbf{Z}_0 &= \mbf{K} \mbf{Z}_0.
+\end{align*}
+This is a classic eigenvalue problem!
+Going through the motions tells us that we have eigenvalues when
+\[ \omega^2 = \frac{k}{m} \;\text{ or }\; \omega^2 = \frac{k + 2k'}{m}, \]
+just like we've already found.
+The corresponding eigenvectors are the $\mbf{Z}_+$ and $\mbf{Z}_-$ from before.
+
+\subsection*{Weak Coupling}
+Now let's quickly look at the weak coupling limit $k' \ll k$.
+Here we have
+\[ \omega_2 = \sqrt{\frac{k}{m}} \sqrt{1 + \frac{2k'}{k}} \approx \sqrt{\frac{k}{m}} \left( 1 + \frac{1}{2} \frac{2k'}{k} \right) = \omega_1 + \frac{k'}{\sqrt{mk}}. \]
+If $\omega_0 = (\omega_+ + \omega_-) / 2$ and $\Delta \omega = \omega_- - \omega_+$ then our solution from before becomes
+\[ \mbf{Z}(t) = e^{i\omega_0 t} \left( C_1 \begin{bmatrix} 1 \\ 1 \end{bmatrix} e^{-i \Delta \omega \,t} + C_2 \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{i \Delta \omega \,t} \right). \]
+If mass 2 initially has zero displacement then substituting $x_2(0) = 0$ gives $C_1 = C_2$ and
+\[ \mbf{Z}(t) = C_1 e^{i \omega_0 t} \begin{bmatrix} e^{-i \Delta \omega \,t} + e^{i \Delta \omega \,t} \\ e^{-i \Delta \omega \,t} - e^{i \Delta \omega \,t} \end{bmatrix} = 2 C_1 e^{i\omega_0 t} \begin{bmatrix} \cos \Delta \omega \,t \\ -i \sin \Delta \omega \,t \end{bmatrix}. \]
+Defining $C_1 = D_1 e^{i \delta_1}$ for real $D_1, \delta_1$ gives
+\[ \mbf{X}(t) = \pfn{Re}(\mbf{Z}(t)) = D_1 \begin{bmatrix} \cos(\omega_0 t + \delta_1) \cos (\Delta \omega \,t) \\ \sin(\omega_0 t + \delta_1) \sin (\Delta \omega \,t) \end{bmatrix}. \]
+So $x_1(t)$ and $x_2(t)$ both look like beats with out-of-phase envelopes!
+
+\section{Several Coupled Oscillators}
+Now let's look at a system of $N$ coupled oscillators near equilibrium (at $q_1 = \cdots = 0$).
+To second order,
+\[ U(q) \approx U(0) + \frac{1}{2} \sum_{i,j}^{} q_i q_j \frac{\partial^2 U(0)}{\partial q_i \partial q_j}, \]
+where the linear terms have gone to zero because $U(0)$ is a minimum.
+We'll define a symmetric matrix $\mbf{K}$ with entries
+\[ \mbf{K}_{ij} = \frac{\partial^2 U(0)}{\partial q_i \partial q_j} \]
+so we can write
+\[ U(q) = \frac{1}{2} \sum_{i,j}^{} q_I \mbf{K}_{ij} q_j = \frac{1}{2} \mbf{X}^T \mbf{K} \mbf{X}, \]
+where $\mbf{X}$ is a coordinate vector with components $q_1, \ldots, q_N$.
+We can do a similar thing with the kinetic energy which, including only the second-order terms, looks like
+\begin{align*}
+    T &\approx \frac{1}{2} \mbf{M}(q)_{11} \dot q_1^2 + \frac{1}{2} \mbf{M}(q)_{12} \dot q_1 \dot q_2 + \frac{1}{2} \mbf{M}(q)_{13} \dot q_1 \dot q_3 + \cdots \\
+    &= \frac{1}{2} \sum_{i,j}^{} \dot q_i \mbf{M}_{ij}(0) \dot q_j \\
+    &= \frac{1}{2} \dot{\mbf{X}}^T \mbf{M}(0) \dot{\mbf{X}}, \qquad \mbf{M}_{ij} = \frac{\partial T}{\partial \dot q_i \partial \dot q_j}.
+\end{align*}
+So the Lagrangian is
+\[ L = \frac{1}{2} \sum_{i,j}^{} \dot q_i \mbf{M}_{ij} \dot q_j - \frac{1}{2} \sum_{i,j}^{} q_i \mbf{K}_{ij} q_j. \]
+Let's now derive the Euler-Lagrange equation for $q_k$.
+We have
+\begin{align*}
+    \frac{\partial L}{\partial q_k} &= -\frac{1}{2} \sum_{i,j}^{} \mbf{K}_{ij} \frac{\partial}{\partial q_k} (q_i q_j) \\
+    &= -\frac{1}{2} \sum_{i,j}^{} K_{ij} \left( q_j \delta_{ik} + q_i \delta_{jk} \right) \\
+    &= -\frac{1}{2} \sum_{j}^{} K_{kj} q_j - \frac{1}{2} \sum_{i}^{} K_{ik} q_i \\
+    &= -(\mbf{K} \mbf{X})_k
+\end{align*}
+We could similarly show that $\partial L / \partial \dot q_k = (\mbf{M} \dot{\mbf{X}})_k$, meaning $(\mbf{M} \ddot{\mbf{X}})_k = -(\mbf{K} \mbf{X})_k$ and, in all, the Euler-Lagrange equations are
+\[ \mbf{M} \ddot{\mbf{X}} = -\mbf{K} \mbf{X}. \]
+When we go to solve these, we once again define a complex-valued $\mbf{Z}$ satisfying $\mbf{X}(t) = \pfn{Re}(\mbf{Z}(t))$ to write $\mbf{M} \ddot{\mbf{Z}} = -\mbf{K} \mbf{Z}$.
+Substituting the ansatz $\mbf{Z}(t) = \mbf{Z}_0 e^{i \omega t}$ gives
+\[ \omega^2 \mbf{M} \mbf{Z}_0 = \mbf{K} \mbf{Z}_0 .\]
+This is what we call a generalized eigenvalue problem!
+We'd proceed by solving $\det (\mbf{K} - \omega^2 \mbf{M}) = 0$ and them finding the null space of $\mbf{K} - \omega^2 \mbf{M}$ for each of the resulting eigenvalues.
+Note that each of the eigenvalues $\omega^2$ will turn out to be real and positive, and that all of the eigenvectors $\mbf{Z}_i$ satisfy $\mbf{Z}_i^T \mbf{M} \mbf{Z}_j = 0$.
+(This is what we'll mean by orthogonality in this context.)
+
+\pagebreak
+
+\section{Linear Resonance}
+Consider, now, an isolated damped oscillator with mass $m$, spring constant $k$, damping coefficient $b$, and driving force $F_d$.
+By Newton's second law we have
+\begin{align*}
+    m \ddot x + b \dot x + k x &= F_d, \\
+    \ddot x + 2\beta \dot x + \omega_0^2 x &= \frac{F_d}{m},
+\end{align*}
+where $2\beta \equiv b / m$ and $\omega_0^2 \equiv k / m$.
+We could show that the homogeneous solutions to this differential equation decay exponentially in time, so we'll ignore them in this discussion.
+As for the particular solution, take $F_d(t) = \cos (\omega t)$ and define $x(t) = \pfn{Re}(z(t))$, turning the equation into
+\[ \ddot z + 2\beta \dot z + \omega_0^2 z = f e^{i\omega t}. \]
+Substituting the ansatz $z = Ae^{i \omega t}$ yields
+\[ A = \frac{f}{\omega_0^2 - \omega^2 + 2i \beta \omega} = \frac{f(\omega_0^2 - \omega^2)}{(\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2} - i \frac{2\beta\omega f}{(\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2}, \]
+where in the last expression we'e multiplied by the conjugate of the first denominator.
+So if $A = a + bi$ then we could show that our solution looks like
+\begin{align*}
+    x_p(t) &= \pfn{Re} \big[ (a + bi)(\cos \omega t + i \sin \omega t) \big] \\
+    &= C \cos (\omega t + \delta),
+\end{align*}
+where
+\[ C = \frac{f}{\big[ (\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2 \big]^{1 / 2}}, \qquad \tan \delta = \frac{2\beta \omega}{\omega_0^2 - \omega^2}. \]
+Note that $C$ is maximized at $\omega = \omega_0$, and that the maximum value is $C_\textrm{max} = f / 2\beta \omega_0$.
+But $\omega_0$ is not the only frequency that gets amplified---to communicate the ``characteristic width'' of amplified frequencies, we'll say we want $(\omega_0^2 - \omega^2)^2 \sim 4 \beta^2 \omega^2$ and so
+\[ (\omega_0 + \omega)(\omega_0 - \omega) \sim 2\beta \omega \;\implies\; (\omega_0 - \omega) \sim \beta \]
+if we take $\omega_0 + \omega \sim 2\omega$.
+So $2\beta$, in a sense, communicates the width of frequencies that get amplified!
+The output phase changes with different input frequencies, too---in certain limiting cases we have
+\[ \delta = \begin{cases} 0 & \omega \ll \omega_0, \\ \pi & \omega \gg \omega_0, \\ \pi / 2 & \omega = \omega_0. \end{cases} \]
+
+\end{document}

@@ -1,10 +1,149 @@
-\documentclass[../m157main.tex]{subfiles}
+\documentclass[../p111main.tex]{subfiles}
 \graphicspath{{\subfix{../figures/}}}
 
 \begin{document}
 
-\chapter{Unsorted Notes}
-\section{Lecture 1}
-thing here
+\chapter{Lagrangian Mechanics}
+\section{The Principle of Least Action}
+Newtonian mechanics provides a nice, intuitive interpretation of how forces cause motion: a force pushes on an object at a given place and at a given time, nudging it along its trajectory.
+The issue with this ``local'' approach is that, if we only have information about some snapshots of time, some more general properties or symmetries of the system can get obscured.
+It's also quite unpleasant to write Newton's laws in different coordinate systems, even relatively simple ones like polar coordinates!
+
+For our new formulation of mechanics, let's start with 1D motion under the influence of conservative forces.
+Suppose we toss a ball into the air, and we want to find a function $x(t)$ on $t \in [t_i, t_f]$ that represents its height over time.
+In our new approach, every path the ball could take has an associated number $S$ called the action:
+\[ S \equiv \int_{t_i}^{t_f} L(x(t), \dot x(t), t) \,dt, \]
+where $L$ is called the Lagrangian, which is in turn defined by
+\[ L \equiv T - U. \]
+Here, $T$ and $U$ are the kinetic and potential energies, respectively.
+($S[x(t)]$ is called a functional. as it takes a path as an input and spits out a number.)
+The principle of least action states that the path the ball actually takes is the one with the smallest $S$---to actually apply this, we'll need the calculus of variations.
+
+\subsection*{Minimizing the Action}
+Recall that the Taylor expansion about $x_0$ of a single-variable function is
+\[ f(x) = f(x_0 + \Delta x) = f(x_0) + \frac{df}{dx}(x_0) \Delta x + \frac{1}{2} \frac{d^2f}{dx^2} (x_0) \Delta x^2 + \cdots. \]
+If $x_0$ has a minimum for $f$ then to first order in $\Delta x$ we have $f(x_0) \approx f(x_0 + \Delta x)$.
+This gives an alternative interpretation for minima which will prove useful when we go to minimize our action functional.
+Note that this we can generalize this to multivariable functions---for two variables we have, to first order,
+\[ \frac{\partial f}{\partial x} (x_0, y_0) \Delta x + \frac{\partial f}{\partial y} (x_0, y_0) \Delta y = 0 \]
+at a minimum.
+Since this equation holds for any small $\Delta x$ and $\Delta y$, the only solution is for both partial derivatives to be zero, like we'd expect.
+
+Now let's apply all this in our action minimization problem.
+Suppose there is a path $x_0(t)$ that minimizes $S$, meaning the action is unchanged under tiny variations and $S[x_0(t) + \Delta x(t)] = S[x_0(t)]$.
+We could show, using a first-order Taylor expansion, that
+\[ S[x_0(t) + \Delta x(t)] - S[x_0(t)] = \int_{t_1}^{t_2} dt \left( \frac{\partial L(x, \dot x, t)}{\partial x} \Delta x + \frac{\partial L(x, \dot x, t)}{\partial \dot x} \Delta \dot x \right). \]
+So to minimize the action we solve the equation
+\[ \int_{t_1}^{t_2} \left( \frac{\partial L}{\partial x} \Delta x + \frac{\partial L}{\partial \dot x} \frac{d}{dt} (\Delta x) \right) dt = 0. \]
+We'd like to make this look a little simpler, though.
+Ignoring the first term for now, we'll do integration by parts on the second term:
+\[ \int_{t_i}^{t_f} \frac{\partial L}{\partial \dot x} \frac{d}{dt} (\Delta x) \,dt = \frac{\partial L}{\partial \dot x} \Delta x \Bigg|_{t_i}^{t_f} - \int_{t_i}^{t_f} \frac{d}{dt} \left( \frac{\partial L}{\partial \dot x} \right) \Delta x \,dt. \]
+In order for this variational approach to make sense, we should keep $\Delta x(t_i) = \Delta x(t_f) = 0$ so that our ``varied'' function still starts and ends at the same point.
+So the first term disappears, and our equation becomes
+\[ \int_{t_1}^{t_2} \left[ \frac{\partial L}{\partial x} - \frac{d}{dt} \left( \frac{\partial L}{\partial \dot x} \right) \right] \Delta x \,dt = 0. \]
+Because this must hold for any choice of $\Delta x(t)$, the bracketed factor must be zero.
+This gives us the Euler-Lagrange equation
+\[ \frac{d}{dt} \frac{\partial L}{\partial \dot x} = \frac{\partial L}{\partial x}. \]
+This variational principle can be applied to a variety of scenarios---the general method is to write down the ``action'' integral we'd like to minimize, extract a ``Lagrangian'', and write down the corresponding Euler-Lagrange equation.
+
+\subsection*{Generalized Coordinates}
+Now, perhaps most important about what we've done here is that it is completely equivalent to Newton's framework!
+For a particle moving along the $x$-axis we have the Lagrangian $L = m \dot x^2 / 2 - U(x)$ and the Euler-Lagrange equation
+\[ m \ddot x = -\frac{dU}{dx}, \]
+which we recognize this as Newton's second law.
+But in a sense the Lagrangian formalism is more powerful than the Newtonian one because for any choice of coordinate $q$ we can write
+\[ \frac{d}{dt} \frac{\partial L}{\partial \dot q} = \frac{\partial L}{\partial q}, \]
+but we cannot in general write $m \ddot q = -\partial U / \partial q$.
+(A modification of this equation does work, of course, but things get messy when $q$ is non-rectangular.)
+We call $q$ a generalized coordinate because it really can be anything---linear, angular, or something more creative and exotic.
+In practice we take whatever best respects the constraints and symmetries of the problem at hand.
+
+Even better, Lagrangian mechanics allows us to more easily work in accelerating reference frames!
+Because the Euler-Lagrange equation is valid for any generalized coordinate, we can simply calculate the Lagrangian in an inertial reference frame (using an accelerating coordinate) and the Euler-Lagrange equation will spit out the equation of motion we're looking for.
+
+Lastly, as expected, everything we've just done also applies to systems that are described using several generalized coordinates.
+In two dimensions the action is
+\[ S = \int_{t_i}^{t_f} L(q_1, \dot q_1, q_2, \dot q_2, t) \,dt \]
+which, when minimized, yields the Euler-Lagrange equations
+\[ \frac{d}{dt} \frac{\partial L}{\partial \dot q_1} = \frac{\partial L}{\partial q_1}, \qquad \frac{d}{dt} \frac{\partial L}{\partial \dot q_2} = \frac{\partial L}{\partial q_2}. \]
+This generalizes to systems with several coordinates.
+(We define a system's number of degrees of freedom to be the minimum number of generalized coordinates needed to characterize its motion.)
+
+\section{Noether's Theorem and the Hamiltonian}
+We've already shown that the Euler-Lagrange equations are equivalent to Newton's second law $dp / dt = F$, but we might also notice that the two sets of equations take very similar forms.
+So we'll often refer to the quantities
+\[ p_{i} = \frac{\partial L}{\partial \dot q_i} \;\;\text{ and }\;\; F_i = \frac{\partial L}{\partial q_i} \]
+as the generalized momentum and generalized force, respectively, in the $q_i$ direction.
+
+Now, a coordinate $q_i$ is called cyclic if $\partial L / \partial q_i = 0$ or, equivalently, if $q_i$ does not appear anywhere in $L$.
+The Euler-Lagrange equations reveal that cyclic coordinates have $dp_i / dt = 0$, meaning their component of the generalized momentum is conserved!
+
+We might formalize this a little more in terms of symmetries, coordinate transformations which leave the action unchanged---for example, if $q_i$ does not appear in the Lagrangian then we can translate $q_i$ in any way we'd like (say, by adding a $\Delta q_i$) without changing the action.
+In particular, such a transformation encodes a continuous symmetry because the ``step size'' $\Delta q_i$ can vary continuously while still being a symmetry.
+This particular kind of symmetry is what leads to conservation of $p_i$.
+
+These observations bring us to Noether's theorem: every continuous symmetry of the action has a corresponding conserved quantity.
+These symmetries tend to have striking physical interpretations---translational symmetry, for example, just means that the evolution of a system is completely independent of where it is in space, or perhaps how it's oriented.
+This fact alone is enough to conclude that the system's linear momentum or angular momentum is conserved.
+
+Translational symmetry is easy enough to intuit when spatial coordinates are being translated.
+When it's time being translated, we're really just looking at whether a system's evolution is dependent on when we set $t=0$.
+Still simple in concept, but it isn't at all obvious what the associated conserved quantity should be.
+
+Consider a Lagrangian $L(x, \dot x, t)$ for which $\partial L / \partial t = 0$.
+Certainly $L$ is not conserved, but maybe computing $dL / dt$ will be illuminating anyway:
+\begin{align*}
+    \frac{d L}{d t} &= \frac{\partial L}{\partial x} \frac{dx}{dt} + \frac{\partial L}{\partial \dot x} \frac{d \dot x}{dt} + \frac{\partial L}{\partial t} \\
+    &= \frac{\partial L}{\partial x} \dot x + \frac{\partial L}{\partial \dot x} \frac{d}{dt} (\dot x) \\
+    &= \frac{d}{dt} \left( \frac{\partial L}{\partial \dot x} \right) \dot x + \frac{\partial L}{\partial \dot x} \frac{d}{dt} (\dot x) \\
+    &= \frac{d}{dt} \left( \dot x \frac{\partial L}{\partial \dot x} \right).
+\end{align*}
+Noticing derivatives on either side of the equation, we can force a conserved quantity by simply rearranging:
+\[ 0 = \frac{d}{dt} \left( \dot x \frac{\partial L}{\partial \dot x} - L \right). \]
+We call the conserved parenthetical the Hamiltonian,
+\[ H = \dot x \frac{\partial L}{\partial \dot x} - L. \]
+In several dimensions this is
+\[ H = \left( \sum_{i}^{} p_i \dot q_i \right) - L = \left( \sum_{i}^{} \dot q_i \frac{\partial L}{\partial \dot q_i} \right) - L. \]
+This is a pretty abstract quantity, but it might not be too hard to guess that it's closely connected to the total mechanical energy in a system.
+In particular, we have $H = T + U$ whenever the transformation from Cartesian coordinates to whatever generalized coordinates we're using is time-independent.
+We'll spend the rest of the section proving this fact in three dimensions.
+
+Let $r_i$ and $q_i$ denote Cartesian and generalized coordinates, respectively, for $i = 1, 2, 3$, and let the transformation between these coordinates be encoded by $r_i = f_i(q_1, q_2, q_3, t)$.
+If these $r_i$ are time-independent then the kinetic energy is given by
+\[ T = \frac{1}{2} m \sum_{i}^{} \dot r_i^2 = \frac{1}{2} m \sum_{i}^{} \left( \sum_{j}^{} \frac{\partial f_i}{\partial q_j} \dot q_j \right)^2 = \frac{1}{2} m \sum_{i,j,k}^{} \frac{\partial f_i}{\partial q_j} \dot q_j \frac{\partial f_i}{\partial q_k} \dot q_k. \]
+(Note that all sum indices are implied to range from 1 to 3 here.)
+We aim to show that the first term in the Hamiltonian is equal to $2T$.
+To this end we note that, for a velocity-independent potential, $\partial L / \partial \dot q_m$ is equivalent to $\partial T / \partial \dot q_m$.
+Also note that the $f_i$ are velocity-independent, meaning
+\begin{align*}
+    \frac{\partial T}{\partial \dot q_m} &= \frac{1}{2} m \sum_{i,j,k} \frac{\partial f_i}{\partial q_j} \frac{\partial f_i}{\partial q_k} \frac{\partial}{\partial \dot q_m} (\dot q_j \dot q_k) \\
+    &= \frac{1}{2} m \sum_{i,j,k} \frac{\partial f_i}{\partial q_j} \frac{\partial f_i}{\partial q_k} \left( \dot q_j \delta_{km} + \dot q_k \delta_{jm} \right), \\
+    \intertext{where $\delta_{ab}$ is a Kronecker delta. Using this to collapse some sums gives}
+    &= \frac{1}{2} m \sum_{i,j}^{} \frac{\partial f_i}{\partial q_j} \frac{\partial f_i}{\partial q_m} \dot q_j + \frac{1}{2} m \sum_{i,k}^{} \frac{\partial f_i}{\partial q_m} \frac{\partial f_i}{\partial q_k} \dot q_k \\
+    &= m \sum_{i,k}^{} \frac{\partial f_i}{\partial q_m} \frac{\partial f_i}{\partial q_k} \dot q_k.
+\end{align*}
+So the first bit of the Hamiltonian evaluates to
+\[ \sum_{m}^{} \dot q_m \frac{\partial L}{\partial \dot q_m} = \sum_{m}^{} \dot q_m \frac{\partial T}{\partial \dot q_m} = m \sum_{m,i,k}^{} \frac{\partial f_i}{\partial q_m} \frac{\partial f_i}{\partial q_k} \dot q_k \dot q_m. \]
+Comparing with the $T$ we found earlier, this sum is actually $2T$.
+So $H = 2T - L = T + U$ and the Hamiltonian is the system's total mechanical energy.
+(If we didn't assume a time-independent transformation then each $\dot r_i$ would have an extra $\partial f_i / \partial t$ in it and all of this would fall apart.)
+
+\section{Lagrange Multipliers}
+Up to this point we have implemented any constraints on a system's motion via a choice of coordinates that reflects those constraints.
+But there are times where this isn't enough, either because the constraints are too complex or because we want to use them to learn something else about the system.
+
+Here we'll focus on holonomic constraints, that is, those of the form $f(q_1, \,\ldots, \,q_N, t) = 0$.
+These constraints are implemented via the method of Lagrange multipliers---we take whatever Lagrangian we write down and tack on a $\lambda f(q_1, \,\ldots, \,q_N, t)$ at the end.
+We then compute the Euler-Lagrange equations for the $N$ generalized coordinates \textit{and} for the Lagrange multiplier $\lambda$.
+(This last equation is what encodes the constraint.)
+
+From here we can recover all the results we're familiar with.
+If this is all we care about then we've potentially wasted a lot of time, but we can do something more!
+It turns out that the expression $\lambda (\partial f / \partial q_i)$ encodes the $i$th component of the force associated with the constraint function $f$.
+In the case of a simple pendulum, for example, we'd end up with
+\[ \lambda \frac{\partial f}{\partial r} = -mg \cos \theta - m \ell \dot \theta^2, \]
+which we recognize as tension and some centripetal force.
+(Notice that the signs indicate the direction of the force, too, with negatives denoting the $-\hat r$ direction.)
+We call this the generalized constraint force.
 
 \end{document}
