@@ -55,7 +55,7 @@ Rather than give a general treatment for the discrete case, though, we'll focus 
 
 We'll spend much more time looking at the continuous case.
 
-\begin{definition}[Continuous multivariate distributions]
+\begin{definition}[Continuous multivariate distribution]
     If $X_1, \ldots, X_n$ have joint pdf $f_{X_1, \ldots, X_n}$ then
     \[ P \big( (x_1, \ldots, x_n) \in A \big) = \int_A f_{X_1, \ldots, X_n} (x_1, \ldots, x_n) \, dx_1 \cdots dx_n. \]
     The marginal density of $X_1$ is found by ``integrating out'' $X_2, \ldots, X_n$.
@@ -88,7 +88,7 @@ We can get similarly natural results about expected value.
 
 \begin{theorem}[Expected value of a sum]
     For any random variables $X_1, \ldots, X_n$,
-    \[ E[X_1 + \cdots + X_n] = E[X_1] + \cdots + E[X_n]. \]
+    \[ E(X_1 + \cdots + X_n) = E(X_1) + \cdots + E(X_n). \]
 \end{theorem}
 
 Note that this holds when $X_1, \ldots, X_n$ are not independent.
