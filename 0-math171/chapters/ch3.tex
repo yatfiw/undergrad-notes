@@ -24,9 +24,9 @@ We might view this as a generalization of $G$ acting on itself---if $H = \left\{
     We'll just prove (c).
     By definition,
     \begin{align*}
-        \ker \pi_H &= \left\{ g \in G \;|\; g \cdot xH = xH \textrm{ for all $x \in G$} \right\} \\
-        &= \left\{ g \in G \;|\; x^{-1} gx \textrm{ for all $x \in G$} \right\} \\
-        &= \left\{ g \in G \;|\; g \in xHx^{-1} \textrm{ for all $x \in G$} \right\} \\
+        \ker \pi_H &= \left\{ g \in G \mid g \cdot xH = xH \textrm{ for all $x \in G$} \right\} \\
+        &= \left\{ g \in G \mid x^{-1} gx \in H \textrm{ for all $x \in G$} \right\} \\
+        &= \left\{ g \in G \mid g \in xHx^{-1} \textrm{ for all $x \in G$} \right\} \\
         &= \bigcap_{x \in G} xHx^{-1}.
     \end{align*}
     Now, if $N \trianglelefteq G$ and $N \leq H$ then $N = xNx^{-1} \leq xHx^{-1}$ for all $x \in G$.
@@ -60,7 +60,7 @@ We can also generalize our result about subgroups of index 2 being normal.
     Then
     \[ |G : K| = |G : H| |H : K| = pk. \]
     By the first isomorphism theorem $G / K$ is isomorphic to $\pi_H(G)$, a subgroup of $S_{G / H} = S_p$.
-    So by Lagrange's theorem $|G / K| = pk$ must divide $|S_p| = p!$, and $k \,|\, (p-1)!$.
+    So by Lagrange's theorem $|G / K| = pk$ must divide $|S_p| = p!$, and $k \mid (p-1)!$.
 
     Now, the prime divisors of $(p-1)!$ are all less than $p$.
     But the prime divisors of $k$ are all greater than or equal to $p$ by the minimality of $p$.
@@ -91,7 +91,7 @@ If we have a group acting on a set $X$, then in order to determine how many elem
     This map is well-defined: if $g \cdot x = h \cdot x$ then $h^{-1}g$ stabilizes $x$, meaning $h^{-1} g \in G_x$ and $gG_x = hG_x$.
     We can trace this argument in reverse to show that the map is injective.
     It is clearly also surjective, meaning the map is a bijection and
-    \[ \big| \left\{ g \cdot x \;|\; g \in G \right\} \big| = |G / G_x| = |G : G_x|, \]
+    \[ \big| \left\{ g \cdot x \mid g \in G \right\} \big| = |G / G_x| = |G : G_x|, \]
     as desired.
 \end{proof}
 
@@ -100,7 +100,7 @@ If we have a group acting on a set $X$, then in order to determine how many elem
 \end{corollary}
 
 \begin{proof}
-    Under conjugation, $G_a = \left\{ g \in G \;|\; gag^{-1} = a \right\} = C_G(a)$.
+    Under conjugation, $G_a = \left\{ g \in G \mid gag^{-1} = a \right\} = C_G(a)$.
 \end{proof}
 
 Now, if an element commutes with every element in $G$, it's in its own conjugacy class.
@@ -134,14 +134,14 @@ Finally, we have a nice application of this theory to combinatorics---in plain t
 \begin{theorem}[Cauchy-Frobenius lemma]   % "the lemma that's not burnside's"
     Let $G$ be a finite group acting on a nonempty finite set $X$.
     For each $g \in G$, let
-    \[ \pfn{fix}(g) = \big| \left\{ x \in X \;|\; g \cdot x = x \right\} \big|. \]
+    \[ \pfn{fix}(g) = \big| \left\{ x \in X \mid g \cdot x = x \right\} \big|. \]
     Then the number of orbits of the action of $G$ on $X$ is
     \[ \frac{1}{|G|} \sum_{g \in G}^{} \pfn{fix}(g). \]
 \end{theorem}
 
 \begin{proof}
     First note that
-    \[ \sum_{g \in G}^{} \pfn{fix}(g) = \big| \left\{ (g,x) \in G \times X \;|\; g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
+    \[ \sum_{g \in G}^{} \pfn{fix}(g) = \big| \left\{ (g,x) \in G \times X \mid g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
     Any $x \in X$ has an orbit of size $|G : G_X|$, meaning the total number of orbits is
     \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \pfn{fix}(g), \]     % the 1/size thing is prof. o's favorite trick in this class!
     as desired.
@@ -169,6 +169,23 @@ We'll define some things before getting into the rest of the theorems.
     \end{itemize}
 \end{definition}
 
+We also have a useful intermediate result.
+
+\begin{lemma}[]
+    Let $P \in Syl_p(G)$.
+    If $Q$ is any $p$-subgroup of $G$ then $Q \cap N_G(P) = Q \cap P$.
+\end{lemma}
+
+\begin{proof}
+    Let $H = Q \cap N_G(P)$.
+    We can see that $P \leq N_G(P)$, so immediately $Q \cap P \leq H$.
+    We'll get the other inequality if we can show that $H \leq P$ (since we already know $H \leq Q$ by definition).
+
+    Since $H \leq N_G(P)$, $PH \leq G$.
+    Also, since $|PH| = |P| |H| / |P \cap H|$, we know that $PH$ is a $p$-subgroup of $G$.
+    But $P \leq PH$ and $P$ is a maximal $p$-subgroup of $G$, so $P = PH$ implying $H \leq P$.
+\end{proof}
+
 \begin{theorem}[Sylow theorems]
     Let $G$ be a finite group of order $p^{a}m$ where $p$ is prime and $p \nmid m$.
     \begin{enumerate}[label=(\alph*),topsep=0pt]
@@ -193,6 +210,31 @@ We'll define some things before getting into the rest of the theorems.
     \[ |G| = |Z(G)| + \sum_{i=1}^{r} |G : C_G(g_i)| \]
     reveals that there must be some $g_i$ such that $p$ does not divide $|G : C_G(g_)i| = p^{a} k$ where $p$ does not divide $k < m$.
     By the inductive hypothesis $C_G(g_i)$ has a Sylow $p$-subgroup $P$ of order $p^{a}$, and $P$ is also a Sylow $p$-subgroup of $G$.
+    This proves (a).
+
+    As setup for the rest of the proof, let $S$ be the set of conjugates of $P$ in $G$, and let $Q$ be any $p$-subgroup of $G$.
+    $Q$ acts on $S$ by conjugation, partitioning $S$ into $s$ orbits, each denoted by $\mathcal O_i$.
+    Label the elements $P_i$ of $S$ so that the first $s$ elements satisfy $P_i \in \mathcal O_i$.
+
+    We know that $|\mathcal O_i| = |Q : N_Q(P_i)|$, where by definition $N_Q(P_i) = Q \cap N_G(P_i)$.
+    By the preceding lemma we also have $Q \cap N_G(P_i) = Q \cap P_i$, so
+    \[ |\mathcal O_i| = |Q : Q \cap P_i|. \]
+    Setting $Q = P_1$ gives $|\mathcal O_1| = 1$.
+    For all $i > 1$, however, $P_1 \cap P_i < P_1$.
+    So
+    \[ |\mathcal O_i| = |P_1 : P_1 \cap P_i| > 1 \]
+    is a power of $p$ and is thus divisible by $p$.
+    It follows that
+    \[ |S| = |\mathcal O_1| + (|\mathcal O_2| + \cdots + |\mathcal O_s|) \equiv 1 \bmod p. \]
+    Now let $Q$ once again be an arbitrary $p$-subgroup of $G$.
+    If $Q$ were not contained in any of the $P_i$ then $|\mathcal O_i| = |Q : Q \cap P_i| > 1$ for all $1 \leq i \leq s$.
+    So $|\mathcal O_i|$ is divisible by $p$ for all $1 \leq i \leq s$, contradicting the fact that $|S| \equiv 1 \bmod p$.
+    So $Q$ must be contained in some $P_i$, proving (b).
+    Since the $Q$ here may be a Sylow $p$-subgroup of $G$, if $P' \in Syl_p(G)$ then $P' \in S$ and so $n_p(G) \equiv 1 \bmod p$.
+    This proves (c).
+    Finally, since the Sylow $p$-subgroups of $G$ are all conjugate, we have
+    \[ n_p(G) = |G : N_G(P)|. \]
+    Trivially, $P \leq N_G(P)$, so $n_p(G) \mid m$. This proves (d).
 \end{proof}
 
 \begin{corollary}[]

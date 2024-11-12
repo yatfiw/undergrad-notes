@@ -18,7 +18,6 @@ We'll begin this discussion in the context of fibers and kernels.
 
 \begin{theorem}[]
     Let $\varphi : G \to H$ be a homomorphism with kernel $K$, and let $x,y \in G$.
-    The following statements are equivalent.
     We have the equivalent statements
     \[ \varphi(x) = \varphi(y) \;\iff\; y^{-1} x \in K \;\iff\; xy^{-1} \in K \;\iff\; x^{-1}y \in K \;\iff\; yx^{-1} \in K. \]
 \end{theorem}
@@ -28,7 +27,7 @@ The latter two bits here can be used to show something important about what fibe
 \begin{theorem}[]
     Let $\varphi : G \to H$ be a homomorphism with kernel $K$.
     The fiber containing $x \in G$ can be expressed in two different ways:
-    \[ xK = \left\{ xk \;|\; k \in K \right\}, \qquad Kx = \left\{ kx \;|\; k \in K \right\}. \]
+    \[ xK = \left\{ xk \mid k \in K \right\}, \qquad Kx = \left\{ kx \mid k \in K \right\}. \]
     In particular, note that
     \begin{enumerate}[label=(\alph*)]
         \item $xK = Kx$ (so $x$ is in the normalizer of $K$) and
@@ -42,7 +41,7 @@ It turns out that they interact in a very nice way!
 \begin{definition}[]
     Let $\varphi : G \to H$ be a homomorphism with kernel $K$.
     The set of associated fibers, called ``$G$ mod $K$'', is denoted by
-    \[ G / K = \left\{ gK \;|\; g \in G \right\}. \]
+    \[ G / K = \left\{ gK \mid g \in G \right\}. \]
 \end{definition}
 
 \begin{theorem}[]
@@ -70,7 +69,7 @@ We can generalize much of the above discussion to any subgroup of the group we'r
 \begin{definition}[Coset]
     Let $N \leq G$.
     If $g \in G$, then
-    \[ gN = \left\{ gn \;|\; n \in N \right\} \;\text{ and }\; Ng = \left\{ ng \;|\; g \in N \right\} \]
+    \[ gN = \left\{ gn \mid n \in N \right\} \;\text{ and }\; Ng = \left\{ ng \mid g \in N \right\} \]
     are left and right cosets of $N$ in $G$, respectively.
 \end{definition}
 
@@ -217,7 +216,7 @@ It turns out that this result from Sylow is provably the strongest partial conve
 We'll come back to this it later---for now, we'll finish off the section with some more useful facts about cosets.
 
 \begin{theorem}[]
-    Let $H$ and $K$ be subgroups of $G$, and define $HK = \left\{ hk \,|\, h \in H, \, k \in K \right\}$.
+    Let $H$ and $K$ be subgroups of $G$, and define $HK = \left\{ hk \mid h \in H, \, k \in K \right\}$.
     \begin{enumerate}[label=(\alph*)]
         \item If $H$ and $K$ are finite then $|HK| = |H| |K| / |H \cap K|$.
         \item $HK$ is a subgroup of $G$ if and only if $HK = KH$.
@@ -273,7 +272,7 @@ Since $B$ isn't necessarily a subgroup of $A$, we have to do one of two things f
         &= \varphi(ab) \varphi(a_1 b_1).
     \end{align*}
     The kernel of $\varphi$ is, by definition,
-    \[ \ker(\varphi) = \left\{ ab \,|\, a \in A, \, b \in B, \, a \in A \cap B \right\} = B. \]
+    \[ \ker(\varphi) = \left\{ ab \mid a \in A, \, b \in B, \, a \in A \cap B \right\} = B. \]
     Finally, $\varphi(AB) = A / (A \cap B)$ because each coset of $A \cap B$ has a representative in $A$.
     So by the first isomorphism theorem, $B \trianglelefteq AB$ and $AB / B \cong A / (A \cap B)$.
 \end{proof}
@@ -294,8 +293,8 @@ Our third theorem concerns taking quotients of quotients and is a bit more intui
     Notice that $gH = g_1H$ implies $g_1^{-1} g \in H \leq K$, meaning $gK = g_1 K$ and $\varphi$ is well-defined.
     It is easy to see that $\varphi$ is surjective, and the kernel is
     \begin{align*}
-        \ker(\varphi) &= \left\{ gH \in G / H \;|\; gK = K \right\} \\
-        &= \left\{ gH \in G / H \;|\; g \in K \right\} \\
+        \ker(\varphi) &= \left\{ gH \in G / H \mid gK = K \right\} \\
+        &= \left\{ gH \in G / H \mid g \in K \right\} \\
         &= K / H.
     \end{align*}
     Both (a) and (b) follow from the first isomorphism theorem.
