@@ -1,0 +1,227 @@
+\documentclass[../m180main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Laplace's Equation}
+\section{Derivation: Electrostatics}
+Back to modeling once again.
+Consider a two-dimensional region $D$ in space with closed boundary $\pa D$, and let $u(x,y)$ denote the electric potential at a point in $D$.
+(We'll seek stationary solutions, so we assume $u$ has no time dependence).
+The charge density $\rho(x,y) = 0$ everywhere in $D$ and on $\pa D$.
+We begin with Gauss's law, which states that
+\[ \int_{\pa D} \mbf{E} \cdot \mbf{n} \,dS = \iint_D \frac{\rho(x,y)}{\varepsilon_0} \,dA, \]
+where $\varepsilon_0$ is a constant called the permittivity of free space.
+By the divergence theorem this is equivalent to
+\begin{align*}
+    \iint_D \nabla \cdot \mbf{E} \,dA &= \iint_D \frac{\rho(x,y)}{\varepsilon_0} \,dA \\
+    \nabla \cdot \mbf{E} &= \frac{\rho(x,y)}{\varepsilon_0}.
+\end{align*}
+In the free space we've assumed, this becomes $\nabla \cdot \mbf{E} = 0$.
+We also have Faraday's law,
+\[ \nabla \times \mbf{E} = -\frac{\pa \mbf{B}}{\pa t}; \]
+since we seek stationary solutions this becomes $\nabla \times \mbf{E} = 0$.
+This implies that $\mbf{E}$ is conservative, so there is a potential $u(x,y)$ such that $\nabla u = \mbf{E}$.
+Substituting this into the differential form of Gauss's law gives
+\[ \nabla^2 u(x,y) = 0. \]
+This is Laplace's equation.
+Note that the operator
+\begin{align*}
+    \nabla^2 &= \frac{\pa^2}{\pa x^2} + \frac{\pa^2}{\pa y^2} \\
+    &= \frac{\pa^2}{\pa r^2} + \frac{1}{r} \frac{\pa}{\pa r} + \frac{1}{r^2} \frac{\pa^2}{\pa \theta^2}
+\end{align*}
+is called the Laplacian, and it generalizes to any number of dimensions.
+
+\section{Solution on a Disk}
+Suppose our region $D$ is a radius-$a$ disk centered at the origin.
+This is conducive to using polar coordinates, in which case our PDE becomes
+\begin{align*}
+    \frac{1}{r^2} u_{\theta\theta} + \frac{1}{r}u_r + u_{rr} &= 0 \qquad\quad\; r \in (0,a), \; \theta \in \R, \\
+    u(a,\theta) &= f(\theta) \qquad \theta \in \R.
+\end{align*}
+We'll once again proceed via separation of variables.
+Substituting $u(r,\theta) = R(r) \Theta(\theta)$ gives
+\[ \frac{r^2 R'' + rR'}{R} = -\frac{\Theta''}{\Theta}, \]
+and both of these are equal to the same constant $\lambda$.
+In $\theta$ we get $\Theta'' = -\lambda \Theta$, the Fourier eigenvalue problem---the solutions are
+\[ \Theta(\theta) = c_1 \cos\left( \sqrt{\lambda} \,\theta \right) + c_2 \sin \left( \sqrt{\lambda} \,\theta \right), \]
+where $\Theta$ must be $2\pi$-periodic meaning $\lambda_n^2 = n$ for $n = 1, 2, \ldots$.
+The eigenfunctions are $\left\{ 1, \, \cos n\theta, \, \sin n\theta \right\}$.
+
+With this choice of $\lambda$ our equation in $r$ becomes
+\[ r^2 R'' + rR' - n^2 R = 0, \]
+which we call a Cauchy-Euler eigenvalue problem.
+For $n=0$ we get $R_0(r) = c_0 + c_1 \ln r$.
+For $n > 0$ we proceed by making and substituting the ansatz $R(r) = r^{\alpha}$; this would give
+\[ R_n(r) = k_0 r^{n} + k_1 r^{-n} \]
+for some constants $k_0, k_1$.
+But solutions should be well-defined as $r \to 0$, so we take $c_1 = k_1 = 0$ and
+\[ R(r) = \begin{cases} c_0 & n = 0 \\  r^{n} & n = 1, 2, \ldots \end{cases} \]
+In all, solutions look like
+\[ u(r,\theta) = c_0 + \sum_{n=1}^{\infty} r^{n} \big( a_n \cos (n\theta) + b_n \sin (n\theta) \big). \]
+The coefficients can be found in the same way as before.
+
+\section{Inhomogeneous Problems}
+Now we'll look at a couple of different ways of tackling problems with inhomogeneous differential equations or boundary conditions.
+For the first we'll take an inhomogeneous heat equation $u_t = D u_{xx} + \alpha$ with homogeneous boundary conditions and zero initial condition on $x \in (0,1)$, $t > 0$.
+Separation of variables won't work here, so we need to be a little clever.
+
+Let's focus our attention on finding a steady-state solution $u_s$, one that's constant in time.
+This reduces the equation to $u_s''(x) = -\alpha / D$; integrating twice gives
+\[ u_s(x) = -\frac{\alpha}{2D} x^2 + Ax + B. \]
+Applying $u_s(0) = 0$ gives $B = 0$, while $u_s(1) = 0$ gives $A = \alpha / 2D$.
+Thus
+\[ u_s(x) = \frac{\alpha}{2D} x(1-x). \]
+Now suppose this $u_s$ is just one component of some larger solution---that is, $u(x,t) = u_s(x) + v(x,t)$ for some $v$.
+Since $u$ solves the heat equation we can write
+\begin{align*}
+    \left[ u_s(x) + v(x,t) \right]_t &= D \left[ u_s(x) + v(x,t) \right], \\
+    v_t &= D v_{xx} + \left[ D u_s''(x) + \alpha \right], \\
+    v_t &= D v_{xx}.
+\end{align*}
+Solving this equation with homogeneous boundary conditions and the initial condition $v(x,0) = -u(x)$ would give us what we need to write down a solution to the original problem.
+
+For our other method, let's go back to Laplace's equation $\nabla^2 u(x,y) = 0$ with rectangular boundary conditions
+\[ u(x,0) = f_1(x), \qquad u(x,H) = f_2(x), \qquad u(0,y) = g_1(y), \qquad u(L,y) = g_2(y). \]
+Things get a bit dicey here if multiple sides are inhomogeneous.
+To remedy this we might split our problem into four---we'll take
+\[ u(x,y) = u_1 + y_2 + u_3 + u_4 \]
+where $u_k$ is subject to the $k$th boundary condition listed above with all the others homogeneous.
+In practice we would need to solve the corresponding problem for each of these four pieces; here we'll focus on the second:
+\[ \nabla^2 u_2(x,y) = 0, \qquad u(x.H) = f_2(x) \]
+with the rest of the boundaries zero.
+Substituting the ansatz $u(x,y) = X(x) Y(y)$ gives
+\[ \frac{X''(x)}{X(x)} = -\frac{Y''(y)}{Y(y)} = \lambda. \]
+For convenience we'll start with the side subject to homogeneous boundary conditions.
+From $X''(x) = \lambda X(x)$ we get
+\[ X_n(x) = b_n \sin \left( \frac{n\pi x}{L} \right), \quad \lambda_n = - \left( \frac{n\pi}{L} \right)^2. \]
+The other equation at hand is
+\[ Y''(y) = \left( \frac{n\pi}{L} \right)^2 Y(y), \]
+and the solutions look like
+\begin{align*}
+    Y(y) &= \alpha e^{(n\pi / L) y} + \beta e^{-(n\pi / L) y} \\
+    &= c_1 \cosh \left( \frac{n\pi}{L} y \right) + c_2 \sinh \left( \frac{n\pi}{L} y \right).
+\end{align*}
+Using hyperbolic functions makes the boundary conditions a lot nicer to work with!
+Substituting $Y(0) = 0$ gives $c_1 = 0$ and, we can combine our two solutions to get
+\[ u_2(x,y) = \sum_{n=1}^{\infty} c_n \sin \left( \frac{n\pi}{L} x \right) \sinh \left( \frac{n\pi}{L} y \right). \]
+Finally, substituting the inhomogeneous $u(x.H) = f_2(x)$ turns our sum into a Fourier sine series, which we know how to work with by now.
+The other three components of the problem follow very similarly.
+
+\section{Well-Posed Problems}
+Now we'll take a step back again and see what it means for a problem to be well-posed, and under what conditions it happens.
+
+\begin{definition}[Well-posed problem]
+    A problem is well-posed if a solution exists, is unique, and is stable (that is, if a small perturbation made to the initial state or boundary condition only changes the solution by a small amount).
+\end{definition}
+
+We'll illustrate these ideas via a case study of the heat equation's Dirichlet problem on $x \in (0,1)$ with homogeneous boundary conditions and $u(x,0) = f(x)$.
+
+\begin{example}[Existence]
+    The most obvious way to show existence is to simply find an explicit solution to the problem; more generally, though, we can show that there is a series that converges to a solution.
+    Let
+    \[ u_N(x,t) = \sum_{n=1}^{N} a_n e^{-n^2 \pi^2 Dt} \sin(n\pi x), \quad a_n = 2 \int_{0}^{1} f(x) \sin(n\pi x)dx, \]
+    and define $u(x,t) = \lim_{N \to \infty} u_N(x,t)$.
+    To show that $u(x,t)$ is a solution to our problem, start by defining $M / 2 = \max_{x \in (0,1)} |f(x)|$ so that $|a_n| \leq M$ for all $n$.
+    By the triangle inequality,
+    \[ |u_N(x,t)| \leq \sum_{n=1}^{N} |a_n| e^{-n^2 \pi^2 Dt} \leq M \sum_{n=1}^{N} e^{-n^2 \pi^2 Dt} \]
+    This converges absolutely as $N \to \infty$, and thus so does $u_N(x,t)$.
+    So $u(x,t)$ satisfies the differential equation and boundary conditions, and since the Fourier sine series
+    \[ \hat f(x) = \sum_{n=1}^{\infty} a_n \sin(n\pi x) \]
+    converges to $f(x)$, our initial condition is also satisfied.
+\end{example}
+
+\begin{example}[Uniqueness]
+    One way to show uniqueness is via an energy method.
+    We begin by multiplying both sides of the differential equation by $u$ to get $uu_t = D uu_{xx}$, and integrating with respect to $x$ gives
+    \begin{align*}
+        \int_{0}^{1} uu_t dx &= D \int_{0}^{1} uu_{xx} dx \\
+        \frac{1}{2} \int_{0}^{1} \frac{d}{dt} (u^2) dx &= D \left[ uu_x \Big|_0^1 - \int_{0}^{1} u_x^2 dx \right] \\
+        \intertext{We'll define the energy $E(t) = \frac{1}{2} \int_{0}^{1} u^2 dx$ to turn this into}
+        \frac{d}{dt} E(t) &= -D \int_{0}^{1} u_x^2 dx \\
+        \frac{d}{dt} E(t) &\leq 0.
+    \end{align*}
+    Now suppose, for contradiction, that there are two distinct solutions $u_1, u_2$ to our Dirichlet problem.
+    Define $v(x,t) = u_2(x,t) = u_1(x,t)$; by linearity $v$ satisfies the heat equation with homogeneous boundary conditions and a zero initial condition.
+    Thus $v$ also satisfies
+    \[ \frac{d}{dt} \left( \frac{1}{2} \int_{0}^{1} v^2(x,t) \,dx \right) \leq 0. \]
+    Note that the parenthetical $E(t)$ is strictly non-negative and that $E(0) = 0$.
+    Combined with the fact that $E(t)$ is non-increasing we conclude that the integral is zero for all $t \geq 0$, meaning $v(x,t) = 0$ and $u_1(x,t) = u_2(x,t)$.
+    Solutions to our problem are unique!
+\end{example}
+
+\begin{example}[Stability]
+    Suppose $u_1, u_2$ both solve our Dirichlet problem with respective initial conditions $f_1(x), f_2(x)$.
+    We'd like to show that if $u_1, u_2$ start close together then they stay close together---specifically, that
+    \[ \| u_1(x,t) - u_2(x,t) \| \leq \| f_1(x) - f_2(x) \|, \quad t > 0. \]
+    Define $v(x,t) = u_2(x,t) - u_1(x,t)$ so, like before, $v$ satisfies the Dirichlet problem with initial condition $v(x,0) = f_2(x) - f_1(x)$.
+    We have the energy
+    \[ E[v] = \frac{1}{2} \int_{0}^{1} v^2(x,t) dx = \frac{1}{2} \| v \|^2 = \frac{1}{2} \| u_2(x,t) - u_1(x,t) \|^2. \]
+    At $t=0$ we have \vspace{-5pt}
+    \[ E[v(x,0)] = \frac{1}{2} \| f_2(x) - f_1(x) \|^2. \]
+    As before, $E[v]$ is non-negative and non-increasing, so we have $E[v(x,t)] \leq E[v(x,0)]$ and
+    \[ \frac{1}{2} \| u_1(x,t) - u_2(x,t) \|^2 \leq \frac{1}{2} \| f_1(x) - f_2(x) \|^2 \]
+    for all $t \geq 0$.
+\end{example}
+
+As an example of an ill-posed problem, consider a ``backward hear equation'' $u_t = -u_{xx}$.
+Separation of variables would yield \vspace{-5pt}
+\[ u_n(x,t) = \frac{1}{n} e^{n^2 \pi^2 t} \sin(n\pi x). \]
+At $t=0$, $|u_n(x,0)|$ attains a maximum value of $1 / n$ for $x \in (0,1)$.
+But at an arbitrarily small $t = 1 / n$,
+\[ \max_{x \in (0,1)} \left| u_n(x , 1 / n) \right| = e^{n\pi^2} / n. \]
+So small initial conditions become very large at very small times, meaning the problem is not stable.
+
+\section{Maximum Principles}
+Remaining in the realm of theory, now we'll look at where solutions to problems are extremized.
+We'll focus our attention on the heat equation for convenience.
+
+\begin{theorem}[Minimum principle]
+    Let $R$ be a closed region with $0 \leq x \leq L$ and $0 \leq t \leq T$, and let $u(x,t)$ be a solution to the heat equation $u_t = Du_{xx}$ which is continuous on $R$.
+    (That is, $u \in C_x^2[0,L] \cap C_t[0,T]$.)
+    Then $u(x,t)$ achieves its maximum either initially or on one of the boundaries.
+\end{theorem}
+
+\begin{proof}
+    Suppose, for contradiction, that there is a maximum on the interior of $R$.
+    At this maximum we have $u_t(x_1, t_1)$, $u_x(x_1, t_1)$, and $u_{xx}(x_1, t_1) \leq 0$.
+    If $u_{xx} < 0$ then we already have a contradiction because $u$ wouldn't satisfy the heat equation, so we'll focus on the case in which $u_{xx} = 0$.
+
+    We'll address this by defining a continuous ``subfunction'' $v(x,t)$ that satisfies $u \equiv v$ at $x=0$, $x=L$, and $t=0$ with $v(x,t) < u(x,t)$ everywhere else:
+    \[ v(x,t) = u(x,t) - \varepsilon t x (L - x), \quad \varepsilon > 0. \]
+    Note that $u(x,t) - v(x,t)$ tends uniformly to zero as $\varepsilon \to 0$, and that the maximum of $v(x,t)$ in $R$ tends toward that of $u(x,t)$ as $\varepsilon \to 0$.
+    Also, since $u$ satisfies the heat equation, $v$ satisfies
+    \begin{align*}
+        [v(x,t) + \varepsilon t x (L - x)]_t &= D [v(x,t) + \varepsilon t x (L - x)]_{xx}, \\
+        v_t + \varepsilon x(L-x) &= Dv_{xx} - 2D \varepsilon t, \\
+        v_t &= Dv_{xx} - \varepsilon [x(L-x) + 2Dt].
+    \end{align*}
+    We have three cases.
+    If $v$ has its maximum on the interior of $R$ then $v_t(x_1,t_1) = 0$ and here we must have
+    \[ Dv_{xx} = \varepsilon [x(L-x) + 2Dt] > 0, \]
+    a contradiction.
+    So $v$ doesn't attain its maximum on the interior of $R$.
+    If $v$ has its maximum at $t = T$ then $v_x(x_1, T) = 0$ and $v_{xx} \leq 0$ there.
+    Also, 
+    \[ v_t = Dv_{xx} - \varepsilon [x(L-x) + 2Dt] < 0, \]
+    a contradiction.
+    This leaves only the maximum occurring at $x=0$, $x=L$, or $t=0$, in which cases we have $v \equiv u$.
+    The maximum of $v$ must occur on one of these.
+
+    So $v$ satisfies the maximum principle, and since $v$ (and its maximum) converges uniformly to $u$ as $\varepsilon \to 0$, meaning $u$ also satisfies the maximum principle.
+\end{proof}
+
+There is a completely analogous minimum principle, and we may combine it with the maximum principle to get another, stronger result.
+
+\begin{theorem}[Minimum principle]
+    Under the same conditions as the previous theorem, $u(x,t)$ achieves its minimum either initially or on one of the boundaries.
+\end{theorem}
+
+\begin{theorem}[Strong maximum principle]
+    Let $u(x,t)$ be a solution to the heat equation in the rectangle $R : [0,L] \times [0,T]$.
+    If $u$ achieves its maximum on the interior of $R$ then $u$ is constant.
+\end{theorem}
+
+Put together, all this gives us a new tool for studying many problems' uniqueness and stability.
+
+\end{document}

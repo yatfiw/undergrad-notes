@@ -1,0 +1,207 @@
+\documentclass[../m180main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{The Heat Equation}
+\section{Derivation: Bacteria Movements}
+Let's go back to modeling with the end of deriving a new differential equation.
+Suppose we have a long, one-dimensional tube filled with bacteria---these bacteria can run (propel themselves to the left or right) and tumble (randomly change its direction).
+If at $t=0$ we start all of the bacteria at $x=0$ in the tube, we'd like to determine the density of bacteria as functions of position and time.
+
+We will assume the bacteria don't interact with one another in any way and that tumbles are instantaneous with probability 1/2.
+Also, each run moves a bacterium a distance $\Delta x$ in a time $\Delta t$.
+To start, let $P(x,t)$ denote a time-varying probability density function for the bacterium's position; with how we've discretized the tube, we can immediately see that
+\[ P(x, \; t + \Delta t) = \frac{1}{2} P(x - \Delta x, \;t) + \frac{1}{2}P(x + \Delta x, \; t). \]
+To get something more familiar, we may subtract $P(x,t)$ and do some other manipulation to get
+\[ \frac{P(x, \; t + \Delta t) - P(x,t)}{\Delta t} = \frac{\Delta x^2}{2 \Delta t} \frac{P(x - \Delta x, \, t) - 2 P(x,t) + P(x + \Delta x, \, t)}{\Delta x^2}. \]
+If we take $\Delta t, \, \Delta x \to 0$ in such a way that $\Delta x^2 / 2 \Delta t$ is constant, this becomes
+\[ \frac{\pa P}{\pa t} = D \frac{\pa^2 P}{\pa x^2}. \]
+The $D$ here, called the diffusion coefficient, roughly quantifies how easily the bacteria spread throughout the tube.
+(More generally, it's a measure of the amount of diffusion a material facilitates.)
+From here we can get the actual density of bacteria by multiplying $\rho(x,t) = N \, P(x,t)$. where $N$ is the number of bacteria we're looking at.
+So we get
+\[ \frac{\pa \rho}{\pa t} = D \frac{\pa^2 \rho}{\pa x^2}. \]
+This is called the heat (or diffusion) equation.
+Note that we can draw a connection to conservation laws by writing
+\[ \frac{\pa \rho}{\pa t} + \frac{\pa}{\pa x} \left[ -D \frac{\pa \rho}{\pa x} \right] = 0 \]
+and recognizing the flux $q(x,t) = - D \,(\pa \rho / \pa x)$.
+(So the flux moves down gradients, reflecting how bacteria move from high concentrations to low ones.)
+
+For a finite tube with length $L$ there's a few especially common choices of boundary conditions.
+\begin{itemize}[topsep=0pt]
+    \item (Dirichlet) We might fix the values of $\rho$ at the caps, specifying $\rho(0,t)$ and $\rho(L,t)$. 
+    \item (Neumann) We might also fix the flux through the caps, specifying $\rho_x(0,t)$ and $\rho_x(L,t)$.
+    \item (Robin) The flux might depend on external conditions.
+    If these conditions are $f(t)$ on the far side of the tube then we can write
+    \[ -D u_x(L,t) = H \big( f(t) - u(L,t) \big) \]
+    where the constant $H$ is called the transfer coefficient.
+\end{itemize}
+
+\section{Separation of Variables}
+We'll start our study of the heat equation with the Dirichlet problem with homogeneous boundary conditions:
+\begin{align*}
+    u_t &= Du_{xx} \qquad 0 < x < \pi, \quad t > 0, \\
+    u(0,t) = u(\pi, t) &= 0 \qquad\qquad t > 0, \\
+    u(x,0) &= f(x) \qquad\;\; 0 < x < \pi.
+\end{align*}
+We'll solve this equation using a method called separation of variables---substituting the ansatz $u(x,t) = X(x) T(t)$ into the differential equation gives
+\[ X(x) T'(t) = D T(t) X''(x) \;\implies\; \frac{T'(t)}{DT(t)} = \frac{X''(x)}{X(x)}. \]
+The only way for this to possibly be true for all $x,t$ is if both sides are constant at $\lambda$.
+So we've turned our PDE into two disjoint ODE subproblems with solutions
+\[ T(t) = C e^{\lambda D t}, \qquad X(x) = C_1 e^{\sqrt{\lambda} \,x} + C_2 e^{-\sqrt{\lambda} \,x}. \]
+Now, our boundary conditions imply $X(0) = 0$ and $X(\pi) = 0$.
+For the latter condition we get no nontrivial solutions for $\lambda \geq 0$, so we require that $\lambda < 0$ and get
+\[ X(x) = A \cos \left( \sqrt{-\lambda} \,x \right) + B \sin \left( \sqrt{-\lambda} \,x \right). \]
+The condition $X(0) = 0$ implies $A = 0$, while $X(\pi) = 0$ gives the condition $\sqrt{-\lambda} = n$ for $n = 0, 1, \ldots$.
+So we can index
+\[ X_n(x) = B \sin (nx). \]
+Since $T(t)$ depends on our choice of $\lambda$, our quantization of $\lambda$ affects this other part of the solution, too.
+So we have the countable set of solutions
+\[ u_n(x,t) = X_n(x) T_n(t) = b_n e^{-n^2 Dt} \sin nx, \quad n = 0, 1, \ldots \]
+The heat equation is homogeneous, meaning its solution space is closed under linear combinations and we have the solution
+\[ u(x,t) = \sum_{n=0}^{\infty} b_n e^{-n^2 Dt} \sin nx. \] %<3
+The coefficients $b_n$ are determined by the initial condition $u(x,0) = f(x)$; specifically, we require that
+\[ f(x) = \sum_{n=0}^{\infty} b_n \sin nx. \]
+Such a sum is called a Fourier sine series, and the $b_n$ are called the Fourier coefficients.
+The coefficients are found by projecting $f(x)$ onto each of the $\sin nx$:
+\[ b_n = \frac{\left< f(x), \, \sin nx \right>}{\| \sin nx \|^2} = \frac{2}{\pi} \int_{0}^{\pi} f(x) \sin nx \,dx., \]
+where we've employed the $L^2[0,\pi]$ inner product
+\[ \left< u, v \right>_{L^2[0,\pi]} = \int_{0}^{\pi} u(x) v(x) \,dx. \]
+This kind of projection is valid whenever we have a countable ``basis'' of functions, not just with sines.
+(In particular, note that we'd end up with the same kind of result using Neumann boundary conditions, just with cosines instead of sines.)
+
+\section{The Fourier Eigenvalue Problem}
+While solving the Dirichlet problem we've stumbled upon another problem that's much more general, namely,
+\[ -u''(x) = \lambda u(x), \qquad 0 \in (0,\pi), \quad u(a) = u(b) = 0. \]
+Noting that differentiation is linear, we call this the Fourier eigenvalue problem.
+A solution so such an equation is a nonzero eigenpair $(\lambda, u)$.
+For this discussion we'll restrict ourselves to the vector space $\mathcal{V}_D$ of functions on $[a,b]$ that are twice-differentiable with continuous derivatives, are square-integrable, and satisfy our boundary conditions.
+Formally,
+\[ \mathcal{V}_D = \left\{ u \in \mathcal{C}^2[a,b] \cap \mathcal{L}^2[a,b] : u(a) = u(b) = 0 \right\}. \]
+We require square-integrability so that the $L^2$ inner product is well defined.
+
+\begin{definition}[Self-adjoint operator]
+    Let $\mathcal L$ be a linear operator acting on an inner product space $\mathcal U$.
+    We say $\mathcal L$ is self-adjoint if for any $u,v \in \mathcal U$ it satisfies
+    \[ \left< u, \mathcal L v \right> = \left< \mathcal L u, v \right>. \]
+\end{definition}
+
+We might view this as a generalization of symmetric matrices, noting that if $A = A^T$ then
+\[ u \cdot A v = u^\intercal Av(Au)^\intercal v = Au \cdot v. \]
+Notice that our operator $D = - d^2 / dx^2$ is self-adjoint.
+We could prove this directly using integration by parts.
+note that the proof also works for homogeneous Neumann boundary conditions and for periodic boundary conditions, in which cases we denote our vector spaces $\mathcal V_N$ and $\mathcal V_P$, respectively.
+
+\begin{theorem}[]
+    Let $\mathcal L$ be self-adjoint on $\mathcal U$ and let $u = p + iq$, where $p,q \in \mathcal U$.
+    Then the eigenvalue problem $\mathcal L u = \lambda u$ has only real $\lambda$.
+\end{theorem}
+
+\begin{proof}
+    We can use the fact that $\mathcal L$ is self-adjoint to write
+    \[ \left< \overline u, \mathcal{L} u \right> = \left< p - iq, \mathcal{L} p + i \mathcal{L} q \right> = \left< p, \mathcal{L} p \right> + \left< q, \mathcal{L} q \right>. \]
+    On the other hand,
+    \begin{align*}
+        \left< \bar u, \mathcal{L} u \right> &= \left< \bar u, \lambda u \right> \\
+        &= \lambda \big[ \left< p,p \right> + \left< q,q \right> + i \big( \left< p,q \right> - \left< q,p \right> \big) \big] \\
+        &= \lambda \left[ \| p \|^2 + \| q \|^2 \right]
+    \end{align*}
+    By transitivity
+    \[ \lambda = \frac{\left< p, \mathcal{L} p \right> + \left< q, \mathcal{L} q \right>}{\| p \|^2 + \| q \|^2}, \]
+    which is real.
+\end{proof}
+
+\begin{theorem}[]
+    Let $\mathcal L$ be self-adjoint on $\mathcal U$.
+    If $u_n, u_m \in \mathcal U$ are eigenfunctions with distinct eigenvalues $\lambda_n, \lambda_m$ for the eigenvalue problem $\mathcal L u = \lambda u$ then $u_n, u_m$ are orthogonal.
+\end{theorem}
+
+\begin{proof}
+    Because $\mathcal{L}$ is self-adjoint, $\left< u_n, \mathcal L u_m \right> = \left< \mathcal L u_n, u_m \right>$ and $\lambda_m \left< u_n, u_m \right> = \lambda_n \left< u_n, u_m \right>$.
+    This is satisfied if and only if $\left< u_n, u_m \right> = 0$.
+\end{proof}
+
+Conveniently for us, it turns out that the eigenvalues associated with our $D u = \lambda u$ are strictly non-negative.
+This result combined with orthogonality go a long way in justifying some of the choices we made in solving the Dirichlet problem, and even in streamlining the process for other problems.
+
+\section{Real Fourier Series}
+Going back to the heat equation for a moment, we might also use the periodic boundary conditions $u(-\ell, t) = u(\ell, t)$ and $u_x(-\ell, t) = u_x(\ell, t)$.
+The Fourier eigenvalue problem has solutions 
+\[ X(x) = A \cos (\sqrt{\lambda} \,x) + B \sin (\sqrt{\lambda} \,x), \]
+but applying the boundary conditions puts no restrictions on the coefficients $A,B$, but rather just $\lambda = n^2 \pi^2 / \ell$.
+So we get the solutions
+\[ X(x) = a_0 + \sum_{n=1}^{\infty} \left[ a_n \cos \left( \frac{n\pi x}{\ell} \right) + b_n \sin \left( \frac{n\pi x}{\ell} \right) \right] \]
+with coefficients determined by projection of any initial conditions onto the eigenfunctions.
+This ``Fourier projection'' is more than just a way to write down solutions to PDEs, though---we can also use it to approximate functions in general, even non-periodic ones!
+(The $X(x)$ above is simply the Fourier expansion of whatever initial condition we're working with.)
+
+\begin{definition}[Periodic extension]
+    Suppose $f$ is defined on $[-\ell, \ell]$.
+    The periodic extension of $f$ is the unique $\tilde f : \R \to \R$ such that
+    \begin{itemize}[topsep=0pt]
+        \item $\tilde f(x) = f(x)$ for all $x \in [-\ell, \ell]$ and
+        \item $\tilde f(x + 2\ell) = \tilde f(x)$ for all $x \in \R$.
+    \end{itemize}
+\end{definition}
+We could similarly define the odd extension $f_o$ as the unique function satisfying $f_o(-x) = f(x)$ for $x \in [-\ell, \ell]$, and the even extension $f_e$ is defined analogously.
+(For both of these we keep $x \geq 0$ and mirror on $x < 0$.)
+
+Now, when we go to write functions in terms of sines and cosines, infinite sums aren't very practical.
+So we'll have to settle with approximations---if we want to approximate $f \in L^2[0,\pi]$ as a linear combination of $N$ ``Fourier modes'' $\left\{ e_1, \ldots, e_N \right\}$, we simply write
+\[ f \approx \sum_{j=1}^{n} c_j e_j, \quad c_m \approx \frac{\left< f, e_m \right>}{\| e_m\|^2}. \]
+We have a way to quantify the ``goodness'' of this approximation.
+
+\begin{theorem}[]
+    Suppose $f$ is an element of an inner product space $V$ and $\left\{ e_i \right\}$ is an orthogonal set.
+    The approximation of $f$ by a linear combination
+    \[ \hat f_n = \sum_{i=1}^{N} c_i e_i \]
+    that minimizes the error $E_n = \| f - \hat f_N \|$ is to choose $c_i = a_i$ with $a_i = \left< f, e_i \right> / \| e_i \|^2$.
+\end{theorem}
+
+\begin{proof}
+    The expression for squared error is
+    \begin{align*}
+        E_N^2 &= \| f - \hat f_N \|^2 \\
+        &= \left< f, f \right> + \left< \hat f_N, \hat f_N \right> - 2 \left< f, \hat f_N \right> \\
+        &= \| f \|^2 + \sum_{i=1}^{N} \sum_{j=1}^{N} c_i c_j \left< e_i, e_j \right> - 2 \sum_{i=1}^{N} c_i \left< f, e_i \right> \\
+        &= \| f \|^2 + \sum_{i=1}^{N} c_i^2 \| e_i \|^2 - 2 \sum_{i=1}^{N} c_i a_i \| e_i \|^2, \\
+        &= \| f \|^2 + \sum_{i=1}^{N} \left( (c_i - a_i)^2 - a_i^2 \right) \| e_i \|^2,
+    \end{align*}
+    where $a_i = \left< e_i, f \right> / \| e_i \|^2$.
+    $E_N^2$ is minimized (and so is $E_N$) when $c_i - a_i = 0$, as desired.
+\end{proof}
+
+All this means the error satisfies
+\[ E_N^2 = \| f \|^2 - \sum_{i=1}^{N} c_i^2 \| e_i \|^2. \]
+Since $E_N^2 \geq 0$ and $\lim_{N \to \infty} E_N = 0$ we have Bessel's inequality and Parseval's inequality, respectively:
+\[ \| f \|^2 \geq \sum_{i=1}^{N} c_i^2 \| e_i \|^2, \qquad \| f \|^2 = \sum_{i=1}^{\infty} c_i^2 \| e_i \|^2. \]
+Of course, as we add more terms to our approximation, our series should converge to the function we're approximating.
+There are three different ways we might describe this behavior.
+
+\begin{theorem}[Criteria for uniform convergence]
+    The Fourier series $\hat f$ converges to $f$ uniformly on $[a,b]$ provided the following are true:
+    \begin{itemize}[topsep=0pt]
+        \item $f \in C^2 [a,b]$.
+        That is, $f$ and its first two derivatives exist and are continuous.
+
+        \item $f$ satisfies any given boundary conditions.
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Criterion for pointwise convergence]
+    The Fourier series $\hat f$ converges to $f$ pointwise on $[a,b]$ provided that $f$ and $f'$ are piecewise continuous.
+\end{theorem}
+
+The third notion of convergence might be unfamiliar.
+
+\begin{definition}[$L^2$ convergence]
+    A series $S_n$ converges in the $L^2$ (mean square) sense to $f(x)$ in $(a,b)$ if
+    \[ \lim_{n \to \infty} \| f(x) - S_n \| = 0. \]
+\end{definition}
+
+\begin{theorem}[Criterion for $L^2$ convergence]
+    The Fourier series $\hat f$ converges in $(a,b)$ to $f$ in the mean square sense provided that $f \in L^2(a,b)$.
+\end{theorem}
+
+\end{document}
