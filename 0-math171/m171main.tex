@@ -2,13 +2,14 @@
 \newcommand{\coursetitle}{Abstract Algebra I}
 \newcommand{\semester}{Fall 2024}
 \newcommand{\credit}{Adapted from 
+    David S. Dummit \& Richard M. Foote, \textit{Abstract Algebra} (2004) and
     FA24 Lecture Notes.}
 
 % ------------------------ %
 
 \documentclass[10pt,a4paper,oneside]{book}
 \input{../Templates/jointPreamble.tex} %<3
-\graphicspath{{figures/}}
+\graphicspath{{figures/}} %<3
 
 % ------------------------ %
 
@@ -16,11 +17,11 @@
 %<3
 \begin{document}
 \tableofcontents
-\blfootnote{* \credit}
+\blfootnote{* \credit} %<3
 %<3
 \subfile{chapters/ch1} % groups and subgroups
 \subfile{chapters/ch2} % quotient groups
 \subfile{chapters/ch3} % group actions
-% \subfile{chapters/ch4} % unsorted notes
+\subfile{chapters/ch4} % rings
 %<3 ur a nerd
 \end{document}
