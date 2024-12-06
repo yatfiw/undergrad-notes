@@ -3,8 +3,423 @@
 
 \begin{document}
 
-\chapter{Unsorted Notes}
-\section{Lecture 18}
-stuff will go here
+\chapter{Rings}
+\section{Axioms and Properties}
+Now we'll look at a different, more familiar algebraic structure.
+In this new context we'll quickly go through all the same discussions as we had with groups.
+
+\begin{definition}[Ring]
+    A ring $R$ is a set with two binary operations $+$ (addition) and $\times$ (multiplication) such that
+    \begin{itemize}[topsep=0pt]
+        \item $(R, +)$ is an abelian group,
+        \item $\times$ is associative, and
+        \item the distributive law holds---that is, for all $a,b,c \in R$,
+    \end{itemize}
+    \[ (a + b) \times c = (a \times c) + (b \times c) \quad\text{ and }\quad a \times (b + c) = (a \times b) + (a \times c). \]
+    $R$ is commutative if $\times$ is commutative.
+    $R$ has an identity if there is an element $1 \in R$ such that $1 \times a = a \times 1 = a$ for all $a \in R$.
+\end{definition}
+
+We'll write $ab$ for $a \times b$.
+Also, the additive identity of $R$ is 0, and the additive inverse of $a \in R$ is $-a$.
+
+\begin{theorem}[] %<3
+    If $R$ is a ring then for all $a,b \in R$:
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item $0a = a0 = 0$.
+        \item $(-a)b = a(-b) = -(ab)$.
+        \item $(-a)(-b) = ab$. %<3
+        \item if $R$ has an identity 1, then it is unique and $-a = (-1)a$.
+    \end{enumerate}
+\end{theorem}
+%<3
+\begin{proof}
+    (Sketch) We'll motivate proofs for each part.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item We have $0a = (0+0)a = 0a + 0a$, and cancellation gives $0 = 0a$.
+        \item We have $ab + (-a)b = (a-a)b = 0$, and cancellation gives $(-a)b = -(ab)$.
+        \item We have $ab - (-a)(-b) = ab + a(-b) = a(b-b) = 0$. and cancellation gives $ab = (-a)(-b)$.
+        \item If $1$ and $1'$ are both identities then $1 = 1 \times 1' = 1'$.
+        Also, $(-1)a = -(1a) = -a$.
+    \end{enumerate}
+    Filling in the gaps would complete the proof.
+\end{proof} %<3
+
+\begin{definition}[Subring] %<3
+    A subring of the ring $R$ is a subgroup of $R$ that is closed under multiplication.
+\end{definition}
+
+Now we'll run through some new vocabulary.
+
+\begin{definition}[Division ring]
+    A ring $R$ with identity $1 \neq 0$ is a division ring if every nonzero element of $R$ has a multiplicative inverse.
+    A commutative division ring is called a field.
+\end{definition}
+
+\begin{definition}[Zero divisor]
+    A nonzero element $a \in R$ is a zero divisor if there is a nonzero $b \in R$ such that $ab = 0$ or $ba = 0$.
+\end{definition}
+
+\begin{definition}[Unit]
+    If $R$ has identity $1 \neq 0$ then $u \in R$ is a unit in $R$ if there is some $v \in R$ such that $uv = vu = 1$.
+    In this case $v$ is unique and is denoted by $u^{-1}$.
+    The set of units in $R$ is denoted by $R^\times$.
+\end{definition}
+
+\begin{theorem}[]
+    A unit is never a zero divisor.
+\end{theorem}
+
+\begin{proof}
+    Let $a$ be a unit and suppose $ab = 0$.
+    Then $b = (a^{-1} a) b = a^{-1}0 = 0$.
+    A similar approach works when $ba = 0$.
+    Thus $a$ cannot be a zero divisor.
+\end{proof}
+
+The ring of integers $\Z$ is a particularly important one, and it is characterized by having no zero divisors and its only units being $\pm 1$.
+This next class of rings, then, can be viewed as a kind of generalization of $\Z$.
+
+\begin{definition}[Integral domain]
+    A commutative ring with identity $1 \neq 0$ is an integral domain if it has no zero divisors.
+\end{definition}
+
+\begin{theorem}[Cancellation law]
+    Let $R$ be an integral domain and let $a,b,c \in R$.
+    If $ab = ac$ then either $a = 0$ or $b = c$.
+\end{theorem}
+
+\begin{proof}
+    If $ab = ac$ then $a(b-c) = 0$.
+    If $a=0$ then we're done; if $a \neq 0$ then we must have that $b - c = 0$ (because $R$ has no zero divisors), implying $b = c$.
+\end{proof}
+
+\begin{corollary}[]
+    Every finite integral domain is a field.
+\end{corollary}
+
+\begin{proof}
+    Let $R$ be a finite integral domain.
+    Suppose $a \in R$ and $a \neq 0$.
+    By the above theorem the map defined by $x \mapsto ax$ is injective on $R$, and since $R$ is finite, this map is also surjective.
+    So $ab = 1$ for some $b \in R$, and it follows that all nonzero elements of $R$ are units.
+    Thus $R$ is a finite commutative division ring or, in other words, a finite field.
+\end{proof}
+
+Here're a few families of rings that frequently appear in applications.
+\begin{itemize}[topsep=0pt]
+    \item (Polynomial ring) Let $R$ be a commutative ring with identity and let $x$ be an indeterminate.
+    Denote by $R[x]$ the set of polynomials in $x$ with coefficients in $R$.
+    These polynomials form a ring under the usual addition and multiplication of polynomials.
+
+    \item (Matrix ring) Let $R$ be a ring and let $n$ be a positive integer.
+    The set $M_n(R)$ of all $n \times n$ matrices with entries in $R$ forms a ring under the usual addition and multiplication of matrices.
+
+    \item (Group ring) Let $R$ be a commutative ring with identity $1 \neq 0$ and let $G = \left\{ g_1, \ldots, g_n \right\}$ be a finite group.
+    The group ring of $G$ with coefficients in $R$ is the set $RG$ of formal sums $a_1g_1 + \cdots + a_n g_n$ where $a_1, \ldots, a_n \in R$.
+    Addition is componentwise and multiplication uses a distributive property.
+\end{itemize}
+Note that we may also think of each element in a group ring $RG$ as a function $\alpha : G \to R$, where each group element is mapped to its ring coefficient.
+
+\section{Homomorphisms and Quotients}
+Now we'll fly through a familiar discussion of ring homomorphisms and quotient rings.
+
+\begin{definition}[Homomorphism]
+    Let $R$ and $S$ be rings.
+    A map $ : R \to S$ is a (ring) homomorphism if for all $a,b \in R$
+    \begin{itemize}[topsep=0pt]
+        \item $\varphi(a + b) = \varphi(a) + \varphi(b)$ and
+        \item $\varphi(ab) = \varphi(a)\varphi(b)$.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[]
+    Let $R$ and $S$ be rings and let $\varphi : R \to S$ be a homomorphism.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item The image of $\varphi$ is a subring of $S$.
+        \item The kernel of $\varphi$ is a subring of $R$.
+        \item If $\alpha \in \ker(\varphi)$ then $\alpha r, r\alpha \in \ker(\varphi)$ for all $r \in R$.
+    \end{enumerate}
+\end{theorem}
+
+Rather than talk about normal subgroups of a group, we will speak of ideals of a ring.
+(Note that the conditions below are enough to guarantee that ideals are subrings.)
+
+\begin{definition}[Ideal]
+    Let $R$ be a ring.
+    A nonempty subset $I$ of $R$ is an ideal of $R$ if
+    \begin{itemize}[topsep=0pt]
+        \item $I$ is a subgroup of $R$ and
+        \item given $\alpha \in I$ and $r \in R$ then $\alpha r, r \alpha \in I$.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[]
+    Let $I$ be an ideal of a ring $R$.
+    Then the (additive) quotient group $R / I$ is a ring under the binary operations
+    \[ (r+I) + (s+I) = (r+s)+I \quad\text{ and }\quad (r+I) (s+I) = rs + I. \]
+    Conversely, if $I$ is any subgroup of $R$ such that the above holds, then $I$ is an ideal of $R$.
+\end{theorem}
+
+Now we have near-exact analogs of the isomorphism theorems.
+
+\begin{theorem}[First isomorphism theorem]
+    If $\varphi : R \to S$ is a ring homomorphism then $\ker(\varphi)$ is an ideal of $R$ and $R / \ker(\varphi) \cong \varphi(R)$.
+\end{theorem}
+
+\begin{theorem}[Second isomorphism theorem]
+    Let $A$ be a subring of $R$ and let $B$ be an ideal of $R$.
+    Then $A+B$ is a subring of $R$, $A \cap B$ is an ideal of $A$, and
+    \[ (A+B) / B \cong A / A \cap B. \]
+\end{theorem}
+
+\begin{theorem}[Third isomorphism theorem]
+    Let $I$ and $J$ be ideals of a ring $R$ with $I \subseteq J$.
+    Then $J / I$ is an ideal of $R / I$ and
+    \[ (R / I) / (J / I) \cong R / J. \]
+\end{theorem}
+
+\section{Properties of Ideals}
+Now we'll take some time to study ideals in their own right, as the structure of a ring's ideals can provide deep insights into the nature of the ring itself.
+We will limit this discussion to rings with identity $1 \neq 0$.
+
+\begin{definition}[Generating ideals]
+    Let $A$ be a subset of a ring $R$.
+    \begin{itemize}[topsep=0pt]
+        \item The ideal generated by $A$, denoted $(A)$, is the smallest ideal of $R$ that contains $A$.
+        It is the intersection of all ideals containing $A$.
+
+        \item The left ideal generated by $A$ is
+        \[ RA = \left\{ \sum_{i=1}^{n} r_i a_i \mid r_i \in R, \, a_i \in A, \, n \in \Z^+ \right\}. \]
+        The right ideal $AR$ generated by $A$ is defined analogously.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Principal ideal]
+    An ideal generated by a single element is called a principal ideal.
+\end{definition}
+
+In general $(0)$ is the trivial ideal $0$, $(1)$ is $R$ itself, and if $R$ is commutative then $(a)$ is the set of all $R$-multiples of $a \in R$.
+Note that every subring $n\Z$ of $\Z$ is a principal ideal $(n)$.
+
+\begin{theorem}[]
+    Let $I$ be an ideal of a ring $R$.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item $I = R$ if and only if $I$ contains a unit.
+        \item If $R$ is commutative, then $R$ is a field if and only if its only ideals are $0$ and $R$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{corollary}[]
+    If $R$ is a field then any nonzero ring homomorphism from $R$ to another ring is injective.
+\end{corollary}
+
+Now we'll work toward generalizing the notion of primality to rings other than $\Z$.
+
+\begin{definition}[Maximal ideal]
+    An ideal $M$ of $R$ is a maximal ideal if $M \neq R$ and the only ideals containing $M$ are $R$ and $M$.
+\end{definition}
+
+\begin{theorem}[]
+    Let $R$ be commutative.
+    An ideal $M$ of $R$ is maximal if and only if the quotient group $R / M$ is a field.
+\end{theorem}
+
+\begin{proof}
+    By the fourth isomorphism theorem $M$ is maximal if and only if the only ideals of $R / M$ are $0$ and $R / M$, which is true if and only if $R / M$ is a field.
+\end{proof}
+
+It follows that the ideal $n \Z$ is maximal (and is a field) in $\Z$ if and only if $n$ is prime.
+Note that some rings don't have maximal ideals---if we take $\Q$ with $ab = 0$ for all $a,b \in \Q$ then the ideals are just the (additive) subgroups of $\Q$, none of which are maximal.
+
+\pagebreak
+
+\begin{definition}[Prime ideal]
+    Let $R$ be commutative.
+    An ideal $P \neq R$ is a prime if $a,b \in R$ and $ab \in P$ imply $a \in P$ or $b \in P$.
+\end{definition}
+
+\begin{theorem}[]
+    Let $R$ be commutative.
+    An ideal $P$ is prime if and only if $R / P$ is an integral domain.
+\end{theorem}
+
+\begin{proof}
+    Let $\overline r = r + P \in R / P$.
+    By definition, $P$ is prime if and only if $R / P \neq 0$ and $\overline{ab} = \overline a \overline b = 0$ implies $\overline a = \overline 0$ or $\overline b = \overline 0$, i.e., if $R / P$ is an integral domain.
+\end{proof}
+
+\begin{corollary}[]
+    If $R$ is commutative then every maximal ideal of $R$ is prime.
+\end{corollary}
+
+\begin{proof}
+    If $M$ is a maximal ideal then $R / M$ is a field, which is an integral domain.
+\end{proof}
+
+So in $\Z$, the ideals $p\Z$ where $p \in \Z$ is prime are both maximal and prime.
+(Also, the zero ideal is prime in $\Z$, but not maximal.)
+The ideal $(x)$ in $\Z[x]$ is another example of a prime (not maximal) ideal, since $\Z[x] / (x) \cong \Z$ (which is an integral domain).
+
+\section{Euclidean Domains}
+Now we'll look at a particular class of integral domains that preserve a lot of the basic number theoretic ideas we might be familiar with.
+
+\begin{definition}[Norm]
+    If $R$ is an integral domain, then a function $N : R \to \N \cup \left\{ 0 \right\}$ with $N(0) = 0$ is a norm.
+\end{definition}
+
+\begin{definition}[Euclidean domain]
+    An integral domain $R$ is a Euclidean domain if there is a norm $N$ on $R$ such that for all $a,b \in R$, $b \neq 0$, there exist $q,r \in R$ with
+    \[ a = qb + r \]
+    where $r = 0$ or $N(r) < N(b)$.
+\end{definition}
+
+All fields are Euclidean domains, and any norm works---simply take $q = ab^{-1}$.
+As a couple of examples, $\Z$ is a Euclidean domain with norm $N(a) = |a|$, and for any field $F$ the polynomial ring $F[x]$ is a Euclidean domain with the norm $N(p(x))$ being the degree of $p(x) \in F[x]$.
+
+\begin{theorem}[]
+    Every ideal in a Euclidean domain is principal.
+    In particular, if $I$ is a nonzero ideal in a Euclidean domain and a nonzero $d \in I$ has minimum norm in $I$ then $I = (d)$.
+\end{theorem}
+
+\begin{proof}
+    If $I$ is the zero ideal then we're done.
+    Otherwise, let $d \in I$ be nonzero with minimum norm; clearly, $(d) \subseteq I$.
+    To show the reverse, let $a \in I$ and write $a = qd + r$ where $r = 0$ or $N(r) < N(d)$.
+    Since $a,qd \in I$ we have $r \in R$.
+    By the minimality of $N(d)$ we also have $r = 0$, meaning $a = qd \in (d)$ and thus $I = (d)$.
+\end{proof}
+
+Now we'll see how this helps us generalize some basic arithmetic.
+
+\begin{definition}[Divisor]
+    Let $R$ be commutative and let $a,b \in R$.
+    \begin{itemize}[topsep=0pt]
+        \item $b$ divides $a$ if there is an $x \in R$ such that $a = bx$.
+        In this case we write $b \mid a$.
+
+        \item A greatest common divisor of $a$ and $b$ is a nonzero $d$ such that $d \mid a$ and $d \mid b$, and if $d' \mid a$ and $d' \mid b$ then $d' \mid d$.
+    \end{itemize}
+\end{definition}
+
+Note that $a \in (d)$ and $(a) \subseteq (d)$ are both equivalent to $d \mid a$.
+
+\begin{definition}[Greatest common divisor]
+    The element $d$ is a greatest common divisor of $a$ and $b$ if $(a,b) \subseteq (d)$ and if $(a,b) \subseteq (d')$ implies $(d) \subseteq (d')$.
+\end{definition}
+
+\begin{definition}[Prime]
+    A nonzero element $p$ is prime if $(p)$ is a prime ideal.
+    This if $p$ is prime then $p$ is not a unit and $p \mid ab$ implies $p \mid a$ or $p \mid b$.
+\end{definition}
+
+\begin{theorem}[]
+    Let $R$ be commutative and let $a,b \in R$ be nonzero.
+    If $(a,b) = (d)$ then $(d)$ is a greatest common divisor of $a$ and $b$.
+\end{theorem}
+
+\begin{theorem}[]
+    Let $R$ be an integral domain and let $d, d' \in R$.
+    If $(d) = (d')$ then $d' = ud$ for some unit $u \in R$.
+    In particular, if $d$ and $d'$ are GCDs of $a,b \in R$, then $d' = ud$ for some unit $u \in R$.
+\end{theorem}
+
+\begin{proof}
+    If either $d$ or $d'$ is zero then we're done.
+    Otherwise, since $d \in (d')$ there is some $x \in R$ such that $d = xd'$.
+    Similarly, since $d' \in (d)$ there is some $y \in R$ such that $d' = yd$.
+    Thus $d = xyd$ and so $d(1 - xy) = 0$; since $d \neq 0$, $xy = 1$ and $x,y$ are both units.
+\end{proof}
+
+One of the great advantages of working in Euclidean domains is that they allow us to employ the well-known division algorithm---if we have two elements $a,b \in R$ then by successive ``divisions''
+\begin{align*}
+    a &= q_0b + r_0, \\
+    b &= q_1 r_0 + r_1, \\
+    r_0 &= q_2 r_1 + r_2, \\
+    &\;\;\vdots \\
+    r_{n-2} &= q_n r_{n-1} + r_n, \\
+    r_{n-1} &= q_{n+1} r_n.
+\end{align*}
+
+\begin{theorem}[]
+    Let $R$ be a Euclidean domain, and consider nonzero $a,b \in R$.
+    If $d = r_n$ is the last nonzero remainder in the division algorithm for $a,b$, then $d$ is a greatest common divisor of $a,b$ and $(d) = (a,b)$.
+\end{theorem}
+
+\begin{proof}
+    (Sketch) We need only show that $(d) = (a,b)$.
+    By going backwards in the algorithm we see that $d$ divides $a$ and $b$, so $(a,b) \subseteq (d)$.
+    We can also see that each $r_i$ is in $(a,b)$, meaning $(d) \subseteq (a,b)$.
+\end{proof}
+
+% hierarchy:
+    % integral domains (ex.  Z[x])
+    % euclidean domains (ex.  Z)
+    % fields (ex.  R)
+
+\section{Principal Ideal Domains}
+Now we'll generalize a bit and consider the class of integral domains for which every ideal is principal.
+Note that we've already seen this to be true for Euclidean domains.
+
+\begin{definition}[Principal ideal domain]
+    A principal ideal domain is an integral domain in which every ideal is principal.
+\end{definition}
+
+\begin{theorem}[]
+    Every nonzero prime ideal in a PID is a maximal ideal.
+\end{theorem}
+
+\begin{proof}
+    Let $R$ be a PID and let $(p)$ be a nonzero prime ideal contained in a maximal ideal $(m)$.
+    (The existence of such a maximal ideal relies on Zorn's lemma.)
+    Since $(p) \subseteq (m)$, $p = rm$ for some $r \in R$ and either $r \in (p)$ or $m \in (p)$.
+    If $r \in (p)$ then $r = ps$ for some $s \in R$, so $p = psm$ and $m$ is a unit, a contradiction since $(m)$ is a proper ideal.
+    Thus $m \in (p)$ and so $(p) = (m)$.
+\end{proof}
+
+\begin{theorem}[]
+    If $R[x]$ is a PID then $R$ is a field.
+\end{theorem}
+
+\begin{proof}
+    If $R[x]$ is a PID then $R$ must be an integral domain, since $R \subset R[x]$.
+    The ideal $(x)$ is a nonzero prime ideal since $R[x] / (x) \cong R$ is an integral domain, so by the above theorem $(x)$ is maximal and $R[x] / (x) \cong R$ is a field.
+\end{proof}
+
+Note that this corollary is useful when showing that $R[x]$ is a Euclidean domain if and only if $R$ is a field.
+
+\begin{definition}[Irredicubility]
+    Let $R$ be an integral domain.
+    \begin{itemize}[topsep=0pt]
+        \item Let $r \in R$ be nonzero and not a unit.
+        We say $r$ is irreducible if $r = ab$ implies $a$ or $b$ is a unit.
+
+        \item If $a,b \in R$, $u \in R^*$, and $a = ub$, then we say $a$ and $b$ are associates.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[]
+    In an integral domain, prime elements are irreducible.
+\end{theorem}
+
+\begin{proof}
+    Let $R$ be an integral domain, let $(p)$ be a nonzero prime ideal, and suppose $p = ab$ so either $a \in (p)$ or $b \in (p)$.
+    Without loss of generality, suppose $a \in (p)$; then $a = pr$ for some $r \in R$, meaning $p = ab = prb$ and so $b$ is a unit.
+    Thus the prime $p$ is irreducible.
+\end{proof}
+
+\begin{theorem}[]
+    In a PID, a nonzero element is prime if and only if it is irreducible.
+\end{theorem}
+
+\begin{proof}
+    Let $R$ be a PID, suppose $p \in R$ is irreducible, and let $M = (m)$ be an ideal containing $p$.
+    Then $p = rm$ for some $r \in R$ and since $p$ is irreducible, $r$ or $m$ is a unit.
+    Thus $(m) = (p)$ or $(m) = R$, which shows that the only ideals containing $(p)$ are $(p)$ and $R$.
+    Thus $(p)$ is maximal and therefore prime, so $p$ is prime.
+    The reverse direction follows from the previous result.
+\end{proof}
+
+% "I'm going to do something in about five seconds, it may startle you..... AHH!"
 
 \end{document}

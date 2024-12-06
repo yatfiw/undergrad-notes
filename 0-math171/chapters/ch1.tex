@@ -4,7 +4,7 @@
 \begin{document}
 
 \chapter{Groups and Subgroups}
-\section{Basic Axioms and Properties}
+\section{Axioms and Properties}
 For most of this course, the central object of study will be the group.
 
 \begin{definition}[Binary operation]
@@ -152,17 +152,14 @@ Thus $S_3$ is isomorphic to $D_6$ ($S_3 \cong D_6$).
     \end{gather*}
 \end{definition}
 
-% we should also be familiar with cyclic groups at this point
-
-% also! given two groups G and H, their cartesian product G x H is also a group with (a, b)(a', b') = (aa', bb').
+Finally, given two groups $G$ and $H$, their Cartesian product $G \times H$ is also a group with the binary operation $(a, b)(a', b') = (aa', bb')$.
 
 \section{Homomorphisms}
-Now we'll look at different kinds of maps between groups, starting with the simplest one posible.
+Now we'll look at different kinds of maps between groups, starting with the simplest one possible.
 
 \begin{definition}[Homomorphism]
     Let $G$ and $H$ be groups.
-    A homomorphism from $G$ to $H$ is a function $\varphi : G \to H$ such that, for all $x,y \in G$,
-    \[ \varphi(xy) = \varphi(x) \varphi(y). \]
+    A homomorphism from $G$ to $H$ is a function $\varphi : G \to H$ such that, for all $x,y \in G$, $\varphi(xy) = \varphi(x) \varphi(y)$.
     The kernel and image of $\varphi$ are, respectively,
     \[ \ker (\varphi) = \left\{ x \in G \; | \; \varphi(x) = 1 \right\}, \quad \pfn{image} (\varphi) = \left\{ \varphi(x) \; | \; x \in G \right\}. \]
 \end{definition}
@@ -216,8 +213,6 @@ There are many easily accessible examples of group actions---here's the most gla
 
 As for some others: $\R^\times$ acts on $\R^n$ by scaling, $S_\Omega$ acts on $\Omega$ by permuting, and $D_{2n}$ acts on the vertices of a regular $n$-gon.
 
-% Let $G = X$ and define $gx = g x g^{-1}$ for $g,x \in G$.
-
 \begin{theorem}[]
     Suppose $G$ acts on $X$.
     For each $g \in G$, $\sigma_g(x) = g \cdot x$ defines a permutation of $X$.
@@ -227,7 +222,7 @@ As for some others: $\R^\times$ acts on $\R^n$ by scaling, $S_\Omega$ acts on $\
 \begin{proof}
     Let $g \in G$.
     Since $\sigma_g \circ \sigma_{g^{-1}}$ and $\sigma_{g^{-1}} \circ \sigma_g$ are both the identity map on $X$, $\sigma_g$ has a two-sided inverse and is therefore a bijection from $X$ to $X$.
-    In other words, $\sigma_g$ is a permutation of $X$.     % cf. prop 1 in section 0.1
+    In other words, $\sigma_g$ is a permutation of $X$.
 
     Now define a map $\varphi : G \to S_X$ such that $\varphi(g) = \sigma_g$.
     We have
@@ -240,9 +235,6 @@ As for some others: $\R^\times$ acts on $\R^n$ by scaling, $S_\Omega$ acts on $\
     \end{align*}
     So we have $\varphi(gh) = \varphi(g) \circ \varphi(h)$ for all $g,h \in G$ and $\varphi$ is a homomorphism.
 \end{proof}
-
-% DEF. Suppose G acts on X and let (x in X). The orbit of x is
-%       { gx | g in G }.
 
 All this motivates the following.
 

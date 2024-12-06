@@ -131,7 +131,7 @@ This can put some useful constraints on the structure of the group we're working
 
 Finally, we have a nice application of this theory to combinatorics---in plain terms, if a group $G$ acts on a set $X$ then the associated number of orbits is equal to the average number of $x \in X$ fixed by the $g \in G$.
 
-\begin{theorem}[Cauchy-Frobenius lemma]   % "the lemma that's not burnside's"
+\begin{theorem}[Cauchy-Frobenius lemma]   % aka "the lemma that's not burnside's"
     Let $G$ be a finite group acting on a nonempty finite set $X$.
     For each $g \in G$, let
     \[ \pfn{fix}(g) = \big| \left\{ x \in X \mid g \cdot x = x \right\} \big|. \]
@@ -142,8 +142,8 @@ Finally, we have a nice application of this theory to combinatorics---in plain t
 \begin{proof}
     First note that
     \[ \sum_{g \in G}^{} \pfn{fix}(g) = \big| \left\{ (g,x) \in G \times X \mid g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
-    Any $x \in X$ has an orbit of size $|G : G_X|$, meaning the total number of orbits is
-    \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \pfn{fix}(g), \]     % the 1/size thing is prof. o's favorite trick in this class!
+    Any $x \in X$ has an orbit of size $|G : G_x|$, meaning the total number of orbits is
+    \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \pfn{fix}(g), \]     % the 1/size sum is prof. o's favorite trick in this class!
     as desired.
 \end{proof}
 
