@@ -1,0 +1,142 @@
+\documentclass[../m180main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{The Wave Equation}
+\section{Derivation: Guitar String}
+Modeling once more!
+This derivation's a quick one.
+Consider a guitar string with cross-sectional area $A$ and density $\rho$ held under a tension $\tau$.
+When the string is displaced a distance $u(x,t)$, it tries to bring itself back to a straight configuration with restoring force $\mathcal F = \tau u_{xx} A \Delta x$.
+By Newton's second law $\mathcal F = (\rho A \Delta x) u_{tt}$, so $\tau u_{xx} = \rho u_{tt}$ or, written a different way,
+\[ u_{tt} = c^2 u_{xx} \]
+where $c$ denotes the speed of the wave.
+Unsurprisingly, we call this the wave equation.
+
+\section{d'Alembert's Solution}
+When we're working on a finite domain the wave equation is solvable via separation of variables.
+With homogeneous boundary conditions and $u(x,0) = f(x)$ and $u_t(x,0) = g(x)$, the solutions are
+\[ u(x,t) = \sum_{n=1}^{\infty} \sin (k_n x) \big[ A_n \cos (\omega_n t) + B_n \sin(\omega_n t) \big], \qquad \omega_n = \frac{n\pi c}{L}, \quad k_n = \frac{n\pi}{L} \]
+with coefficients
+\[ A_n = \frac{2}{L} \int_{0}^{L} f(x) \sin (k_n x) \,dx, \qquad B_n = \frac{2}{\omega_n L} \int_{0}^{L} g(x) \sin(k_n x) \,dx. \]
+If we wanted to consider solutions on an infinite domain, however, we ditch the boundary conditions and separation of variables doesn't quite work anymore.
+(We call such a problem a Cauchy problem.)
+To inch toward a solution we might write the wave equation in operator form,
+\[ \left( \frac{\pa^2}{\pa t^2} - c^2 \frac{\pa^2}{\pa x^2} \right) u = 0, \]
+and recognize a difference of squares to write
+\[ \left( \frac{\pa}{\pa t} - c \frac{\pa}{\pa x} \right) \left( \frac{\pa}{\pa t} + c \frac{\pa}{\pa x} \right) u = 0 \;\;\text{ or }\;\; \left( \frac{\pa}{\pa t} + c \frac{\pa}{\pa x} \right) \left( \frac{\pa}{\pa t} - c \frac{\pa}{\pa x} \right) u = 0. \]
+We can see, now, that some version of the advection equation is hiding in here.
+The solutions to these equations are $u(x,t) = A(x - ct)$ and $u(x,t) = B(x + ct)$ for some functions $A,B$, respectively; we hypothesize that solutions to the wave equation are linear combinations of these.
+
+We'll make the change of variables $\xi = x - ct$, $\eta = x + ct$, and $U(\xi, \eta)$.
+We could show that the derivative operators are
+\[ \frac{\pa}{\pa t} = -c \frac{\pa}{\pa \xi} + c \frac{\pa}{\pa \eta}, \qquad \frac{\pa}{\pa x} = \frac{\pa}{\pa \xi} + \frac{\pa}{\pa \eta}, \]
+so our wave equation operator turns out to be
+\[ \frac{\pa^2}{\pa t^2} - c^2 \frac{\pa^2}{\pa x^2} = -4c^2 \frac{\pa}{\pa \xi} \frac{\pa}{\pa \eta}. \]
+So we have the equation
+\[ \frac{\pa^2 U}{\pa \xi \pa \eta} = 0, \]
+and we can see that $U(\xi, \eta) = A(\xi) + B(\eta)$ for some functions $A,B$.
+Applying the initial conditions gives
+\begin{align*}
+    f(x) &= A(x) + B(x), \\
+    g(x) &= -cA'(x) + cB'(x).
+\end{align*}
+Now we just need to solve for these unknown functions.
+We have
+\begin{align*}
+    \int_{0}^{x} g(z) dz &= c \big( B(x) - A(x) - B(0) + A(0) \big), \\
+    \frac{1}{c} \int_{0}^{x} g(z) dz &= f(x) - 2A(x) - B(0) + A(0), \\
+    A(x) &= \frac{1}{2} f(x) - \frac{1}{2c} \int_{0}^{x} g(z) dz - \frac{1}{2} \big( B(0) - A(0) \big).
+\end{align*}
+Similarly,
+\[ B(x) = \frac{1}{2} f(x) + \frac{1}{2c} \int_{0}^{x} g(z) dx + \frac{1}{2} \big( B(0) - A(0) \big). \]
+We can substitute these into our general solution and combine the integrals together to get
+\[ u(x,t) = \frac{1}{2} \big[ f(x-ct) + f(x+ct) \big] + \frac{1}{2c} \int_{x - ct}^{x + ct} g(z) dz. \]
+We call this d'Alembert's solution to the wave equation.
+
+\section{Fourier Series and Galerkin Methods}
+We'll find it useful, in future discussion, to generalize some of the theory we've developed from $\R$ to $\C$.
+We must first modify the properties that define an inner product---if $u,v,w$ are elements of a vector space over the field $\C$, and if $\alpha, \beta \in \C$, then the following are true about the inner product $\left< \cdot, \cdot \right>$.
+\begin{itemize}[topsep=0pt]
+    \item (Hermitian symmetry) $\left< u,v \right> = \overline{\left< v, u \right>}$.
+    \item (Second-argument linearity) $\left< u, \, \alpha v + \beta w \right> = \alpha \left< u, v \right> + \beta \left< u, w \right>$.
+    \item (Positive definite) $\left< u, u \right> \geq 0$, with equality if and only if $u = 0$.
+\end{itemize}
+The norm is still defined by $\| u \|^2 = \left< u,u \right>$.
+Now, for complex-valued functions $u,v : [a,b] \to \C$ the $L^2$ inner product becomes
+\[ \left< u,v \right> = \int_{a}^{b} \overline u v \,dx. \]
+For our purposes, one particularly important set of complex-valued functions is defined by $e_n = e^{i (n\pi x / \ell)}$ for $n \in \Z$.
+It isn't difficult to show that this set is orthogonal with the $L^2[-\ell, \ell]$ inner product, and we can exploit this fact to expand complex functions (defined on $x \in [-\ell, \ell]$) in terms of these functions:
+\[ f(x) = \sum_{z \in \Z}^{} c_n e^{i (n\pi x / \ell)}, \qquad c_m = \frac{\left< e_m, \, f(x) \right>}{\left< e_m, \, e_m \right>} = \frac{1}{2\ell} \int_{-\ell}^{\ell} e^{-i (n\pi x / \ell)} f(x) \,dx. \]
+This is a complex Fourier series, and we could show that the given choice of coefficients still minimizes the $L^2$ error $E_n = \| f - S_n \|$.
+In fact, use of Euler's formula shows that the above series is exactly the same as the real Fourier series we worked with earlier, just with different basis functions!
+
+As a first application, let's look at the linearized Korteweg-de Vries equation on $-\pi \leq \theta \leq \pi$ and $t > 0$:
+\[ u_t + u_\theta = u_{\theta\theta\theta}, \qquad u(\theta,0) = f(\theta). \]
+We'll solve this problem using a Galerkin method, which involves breaking it down into more discrete pieces using some function basis.
+We'll specifically be working with the above exponential basis, so we call this a Fourier spectral method.
+We begin by writing the solution as a complex Fourier series with time-dependent coefficients,
+\[ u(\theta, t) = \sum_{n \in \Z}^{} A_n(t) e^{in\theta}, \]
+and substituting it into the PDE to get
+\begin{align*}
+    \sum_{n \in \Z}^{} A_n'(t) e^{in\theta} + \sum_{n \in \Z}^{} (in) A_n(t) e^{in\theta} &= \sum_{n \in \Z}^{} (in)^3 A_n(t) e^{in\theta}, \\
+    \sum_{n \in \Z}^{} \left[ \frac{dA_n}{dt} + i(n + n^3) A_n(t) \right] e^{in\theta} &= 0.
+\end{align*}
+All of the coefficients here must be zero, so we get an infinite set of ODEs defined by
+\[ \frac{dA_n}{dt} = -i(n+n^3) A_n(t) ,\quad n \in \Z. \]
+From our initial condition we get
+\[ u(\theta,0) = f(\theta) = \sum_{n \in \Z}^{} c_n e^{in\theta}, \qquad c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} e^{-in\theta} f(\theta) d\theta, \]
+and we must have $A_n(0) = c_n$.
+So the ODEs have solutions $A_n(t) = c_n e^{-i(n+n^3)t}$, and for the PDE
+\begin{align*}
+    u(\theta,t) &= \sum_{n \in \Z}^{} c_n e^{-i(n+n^3)t} e^{in\theta} \\
+    &= \sum_{n \in \Z}^{} c_n e^{i(n\theta - (n + n^3)t)}.
+\end{align*}
+
+\section{The Fourier Transform}
+We'll continue to build upon our theory by developing a kind of continuous analog for Fourier series.
+Define the discrete wavenumber $k_n = n\pi / \ell$ and the scaled Fourier coefficients
+\[ \hat f_\ell (k_n) = 2\ell c_n = \int_{-\ell}^{\ell} e^{-ik_n x} f(x) \,dx. \]
+In the $\ell \to \infty$ limit the $k_n$ get infinitesimally close together and $\hat f_\ell$ becomes a continuous function, $\hat f$.
+With this, we can define the Fourier transform of a function $f : \R \to \C$:
+\[ \mathcal F \{ f(x) \} = \hat f(k) = \int_{-\infty}^{\infty} f(x) e^{-ikx} dx, \]
+provided the integral exists.
+This happens when $f$ is absolutely integrable---that is, when $\int_{-\infty}^{\infty} |f(x)| dx$ is finite.
+So we'll restrict ourselves to the space of functions in which $f(x) \to 0$ as $x \to \pm \infty$.
+We also have an explicit formula for the inverse Fourier transform:
+\[ \mathcal F^{-1} \left\{ \hat g(k) \right\} = g(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat g(k) e^{ikx} dk, \]
+again provided the integral exists.
+$\mathcal F$ has a few nice properties that we can exploit to more easily compute new, potentially nasty transforms.
+Most important is the fact that $\mathcal F$ is linear (which we can use with the "building blocks" on the left), but we also have a few other general rules on the right.
+\begin{align*}
+    H(x) e^{-x} &\,\overset{\mathcal F}{\longrightarrow}\, \frac{1}{1+ik} & f(-x) &\,\overset{\mathcal F}{\longrightarrow}\, \hat f(-k) \\
+    e^{-a|x|} &\,\overset{\mathcal F}{\longrightarrow}\, \frac{2a}{a^2 + k^2} \quad a > 0 & f(ax) &\,\overset{\mathcal F}{\longrightarrow}\, \frac{1}{|a|} \hat f (k / a) \quad a \neq 0 \\
+    H(x) e^{-x} \sin x &\,\overset{\mathcal F}{\longrightarrow}\, \frac{1}{2 - k^2 + 2ik} & \frac{df}{dx} &\,\overset{\mathcal F}{\longrightarrow}\, ik \, \hat f(k) \\
+    \delta(x - x_0) &\,\overset{\mathcal F}{\longrightarrow}\, e^{-ikx_0} & f(x) * g(x) &\,\overset{\mathcal F}{\longrightarrow}\, \hat f(k) \hat g(k)
+\end{align*}
+Here $H(x)$ is the Heaviside function, which is zero for $x < 0$, one for $x > 0$, and $1 / 2$ for $x = 0$, abd $*$ denotes convolution, which is defined by
+\[ f(t) * g(t) = \int_{-\infty}^{\infty} f(s) g(t-s) \,ds. \]
+The $\delta(x)$ is the Dirac delta function (or distribution), which can be defined in two ways.
+We might set
+\[ \delta_\epsilon(x - x_0) = \begin{cases} 1 / 2\epsilon & |x - x_0| < \epsilon \\ 0 & \textrm{otherwise} \end{cases} \]
+and say that $\delta_\epsilon \to \delta$ as $\epsilon \to 0$; this is the limit description of $\delta$.
+But we can also define it through the sampling property: for any function $f$,
+\[ f(x_0) = \int_{-\infty}^{\infty} f(x) \delta(x - x_0) \,dx. \]
+The response of a linear ODE to a $\delta$-function forcing is called the Green's function for the ODE.
+These are very important solutions because they act as ``building block'' solutions to the same equation with different forcing functions!
+Specifically, if $g(t)$ is the Green's function for an ODE, then for any other forcing function $f(t)$ we get the solution
+\[ y(t) = f(t) * g(t). \]
+For a PDE, the Green's function is the solution with a $\delta$-function initial condition.
+
+When we go to solve equations using the Fourier transform, the aim is simply to turn the problem at hand into a simpler one that we can solve and then apply an inverse transform.
+We generally go from an ODE to an algebraic equation and from a PDE to an ODE.
+
+We'll often encounter Gaussians in doing this, so we note that
+\[ \mathcal F \left\{ e^{-ax^2 / 2} \right\} = e^{-k^2 / 2a} \sqrt{\frac{2\pi}{a}}, \qquad \mathcal F^{-1} \left\{ e^{-ck^2} \right\} = \frac{1}{\sqrt{4\pi c}} e^{-x^2 / 4c}, \]
+and that we may sometimes write
+
+\[ \pfn{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-y^2} dy. \]
+We have $\pfn{erf}(0) = 0$ and asymptotes at $1$ and $-1$.
+
+\end{document}
