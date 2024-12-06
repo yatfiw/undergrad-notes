@@ -56,15 +56,15 @@ Contents are below, including planned but incomplete notes.
     <td>FA24</td>
  </tr>
    <tr>
-    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
+   <td>MATH180</td>
+    <td>Intro. to PDEs</td>
+    <td>FA24</td>
     <td>ASTR122</td>
     <td>High-Energy Astrophysics</td>
     <td>SP25</td>
  </tr>
   <tr>
-    <td>MATH180</td>
-    <td>Intro. to PDEs</td>
-    <td>FA24</td>
+    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
     <td>PHYS116</td>
     <td>Quantum Mechanics</td>
     <td>SP25</td>
