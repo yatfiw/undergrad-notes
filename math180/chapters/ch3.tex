@@ -164,7 +164,7 @@ We'll illustrate these ideas via a case study of the heat equation's Dirichlet p
     for all $t \geq 0$.
 \end{example}
 
-As an example of an ill-posed problem, consider a ``backward hear equation'' $u_t = -u_{xx}$.
+As an example of an ill-posed problem, consider a ``backward heat equation'' $u_t = -u_{xx}$.
 Separation of variables would yield \vspace{-5pt}
 \[ u_n(x,t) = \frac{1}{n} e^{n^2 \pi^2 t} \sin(n\pi x). \]
 At $t=0$, $|u_n(x,0)|$ attains a maximum value of $1 / n$ for $x \in (0,1)$.
@@ -176,7 +176,7 @@ So small initial conditions become very large at very small times, meaning the p
 Remaining in the realm of theory, now we'll look at where solutions to problems are extremized.
 We'll focus our attention on the heat equation for convenience.
 
-\begin{theorem}[Minimum principle]
+\begin{theorem}[Maximum principle]
     Let $R$ be a closed region with $0 \leq x \leq L$ and $0 \leq t \leq T$, and let $u(x,t)$ be a solution to the heat equation $u_t = Du_{xx}$ which is continuous on $R$.
     (That is, $u \in C_x^2[0,L] \cap C_t[0,T]$.)
     Then $u(x,t)$ achieves its maximum either initially or on one of the boundaries.
