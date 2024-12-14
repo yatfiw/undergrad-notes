@@ -1,0 +1,126 @@
+\documentclass[../p111main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Hamiltonian Mechanics}
+\section{Hamilton's Equations}
+Now we'll go back to studying the underlying framework of classical mechanics, this time based on the Hamiltonian and its dependencies on positions and momenta.
+This Hamiltonian formulation turns out to have a lot of advantages (and disadvantages) when compared with the Lagrangian approach:
+\begin{itemize}[topsep=0pt]
+    \item it leads to a system of first-order differential equations rather than second-order ones, which are numerically easier objects to work with;
+    \item it allows for a cleaner treatment of conserved quantities since any conserved momenta actually appear in the Hamiltonian;
+    \item it ends up being practically easier in fields like statistical and quantum mechanics; and
+    \item it puts the positions and momenta on similar footing, allowing for much more flexibility in the coordinates we choose to work with.
+\end{itemize}
+We must first establish that the Hamiltonian actually depends only on positions and momenta; that is, that it's independent of any velocities.
+For a system with one degree of freedom,
+\begin{align*}
+    H(p, q, \dot q, t) &= p \dot q - L(q, \dot q, t), \\
+    dH &= \dot q \,dp + p \,d\dot q - \left( \frac{\partial L}{\partial q} dq + \frac{\partial L}{\partial \dot q} d \dot q + \frac{\partial L}{\partial t} dt \right) \\
+    &= \dot q \,dp - \frac{\partial L}{\partial q} \,dq + \left( p - \frac{\partial L}{\partial \dot q} \right) d \dot q - \frac{\partial L}{\partial t} \,dt,
+\end{align*}
+and if we define the canonical momentum $p \equiv \partial L / \partial \dot q$, we can see that the explicit $\dot q$ dependence goes away!
+In practice, to transform from a Hamiltonian in $\dot q$ to one in $p$ we simply compute $p = \partial L / \partial \dot q$, solve for $\dot q$, and substitute.
+(This generalizes naturally to systems with multiple degrees of freedom.)
+
+Speaking in mathematical terms, what we've done here is take the Legendre transformation of the Lagrangian to get the Hamiltonian: $H(p, q, t) = p \dot q - L(q, \dot q, t)$.
+This transform can be inverted in an analogous way to recover the Lagrangian!
+
+Now, by the Euler-Lagrange equation $\dot p = \partial L / \partial q$, we're left with
+\begin{align*}
+    dH &= \dot q \,dp - \frac{\partial L}{\partial q} \,dq - \frac{\partial L}{\partial t} \,dt \\
+    &= \dot q \,dp - \dot p \,dq - \frac{\partial L}{\partial t} \,dt.
+\end{align*}
+Also, by the chain rule
+\[ dH = \frac{\partial H}{\partial p} \,dp + \frac{\partial H}{\partial q} \,dq + \frac{\partial H}{\partial t} \,dt, \]
+and matching terms gives Hamilton's equations of motion:
+\[ \dot q = \frac{\partial H}{\partial p}, \qquad \dot p = -\frac{\partial H}{\partial q}. \]
+For a system with $n$ degrees of freedom we would end with a system of $2n$ equations, two for each coordinate.
+Also note that we could use the chain rule to show that $dH / dt = \partial H / \partial t$, so $H$ is conserved if it has no explicit time dependence.
+
+\section{Liouville's Theorem}
+During our earlier discussion of Lagrangian mechanics we looked at state space as a tool for visualizing dynamical systems.
+We'll do something similar here, but rather than plot the evolution of the $(q, q_i)$ we will track the $(q_i, p_i)$ in what's called phase space.
+
+Trajectories in phase space have some nice properties.
+One of them is that different trajectories cannot cross at the same time---and if $H$ is time-independent then they also cannot cross at all.
+Another is Liouville's theorem, which states that volumes enclosed by surfaces in phase space are time-independent.
+More specifically, if we look at a region of phase space and imagine it being occupied by a bunch of infinitesimal ``particles'', then the amount of space those particles occupy is constant over time.
+
+We'll prove this result for a system with one degree of freedom, but we could to larger systems quite easily.
+Consider a phase space characterized by a velocity vector $\mbf{v} = \dot q \, \hat q + \dot p \, \hat p$ and a closed area $\Sigma$ in that space, whose outward normal is $\mbf{n}$.
+In a small time $dt$ the area enclosed by $\partial \Sigma$ changes by an amount
+\[ dV = dt \oint_{\partial \Sigma} (\mbf{v} \cdot \mbf{n}) \,d\ell = dt \iint_\Sigma (\nabla \cdot \mbf{v}) \,dA, \]
+and so by Hamilton's equations
+\[ \frac{dV}{dt} = \iint_\Sigma \left( \frac{\partial \dot q}{\partial q} + \frac{\partial \dot p}{\partial p} \right) dA = \iint_\Sigma \left[ \frac{\partial}{\partial q} \frac{\partial H}{\partial p} + \frac{\partial}{\partial p} \left( - \frac{\partial H}{\partial q} \right) \right] dA = 0. \]
+We can also make a more local statement: if $\rho$ denotes the ``density'' of these particles in phase space then $d \rho / dt = 0$.
+(This is because we can take an arbitrarily small region of particles and see how the number of particles and size of the region are both constant.)
+So the flow generated by the Hamiltonian here acts sort of like an incompressible fluid!
+
+\section{Poisson Brackets and Quantization}
+The Hamiltonian formulation of mechanics comes with a very elegant mathematical structure for time evolution.
+If we have some observable that depends on some combination of coordinates $q_i, p_i$ (and, perhaps, time) then we can write
+\begin{align*}
+    \frac{df}{dt} &= \frac{\partial f}{\partial t} + \sum_{i}^{} \left( \frac{\partial f}{\partial q_i} \dot q_i + \frac{\partial f}{\partial p_i} \dot p_i \right) \\
+    &= \frac{\partial f}{\partial t} + \sum_{i}^{} \left( \frac{\partial f}{\partial q_i} \frac{\partial H}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial H}{\partial q_i} \right).
+\end{align*}
+We'll call the summation here the Poisson bracket $\left\{ f, H \right\}$.
+Notice that $f$ is conserved if and only if $\left\{ f, H \right\} = 0$, in which case we might say that $f$ ``Poisson commutes'' with the Hamiltonian.
+(Because of this role it plays in observables' time dependence, the Hamiltonian is often referred to as the ``generator'' of time evolution.)
+
+More generally, for any observables $A,B$ we have the Poisson bracket
+\[ \left\{ A,B \right\} = \sum_{i}^{} \left( \frac{\partial A}{\partial q_i} \frac{\partial B}{\partial p_i} - \frac{\partial A}{\partial p_i} \frac{\partial B}{\partial q_i} \right), \]
+and so $\left\{ A,B \right\} = -\left\{ A,B \right\}$.
+Crucially, the position and momentum observables satisfy
+\[ \left\{ q_i, q_j \right\} = \left\{ p_i, p_j \right\} = 0, \qquad \left\{ q_i, p_j \right\} = \delta_{ij} \]
+for all valid indices $i,j$.
+We can also see that the Poisson bracket provides a nice way to rewrite Hamilton's equations:
+\[ \dot q_i = \left\{ q_i, H \right\}, \qquad \dot p_i = \left\{ p_i, H \right\}. \]
+
+Now, one of the great advantages of the Hamiltonian formulation over the Lagrangian one is a greater flexibility in our choice of coordinates.
+In Lagrangian mechanics we could pick any set of coordinates $q_i$ we wanted, and the $\dot q_i$ just fell out of that choice.
+But in Hamiltonian mechanics the $q_i$ and $p_i$ are much more removed from one another, so in principle we have twice as many choices to make for coordinates!
+This really increases our ability to simplify complex problems.
+But still, not every transformation is valid.
+
+In particular, a coordinate transformation
+\[ (q_1, p_1, \ldots, q_N, p_N) \, \to \, (Q_1 P_1, \ldots, Q_N, P_N) \]
+is allowed only if it preserves the structure of Hamilton's equations:
+\[ \dot Q_i = \frac{\partial H}{\partial P_i}, \qquad \dot P_i = -\frac{\partial H}{\partial Q_i}. \]
+Alternatively, it must satisfy the Poisson ``commutation relations''
+\[ \left\{ Q_i, Q_j \right\} = \left\{ P_i, P_j \right\} = 0, \qquad \left\{ Q_i, P_j \right\} = \delta_{ij}. \]
+Such a coordinate transformation is called a canonical transformation, and we call the $Q_i, P_i$ canonical coordinates.
+The flexibility that comes with these transformations is reflected in how the transformation $Q = -p$, $P = q$ is perfectly valid!
+
+Another surprising example of a valid canonical transformation is time evolution:
+\[ Q_i(t) = q_i(t + \Delta t), \qquad P_i(t) = p_i(t + \Delta t). \]
+There's a couple of interesting lines of reasoning we could follow from this.
+On one hand, the Hamiltonian framework may encourage us to move all time dependence from the state of the system to the coordinates that describe the system.
+If we imagine a state as a collection of points on a grid, we might imagine the grid itself warping rather than the points moving around upon it.
+
+But we can also take the idea of positions and momenta as transformations to the extreme and say that \textit{all} observables are just transformations of the system's state.
+In this case we would need some new quantity on which these observables can act and transform---we might call it a wave function or, more suggestively, a quantum state.
+
+In this way of thinking, all observables become operators rather than functions of time.
+These operators, of course, don't necessarily commute; to capture this we define the commutator
+\[ [\hat A, \hat B] = \hat A \hat B - \hat B \hat A = -[\hat B, \hat A]. \]
+The commutation relation for a pair of quantum operators comes from the Poisson bracket:
+\[ [\hat A, \hat B] = i \hbar \left\{ A, B \right\}. \]
+This is where the canonical commutation relations come from, including the Heisenberg uncertainty principle:
+\[ [\hat X_i, \hat P_i] = i\hbar \left\{ X_i, P_j \right\} = i\hbar \, \delta_{ij}. \]
+Physically, operators that don't commute with one another have some fundamental uncertainty associated with their successive measurements.
+If we went to measure $X_i$ in a quantum state, for example, we would not then be able to definitively measure $P_i$ for that same state.
+
+Given the relationship between commutators and Poisson brackets, it should be unsurprising that observable time evolution in the quantum picture is very similar to that in the classical one.
+We'll just slap on some expectation values:
+\[ \frac{d \left< \hat f \right>}{dt} = \left< \frac{\partial \hat f}{\partial t} \right> + \frac{1}{i\hbar} \left< [\hat f, \hat H] \right>. \]
+
+One final connection we can make between classical and quantum mechanics is that, in both pictures, we consider a variety of paths in determining how a system will move from point $A$ to point $B$.
+In classical mechanics we look for a path with extremal action, while in quantum mechanics we look for a path with stationary phase.
+These two ideas are related by the fact that the wave function for a process going from $A$ to $B$ is given by
+\[ \psi(A \to B) = \sum_{k}^{} \exp \left( \frac{i S_k}{\hbar} \right), \]
+where $k$ indexes the paths $A \to B$.
+From here we can see that the principle of extremal action follows from the principle of stationary phase.
+
+\end{document}

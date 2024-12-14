@@ -1,0 +1,237 @@
+\documentclass[../p111main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Rigid Bodies}
+\section{Rotational Energy and Momentum}
+The theory of oscillations, coupled or otherwise, proves to be very useful in simplifying the study of macroscopic systems.
+Another way we might study these is by assuming the particles comprise a rigid body, in which case the particles are said to be fixed in place.
+(In principle this isn't really true, of course, but we're not going to write down a Lagrangian with $10^{23}$ degrees of freedom to accommodate this technicality.)
+This leaves us with six degrees of freedom: three for the body's position and three for its orientation.
+
+Take our object and break it into chunks indexed by $\alpha$; the object's kinetic energy is
+\begin{align*}
+    T &= \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha |\mbf{r}_\alpha|^2. \\
+    \intertext{We'd like to break this up into translational and rotational components.
+    To this end, we'll introduce a ``tagged point'' that specifies the position of the object.
+    Let $\mbf{R}$ be the position of the tagged point and let $\mbf{r}_\alpha'$ be the position of $\alpha$ relative to the tagged point; with these our kinetic energy becomes}
+    &= \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha |\dot{\mbf{R}} + \dot{\mbf{r}}_\alpha'|^2. \\
+    \intertext{Now, $\mbf{r}_\alpha'$ has constant magnitude for a rigid body, meaning $\dot{\mbf{r}}_\alpha'$ is pure rotation.
+    In particular, if the object has angular velocity $\bm \omega$ at an angle $\theta$ to $\mbf{r}_\alpha'$ then $|\dot{\mbf{r}}_\alpha'| = (r_\alpha' \sin \theta) \,\omega = |\bm \omega \times \mbf{r}_\alpha'|$ and, by the right-hand rule, $\dot{\mbf{r}}_\alpha' = \bm \omega \times \mbf{r}_\alpha'$.
+    So the kinetic energy becomes}
+    &= \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha |\dot{\mbf{R}} + (\bm \omega \times \mbf{r}_\alpha')|^2.
+\end{align*}
+Expanding and manipulating turns this into
+\[ T = \frac{1}{2} M |\dot{\mbf{R}}|^2 + \dot{\mbf{R}} \cdot \left[ \bm \omega \times \left( \sum_{\alpha}^{} \Delta m_\alpha \mbf{r}_\alpha' \right) \right] + \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha |\bm \omega \times \mbf{r}_\alpha'|^2, \]
+where $M = \sum_{\alpha}^{} \Delta m_\alpha$ is the mass of the body.
+Notice that the first and third terms are purely translation and purely rotational, respectively, and that the middle term goes to zero if $\dot{\mbf{R}} = 0$ or $\mbf{R} = \mbf{R}_\textrm{CM}$.
+One of these will always be true for us, so we can ignore this term and write
+\[ T = \frac{1}{2} M |\dot{\mbf{R}}|^2 + \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha (\bm \omega \times \mbf{r}_\alpha') \cdot (\bm \omega \times \mbf{r}_\alpha'). \]
+Let's now focus our attention on the rotational component, which we can write as
+\begin{align*}
+    T_\textrm{rot} &= \frac{1}{2} \sum_{\alpha}^{} \Delta m_\alpha \big[ \omega^2 r_\alpha^2 - (\bm \omega \cdot \mbf{r}_\alpha')^2 \big] \\
+    \intertext{or, in the continuum limit,}
+    &= \frac{1}{2} \int \rho(\mbf{r}') \,d^3\mbf{r}' \big[ \omega^2 r'^2 - (\bm \omega \cdot \mbf{r}')^2 \big].
+\end{align*}
+We'll write our dot products in index notation via
+\[ \omega^2 = \sum_{i,j}^{} \omega_i \delta_{ij} \omega_j, \qquad (\bm \omega \cdot \mbf{r}')^2 = \sum_{i,j}^{} (\omega_i r'_i) (\omega_j r'_j), \]
+and substitute them into $T_\textrm{rot}$ to get
+\begin{align*}
+    T_\textrm{rot} &= \frac{1}{2} \sum_{i,j}^{} \int \rho(\mbf{r}') \, d^3\mbf{r}' \big[ \omega_i \omega_j r'^2 \delta_{ij} - \omega_i \omega_j r'_i r'_j \big] \\
+    &= \frac{1}{2} \sum_{i,j}^{} \omega_i \omega_j \left[ \int \rho(\mbf{r}') \, d^3 \mbf{r}' \big( r'^2\delta_{ij} - r'_i r'_j \big) \right].
+\end{align*}
+The bracketed expression is the $(i,j)$ component of the moment of inertia tensor $\mbf{I}$.
+So the rotational kinetic energy becomes
+\[ T_\textrm{rot} = \frac{1}{2} \sum_{i,j}^{} \mbf{I}_{ij} \omega_i \omega_j. \]
+Notice how this reduces to the familiar $I \omega^2 / 2$ for rotation about a single fixed axis.
+Now, the inertia tensor $\mbf{I}$ is a (time-dependent) symmetric matrix, and its diagonal components look like
+\[ \mbf{I}_{xx} = \int \rho(\mbf{r}') \, d^3 \mbf{r}' \big[ r'^2 \cdot 1 - x^2 \big] = \int \rho(\mbf{r}') \, d^3 \mbf{r}' (y^2 + z^2). \]
+Physically, this is a projection of $\mbf{r}'$ into the $yz$-plane a measure of how resistant our object is to rotations about $\hat x$.
+The off-diagonal terms, however, have no clear physical meaning other than the fact that nonzero values tend to couple rotations about two axes---if we try to generate a rotation about $\hat x$ then we'd also get one about $\hat y$.
+(We'll soon find that this happens when the object at hand lacks some kind of symmetry.)
+
+For angular momentum we get a similar result by taking
+\[ \bm \ell = \sum_{\alpha}^{} \Delta m_\alpha (\mbf{r}_\alpha \times \dot{\mbf{r}}_\alpha) = \sum_{\alpha}^{} \Delta m_\alpha (\mbf{R} + \mbf{r}_\alpha') \times (\dot{\mbf{R}} + \bm \omega \times \mbf{r}_\alpha'), \]
+from which one could deduce that
+\[ \ell_i = M (\mbf{R} \times \dot{\mbf{R}}) + \sum_{j}^{} \mbf{I}_{ij} \omega_j. \]
+Note that this means conservation of angular momentum doesn't imply conservation of $\bm \omega$.
+
+\section{Principal Axes}
+The fact that the inertia tensor has off-diagonal entries suggests that the Cartesian basis isn't the most ``natural'' one for this problem.
+We'd like to have one in which $\bm \ell = \lambda \bm \omega$ if $\bm \omega$ points along one of the axes; since $\bm \ell = \mbf{I} \bm \omega$ for non-translational frames we can write $\mbf{I} \bm \omega = \lambda \bm \omega$.
+This is an eigenvalue problem, and because $\mbf{I}$ is symmetric we get real eigenvalues and orthogonal eigenvectors.
+The eigenvalues $\lambda_i$ are the principal moments of our object, and the eigenvectors $\hat e_i$ are its principal axes.
+Define $\hat x' = \hat e_1$, $\hat y' = \hat e_2$, and $\hat z' = \hat e_3$.
+
+We can see that if $\bm \omega$ points along a principal axis then $\bm \ell \propto \bm \omega$ and $\bm \ell$-conservation implies $\bm \omega$-conservation.
+More generally,
+\[ \bm \ell = \mbf{I} \bm \omega = \lambda_{x'} \omega_{x'} \hat x' + \lambda_{y'} \omega_{y'} \hat y' + \lambda_{z'} \omega_{z'} \hat z'. \]
+This indicates that, in the principal axis basis, the inertia tensor $\mbf{I}$ is diagonal with entries $\lambda_{x'}, \lambda_{y'}, \lambda_{z'}$.
+This gives us
+\[ T = \frac{1}{2} \sum_{i',j'}^{} \omega_{i'} \mbf{I}_{i'j'} \omega_{j'} = \frac{1}{2} \left( \lambda_{x'} \omega_{x'}^2 + \lambda_{y'} \omega_{y'}^2 + \lambda_{z'} \omega_{z'}^2 \right), \]
+which looks a lot more like what we'd expect!
+So principal axes serve to reduce the number of components of $\mbf{I}$ we need to deal with, which serves to make all the math a bit more physically intuitive.
+Unfortunately, an object's principal axes are intrinsic to its shape and so vary with time as the body spins.
+(This doesn't affect our calculation for $T$, though, since it's coordinate-independent and we did it in an inertial frame.)
+
+Symmetry makes it very easy to identify some or all of an object's principal axes.
+It isn't difficult to show that the existence of a reflection symmetry, say $x \to -x$, implies that $\hat x$ is a principal axis; it follows that $I_{xx}$ is a principal moment and $I_{xy} = I_{xz} = 0$.
+Similarly, if there is a rotational axis of symmetry then that axis is a principal axis, and any other pair of mutually orthogonal axes are also principal.
+
+\section{Rotating Frames of Reference}
+Motivated by the fact that a body's principal axes generally define a frame of reference that rotates relative to the body's surroundings, we'll spend some time talking about how to work in rotating frames in general.
+
+Consider a reference frame that rotates with angular velocity $\bm \omega$ relative to an inertial frame, and suppose a vector $\mbf{A}$ is stationary in this rotating frame.
+If $\mbf{A}$ makes an angle $\theta$ with $\bm \omega$ then in a time $dt$ we have $(dA)_\textrm{in} = (A \sin \theta) \omega \,dt$ and $(d\mbf{A} / dt)_\textrm{in} = \bm \omega \times \mbf{A}$.
+But if $\mbf{A}$ is not stationary in the rotating frame then by the Galilean velocity transformation
+\[ \left( \frac{d\mbf{A}}{dt} \right)_\textrm{in} = \left( \frac{d\mbf{A}}{dt} \right)_\textrm{rot} + (\bm \omega \times \mbf{A}). \]
+Now we'll derive the equation of motion for a point mass in a rotating frame.
+This requires finding the Lagrangian, which should be written down in an inertial frame.
+The kinetic energy in such a frame is
+\begin{align*}
+    T &= \frac{1}{2} m \big[ \mbf{v}_\textrm{rot} + (\bm \omega \times \mbf{r}) \big]^2 \\
+    &= \frac{1}{2} m \big[ \mbf{v}_\textrm{rot} \cdot \mbf{v}_\textrm{rot} + 2 \mbf{v}_\textrm{rot} \cdot (\bm \omega \times \mbf{r}) + \omega^2 r^2 - (\bm \omega \cdot \mbf{r})^2 \big] \\
+    &= \frac{1}{2} m \left[ \sum_{k}^{} v_{\textrm{rot}, \, k}^2 + 2 \sum_{k}^{} v_{\textrm{rot}, \, k} (\bm \omega \times \mbf{r})_k + \omega^2 \sum_{k}^{} r_k^2 - \sum_{j,k}^{} \omega_j \omega_k r_j r_k \right],
+\end{align*}
+and the Lagrangian is $L = T - U(\mbf{r})$.
+Each component of the Euler-Lagrange equations looks like
+\[ \frac{d}{dt} \frac{\partial L}{\partial v_{\textrm{rot}, \,i}} = \frac{\partial L}{\partial r_i}, \]
+and computing these would give the equation of motion
+\[ m \ddot{\mbf{r}}_\textrm{rot} = - \nabla U - m \bm \omega \times (\bm \omega \times \mbf{r}_\textrm{rot}) - 2m \bm \omega \times \mbf{v}_\textrm{rot} - m (\dot{\bm \omega} \times \mbf{r}_\textrm{rot}). \]
+The $-\nabla U$ here is the inertial force, and it's all we'd see in an inertial frame.
+The second term, called the centrifugal force, tends to push away from the axis of rotation; we could demonstrate this using the right-hand rule.
+If we're at the equator of a planet with mass $M$ and radius $R$, we could show that
+\[ \frac{|\mbf{F}|_\textrm{cent}}{|\mbf{F}|_\textrm{grav}} = \frac{\omega^2 r^3}{GM}. \]
+For Earth this evaluates to about 0.3\%.
+The third is the Coriolis force, and the fourth is the Euler term.
+(We generally ignore this term since $\dot{\bm \omega}$ is usually either zero or near zero.)
+
+\section{Euler's Equations}
+We're now in a position to determine the equations of motion for a rotating rigid body.
+If a torque $\bm \Gamma$ acts in the inertial frame then by the rotational vector transformation we have
+\[ \dot{\mbf{L}}_\textrm{rot} + \bm \omega \times \mbf{L}_\textrm{rot} = \bm \Gamma. \]
+In the case of free rotation ($\bm \Gamma = 0$) we can expand both nonzero terms to get Euler's equations:
+\begin{align*}
+    \lambda_1 \dot \omega_{x'} - (\lambda_2 - \lambda_3) \omega_{y'} \omega_{z'} &= 0, \\
+    \lambda_2 \dot \omega_{y'} - (\lambda_3 - \lambda_1) \omega_{x'} \omega_{z'} &= 0, \\
+    \lambda_3 \dot \omega_{z'} - (\lambda_1 - \lambda_2) \omega_{x'} \omega_{y'} &= 0.
+\end{align*}
+We can quickly leverage this set of equations to learn something about the stability of rotations about each principal axis.
+If we have rotation purely about $\hat z'$ and introduce a small perturbation so that $\omega_{z'} \approx 0$ is preserved, the first of Euler's equations gives
+\[ \lambda_1 \ddot \omega_{x'} = (\lambda_2 - \lambda_3) [\omega_{z'} \dot \omega_{y'} + \dot \omega_{z'} \omega_{y'}] \]
+and after taking $\dot \omega_{z'} = 0$ and substituting for $\dot \omega_{y'}$ we get
+\[ \ddot \omega_{x'} = \frac{(\lambda_2 - \lambda_3) (\lambda_3 - \lambda_1) \omega_{z'}^2}{\lambda_1 \lambda_2} \omega_{x'}. \]
+Notice that, if $\lambda_1 < \lambda_3 < \lambda_2$, the above coefficient is positive and $\omega_x'$ grows exponentially!
+In this case rotation about $\hat z'$ is unstable.
+More generally, rotations about principal axes with ``intermediate'' moments are unstable; this is called the tennis racket theorem.
+
+Now let's make a huge simplification and assume our body has cylindrical symmetry, so $\lambda_1 = \lambda_2 = \lambda$.
+Looking at the Euler equations, we can see that this makes $\omega_{z'}$ constant, so that nonlinear system of equations has become linear!
+Specifically, we get
+\[ \dot \omega_{x'} = \Omega_b \omega_{y'}, \quad \dot \omega_{y'} = -\Omega_b \omega_{x'}, \qquad \Omega_b \equiv \frac{(\lambda - \lambda_3) \omega_{z'}}{\lambda}. \]
+We could combine these equations to get $\ddot \omega_{x'} = -\Omega_b^2 \omega_{x'}$ which, with the initial conditions $\omega_{x'}(0) = \omega_0$ and $\omega_{y'}(0) = 0$, gives
+\[ \omega_{x'}(t) = \omega_0 \cos \Omega_b t, \qquad \omega_{y'}(t) = -\omega_0 \sin \Omega_b t. \]
+So both $\bm \omega$ and $\bm \ell$ precess about $\hat z'$ at a rate $\Omega_b$:
+\begin{align*}
+    \bm \omega &= \omega_0 \cos \Omega_b t \, \hat x' - \omega_0 \sin \Omega_b t \, \hat y' + \omega_{z'} \hat z', \\
+    \bm \ell &= \lambda \big[ \omega_0 \cos \Omega_b t \, \hat x' - \omega_0 \sin \Omega_b t \, \hat y' \big] + \lambda_3 \omega_{z'} \hat z'.
+\end{align*}
+But remember, this is what the body sees in its own, rotating frame of reference.
+In the inertial ``space frame'' we note that $\bm \ell$ is fixed, that it makes a constant angle with $\bm \omega$, and that these two vectors lay in the same plane as $\hat z'$.
+Put together, it turns out that both $\hat z'$ and $\bm \omega$ precess about $\bm \ell$ at a rate $\Omega_s = \ell / \lambda$!
+(This will be easier to show via the Lagrangian approach that we'll develop soon.)
+
+\section{Euler Angles}
+The Euler equations do a good job at describing motion in the body frame, but we really seek equations of motion relative to the inertial frame.
+To make this happen we'll need to define a set of generalized coordinates that specify the orientation of our body relative to such a frame.
+We'll once again focus on objects with cylindrical symmetry.
+
+The standard choice is to use the Euler angles, which are defined as follows.
+Start with the principal axes aligned with the inertial-frame axes.
+\begin{itemize}[topsep=0pt]
+    \item Rotate the body an angle $\phi$ about the $z$-axis.
+    \item Tilt the body an angle $\theta$ from the $z$-axis (about $\hat x$').
+    \item Spin the body an angle $\psi$ about the $z'$-axis.
+\end{itemize}
+In practical terms, $\theta$ and $\phi$ are the polar and azimuthal angles of the $z'$-axis, while $\psi$ is the amount that $\hat x'$ has rotated out of the $xy$-plane due to the spin of the object about $\hat z'$.
+
+This gives rise to three kinds of motion: spin ($\dot \psi$), precession ($\dot \phi$), and nutation ($\dot \theta$).
+Each of these contributes to the full rotation of the body in different ways.
+\begin{itemize}[topsep=0pt]
+    \item ($\dot \psi$)
+    This is purely rotation about $\hat z'$, so $\omega_{z' (\psi)} = \dot \psi$.
+    
+    \item ($\dot \phi$)
+    This is rotation about $\hat z = \hat z' \cos \theta + \hat y' \sin \theta$, so $\omega_{z'(\phi)} = \dot \phi \cos \theta$ and $\omega_{y'(\phi)} = \dot \phi \sin \theta$.
+    
+    \item ($\dot \theta$)
+    By cylindrical symmetry we can choose $\hat x'$ to lie in the $xy$-plane, in which case $\dot \theta$ is purely rotation about $\hat x'$ meaning $\omega_{x'(\theta)} = \dot \theta$.
+\end{itemize}
+With this we have the kinetic energy
+\begin{align*}
+    T &= \frac{1}{2} \left( \lambda \omega_{x'}^2 + \lambda \omega_{y'}^2 + \lambda_3 \omega_{z'}^2 \right) \\
+    &= \frac{1}{2} \lambda \left( \dot \theta^2 + \dot \phi^2 \sin^2 \theta \right) + \frac{1}{2} \lambda_3 \left( \dot \psi + \dot \phi \, \cos \theta \right)^2
+\end{align*}
+which, along with a potential, is just what we need to write down a Lagrangian!
+If we again focus our attention on the free rotation case (in which $L = T$) we can immediately see a couple of conserved quantities:
+\begin{align*}
+    p_\psi &= \frac{\partial L}{\partial \dot \psi} = \lambda_3 \left( \dot \psi + \dot \phi \cos \theta \right), \\
+    p_\phi &= \frac{\partial L}{\partial \dot \phi} = \lambda \dot \phi \sin^2 \theta + \lambda_3 \cos \theta \left( \dot \psi + \dot \phi \cos \theta \right).
+\end{align*}
+Also, if we define $\hat z$ such that $\bm \ell  = \ell \hat z$, then by conservation of angular momentum we have
+\begin{align*}
+    \ell \, \hat z &= \lambda \omega_{x'} \hat x' + \lambda \omega_{y'} \hat y' + \lambda \omega_{z'} \hat z', \\
+    \ell \cos \theta \,\hat z' + \ell \sin \theta \,\hat y' &= \lambda \dot \theta \,\hat x' + \lambda \dot \phi \sin \theta \,\hat y' + \lambda_3 (\dot \psi + \dot \phi \cos \theta) \hat z'.
+\end{align*}
+From this it follows that $\dot \theta = 0$, so we have no nutation, and $\dot \phi = \ell / \lambda$, which is exactly the precession frequency we pointed out previously.
+We can also say something about spin---since $\ell \cos \theta = \lambda_3 (\dot \psi + \dot \phi \cos \theta)$,
+\[ \dot \psi = \frac{1}{\lambda_3} \left( \ell \cos \theta - \lambda_3 \dot \phi \cos \theta \right) = \frac{1}{\lambda_3} \left( \ell \cos \theta - \lambda_3 \frac{\ell}{\lambda} \cos \theta \right) = \frac{\ell \cos \theta}{\lambda \lambda_3} (\lambda - \lambda_3), \]
+and because $\ell \cos \theta = \lambda_3 \omega_{z'}$, this becomes
+\[ \dot \psi = \frac{\omega_{z'} (\lambda - \lambda_3)}{\lambda}, \]
+which is exactly the frequency at which we found $\bm \ell$ to precess in the body frame.
+
+We'll finish off with physical interpretations for the generalized momenta $p_\psi, p_\phi$, along with a relationship between the two.
+In the body frame we have
+\begin{align*}
+    p_\psi &= \lambda_3 \left( \dot \psi + \dot \phi \cos \theta \right) = \lambda_{z'}, \\
+    p_\phi &= \lambda \dot \phi \sin^2 \theta + \lambda_3 \cos \theta \left( \dot \psi + \dot \phi \cos \theta \right) = \ell_{y'} \sin \theta + \ell_{z'} \cos \theta,
+\end{align*}
+and by moving into the inertial frame with $\bm \ell = \ell \hat z$ we get $p_\psi = \ell \cos \theta$ and
+\[ p_\phi = \ell \sin^2 \theta + \ell \cos^2 \theta = \ell. \]
+Note that $p_\phi \cos \theta = p_\psi$ here.
+Lastly, let's take a look at the Euler-Lagrange equation for $\theta$:
+\begin{align*}
+    \lambda \ddot \theta &= \lambda \dot \phi^2 \sin\theta \cos\theta + \lambda_3 \left( \dot \psi + \dot \phi \cos \theta \right) \left( - \dot \phi \sin \theta \right) \\
+    &= \sin \theta \dot \phi \left( \lambda \dot \phi \cos \theta - p_\psi \right) \\
+    \intertext{Because $p_\phi = \lambda \sin^2 \theta \,\dot \phi + p_\psi \cos \theta$, we can substitute for the innner $\dot \phi$ and, after some manipulation, get}
+    &= \frac{\dot \phi}{\sin \theta} \left( p_\phi \cos \theta - p_\psi \right).
+\end{align*}
+So we can see that $\ddot \theta = 0$ if $p_\phi \cos \theta = p_\psi$, which occurs when $\bm \ell$ aligns with $\hat z$.
+
+\section{Gyroscope Precession}
+Now we'll consider a problem in which there is an external torque---a gyroscope under the influence of gravity.
+There's actually only a couple of modifications we'll need to make from the free rotation problem.
+\begin{itemize}[topsep=0pt]
+    \item Our tagged point will be the stationary point of the gyroscope in contact with the ground.
+    This turns out to not affect our kinetic energy $T$ at all if we go through the same motions as before.
+
+    \item If $R$ is the distance from the tagged point to the center of mass then $U = MgR \cos \theta$.
+\end{itemize}
+With these the Lagrangian is $L = T - U$ and the Euler-Lagrange equation in $\theta$ is
+\[ \lambda \ddot \theta = \lambda \dot \phi^2 \sin \theta \cos \theta - \lambda_3 \left( \dot \psi + \dot \phi \cos \theta \right) \dot \phi \sin \theta + MgR \sin \theta. \]
+In the case of no nutation ($\dot \theta = 0$) we get $\lambda \dot \phi^2 \cos \theta - p_\psi \dot \phi + MgR = 0$.
+If $p_\psi$ is large (i.e., if the top is spinning very quickly), solving the quadratic for $\dot \phi$ would give
+\[ \dot \phi = \frac{MgR}{p_\psi} \;\textrm{ or }\; \dot \phi = \frac{p_\psi}{\lambda \cos \theta} \]
+as the respective slow and fast solutions.
+This is called steady precession---all angles change at constant rates!
+Now, if there is nutation we'll need to use the fact that the Hamiltonian is conserved and equal to
+\[ H = \frac{1}{2} \lambda \left( \dot \phi^2 \sin^2 \theta + \dot \theta^2 \right) + \frac{1}{2} \lambda_3 \left( \dot \psi + \dot \phi \cos \theta \right)^2 + MgR \cos \theta.\]
+Noting that $p_\phi$ and $p_\psi$ are conserved, we can substitute $p_\psi = \lambda_3 (\dot \psi + \dot \phi \cos \theta)$ and $\lambda \dot \phi \sin^2 \theta = p_\phi - p_\psi \cos \theta$ to get
+\[ H = \frac{1}{2} \lambda \dot \theta^2 + \frac{(p_\phi - p_\psi \cos \theta)^2}{2\lambda \sin^2 \theta} + \frac{p_\psi^2}{2\lambda_3} + MgR \cos \theta, \]
+which allows us to define an effective potential as before.
+Solving as we did for the two-body problem would reveal that
+\[ \dot \phi = \frac{p_\phi - p_\psi \cos \theta}{\lambda \sin^2 \theta}. \]
+Notice that if $p_\phi > p_\psi$ then $\dot \theta$ is always positive, but if $p_\phi < p_\psi$ then the sign of $\dot \phi$ may change depending on the values of $p_\psi - p_\psi \cos \theta$ at the minimum and maximum $\theta$.
+
+\end{document}
