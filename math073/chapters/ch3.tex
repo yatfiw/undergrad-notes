@@ -42,7 +42,7 @@ Since a matrix is comprised of several vectors, this provides good motivation fo
 	If $A$ is an $m\times n$ matrix and $B$ is an $n\times r$ matrix, then the product $C = AB$ is an $m\times r$ matrix where each entry is given by
 	\[ c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}. \]
 	The matrix-column and row-matrix representations of the product are, respectively,
-	\[ AB = \begin{bmatrix} A \mbf{b}_1 & A \mbf{b}_2 & \cdots & A \mbf{b}_r \end{bmatrix} \;\text{ and }\; AB = \begin{bmatrix} \mathbf{A}_1 B \\ \mathbf{A}_2 B \\ \vdots \\ \mathbf{A}_m B \end{bmatrix}. \]
+	\[ AB = \begin{bmatrix} A \mbf{b}_1 & \cdots & A \mbf{b}_r \end{bmatrix} \;\text{ and }\; AB = \begin{bmatrix} \mathbf{A}_1 B \\ \vdots \\ \mathbf{A}_m B \end{bmatrix}. \]
 \end{definition}
 
 Sometimes it'll be useful to extract the $i$th row or column from a matrix.
@@ -79,16 +79,18 @@ We begin with the basic operations of addition and scalar multiplication, noting
 \begin{theorem}[Properties of matrix addition and scalar multiplication]
 	Let $A$, $B$, and $C$ be matrices of the same size and let $c$ and $d$ be scalars.
 	Then
-	\begin{enumerate}[label=(\alph*)]
-		\item $A + B = B + A$
-		\item $(A + B) + C = A + (B + C)$
-		\item $A + O = A$
-		\item $A + (-A) = O$
-		\item $c(A + B) = cA + cB$
-		\item $(c+d)A = cA + dA$
-		\item $c(dA) = (cd)A$
-		\item $1A = A$
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $A + B = B + A$
+			\item $(A + B) + C = A + (B + C)$
+			\item $A + O = A$
+			\item $A + (-A) = O$
+			\item $c(A + B) = cA + cB$
+			\item $(c+d)A = cA + dA$
+			\item $c(dA) = (cd)A$
+			\item $1A = A$
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
 
 Now we'll look at matrix multiplication and transposition, noting that multiplication is not commutative!
@@ -96,25 +98,29 @@ Now we'll look at matrix multiplication and transposition, noting that multiplic
 \begin{theorem}[Properties of matrix multiplication]
 	Let $A$, $B$, and $C$ be matrices (such that all indicated operations are defined) and let $k$ be a scalar.
 	Then
-	\begin{enumerate}[label=(\alph*)]
-		\item $A(BC) = (AB)C$
-		\item $A(B+C) = AB+AC$
-		\item $(A+B)C = AC+BC$
-		\item $k(AB) = (kA)B = A(kB)$
-		\item $I_mA = A = AI_n$
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $A(BC) = (AB)C$
+			\item $A(B+C) = AB+AC$
+			\item $(A+B)C = AC+BC$
+			\item $k(AB) = (kA)B = A(kB)$
+			\item $I_mA = A = AI_n$
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
 
 \begin{theorem}[Properties of matrix transposition]
 	Let $A$ and $B$ be matrices (such that all indicated operations are defined) and let $k$ be a scalar.
 	Then
-	\begin{enumerate}[label=(\alph*)]
-		\item $(A^T)^T = A$
-		\item $(A+B)^T = A^T + B^T$
-		\item $(kA)^T = k(A^T)$
-		\item $(AB)^T = B^TA^T$
-		\item $(A^r)^T = (A^T)^r$
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $(A^T)^T = A$
+			\item $(A+B)^T = A^T + B^T$
+			\item $(kA)^T = k(A^T)$
+			\item $(AB)^T = B^TA^T$
+			\item $(A^r)^T = (A^T)^r$
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
 
 We can use some of these to show what happens when we add or multiply a matrix by its own transpose.
@@ -206,18 +212,18 @@ Specifically, each ERO corresponds to a matrix which, when multiplied, is equiva
 From here, we can begin formulating a theorem that will not only be useful for our immediate purposes, but which will also reoccur plenty throughout the course: the fundamental theorem of linear algebra (FTLA).
 It's essentially a list of useful conditions that are both necessary and sufficient for matrix invertibility.
 
-\pagebreak
-
 \begin{theorem}[Additions to the FTLA]
-	Let $A$ be an $n\times n$ matrix.
+	Let $A$ be an $n\times n$ matrix and let $\mbf{b}$ be a vector in $\R^n$.
 	The following statements are equivalent:
-	\begin{enumerate}[label=(\alph*)]
-		\item $A$ is invertible.
-		\item $A\mbf{x}= \mbf{b}$ has a unique solution for every $\mbf{b}\in\R^n$.
-		\item $A\mbf{x}=\mbf{0}$ has only the trivial solution.
-		\item The reduced row echelon form of $A$ is $I_n$.
-		\item $A$ is a product of elementary matrices.
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $A$ is invertible.
+			\item $A\mbf{x}= \mbf{b}$ has a unique solution.
+			\item $A\mbf{x}=\mbf{0}$ has only the trivial solution.
+			\item The reduced row echelon form of $A$ is $I_n$.
+			\item $A$ is a product of elementary matrices.
+		\end{enumerate}
+	\end{multicols}
 	For the full theorem, see Appendix A.
 \end{theorem}
 
@@ -352,6 +358,8 @@ Thankfully, there is a straightforward way to find a basis for each subspace we'
 No subspace (except for the trivial space $\left\{ \mbf{0} \right\}$) has a unique basis.
 However, every basis for a subspace is comprised by the same number of vectors, making it an intrinsic quantity for the subspace.
 
+\pagebreak
+
 \begin{theorem}[Sizes of distinct bases]
 	Let $S$ be a subspace of $\R^n$.
 	Then any two bases for $S$ have the same number of vectors.
@@ -384,8 +392,6 @@ But the dimensions of the row and column spaces are invariant under elementary r
 
 Since the row and column spaces of a matrix just get swapped upon transposition, we get the following.
 
-% ----- STOPPED HERE ----- %
-
 \begin{theorem}[Rank of a transpose]
 	For any matrix $A$, $\pfn{rank}(A^T) = \pfn{rank}(A)$.
 \end{theorem}
@@ -405,22 +411,26 @@ Adding these together gives the full dimension of the space being acted upon.
 
 We're now in a position to add statements about the row, column, and null spaces to the FTLA.
 
+\pagebreak
+
 \begin{theorem}[Additions to the FTLA]
 	Let $A$ be an $n\times n$ matrix.
 	The following statements are equivalent:
-	\begin{enumerate}[label=(\alph*)]
-		\item $A$ is invertible. \\
-		\phantom{~}\hspace{-19.5pt} \vdots
-		\setcounter{enumi}{5}		
-		\item $\pfn{rank}(A) = n$
-		\item $\pfn{nullity}(A) = 0$
-		\item The column vectors of $A$ are linearly independent.
-		\item The column vectors of $A$ span $\R^n$.
-		\item The column vectors of $A$ form a basis for $\R^n$.
-		\item The row vectors of $A$ are linearly independent.
-		\item The row vectors of $A$ span $\R^n$.
-		\item The row vectors of $A$ form a basis for $\R^n$.
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $A$ is invertible. \\
+			\phantom{~}\hspace{-19.5pt} \vdots
+			\setcounter{enumi}{5}		
+			\item $\pfn{rank}(A) = n$
+			\item $\pfn{nullity}(A) = 0$
+			\item The column vectors of $A$ are linearly independent.
+			\item The column vectors of $A$ span $\R^n$.
+			\item The column vectors of $A$ form a basis for $\R^n$.
+			\item The row vectors of $A$ are linearly independent.
+			\item The row vectors of $A$ span $\R^n$.
+			\item The row vectors of $A$ form a basis for $\R^n$.
+		\end{enumerate}
+	\end{multicols}
 	For the full theorem, see Appendix A.
 \end{theorem}
 
