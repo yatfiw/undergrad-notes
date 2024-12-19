@@ -19,24 +19,19 @@ Here, we generalize to square matrices of any size.
 \end{definition}
 
 This gives us a way to compute determinants via a ``cofactor expansion'' along the top row, but it turns out we can do it on any row or column we'd like!
-This can save us a lot of work in some situations.
+This can save us a lot of work in certain situations.
 
 \begin{theorem}[Computing determinants]
-	The determinant of an $n \times n$ matrix $A$, where $n \geq 2$, is given by
-	\begin{align*}
-		\det A &= \sum_{j = 1}^{n} a_{ij} C_{ij} = \sum_{i = 1}^{n} a_{ij} C_{ij}
-	\end{align*}
-	for any $i,j \leq n$.
+	The determinant of an $n \times n$ matrix $A$ with $n \geq 2$ is given, for any $i,j \leq n$, by
+	\[ \det A = \sum_{j = 1}^{n} a_{ij} C_{ij} = \sum_{i = 1}^{n} a_{ij} C_{ij}. \]
 \end{theorem}
-
-There are other cases involving special types of matrices in which finding determinants is especially easy.
 
 \begin{theorem}[Determinant of a triangular matrix]
 	The determinant of a triangular matrix is the product of the entries on its main diagonal.
 \end{theorem}
 
 Sometimes it will be useful to use row reduction as an alternative to cofactor expansion.
-We do this by taking advantage of the following rules.
+We do this by taking advantage of the following rules, which simply follow from cofactor expansion.
 
 \begin{theorem}[Determinants via row reduction]
 	Let $A$ be a square matrix.
@@ -50,11 +45,10 @@ We do this by taking advantage of the following rules.
 	\end{enumerate}
 \end{theorem}
 
-We'll use these properties to draw a connection between determinants and invertibility.
-Elementary matrices will serve as our bridge.
+We'll use these to connect determinants and invertibility, using elementary matrices as our bridge.
 
 \begin{theorem}[Determinant of an elementary matrix]
-	Let $E$ be an $n \times n$ elementary matrix,
+	Let $E$ be an $n \times n$ elementary matrix.
 	\begin{enumerate}[label=(\alph*)]
 		\item If $E$ results from interchanging two rows of $I_n$, then $\det E = -1$.
 		\item If $E$ results from multiplying one row of $I_n$ by $k$, then $\det E = k$.
@@ -76,27 +70,29 @@ Finally, with the power of the fundamental theorem, we get the following.
 	A square matrix $A$ is invertible if and only if $\det A \neq 0$.
 \end{theorem}
 
+\begin{proof}
+	Let $A$ be an $n \times n$ matrix and let $R$ be the reduced row echelon form of $A$.
+	If $E_1, E_2, \ldots, E_r$ are the elementary matrices that reduce $A$ to $R$ then $E_r \cdots E_2 E_1 A = R$ and
+	\[ (\det E_r) \cdots (\det E_2) (\det E_1) (\det A) = \det R. \]
+	The elementary matrices have nonzero determinants, so $\det A \neq 0$ if and only if $\det R \neq 0$.
+
+	Now suppose $A$ is invertible; by the FTLA $R = I_n$, meaning $\det R \neq 0$ and so $\det A \neq 0$.
+	Conversely, suppose $\det A \neq 0$; then $\det R \neq 0$, so $R$ cannot contain a zero row, $R = I_n$, and $A$ is invertible.
+\end{proof}
+
 Many matrix operations come with their own ways to calculate the determinants of their resulting matrices.
 We'll consider scalar multiplication, matrix multiplication, inverses, and transposes; we exclude addition because there is no clear relationship between $\det (A + B)$ and the individual determinants of $A$ and $B$.
 
-\begin{theorem}[Determinant after scalar multiplication]
-	If $A$ is an $n \times n$ matrix, then
-	\[ \det kA = k^n \det A. \]
-\end{theorem}
-
-\begin{theorem}[Determinant after matrix multiplication]
-	If $A$ and $B$ are square matrices of the same size, then
-	\[ \det (AB) = (\det A)(\det B). \]
-\end{theorem}
-
-\begin{theorem}[Determinant after inversion]
-	If $A$ is invertible, then
-	\[ \det (A^{-1}) = \frac{1}{\det A}. \]
-\end{theorem}
-
-\begin{theorem}[Determinant after transposition]
-	For any square matrix $A$,
-	\[ \det A = \det A^T. \]
+\begin{theorem}[Determinant after matrix operations]
+	Let $A$ and $B$ be $n \times n$ matrices.
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*),topsep=0pt]
+			\item $\det kA = k^{n} \det A$.
+			\item $\det(AB) = (\det A) (\det B)$.
+			\item $\det (A^{-1}) = (\det A)^{-1}$ for invertible $A$.
+			\item $\det A = \det A^T$.
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
 
 \section{Eigenvalues and Eigenvectors}
@@ -109,25 +105,18 @@ We now begin investigating one of the most central problems to linear algebra: t
 	The set of all eigenvectors corresponding to $\lambda$, including the zero vector, is called the eigenspace of $\lambda$ and is denoted by $E_\lambda$.
 \end{definition}
 
-The study of eigenvectors is the study of vectors whose directions are invariant under a matrix transformation.
-We now discuss how to compute them.
-
-From the above definition, $(\lambda, \mbf{x})$ is an ``eigenpair'' of $A$ if they satisfy the equation
-\[ (A - \lambda I) \mbf{x} = \mbf{0}. \]
+The study of eigenvectors is the study of vectors whose directions are invariant under a matrix transformation; we'll now discuss how to compute them.
+From the definition, $(\lambda, \mbf{x})$ is an ``eigenpair'' of $A$ if they satisfy the equation $(A - \lambda I) \mbf{x} = \mbf{0}$.
 This gives us an easy way to immediately compute the eigenvalues of $A$.
-
-\begin{theorem}[Computing eigenvalues]
-	The eigenvalues of a square matrix $A$ are precisely the solutions $\lambda$ of the equation
-	\[ \det (A - \lambda I) = 0. \]
-\end{theorem}
-
-This determinant gives us a polynomial in $\lambda$,
-Computing the eigenvalues of a matrix, therefore, is equivalent to finding the roots of this polynomial.
 
 \begin{definition}[Characteristic polynomial]
 	The polynomial in $\lambda$ resulting from the expansion of $\det (A - \lambda I)$ is called the characteristic polynomial $c_A (\lambda)$ of $A$.
 	The equation $\det (A - \lambda I) = 0$ is called the characteristic equation of $A$.
 \end{definition}
+
+\begin{theorem}[Computing eigenvalues]
+	The eigenvalues of a square matrix $A$ are precisely the roots $\lambda$ of the characteristic polynomial of $A$.
+\end{theorem}
 
 Once we have our eigenvalues, we use them in the equation $(A - \lambda I) \mbf{x} = 0$ to determine the eigenvectors and, thus, eigenspaces.
 
@@ -136,15 +125,11 @@ Once we have our eigenvalues, we use them in the equation $(A - \lambda I) \mbf{
 \end{theorem}
 
 The remainder of this chapter will be dedicated to investigating this eigenstuff, both in their own right and in applications.
-Firstly, just like with determinants, when our matrix is triangular, our job turns out to be easy.
+Firstly, just like with determinants, our job is easy when our matrix has certain properties.
 
 \begin{theorem}[Eigenvalues of a triangular matrix]
 	The eigenvalues of a triangular matrix are the entries on its main diagonal.
 \end{theorem}
-
-Similarly, the eigenvalues of a matrix raised to a power relate to those of the original matrix.
-
-\pagebreak
 
 \begin{theorem}[Eigenvalues after exponentiation]
 	Let $A$ be a square matrix with an eigen-pair $(\lambda, \mbf{x})$.
@@ -156,11 +141,16 @@ Similarly, the eigenvalues of a matrix raised to a power relate to those of the 
 \end{theorem}
 
 We can now draw a connection to invertible matrices.
-Just like with determinants, for a matrix to be invertible, its eigenvalues must not nonzero.
+Just like with determinants, for a matrix to be invertible, its eigenvalues must be nonzero.
 
 \begin{theorem}[Condition for invertibility]
 	A square matrix is invertible if and only if it does not have 0 as an eigenvalue.
 \end{theorem}
+
+\begin{proof}
+	Let $A$ be a square matrix, so $A$ is invertible if and only if $\det A \neq 0$.
+	But this is equivalent to $\det (A - 0I) \neq 0$, meaning 0 is not a root of the characteristic equation of $A$.
+\end{proof}
 
 With this, we can add two more statements to our fundamental theorem.
 
@@ -177,7 +167,7 @@ With this, we can add two more statements to our fundamental theorem.
 	For the full theorem, see Appendix A.
 \end{theorem}
 
-We can use the properties discussed to far to show what happens when we multiply a vector by the same matrix multiple time in succession.
+We can use the properties discussed so far to show what happens when we multiply a vector by the same matrix multiple time in succession.
 We take advantage of the case in which the vector can be represented as a linear combination of eigenvectors.
 
 \begin{theorem}[Repeated matrix transformations]
@@ -186,13 +176,28 @@ We take advantage of the case in which the vector can be represented as a linear
 	\[ A^k \mbf{x} = c_1 \lambda_1^k \mbf{v}_1 + c_2 \lambda_2^k \mbf{v}_2 + \cdots + c_m \lambda_m^k \mbf{v}_m. \]
 \end{theorem}
 
-We won't always be able to apply this, though, since it's possible that $x$ is not a linear combination of eigenvectors.
+We won't always be able to apply this, though, since it's possible that $\mbf{x}$ is not a linear combination of eigenvectors.
 As a step toward seeing when we can apply the theorem, we have the following.
 
 \begin{theorem}[Condition for linearly independent eigenvectors]
 	Let $A$ be an $n \times n$ matrix and let $\lambda_1, \lambda_2, \ldots, \lambda_m$ be distinct eigenvalues of $A$ with corresponding eigenvectors $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$.
 	Then these eigenvectors are linearly independent.
 \end{theorem}
+
+\begin{proof}
+	Suppose, for contradiction, that $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_m$ are linearly dependent, and let $\mbf{v}_{k+1}$ be the first of these vectors that can be expressed as a linear combination of the previous ones.
+	Then there exist $c_1, c_2, \ldots, c_k$ such that
+	\[ \mbf{v}_{k+1} = c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k. \]
+	Multiplying both sides of this equation by $A$ gives
+	\[ \lambda_{k+1} \mbf{v}_{k+1} = A \mbf{v}_{k+1} = c_1 \lambda_1 \mbf{v}_1 + c_2 \lambda_2 \mbf{v}_2 + \cdots + c_k \lambda_k \mbf{v}_k; \]
+	instead multiplying by $\lambda_{k+1}$ gives
+	\[ \lambda_{k+1} \mbf{v}_{k+1} = c_1 \lambda_{k+1} \mbf{v}_1 + c_2 \lambda_{k+1} \mbf{v}_2 + \cdots + c_k \lambda_{k+1} \mbf{v}_k. \]
+	After subtracting these we get
+	\[ 0 = c_1 (\lambda_1 - \lambda_{k+1}) \mbf{v}_1 + \cdots + c_k (\lambda_k - \lambda_{k+1}) \mbf{v}_k, \]
+	and since these $\mbf{v}_i$ are linearly independent (and the eigenvalues are distinct) the $c_i$ must be zero.
+	But this means $\mbf{v}_{k+1}$ is the zero vector, a contradiction.
+	So $\mbf{v}_1, \ldots, \mbf{v}_m$ are linearly independent.
+\end{proof}
 
 \section{Similarity and Diagonalization}
 We've already considered a couple of different ways to transform a matrix, namely Gaussian and Gauss-Jordan elimination.
@@ -206,6 +211,8 @@ Here, we consider another type of transformation that preserves eigenvalues and 
 
 Similarity can be interpreted as a kind of equivalence between matrices.
 We thus call similarity an equivalence relation, meaning it has the following familiar properties.
+
+\pagebreak
 
 \begin{theorem}[Similarity as an equivalence relation]
 	Let $A$, $B$, and $C$ be square matrices of the same size.
@@ -222,51 +229,64 @@ This is true of similar matrices, and some of these properties are below.
 
 \begin{theorem}[Shared properties of similar matrices]
 	Let $A$ and $B$ be square matrices of the same size with $A \sim B$.
-	Then:
-	\begin{enumerate}[label=(\alph*)]
-		\item $\det A = \det B$.
-		\item $A$ is invertible if and only of $B$ is invertible.
-		\item $A$ and $B$ have the same rank.
-		\item $A$ and $B$ have the same characteristic polynomial.
-		\item $A$ and $B$ have the same eigenvalues.
-		\item $A^m \sim B^m$ for all integers $m \geq 0$.
-		\item If $A$ is invertible, then $A^m \sim B^m$ or all integers $m$.
-	\end{enumerate}
+	Then $A$ and $B$ have the same determinant, invertibility, rank, characteristic polynomial, and eigenvalues.
+
+	Also, $A^m \sim B^m$ for all integers $m \geq 0$, and if $A$ is invertible then this is true for all integers $m$.
 \end{theorem}
 
 The best possible situation is when a square matrix is similar to a diagonal matrix, because these are really nice to work with.
+The idea of finding a similar diagonal matrix is intimately related to eigenstuff; not only do they give us a condition for diagonalizability, but they help us do the actual diagonalization.
 
 \begin{definition}[Diagonalizable matrix]
 	A square matrix $A$ is diagonalizable if there is a diagonal matrix $D$ such that $A$ is similar to $D$---that is, if there is an invertible matrix $P$ such that $P^{-1}AP = D$.
 \end{definition}
 
-The idea of diagonalization is intimately related to eigenvalues and eigenvectors.
-Not only do they give us a condition for diagonalizability, but they help us do the actual diagonalization.
+% The idea of diagonalization is intimately related to eigenvalues and eigenvectors.
+% Not only do they give us a condition for diagonalizability, but they help us do the actual diagonalization.
 
 \begin{theorem}[Condition and method for diagonalization]
 	Let $A$ be an $n \times n$ matrix.
-	Then $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors.
+	$A$ is diagonalizable if and only if it has $n$ linearly independent eigenvectors.
 
 	More precisely, there exist an invertible matrix $P$ and a diagonal matrix $D$ such that $P^{-1}AP = D$ if and only if the columns of $P$ are $n$ linearly independent eigenvectors of $A$ and the diagonal entries of $D$ are the eigenvalues of $A$ corresponding to the eigenvectors in $P$ in the same order.
 \end{theorem}
 
-Usually, we would have to verify that $P$ is invertible before using it to find a matrix similar to $A$.
+\begin{proof}
+	Suppose $A$ is similar to the diagonal matrix $D$.
+	Let the columns of $P$ be $\mbf{p}_1, \ldots, \mbf{p}_n$ and let the diagonal entries of $D$ be $\lambda_1, \ldots, \lambda_n$.
+	Then $AP = PD$ becomes
+	\begin{gather*}
+		\begin{bmatrix} A\mbf{p}_1 & \cdots & A\mbf{p}_n \end{bmatrix} = \begin{bmatrix} \lambda_1 \mbf{p}_1 & \cdots & \lambda_n \mbf{p}_n \end{bmatrix}, \\
+		A\mbf{p}_1 = \lambda_1 \mbf{p_1}, \; \ldots, \; A\mbf{p}_n = \lambda_n \mbf{p}_n.
+	\end{gather*}
+	Since $P$ is invertible, its columns are linearly independent.
+	For the reverse direction we can simply trace this argument in reverse.
+\end{proof}
+
+Usually we'd have to verify that $P$ is invertible before using it to find a matrix similar to $A$.
 The next theorem shows that this is not necessary for diagonalization problems.
 
 \begin{theorem}[Basis eigenvectors are linearly independent]
-	Let $A$ be a square matrix and let $\lambda_1, \lambda_2, \ldots, \lambda_k$ be distinct eigenvalues of $A$.
-	If $\mathcal{B}_i$ is a basis for the eigenspace $E_\lambda$, then $\displaystyle\bigcup_{i=1}^k\mathcal{B}_i$ is linearly independent.
+	Let $A$ be a square matrix.
+	The set of basis vectors for all of the eigenspaces of $A$ is linearly independent.
 \end{theorem}
 
+\begin{proof}
+	Let $A$ have $k$ distinct eigenvalues and let $\mathcal B_i = \left\{ \mbf{v}_{i1}, \ldots, \mbf{v}_{in} \right\}$.
+	Suppose some nontrivial linear combination of the vectors in all the $\mathcal B_i$ is the zero vector.
+	If $\mbf{x}_i$ is the portion of this combination comprised of the vectors in $\mathcal B_i$ then we can write $\mbf{x}_1 + \cdots + \mbf{x}_k = \mbf{0}$, meaning the $\mbf{x}_i$ are linearly dependent.
+	Now, since $\mbf{x}_i \in E_{\lambda_i}$, it is either $\mbf{0}$ or an eigenvector corresponding to $\lambda_i$.
+	But since the $\lambda_i$ are distinct, if any of the $\mbf{x}_i$ is an eigenvector then they are linearly independent, a contradiction.
+\end{proof}
+
 This shows that linear independence is preserved when the bases of different eigenspaces are combined.
-So when we have $n$ different eigenspaces, each of dimension one, we automatically have a diagonalizable matrix.
+So when we have $n$ different eigenspaces, each of dimension one, we must have a diagonalizable matrix.
 
 \begin{theorem}[Distinct eigenvalues imply diagonalizibility]
 	If $A$ is an $n \times n$ matrix with $n$ distinct eigenvalues, then $A$ is diagonalizable.
 \end{theorem}
 
 When this theorem isn't applicable, there's still a way we can use eigenvalues to determine diagonalizability.
-It requires a preliminary definition.
 
 \begin{definition}[Algebraic and geometric multiplicity]
 	The algebraic multiplicity of an eigenvalue $\lambda$ is its multiplicity as a root of the characteristic polynomial.
@@ -276,8 +296,6 @@ It requires a preliminary definition.
 \begin{lemma}[Diagonalizibility from multiplicities]
 	If $A$ is a square matrix, then the geometric multiplicity of each eigenvalue is less than or equal to its algebraic multiplicity.
 \end{lemma}
-
-We summarize the different ways to check for diagonalizability in one final theorem.
 
 \begin{theorem}[Conditions for diagonalizibility]
 	Let $A$ be an $n \times n$ matrix.

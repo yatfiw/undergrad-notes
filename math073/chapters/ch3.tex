@@ -163,9 +163,6 @@ Since we can use matrix inverses to uniquely ``undo'' the effects of matrix mult
 In order to apply this to actual systems, we must be able to actually compute the matrix inverse.
 Thankfully, the $2 \times 2$ case is relatively straightforward and can be verified by a laborious computation.
 
-% This is great, but how do we actually compute these matrix inverses?
-% We'll arrive at a general method shortly, but for now the $2 \times 2$ case is relatively straightforward and can be verified by a laborious computation.
-
 \begin{theorem}[Inverse of a two-by-two matrix]
 	The matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is invertible if $ad - bc \neq 0$, in which case
 	\[ A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}. \]
@@ -173,6 +170,8 @@ Thankfully, the $2 \times 2$ case is relatively straightforward and can be verif
 \end{theorem}
 
 To get a more general result, we'll need to look at some more easily-verified properties of inverses.
+
+\pagebreak
 
 \begin{theorem}[Properties of matrix inverses]
 	If $A$ and $B$ are invertible matrices of the same size, then the following are true:
@@ -214,7 +213,7 @@ It's essentially a list of useful conditions that are both necessary and suffici
 
 \begin{theorem}[Additions to the FTLA]
 	Let $A$ be an $n\times n$ matrix and let $\mbf{b}$ be a vector in $\R^n$.
-	The following statements are equivalent:
+	The following statements are equivalent.
 	\begin{multicols}{2}
 		\begin{enumerate}[label=(\alph*)]
 			\item $A$ is invertible.
@@ -415,7 +414,7 @@ We're now in a position to add statements about the row, column, and null spaces
 
 \begin{theorem}[Additions to the FTLA]
 	Let $A$ be an $n\times n$ matrix.
-	The following statements are equivalent:
+	The following statements are equivalent.
 	\begin{multicols}{2}
 		\begin{enumerate}[label=(\alph*)]
 			\item $A$ is invertible. \\

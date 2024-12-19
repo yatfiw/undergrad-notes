@@ -10,7 +10,7 @@ Here, we define the inner product as a generalization of the dot product.
 
 \begin{definition}[Inner product]
 	An inner product on a vector space $V$ is an operation that assigns to every pair of vectors $\mbf{u}, \mbf{v} \in V$ a real number $\left< \mbf{u}, \mbf{v} \right>$ such that the following properties hold for all vectors $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ in $W$ and all scalars $c$:
-	\begin{enumerate}[label=(\alph*)]
+	\begin{enumerate}[topsep=0pt]
 		\item $\left< \mbf{u}, \mbf{v} \right> = \left< \mbf{v}, \mbf{u} \right>$.
 		\item $\left< \mbf{u}, \mbf{v} + \mbf{w} \right> = \left< \mbf{u}, \mbf{v} \right> + \left< \mbf{u}, \mbf{w} \right>$.
 		\item $\left< c \mbf{u}, \mbf{v} \right> = c \left< \mbf{u}, \mbf{v} \right>$.
@@ -18,6 +18,9 @@ Here, we define the inner product as a generalization of the dot product.
 	\end{enumerate}
 	A vector space with an inner product is called an inner product space.
 \end{definition}
+
+This technically only defines real inner product spaces, since we're assuming the scalars of our vector space are pulled from $\R$ and that the inner product yields a real number.
+For more general (say, complex) inner product spaces the definition would be slightly different.
 
 \begin{theorem}[Properties of the inner product]
 	Let $\mbf{u}$, $\mbf{v}$, and $\mbf{w}$ be vectors in an inner product space $V$ and let $c$ be a scalar.
@@ -29,16 +32,16 @@ Here, we define the inner product as a generalization of the dot product.
 \end{theorem}
 
 We can now define such notions as length, distance, and orthogonality in abstract vector spaces.
-The remainder of this section will be dedicated to rehashing many of the related results from Euclidean spaces.
+The construction of all these objects is very similar to what we did with Euclidean spaces, so we won't rehash all the details.
 
 \begin{definition}[Geometry in inner product spaces]
 	Let $\mbf{u}$ and $\mbf{v}$ be vectors in an inner product space $V$.
-	\begin{enumerate}
+	\begin{itemize}[topsep=0pt]
 		\item The length (or norm) of $\mbf{v}$ is $\|\mbf{v}\| = \sqrt{\left< \mbf{v}, \mbf{v} \right>}$.
 		(A unit vector is a vector of length 1.)
 		\item The distance between $\mbf{u}$ and $\mbf{v}$ is $\pfn{d}(\mbf{u}, \mbf{v}) = \|\mbf{u} - \mbf{v}\|$.
 		\item $\mbf{u}$ and $\mbf{v}$ are orthogonal if $\left< \mbf{u}, \mbf{v} \right> = 0$.
-	\end{enumerate}
+	\end{itemize}
 \end{definition}
 
 \begin{theorem}[Pythagorean theorem]
@@ -51,8 +54,7 @@ The remainder of this section will be dedicated to rehashing many of the related
 	Let $\{\mbf{u}_1, \ldots, \mbf{u}_k\}$ be an orthogonal basis for a subspace $W$ of an inner product space $V$, and let $\mbf{v}$ be a vector in $V$.
 	Then the orthogonal projection $\pfn{proj}_W(\mbf{v})$ of $\mbf{v}$ onto $W$ is
 	\[ \pfn{proj}_W(\mbf{v}) = \frac{\left< \mbf{u}_1, \mbf{v} \right>}{\left< \mbf{u}_1, \mbf{u}_1 \right>} \mbf{u}_1 + \cdots + \frac{\left< \mbf{u}_k, \mbf{v} \right>}{\left< \mbf{u}_k, \mbf{u}_k \right>}. \]
-	The component of $\mbf{v}$ orthogonal to $W$ is the vector
-	\[ \pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v}) \]
+	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v})$.
 \end{definition}
 
 \begin{theorem}[Cauchy-Schwarz inequality]
@@ -69,8 +71,8 @@ The remainder of this section will be dedicated to rehashing many of the related
 \end{theorem}
 
 \section{Least Squares Approximation}
-This section is motivated by the search for a ``line of best fit'' for a given set of data.
-We begin by speaking strictly in terms of vectors.
+We can use this theory to find a ``line of best fit'' for a given set of data.
+We'll begin by rephrasing this search in terms of vectors.
 
 \begin{definition}[Best approximation of a vector]
 	If $W$ is a subspace of a normed vector space $V$ and if $\mbf{v}$ is a vector in $V$, then the best approximation to $\mbf{v}$ in $W$ is the vector $\overline{\mbf{v}}$ in $W$ such that
@@ -121,7 +123,7 @@ However, if we have a $QR$ factorization of $A$, our job is made much easier.
 \end{theorem}
 
 \section{The Singular Value Decomposition}
-In this final section, we will briefly investigate one last defined decomposition.
+In this final section, we will briefly investigate one last matrix decomposition.
 These have to do with the singular values of a matrix, defined below.
 
 \begin{definition}[Singular values]
@@ -148,7 +150,7 @@ We can now make one last addition to the Fundamental Theorem.
 
 \begin{theorem}[Additions to the FTLA]
 	Let $A$ be an $n\times n$ matrix and let $T : V \to V$ be a linear transformation whose matrix $[T]_{\mathcal{C} \from \mathcal{B}}$ with respect to bases $\mathcal{B}$ and $\mathcal{C}$ of $V$ and $W$, respectively, is $A$.
-	The following statements are equivalent:
+	The following statements are equivalent.
 	\begin{enumerate}[label=(\alph*)]
 		\item $A$ is invertible. \\
 		\phantom{~}\hspace{-19.5pt} \vdots

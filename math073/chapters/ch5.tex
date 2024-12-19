@@ -8,32 +8,44 @@
 Here, we extend the notion of orthogonality from pairs of vectors to sets of vectors.
 
 \begin{definition}[Orthogonal set of vectors]
-	A set of $\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k$ in $\R^n$ is called an orthogonal set if all pairs of distinct vectors in the set are orthogonal. 
+	A set of vectors in $\R^n$ is called an orthogonal set if all pairs of distinct vectors in the set are orthogonal. 
 \end{definition}
 
 There are many advantages to working with orthogonal sets.
-One of these is that orthogonal sets are necessarily linearly independent, meaning they make for convenient bases for subspaces.
+One of these is that they are necessarily linearly independent, meaning they make for convenient bases for subspaces; for this reason, they make convenient bases for subspaces.
 
 \begin{theorem}[Orthogonal sets are linearly independent]
-	If $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ is an orthogonal set of nonzero vectors in $\R^n$, then these vectors are linearly independent.
+	Any orthogonal set of nonzero vectors in $\R^n$ is linearly independent.
 \end{theorem}
 
-For this reason, orthogonal sets often make a convenient choice of basis for subspaces.
+\begin{proof}
+	If $c_1, \ldots, c_k$ are scalars such that $c_1 \mbf{v}_1 + \cdots + c_k \mbf{v}_k = \mbf{0}$ then
+	\[ c_1 (\mbf{v}_1 \cdot \mbf{v}_i) + \cdots + c_k (\mbf{v}_k \cdot \mbf{v}_i) = 0. \]
+	All of the dot products here are zero except for $\mbf{v}_i \cdot \mbf{v}_i$, so we have $c_i (\mbf{v}_i \cdot \mbf{v}_i) = 0$.
+	Thus $c_i = 0$, and since this is true for all $i = 1, \ldots, k$ implies that $\left\{ \mbf{v}_1, \ldots, \mbf{v}_k \right\}$ is a linearly independent set.
+\end{proof}
 
 \begin{definition}[Orthogonal basis]
 	An orthogonal basis for a subspace $W$ of $\R^n$ is a basis of $W$ that is an orthogonal set.
 \end{definition}
 
 Of course, any vector in $W$ can be written as a linear combination of these orthogonal vectors.
-Another convenience that comes with orthogonal sets is that the coefficients of this linear combination are easy to find.
+Another convenience that comes with orthogonal sets is that the coefficients of such a combination are easy to find.
 
 \begin{theorem}[Coefficients of an orthogonal linear combination]
 	Let $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ be an orthogonal basis for a subspace $W$ of $\R^n$ and let $\mbf{w}$ be any vector in $W$.
 	Then the unique scalars $c_1, c_2, \ldots, c_k$ such that
 	\[ \mbf{w} = c_1 \mbf{v}_1 + c_2 \mbf{v}_2 + \cdots + c_k \mbf{v}_k \]
 	are given by
-	\[ c_1 = \frac{\mbf{w} \cdot \mbf{v}_i}{\mbf{v}_i \cdot \mbf{v}_i} \text{ for } i = 1, \ldots, k. \]
+	\[ c_1 = \frac{\mbf{w} \cdot \mbf{v}_i}{\mbf{v}_i \cdot \mbf{v}_i} \;\text{ for }\; i = 1, \ldots, k. \]
 \end{theorem}
+
+\begin{proof}
+	Since $\left\{ \mbf{v}_1, \ldots, \mbf{v}_k \right\}$ is a basis for $W$, there are unique scalars such that $\mbf{w} = c_1 \mbf{v}_1 + \cdots + c_k \mbf{v}_k$.
+	So
+	\[ \mbf{w} \cdot \mbf{v}_i = (c_1 \mbf{v}_1 + \cdots + c_k \mbf{v}_k) \cdot \mbf{v}_i = c_i (\mbf{v}_i \cdot \mbf{v}_i), \]
+	and dividing by $\mbf{v}_i \cdot \mbf{v}_i \neq 0$ gives the equation we desire.
+\end{proof}
 
 Notice that, in the case of an orthogonal basis, we simply project the vector onto each of the basis vectors to find the coefficients of the linear combination.
 Things are even more convenient if our orthogonal set consists entirely of unit vectors.
@@ -43,11 +55,9 @@ Things are even more convenient if our orthogonal set consists entirely of unit 
 	An orthonormal basis for a subspace $W$ of $\R^n$ is a basis of $W$ that is an orthonormal set.
 \end{definition}
 
-\pagebreak
-
 \begin{theorem}[Coefficients of an orthonormal linear combination]
 	Let $\{\mbf{q}_1, \mbf{q}_2, \ldots, \mbf{q}_k\}$ be an orthonormal basis for a subspace $W$ of $\R^n$ and let $\mbf{w}$ be any vector in $W$.
-	Then
+	Then \vspace{-3pt}
 	\[ \mbf{w} = (\mbf{w} \cdot \mbf{q}_1) \mbf{q}_1 + (\mbf{w} \cdot \mbf{q}_2) \mbf{q}_2 + \cdots + (\mbf{w} \cdot \mbf{q}_k) \mbf{q}_k,\]
 	and this representation is unique.
 \end{theorem}
@@ -55,16 +65,14 @@ Things are even more convenient if our orthogonal set consists entirely of unit 
 When a matrix has columns that form an orthonormal set, they turn out to have many very nice properties.
 The rest of this section is dedicated to examining these.
 
-Notice that we can think of matrix multiplication as a grid of dot products between row and column.
-When the row and column are orthogonal to each other, they'll ``cancel out.''
-It turns out that when we multiply a matrix with its transpose, it happens in such a way that it leaves behind only the identity matrix.
+Notice that we can think of matrix multiplication as a grid of dot products between rows and columns, and when a row-column pair is orthogonal, they'll simply cancel.
+So if we have a matrix whose columns comprise an orthonormal set, multiplying by its transpose simply leaves behind an identity matrix.
 
 \begin{theorem}[Transpose of a matrix with orthonormal columns]
-	The columns of an $m \times n$ matrix $Q$ for an orthonormal set if and only if $Q^T Q = I_n$.
+	The columns of an $m \times n$ matrix $Q$ form an orthonormal set if and only if $Q^T Q = I_n$.
 \end{theorem}
 
-Clearly, for square choices of $Q$, the transpose $Q^T$ is the inverse of $Q$.
-This is a powerful result, rewritten below below.
+For square $Q$ we can characterize this behavior in terms of matrix inverses.
 
 \begin{definition}[Orthogonal matrix]
 	A square matrix $Q$ whose columns form an orthonormal set is called an orthogonal matrix.
@@ -79,19 +87,37 @@ One of the most important ones is that they preserve the lengths of the vectors 
 
 \begin{theorem}[Orthogonal matrices are isometric]
 	Let $Q$ be a $n \times n$ matrix.
-	The following statements are equivalent:
-	\begin{enumerate}[label=(\alph*)]
-		\item $Q$ is orthogonal.
-		\item $\|Q \mbf{x}\| = \|\mbf{x}\|$ for every $\mbf{x}$ in $\R^n$.
-		\item $Q \mbf{x} \cdot Q \mbf{y} = \mbf{x} \cdot \mbf{y}$ for every $\mbf{x}$ and $\mbf{y}$ in $\R^n$.
-	\end{enumerate}
+	The following statements are equivalent.
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $Q$ is orthogonal.
+			\item $Q \mbf{x} \cdot Q \mbf{y} = \mbf{x} \cdot \mbf{y}$ for every $\mbf{x}$ and $\mbf{y}$ in $\R^n$.
+			\item $\|Q \mbf{x}\| = \|\mbf{x}\|$ for every $\mbf{x}$ in $\R^n$.
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
+
+\begin{proof}
+	Suppose $Q$ is orthogonal.
+	Then for any $\mbf{x},y \in \R^n$ we have
+	\[ Q\mbf{x} \cdot Q\mbf{y} = (Q\mbf{x})^T Q\mbf{y} = \mbf{x}^T Q^T Q \mbf{y} = \mbf{x}^T \mbf{y} = \mbf{x} \cdot \mbf{y}. \]
+	Now take $\mbf{y} = \mbf{x}$, so $\| Q\mbf{x} \| = \sqrt{Q\mbf{x} \cdot Q\mbf{x}} = \sqrt{\mbf{x} \cdot \mbf{x}} = \| \mbf{x} \|$.
+	This proves (a) $\implies$ (b) $\implies$ (c).
+	Now, let $\mbf{q}_i$ denote the $i$th column of $Q$; it could be shown that
+	\[ \mbf{x} \cdot \mbf{y} = \frac{1}{4} \left( \| \mbf{x} + \mbf{y} \|^2 - \| \mbf{x} - \mbf{y} \|^2 \right) + \frac{1}{4} \left( \| Q\mbf{x} + Q\mbf{y} \|^2 - \| Q\mbf{x} - Q\mbf{y} \|^2 \right) = Q\mbf{x} \cdot Q\mbf{y}. \]
+	If $\mbf{e}_i$ is the $i$th standard basis vector, then $\mbf{q}_i = Q\mbf{e}_i$ and $\mbf{q}_i \cdot \mbf{q}_j = \mbf{e}_i \cdot \mbf{e}_j$, which is one for like indices and zero otherwise.
+	Thus the columns of $Q$ form an orthonormal set.
+\end{proof}
 
 We'll finish off with a couple of theorems elaborating on some properties of orthogonal matrices.
 
 \begin{theorem}[Orthogonal matrices have orthonormal rows]
-	If $Q$ is an orthogonal matrix, then its rows form an orthonormal set.
+	If $Q$ is an orthogonal matrix then its rows form an orthonormal set.
 \end{theorem}
+
+\begin{proof}
+	Since $Q^{-1} = Q^T$ we have $(Q^T)^{-1} = Q = (Q^T)^T$, meaning $Q^T$ is an orthogonal matrix.
+\end{proof}
 
 \begin{theorem}[Properties of orthogonal matrices]
 	Let $Q$ be an orthogonal matrix.
@@ -110,23 +136,23 @@ We begin with the first of these.
 \begin{definition}[Orthogonal complement]
 	Let $W$ be a subspace of $\R^n$.
 	We say that a vector $\mbf{v}$ in $\R^n$ is orthogonal to $W$ if $\mbf{v}$ is orthogonal to every vector in $W$.
-	The set of all vectors that are orthogonal to $W$ is called the orthogonal complement of $W$, denoted $W^\perp$.
+	The set of all such vectors is called the orthogonal complement of $W$, denoted $W^\perp$.
 \end{definition}
-
-The orthogonal complement of a subspace has some fairly intuitive properties.
 
 \begin{theorem}[Properties of orthogonal complements]
 	Let $W$ be a subspace of $\R^n$.
-	\begin{enumerate}[label=(\alph*)]
-		\item $W^\perp$ is a subspace of $\R^n$.
-		\item $\left( W^\perp \right)^\perp = W$.
-		\item $W \cap W^\perp = \{\mbf{0}\}$.
-		\item If $\pfn{span}(\mbf{w}_1, \mbf{w}_2, \ldots, \mbf{w}_k)$, then $\mbf{v}$ is in $W^\perp$ if and only if $\mbf{v} \cdot \mbf{w}_i = 0$ for all $i = 1, \ldots, k$.
-	\end{enumerate}
+	\begin{multicols}{2}
+		\begin{enumerate}[label=(\alph*)]
+			\item $W^\perp$ is a subspace of $\R^n$.
+			\item $\left( W^\perp \right)^\perp = W$.
+			\item $W \cap W^\perp = \{\mbf{0}\}$.
+			\item If $W = \pfn{span}(\mbf{w}_1, \mbf{w}_2, \ldots, \mbf{w}_k)$, then $\mbf{v}$ is in $W^\perp$ if and only if $\mbf{v} \cdot \mbf{w}_i = 0$ for all $i = 1, \ldots, k$.
+		\end{enumerate}
+	\end{multicols}
 \end{theorem}
 
 Using orthogonal complements, we can make describe some fundamental relationships between the subspaces associated with a matrix.
-To relate the row space to the null space, notice that for $A \mbf{x} = \mbf{0}$ to be true, we must have $\mbf{r} \cdot \mbf{x}$ for every row $\mbf{r}$ in $A$; therefore, all rows in $A$ are orthogonal to vectors in $\pfn{null}(A)$.
+To relate the row space to the null space, notice that for $A \mbf{x} = \mbf{0}$ to be true, we must have $\mbf{r} \cdot \mbf{x} = 0$ for every row $\mbf{r}$ in $A$; therefore, all rows in $A$ are orthogonal to vectors in $\pfn{null}(A)$.
 A similar line of reasoning relates $\pfn{col}(A)$ to $\pfn{null}(A^T)$. 
 
 \begin{theorem}[Fundamental spaces and orthogonality]
@@ -134,14 +160,13 @@ A similar line of reasoning relates $\pfn{col}(A)$ to $\pfn{null}(A^T)$.
 	Then $(\pfn{row}(A))^\perp = \pfn{null}(A)$ and $(\pfn{col}(A))^\perp = \pfn{null}(A^T)$.
 \end{theorem}
 
-Now, we'll move on to generalizing projections.
+Now we'll move on to generalizing projections.
 
-\begin{definition}[Orthogonal projection onto a space]
+\begin{definition}[Orthogonal projection onto a subspace]
 	Let $W$ be a subspace of $\R^n$ and let $\{\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_k\}$ be an orthogonal basis for $W$.
 	For any vector $\mbf{v}$ in $\R^n$, the orthogonal projection of $\mbf{v}$ onto $W$ is defined as
 	\[ \pfn{proj}_W(\mbf{v}) = \pfn{proj}_{\mbf{u}_1}(\mbf{v}) + \pfn{proj}_{\mbf{u}_2}(\mbf{v}) + \cdots + \pfn{proj}_{\mbf{u}_k}(\mbf{v}). \]
-	The component of $\mbf{v}$ orthogonal to $W$ is the vector
-	\[ \pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v}). \]
+	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v})$.
 \end{definition}
 
 We can use orthogonal projections to decompose a vector into orthogonal components.
@@ -151,7 +176,15 @@ We can use orthogonal projections to decompose a vector into orthogonal componen
 	Then there are unique vectors $\mbf{w}$ in $W$ and $\mbf{w}^\perp$ in $W^\perp$ such that $\mbf{v} = \mbf{w} + \mbf{w}^\perp$.
 \end{theorem}
 
-\pagebreak
+\begin{proof}
+	To show that such a decomposition exists, take an orthogonal basis $\left\{ \mbf{u}_1, \ldots, \mbf{u}_k \right\}$ for $W$ and define $\mbf{w} = \pfn{proj}_W(\mbf{v})$ with $\mbf{w}^\perp = \pfn{perp}_W(\mbf{v})$.
+	We can immediately see that $\mbf{w} + \mbf{w}^\perp = \mbf{v}$ and $\mbf{w} \in W$; to show that $\mbf{w}^\perp \in W^\perp$ we could use a direct computation to get $\mbf{u}_i \cdot \mbf{v} = 0$ for all basis vectors $\mbf{u}_i$.
+
+	To show uniqueness, suppose there is another decomposition $\mbf{v} = \mbf{w}' + \mbf{w}'^\perp$.
+	Then $\mbf{w} + \mbf{w}^\perp = \mbf{w}' + \mbf{w}'^\perp$ and $\mbf{w} - \mbf{w}' = \mbf{w}'^\perp - \mbf{w}^\perp$.
+	But the left-hand side is in $W$ while the right-hand side is in $W^\perp$, and because these subspaces intersect at $\mbf{0}$, both sides must be zero.
+	Thus $\mbf{w}' = \mbf{w}$ and $\mbf{w}'^\perp = \mbf{w}^\perp$.
+\end{proof}
 
 Lastly, we have a relationship between the dimensions of a subspace and its orthogonal complement.
 
@@ -159,6 +192,13 @@ Lastly, we have a relationship between the dimensions of a subspace and its orth
 	If $W$ is a subspace of $\R^n$, then
 	\[ \pfn{dim } W + \pfn{dim } W^\perp = n. \]
 \end{theorem}
+
+\begin{proof}
+	Let $\mathcal B$ be the union of bases for $W$ and $W^\perp$.
+	We can immediately see that $\mathcal B$ is an orthogonal set and so is linearly independent.
+	Now, by the orthogonal decomposition theorem, any $\mbf{v} \in \R^n$ can be written as a sum of vectors in $W$ and $W^\perp$, which can in turn be written as linear combinations of vectors in $\mathcal B$.
+	Thus $\mathcal B$ is a basis for $\R^n$; it follows that $\pfn{dim } W + \pfn{dim } W^\perp = \dim \R^n$.
+\end{proof}
 
 Note that the rank theorem is a corollary to this theorem.
 
@@ -178,7 +218,7 @@ We do this using a series of projections.
 	In particular, $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ is an orthogonal basis for $W$.
 \end{theorem}
 
-We can use this to decompose any invertible square matrix into an orthogonal matrix and a triangular matrix.
+We can use this to decompose any invertible square matrix into an orthogonal matrix and a triangular matrix---the vectors resulting from the process are the columns of $Q$, while their coefficients are the entries of $R$.
 
 \begin{theorem}[$QR$ factorization]
 	Let $A$ be an $m \times n$ matrix with linearly independent columns.

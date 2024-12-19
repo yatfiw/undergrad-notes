@@ -79,7 +79,6 @@ Contents are below, including planned but incomplete notes.
  </tr>
 </table>
 
-Note that MATH073 is missing most proofs.
-These are some other courses I'd like to add in the future, in order of decreasing priority.
+There's a couple of other courses I'd like to add in the future, if I get around to it.
 * PHYS024 Mechanics and Wave Motion (SP23)
 * MATH019 Single and Multivariable Calculus (FA22)
