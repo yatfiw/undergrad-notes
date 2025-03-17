@@ -122,20 +122,20 @@ To make this happen, we'll need some scaffolding.
 
 \begin{definition}[Covariance]
     The covariance of $X$ and $Y$ is
-    \[ \pfn{cov}(X,Y) = E[(X - \mu_X)(Y - \mu_Y)], \]
+    \[ \cov(X,Y) = E[(X - \mu_X)(Y - \mu_Y)], \]
     where $E(X) = \mu_X$ and $E(Y) = \mu_Y$.
 \end{definition}
 
 \begin{theorem}[Covariance via expected value]
     For any random variables $X$ and $Y$,
-    \[ \pfn{cov}(X,Y) = E(XY) - E(X) E(Y). \]
+    \[ \cov(X,Y) = E(XY) - E(X) E(Y). \]
 \end{theorem}
 
 It follows that the covariance of two independent variables is zero, and that the covariance of a variable with itself (a scenario with maximum dependence) is simply its variance.
 
 This suggests some intuition as to what the covariance is quantifying.
-If $\pfn{cov} (X,Y) > 0$ then we say $X,Y$ are positively correlated, meaning higher values of $X$ are likely to correspond to higher $Y$.
-If $\pfn{cov}(X,Y) < 0$ then we analogously have negative correlation, and if $\pfn{cov}(X,Y) = 0$ then $X,Y$ are uncorrelated.
+If $\cov (X,Y) > 0$ then we say $X,Y$ are positively correlated, meaning higher values of $X$ are likely to correspond to higher $Y$.
+If $\cov(X,Y) < 0$ then we analogously have negative correlation, and if $\cov(X,Y) = 0$ then $X,Y$ are uncorrelated.
 
 We'll come back to this in a moment.
 First, let's look at some of the nice results covariance gives us.
@@ -143,29 +143,29 @@ First, let's look at some of the nice results covariance gives us.
 \begin{theorem}[Covariance is bilinear]
     For any random variables $X,Y,Z$,
     \begin{enumerate}[label=(\alph*)]
-        \item $\pfn{cov}(aX, bY) = ab \,\pfn{cov}(X,Y)$ and
-        \item $\pfn{cov} (X, Y+Z) = \pfn{cov}(X,Y) + \pfn{cov}(X,Z)$.
+        \item $\cov(aX, bY) = ab \cov(X,Y)$ and
+        \item $\cov (X, Y+Z) = \cov(X,Y) + \cov(X,Z)$.
     \end{enumerate}
 \end{theorem}
 
 \begin{theorem}[Variance of a sum]
     For any random variables $X_1, \ldots, X_n$,    \vspace{-6pt}
-    \[ \pfn{var} (X_1 + \cdots + X_n) = \sum_{i=1}^{n} \sum_{j=1}^{n} \pfn{cov}(X_i, X_j) \]
+    \[ \var (X_1 + \cdots + X_n) = \sum_{i=1}^{n} \sum_{j=1}^{n} \cov(X_i, X_j) \]
 \end{theorem}
 
 \begin{corollary}[]
     For independent random variables $X_1, \ldots, X_n$,
-    \[ \pfn{var}(X_1 + \cdots + X_n) = \pfn{var}(X_1) + \cdots + \pfn{var}(X_n). \]
+    \[ \var(X_1 + \cdots + X_n) = \var(X_1) + \cdots + \var(X_n). \]
 \end{corollary}
 
-At this point we could use indicator variables to show that, for the matching problem, $\pfn{var}(X) = 1$.
+At this point we could use indicator variables to show that, for the matching problem, $\var(X) = 1$.
 We could similarly derive the variance of a binomial random variable.
 More novel, though, is a connection we can make to correlation.
 
 \begin{definition}[Correlation]
     Let $X,Y$ have variances $\sigma_X^2,\sigma_Y^2$.
     The correlation between $X$ and $Y$ is
-    \[ \rho(x,y) = \frac{\pfn{cov}(X,Y)}{\sigma_X \sigma_Y}. \]
+    \[ \rho(x,y) = \frac{\cov(X,Y)}{\sigma_X \sigma_Y}. \]
 \end{definition}
 
 \begin{theorem}[Restrictions on correlations]
@@ -179,12 +179,12 @@ More novel, though, is a connection we can make to correlation.
 \begin{proof}
     Variance is strictly non-negative, so we have
     \begin{align*}
-        0 &\leq \pfn{var} \left( \frac{X}{\sigma_X} + \frac{Y}{\sigma_Y} \right) \\
-        &= \frac{1}{\sigma_X^2} \pfn{var}(X) + \frac{1}{\sigma_Y^2} \pfn{var}(Y) + \frac{2 \pfn{cov}(X,Y)}{\sigma_X \sigma_Y} \\
+        0 &\leq \var \left( \frac{X}{\sigma_X} + \frac{Y}{\sigma_Y} \right) \\
+        &= \frac{1}{\sigma_X^2} \var(X) + \frac{1}{\sigma_Y^2} \var(Y) + \frac{2 \cov(X,Y)}{\sigma_X \sigma_Y} \\
         &= 1 + 1 + 2\rho(X,Y),
     \end{align*}
     meaning $\rho(X,Y) \geq -1$.
-    If we instead started with $\pfn{var}(X / \sigma_X - Y / \sigma_Y)$ we'd get $\rho(X,Y) \leq 1$.
+    If we instead started with $\var(X / \sigma_X - Y / \sigma_Y)$ we'd get $\rho(X,Y) \leq 1$.
     This proves statement (a).
     If we'd used equalities rather than inequalities we'd get the forward direction for (b); the reverse is just some algebra.
 \end{proof}
@@ -241,13 +241,13 @@ To finish things off, we'll look at some of the more important theoretical resul
 
 \begin{theorem}[Chebyshev's inequality]
     If $E(X) = \mu$, then for any $t > 0$,
-    \[ P(|X - \mu| \geq t) \leq \frac{\pfn{var}(X)}{t^2}. \]
+    \[ P(|X - \mu| \geq t) \leq \frac{\var(X)}{t^2}. \]
 \end{theorem}
 
 \begin{proof}
     Let $Y = (X-\mu)^2$.
-    Note that $Y \geq 0$ and $E(Y) = \pfn{var}(X)$, so using Markov's inequality we can write
-    \[ P(|x - \mu| \geq t) = P(Y \geq t^2) \leq \frac{E(Y)}{t^2} = \frac{\pfn{var}(X)}{t^2}, \]
+    Note that $Y \geq 0$ and $E(Y) = \var(X)$, so using Markov's inequality we can write
+    \[ P(|x - \mu| \geq t) = P(Y \geq t^2) \leq \frac{E(Y)}{t^2} = \frac{\var(X)}{t^2}, \]
     as desired.
 \end{proof}
 
@@ -263,7 +263,7 @@ Chebyshev's inequality is a workhorse in probability theory, but we can also pro
 \begin{theorem}[EV and variance of a sample mean]
     Let $X_1, \ldots, X_n$ be independent and identically distributed random variables, each with mean $\mu$ and variance $\sigma^2$.
     Then
-    \[ E(\overline{X}_n) = \mu, \qquad \pfn{var}(\overline{X}_n) = \frac{\sigma^2}{n}. \]
+    \[ E(\overline{X}_n) = \mu, \qquad \var(\overline{X}_n) = \frac{\sigma^2}{n}. \]
 \end{theorem}
 
 \begin{theorem}[Law of large numbers]
@@ -274,7 +274,7 @@ Chebyshev's inequality is a workhorse in probability theory, but we can also pro
 
 \begin{proof}
     For $\epsilon > 0$, by Chebyshev's inequality
-    \[ P \Big( |\overline{X}_n - \mu| \geq \epsilon \Big) \leq \frac{\pfn{var}(\overline{X}_n)}{\epsilon^2} = \frac{\sigma^2}{N \epsilon^2}. \]
+    \[ P \Big( |\overline{X}_n - \mu| \geq \epsilon \Big) \leq \frac{\var(\overline{X}_n)}{\epsilon^2} = \frac{\sigma^2}{N \epsilon^2}. \]
     and
     \[ P \Big( |\overline{X}_n - \mu| < \epsilon \Big) = 1 - \frac{\sigma^2}{N\epsilon^2}. \]
     Thus
@@ -299,7 +299,7 @@ For our last theoretical result, we have one of the foundational theorems of pro
     To this end, let $Y_i = (X_i - \mu) / \sigma$ so that
     \[ \sum_{i=1}^{n} \frac{Y_i}{\sqrt{n}} = \frac{\sum X_i - n\mu}{\sigma \sqrt{n}} = \frac{\overline{X}_n - \mu}{\sigma / \sqrt{n}} = Y. \]
     Now we need only find the moment generating function of each $Y_i$.
-    We can easily show that $E(Y_i) = 0$ and $\pfn{var}(Y_i) = 1$, meaning $E(Y_i^2) = 1$ and by Taylor's theorem the MGF of $Y_i$ is
+    We can easily show that $E(Y_i) = 0$ and $\var(Y_i) = 1$, meaning $E(Y_i^2) = 1$ and by Taylor's theorem the MGF of $Y_i$ is
     \begin{align*}
         M(t) &= M(0) + M'(0) t + M''(0) \frac{t^2}{2} + M'''(c) \frac{t^3}{6} \\
         &= 1 + E(Y_i) t + E(Y_i^2) \frac{t^2}{2} + M'''(c) \frac{t^3}{6} \\

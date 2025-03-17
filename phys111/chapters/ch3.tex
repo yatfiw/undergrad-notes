@@ -48,9 +48,9 @@ Each term here corresponds to an eigenmode of our system: the first represents t
 It will soon become useful for us to have this solution in complex form.
 We can write
 \begin{align*}
-    \mbf{X}(t) &= \pfn{Re} \left( \frac{A_+}{2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} e^{i \omega_+ t} e^{i \delta_+} + \frac{A_-}{2} \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{i \omega_- t} e^{i \delta_-} \right), \\
+    \mbf{X}(t) &= \Re \left( \frac{A_+}{2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} e^{i \omega_+ t} e^{i \delta_+} + \frac{A_-}{2} \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{i \omega_- t} e^{i \delta_-} \right), \\
     \intertext{and if we define $C_+ = (A_+ / 2) e^{i\delta_+}$ with the first normal mode $\mbf{Z}_+$ (along with analogous quantities $C_-, \mbf{Z}_-$),}
-    &= \pfn{Re} \Big( C_+ \mbf{Z}_+ e^{i\omega_+ t} + C_- \mbf{Z}_- e^{i\omega_- t} \Big).
+    &= \Re \Big( C_+ \mbf{Z}_+ e^{i\omega_+ t} + C_- \mbf{Z}_- e^{i\omega_- t} \Big).
 \end{align*}
 We've gone from four free parameters to just two!
 (This is just taking advantage of the fact that one complex number encodes the same amount of information as two real numbers.)
@@ -59,7 +59,7 @@ We've gone from four free parameters to just two!
 Now, we could've come to all the same conclusions in a much more streamlined way using some linear algebra.
 Notice that we could've written our original (coupled) Euler-Lagrange equations as
 \[ \ddot{\mbf{X}} = -\frac{1}{m} \mbf{K} \mbf{X}, \qquad \mbf{K} = \begin{bmatrix} k + k' & -k' \\ -k' & k + k' \end{bmatrix}. \]
-Rather than solve this problem directly, we'll say that $\mbf{X}(t) = \pfn{Re}(\mbf{Z(t)})$ for some complex-valued function $\mbf{Z}$ and focus on $\ddot{\mbf{Z}} = -(1 / m) \mbf{K} \mbf{Z}$.
+Rather than solve this problem directly, we'll say that $\mbf{X}(t) = \Re (\mbf{Z(t)})$ for some complex-valued function $\mbf{Z}$ and focus on $\ddot{\mbf{Z}} = -(1 / m) \mbf{K} \mbf{Z}$.
 Substituting the ansatz $\mbf{Z}(t) = \mbf{Z}_0 e^{i \omega t}$ for some constant vector $\mbf{Z}_0$ gives
 \begin{align*}
     (i\omega)^2 \mbf{Z}_0 e^{i\omega t} &= -\frac{1}{m} \mbf{K} \mbf{Z}_0 e^{i\omega t}, \\
@@ -80,7 +80,7 @@ If $\omega_0 = (\omega_+ + \omega_-) / 2$ and $\Delta \omega = \omega_- - \omega
 If mass 2 initially has zero displacement then substituting $x_2(0) = 0$ gives $C_1 = C_2$ and
 \[ \mbf{Z}(t) = C_1 e^{i \omega_0 t} \begin{bmatrix} e^{-i \Delta \omega \,t} + e^{i \Delta \omega \,t} \\ e^{-i \Delta \omega \,t} - e^{i \Delta \omega \,t} \end{bmatrix} = 2 C_1 e^{i\omega_0 t} \begin{bmatrix} \cos \Delta \omega \,t \\ -i \sin \Delta \omega \,t \end{bmatrix}. \]
 Defining $C_1 = D_1 e^{i \delta_1}$ for real $D_1, \delta_1$ gives
-\[ \mbf{X}(t) = \pfn{Re}(\mbf{Z}(t)) = D_1 \begin{bmatrix} \cos(\omega_0 t + \delta_1) \cos (\Delta \omega \,t) \\ \sin(\omega_0 t + \delta_1) \sin (\Delta \omega \,t) \end{bmatrix}. \]
+\[ \mbf{X}(t) = \Re (\mbf{Z}(t)) = D_1 \begin{bmatrix} \cos(\omega_0 t + \delta_1) \cos (\Delta \omega \,t) \\ \sin(\omega_0 t + \delta_1) \sin (\Delta \omega \,t) \end{bmatrix}. \]
 So $x_1(t)$ and $x_2(t)$ both look like beats with out-of-phase envelopes!
 
 \section{Several Coupled Oscillators}
@@ -111,7 +111,7 @@ We have
 \end{align*}
 We could similarly show that $\partial L / \partial \dot q_k = (\mbf{M} \dot{\mbf{X}})_k$, meaning $(\mbf{M} \ddot{\mbf{X}})_k = -(\mbf{K} \mbf{X})_k$ and, in all, the Euler-Lagrange equations are
 \[ \mbf{M} \ddot{\mbf{X}} = -\mbf{K} \mbf{X}. \]
-When we go to solve these, we once again define a complex-valued $\mbf{Z}$ satisfying $\mbf{X}(t) = \pfn{Re}(\mbf{Z}(t))$ to write $\mbf{M} \ddot{\mbf{Z}} = -\mbf{K} \mbf{Z}$.
+When we go to solve these, we once again define a complex-valued $\mbf{Z}$ satisfying $\mbf{X}(t) = \Re (\mbf{Z}(t))$ to write $\mbf{M} \ddot{\mbf{Z}} = -\mbf{K} \mbf{Z}$.
 Substituting the ansatz $\mbf{Z}(t) = \mbf{Z}_0 e^{i \omega t}$ gives
 \[ \omega^2 \mbf{M} \mbf{Z}_0 = \mbf{K} \mbf{Z}_0 .\]
 This is what we call a generalized eigenvalue problem!
@@ -130,14 +130,14 @@ By Newton's second law we have
 \end{align*}
 where $2\beta \equiv b / m$ and $\omega_0^2 \equiv k / m$.
 We could show that the homogeneous solutions to this differential equation decay exponentially in time, so we'll ignore them in this discussion.
-As for the particular solution, take $F_d(t) = \cos (\omega t)$ and define $x(t) = \pfn{Re}(z(t))$, turning the equation into
+As for the particular solution, take $F_d(t) = \cos (\omega t)$ and define $x(t) = \Re (z(t))$, turning the equation into
 \[ \ddot z + 2\beta \dot z + \omega_0^2 z = f e^{i\omega t}. \]
 Substituting the ansatz $z = Ae^{i \omega t}$ yields
 \[ A = \frac{f}{\omega_0^2 - \omega^2 + 2i \beta \omega} = \frac{f(\omega_0^2 - \omega^2)}{(\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2} - i \frac{2\beta\omega f}{(\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2}, \]
 where in the last expression we'e multiplied by the conjugate of the first denominator.
 So if $A = a + bi$ then we could show that our solution looks like
 \begin{align*}
-    x_p(t) &= \pfn{Re} \big[ (a + bi)(\cos \omega t + i \sin \omega t) \big] \\
+    x_p(t) &= \Re \big[ (a + bi)(\cos \omega t + i \sin \omega t) \big] \\
     &= C \cos (\omega t + \delta),
 \end{align*}
 where

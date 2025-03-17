@@ -73,21 +73,21 @@ The criteria for a subset being a subspace are analogous to the ones we saw prev
 \end{theorem}
 
 \begin{definition}[Span]
-	If $S = \{\mbf{v}_1, \ldots, \mbf{v}_{k}\}$ is a set of vectors in a vector space $V$, then the set of all linear combinations of $\mbf{v}_1, \ldots, \mbf{v}_k$ is called the span of $\mbf{v}_1, \ldots, \mbf{v}_k$ and is denoted by $\pfn{span}(\mbf{v}_1, \ldots, \mbf{v}_k)$ or $\pfn{span}(S)$.
-	If $V = \pfn{span}(S)$, then $S$ is called a spanning set for $V$ and $V$ is said to be spanned by $S$.
+	If $S = \{\mbf{v}_1, \ldots, \mbf{v}_{k}\}$ is a set of vectors in a vector space $V$, then the set of all linear combinations of $\mbf{v}_1, \ldots, \mbf{v}_k$ is called the span of $\mbf{v}_1, \ldots, \mbf{v}_k$ and is denoted by $(\mbf{v}_1, \ldots, \mbf{v}_k)$ or $\on{span}(S)$.
+	If $V = \on{span}(S)$, then $S$ is called a spanning set for $V$ and $V$ is said to be spanned by $S$.
 \end{definition}
 
 \begin{theorem}[Span as a subspace]
 	Let $S$ be a set of vectors in a vector space $V$.
 	\begin{enumerate}[label=(\alph*),topsep=0pt]
-		\item $\pfn{span}(S)$ is a subspace of $V$.
-		\item $\pfn{span}(S)$ is the smallest subspace of $V$ that contains the vectors in $S$.
+		\item $\on{span}(S)$ is a subspace of $V$.
+		\item $\on{span}(S)$ is the smallest subspace of $V$ that contains the vectors in $S$.
 	\end{enumerate}
 \end{theorem}
 
 \begin{proof}
 	To prove (b), let $W$ be a subspace of $V$ that has $S$ as a subset.
-	$W$ contains every linear combination of the vectors in $S$, meaning $\pfn{span}(S)$ is contained in $W$.
+	$W$ contains every linear combination of the vectors in $S$, meaning $\on{span}(S)$ is contained in $W$.
 \end{proof}
 
 
@@ -182,7 +182,7 @@ Now that we've established that every basis for a vector space contains the same
 
 \begin{definition}[Dimension]
 	A vector space $V$ is called finite-dimensional if it has a basis containing finitely many vectors.
-	The dimension of $V$, denoted by $\pfn{dim}(V)$, is the number of vectors in a basis for $V$.
+	The dimension of $V$, denoted by $\on{dim}(V)$, is the number of vectors in a basis for $V$.
 	The dimension of the zero vector space $\{\mbf{0}\}$ is defined to be zero.
 	A vector space that has no finite basis is called infinite-dimensional.
 \end{definition}
@@ -191,7 +191,7 @@ Knowing the dimension of a vector space provides us with much information about 
 Some of this information is described in the next two theorems.
 
 \begin{theorem}[Dimension, span, and linear independence]
-	Let $V$ be a vector space with $\pfn{dim}(V) = n$.
+	Let $V$ be a vector space with $\on{dim}(V) = n$.
 	\begin{enumerate}[label=(\alph*)]
 		\item Any linearly independent set in $V$ contains at most $n$ vectors.
 		\item Any spanning set for $V$ contains at least $n$ vectors.
@@ -206,8 +206,8 @@ Some of this information is described in the next two theorems.
 	Let $W$ be a subspace of a finite-dimensional vector space $V$.
 	Then:
 	\begin{enumerate}[label=(\alph*)]
-		\item $W$ is finite-dimensional and $\pfn{dim}(W) \leq \pfn{dim}(V)$.
-		\item $\pfn{dim}(W) = \pfn{dim}(V)$ if and only if $W = V$.
+		\item $W$ is finite-dimensional and $\on{dim}(W) \leq \on{dim}(V)$.
+		\item $\on{dim}(W) = \on{dim}(V)$ if and only if $W = V$.
 	\end{enumerate}
 \end{theorem}
 
@@ -322,7 +322,7 @@ Now we'll generalize the notions of a matrix's null space and column space.
 \begin{definition}[Kernel and range]
 	Let $T : V \to W$ be a linear transformation.
 	The kernel and range of $T$ are, respectively,
-	\[ \pfn{ker}(T) = \{\mbf{v} \in V : T(\mbf{v}) = \mbf{0}\} \;\text{ and }\; \pfn{range}(T) = \{T(\mbf{v}) : \mbf{v} \in V\}. \]
+	\[ \on{ker}(T) = \{\mbf{v} \in V : T(\mbf{v}) = \mbf{0}\} \;\text{ and }\; \on{range}(T) = \{T(\mbf{v}) : \mbf{v} \in V\}. \]
 \end{definition}
 
 Like the null and column spaces of a matrix are subspaces of $\R^n$, the kernel and range of a linear transformation are subspaces of the domain and codomain.
@@ -331,8 +331,8 @@ Like the null and column spaces of a matrix are subspaces of $\R^n$, the kernel 
 	Let $T : V \to W$ be a linear transformation.
 	Then:
 	\begin{enumerate}[label=(\alph*)]
-		\item $\pfn{ker}(T)$ is a subspace of $V$.
-		\item $\pfn{range}(T)$ is a subspace of $W$.
+		\item $\on{ker}(T)$ is a subspace of $V$.
+		\item $\on{range}(T)$ is a subspace of $W$.
 	\end{enumerate}
 \end{theorem}
 
@@ -342,13 +342,13 @@ Like before, we assign names to the dimensions of these subspaces and draw a con
 
 \begin{definition}[Rank and nullity]
 	Let $T : V \to W$ be a linear transformation.
-	The rank of $T$ is $\pfn{rank}(T) = \dim (\pfn{range}(T))$ and the nullity of $T$ is $\pfn{nullity}(T) = \dim (\pfn{ker}(T))$.
+	The rank of $T$ is $\on{rank}(T) = \dim (\on{range}(T))$ and the nullity of $T$ is $\on{nullity}(T) = \dim (\on{ker}(T))$.
 \end{definition}
 
 \begin{theorem}[Rank theorem]
 	Let $T : V \to W$ be a linear transformation where $V$ is finite-dimensional.
 	Then
-	\[ \pfn{rank}(T) + \pfn{nullity}(T) = \dim V. \]
+	\[ \on{rank}(T) + \on{nullity}(T) = \dim V. \]
 \end{theorem}
 
 \begin{proof}
@@ -362,12 +362,12 @@ Now we have some vocabulary that will help us better describe the input and outp
 	Let $T : V \to W$ be a linear transformation.
 	\begin{itemize}
 		\item $T$ is one-to-one if, for all $\mbf{u}, \mbf{v}$ in $V$, $\mbf{u} \neq \mbf{v} \implies T(\mbf{u}) \neq T(v)$.
-		\item $T$ is onto if $\pfn{range}(T) = W$.
+		\item $T$ is onto if $\on{range}(T) = W$.
 	\end{itemize}
 \end{definition}
 
 \begin{theorem}[Condition for one-to-one]
-	A linear transformation $T$ is one-to-one if and only if $\pfn{ker}(T) = \{\mbf{0}\}$
+	A linear transformation $T$ is one-to-one if and only if $\on{ker}(T) = \{\mbf{0}\}$
 \end{theorem}
 
 \begin{proof}
@@ -382,7 +382,7 @@ Now we have some vocabulary that will help us better describe the input and outp
 \end{theorem}
 
 \begin{proof}
-	By the rank theorem, $\pfn{nullity}(T) = 0$ if and only if $\pfn{rank}(T) = n$, where $\dim W = n$.
+	By the rank theorem, $\on{nullity}(T) = 0$ if and only if $\on{rank}(T) = n$, where $\dim W = n$.
 \end{proof}
 
 In the previous section, we found that linear transformations, in a sense, preserve spanning sets.
@@ -483,8 +483,8 @@ We can now make some new additions to the Fundamental Theorem.
 			\item $T$ is invertible.
 			\item $T$ is one-to-one.
 			\item $T$ is onto.
-			\item $\pfn{ker}(T) = \{\mbf{0}\}$.
-			\item $\pfn{range}(T) = W$.
+			\item $\on{ker}(T) = \{\mbf{0}\}$.
+			\item $\on{range}(T) = W$.
 			\item[]
 		\end{enumerate}
 	\end{multicols}

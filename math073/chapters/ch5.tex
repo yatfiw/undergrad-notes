@@ -146,18 +146,18 @@ We begin with the first of these.
 			\item $W^\perp$ is a subspace of $\R^n$.
 			\item $\left( W^\perp \right)^\perp = W$.
 			\item $W \cap W^\perp = \{\mbf{0}\}$.
-			\item If $W = \pfn{span}(\mbf{w}_1, \mbf{w}_2, \ldots, \mbf{w}_k)$, then $\mbf{v}$ is in $W^\perp$ if and only if $\mbf{v} \cdot \mbf{w}_i = 0$ for all $i = 1, \ldots, k$.
+			\item If $W = \on{span}(\mbf{w}_1, \mbf{w}_2, \ldots, \mbf{w}_k)$, then $\mbf{v}$ is in $W^\perp$ if and only if $\mbf{v} \cdot \mbf{w}_i = 0$ for all $i = 1, \ldots, k$.
 		\end{enumerate}
 	\end{multicols}
 \end{theorem}
 
 Using orthogonal complements, we can make describe some fundamental relationships between the subspaces associated with a matrix.
-To relate the row space to the null space, notice that for $A \mbf{x} = \mbf{0}$ to be true, we must have $\mbf{r} \cdot \mbf{x} = 0$ for every row $\mbf{r}$ in $A$; therefore, all rows in $A$ are orthogonal to vectors in $\pfn{null}(A)$.
-A similar line of reasoning relates $\pfn{col}(A)$ to $\pfn{null}(A^T)$. 
+To relate the row space to the null space, notice that for $A \mbf{x} = \mbf{0}$ to be true, we must have $\mbf{r} \cdot \mbf{x} = 0$ for every row $\mbf{r}$ in $A$; therefore, all rows in $A$ are orthogonal to vectors in $\on{null}(A)$.
+A similar line of reasoning relates $\on{col}(A)$ to $\on{null}(A^T)$. 
 
 \begin{theorem}[Fundamental spaces and orthogonality]
 	Let $A$ be a matrix.
-	Then $(\pfn{row}(A))^\perp = \pfn{null}(A)$ and $(\pfn{col}(A))^\perp = \pfn{null}(A^T)$.
+	Then $(\on{row}(A))^\perp = \on{null}(A)$ and $(\on{col}(A))^\perp = \on{null}(A^T)$.
 \end{theorem}
 
 Now we'll move on to generalizing projections.
@@ -165,8 +165,8 @@ Now we'll move on to generalizing projections.
 \begin{definition}[Orthogonal projection onto a subspace]
 	Let $W$ be a subspace of $\R^n$ and let $\{\mbf{u}_1, \mbf{u}_2, \ldots, \mbf{u}_k\}$ be an orthogonal basis for $W$.
 	For any vector $\mbf{v}$ in $\R^n$, the orthogonal projection of $\mbf{v}$ onto $W$ is defined as
-	\[ \pfn{proj}_W(\mbf{v}) = \pfn{proj}_{\mbf{u}_1}(\mbf{v}) + \pfn{proj}_{\mbf{u}_2}(\mbf{v}) + \cdots + \pfn{proj}_{\mbf{u}_k}(\mbf{v}). \]
-	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v})$.
+	\[ \on{proj}_W(\mbf{v}) = \on{proj}_{\mbf{u}_1}(\mbf{v}) + \on{proj}_{\mbf{u}_2}(\mbf{v}) + \cdots + \on{proj}_{\mbf{u}_k}(\mbf{v}). \]
+	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\on{perp}_W(\mbf{v}) = \mbf{v} - \on{proj}_W(\mbf{v})$.
 \end{definition}
 
 We can use orthogonal projections to decompose a vector into orthogonal components.
@@ -177,7 +177,7 @@ We can use orthogonal projections to decompose a vector into orthogonal componen
 \end{theorem}
 
 \begin{proof}
-	To show that such a decomposition exists, take an orthogonal basis $\left\{ \mbf{u}_1, \ldots, \mbf{u}_k \right\}$ for $W$ and define $\mbf{w} = \pfn{proj}_W(\mbf{v})$ with $\mbf{w}^\perp = \pfn{perp}_W(\mbf{v})$.
+	To show that such a decomposition exists, take an orthogonal basis $\left\{ \mbf{u}_1, \ldots, \mbf{u}_k \right\}$ for $W$ and define $\mbf{w} = \on{proj}_W(\mbf{v})$ with $\mbf{w}^\perp = \on{perp}_W(\mbf{v})$.
 	We can immediately see that $\mbf{w} + \mbf{w}^\perp = \mbf{v}$ and $\mbf{w} \in W$; to show that $\mbf{w}^\perp \in W^\perp$ we could use a direct computation to get $\mbf{u}_i \cdot \mbf{v} = 0$ for all basis vectors $\mbf{u}_i$.
 
 	To show uniqueness, suppose there is another decomposition $\mbf{v} = \mbf{w}' + \mbf{w}'^\perp$.
@@ -190,14 +190,14 @@ Lastly, we have a relationship between the dimensions of a subspace and its orth
 
 \begin{theorem}[Dimension of orthogonal subspace]
 	If $W$ is a subspace of $\R^n$, then
-	\[ \pfn{dim } W + \pfn{dim } W^\perp = n. \]
+	\[ \on{dim} W + \on{dim} W^\perp = n. \]
 \end{theorem}
 
 \begin{proof}
 	Let $\mathcal B$ be the union of bases for $W$ and $W^\perp$.
 	We can immediately see that $\mathcal B$ is an orthogonal set and so is linearly independent.
 	Now, by the orthogonal decomposition theorem, any $\mbf{v} \in \R^n$ can be written as a sum of vectors in $W$ and $W^\perp$, which can in turn be written as linear combinations of vectors in $\mathcal B$.
-	Thus $\mathcal B$ is a basis for $\R^n$; it follows that $\pfn{dim } W + \pfn{dim } W^\perp = \dim \R^n$.
+	Thus $\mathcal B$ is a basis for $\R^n$; it follows that $\on{dim} W + \on{dim} W^\perp = \dim \R^n$.
 \end{proof}
 
 Note that the rank theorem is a corollary to this theorem.
@@ -207,12 +207,12 @@ Given how useful orthogonal bases have proven to be, it might also be useful to 
 We do this using a series of projections.
 
 \begin{theorem}[Gram-Schmidt process]
-	Let $\{\mbf{x}_1, \mbf{x}_2, \ldots, \mbf{x}_k\}$ be a basis for a subspace $W$ of $\R^n$, let $W_i = \pfn{span}(\mbf{x}_1, \mbf{x}_2, \ldots, \mbf{x}_i)$, and define the following:
+	Let $\{\mbf{x}_1, \mbf{x}_2, \ldots, \mbf{x}_k\}$ be a basis for a subspace $W$ of $\R^n$, let $W_i = \on{span}(\mbf{x}_1, \mbf{x}_2, \ldots, \mbf{x}_i)$, and define the following:
 	\begin{alignat*}{2}
 		\mbf{v}_1 &= \mbf{x}_1 \\
-		\mbf{v}_2 &= \pfn{perp}_{W_1}(\mbf{x}_2) &&= \mbf{x}_k - \pfn{proj}_{\mbf{v}_1}\mbf{x}_k \\
+		\mbf{v}_2 &= \on{perp}_{W_1}(\mbf{x}_2) &&= \mbf{x}_k - \on{proj}_{\mbf{v}_1}\mbf{x}_k \\
 		&\phantom{~!}\vdots \\
-		\mbf{v}_k &= \pfn{perp}_{W_{k-1}}(\mbf{x}_k) &&= \mbf{x}_k - \pfn{proj}_{\mbf{v}_1}\mbf{x}_k - \pfn{proj}_{\mbf{v}_2}\mbf{x}_k - \cdots - \pfn{proj}_{\mbf{v}_{k-1}}\mbf{x}_k
+		\mbf{v}_k &= \on{perp}_{W_{k-1}}(\mbf{x}_k) &&= \mbf{x}_k - \on{proj}_{\mbf{v}_1}\mbf{x}_k - \on{proj}_{\mbf{v}_2}\mbf{x}_k - \cdots - \on{proj}_{\mbf{v}_{k-1}}\mbf{x}_k
 	\end{alignat*}
 	Then for each $i = 1, \ldots, k$, $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_i\}$ is an orthogonal basis for $W_i$.
 	In particular, $\{\mbf{v}_1, \mbf{v}_2, \ldots, \mbf{v}_k\}$ is an orthogonal basis for $W$.

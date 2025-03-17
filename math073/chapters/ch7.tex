@@ -39,7 +39,7 @@ The construction of all these objects is very similar to what we did with Euclid
 	\begin{itemize}[topsep=0pt]
 		\item The length (or norm) of $\mbf{v}$ is $\|\mbf{v}\| = \sqrt{\left< \mbf{v}, \mbf{v} \right>}$.
 		(A unit vector is a vector of length 1.)
-		\item The distance between $\mbf{u}$ and $\mbf{v}$ is $\pfn{d}(\mbf{u}, \mbf{v}) = \|\mbf{u} - \mbf{v}\|$.
+		\item The distance between $\mbf{u}$ and $\mbf{v}$ is $\on{d}(\mbf{u}, \mbf{v}) = \|\mbf{u} - \mbf{v}\|$.
 		\item $\mbf{u}$ and $\mbf{v}$ are orthogonal if $\left< \mbf{u}, \mbf{v} \right> = 0$.
 	\end{itemize}
 \end{definition}
@@ -52,9 +52,9 @@ The construction of all these objects is very similar to what we did with Euclid
 
 \begin{definition}[Orthogonal projection]
 	Let $\{\mbf{u}_1, \ldots, \mbf{u}_k\}$ be an orthogonal basis for a subspace $W$ of an inner product space $V$, and let $\mbf{v}$ be a vector in $V$.
-	Then the orthogonal projection $\pfn{proj}_W(\mbf{v})$ of $\mbf{v}$ onto $W$ is
-	\[ \pfn{proj}_W(\mbf{v}) = \frac{\left< \mbf{u}_1, \mbf{v} \right>}{\left< \mbf{u}_1, \mbf{u}_1 \right>} \mbf{u}_1 + \cdots + \frac{\left< \mbf{u}_k, \mbf{v} \right>}{\left< \mbf{u}_k, \mbf{u}_k \right>}. \]
-	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\pfn{perp}_W(\mbf{v}) = \mbf{v} - \pfn{proj}_W(\mbf{v})$.
+	Then the orthogonal projection $\on{proj}_W(\mbf{v})$ of $\mbf{v}$ onto $W$ is
+	\[ \on{proj}_W(\mbf{v}) = \frac{\left< \mbf{u}_1, \mbf{v} \right>}{\left< \mbf{u}_1, \mbf{u}_1 \right>} \mbf{u}_1 + \cdots + \frac{\left< \mbf{u}_k, \mbf{v} \right>}{\left< \mbf{u}_k, \mbf{u}_k \right>}. \]
+	The component of $\mbf{v}$ orthogonal to $W$ is the vector $\on{perp}_W(\mbf{v}) = \mbf{v} - \on{proj}_W(\mbf{v})$.
 \end{definition}
 
 \begin{theorem}[Cauchy-Schwarz inequality]
@@ -83,7 +83,7 @@ We'll begin by rephrasing this search in terms of vectors.
 Provided that $V$ is equipped with an inner product, our problem has a simple solution.
 
 \begin{theorem}[Best approximation theorem]
-	If $W$ is a finite-dimensional subspace of an inner product space $V$ and if $\mbf{v}$ is a vector in $V$, then $\pfn{proj}_W(\mbf{v})$ is the best approximation to $\mbf{v}$ in $W$.
+	If $W$ is a finite-dimensional subspace of an inner product space $V$ and if $\mbf{v}$ is a vector in $V$, then $\on{proj}_W(\mbf{v})$ is the best approximation to $\mbf{v}$ in $W$.
 \end{theorem}
 
 We can use this pair of ideas to determine approximate solutions to inconsistent linear systems.
@@ -94,8 +94,8 @@ We can use this pair of ideas to determine approximate solutions to inconsistent
 	for all $\mbf{x}$ in $\R^n$.
 \end{definition}
 
-Note that $\mbf{b} - A \overline{\mbf{x}} = \pfn{perp}_{\pfn{col}(A)}(\mbf{b})$.
-Therefore, $\mbf{b} - A \overline{\mbf{x}}$ is in $(\pfn{col}(A))^\perp = \pfn{null}(A^T)$, and we have the following.
+Note that $\mbf{b} - A \overline{\mbf{x}} = \on{perp}_{\on{col}(A)}(\mbf{b})$.
+Therefore, $\mbf{b} - A \overline{\mbf{x}}$ is in $(\on{col}(A))^\perp = \on{null}(A^T)$, and we have the following.
 
 \begin{theorem}[Least squares theorem]
 	Let $A$ be an $m \times n$ matrix and let $\mbf{b}$ be in $\R^m$.

@@ -114,10 +114,10 @@ As a side note, if we have complex eigenvalues, we can use the following shortcu
 \begin{theorem}[Linearly independent solutions from complex eigendata]
     Let $\mbf{x}(t) = e^{\lambda t} \mbf{v}$, $\lambda \in \C$ solve the system $\mbf{x}' = A \mbf{x}$.
     Define $\lambda = \alpha + i\beta$ and $\mbf{v} = \mbf{p} + i\mbf{q}$.
-    Then $\pfn{Re} (\mbf{x}(t))$ and $\pfn{Im} (\mbf{x}(t))$ are linearly independent solutions to the system, with
+    Then $\Re (\mbf{x}(t))$ and $\Im (\mbf{x}(t))$ are linearly independent solutions to the system, with
     \begin{align*}
-        \pfn{Re}(\mbf{x}(t)) &= e^{\alpha t} (\cos \beta t \; \mbf{p} - \sin \beta t \; \mbf{q}) \\
-        \pfn{Im}(\mbf{x}(t)) &= e^{\alpha t} (\sin \beta t \; \mbf{p} + \cos \beta t \; \mbf{q})
+        \Re(\mbf{x}(t)) &= e^{\alpha t} (\cos \beta t \; \mbf{p} - \sin \beta t \; \mbf{q}) \\
+        \Im(\mbf{x}(t)) &= e^{\alpha t} (\sin \beta t \; \mbf{p} + \cos \beta t \; \mbf{q})
     \end{align*}
 \end{theorem}
 
@@ -275,21 +275,21 @@ Key to predicting what the orbits will look like is the distinction between the 
 
 The real part of $\lambda$ controls the exponential growth or decay of a system.
 \begin{itemize}
-    \item If $\pfn{Re} (\lambda) > 0$, then the system exhibits growth.
-    \item If $\pfn{Re} (\lambda) < 0$, then the system exhibits decay.
-    \item If $\pfn{Re} (\lambda) = 0$, then we get neither growth nor decay, so the ``magnitude'' of the system remains constant.
+    \item If $\Re (\lambda) > 0$, then the system exhibits growth.
+    \item If $\Re (\lambda) < 0$, then the system exhibits decay.
+    \item If $\Re (\lambda) = 0$, then we get neither growth nor decay, so the ``magnitude'' of the system remains constant.
 \end{itemize}
 If the system has two real eigenvalues, then the scaling described here happens in the direction of each eigenvalue's corresponding eigenvector.
 
 The imaginary part of $\lambda$ controls the rotation of a system.
 \begin{itemize}
-    \item If $\pfn{Im} (\lambda) > 0$, then the system rotates counterclockwise.
-    \item If $\pfn{Im} (\lambda) < 0$, then the system rotates clockwise.
-    \item If $\pfn{Im} (\lambda) = 0$, then the system does not rotate.
+    \item If $\Im (\lambda) > 0$, then the system rotates counterclockwise.
+    \item If $\Im (\lambda) < 0$, then the system rotates clockwise.
+    \item If $\Im (\lambda) = 0$, then the system does not rotate.
 \end{itemize}
 
 Now, using the fact that
-\[ \lambda_{1,2} = \frac{\pfn{tr} A \pm \sqrt{(\pfn{tr} A)^2 - 4 \det A}}{2}, \]
+\[ \lambda_{1,2} = \frac{\on{tr} A \pm \sqrt{(\on{tr} A)^2 - 4 \det A}}{2}, \]
 we can graphically represent all possible phase portraits.
 The figure below is courtesy of Prof. Jacobsen.
 \begin{center}
@@ -305,7 +305,7 @@ There is a variety of definitive statements we can make about the behavior of in
 We'll give one of these to finish off our discussion of linear systems.
 
 \begin{theorem}[Asymptotic stability theorem]
-    If $\pfn{Re} (\lambda) < 0$ for all eigenvalues $\lambda$ of $A$, then all solutions of $\mbf{x}' = A \mbf{x}$ satisfy $\mbf{x}(t) \to \mbf{0}$ as $t \to \infty$.
+    If $\Re (\lambda) < 0$ for all eigenvalues $\lambda$ of $A$, then all solutions of $\mbf{x}' = A \mbf{x}$ satisfy $\mbf{x}(t) \to \mbf{0}$ as $t \to \infty$.
 \end{theorem}
 
 \section{Nonlinear Systems}
@@ -340,8 +340,8 @@ This gives us the following result.
 Using this, we can classify each equilibrium point of a system by stability.
 
 \begin{definition}[Equilibrium stability]
-    An equilibrium point is stable if $\pfn{Re} (\lambda) \leq 0$ for all eigenvalues $\lambda$ of $A = D \mbf{f} (\mbf{x}_0)$.
-    An equilibrium point is asymptotically stable if $\pfn{Re}(\lambda) < 0$ for all eigenvalues $\lambda$ of $A = D \mbf{f} (\mbf{x}_0)$.
+    An equilibrium point is stable if $\Re (\lambda) \leq 0$ for all eigenvalues $\lambda$ of $A = D \mbf{f} (\mbf{x}_0)$.
+    An equilibrium point is asymptotically stable if $\Re(\lambda) < 0$ for all eigenvalues $\lambda$ of $A = D \mbf{f} (\mbf{x}_0)$.
     Otherwise we say the equilibrium point is unstable.
 \end{definition}
 
@@ -355,13 +355,13 @@ In most cases, a system's linearization gives us an accurate understanding of ho
 However, this won't always be true; a condition for this is below.
 
 \begin{theorem}[Hartman-Grobman theorem]
-    If $\mbf{x}_0$ is an equilibrium point of $\mbf{x}'= \mbf{f}(\mbf{x})$ and $\pfn{Re} (\lambda) \neq 0$ for all eigenvalues $\lambda$ of $D \mbf{f} (\mbf{x}_0)$, then the linearization at $\mbf{x}_0$ is ``faithful.''
+    If $\mbf{x}_0$ is an equilibrium point of $\mbf{x}'= \mbf{f}(\mbf{x})$ and $\Re (\lambda) \neq 0$ for all eigenvalues $\lambda$ of $D \mbf{f} (\mbf{x}_0)$, then the linearization at $\mbf{x}_0$ is ``faithful.''
 \end{theorem}
 
 This theorem can be used to prove a version of Theorem 4.15 for nonlinear systems.
 
 \begin{theorem}[Local stability theorem]
-    If $\mbf{x}_0$ is an equilibrium point of $\mbf{x}' = \mbf{f} (\mbf{x})$ and $\pfn{Re} < 0$ for all eigenvalues $\lambda$ of $D \mbf{f} (\mbf{x}_0)$, then all solutions that start sufficiently close to $\mbf{x}_0$ will satisfy $\mbf{x}(t) \to \mbf{x}_0$ as $t \to \infty$.
+    If $\mbf{x}_0$ is an equilibrium point of $\mbf{x}' = \mbf{f} (\mbf{x})$ and $\Re < 0$ for all eigenvalues $\lambda$ of $D \mbf{f} (\mbf{x}_0)$, then all solutions that start sufficiently close to $\mbf{x}_0$ will satisfy $\mbf{x}(t) \to \mbf{x}_0$ as $t \to \infty$.
 \end{theorem}
 
 \subsection{Nullclines and Energy}

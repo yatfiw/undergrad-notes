@@ -31,10 +31,10 @@ Before looking at some important kinds of probability mass functions, we'll exam
 \begin{definition}[Variance and standard deviation]
     The variance of a random variable $X$ with mean $\mu$ is the average squared distance from $\mu$.
     That is, \vspace{-4pt}
-    \[ \pfn{var}(X) = E[(x-\mu)^2]. \] \vspace{-4pt}
+    \[ \var(X) = E[(x-\mu)^2]. \] \vspace{-4pt}
     It is typically denoted by $\sigma^2$ or $\sigma_x^2$.
     The standard deviation is
-    \[ \pfn{sd}(x) = \sqrt{\pfn{var}(x)}, \vspace{-8pt} \]
+    \[ \on{sd}(x) = \sqrt{\var(x)}, \vspace{-8pt} \]
     and is typically denoted by $\sigma$ or $\sigma_x$.
 \end{definition}
 
@@ -42,12 +42,12 @@ There's a couple of theorems regarding expected value and variance which will pr
 
 \begin{theorem}[Expected value and variance of linear expressions]
     For real $a$ and $b$, \vspace{-4pt}
-    \[ E(ax + b) = a \,E(x) + b \;\text{ and }\; \pfn{var}(ax + b) = a^2 \,\pfn{var}(x). \]
+    \[ E(ax + b) = a \,E(x) + b \;\text{ and }\; \var(ax + b) = a^2 \,\var(x). \]
 \end{theorem}
 
 \begin{theorem}[Variance via expected value]
     For a random variable $X$, \vspace{-4pt}
-    \[ \pfn{var}(X) = E(X^2) - E(X)^2. \]
+    \[ \var(X) = E(X^2) - E(X)^2. \]
 \end{theorem}
 
 We'll prove later that a random variable is almost always within two standard deviations of its mean, with probability at least 75\%.
@@ -60,11 +60,11 @@ This is boring, though, so let's define a few more interesting ones.
     Consider an infinite sequence of independent binary events, each of which has a probability $p$ of success.
     If $X$ is the index of the first success, then $X$ is called a geometric random variable and
     \[ P(X = k) = (1-p)^{k-1} p. \]
-    We say that $X$ obeys a geometric distribution with parameter $p$, or $X \sim \pfn{geo}(p)$.
+    We say that $X$ obeys a geometric distribution with parameter $p$, or $X \sim \on{geo}(p)$.
 \end{definition}
 
 \begin{theorem}[EV of a geometric random variable]
-    A random variable $X \sim \pfn{geo}(p)$ has expected value $E(X) = 1 / p$.
+    A random variable $X \sim \on{geo}(p)$ has expected value $E(X) = 1 / p$.
 \end{theorem}
 
 We omit a proof because the result is intuitive, but it involves differentiating the geometric series sum.
@@ -76,26 +76,26 @@ Now onto another!
     Consider a sequence of $n$ independent binary events, each of which has a probability $p$ of success.
     If $X$ is the number of successes in this sequence, then $X$ is called a binomial random variable and
     \[ P(X = k) = \binom{n}{k} p^{k}(1 - p)^{n-k}. \]
-    We say that $X$ obeys a geometric distribution with parameters $n$ and $p$, or $X \sim \pfn{bin}(n,p)$.
+    We say that $X$ obeys a geometric distribution with parameters $n$ and $p$, or $X \sim \on{bin}(n,p)$.
 \end{definition}
 
 \begin{theorem}[EV and variance of a binomial random variable]
-    A random variable $X \sim \pfn{bin}(n,p)$ has $E(X) = np$ and $\pfn{var}(X) = np (1-p)$.
+    A random variable $X \sim \on{bin}(n,p)$ has $E(X) = np$ and $\var(X) = np (1-p)$.
 \end{theorem}
 
 Another intuitive result, and we'll defer a proof to later.
-For our last variable, we start with $X \sim \pfn{bin}(n,p)$ and take the large and small limits of $n$ and $p$, respectively.
+For our last variable, we start with $X \sim \on{bin}(n,p)$ and take the large and small limits of $n$ and $p$, respectively.
 This gives us the following.
 
 \begin{definition}[Poisson random variable]
     Consider a long sequence of rare binary events with expected value $\lambda > 0$.
     If $X$ is the number of successes in the sequence, then $X$ is called a Poisson random variable and
     \[ P(X = k) = \frac{\lambda^{k} e^{-\lambda}}{k!}. \]
-    We say that $X$ obeys a Poisson distribution with parameter $\lambda$, or $X \sim \pfn{poi}(\lambda)$.
+    We say that $X$ obeys a Poisson distribution with parameter $\lambda$, or $X \sim \on{poi}(\lambda)$.
 \end{definition}
 
 \begin{theorem}[Variance of a Poisson random variable]
-    A random variable $X \sim \pfn{poi}(\lambda)$ has $\pfn{var}(X) = \lambda$.
+    A random variable $X \sim \on{poi}(\lambda)$ has $\var(X) = \lambda$.
 \end{theorem}
 
 The full proof of this is lengthy.
@@ -180,10 +180,10 @@ Note that the expected value may not exist if the distribution has ``heavy tails
     \[ E(X) = \int_{-\infty}^{\infty} x f_X(x) \,dx, \qquad E[g(x)] = \int_{-\infty}^{\infty} g(x) f_X(x) \,dx. \]
 \end{definition}
 
-The variance and standard deviation are the same as we defined before: $\pfn{var}(X) = E[(x-\mu)^2]$, where $\mu$ is the distribution's mean.
+The variance and standard deviation are the same as we defined before: $\var(X) = E[(x-\mu)^2]$, where $\mu$ is the distribution's mean.
 Also, all of the nice properties we found about these characteristics hold, too!
 Namely:
-\[ E(ax + b) = a \,E(x) + b, \qquad \pfn{var}(ax + b) = a^2 \pfn{var}(x), \qquad \pfn{var}(X) = E(X^2) - E(X)^2. \]
+\[ E(ax + b) = a \,E(x) + b, \qquad \var(ax + b) = a^2 \var(x), \qquad \var(X) = E(X^2) - E(X)^2. \]
 By the linearity of integration we could generalize the first result to arbitrary linear combinations of functions.
 Now we'll make one more definition that we really could've made earlier in the discrete case but also wouldn't have been useful until now.
 
@@ -224,7 +224,7 @@ Like before, we can start simple with the uniform random variable.
 
 \begin{theorem}[EV and variance of a uniform RV]
     If $X \sim u(a,b)$ then
-    \[ E(X) = \frac{a+b}{2}, \qquad \pfn{var}(X) = \frac{(b-a)^2}{12}. \]
+    \[ E(X) = \frac{a+b}{2}, \qquad \var(X) = \frac{(b-a)^2}{12}. \]
 \end{theorem}
 
 What's interesting about this is that we might treat an arbitrary distribution function $F_X(x)$ as a probability distribution, note that it ranges from 0 to 1, and find that $F_X(x) \sim u(0,1)$.
@@ -240,17 +240,17 @@ Next, we have the continuous analog of the geometric distribution.
 \begin{definition}[Exponential random variable]
     $X$ is an exponential random variable with parameter $\lambda > 0$ if $X$ has pdf
     \[ f(x) = \lambda e^{-\lambda x}. \]
-    Such a random variable is denoted $X \sim \pfn{expo}(\lambda)$.
+    Such a random variable is denoted $X \sim \on{expo}(\lambda)$.
 \end{definition}
 
 $\lambda$ is often called the rate parameter, and $1 / \lambda$ represents the ``average time'' between rare events.
 In this way, the $\lambda$ here is the same as in the Poisson distribution!
 
 \begin{theorem}[EV and variance of an exponential RV]
-    If $X \sim \pfn{expo}(\lambda)$, then
+    If $X \sim \on{expo}(\lambda)$, then
     \[ E(X) = \frac{1}{\lambda}. \]
     Also, $E(X^2) = 2 / \lambda^2$, so
-    \[ \pfn{var}(X) = E(X^2) - E(X)^2 = \frac{1}{\lambda^2}. \]
+    \[ \var(X) = E(X^2) - E(X)^2 = \frac{1}{\lambda^2}. \]
 \end{theorem}
 
 Finally, we have what is perhaps the most important random variable of all.
@@ -273,7 +273,7 @@ It still has no elementary antiderivative, though, so in practice we map problem
     If $X \sim n(\mu, \sigma^2)$ and $Y = aX + b$, then
     \begin{enumerate}[label=(\alph*)]
         \item $E(Y) = a\mu + b$ and
-        \item $\pfn{var}(Y) = a^2 \sigma^2$.
+        \item $\var(Y) = a^2 \sigma^2$.
     \end{enumerate}
     In fact, $Y$ is also normal with these parameters.
 \end{theorem}

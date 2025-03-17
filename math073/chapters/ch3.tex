@@ -285,21 +285,21 @@ Those reachable by the rows or columns of a matrix are particularly relevant.
 
 \begin{theorem}[Span as a subspace]
 	Let $S$ be a set of vectors in $\R^n$.
-	Then $\pfn{span}(S)$ is a subspace of $\R^n$.
+	Then $\on{span}(S)$ is a subspace of $\R^n$.
 \end{theorem}
 
 \begin{definition}[Row space and column space]
 	Let $A$ be an $m\times n$ matrix.
 	\begin{itemize}
-		\item The row space $\pfn{row}(A)$ of $A$ is the subspace of $\R^n$ spanned by the rows of $A$.
-		\item The column space $\pfn{col}(A)$ of $A$ is the subspace of $\R^m$ spanned by the columns of $A$.
+		\item The row space $\on{row}(A)$ of $A$ is the subspace of $\R^n$ spanned by the rows of $A$.
+		\item The column space $\on{col}(A)$ of $A$ is the subspace of $\R^m$ spanned by the columns of $A$.
 	\end{itemize}
 \end{definition}
 
 Noting that a matrix's row space is invariant under elementary row operations, we get the following.
 
 \begin{theorem}[Row spaces of row equivalent matrices]
-	If $B$ is row equivalent to $A$, then $\pfn{row}(B) = \pfn{row}(A)$.
+	If $B$ is row equivalent to $A$, then $\on{row}(B) = \on{row}(A)$.
 \end{theorem}
 
 As for the third space of interest, we also note that the solution set of a homogeneous linear system is a subspace.
@@ -312,7 +312,7 @@ This can be shown via some simple algebra.
 
 \begin{definition}[Null space]
 	Let $A$ be an $m\times n$ matrix.
-	The null space $\pfn{null}(A)$ of $A$ is the subspace of $A$ consisting of solutions of the homogeneous linear system $A\mbf{x} = \mbf{0}$.
+	The null space $\on{null}(A)$ of $A$ is the subspace of $A$ consisting of solutions of the homogeneous linear system $A\mbf{x} = \mbf{0}$.
 \end{definition}
 
 This notion is interesting: due to the properties of subspaces null spaces must either be empty, singleton, or infinite.
@@ -327,7 +327,7 @@ That illuminates something important about systems!
 	If (a) or (b) are true, then we are done.
 	Otherwise, suppose $\mbf{x}_1$ and $\mbf{x}_2$ are both solutions to the system $A \mbf{x} = \mbf{b}$.
 	Their difference $\mbf{x}_0$ solves the associated homogeneous system.
-	Now, if the solutions are distinct, then $\mbf{x}_0 \neq \mbf{0}$ and $\pfn{null}(A)$ is infinite.
+	Now, if the solutions are distinct, then $\mbf{x}_0 \neq \mbf{0}$ and $\on{null}(A)$ is infinite.
 	Thus $\mbf{x}_1 + c \mbf{x}_0$ solves the system for all $c \in \R$.
 \end{proof}
 
@@ -348,9 +348,9 @@ Thankfully, there is a straightforward way to find a basis for each subspace we'
 	Let $R$ be the reduced row echelon form for $A$.
 	To find bases for the row, column, and null spaces of a matrix $A$, we do the following.
 	\begin{enumerate}[label=(\alph*)]
-		\item For $\pfn{row}(A)$, take the nonzero row vectors of $R$.
-		\item For $\pfn{col}(A)$, take the column vectors of $A$ that correspond to the pivot columns of $R$.
-		\item For $\pfn{null}(A)$, solve the system $A \mbf{x} = R \mbf{x} = \mbf{0}$ and write the solution as a linear combination of vectors times free variables.
+		\item For $\on{row}(A)$, take the nonzero row vectors of $R$.
+		\item For $\on{col}(A)$, take the column vectors of $A$ that correspond to the pivot columns of $R$.
+		\item For $\on{null}(A)$, solve the system $A \mbf{x} = R \mbf{x} = \mbf{0}$ and write the solution as a linear combination of vectors times free variables.
 	\end{enumerate}
 \end{theorem}
 
@@ -386,13 +386,13 @@ But the dimensions of the row and column spaces are invariant under elementary r
 \end{theorem}
 
 \begin{definition}[Rank]
-	The rank of a matrix $A$, denoted $\pfn{rank}(A)$, is the common dimension of its row and column spaces.
+	The rank of a matrix $A$, denoted $\on{rank}(A)$, is the common dimension of its row and column spaces.
 \end{definition}
 
 Since the row and column spaces of a matrix just get swapped upon transposition, we get the following.
 
 \begin{theorem}[Rank of a transpose]
-	For any matrix $A$, $\pfn{rank}(A^T) = \pfn{rank}(A)$.
+	For any matrix $A$, $\on{rank}(A^T) = \on{rank}(A)$.
 \end{theorem}
 
 Now, the rank of a matrix is very closely related to its null space.
@@ -400,12 +400,12 @@ In terms that we already know, the rank $r$ of a matrix is given by the number o
 Adding these together gives the full dimension of the space being acted upon.
 
 \begin{definition}[Nullity]
-	The nullity $\pfn{nullity}(A)$ of a matrix $A$ is the dimension of its null space.
+	The nullity $\on{nullity}(A)$ of a matrix $A$ is the dimension of its null space.
 \end{definition}
 
 \begin{theorem}[Rank theorem]
 	If $A$ is an $m\times n$ matrix, then
-	\[ \pfn{rank}(A) + \pfn{nullity}(A) = n. \]
+	\[ \on{rank}(A) + \on{nullity}(A) = n. \]
 \end{theorem}
 
 We're now in a position to add statements about the row, column, and null spaces to the FTLA.
@@ -420,8 +420,8 @@ We're now in a position to add statements about the row, column, and null spaces
 			\item $A$ is invertible. \\
 			\phantom{~}\hspace{-19.5pt} \vdots
 			\setcounter{enumi}{5}		
-			\item $\pfn{rank}(A) = n$
-			\item $\pfn{nullity}(A) = 0$
+			\item $\on{rank}(A) = n$
+			\item $\on{nullity}(A) = 0$
 			\item The column vectors of $A$ are linearly independent.
 			\item The column vectors of $A$ span $\R^n$.
 			\item The column vectors of $A$ form a basis for $\R^n$.
@@ -439,8 +439,8 @@ As an application, we have a nice little result that will be useful later.
 	Let $A$ be an $m\times n$ matrix.
 	Then
 	\begin{enumerate}[label=(\alph*)]
-		\item $\pfn{rank}(A^TA) = \pfn{rank}(A)$ and
-		\item $A^TA$ is invertible if and only if $\pfn{rank}(A) = n$.
+		\item $\on{rank}(A^TA) = \on{rank}(A)$ and
+		\item $A^TA$ is invertible if and only if $\on{rank}(A) = n$.
 	\end{enumerate}
 \end{theorem}
 
@@ -448,11 +448,11 @@ As an application, we have a nice little result that will be useful later.
 	We only prove (a) since part (b) follows trivially.
 	Since $A$ and $A^TA$ both have $n$ columns, it suffices to show that the two matrices have the same null space.
 
-	If $\mbf{x} \in \pfn{null}(A)$ then $A^T A \mbf{x} = A^T \mbf{0} = \mbf{0}$, meaning $\mbf{x} \in \pfn{null} (A^TA)$.
-	If instead $\mbf{x} \in \pfn{null} (A^T A)$, then
+	If $\mbf{x} \in \on{null}(A)$ then $A^T A \mbf{x} = A^T \mbf{0} = \mbf{0}$, meaning $\mbf{x} \in \on{null} (A^TA)$.
+	If instead $\mbf{x} \in \on{null} (A^T A)$, then
 	\[ (A \mbf{x}) \cdot (A \mbf{x}) = \mbf{x}^T A^T A \mbf{x} = \mbf{x}^T \mbf{0} = \mbf{0}, \]
 	so $(A \mbf{x}) \cdot (A \mbf{x}) = \mbf{0}$ and $A \mbf{x} = \mbf{0}$.
-	Thus $\mbf{x} \in \pfn{null}(A)$ if and only if $\mbf{x} \in \pfn{null}(A^T A)$.
+	Thus $\mbf{x} \in \on{null}(A)$ if and only if $\mbf{x} \in \on{null}(A^T A)$.
 \end{proof}
 
 There's one more thing that will come in handy later---unique vector representations under a given basis.

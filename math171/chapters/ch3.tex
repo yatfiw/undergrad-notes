@@ -134,22 +134,22 @@ Finally, we have a nice application of this theory to combinatorics---in plain t
 \begin{theorem}[Cauchy-Frobenius lemma]   % aka "the lemma that's not burnside's"
     Let $G$ be a finite group acting on a nonempty finite set $X$.
     For each $g \in G$, let
-    \[ \pfn{fix}(g) = \big| \left\{ x \in X \mid g \cdot x = x \right\} \big|. \]
+    \[ \on{fix}(g) = \big| \left\{ x \in X \mid g \cdot x = x \right\} \big|. \]
     Then the number of orbits of the action of $G$ on $X$ is
-    \[ \frac{1}{|G|} \sum_{g \in G}^{} \pfn{fix}(g). \]
+    \[ \frac{1}{|G|} \sum_{g \in G}^{} \on{fix}(g). \]
 \end{theorem}
 
 \begin{proof}
     First note that
-    \[ \sum_{g \in G}^{} \pfn{fix}(g) = \big| \left\{ (g,x) \in G \times X \mid g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
+    \[ \sum_{g \in G}^{} \on{fix}(g) = \big| \left\{ (g,x) \in G \times X \mid g \cdot x = x \right\} \big| = \sum_{x \in X}^{} |G_x|. \]
     Any $x \in X$ has an orbit of size $|G : G_x|$, meaning the total number of orbits is
-    \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \pfn{fix}(g), \]     % the 1/size sum is prof. o's favorite trick in this class!
+    \[ \sum_{x \in X}^{} \frac{1}{|G : G_x|} = \frac{1}{|G|} \sum_{x \in X}^{} |G_x| = \sum_{g \in G}^{} \on{fix}(g), \]     % the 1/size sum is prof. o's favorite trick in this class!
     as desired.
 \end{proof}
 
 Suppose we want to count the number of ways we can color the vertices of a 3-cycle using two colors.
 We can see that there are eight ways to color the vertices, but there are two triplets that are the same up to rigid symmetry.
-To formalize this observation, let $D_6$ act on the eight colorings---if we go through each $g \in D_6$, sum the $\pfn{fix}(g)$, and divide by 6 we get 4, the number of orbits for this action.
+To formalize this observation, let $D_6$ act on the eight colorings---if we go through each $g \in D_6$, sum the $\on{fix}(g)$, and divide by 6 we get 4, the number of orbits for this action.
 
 \section{The Sylow Theorems}
 As mentioned before, the first of the Sylow theorems offer a ``sharp'' partial converse to Lagrange's theorem.
