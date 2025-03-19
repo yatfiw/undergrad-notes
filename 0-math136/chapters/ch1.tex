@@ -3,8 +3,90 @@
 
 \begin{document}
 
-\chapter{Unsorted Notes}
-\section{Lecture One}
-filler
+\chapter{Complex Numbers}
+We'll start with the absolute basics of complex numbers.
+
+\begin{definition}[Complex number]
+    A complex number is an expression of the form $a + bi$, with $a,b \in \R$ and $i^2 = -1$; the set of complex numbers is denoted $\C$.
+    The real part $\Re(z) = a$ and the imaginary part $\Im(z) = b$.
+\end{definition}
+
+Adding and subtracting complex numbers looks exactly how we'd expect---if $z = a + bi$ and $w = c + di$, then $z \pm w = (a + c) + i (b + d)$.
+Multiplication and division look like
+\[ zw = (ac - ba) + i(ad + bc), \qquad \frac{z}{w} = \left( \frac{ac + bd}{c^2 + d^2} \right) + i \left( \frac{bc - ad}{c^2 + d^2} \right), \]
+where we require $w \neq 0$ for division.
+To get a more geometric sense for these, we make a couple more definitions motivated by framing complex numbers as vectors in the real-imaginary plane.
+
+\begin{definition}[Norm and argument]
+    Let the number $z = a + bi$ make an angle $\theta$ with the positive-real axis.
+    The norm (or magnitude, modulus) and argument of $z$ are, respectively,
+    \[ |z| = \sqrt{a^2+ b^2}, \arg(z) = \left\{ \theta + 2\pi k \mid k \in \Z \right\}, \]
+    where $\arg(0)$ is undefined.
+    The principal argument $\Arg(z)$ is the unique value of $\arg(z)$ in $(-\pi, \pi]$.
+\end{definition}
+
+We can therefore express complex numbers in polar form via
+\[ z = r \cos \theta + i r \sin \theta = r \cis \theta, \]
+and we could use some trigonometric identities to show that multiplication should be interpreted as multiplying magnitudes and adding arguments.
+(Note that arguments add, but Arguments might not.)
+We can thus state de Moivre's formula
+\[ (\cos \theta + i \sin \theta)^{n} = \cos (n \theta) + i \sin(n \theta), \quad n \in \N, \]
+which has a straightforward proof by induction.
+This also allows us to reason about complex roots!
+Suppose $z = r \cis \theta$; we seek $w = \rho \cis \phi$ such that $w^{n} = z$ for some $n \in \N$, that is,
+\[ \rho^{n} \cis n\phi = r \cis \theta. \]
+We can see that $\rho = r^{1 / n}$, the unique positive root of $r > 0$, and $\phi = (\theta + 2\pi k) / n = (\theta / n) + (2\pi / n)k$ for $k \in \Z$.
+These roots are distinct for $k \in \left\{ 0, \, 1, \, \ldots, \, n-1 \right\}$, and together they define our $n$th roots!
+(Note that an $n$th root is called primitive if there is no $k \in \left\{ 1, \, \ldots, \, n-1 \right\}$ for which $w^{k} = 1$.)
+
+Now we'll introduce a new, distinctly complex feature of this number system.
+
+\begin{definition}[Complex conjugate]
+    The complex conjugate of $z = a + bi$ is
+    \[ \overline z = a - bi. \]
+\end{definition}
+
+It is clear that $\overline{z \pm w} = \overline z \pm \overline w$ and $z \overline z = |z|^2$, and if we interpret conjugation as reflection over the real axis, we get
+\[ |\overline z| = |z|, \quad \overline{zw} = \overline z \overline w, \quad \overline{\left( \frac{z}{w} \right)} = \frac{\overline z}{\overline w}, \quad \overline{\bar z} = z. \]
+We also have a few handy identities:
+\[ \Re(z) = \frac{z + \overline z}{2}, \qquad \Im(z) = \frac{z - \overline z}{2i}, \qquad \frac{z}{w} = \frac{z \overline w}{|w|^2}. \]
+Finally, we can use the notion of conjugation to arrive at a familiar result!
+
+\begin{theorem}[Triangle inequality]
+    For any $z,w \in \C$,
+    \[ |z + w| \leq |z| + |w|. \]
+\end{theorem}
+
+\begin{proof}
+    We could prove this by interpreting complex numbers as vectors, but alternatively, we can simply write
+    \begin{align*}
+        |z + w| &= (z + w) \cdot \overline{z + w} \\
+        &= z \overline z + z \overline w + w \overline z + w \overline w \\
+        &= |z|^2 + |w|^2 + 2 \Re(z \overline w). \\
+        \intertext{By the triangle inequality in $\R$,}
+        &\leq |z|^2 + |w|^2 + |z \overline w| \\
+        &= (|z| + |w|)^2,
+    \end{align*}
+    as desired.
+\end{proof}
+
+We'll end by constructing an interesting model of the complex plane.
+Let $\Sigma$ be a diameter-1 sphere whose south pole is at the origin.
+If the $xy$-plane is identified with $\C$ and the $u$-axis is vertical, the sphere is then described by
+\[ x^2 + y^2 + \left( u - \frac{1}{2} \right)^2 = \frac{1}{4}. \]
+Now, for each $z \in \C$ we draw a line segment to the north pole $N$ and notice that the segment intersects with the sphere at exactly one other point.
+This defines a bijection from $C \to \Sigma \setminus \left\{ N \right\}$, and to map to all of $\Sigma$ we add a point $\infty$ defined by $\sigma \leftrightarrow N$.
+We therefore define the extended complex plane $\hat \C = \C \cup \left\{ \infty \right\}$, and we have $\hat \C \simeq \Sigma$.
+
+To make this bijection explicit we first parametrize the line via
+\[ \ell(t) = (x,y,0) + t (-x, -y, 1), \quad t \in [0,1] \]
+and notice that it intersects with the sphere when
+\[ x^2 (1-t)^2 + y^2(1-t)^2 + \left( t - \frac{1}{2} \right)^2 = \frac{1}{4}. \]
+This equation has roots
+\[ t = 1, \qquad t = \frac{x^2 + y^2}{1 + x^2 + y^2}, \]
+and so the nontrivial intersection is at
+\[ \left( \frac{x}{1 + x^2 + y^2}, \; \frac{y}{1 + x^2 + y^2}, \; \frac{x^2 + y^2}{1 + x^2 + y^2} \right) \in \Sigma. \]
+This characterization of $\Sigma$ is called the Riemann sphere.
+(In topological terms, we call $\hat \C$ a one-point compactification of $\C$.)
 
 \end{document}

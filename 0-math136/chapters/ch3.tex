@@ -1,0 +1,384 @@
+\documentclass[../m136main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Integration}
+\section{Contour Integrals}
+The integral in $\C$ is defined in pretty much the same way as it is in $\R$, and evaluating them is reminiscent of line integrals in multivariable calculus.
+
+\begin{definition}[Integral]
+    Let $\gamma$ be a directed smooth curve in $\C$ that is split into several pieces $\gamma_k$, each with endpoints $z_k, z_{k+1}$ and a point $c_k$ between them.
+    Then
+    \[ \int_\gamma f(z) \,dz = \lim_{\substack{N \to \infty \\ \Delta z_k \to 0}} \sum_{k=0}^{N-1} f(c_k) \Delta z_k, \]
+    provided the limit exists and is independent of the choice of partition.
+\end{definition}
+
+\begin{theorem}[]
+    Let $f$ be a function continuous on the directed smooth curve $\gamma$.
+    Then if $z = z(t)$, $t \in [a,b]$ is a parametrization of $\gamma$, we have
+    \[ \int_\gamma f(z) \,dz = \int_a^b f(z(t)) \, z'(t) \,dt. \]
+\end{theorem}
+
+\begin{proof}
+    Suppose $\gamma$ has a parametrization $z(t) = x(t) + i \,y(t)$, $t \in [a,b]$; the path is traversed once and $z'(t) \neq 0$ for all $t$.
+    Defining $\Delta t_k = t_{k+1} - t_k$, we can write
+    \begin{align*}
+        \int_\gamma f(z) \,dz &= \lim_{\substack{N \to \infty \\ \Delta t_k \to 0}} \sum_{k=0}^{N-1} f(z(c_k)) \frac{z(t_{k+1}) - z(t_k)}{\Delta t_k} \Delta t_k, \\
+        \intertext{where $c_k \in t_k, t_{k+1}$. There is no mean value theorem in $\C$, but we can split this difference quotient into real and imaginary parts to apply the MVT in $\R$: for some $\alpha_k, \beta_k \in (t_k, t_{k+1})$, we can write}
+        &= \lim_{\substack{N \to \infty \\ \Delta t_k \to 0}} \sum_{k=0}^{N-1} f(z(c_k)) \big( x'(\alpha_k) + i \, y'(\beta_k) \big) \Delta t_k \\
+        &= \int_a^b f(z(t)) \, z'(t) \,dt,
+    \end{align*}
+    as desired.
+\end{proof}
+
+We could use this to show that
+\[ \oint_\gamma (z - z_0)^{n} \, dz = \begin{cases} 0 & n \neq -1, \\ 2\pi i & n = -1, \end{cases} \] %<3
+where $\gamma$ is a once-traversed circle centered at $z_0$, oriented counterclockwise; this particular integral will prove to be very useful later.
+We should expect that this result, like any other integral, is independent of how we choose to parametrize $\gamma$, and this is the case!
+Proving it is a simple application of the above theorem.
+
+\pagebreak
+
+\begin{corollary}[]
+    Let $\tilde \gamma$ be a reparametrization of $\gamma$---that is, suppose there is a $\phi(t)$ satisfying $\phi'(t) > 0$ such that $\gamma(t) = \tilde \gamma(\phi(t))$.
+    Then
+    \[ \int_\gamma f(z) \,dz = \int_{\tilde \gamma} f(z) \,dz. \]
+\end{corollary}
+
+Given a path $\gamma$, we will use $-\gamma$ to denote $\gamma$ as traversed in the opposite direction, and we could show that
+\[ \int_{-\gamma} f(z) \,dz = -\int_\gamma f(z) \,dz. \]
+In general we will integrate over contours, which are finite sequences of directed smooth curves that connect one after another.
+We will not always need to evaluate such contour integrals however; an upper bound is often good enough, and we can get one pretty easily.
+
+\begin{lemma}[ML lemma]
+    Let $\gamma$ be a contour with length $\ell(\lambda)$.
+    If $f$ is continuous on $\gamma$ and if $|f(z)| \leq M$ for all $z$ on $\gamma$, then
+    \[ \left| \int_\gamma f(z) \,dz \right| \leq M \cdot \ell(\gamma). \]
+\end{lemma}
+
+\begin{proof}
+    Suppose $\int_\gamma f(z) \,dz = r_0 e^{i \theta_0}$.
+    Then
+    \begin{align*}
+        \left| \int_\gamma f(z) \,dz \right| &= e^{-i\theta_0} \int_a^b f(z(t)) \,z'(t) \,dt \\
+        &= \int_a^b \Re \left[ e^{-i\theta_0} f(z(t)) \, z'(t) \right] dt \\
+        &\leq \int_a^b M \left| z'(t) \right| dt = M \cdot \ell(\gamma),
+    \end{align*}
+    as desired.
+\end{proof}
+
+Note that the ``lower triangle inequality'' $\big| |a| - |b| \big| \leq |a + b|$ will often be useful in using this inequality.
+
+\section{Path Independence}
+Now we're ready for some of the bigger theorems in integral calculus, starting with an old friend.
+
+\begin{theorem}[Fundamental theorem]
+    Suppose $f$ is continuous on a domain $\Omega$ and has a primitive (antiderivative) $F(z)$ throughout $\Omega$.
+    Then for any contour $\gamma$ in $\Omega$ with endpoints $z$ and $w$ we have
+    \[ \int_\gamma f(z) \,dz = F(w) - F(z). \]
+\end{theorem}
+
+\begin{proof}
+    Let $\gamma : [a,b] \to \C$ be a smooth contour.
+    Then
+    \[ \int_\gamma f(z) \,dz = \int_a^b f(\gamma(t)) \gamma'(t) \,dt = F(\gamma(b)) - F(\gamma(a)). \]
+    For any other contour, we can break it up into smooth contours and sum them to get the same.
+\end{proof}
+
+Note that this implies that $F$ is analytic, and so also continuous, in $\Omega$.
+Next we have a less immediately applicable set of equivalent statements, but one whose use will soon become clearer.
+
+\begin{theorem}[ABC theorem]
+    Let $f$ be continuous in a domain $\Omega$.
+    Then the following statements are equivalent.
+    \begin{enumerate}[label=(\alph*),topsep=0pt]
+        \item $f$ has an antiderivative in $\Omega$.
+        \item If $\gamma$ is a closed loop in $\Omega$ then $\int_\gamma f(z) \,dz = 0$.
+        \item The contour integrals of $f$ are path-independent in $\Omega$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    It is easy to see that (a) implies both (b) by the fundamental theorem.
+    Now let $\gamma_1, \gamma_2$ be any two contours in $\Omega$ with the same endpoints and define $\Gamma = \gamma_1 - \gamma_2$.
+    If we assume (b), then
+    \[ 0 = \int_{\gamma_1} f(z) \,dz + \int_{-\gamma_2} f(z) \,dz = \int_{\gamma_1} f(z) \,dz - \int_{\gamma_2} f(z) \,dz \]
+    and we get (c).
+    Now, assuming (c), fix $z_0 \in \Omega$ and let $\gamma(z)$ be a path from $z_0$ to some $z \in \Omega$.
+    Define
+    \[ F(z) = \int_{\gamma(z)} f(w) \,dw, \quad z \neq z_0. \]
+    This function is well-defined because $F(z)$ is independent of the specific choice of path $\gamma$, and we could apply the definition of the derivative to show that $F' = f$, so we get (a).
+\end{proof}
+
+\section{Cauchy's Theorem}
+The ABC theorem might seem difficult to apply at present, but we're about to derive another result that gives a sufficient condition for (b).
+We need to lay a bit of topological groundwork first, though.
+
+\begin{definition}[Homotopy]
+    Let $\gamma_0, \gamma_1 : [0,1] \to \Omega$ be closed curves in a domain $\Omega$.
+    $\gamma_1$ is homotopic to $\gamma_0$ if there exists a continuous homotopy $H : [0,1] \times [0,1] \to \Omega$ such that
+    \[ H(0,t) = \gamma_0(t), \qquad H(1,t) = \gamma_1(t), \qquad H(s,0) = H(s,1). \]
+    (We include the third condition because we're interested in closed curves.)
+\end{definition}
+
+\begin{definition}[Simply connected domain]
+    A domain $\Omega$ is simply connected if every closed path in $\Omega$ is homotopic to a point in $\Omega$---in other words, the domain has no ``holes''.
+\end{definition}
+
+We could do some straight forward calculus to show that if
+\[ I(s) = \int_{\gamma_s} f(z) \,dz = \int_0^1 f(H(s,t)) \frac{\partial H}{\partial t} (s,t) \,dt, \]
+then $I'(s) = 0$ so long as $f \in C^1$ (to bring the $\partial / \partial s$ into the integral) and $H \in C^2$ (for the equality of mixed partials).
+Thus if $f$ has a continuous derivative, its integral is the same over any pair of homotopic curves.
+
+A couple more clarifications.
+A simple closed curve is one that does not self-intersect, and it is positively oriented if the enclosed region is on the left of the curve.
+(This is how we generalize counterclockwise-ness.)
+
+\pagebreak
+
+Now we'll give a couple of proofs for the same theorem---one using this idea of contour deformation we just arrived at, and another using vector calculus.
+
+\begin{theorem}[Cauchy's theorem (preliminary)]
+    If $f$ is analytic with a continuous derivative on a simply connected domain $\Omega$ and $\gamma$ is a positively oriented simple closed curve in $\Omega$, then
+    \[ \oint_\gamma f(z) \,dz = 0. \]
+\end{theorem}
+
+\begin{proof}
+    On a simply connected domain $\Omega$, a closed loop $\gamma$ in $\Omega$ is homotopic to a point $z_0 \in \Omega$.
+    Thus
+    \[ \oint_\gamma f(z) \,dz = \int_{\left\{ z_0 \right\}} f(z) \,dz = 0 \]
+    as desired. 
+\end{proof}
+
+\begin{proof}
+    Let $\gamma$ be parametrized by $z(t)$, $t \in [a,b]$.
+    If $z = x + iy$ and $f = u + iv$, then we can write
+    \begin{align*}
+        \oint_\gamma f \,dz &= \int_a^b f(z(t)) z'(t) \,dt \\
+        &= \int_a^b (ux' - vy') + i(vx' + uy') \,dt \\
+        &= \oint_\gamma u \,dx - v \,dy + i \oint_\gamma v \,dx + u\,dy, \\
+        \intertext{and by Green's theorem}
+        &= \iint_\Omega (-v_x - u_y) \,dA + i \iint_\Omega (u_x = v_y) \,dA;
+    \end{align*}
+    by the Cauchy-Riemann equations, this goes to zero.
+\end{proof}
+
+These proofs are simple, but we'd like to remove the condition of having a continuous derivative.
+We begin with a special case.
+
+\begin{lemma}[]
+    Let $R = [a,b] \times [c,d]$ be a rectangle in $\Omega$.
+    If $f$ is analytic on $\Omega$ then
+    \[ \oint_{\partial R} f \,dz = 0. \]
+\end{lemma}
+
+\begin{proof}
+    Suppose a rectangle $R$ has diagonal and perimeter lengths $D$ and $P$ respectively.
+    Divide this rectangle into four sub-rectangles and suppose, without loss of generality, that $R_{11}$ is the sub-rectangle for which $\left| \oint_{\partial R_{i1}} f \,dz \right|$ is maximized.
+    Now split this maximal rectangle into four and let $R_{12}$ be the piece that maximizes the line integral.
+    Continuing on this way for $k$ subdivisions reveals that
+    \[ \left| \oint_{\partial R} f\,dz \right| \leq 4^{k} \left| \oint_{\partial R_{1k}} f\,dz \right|. \]
+    From analysis we know that there exists a $z_0 \in \bigcap_{k=1}^\infty R_{1k}$.
+    $f$ is analytic at this point, meaning
+    \[ f(z) = f(z_0) + f'(z_0) (z - z_0) + o(z - z_0), \qquad \lim_{z \to z_0} \frac{o(z - z_0)}{z - z_0} = 0. \]
+    Thus for every $\epsilon > 0$ there is a $k > 1$ such that $|o(h) / (z - z_0)| < \epsilon$ for all $z \in R_{1k}$.
+    By the ABC theorem and ML lemma,
+    \[ \left| \oint_{\partial R_{1k}} f(z) \,dz \right| = \left| \oint_{\partial R_{1k}} o(h) \,dz \right| \leq (\epsilon \cdot 2^{-k} D) \cdot 2^{-k} P. \]
+    The original integral therefore becomes
+    \[ \left| \oint_{\partial R} f\,dz \right| \leq 4^{k} \left| \oint_{\partial R_{1k}} f\,dz \right| \leq 4^{k} \cdot (\epsilon \cdot 2^{-k} D \cdot 2^{-k} P) = \epsilon DP. \]
+    Since our $\epsilon > 0$ was arbitrary, this integral is zero.
+\end{proof}
+
+Now we'll take another step by proving Cauchy's theorem, but only in a disk.
+
+\begin{lemma}[Cauchy's theorem (in a disk)]
+    Let $\Omega$ be an open disk with radius $R$ centered at $z_0$.
+    If $f$ is analytic in $\Omega$ and $\gamma$ is a closed contour in $\Omega$ then
+    \[ \oint_\gamma f(z) \,dz = 0. \]
+\end{lemma}
+
+\begin{proof}
+    Given $w \in \Omega$ define $\gamma_w$ as the path from $z_0$ to $w$ traversed in two purely horizontal and vertical components $\gamma_1, \gamma_2$.
+    The function
+    \[ F(w) = \int_{\gamma_w} f(z) \,dz \]
+    is well-defined for all $w \in \Omega$, and we'd like to prove that $F'(w) = f(w)$.
+
+    We first determine $F(w+h) - F(w)$---given $\epsilon > 0$, there exists a $\delta > 0$ not only such that $|z-w| < \delta$ implies $|f(z) - f(w)| < \epsilon$, but also such that $\left\{ |z-w| < \delta \right\} \subseteq \Omega$.
+    For $|h| < \delta$ we similarly define $\gamma_{w+h}$ in terms of horizontal and vertical components and notice that
+    \[ \int_{\gamma_{w+h}} f \,dz = \int_{\gamma_w} f \,dz \pm \oint_{\partial R} f \,dz + \int_{w \to w+h} \hspace{-6pt} f \,dz, \]
+    where $R$ is the rectangle formed by connecting $\gamma_w$ and $\gamma_{w+h}$ and the $\pm$ is whichever sign is needed to make things cancel nicely.
+    The integral over $\partial R$ is zero by the previous lemma, meaning
+    \[ F(w+h) - F(w) = \int_{w \to w+h} \hspace{-6pt} f \,dz. \]
+    Now by the ML lemma,
+    \[ \left| \frac{F(w+h) - F(w)}{h} - f(w) \right| = \frac{1}{|h|} \left| \int_{w \to w+h} \hspace{-6pt} (f(z) - f(w)) \,dz \right| < \frac{1}{|h|} (\epsilon \cdot 2|h|) = 2\epsilon, \]
+    and since $\epsilon > 0$ was arbitrary we arrive at $F'(w) = f(w)$ for all $w \in \Omega$.
+    Thus by the ABC theorem $\oint_\gamma f \,dz = 0$, as desired.
+\end{proof}
+
+Finally, we can make a contour deformation argument to get what we want!
+
+\pagebreak
+
+\begin{theorem}[Cauchy's theorem]
+    If $f$ is analytic in a simply connected domain $\Omega$ and $\gamma$ is any closed contour in $\Omega$, then
+    \[ \oint_\gamma f(z) \,dz = 0. \]
+\end{theorem}
+
+\begin{proof}
+    If $\gamma_0$ is a closed contour in $\Omega$ then it is homotopic to a circle $\gamma_1$ interior to $\gamma_0$.
+    If we break the domain of the homotopy $H$ into a bunch of very small chunks $R_{ij}$ and define $\Gamma_{ij} = H(\partial R_{ij})$ then by the previous theorem
+    \[ \int_{\Gamma} f(z) \,dz = \sum_{i,j}^{} \int_{\Gamma_{ij}} f(z) \,dz = \sum_{i,j}^{} 0 = 0, \]
+    where $\Gamma$ is the contour produced by traversing $\gamma_0$, moving inward to traverse $\gamma_1$, and then back out again.
+    If $\gamma_0 = H(0,t)$ and $\gamma_1 = H(1,t)$ then we can write
+    \[ 0 = \int_\Gamma f(z) \,dz = \int_{-H(0,t)} \hspace{-6pt} f(z) \,dz + \int_{H(1,t)} \hspace{-6pt} f(z) \,dz + \int_{H(s,0)} \hspace{-6pt} f(z) \,dz + \int_{-H(s,1)} \hspace{-6pt} f(z) \,dz, \]
+    meaning $\oint_{\gamma_0} f(z) \,dz = \oint_{\gamma_1} f(z) \,dz$.
+    Thus integrals in $\Omega$ are invariant under homotopy and for some $z_0 \in \Omega$
+    \[ \oint_{\gamma_0} f(z) \,dz = \int_{\left\{ z_0 \right\}} f(z) \,dz = 0, \]
+    as desired.
+\end{proof}
+
+\section{Cauchy's Integral Formula}
+Contour deformation also provides motivation for our next key result.
+
+\begin{theorem}[Cauchy's integral formula]
+    Let $\gamma$ be a simple closed positively-oriented curve.
+    If $f$ is analytic in a simply connected domain $\Omega$ containing $\gamma$ and $z_0$ is interior to $\gamma$, then
+    \[ f(z_0) = \frac{1}{2\pi i} \oint_\gamma \frac{f(z)}{z - z_0} \,dz. \]
+\end{theorem}
+
+\begin{proof}
+    $f$ is continuous at $z_0$, so for every $\epsilon > 0$ there is a $\delta > 0$ such that $|z - z_0| < \delta$ implies $|f(z) - f(z_0)| < \epsilon$.
+    Let $r \in (0, \delta)$ be the radius of a positively-oriented circle $\gamma_r$ centered at $z_0$; then, because $2\pi i = \oint_{\gamma_r} dz / (z - z_0)$,
+    \[ \left| \oint_{\gamma_r} \frac{f(z)}{z - z_0} \,dz - 2\pi i \,f(z_0) \right| = \left| \oint_{\gamma_r} \frac{f(z) - f(z_0)}{z - z_0} \right| \leq \oint_{\gamma_r} \frac{|f(z) - f(z_0)|}{|z - z_0|} \,dz < \frac{\epsilon}{r} \cdot 2\pi r. \]
+    Since $\epsilon > 0$ was arbitrary we conclude, by contour deformation, that
+    \[ \oint_\gamma \frac{f(z)}{z - z_0} \,dz = \oint_{\gamma_r} \frac{f(z)}{z - z_0} = 2\pi i \,f(z_0), \]
+    as desired.
+\end{proof}
+
+Now, if we treat this integral as a function (rather than evaluating it only at $z_0$), its derivatives turn out to behave nicely.
+
+\pagebreak
+
+\begin{theorem}[]
+    Let $g$ be continuous on the contour $\gamma$, and for each $z \notin \gamma$ set
+    \[ G(z) = \int_\gamma \frac{g(s)}{s - z} \,ds. \]
+    Then $G$ is analytic and
+    \[ G'(z) = \int_\gamma \frac{g(s)}{(s-z)^2} \,ds. \]
+\end{theorem}
+
+\begin{proof}
+    We could do some algebra and then apply the ML lemma to get
+    \begin{align*}
+        \left| \frac{G(z+h) - G(z)}{h} - \int_\gamma \frac{g(s)}{(s-z)^2} \,dz \right| &= \left| \int_\gamma g(s) \left[ \frac{h}{(s-z-h)(s-z)^2} \right] \right| \\
+        &= |h| M \int_\gamma \frac{1}{|s-z-h| |s-z|^2} \,ds, \\
+        \intertext{where $M = \max_{s \in \gamma} |g(s)|$. Now let $d = \min_{s \in \gamma} |s-z|$; then $|s-z - h| \geq |s-z| - |h| \geq d - d / 2$, so}
+        &\leq |h| M \int_\gamma \frac{1}{(d / 2) d^2} \,ds, 
+    \end{align*}
+    which goes to zero as $h \to 0$.
+\end{proof}
+
+In showing this, we've also shown that the expression in Cauchy's formula is analytic with
+\[ f'(z) = \frac{1}{2\pi i} \oint_\gamma \frac{f(s)}{(s-z)^2} \,ds. \]
+It turns out that we can go through a similar line of reasoning to show that this $f'$ is analytic with a similar integral expression; a simple proof by induction gives the following.
+
+\begin{theorem}[Cauchy's integral formula (for the $k$th derivative)]
+    If $f$ is analytic on and inside a positively-oriented simple closed curve $\gamma$ and $z$ lies inside $\gamma$, then
+    \[ f^{(k)}(z) = \frac{k!}{2\pi i} \oint_\gamma \frac{f(s)}{(s-z)^{k+1}} \,ds, \qquad k \in \N. \]
+\end{theorem}
+
+\begin{corollary}[]
+    If $f$ is analytic in a domain $\Omega$ then all of its derivatives exist and are analytic on $\Omega$.
+\end{corollary}
+
+Because differentiability implies continuity, $f \in C^\infty$ and the continuous-derivative assumption we made earlier on was true all along!      % TODO: something about C^\infty versus C^\omega, continuous vs. analytic?
+Now we have a couple more theorems that tie some loose ends.
+
+\begin{corollary}[]
+    If $f = u + iv$ is analytic then $u$ and $v$ are harmonic functions.
+\end{corollary}
+
+\begin{proof}
+    Since $f \in C^\infty$, we have $u,v \in C^\infty$.
+    The Cauchy-Riemann equations imply $u_{xx} = v_{yx}$ and $v_{yy} = -v_{xy}$, and since $v \in C^2$ its mixed partials are equal and so $\Delta u = \Delta v = 0$.
+\end{proof}
+
+\pagebreak
+
+\begin{theorem}[Morera's theorem]
+    If $f$ is continuous on $\Omega$ and $\oint_\gamma f \,dz = 0$ for all closed contours $\gamma$ in $\Omega$, then $f$ is analytic.
+\end{theorem}
+
+\begin{proof}
+    Suppose $\oint_\gamma f \,dz = 0$ for all $\gamma$.
+    Then by the ABC theorem there exists an $F$ such that $F = f'$.
+    Thus $F$ is analytic, and so is its derivative $f$.
+\end{proof}
+
+\section{Bounds for Analytic Functions}
+Now we''ll use these results to place restrictions on the behavior of analytic functions.
+
+\begin{theorem}[Cauchy's estimate]
+    Let $f$ be analytic on a closed ball $B(z_0, R)$.
+    If $|f(z)| \leq M$ for all $z \in B$, then
+    \[ \left| f^{(k)}(z_0) \right| \leq \frac{k! M}{R^k}, \qquad k \in \N. \]
+\end{theorem}
+
+\begin{proof}
+    The integrand in the Cauchy integral formula (for the $k$th derivative) is bounded by $M / R^{n+1}$, so by the ML lemma
+    \[ \left| f^{(k)}(z_0) \right| \leq \frac{k!}{2\pi} \left( \frac{M}{R^{k+1}} \cdot 2\pi R \right), \]
+    as desired.
+\end{proof}
+
+Notice that if a function is entire and bounded over all of $\C$, then it satisfies the conditions of the previous theorem for any ball $B(z_0, R)$.
+Thus if we take $R \to \infty$ its derivatives must vanish and we get the following.
+
+\begin{theorem}[Liouville's theorem]
+    If $f(z)$ is bounded and entire, then $f$ is constant.
+\end{theorem}
+
+We can use Liouville's theorem to prove a familiar statement, but an unexpected one for this context!
+
+\begin{theorem}[Fundamental theorem of algebra]
+    Every non-constant polynomial with complex coefficients has at least one zero.
+\end{theorem}
+
+\begin{proof}
+    Suppose $P(z) = a_n z^n + \cdots + a_0$, $a_n \neq 0$, has no zeroes, so $H(z) = 1 / P(z)$ is entire.
+    For sufficiently large $|z|$ we have $|P(z) / z^n| \geq |a_n| / 2$, meaning there exists an $R \gg 1$ such that
+    \[ |H(z)| = \frac{1}{|P(z)|} \leq \frac{2}{R^n |a_n|}, \qquad |z| \geq R. \]
+    Also, by continuity (and the extreme value theorem) there exists a finite $M$ such that $|H(z)| \leq M$ for all $|z| \leq R$, meaning
+    \[ |H(z)| \leq \max \left\{ M, \frac{2}{R^n |a_n|} \right\}, \qquad z \in \C. \]
+    Thus $H(z)$ is constant, and so is $P(z)$---a contradiction.
+    Thus $P(z)$ has at least one root.
+\end{proof}
+
+In fact, all of these polynomials' roots lie in $\C$---any polynomial can be factored ito $P(z) = (z - z_1) Q_1(z)$, where $Q_1$ is another polynomial that can be factored in the same way.
+(This process has a finite number of iteration.)
+We therefore call $\C$ ``algebraically closed''.
+Now for one last theorem!
+
+\begin{theorem}[Maximum-modulus principle]
+    If $f$ is analytic on a domain $\Omega$ and $|f(z)|$ has a local maximum at $z_0 \in \Omega$, then $f$ is constant on a neighborhood of $z_0$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $z_0 \in \Omega$ with $|f(z_0)| \geq f(z)$ for all $z \in \Omega$', where the domain $\Omega' \subset \Omega$.
+    Choose $R > 0$ such that $B(z_0, R) \subset \Omega'$; by Cauchy's integral formula
+    \[ f(z_0) = \frac{1}{2\pi i} \oint_{\partial B} \frac{f(z)}{z - z_0} \,dz = \frac{1}{2\pi} \int_{0}^{2\pi} f(z_0 + Re^{it}) \,dt, \]
+    and so
+    \[ |f(z_0)| \leq \frac{1}{2\pi} \int_{0}^{2\pi} |f(z + Re^{it})| \,dt \leq \frac{1}{2\pi} \int_{0}^{2\pi} |f(z_0)| \,dt = |f(z_0)|. \]
+    It follows that the two intermediate expressions are equal, so
+    \[ \frac{1}{2\pi} \int_{0}^{2\pi} \Big( |f(z_0)| - |f(z_0 + Re^{it})| \Big) dt = 0 \]
+    and $|f(z_0)| = |f(z_0 + Re^{it})|$.
+    Thus $|f|$ is constant on a $\partial B(z_0, R)$ of any radius $0 < r < R$, and so $|f|$ is constant on $B(z_0, R)$.
+
+    Now, if $f = u + iv$ then $u^2 + v^2$ is constant, meaning both of its partial derivatives are equal to zero.
+    An application of the Cauchy-Riemann equations gives the matrix equation
+    \[ \begin{bmatrix} u & -v \\ v & u \end{bmatrix} \begin{bmatrix} u_x \\ u_y \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}, \quad (x_0, y_0) \in B. \]
+    If this coefficient matrix is singular somewhere in $B$ then $u = v = 0$ there, and we're done.
+    Otherwise the vector above must be the zero vector, meaning $u_x = v_y = 0$ and $v_x = -u_y = 0$ on $B$.
+    Thus $u$ and $v$ are constant on $B$, and so is $f$.
+\end{proof}
+
+\end{document}
