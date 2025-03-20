@@ -381,6 +381,23 @@ Now for one last theorem!
     Thus $u$ and $v$ are constant on $B$, and so is $f$.
 \end{proof}
 
+This may feel like a relatively weak statement, but we can turn this local statement into a global one!
+
+\begin{corollary}[]
+    If $f$ is analytic in a domain $\Omega$ and $|f(z)|$ achieves its maximum value at a point $z_0 \in \Omega$, then $f$ is constant in $\Omega$.
+\end{corollary}
+
+\begin{proof}
+    Suppose $|f(z)|$ is not constant.
+    Then there is a $z_1 \in \Omega$ such that $|f(z_1)| < |f(z_0)|$.
+    Let $\gamma$ be a path in $\Omega$ running from $z_0$ to $z_1$, and let $w$ be the first point along this path where $|f(z)|$ first starts to decrease.
+    Thus $|f(w)| = |f(z_0)|$.
+
+    Now, since $w$ is an interior point, there must be a disk centered at $w$ that lies within $\Omega$.
+    But $|f|$ is constant in this disk by the previous theorem, meaning the points that come immediately after $w$ along $\gamma$ do not have decreasing modulus, a contradiction.
+    Thus $|f|$ is constant and so is $f$.
+\end{proof}
+
 \begin{corollary}[]
     If $f$ is analytic on a bounded domain $\Omega$ and continuous on the closure $\overline \Omega = \Omega \cup \partial \Omega$, then $|f|$ achieves its maximum on $\partial \Omega$.
 \end{corollary}
