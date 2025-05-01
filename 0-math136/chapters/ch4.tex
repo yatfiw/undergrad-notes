@@ -1,0 +1,315 @@
+\documentclass[../m136main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Series Representations}
+\section{Taylor Series}
+We'll begin our discussion of series representations of functions with a few familiar definitions.
+
+\begin{definition}[Sequence and series]
+    Let $\left\{ a_n \right\}_{n=0}^\infty$ be a sequence of complex numbers.
+    We say $a_n$ converges to $L$ if for every $\varepsilon > 0$ there exists an $N \in \N$ such that
+    \[ m > N \;\implies\; |a_m - L| < \varepsilon. \]
+    In this case we say $a_n \to L$ and $\lim_{n \to \infty} a_n = L$.
+    We also say the series
+    \[ \sum_{n=0}^{\infty} a_n = L \;\text{ if }\; \lim_{N \to \infty} \sum_{n=0}^{N} a_n = L. \]
+\end{definition}
+
+\begin{definition}[Uniform convergence]
+    The series $\sum_{k=0}^{\infty} f_k(z)$ converges uniformly to $f(z)$ on a set $K$ if for every $\varepsilon > 0$ there exists an $n \in N$ such that
+    \[ m \geq n \;\implies\; \left| f(z) - \sum_{k=0}^{m} f_k(z) \right| < \varepsilon. \]
+\end{definition}
+
+An important example of a series that converges is the geometric series.
+Let $z \in \C$ with $|z| < 1$; then
+\[ \sum_{k=0}^{\infty} z^{k} = \frac{1}{1-z}. \]
+This will be useful in our analysis of Taylor series, the key (patently complex) result about which is below.
+
+\begin{theorem}[Taylor series]
+    Let $f$ be analytic on a domain $\Omega$.
+    If $z_0 \in \Omega$ and $B(z_0, R) \subset \Omega$, then for all $z$ interior to $B(z_0, R)$
+    \[ f(z) = \sum_{k=0}^{\infty} \frac{f^{(k)}(z_0)}{k!} (z - z_0)^{k}. \]
+\end{theorem}
+
+\begin{proof}
+    We'll prove the statement for $z_0 = 0$, noticing that we can generalize our result to any $z_0$ by translation.
+    (The chain rule doesn't introduce anything new into the picture.)
+
+    Suppose $0 \in \Omega$ and $B(0,R) \subset \Omega$, and let $C$ be a circle defined by $|z| = R_0 < R$.
+    For $z$ inside $C$,
+    \begin{align*}
+        f(z) &= \frac{1}{2\pi i} \oint_C \frac{f(s)}{s-z} \,ds \\
+        &= \frac{1}{2\pi i} \oint_C \frac{f(s)}{s} \left[ \frac{1}{1 - z / s} \right] ds \\
+        &= \frac{1}{2\pi i} \oint_C \frac{f(s)}{s} \left[ \sum_{k=0}^{N-1} \left( \frac{z}{s} \right)^{k} + \frac{(z / s)^{N}}{1 - z / s} \right], \\
+        \intertext{since $|z| < |s|$. This effectively allows us to ``swap'' the order of the integral and the sum:}
+        &= \sum_{k=0}^{N-1} \left( \frac{1}{2\pi i} \oint_C \frac{f(s)}{s^{k+1}} \,ds \right) z^{k} + \frac{z^{N}}{2\pi i} \oint_C \frac{f(s)}{s^{N} (s-z)} \,ds \\
+        &= \sum_{k=0}^{N-1} \frac{f^{(k)}(0)}{k!} z^{k} + \rho_N(z),
+    \end{align*}
+    where we've defined the last term to be $\rho_N(z)$.
+    We need only show that $|\rho_N(z)| \to 0$.
+    Let $M = \max_{s \in C} |f(s)| < \infty$, which we know exists because $f$ is continuous.
+    Then by the ML lemma
+    \begin{align*}
+        |\rho_N(z)| &\leq \frac{|z|^{N}}{2\pi} \frac{M}{R_0^{N} (R_0 - |z|)} \cdot 2\pi R_0 = \frac{MR_0}{R_0 - |z|} \left( \frac{|z|}{R} \right)^{N},
+    \end{align*}
+    and since $N$ can be arbitrarily large, $|\rho_N(z)| < \varepsilon$.
+    Thus the Taylor series of $f$ converges uniformly to $f$ for all closed ``sub-disks'' of $B(z_0, R)$, meaning the convergence is uniform on $B(z_0, R)$.
+\end{proof}
+
+Note that this theorem says nothing about convergence \textit{on} the disk.
+Also note that the Taylor series of, say, $f'$ is equivalent to term-by-term derivative of the Taylor series for $f$.
+Finally, we can generate new Taylor series from known ones using the Cauchy product terms
+\[ \frac{(fg)^{(k)}(z_0)}{k!} = \frac{1}{k!} \sum_{\ell = 0}^{k} \binom{k}{\ell} f^{(k - \ell)}(z_0) g^{(\ell)}(z_0) = \sum_{\ell = 0}^{k} \frac{f^{(k - \ell)}(z_0)}{(k - \ell)!} \frac{g^{(\ell)}(z_0)}{\ell !} = \sum_{\ell = 0}^{k} a_{k - \ell} b_\ell = c_k, \]
+where $a_k$ and $b_k$ are the coefficients of two Taylor series and $c_k$ are the coefficients of the product.
+
+\section{Power Series}
+Now we'll discuss the convergence (and divergence) of power series more generally, starting with the following.
+
+\begin{lemma}[Convergence lemma]    % attributed to Abel-Weierstrass
+    Given $R_0 > 0$, if there exists an $M > 0$ such that
+    \[ |a_k| \leq \frac{M}{R_0^{k}} \vspace{-6pt} \]
+    for all $k$, then $\ds \sum_{k=0}^{\infty} a_k (z - z_0)^{k}$ converges absolutely and uniformly for all $z$ satisfying $|z - z_0| < R_0$.
+\end{lemma}
+
+\begin{proof}
+    Let $z \in \C$ such that $|z - z_0| \leq r_\star < R_0$ then for all $k$,
+    \[ \sum_{k=0}^{\infty} |a_k (z - z_0)^{k}| \leq \sum_{k=0}^{\infty} M \left( \frac{r_\star}{R_0} \right)^{k} = \frac{1}{M (1 - r_\star / R_0)}, \]
+    which is bounded because $|r_\star / R_0| < 1$.
+\end{proof}
+
+% Explaining the alternating series test:
+    % "We start with nothing... like we all do in this ephemeral life..." - Jakes
+
+This leads to a couple of nice corollaries---roughly speaking, if a series converges at a point then it also converges everywhere ``interior'' to that point, and if it diverges at a point then it diverges everywhere ``exterior'' to that point.
+
+\pagebreak
+
+\begin{corollary}[]
+    \vspace{-4pt} If $\,\ds \sum_{k=0}^{\infty} a_k (z - z_0)^{k}$ converges at $z_1 \neq z_0$, then it converges uniformly and absolutely for all  \vspace{-6pt}
+    \[ |z - z_0| < R_0 = |z_1 - z_0|. \]
+\end{corollary}
+
+\begin{proof}
+    Let $R_0 = |z_1 - z_0|$ and pick an $r_\star < R_0$.
+    Since $\sum_{k=0}^{\infty} a_k (z_1 - z_0)^{k}$ converges, the terms $a_k (z_1 - z_0)^{k} \to 0$, so given $\varepsilon > 0$ there is an $N$ such that $m \geq N$ implies
+    \[ |a_m (z_1 - z_0)^{m}| = |a_m| R_0^{m} < \varepsilon. \]
+    With this in mind, let $M = \max \left\{ |a_0|, \, |a_1| R_0, \, |a_2| R_0^2, \, \ldots, \, |a_{N-1}| R_0^{N-1}, \, \varepsilon \right\}$.
+    It follows from the existence of such an $M$ that $|a_k| \leq M / R_0^{k}$ for all $k$, and by the previous lemma $\sum_{k=0}^{\infty} a_k (z - z_0)^{k}$ converges absolutely and uniformly.
+\end{proof}
+
+\begin{corollary}[]
+    \vspace{-4pt} If $\,\ds \sum_{k=0}^{\infty} a_k (z - z_0)^{k}$ diverges at $z_1 \neq z_0$, then it also diverges for all $z$ satisfying   \vspace{-6pt}
+    \[ |z - z_0| > |z_1 - z_0|. \]
+\end{corollary}
+
+Now, given $z_0$ we define the radius of convergence
+\[ R = \sup \left( |z - z_0| \;\middle|\; \sum_{k=0}^{\infty} a_k(z - z_0)^k \;\text{ converges at $z$} \right). \]
+The circle $|z - z_0| = R$ is called the circle of convergence.
+Everything inside converges, but on this circle the behavior is not definite.
+We can say a couple of things, though:
+\begin{itemize}[topsep=0pt]
+    \item if a point on the circle converges absolutely then everything on the circle converges absolutely, and consequentially
+    \item if a point on the circle diverges then nothing on the circle converges absolutely.
+\end{itemize}
+When determining convergence we generally use the ratio test, though sometimes we also resort to the root test.
+Now we'll look at a series of lemmas that together reveal a deep relationship between power series and analytic functions.
+(The first is a standard result from analysis---see Math 131 for proof.)
+
+\begin{lemma}[]
+    If $f_k \to f$ uniformly on a set $K$ then $f$ is continuous on $K$.
+\end{lemma}
+
+\begin{lemma}[]
+    Suppose $f_k$ are continuous on a set $K$ and $\Gamma$ is a contour in $K$.
+    If $f_k \to f$ uniformly on $K$ then
+    \[ \int_\Gamma f_k(z) \,dz \longrightarrow \int_\Gamma f(z) \,dz. \]
+\end{lemma}
+
+\begin{proof}
+    Given $\varepsilon > 0$ there is an $N \in \N$ such that $m \geq N$ implies $|f_m(z) - f(z)| < \varepsilon / \ell$ for $z \in K$, where $\ell$ is the length of $\Gamma$.
+    Then
+    \[ \left| \int_\Gamma f_m(z) \,dz - \int_\Gamma f(z) \,dz \right| \leq \ell \cdot \max_{z \in \Gamma} |f_m(z) - f(z)| < \ell \cdot \frac{\varepsilon}{\ell}, \]
+    as desired.
+\end{proof}
+
+\begin{lemma}[]
+    Suppose $f_k \to f$ uniformly on a simply connected domain $\Omega$.
+    If the $f_k$ are analytic on $\Omega$ then $f$ is analytic on $\Omega$.
+\end{lemma}
+
+\begin{proof}
+    From the first lemma, $f$ is continuous.
+    Since $\Omega$ is simply connected and $f_k$ analytic, $\oint_\Gamma f_k(z) \,dz = 0$ for any closed loop $\Gamma$ in $\Omega$.
+    It follows from the previous lemma that $\oint_\Gamma f(z) \,dz = 0$, and by Morera's theorem $f$ is analytic.
+\end{proof}
+
+Now suppose
+\[ S(z) = \sum_{k=0}^{\infty} a_k (z - z_0)^{k} \]
+converges on the set $\Omega$ defined by $|z - z_0| < R$.
+This final lemma shows that $S(z)$ is analytic on $\Omega$!
+But then it is also equal to its Taylor series, which is a potentially different representation of $S(z)$.
+To reconcile the two, we can do some partial-sum manipulation with the second lemma to get
+\[ \sum_{k=0}^{\infty} \oint_\Gamma a_k(z - z_0)^k \,dz = \oint_\Gamma \left( \sum_{k=0}^{\infty} a_k (z - z_0)^k \right) dz. \]
+But by Cauchy's integral formula, for some integral $C$ within the circle of convergence we also have
+\begin{align*}
+    S^{(k)}(z_0) &= \frac{k!}{2\pi i} \oint_C \frac{S(z)}{(z - z_0)^{k+1}} \,dz \\
+    &= \frac{k!}{2\pi i} \oint_C \frac{1}{(z - z_0)^{k+1}} \left( \sum_{\ell = 0}^{\infty} a_\ell (z - z_0)^\ell \right) dz \\
+    &= \frac{k!}{2\pi i} \sum_{\ell = 0}^{\infty} \oint_C a_\ell (z - z_0)^{\ell - k - 1} dz \\
+    &= \frac{k!}{2\pi i} \cdot a_k \cdot 2\pi i.
+\end{align*}
+Thus $a_k = S^{(k)}(z_0) / k!$, meaning our power-series representations are the same!
+So in $\C$ there is a precise equivalence between analytic functions (defined in terms of complex derivatives) and convergent power series.
+
+As a side note, all this also gives us a new proof of Liouville's theorem.
+If an analytic function $f(z)$ is bounded (by $M$) and entire then by Cauchy's estimate
+\[ \frac{1}{k!} \left| f^{(k)}(z_0) \right| \leq \frac{M}{R^{k}}, \]
+meaning the higher-degree coefficients of the Taylor series of $f$ go to zero as $R \to \infty$.
+This leaves $f(z) = a_0$ as the only possibilities for $f$.
+
+\section{Laurent Series}
+Many of the functions we care about have singularities, points about which there is no faithful power series expansion.
+This is not to say, however, that there's no way to represent these functions as series!
+Take, for example, the function
+\[ f(z) = \frac{1}{z(z-1)}. \]
+We can use our knowledge of power series to expand $f(z)$ in the regions $|z| > 1$ and $0 < |z| < 1$, respectively:
+\begin{align*}
+    f(z) &= \frac{1}{z^2} \frac{1}{1 - 1 / z} = \frac{1}{z^2} \sum_{k=0}^{\infty} \left( \frac{1}{z} \right)^{k} = \frac{1}{z^2} + \frac{1}{z^3} + \frac{1}{z^{4}} + \cdots, \qquad |z| > 1, \\
+    f(z) &= -\frac{1}{z} \frac{1}{1-z} = -\frac{1}{z} \sum_{k=0}^{\infty} z^{k} = -\frac{1}{z} - 1 - z - z^2 \cdots, \qquad 0 < |z| < 1.
+\end{align*}
+These are examples of Laurent series---they look like Taylor series, just with possibly negative powers.
+Notice how we define these series on an annulus rather than a neighborhood, reflecting how the function is potentially ill-defined at the center of the expansion.
+
+\begin{theorem}[Laurent series]
+    If $f$ is analytic on an annular domain $A = \left\{ z \mid r < |z - z_0| < R \right\}$ then
+    \[ f(z) = \sum_{k=-\infty}^{\infty} c_k(z - z_0)^{k}, \qquad c_k = \frac{1}{2\pi i} \oint_\Gamma \frac{f(s)}{(s - z_0)^{k+1}} \,ds, \qquad z \in A, \quad k \in \Z \]
+    for any simple closed positively oriented curve $\Gamma$ about $z_0$ in $A$.
+    The convergence is uniform on closed sub-annuli, and the series representation is unique.
+\end{theorem}
+
+\begin{proof}
+    Let $z \in A$ with $r < r' \leq |z - z_0| \leq R' < R$ with the circles $C_{r'}, C_{R'}$.
+    If $\Gamma$ is a small circle about $z$ then we can deform $\Gamma$ to get
+    \[ f(z) = \frac{1}{2\pi i} \oint_\Gamma \frac{f(s)}{s-z} \,ds = \frac{1}{2\pi i} \oint_{C_{R'}} \frac{f(s)}{s-z} \,ds - \frac{1}{2\pi i} \oint_{C_{r'}} \frac{f(s)}{s-z} \,ds. \]
+    Call these integrals $I_1$ and $I_2$, respectively.
+    Noting that $|(z - z_0) / (s - z_0)| < 1$ for $s \in C_{R'}$, we could do some algebra and exploit uniform convergence to get
+    \begin{align*}
+        I_1 &= \frac{1}{2\pi i} \oint_{C_{R'}} \frac{f(s)}{s - z_0} \sum_{k=0}^{\infty} \left( \frac{z - z_0}{s - z_0} \right)^{k} ds \\
+        &= \sum_{k=0}^{\infty} \left( \frac{1}{2\pi i} \oint_{C_{R'}} \frac{f(s)}{(s - z_0)^{k+1}} \,ds \right) (z - z_0)^{k}.
+    \end{align*}
+    This sum converges uniformly on $|z - z_0| \leq R' < R$.
+    Now, $|(s - z_0) / (z - z_0)| < 1$ for $s \in C_{r'}$, so using similar methods     \vspace{-12pt}
+    \begin{align*}
+        I_2 &= \frac{1}{2\pi i} \oint_{C_{r'}} \frac{f(s)}{z - z_0} \sum_{k=0}^{\infty} \left( \frac{s - z_0}{z - z_0} \right)^{k} ds \\
+        &= \sum_{k=0}^{\infty} \left( \frac{1}{2\pi i} \oint_{C_{r'}} \frac{f(s)}{(s - z_0)^{-k}} \,ds \right) (z - z_0)^{-k-1} \\
+        &= \sum_{k=1}^{\infty} \left( \frac{1}{2\pi i} \oint_{C_{r'}} \frac{f(s)}{(s - z_0)^{-k+1}} \,ds \right) (z - z_0)^{-k}.
+    \end{align*}
+    This sum converges uniformly on $|z - z_0| \geq r' > r$.
+    Thus if we define $c_k$ as in the theorem statement we get
+    \[ f(z) = \sum_{k=0}^{\infty} c_k (z - z_0)^{k} + \sum_{k=1}^{\infty} \frac{c_{-k}}{(z - z_0)^{k}} = \sum_{k=-\infty}^{\infty} c_k (z - z_0)^{k}, \]
+    which converges uniformly on $r' \leq |z - z_0| \leq R'$.
+    We can deform $C_{R'}$ and $C_{r'}$ into any contour $\Gamma$ in $A$.
+    To prove uniqueness we consider another Laurent series with coefficients $d_k$; in this case,
+    \[ \oint_\Gamma \frac{f(s)}{(s - z_0)^{n+1}} \,ds = \sum_{k=-\infty}^{\infty} \oint_\Gamma d_k \frac{(s - z_0)^{k}}{(s - z_0)^{n+1}} \,ds = d_n \cdot 2\pi i, \]
+    meaning
+    \[ d_n = \frac{1}{2\pi i} \oint_\Gamma \frac{f(s)}{(s - z_0)^{n+1}} \,ds = c_n. \]
+    The Laurent series is therefore unique.
+\end{proof}
+
+Note that if $f$ is analytic on the entire disk $|z - z_0| < R$, then by uniqueness $c_k = 0$ for negative $k$ and the remaining coefficients are the Taylor coefficients.
+Typically, however, $f$ is not analytic at $z_0$, so the positive-indexed terms are not generally the Taylor coefficients (because the derivatives at $z_0$ do not exist).
+Also, this analysis doesn't work on branch cuts, since in that case no sufficient annulus exists.
+
+\section{Zeros and Singularities}
+We'll begin by quickly classifying the zeroes of a function.
+
+\begin{definition}[Classifying zeroes]
+    A point $z_0$ is called a zero of order $m$ for the function $f$ if $f$ is analytic at $z_0$ and it, along with its first $m-1$ derivatives, vanish at $z_0$ but $f^{(m)}(0) \neq 0$.
+    A zero of order 1 is called a simple zero.
+\end{definition}
+
+In this case the Taylor series for $f$ about $z_0$ looks like
+\begin{align*}
+    f(z) &= a_m (z - z_0)^{m} + a_{m+1} (z - z_0)^{m+1} + a_{m+2} (z - z_0)^{m+2} + \cdots \\
+    &= (z - z_0)^{m} \left[ a_m + a_{m+1} (z - z_0) + a_{m+2} (z - z_0)^2 + \cdots \right], \qquad a_m \neq 0.
+\end{align*}
+The bracketed series defines an analytic function in a neighborhood of $z_0$, so we deduce the following.
+
+\begin{theorem}[]
+    Let $f$ be analytic at $z_0$.
+    Then $z_0$ is a zero of order $m$ if and only if
+    \[ f(z) = (z - z_0)^{m} g(z) \]
+    for some $g$ that is analytic at $z_0$ and satisfies $g(z_0) \neq 0$.
+\end{theorem}
+
+By continuity there exists an $\varepsilon > 0$ for which $|z - z_0| < \varepsilon$ implies $g(z) \neq 0$.
+Thus $z_0$ is the only zero of $f$ in this neighborhood, and in general the zeroes of an analytic function are isolated!
+
+\begin{definition}[Classifying singularities]
+    Let $f$ have the Laurent expansion
+    \[ f(z) = \sum_{k=-\infty}^{\infty} a_k (z - z_0)^{k}. \]
+    If $f$ is not analytic at $z_0$ but is analytic on some punctured disk $0 < |z - z_0| < \varepsilon$, then we say $f$ has an isolated singularity at $z_0$.
+    This singularity is classified as follows.
+    \begin{itemize}[topsep=0pt]
+        \item If $a_k = 0$ for all $k < 0$ then $z_0$ is a removable singularity.
+        
+        \item If $a_{-m} \neq 0$ for some positive integer $m$ but $a_k = 0$ for all $j < -m$ then $z_0$ is a pole of order $m$.
+        (If $m=1$ then we call $z_0$ a simple pole.)
+
+        \item If $a_k \neq 0$ for an infinite number of negative $k$ then $z_0$ is an essential singularity of $f$.
+    \end{itemize}
+\end{definition}
+
+Now we'll look a bit more closely at the behavior of a function $f$ at each of these kinds of singularities.
+\begin{itemize}[topsep=0pt]
+    \item If $f$ has a removable singularity at $z_0$ it has a Laurent series
+    \[ f(z) = c_0 + c_1 (z - z_0) + c_2 (z  - z_0)^2 + \cdots, \qquad 0 < |z - z_0| < \varepsilon. \]
+    Strictly speaking this series is defined a punctured neighborhood of $z_0$, but it's analytic at $z_0$, too!
+    So we can simply ``remove'' the singularity at $z_0$ by defining $f(z_0) = c_0$.
+    We can also see that $f$ is bounded on a punctured neighborhood around $z_0$, and the extended $f$ is analytic on some potentially larger neighborhood.
+
+    \item If $f$ has a pole of order $N$ at $z_0$ then there exists an analytic $g$ satisfying $g(z_0) \neq 0$ such that
+    \[ f(z) = \frac{g(z)}{(z - z_0)^{N}}. \]
+    Limits approaching $z_0$ are now unbounded as $f$ is not bounded around $z_0$, but $f$ is analytic around $z_0$.
+
+    \item If $f$ has an essential singularity at $z_0$ then near $z_0$ the output $f(z)$ can be made close to any point in the complex plane!
+    This is formalized by the following.
+\end{itemize}
+
+\begin{theorem}[Casorati-Weirerstrass]
+    If $f$ has an essential singularity at $z_0$, then for every $w \in \C$ there exists a sequence $\left\{ z_k \right\}$ such that $z_k \to z_0$ and $f(z_k) \to w$.
+    (In other words, $f(B(z_0, \varepsilon) \setminus \left\{ z_0 \right\})$ is dense in $\C$.)
+\end{theorem}
+
+\begin{proof}
+    If not, then there exist $\varepsilon > 0$ and $\delta > 0$ such that $|f(z) - w| > \varepsilon$ for $0 < |z - z_0| < \delta$.
+    Then
+    \[ R(z) = \frac{1}{f(z) - w} \]
+    is analytic on the $\delta$-ball, and $|R(z)| < 1 / \varepsilon$ there.
+    Also, if $R(z)$ has a Laurent expansion with coefficients $d_k$ then
+    \[ |d_k| = \left| \frac{1}{2\pi i} \oint_\gamma \frac{R(s)}{(s - z_0)^{k+1}} \,ds \right| \leq \frac{1}{2\pi} \frac{1 / \varepsilon}{r^{k+1}} \cdot 2\pi r = \frac{r^{-k}}{\varepsilon}. \]
+    for a radius-$r$ circle $\gamma$ around $z_0$.
+    Thus as $r \to 0$ we have $|d_k| \to 0$ for $k < 0$, meaning $R(z)$ has a removable singularity at $z_0$.
+    But then
+    \[ f(z) = w + \frac{1}{R(z)}, \qquad 0 < |z - z_0| < \delta \]
+    either has a pole of finite order at $z_0$ or $R(z_0) \neq 0$, both of which disallow $f$ from having an essential singularity there.
+\end{proof}
+
+A stronger statement, called the Picard theorem, shows that the image of $f$ around $z_0$ includes the entire complex plane barring at most one point.
+
+Now let's bring our discussion into the extended complex plane, which includes a point at $\infty$.
+If $f$ has a pole at $z_0$ then $\lim_{z \to z_0} |f(z)| = +\infty$, in which case we say that $f(z_0) = \infty$.
+We can, however, also study the behavior of $f$ at $z = \infty$ by looking at how $\tilde f(w) = f(1 / w)$ behaves at $w=0$.
+In particular, if $f$ is analytic in a neighborhood $|z| > R$ of $z=\infty$ then $\tilde f$ is analytic in a punctured neighborhood $0 < |w| < R$ of $w=0$, and so we can use the familiar classification of isolated singularities at $w=0$ to see what's going on at $z=\infty$.
+
+If $f$ is entire then
+\[ f(z) = a_0 + a_1 z + a_2 z^2 + \cdots, \qquad z \in \C \]
+is valid in every neighborhood of $\infty$, meaning this is the Laurent series for $f$ at $\infty$!
+We have three cases.
+\begin{itemize}[topsep=0pt]
+    \item If $f(z) = a_0$ then $f$ is analytic at $\infty$.
+    \item If $f(z)$ is a degree-$N$ polynomial then $f$ has a pole of order $N$ at $\infty$.
+    \item If $f(z)$ is an infinite power series then $f$ has an essential singularity at $\infty$.
+\end{itemize}
+
+\end{document}

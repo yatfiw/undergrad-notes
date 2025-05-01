@@ -126,7 +126,7 @@ We need to lay a bit of topological groundwork first, though.
     A domain $\Omega$ is simply connected if every closed path in $\Omega$ is homotopic to a point in $\Omega$---in other words, the domain has no ``holes''.
 \end{definition}
 
-We could do some straight forward calculus to show that if
+We could do some straightforward calculus to show that if
 \[ I(s) = \int_{\gamma_s} f(z) \,dz = \int_0^1 f(H(s,t)) \frac{\partial H}{\partial t} (s,t) \,dt, \]
 then $I'(s) = 0$ so long as $f \in C^1$ (to bring the $\partial / \partial s$ into the integral) and $H \in C^2$ (for the equality of mixed partials).
 Thus if $f$ has a continuous derivative, its integral is the same over any pair of homotopic curves.
@@ -182,12 +182,12 @@ We begin with a special case.
     From analysis we know that there exists a $z_0 \in \bigcap_{k=1}^\infty R_{1k}$.
     $f$ is analytic at this point, meaning
     \[ f(z) = f(z_0) + f'(z_0) (z - z_0) + o(z - z_0), \qquad \lim_{z \to z_0} \frac{o(z - z_0)}{z - z_0} = 0. \]
-    Thus for every $\epsilon > 0$ there is a $k > 1$ such that $|o(h) / (z - z_0)| < \epsilon$ for all $z \in R_{1k}$.
+    Thus for every $\varepsilon > 0$ there is a $k > 1$ such that $|o(h) / (z - z_0)| < \varepsilon$ for all $z \in R_{1k}$.
     By the ABC theorem and ML lemma,
-    \[ \left| \oint_{\partial R_{1k}} f(z) \,dz \right| = \left| \oint_{\partial R_{1k}} o(h) \,dz \right| \leq (\epsilon \cdot 2^{-k} D) \cdot 2^{-k} P. \]
+    \[ \left| \oint_{\partial R_{1k}} f(z) \,dz \right| = \left| \oint_{\partial R_{1k}} o(h) \,dz \right| \leq (\varepsilon \cdot 2^{-k} D) \cdot 2^{-k} P. \]
     The original integral therefore becomes
-    \[ \left| \oint_{\partial R} f\,dz \right| \leq 4^{k} \left| \oint_{\partial R_{1k}} f\,dz \right| \leq 4^{k} \cdot (\epsilon \cdot 2^{-k} D \cdot 2^{-k} P) = \epsilon DP. \]
-    Since our $\epsilon > 0$ was arbitrary, this integral is zero.
+    \[ \left| \oint_{\partial R} f\,dz \right| \leq 4^{k} \left| \oint_{\partial R_{1k}} f\,dz \right| \leq 4^{k} \cdot (\varepsilon \cdot 2^{-k} D \cdot 2^{-k} P) = \varepsilon DP. \]
+    Since our $\varepsilon > 0$ was arbitrary, this integral is zero.
 \end{proof}
 
 Now we'll take another step by proving Cauchy's theorem, but only in a disk.
@@ -204,15 +204,15 @@ Now we'll take another step by proving Cauchy's theorem, but only in a disk.
     \[ F(w) = \int_{\gamma_w} f(z) \,dz \]
     is well-defined for all $w \in \Omega$, and we'd like to prove that $F'(w) = f(w)$.
 
-    We first determine $F(w+h) - F(w)$---given $\epsilon > 0$, there exists a $\delta > 0$ not only such that $|z-w| < \delta$ implies $|f(z) - f(w)| < \epsilon$, but also such that $\left\{ |z-w| < \delta \right\} \subseteq \Omega$.
+    We first determine $F(w+h) - F(w)$---given $\varepsilon > 0$, there exists a $\delta > 0$ not only such that $|z-w| < \delta$ implies $|f(z) - f(w)| < \varepsilon$, but also such that $\left\{ |z-w| < \delta \right\} \subseteq \Omega$.
     For $|h| < \delta$ we similarly define $\gamma_{w+h}$ in terms of horizontal and vertical components and notice that
     \[ \int_{\gamma_{w+h}} f \,dz = \int_{\gamma_w} f \,dz \pm \oint_{\partial R} f \,dz + \int_{w \to w+h} \hspace{-6pt} f \,dz, \]
     where $R$ is the rectangle formed by connecting $\gamma_w$ and $\gamma_{w+h}$ and the $\pm$ is whichever sign is needed to make things cancel nicely.
     The integral over $\partial R$ is zero by the previous lemma, meaning
     \[ F(w+h) - F(w) = \int_{w \to w+h} \hspace{-6pt} f \,dz. \]
     Now by the ML lemma,
-    \[ \left| \frac{F(w+h) - F(w)}{h} - f(w) \right| = \frac{1}{|h|} \left| \int_{w \to w+h} \hspace{-6pt} (f(z) - f(w)) \,dz \right| < \frac{1}{|h|} (\epsilon \cdot 2|h|) = 2\epsilon, \]
-    and since $\epsilon > 0$ was arbitrary we arrive at $F'(w) = f(w)$ for all $w \in \Omega$.
+    \[ \left| \frac{F(w+h) - F(w)}{h} - f(w) \right| = \frac{1}{|h|} \left| \int_{w \to w+h} \hspace{-6pt} (f(z) - f(w)) \,dz \right| < \frac{1}{|h|} (\varepsilon \cdot 2|h|) = 2\varepsilon, \]
+    and since $\varepsilon > 0$ was arbitrary we arrive at $F'(w) = f(w)$ for all $w \in \Omega$.
     Thus by the ABC theorem $\oint_\gamma f \,dz = 0$, as desired.
 \end{proof}
 
@@ -248,10 +248,10 @@ Contour deformation also provides motivation for our next key result.
 \end{theorem}
 
 \begin{proof}
-    $f$ is continuous at $z_0$, so for every $\epsilon > 0$ there is a $\delta > 0$ such that $|z - z_0| < \delta$ implies $|f(z) - f(z_0)| < \epsilon$.
+    $f$ is continuous at $z_0$, so for every $\varepsilon > 0$ there is a $\delta > 0$ such that $|z - z_0| < \delta$ implies $|f(z) - f(z_0)| < \varepsilon$.
     Let $r \in (0, \delta)$ be the radius of a positively-oriented circle $\gamma_r$ centered at $z_0$; then, because $2\pi i = \oint_{\gamma_r} dz / (z - z_0)$,
-    \[ \left| \oint_{\gamma_r} \frac{f(z)}{z - z_0} \,dz - 2\pi i \,f(z_0) \right| = \left| \oint_{\gamma_r} \frac{f(z) - f(z_0)}{z - z_0} \right| \leq \oint_{\gamma_r} \frac{|f(z) - f(z_0)|}{|z - z_0|} \,dz < \frac{\epsilon}{r} \cdot 2\pi r. \]
-    Since $\epsilon > 0$ was arbitrary we conclude, by contour deformation, that
+    \[ \left| \oint_{\gamma_r} \frac{f(z)}{z - z_0} \,dz - 2\pi i \,f(z_0) \right| = \left| \oint_{\gamma_r} \frac{f(z) - f(z_0)}{z - z_0} \right| \leq \oint_{\gamma_r} \frac{|f(z) - f(z_0)|}{|z - z_0|} \,dz < \frac{\varepsilon}{r} \cdot 2\pi r. \]
+    Since $\varepsilon > 0$ was arbitrary we conclude, by contour deformation, that
     \[ \oint_\gamma \frac{f(z)}{z - z_0} \,dz = \oint_{\gamma_r} \frac{f(z)}{z - z_0} = 2\pi i \,f(z_0), \]
     as desired.
 \end{proof}
@@ -363,7 +363,7 @@ Now for one last theorem!
 \end{theorem}
 
 \begin{proof}
-    Suppose $z_0 \in \Omega$ with $|f(z_0)| \geq f(z)$ for all $z \in \Omega$', where the domain $\Omega' \subset \Omega$.
+    Suppose $z_0 \in \Omega$ with $|f(z_0)| \geq |f(z)|$ for all $z \in \Omega$', where the domain $\Omega' \subset \Omega$.
     Choose $R > 0$ such that $B(z_0, R) \subset \Omega'$; by Cauchy's integral formula
     \[ f(z_0) = \frac{1}{2\pi i} \oint_{\partial B} \frac{f(z)}{z - z_0} \,dz = \frac{1}{2\pi} \int_{0}^{2\pi} f(z_0 + Re^{it}) \,dt, \]
     and so
