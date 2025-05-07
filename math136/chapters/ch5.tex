@@ -293,7 +293,7 @@ Now we'll take a closer look at a more familiar transform.
 
 \begin{definition}[Laplace transform]
     The Laplace transform of $f : [0,\infty) \to \C$ is
-    \[ \mathcal L[f](z) = F(z) = \int_{0}^{\infty} e^{-zt} f(z) \,dt, \]
+    \[ \mathcal L[f](z) = F(z) = \int_{0}^{\infty} e^{-zt} f(t) \,dt, \]
     provided this limit exists.
 \end{definition}
 
@@ -310,7 +310,7 @@ and so on, and then jump straight into inverses.
 
 \begin{definition}[Inverse Laplace transform]
     Given $F(z)$ with finitely many isolated singularities, we define
-    \[ \mathcal L^{-1}[F(z)](t) = \frac{1}{2\pi i} \int_{\alpha - i\infty}^{\alpha + i\infty} F(z) \,e^{zt} \,dt \]
+    \[ \mathcal L^{-1}[F(z)](t) = \frac{1}{2\pi i} \int_{\alpha - i\infty}^{\alpha + i\infty} F(z) \,e^{zt} \,dz \]
     with $\alpha \in \R$ chosen so that all singularities lie to the left of $\alpha$.
 \end{definition}
 
@@ -360,7 +360,7 @@ We call this the Heaviside expansion formula.
 But alternatively, we could directly compute
 \[ f(t) = \mathcal L^{-1}[F](t) = \mathcal L^{-1} \left[ \sum_{k=1}^{n} \frac{c_k}{z - \alpha_k} \right] = \sum_{k=1}^{n} c_k e^{\alpha_k t}. \]
 It follows that
-\[ c_k = \frac{P(z)}{Q'(z)}, \]
+\[ c_k = \frac{P(\alpha_k)}{Q'(\alpha_k)}, \]
 meaning that the coefficients of the partial fraction decomposition of $F(z)$ are precisely the residues of $F(z)$!
 This provides a slick way to do these decompositions without resorting to systems of equations.
 
