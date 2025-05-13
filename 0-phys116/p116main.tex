@@ -2,7 +2,7 @@
 \newcommand{\coursetitle}{Quantum Mechanics}
 \newcommand{\semester}{Spring 2025}
 \newcommand{\credit}{Adapted from 
-    SP25 lectures.}
+    John S. Townsend, \textit{A Modern Approach to Quantum Mechanics} (2012).}
 
 % ------------------------ %
 
@@ -12,12 +12,23 @@
 
 % ------------------------ %
 
+\usepackage{bm}
+\usepackage{leftindex}
+
+\def\bi#1{\textsf{\textit{#1}}}
+\newcommand{\tr}{\operatorname{tr}}
+
+% ------------------------ %
+
 \usepackage{subfiles}
 
 \begin{document}
 \tableofcontents
 \blfootnote{* \credit}
 
-\subfile{chapters/ch1} % unsorted notes
+\subfile{chapters/ch1} % quantum states
+\subfile{chapters/ch2} % quantized observables
+\subfile{chapters/ch3} % wave mechanics
+\subfile{chapters/ch4} % central potentials
 
 \end{document}

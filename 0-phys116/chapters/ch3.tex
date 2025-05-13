@@ -1,0 +1,339 @@
+\documentclass[../p116main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+\chapter{Wave Mechanics}
+\section{Position States and Translations}
+Now we'll leave the world of two-state systems to discuss a particle's position and momentum in one dimension.
+We begin by introducing the position states $\ket{x}$, which satisfy $\hat x \ket{x} = x \ket{x}$ for $x \in \R$.
+Of course, it isn't possible to obtain a single, definite value when we go to measure a particle's positions (a measuring device cannot have infinite precision).
+Any physical ket is a superposition of position states with coefficients $dx \braket{x}{\psi}$:
+\[ \ket{\psi} \int dx \ket{x} \braket{x}{\psi}. \]
+(Integrals are over all space unless otherwise stated.)
+Notice that if $\ket{\psi}$ is itself a position state $\ket{x'}$ then
+\[ \ket{x'} = \int dx \ket{x} \braket{x}{x'}, \]
+meaning $\braket{x}{x'} = \delta(x - x')$.
+This $\delta$-function appears non-physical in isolation, but in all physical scenarios it appears as part of an integral.
+For example, in normalizing $\ket{\psi}$ we write
+\begin{align*}
+    1 = \braket{\psi}{\psi} &= \left( \int dx \braket{\psi}{x} \bra{x} \right) \left( \int dx \ket{x} \braket{x} {\psi} \right) \\
+    &= \iint dx' dx \braket{\psi}{x} \braket{x}{x'} \braket{x'}{\psi},
+    \intertext{and since the $\braket{x}{x'} = \delta(x - x') \neq 0$ only for $x = x'$,}
+    &= \int dx \braket{\psi}{x} \braket{x}{\psi}.
+\end{align*}
+We therefore identify $dx = \left| \braket{x}{\psi} \right|^2$ with the probability of finding a particle in the interval $[x, \, x + dx]$.
+The amplitude density function $\braket{x}{\psi}$, often denoted $\psi(x)$, is called the wave function; we can use it to rewrite the normalization condition:
+\[ 1 = \int dx \, \psi^*(x) \psi(x) = \int dx \, |\psi(x)|^2. \]
+The expected position of a particle in a state $\ket{\psi}$ is given by
+\begin{align*}
+    \left< x \right> = \bra{\psi} \hat x \ket{\psi} &= \int dx \bra{\psi} \hat x \ket{x} \braket{x}{\psi}, \\
+    &= \int dx \braket{\psi}{x} x \braket{x}{\psi} \\
+    &= \int dx \, |\psi(x)|^2 x,
+\end{align*}
+where in the second step we wrote $\ket{\psi}$ as a superposition (or, alternatively, inserted the identity operator $1 = \int dx \ket{x} \bra{x}$).
+This matches with our understanding of continuous expectation values from probability!
+
+Now we introduce a translation operator $\hat T(a)$ which has the effect $\hat T(a) \ket{x} = \ket{x+a}$.
+For an arbitrary state the action is
+\[ \hat T(a) \ket{\psi} = \hat T(a) \int dx' \ket{x'} \braket{x'}{\psi} \int dx' \ket{x' + a} \braket{x'}{\psi}, \]
+so to shift a state is to shift all the basis kets it's comprised of by an amount $a$.
+Note that $\hat T(a)$ must be unitary to conserve probability.
+
+Using the above, the amplitude of finding the translated state $\ket{\psi'}$ at a position $x$ is
+\begin{align*}
+    \psi'(x) = \braket{x}{\psi'} &= \int dx' \braket{x}{x' + a} \braket{x'}{\psi} \\
+    &= \int dx' \, \delta[x - (x' + a)] \braket{x'}{\psi} \\
+    &= \braket{x-a}{\psi} = \psi(x-a),
+\end{align*}
+which is, of course, equivalent to shifting the wave function rightward by $a$.
+Alternatively, we could take advantage of the fact that $\hat T(a)$ is unitary to write
+\[ \bra{x} \hat T(a) \ket{\psi} = \braket{x-a}{\psi} = \psi(x-a), \]
+as before.
+We might view this through the lens of active and passive transformations---we may literally translate the ket rightward by $a$, or we can find the amplitude in a space that's been shifted leftward by $a$.
+
+\section{The Momentum Operator}
+Now we define a generator of translations $\hat p_x$ using an infinitesimal translation operator:
+\[ \hat T(dx) = 1 - \frac{i}{\hbar} \hat p_x dx \;\implies\; \hat T(a) = e^{-i \hat p_x a / \hbar}. \]
+Given that $\hat p_x$ is Hermitian (since $\hat T(dx)$ is unitary) and that it has units of linear momentum, we identify $\hat p_x$ as the operator corresponding to the $x$-component of linear momentum.
+
+It is easy to show, using the definition of $\hat T(\delta x)$, that
+\[ \left( \hat x \, \hat T(\delta x) - \hat T(\delta x) \hat x \right) \ket{\psi} = \left( \frac{-i \,\delta x}{\hbar} \right) [\hat x, \hat p_x] \ket{\psi}. \]
+We can rewrite the left-hand side using the superposition expansion for $\psi$:
+\begin{align*}
+    & \left( \hat x \, \hat T(\delta x) - \hat T(\delta x) \hat x \right) \int dx \ket{x} \braket{x}{\psi} \\
+    &\qquad\qquad = \hat x \int dx \ket{x + \delta x} \braket{x}{\psi} - \hat T(\delta x) \int dx \, x \ket{x} \braket{x}{\psi} \\
+    &\qquad\qquad = \int dx (x + \delta x) \ket{x + \delta x} \braket{x}{\psi} - \int dx \, x \ket{x + \delta x} \braket{x}{\psi} \\
+    &\qquad\qquad = \delta x \int dx \ket{x + \delta x} \braket{x}{\psi} = \delta x \int dx \ket{x} \braket{x}{\psi} = \delta x \ket{\psi},
+\end{align*}
+where in the penultimate step we've kept only the leading order in $\delta x$.
+(Alternatively, we could substitute $x' = x + \delta x$ and Taylor-expand the wave function to leading order.)
+Comparing this expression with $(-i \, \delta x / \hbar) [\hat x, \hat p_x] \ket{\psi}$ gives
+\[ [\hat x, \hat p_x] = i\hbar. \]
+The Heisenberg uncertainty principle $\Delta x \Delta p_x \geq \hbar / 2$ follows.
+With this commutation relation in mind, let's now look at time evolution---if our particle has mass $m$ then the Hamiltonian is
+\[ \hat H - \frac{\hat p^2}{2m} + V(\hat x) \]
+for some potential $V$.
+So the position expectation value changes like
+\begin{align*}
+    \frac{d \left< x \right>}{dt} &= \frac{i}{2m\hbar} [\hat p_x^2, \hat x] \ket{\psi} \\
+    &= \frac{i}{2m\hbar} \bra{\psi} \left( \hat p_x [\hat p_x, \hat x] + [\hat p_x, \hat x] \hat p_x \right) \ket{\psi} \\
+    &= \frac{\bra{\psi} \hat p_x \ket{\psi}}{m} = \frac{\left< p_x \right>}{m}.
+\end{align*}
+This is the familiar expression for classical linear momentum!
+Further, we could show that
+\[ \frac{d \left< p_x \right>}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat p_x] \ket{\psi} = \left< -\frac{dV}{dx} \right>, \]
+which is just Newton's second law!
+Note that the momentum is a constant of motion only when $[\hat H, \hat p_x]$, that is, when the Hamiltonian is translationally invariant (when $V(x)$ is independent of $x$).
+
+Now we'll determine the representation of the momentum operator in position space.
+The action of the infinitesimal translation operator is
+\begin{align*}
+    \hat T(\delta x) \ket{\psi} &= \int dx \ket{x + \delta x} \braket{x}{\psi} \\
+    &= \int dx' \ket{x'} \braket{x' - \delta x}{\psi} \\
+    \intertext{Taylor-expanding the wave function to first order,}
+    &= \int dx' \ket{x'} \left( \braket{x'}{\psi} - \delta x \frac{\partial}{\partial x'} \braket{x'}{\psi} \right) \\
+    &= \ket{\psi} - \delta x \int dx' \ket{x'} \frac{\partial}{\partial x'} \braket{x'}{\psi}.
+\end{align*}
+Comparing with the definition of $\hat T(\delta x)$ gives
+\[ \hat p_x \ket{\psi} = \frac{\hbar}{i} \int dx' \ket{x'} \frac{\partial}{\partial x'} \braket{x'}{\psi}, \]
+and so
+\[ \bra{x} \hat p_x \ket{\psi} = \frac{\hbar}{i} \frac{\partial}{\partial x} \braket{x}{\psi}. \]
+For an arbitrary state the expectation value is
+\[ \bra{\psi} \hat p_x \ket{\psi} = \int dx' \braket{\psi}{x'} \frac{\hbar}{i} \frac{\partial}{\partial x'} \braket{x'}{\psi}. \]
+All of this suggests that
+\[ \hat p_x \xrightarrow[x \textrm{ basis}]{} \frac{\hbar}{i} \frac{\partial}{\partial x}. \]
+
+\section{Momentum Space}
+We now introduce a new set of momentum eigenstates satisfying $\hat p_x \ket{p} = p \ket{p}$.
+Arbitrary states look like
+\[ \ket{\psi} = \int dp \ket{p} \braket{p}{\psi}, \]
+and of course $\braket{p'}{p} = \delta(p' - p)$.
+The normalization condition suggests that we identify $dp \left| \braket{p}{\psi} \right|^2$ as the probability that a particle in $\ket{\psi}$ has a momentum in $[p, \, p + dp]$; the amplitude density $\braket{p}{\psi}$ is called the wave function in momentum space.
+
+It will be useful to determine the momentum eigenstates' position-space wave functions $\braket{x}{p}$.
+First we write
+\[ \bra{x} \hat p_x \ket{p} = p \braket{x}{p} = \frac{\hbar}{i} \frac{\partial}{\partial x} \braket{x}{p}, \]
+a differential equation which has solution $\braket{x}{p} = N e^{ipx / \hbar}$.
+We could evaluate (using $\delta(x) = \frac{1}{2\pi} \int dk \, e^{ikx}$)
+\[ \braket{p'}{p} = \int dx \braket{p'}{x} \braket{x}{p} \]
+to find that $N = 1 / \sqrt{2\pi \hbar}$, and so
+\[ \braket{x}{p} = \frac{1}{\sqrt{2\pi \hbar}} e^{ipx / \hbar}. \]
+Inserting the identity operator here allows us to transform back and forth between position and momentum space:
+\begin{align*}
+    \braket{p}{\psi} &= \int dx \braket{p}{x} \braket{x}{\psi} = \int dx \frac{1}{\sqrt{2\pi \hbar}} e^{-ipx / \hbar} \braket{x}{\psi} \\
+    \braket{x}{\psi} &= \int dp \braket{x}{p} \braket{p}{\psi} = \int dp \frac{1}{\sqrt{2\pi \hbar}} e^{ipx / \hbar} \braket{p}{\psi}
+\end{align*}
+These together show that $\braket{p}{\psi}$ and $\braket{x}{\psi}$ form a Fourier transform pair.
+
+As an application, consider the Gaussian wave packet
+\[ \braket{x}{\psi} = \psi(x) = N e^{-x^2 / 2a^2}, \quad N = \frac{1}{\sqrt{a \sqrt{\pi}}}. \]
+By symmetry $\left< x \right> = 0$, and by integration $\left< x^2 \right> = a^2 / 2$ and so $\Delta x = a / \sqrt{2}$, which reflects the fact that the Gaussian narrows as $a \to 0$.
+We could show, using the above integrals, that
+\[ \braket{p}{\psi} = \sqrt{\frac{a}{\hbar \sqrt{\pi}}} e^{-p^2 a^2 / 2\hbar^2}. \]
+Once again, by symmetry $\left< p_x \right> = 0$, by integration $\left< p_x^2 \right> = \hbar^2 / 2a^2$, and $ \Delta p_x = \hbar / a \sqrt{2}$.
+Note that $\Delta x \Delta p_x = \hbar / 2$, so this Gaussian wave packet is a minimum uncertainty state.
+(We could prove that it is \textit{the} minimum uncertainty state by requiring $\ket{\beta} = c \ket{\alpha}$ and $\bra{\psi} (\hat O + \hat O^\dagger) \ket{\psi} = 0$ in the proof of the uncertainty principle.)
+
+One advantage of expressing states in momentum space is that free particles have $\hat H = \hat p_x^2 / 2m$, meaning momentum states are also energy eigenstates!
+Thus
+\[ \ket{\psi(t)} = e^{i \hat H t / \hbar} \int dp \ket{p} \braket{p}{\psi(0)} = \int dp \, e^{-ip^2 t / 2m\hbar} \ket{p} \braket{p}{\psi(0)}. \]
+We put this into position space by prepending $\bra{x}$ which, after integrating, gives
+\[ \psi(x,t) = \frac{1}{\sqrt{[a + (i\hbar t / ma)] \sqrt{\pi}}} \exp \left( -\frac{x^2}{2a^2 [1 + (i\hbar t / ma^2)]} \right). \]
+If we compare $\psi^*(x,t) \psi(x,t)$ with the time-independent form from before, we see that
+\[ \Delta x = \frac{a}{\sqrt{2}} \left( 1 + \frac{\hbar^2 t^2}{m^2 a ^{4}} \right)^{1 / 2}. \]
+
+\section{Energy in a Harmonic Oscillator}
+Given how ubiquitous harmonic oscillators are in physics, in this section we will ``solve'' these oscillators---that is, we will determine the eigenvalues and eigenkets of the Hamiltonian
+\[ \hat H = \frac{p_x^2}{2m} + \frac{1}{2} m \omega^2 \hat x^2 \]
+given the commutation relation $[\hat x, \hat p_x] = i\hbar$.
+The operator methods employed here will be very similar in spirit to the ones we used to solve the angular momentum problem.
+
+We start by defining two non-Hermitian operators that are reminiscent of our $\hat J_\pm = \hat J_x \pm i \hat J_y$, noting that we can't simply add $\hat x \pm i \hat p_x$ because of the unit discrepancy:
+\[ \hat a = \sqrt{\frac{m\omega}{2\hbar}} \left( \hat x + \frac{i}{m\omega} \hat p_x \right), \qquad \hat a^\dagger = \sqrt{\frac{m\omega}{2\hbar}} \left( \hat x - \frac{i}{m\omega} \hat p_x \right). \]
+The factor out front is just there to make the operators dimensionless; this produces $[\hat a, \hat a^\dagger] = 1$.
+We also get
+\[ \hat x = \sqrt{\frac{\hbar}{2m\omega}} (\hat a + \hat a^\dagger), \qquad \hat p_x = -i \sqrt{\frac{m\omega \hbar}{2}} (\hat a - \hat a^\dagger), \]
+and so the Hamiltonian can be expressed as
+\[ \hat H = \frac{\hbar \omega}{2} (\hat a^\dagger \hat a + \hat a \hat a^\dagger) = \hbar \omega \left( \hat a^\dagger \hat a + \frac{1}{2} \right). \]
+Thus finding the eigenstates of $\hat H$ is equivalent to finding the eigenstates of the operator $\hat N = \hat a^\dagger \hat a$.
+We'll do this now!
+Denote the eigenstates by $\ket{\eta}$.
+Note that the eigenvalues are non-negative---we have the expectation value
+\[ \bra{\eta} \hat N \ket{\eta} = (\ket{\eta} \hat a^\dagger) (\hat a \ket{\eta}) = \eta \braket{\eta}{\eta}, \]
+and since both of these inner products are zero we must have $\eta \geq 0$.
+To see the effects of $\hat a$ and $\hat a^\dagger$ on the $\ket{\eta}$, we first determine the commutation relations
+\begin{align*}
+    [\hat N, \hat a] &= [\hat a^\dagger \hat a, \hat a] & [\hat N, \hat a^\dagger] &= [\hat a^\dagger \hat a, \hat a^\dagger] \\
+    &= [\hat a^\dagger, \hat a] \hat a &&= \hat a^\dagger [\hat a, \hat a^\dagger] \\
+    &= -\hat a, &&= \hat a^\dagger,
+\end{align*}
+and evaluate $\hat N \hat a^\dagger \ket{\eta}$ and $\hat N \hat a \ket{\eta}$:
+\begin{align*}
+    \hat N \hat a^\dagger \ket{\eta} &= (\hat a^\dagger \hat N + \hat a^\dagger) \ket{\eta} & \hat N \hat a \ket{\eta} &= (\hat a \hat N - \hat a) \ket{\eta} \\
+    &= (\hat a^\dagger \eta + \hat a^\dagger) \ket{\eta} &&= (\hat a \eta - \hat a) \ket{\eta}, \\
+    &= (\eta + 1) \hat a^\dagger \ket{\eta} &&= (\eta - 1) \hat a \ket{\eta},
+\end{align*}
+where we've used the commutation relations above to swap the order of the operations.
+We can see, then, that $\hat a^\dagger \ket{\eta}$ is an eigenket of $\hat N$ with eigenvalue $\eta + 1$, and that $\hat a \ket{\eta}$ has eigenvalue $\eta - 1$, meaning these are raising and lowering operators.
+
+The fact that $\eta \geq 0$ puts a restriction on how far we can lower our eigenvalues.
+The minimum-eigenvalue ket must satisfy $\hat a \ket{\eta_\textrm{min}} = 0$, and if we apply the raising operator to this we get
+\[ \hat a^\dagger \hat a \ket{\eta_\textrm{min}} = \eta_\textrm{min} \ket{\eta_\textrm{min}} = 0, \]
+we can see that we must have $\eta_\textrm{min} = 0$.
+So we label the lowest state as $\ket{0}$, and applying the $\hat a^\dagger$ $n$ times yields the state satisfying
+\[ \hat N \ket{n} = n \ket{n}, \qquad n = 0, 1, 2, \ldots. \]
+Thus the eigenvalues of $\hat N$---now called the number operator---are the non-negative integers, and those of the Hamiltonian are
+\[ \hat H \ket{n} = \hbar \omega \left( n + \frac{1}{2} \right) \ket{n}, \qquad n = 0, 1, 2, \ldots. \]
+So we've quantized the energy of the harmonic oscillator!
+The spacing is uniform with step size $\hbar \omega$.
+
+Like before, it will be useful to determine the matrix representations of our raising and lowering operators.
+We'd like to solve for the $c_+, c_-$ satisfying $\hat a^\dagger \ket{n} = c_+ \ket{n+1}$ and $\hat a \ket{n} = c_- \ket{n-1}$.
+If we take the inner product of the two equations
+\[ \hat a^\dagger \ket{n} = c_+ \ket{n+1}, \qquad \bra{n} \hat a = c_+^* \bra{n+1} \]
+we get $(n+1) \braket{n}{n} = c_+^* c_+ \braket{n+1}{n+1}$.
+(Note that on the left we get an $\hat a \hat a^\dagger$, and so we use the commutation relation to swap the order of the operators.)
+If the eigenstates are normalized then we must have $c_+ = \sqrt{n+1}$.
+Similarly, $c_- = \sqrt{n}$, meaning
+\[ \hat a^\dagger \ket{n} = \sqrt{n+1} \ket{n+1}, \qquad \hat a \ket{n} = \sqrt{n} \ket{n-1}, \]
+and the matrix elements of these operators are
+\[ \bra{n'} \hat a^\dagger \ket{n} = \sqrt{n+1} \,\delta_{n', n+1}, \qquad \bra{n'} \hat a \ket{n} = \sqrt{n} \, \delta_{n', n-1}. \]
+The matrix representations in the energy eigenbasis, therefore, look like
+\[ \hat a^\dagger \rightarrow \begin{bmatrix} 0 & 0 & \cdots \\ \sqrt{1} & 0 & \cdots \\ 0 & \sqrt{2} \\ \vdots & \vdots & \ddots \end{bmatrix}, \qquad \hat a \rightarrow \begin{bmatrix} 0 & \sqrt{1} & 0 & \cdots \\ 0 & 0 & \sqrt{2} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}. \]
+We could construct the matrix representations of the position and momentum operators from here (again, in the energy eigenbasis).
+At this point we can also establish. via induction, that a normalized ket $\ket{n}$ can be expressed as
+\[ \ket{n} = \frac{(\hat a^\dagger)^n}{\sqrt{n!}} \ket{0}. \]
+
+\section{Analysis of the Energy Eigenvalues and Eigenfunctions}
+Now let's connect this discussion back to wave mechanics by determining the position-space eigenfunctions for the harmonic oscillator.
+Projecting the ground-state $\hat a \ket{0} = 0$ into position space gives
+\[ 0 = \bra{x} \hat a \ket{0} = \sqrt{\frac{m\omega}{2\hbar}} \bra{x} \left( \hat x + \frac{i}{m\omega} \hat p_x \right) \ket{0} = \sqrt{\frac{m\omega}{2\hbar}} \left( x \braket{x}{0} + \frac{i}{m\omega} \cdot \frac{\hbar}{i} \frac{\partial \braket{x}{0}}{\partial x} \right), \]
+a differential equation which has the (normalized) solution
+\[ \braket{x}{0} = \left( \frac{m\omega}{\pi \hbar} \right)^{1 / 4} e^{-m\omega x^2 / 2\hbar}. \]
+We can use this to generate all of the position-space energy eigenfunctions:
+\[ \braket{x}{n} = \frac{1}{\sqrt{n!}} \bra{x} (a^\dagger)^n \ket{0} = \frac{1}{\sqrt{n!}} \left( \frac{m\omega}{2\hbar} \right)^{n / 2} \left( x - \frac{\hbar}{m\omega} \frac{d}{dx} \right)^{n} \left( \frac{m\omega}{\pi \hbar} \right)^{1 / 4} e^{-m\omega x / 2\hbar}. \]
+Note that both of the energies' expectation values
+\begin{align*}
+    \frac{\left< p_x^2 \right>}{2m} &= -\frac{\hbar^2}{2m} \int dx \braket{n}{x} \frac{d^2}{dx^2} \braket{x}{n}, \\
+    \left< V(x) \right> &= \frac{1}{2} m\omega^2 \int dx \braket{n}{x} x^2 \braket{x}{n}.
+\end{align*}
+get larger with increasing $n$ due to the wave function's increasing curvature (for the kinetic energy) and widening domain of applicability (for the potential).
+
+Let's hone in on the ground-state energy.
+In a classical oscillator the lowest energy occurs when the particle is at rest, but for us this is disallowed by the Heisenberg uncertainty principle.
+These uncertainties influence the energy via
+\[ \left< E \right> = \frac{(\Delta p_x)^2 + \left< p_x \right>^2}{2m} + \frac{1}{2} m\omega^2 [(\Delta x)^2 + \left< x \right>^2]. \]
+It's easy to show, using the raising and lowering operators, that $\left< x \right> = \left< p_x \right> = 0$ in an energy eigenstate, and so in such a state
+\[ \left< E \right> = \frac{(\Delta p_x)^2}{2m} + \frac{1}{2} m\omega^2 (\Delta x)^2. \]
+To minimize the energy nature picks the combination of $(\Delta x)^2 = \left< x^2 \right>$ and $(\Delta p_x)^2 = \left< p_x^2 \right>$ that minimizes this expression.
+In the ground state these quantities are
+\begin{align*}
+    (\Delta x)^2 &= \frac{\hbar}{2m \omega} \bra{0} (\hat a + \hat a^\dagger)^2 \ket{0} & (\Delta p_x)^2 &= -\frac{m\omega \hbar}{2} \bra{0} (\hat a - \hat a^\dagger)^2 \ket{0} \\
+    &= \frac{\hbar}{2m \omega} \bra{0} (\hat a^2 + (\hat a^\dagger)^2 + \hat a \hat a^\dagger + \hat a^\dagger \hat a) \ket{0} &&= -\frac{m\omega \hbar}{2} \bra{0} (\hat a^2 + (\hat a^\dagger)^2 - \hat a \hat a^\dagger - \hat a^\dagger \hat a) \ket{0} \\
+    &= \frac{\hbar}{2m\omega} \bra{0} \hat a \hat a^\dagger \ket{0} = \frac{\hbar}{2m\omega}, &&= \frac{m\omega \hbar}{2} \bra{0} \hat a \hat a^\dagger \ket{0} = \frac{m\omega\hbar}{2},
+\end{align*}
+which notably produces $\Delta x \Delta p_x = \hbar / 2$.
+So the ground state, as we found before---our $\braket{x}{0}$ is a Gaussian, after all---is a minimum-uncertainty state!
+For the excited states we similarly have
+\[ \Delta x = \sqrt{\left( n + \frac{1}{2} \right) \frac{\hbar}{m\omega}}, \qquad \Delta p_x = \sqrt{\left( n + \frac{1}{2} \right) m\omega \hbar}, \]
+which produce $\Delta x \Delta p_x = (n + 1 / 2) \hbar$.
+
+Now let's zoom back out.
+The correspondence principle states that we should expect that the predictions of quantum mechanics to agree with those of classical physics on macroscopic scales---that is, scales on which our quantum number $n$ is very large.
+On such a scale, the classical motion of a particle with energy $E$ is restricted to lie within the classical turning points at which the kinetic energy is zero:
+\[ E_n = \left( n + \frac{1}{2} \right) \hbar \omega = \frac{1}{2} m \omega^2 x_n^2. \]
+This agrees with the (visual) observation that the eigenfunctions' excursions beyond these turning points becomes less pronounced as $n$ increases.
+
+For a classical oscillator, the probability of finding an energy-$E$ particle in $[x, x + dx]$ is proportional to the amount of time $dx / v$ it spends in this interval.
+We can express this probability as
+\[ P_\textrm{cl} \, dx \propto \frac{dx}{(2 / m)(E_n - V(x))} = \frac{dx}{\sqrt{2 E_n / m - \omega^2 x^2}} = \frac{dx}{\omega \sqrt{x_n^2 - x^2}}, \]
+and normalizing gives a factor of $1 / \sqrt{\pi}$ out front.
+Plotting this over a a $\left| \braket{x}{n} \right|^2$ (for reasonably large $n$) reveals that the $P_\text{cl}$ we've found approximates the mean value of $\left| \braket{x}{n} \right|^2$ at any given position!
+
+\section{Time Dependence and Coherent States}
+The energy eigenstates of the harmonic oscillator are stationary states.
+So time dependence, as we've come to expect, results from superpositions of eigenstates with different energies.
+If this superposition is of two adjacent energy states $\ket{\psi(0)} = c_n \ket{n} + c_{n+1} \ket{n+1}$ then the time evolution is
+\[ \ket{\psi(t)} = e^{-i(n + 1 / 2) \omega t} \left( c_n \ket{n} + c_{n+1} e^{-i\omega t} \ket{n+1} \right), \]
+and we could use the raising and lowering operators to compute $\left< x \right> = A \cos(\omega t + \delta)$.
+
+Another example of a state with interesting time evolution is the coherent state $\ket{\alpha}$, which satisfies $\hat a \ket{\alpha} = \alpha \ket{\alpha}$.
+If we start by writing such a state as a superposition of the energy eigenstates with coefficients $c_n$, the eigenvalue equation becomes   \vspace{-6pt}
+\begin{align*}
+    \alpha \sum_{n=0}^{\infty} c_n \ket{n} &= \sum_{n=1}^{\infty} \sqrt{n} \,c_n \ket{n-1} \\
+    &= \sum_{n'=0}^{\infty} \sqrt{n'+1} \,c_{n'+1} \ket{n'}.
+\end{align*}
+So all of the coefficients must satisfy the recurrence $\sqrt{n+1} \, c_{n+1} = \alpha c_n$, the solution of which is $c_n = (\alpha^n / \sqrt{n!}) c_0$ and thus
+\[ \ket{\alpha} = c_0 \sum_{n=0}^{\infty} \frac{\alpha^n}{\sqrt{n!}} \ket{n}. \]
+To normalize we could evaluate $\braket{\alpha}{\alpha} = |c_0|^2 e^{|\alpha|^2}$, meaning $c_0 = e^{-|\alpha|^2 / 2}$ up to an overall phase and so
+\[ \ket{\alpha} = e^{-|\alpha|^2 / 2} \sum_{n=0}^{\infty} \frac{\alpha^{n}}{\sqrt{n!}} \ket{n}. \]
+The time evolution is given by
+\begin{align*}
+    \ket{\alpha(t)} &= e^{-|\alpha|^2 / 2} \sum_{n=0}^{\infty} \frac{\alpha^{n} e^{-i(n + 1 / 2) \omega t}}{\sqrt{n!}} \ket{n} \\
+    &= e^{i \omega t / 2} e^{-|\alpha|^2 / 2} \sum_{n=0}^{\infty} \frac{( e^{-i \omega t})^{n}}{\sqrt{n!}} \ket{n} \\
+    &= e^{-i \omega t / 2} \ket{\alpha e^{-i \omega t}},
+\end{align*}
+so the eigenvalue $\alpha$ of the lowering operator becomes $\alpha e^{i \omega t}$ as time progresses.
+
+As a first step in investigating the behavior of this coherent state, let's compute the expectation values:
+\begin{align*}
+    \left< x \right> &= \sqrt{\frac{\hbar}{2m\omega}} \bra{\alpha(t)} (\hat a + \hat a^\dagger) \ket{\alpha(t)} & \left< p_x \right> &= -i\sqrt{\frac{m\omega\hbar}{2}} \bra{\alpha(t)} (\hat a - \hat a^\dagger) \ket{\alpha(t)} \\
+    &= \sqrt{\frac{\hbar}{2m\omega}} \left( \alpha e^{-i\omega t} + \alpha^* e^{i\omega t} \right) &&= -i\sqrt{\frac{m\omega\hbar}{2}} \left( \alpha e^{-i \omega t} - \alpha^* e^{i\omega t} \right) \\
+    &= \sqrt{\frac{\hbar}{2m\omega}} \, 2|\alpha| \cos (\omega t + \delta), &&= -\sqrt{\frac{m\omega\hbar}{2}} \, 2|\alpha| \sin (\omega t + \delta),
+\end{align*}
+where $\alpha = |\alpha| e^{-i\delta}$.
+We can see that the position and momentum are oscillating back and forth, as we'd expect from motion in a harmonic oscillator.
+Note that the phase $\delta$ of the eigenvalue determines the phase of these expectation values.
+Now we'll compute the uncertainties, using the commutator $[\hat a, \hat a^\dagger] = 1$ to swap the order of operators as needed:
+\begin{align*}
+    \left< x^2 \right> &= \frac{\hbar}{2m\omega} \bra{\alpha(t)} (\hat a + \hat a^\dagger)^2 \ket{\alpha(t)} & \left< p_x^2 \right> &= -\frac{m\omega \hbar}{2} \bra{\alpha(t)} (\hat a - \hat a^\dagger)^2 \ket{\alpha(t)} \\
+    &= \frac{\hbar}{2m\omega} \bra{\alpha(t)} (\hat a + (\hat a^\dagger)^2 + 2 \hat a^\dagger \hat a + 1) \ket{\alpha(t)} &&= -\frac{m\omega\hbar}{2} \bra{\alpha(t)} (\hat a^2 + (\hat a^\dagger)^2 - 2\hat a^\dagger \hat a - 1) \ket{\alpha(t)} \\
+    &= \frac{\hbar}{2m\omega} \left( \alpha(t) + \alpha^*(t)^2 + 2|\alpha(t)|^2 + 1 \right), &&= \frac{m\omega\hbar}{2} \left( 2|\alpha(t)|^2 + 1 - \alpha(t)^2 - \alpha^*(t)^2 \right),
+\end{align*}
+which combined with the previous expectation values gives
+\[ (\Delta x)^2 = \frac{\hbar}{2m\omega}, \qquad (\Delta p_x)^2 = \frac{m\omega\hbar}{2}. \]
+The product of the uncertainties is $\Delta x \Delta p_x = \hbar / 2$.
+Thus the coherent state is a minimum uncertainty state, and unlike the Gaussian wave packet for the free particle, this coherent Gaussian does not spread with time.
+This is just about as close as we can get to a quantum state that might represent, say, a classical pendulum!
+
+\section{The Schrödinger Equation and Inversion Symmetry}
+As an alternative way of solving the harmonic oscillator, we can write down the energy eigenvalue equation as a differential equation:
+\[ -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \braket{x}{E} + \frac{1}{2} m \omega^2 x^2 \braket{x}{E} = E \braket{x}{E}. \]
+If we substitute $y = x \sqrt{m\omega / \hbar}$ we get
+\[ \frac{d^2 \psi}{dy^2} + (\varepsilon - y^2) \psi = 0, \qquad \varepsilon = \frac{2E}{\hbar \omega}. \]
+As a first step toward finding physical solutions, we note that the solutions in the $|y| \to \infty$ limit look like $\psi(y) = A e^{-y^2 / 2} + B e^{y^2 / 2}$.
+So to ``factor out'' this limiting behavior we can express the wave function as
+\[ \psi(y) = h(y) e^{-y^2 / 2}, \]
+where we have dropped the non-normalizable term.
+Substituting this into the Schrödinger equation reveals that $h$ must satisfy
+\[ \frac{d^2 h}{dy^2} - 2y \frac{d h}{dy} + (\varepsilon - 1) h = 0, \]
+which has the power series solution
+\[ h(y) = \sum_{k=0}^{\infty} a_k y^{k}, \qquad \frac{a_{k+2}}{a_k} = \frac{2k+1 - \varepsilon}{(k+2)(k+1)}. \]
+But there's a problem---this solution exhibits the same behavior as $e^{y^2}$ in the large-$k$ limit, so it diverges.
+To reconcile this we note that $h(y)$ is finite so long as $\varepsilon = 2n + 1$ for some integer $n$, so $\psi(y)$ becomes a finite polynomial multiplied by a decreasing exponential.
+Since $\varepsilon = 2E / \hbar \omega$ the corresponding energies are
+\[ E_n = \left( n + \frac{1}{2} \right) \hbar \omega, \qquad n = 0, 1, 2, \ldots. \]
+Each $h(y)$ is called the Hermite polynomial of order $n$, and we may express it either in power series form or using our previous eigenfunctions for the harmonic oscillator.
+
+One of the most striking features of the energy eigenfunctions is that they're all either even or odd.
+This behavior is rooted in a symmetry in the Hamiltonian.
+To formalize this symmetry we introduce the parity operator $\hat \Pi$, which acts on position states via
+\[ \hat \Pi \ket{x} = \ket{-x}. \]
+An eigenstate of this operator satisfies $\hat \Pi \ket{\psi_A} = \lambda \ket{\psi_A}$, and since $\hat \Pi^2$ is the identity operator, the eigenvalues are $\lambda = \pm 1$.
+For the corresponding eigenstates note that for an arbitrary state $\ket{\psi}$ we have $\bra{x} \hat \Pi^2 \ket{\psi} = \braket{-x}{\psi} = \psi(-x)$, so the parity eigenfunctions satisfy
+\[ \psi_\lambda(-x) = \lambda \psi_\lambda(x). \]
+Thus $\lambda = 1$ corresponds to the even eigenfunctions and $\lambda = -1$ the odd ones.
+
+Importantly, the harmonic oscillator Hamiltonian and the parity operator commute:
+\begin{align*}
+    \bra{x} \hat \Pi \hat H \ket{\psi} &= \bra{-x} \hat H \ket{\psi} \\
+    &= \left( -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + V(-x) \right) \psi(-x) \\
+    &= \left( -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + V(x) \right) \psi(-x) \\
+    &= \bra{x} \hat H \hat \Pi \ket{\psi}.
+\end{align*}
+In fact, this relation holds for every even choice $V$!
+By observing the symmetry of the Hamiltonian under this inversion (among others), we can deduce some of the properties of the eigenfunctions before we've even solved the eigenvalue equation.
+This fact will come in handy in the next chapter.
+
+\end{document}

@@ -1,0 +1,349 @@
+\documentclass[../p116main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+\begin{document}
+
+% region PAST UNFINISHED TOPICS
+
+\chapter{Quantized Observables}
+\section{The Angular Momentum Eigenstates}
+The first observable we'll discuss is angular momentum, the generator of rotations.
+We begin with the observation that the rotation operators about different axes don't commute one another---in particular, a simple second-order Taylor expansion of the rotation matrices about the $x$, $y$, and $z$ axes reveals that
+\[ \mathbb S (\Delta \phi \, \mbf{i}) \mathbb S (\Delta \phi \, \mbf{j}) - \mathbb S (\Delta \phi \, \mbf{j}) \mathbb S (\Delta \phi \, \mbf{i}) = \mathbb S (\Delta \phi^2 \mbf{k}) - \mathbb I. \]
+If we were to replace each matrix here with its corresponding $\hat R$, also expanded to second order, we could do some algebra to find that $\hat J_x \hat J_y - \hat J_y \hat J_x = i\hbar \hat J_z$.
+We'll call this the commutator $[\hat J_x, \hat J_y]$, and every pair of operators has one:
+\[ [\hat J_x, \hat J_y] = i\hbar \hat J_z, \quad [\hat J_y, \hat J_z] = i\hbar \hat J_x, \quad [\hat J_z, \hat J_x] = i\hbar \hat J_y. \]
+So none of the angular momentum operators commute with one another!
+Interestingly, though, it's easy to show that the total angular momentum $\hat{\mbf{J}}^2 = \hat J_x^2 + \hat J_y^2 + \hat J_z^2$ commutes with them all.
+This has important implications for the operators' eigen-stuff---because $\hat{\mbf{J}}^2$ and $\hat J_z$ commute, they have a complete set of eigenstates $\ket{\lambda, m}$ in common: \vspace{-10pt}
+\begin{align*}
+    \hat{\mbf{J}}^2 \ket{\lambda, m} &= \lambda \hbar^2 \ket{\lambda, m}, \\
+    \hat J_z \ket{\lambda, m} &= m \hbar \ket{\lambda, m},
+\end{align*}
+where $\hbar$ has been introduced to keep $\lambda$ and $m$ dimensionless.
+Our aim, now, is to identify these eigenstates by placing restrictions on their eigenvalues.
+In doing this we'll find it useful to define the operators
+\[ \hat J_\pm = \hat J_x \pm i \hat J_y, \]
+which notably satisfy $\hat J_+^\dagger = \hat J_-$ and $[\hat J_z, \hat J_\pm] = \pm \hbar \hat J_\pm$.
+To see the effect that these operators have on a state $\ket{\lambda, m}$ we evaluate $\hat J_z \hat J_\pm \ket{\lambda, m}$, using the commutation relations to swap the order of the operators:
+\begin{align*}
+    \hat J_z \hat J_\pm \ket{\lambda, m} &= (\hat J_\pm \hat J_z \pm \hbar \hat J_\pm) \ket{\lambda, m} \\
+    &= (\hat J_\pm m\hbar + \hbar \hat J_\pm) \ket{\lambda, m} \\
+    &= (m \pm 1) \hbar \hat J_\pm \ket{\lambda, m}.
+\end{align*}
+We can see that the functions of these operators, then, are to produce a new quantum state with a raised or lowered value of $m$.
+We therefore call $\hat J_+$ and $\hat J_-$ raising and lowering operators.
+(We are assured that $\lambda$ is preserved because $\hat J_\pm$ commute with $\hat{\mbf{J}}^2$.)
+
+We'd expect that $\lambda \geq 0$ since the the ``magnitude'' of $\mbf{J}^2$ should be non-negative.
+We can verify this using the expectation value
+\[ \bra{\lambda, m} (\hat J_x^2 + \hat J_y^2 + \hat J_z^2) \ket{\lambda, m} = \lambda \hbar^2: \]
+each term on the left looks like $\bra{\lambda, m} \hat J_x^2 \ket{\lambda, m} = c_x^*c_x \braket{\psi_x}{\psi_x}$ for some normalized ``output'' state $\ket{\psi_x}$; it is known that $c_x^* c_x \geq 0$ and $\braket{\psi_x}{\psi_x} = 1$, so each term on the left is non-negative and so is $\lambda$.
+We thus also have \vspace{-10pt}
+\begin{align*}
+    0 &\leq \bra{\lambda, m} (\hat J_x^2 + \hat J_y^2) \ket{\lambda, m} \\
+    &= \bra{\lambda, m} (\hat{\mbf{J}}^2 - \hat J_z^2) \ket{\lambda, m} \\
+    &= (\lambda - m^2) \hbar^2 \braket{\lambda, m}{\lambda, m},
+\end{align*}
+meaning $m^2 \leq \lambda$, as we'd expect since $|J_z^2| < |\mbf{J}^2|$.
+Every $\lambda$ therefore has maximum and minimum values of $m$ associated with it; call them $j$ and $j'$.
+We must have $\hat J_+ \ket{\lambda, j} = 0$ and $\hat J_- \ket{\lambda, j'} = 0$, and so
+\begin{align*}
+    \hat J_- \hat J_+ \ket{\lambda, j} &= (\hat{\mbf{J}}^2 - \hat J_z^2 - \hbar \hat J_z) \ket{\lambda, j} & \hat J_+ \hat J_- \ket{\lambda, j} &= (\hat{\mbf{J}}^2 - \hat J_z^2 + \hbar \hat J_z) \ket{\lambda, j} \\
+    &= (\lambda - j^2 - j) \hbar^2 \ket{\lambda, j} = 0, &&= (\lambda - j'^2 + j') \hbar^2 \ket{\lambda, j'} = 0.
+\end{align*}
+Thus $j^2 + j = \lambda = j'^2 - j'$ and so $j' = -j$.
+Finally, because we climb from $j'$ to $j$ in size-1 steps, the distance $2j$ between the two must be an integer and we deduce that
+\[ j = 0,\, \frac{1}{2},\, 1,\, \frac{3}{2},\, \ldots, \qquad m = j, \, j-1,\, \ldots,\, -j+1,\, -j.  \]
+This motivates a slight change in notation.
+We'll denote a simultaneous eigenstate of $\hat{\mbf{J}}^2$ and $\hat J_z$ by $\ket{j, m}$:
+\begin{align*}
+    \hat{\mbf{J}}^2 \ket{j,m} &= j(j+1)\hbar^2 \ket{j,m}, \\
+    \hat J_z \ket{j,m} &= m\hbar \ket{j,m}.
+\end{align*}
+
+\section{Angular Momentum in a Spin-1/2 Particle}
+We're now in a position to determine the spin states of a spin-$\frac{1}{2}$ particle using some of the linear algebra we're more familiar with.
+We'll first determine the matrix representations of the raising and lowering operators.
+It is known that
+\[ \hat J_+ \ket{j,m} = c_+ \hbar \ket{j,m+1}, \qquad \hat J_- \ket{j,m} = c_- \hbar \ket{j,m-1} \]
+for some $c_+, c_-$.
+To determine $c_+$ we can take the inner product of the first equation with itself to get
+\begin{align*}
+    c_+^* c_+ \hbar^2 \braket{j,\, m+1}{j,\, m+1} &= \bra{j,m} \hat J_- \hat J_+ \ket{j,m} \\
+    &= \bra{j,m} (\hat{\mbf{J}}^2 - \hat J_z^2 - \hbar \hat J_z) \ket{j,m} \\
+    &= [j(j+1) - m^2 - m] \hbar^2 \braket{j,m}{j,m}.
+\end{align*}
+Assuming that our eigenstates are normalized, we conclude that
+\[ \hat J_+ \ket{j,m} = \sqrt{j(j+1) - m(m+1)} \,\hbar \ket{j,\, m+1}. \]
+By an analogous line of reasoning,
+\[ \hat J_- \ket{j,m} = \sqrt{j(j+1) - m(m-1)} \,\hbar \ket{j,\, m-1}. \]
+The matrix elements of the raising and lowering operators are therefore
+\[ \bra{j, m'} \hat J_\pm \ket{j,m} = \sqrt{j(j+1) - m(m \pm 1)} \,\hbar \, \delta_{m', m \pm 1}. \]
+We can see that the nonzero elements of the raising operator are just above the main diagonal, while those of the lowering operator are just below.
+Using the $j = 1 / 2$ states as a basis gives
+\[ \hat J_+ \to \hbar \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \qquad \hat J_- \to \hbar \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}. \]
+Now we'll hone in specifically on spin angular momentum, so instead of using $J$ to refer to a generic form of angular momentum we'll use $S$ to refer to spin.
+We can use the definitions of the raising and lowering operators to solve for the Pauli spin matrices,
+\[ \hat S_x \to \frac{\hbar}{2} \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} = \frac{\hbar}{2} \sigma_x, \qquad \hat S_y \to \frac{\hbar}{2} \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} = \frac{\hbar}{2} \sigma_y, \qquad \hat S_z \to \frac{\hbar}{2} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} = \frac{\hbar}{2} \sigma_z, \]
+and then use these to get a matrix representation for $\hat{\mbf{S}} = \hat S_x \mbf{i} + \hat S_y \mbf{j} + \hat S_z \mbf{k}$.
+We can then determine the eigenstates of $\hat S_n = \hat{\mbf{S}} \cdot \mbf{n}$---the spin-up and spin-down states along an arbitrary axis $\mbf{n}$---by solving the eigenvalue equation
+\[ \hat S_n \ket{\mu} = \mu \frac{\hbar}{2} \ket{\mu} \]
+in matrix form.
+Doing this for an $\mbf{n}$ in the $xy$-plane yields the familiar
+\[ \ket{\pm \mbf{n}} = \frac{1}{\sqrt{2}} \ket{+\mbf{z}} \pm \frac{e^{i\phi}}{\sqrt{2}} \ket{-\mbf{z}}. \]
+We could run through a very similar process to determine the eigenstates of a spin-1 particle!
+Doing this along, say, the $y$-axis involves solving the equation $\hat S_y \ket{1, \mu}_y = \mu \hbar \ket{1,\mu}_y$ in matrix form to get, as one of the eigenkets,
+\[ \ket{1,1}_y = \frac{1}{2} \ket{1,1} + i \frac{\sqrt{2}}{2} \ket{1,0} - \frac{1}{2} \ket{1,-1}. \]
+Note that we put subscripts on the kets to denote a basis other than $S_z$.
+
+\section{Time Evolution}
+Having discussed how rotations relate to angular momentum, we'll now look at another operator $\hat U(t)$ which translates kets forward in time via $\hat U(t) \ket{\psi(0)} = \ket{\psi(t)}$.
+Like with $\hat R$, we require that $\hat U$ be unitary in order to conserve probability, and we define it in terms of a Hermitian operator $\hat H$ that satisfies
+\[ \hat U(dt) = 1 - \frac{i}{\hbar} \hat H \,dt. \]
+If $\hat H$ is time-independent then we get $\hat U(t) = e^{-i \hat H t / \hbar}$, also like before.
+Now we can see that $\hat H$ has units of energy, and because $\hat H$ commutes with $\hat U$ the observable associated with $\hat H$ has a time-independent expectation value:
+\[ \bra{\psi(t)} \hat H \ket{\psi(t)} = \bra{\psi(0)} \hat U^\dagger \hat H \hat U \ket{\psi(0)} = \bra{\psi(0)} \hat H \ket{\psi(0)}. \]
+We therefore identify $\hat H$ as the energy operator, more commonly known as the Hamiltonian, and so it has eigenstates $\ket{E}$ satisfying
+\[ \hat H \ket{E} = E \ket{E}, \qquad \left< E \right> = \bra{\psi} \hat H \ket{\psi}. \]
+So if the initial state of a system is an energy eigenstate $\ket{\psi(0)} = \ket{E}$, we have
+\[ \ket{\psi(t)} = e^{-i\hat H t / \hbar} \ket{\psi(0)} = e^{-iEt / \hbar} \ket{E}. \]
+Thus time evolution simply causes $\ket{E}$ to pick up an overall phase (i.e., essentially stay the same), so we call $\ket{E}$ a stationary state.
+We only get interesting behavior when we time-evolve superpositions of these states.
+
+The Hamiltonian has a couple of properties which make it an especially powerful tool in quantum mechanics.
+Firstly, we can see that the time evolution operator $\hat U$ satisfies the differential equation
+\[ \hat U(t + dt) = \left( 1 - \frac{i}{\hbar} \hat H \,dt \right) \hat U(t) \;\implies\; i\hbar \frac{d}{dt} \hat U(t) = \hat H \hat U(t), \]
+leading to the Schrödinger equation
+\[ i\hbar \frac{d}{dt} \ket{\psi(t)} = \hat H \ket{\psi(t)}. \]
+This is the fundamental equation of motion in quantum mechanics---it provides all the information we need to determine how a quantum state will evolve in time.
+We can leverage this equation to determine whether an arbitrary observable $A$ has a time-dependent expectation value:
+\begin{align*}
+    \frac{d \left< A \right>}{dt} &= \left( \frac{d}{dt} \bra{\psi(t)} \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{d}{dt} \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
+    &= \left( \frac{1}{-i\hbar} \hat H \bra{\psi(t)} \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{1}{i\hbar} \hat H \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
+    &= \frac{i}{\hbar} \bra{\psi(t)} [\hat H, \hat A] \ket{\psi(t)} + \bra{\psi(t)} \frac{\partial \hat A}{\partial t} \ket{\psi(t)}.
+\end{align*}
+Thus a time-independent operator $\hat A$ has a time-independent $\left< A \right>$ if and only if it commutes with $\hat H$.
+
+\section{Examples of Quantum Dynamics}
+As a simple example of how all this plays out in actual quantum systems, consider a spin-1/2 particle in a constant magnetic field $\mbf{B} = B_0 \mbf{k}$.
+The Hamiltonian of this system is
+\[ \hat H = -\hat{\bm \mu} \cdot \mbf{B} = \omega_0 \hat S_z, \qquad \omega_0 = \frac{ge B_0}{2mc}, \]
+so it has energy eigenstates $\hat H \ket{\pm \mbf{z}} = \pm (\hbar \omega_0 / 2) \ket{\pm \mbf{z}}$.
+Since $\hat H$ is time-independent, the time evolution operator is
+\[ \hat U(t) = e^{-i \hat S_z \phi / \hbar} = \hat R(\phi \,\mbf{k}), \qquad \phi = \omega_0 t. \]
+So as time passes, the state gets rotated about the $z$-axis!
+For instance, if we take $\ket{\psi(0)} = \ket{+\mbf{x}}$ then we'd find
+\[ \ket{\psi(t)} = e^{-i \omega_0 t / 2} \left( \frac{1}{\sqrt{2}} \ket{+\mbf{z}} + \frac{e^{i \omega_0 t}}{\sqrt{2}} \ket{-\mbf{z}} \right), \]
+the spin expectation values of which are what we'd expect based on the symmetry of the system.
+(Specifically, we get $\left< S_z \right> = 0$, $\left< S_x \right> = (\hbar / 2) \cos \omega_0 t$, and $\left< S_y \right> = (\hbar / 2) \sin \omega_0 t$.)
+Note that we could've determined that $S_z$ was a constant of motion ahead of time by leveraging the rotational symmetry of the system about the $z$-axis---rotations about this axis must leave $\hat H$ unchanged, meaning $\hat S_z$ commutes with $\hat H$ and so $\left< S_z \right>$ is constant, unlike the other observables.
+
+Suppose we complicate things by letting $\mbf{B}$ oscillate very slightly in the $x$-direction, so $\mbf{B} = B_1 (\cos \omega t) \mbf{i} + B_0 \mbf{k}$.
+The Hamiltonian is
+\[ \hat H = \omega_0 \hat S_z + \omega_1 (\cos \omega t) \hat S_x, \]
+where $\omega_0, \omega_1$ are defined as before for their respective $\mbf{B}$-fields.
+This $\hat H$ is time-dependent, so we appeal to the Schrödinger equation
+\[ i\hbar \begin{bmatrix} \dot a(t) \\ \dot b(t) \end{bmatrix} = \frac{\hbar}{2} \begin{bmatrix} \omega_0 & \omega_1 \cos \omega t \\ \omega_1 \cos \omega t & -\omega_0 \end{bmatrix} \begin{bmatrix} a(t) \\ b(t) \end{bmatrix} \]
+as it is written in the $S_z$-basis.
+This system is intractable as it stands, but we can exploit $B_1 \ll B_0$ to obtain an approximate solution.
+Motivated by the fact that the solution for $\omega_1 = 0$ is $a(t) = a(0) e^{-i\omega_0 t / 2}$ and $b(t) = b(0) e^{i\omega_0 / 2}$, we substitute
+\[ \begin{bmatrix} a(t) \\ b(t) \end{bmatrix} = \begin{bmatrix} c(t) e^{-i \omega_0 t / 2} \\ d(t) e^{i \omega_0 t / 2} \end{bmatrix} \]
+into the Schrödinger equation and do some algebra to get, after some nice cancellations,
+\[ i \begin{bmatrix} \dot c(t) \\ \dot d(t) \end{bmatrix} = \frac{\omega_1}{4} \begin{bmatrix} \left( e^{i (\omega_0 + \omega) t} + e^{i (\omega_0 - \omega) t} \right) d(t) \\ \left( e^{i (\omega - \omega_0) t} + e^{i (\omega_0 + \omega) t} \right) c(t) \end{bmatrix}. \]
+For most $\omega$ these exponentials will oscillate very quickly compared to $c(t)$ or $d(t)$ and average out to zero.
+But for $\omega \sim \omega_0$, we can neglect the terms oscillating at $\omega_0 + \omega$ in favor of the $\omega_0 - \omega$ ones.
+
+Solving in the $\omega = \omega_0$ case we'd find, for example, that the probabilities of measuring $\ket{\pm\mbf{z}}$ for a particle with definite initial spin oscillate with frequency $\omega_1 / 4$.
+In fact, there is a probability of measuring a ``spin flip'' for any $\omega \sim \omega_0$; there's just a resonant peak at $\omega_0$.
+(The energy difference in the spin-up and spin-down cases comes from interaction with the electromagnetic field.)
+
+As a final example, let the kets $\ket{1}$ and $\ket{2}$ denote configurations of the ammonia molecule in which the nitrogen atom is above and below the plane of the hydrogen atoms, respectively.
+The symmetry of the system dictates that
+\[ \hat H \longrightarrow \begin{bmatrix} \bra{1} \hat H \ket{1} & \bra{1} \hat H \ket{2} \\ \bra{2} \hat H \ket{1} & \bra{2} \hat H \ket{2} \end{bmatrix} = \begin{bmatrix} E_0 & -A \\ -A & E_0 \end{bmatrix}, \]
+where the value $A > 0$ is determined experimentally.
+(These off-diagonal entries exist because there is a finite potential between $\ket{1}$ and $\ket{2}$.)
+The eigenvalues of $\hat H$ are $E_I = E_0 - A$ and $E_{II} = E_0 + A$, and they have eigenkets
+\[ \ket{I} = \frac{1}{\sqrt{2}} \ket{1} + \frac{1}{\sqrt{2}} \ket{2}, \qquad \ket{II} = \frac{1}{\sqrt{2}} \ket{1} - \frac{1}{\sqrt{2}} \ket{2}. \]
+Using this, we could find that an initial state $\ket{1}$ oscillates above and below the plane with frequency $\nu = 2A / \hbar$.
+Now, if we once again complicate things by introducing a static electric field $\mbf{E}$ there is an interaction energy $-\hat{\bm \mu}_e \cdot \mbf{E}$ and so
+\[ \hat H \longrightarrow \begin{bmatrix} E_0 + \mu_e |\mbf{E}| & -A \\ -A &  E_0- \mu_e |\mbf{E}| \end{bmatrix}. \]
+The energies are
+\[ E = E_0 \pm \sqrt{(\mu_e |\mbf{E}|)^2 + A^2} \simeq E_0 \pm A \pm \frac{1}{2} \frac{(\mu_e |\mbf{E}|)^2}{A}. \]
+We therefore take a measurement of $\ket{I}$ versus $\ket{II}$ by shooting molecules through an inhomogeneous electric field with a high gradient, similar to what we saw with Stern-Gerlach devices, separating the beam of molecule in two according to the sign of $\pm$.
+In the case of a time-dependent electric field like $\mbf{E} = \mbf{E}_0 \cos \omega t$ then we can induce resonance in a fashion practically identical to what we saw a bit earlier.
+
+\section{Uncertainty Relations}
+We've seen that commuting operators have simultaneous eigenstates, but now we'll make a very important note about the quantitative conclusions we can draw when two operators do not commute.
+Let $[\hat A, \hat B] = i \hat C$ with all operators Hermitian, and define $\ket{\alpha} = (\hat A - \left< A \right>) \ket{\psi}$ and $\ket{\beta} = (\hat B - \left< B \right>) \ket{\psi}$ so that $\braket{\alpha}{\alpha} = (\Delta A)^2$ and $\braket{\beta}{\beta} = (\Delta B)^2$.
+Now we'd like to compute $\braket{\alpha}{\beta}$ to apply the Schwarz inequality $\braket{\alpha}{\alpha} \braket{\beta}{\beta} \geq \left| \braket{\alpha}{\beta} \right|^2$.
+
+To this end, define $\hat O = (\hat A - \left< A \right>)(\hat B - \left< B \right>)$ so that
+\[ \braket{\alpha}{\beta} = \bra{\psi} \hat O \ket{\psi} = \bra{\psi} \left( \frac{\hat O + \hat O^\dagger}{2} + \frac{\hat O - \hat O^\dagger}{2} \right) \ket{\psi}. \]
+We can see that $\hat O - \hat O^\dagger = [\hat A, \hat B] = i \hat C$, so
+\[ \left| \braket{\alpha}{\beta} \right|^2 = \left| \bra{\psi} \left( \frac{\hat O + \hat O^\dagger}{2} \right) \ket{\psi} + \frac{i}{2} \bra{\psi} \hat C \ket{\psi} \right|^2 \geq \frac{\left| \left< C \right> \right|^2}{4}, \]
+and thus
+\[ (\Delta A)^2 (\Delta B)^2 \geq \frac{\left| \left< C \right> \right|^2}{4} \;\implies\; \Delta A \, \Delta B \geq \frac{\left| \left< C \right> \right|}{2}. \]
+This lines up nicely with the results of our Stern-Gerlach experiments.
+If we have $\hat C = S_z$ and take a measurement of $S_z$, then $\Delta J_z$ is certainly nonzero since we can get either spin-up or spin-down.
+Thus $\Delta J_x$ and $\Delta J_y$ must also be nonzero.
+(This also means angular momentum can't point in any particular direction---otherwise, we'd know all three components at once, a violation of the uncertainty principle!)
+
+There is one very important uncertainty relation that is similar in form but different in character to the ones described above:
+\[ \Delta E \Delta t \geq \frac{\hbar}{2}. \]
+Here $\Delta t$ is not an uncertainty---time is a parameter, not an observable.
+Instead, it denotes a state's ``evolutionary time'', which is the time it takes for the expectation value of an observable $A$ to change significantly (i.e., by an amount on the order of its uncertainty).
+Mathematically, we can take advantage of the statements
+\[ \Delta A \Delta E \geq \frac{1}{2} \left| \bra{\psi} [\hat A, \hat H] \ket{\psi} \right|, \qquad \frac{d \left< A \right>}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat A] \ket{\psi} \]
+to write
+\[ \Delta A \Delta E \geq \frac{\hbar}{2} \left| \frac{d \left< A \right>}{dt} \right| \;\implies\; \Delta t = \frac{\Delta A}{|d \left< A \right> / dt|}. \]
+This is where the natural linewidth comes from.
+The excited states of an atom are not stationary states, and so they decay on some characteristic timescale $\Delta t$ with a corresponding uncertainty in energy $\Delta E$.
+
+\section{Multiparticle Systems}
+Now we'll take a step up and work with quantum states of multiple particles, specifically of spin-1/2 particles.
+Such a state can be written as, for example,
+\[ \ket{+\mbf{z}, +\mbf{z}} = \ket{+\mbf{z}}_1 \otimes \ket{+\mbf{z}}_2 = \ket{+\mbf{z}}_1 \ket{+\mbf{z}}_2, \]
+where $\otimes$ denotes a direct product.
+(In practice we omit the $\otimes$ because the alternatives are unambiguous.)
+Conventionally we use the basis
+\[ \ket{1} = \ket{+\mbf{z}}_1 \ket{+\mbf{z}}_2, \quad \ket{2} = \ket{+\mbf{z}}_1 \ket{-\mbf{z}}_2, \quad \ket{3} = \ket{-\mbf{z}}_1 \ket{+\mbf{z}}_2, \quad \ket{4} = \ket{-\mbf{z}}_1 \ket{-\mbf{z}}_2. \]
+The generators of rotations for particle 1 satisfy $\hat{\mbf{S}}_1 = \hat S_{1x} \mbf{i} + \hat S_{1y} \mbf{j} + \hat S_{1z} \mbf{k}$.
+Since rotations of particle 1 and particle 2 are independent of one another, $[\hat{\mbf{S}}_1, \hat{\mbf{S}}_2] = 0$, and likewise for the generators about each axis.
+We can also define the total spin operator $\hat{\mbf{S}}$ via
+\[ \hat R (d\theta \mbf{n}) = 1 - \frac{i}{\hbar} \hat{\mbf{S}} \cdot \mbf{n} \,d\theta = \left( 1 - \frac{i}{\hbar} \hat{\mbf{S}}_1 \cdot \mbf{n} \,d\theta \right) \otimes \left( 1 - \frac{i}{\hbar} \hat{\mbf{S}}_2 \cdot \mbf{n} \,d\theta \right), \]
+from which we can see that, to first order, $\hat{\mbf{S}} = \hat{\mbf{S}}_1 \otimes 1 + 1 \otimes \hat{\mbf{S}}_2 = \hat{\mbf{S}}_1 + \hat{\mbf{S}}_2$.
+At this point we could show that the components of $\hat{\mbf{S}}$ obey the expected commutation relations.
+
+As an example, we'll look at one of the most important spin-1/2 systems: the hydrogen atom.
+We'll discuss it in more detail later on, but for now we'll focus on the ``hyperfine'' energy structure due to the magnetic spin-spin interaction between the proton and electron, specifically the case in which there is no orbital angular momentum:
+\[ \hat H = \frac{2A}{\hbar^2} \hat{\mbf{S}}_1 \cdot \hat{\mbf{S}}_2 = \frac{A}{\hbar^2} \left( \hat S_{1+} \hat S_{2-} + \hat S_{1-} \hat S_{2+} + 2\hat S_{1z} \hat S_{2z} \right) \]
+for some experimentally-determined $A$ with dimensions of energy.
+We've expressed $\hat H$ in terms of raising and lowering operators because that makes it easier to determine the matrix elements, especially because most of the elements are zero:
+\[ \hat H \longrightarrow \begin{bmatrix} A / 2 & 0 & 0 & 0 \\ 0 & -A / 2 & A & 0 \\ 0 & A & -A / 2 & 0 \\ 0 & 0 & 0 & A / 2 \end{bmatrix}. \]
+This produces one ``singlet'' eigenket with $E = -3A / 2$ and three ``triplet'' eigenkets with $E = A / 2$.
+The Hamiltonian commutes with $\hat{\mbf{S}}^2 = \hat{\mbf{S}}_1^2 + \hat{\mbf{S}}_2^2 + 2 \hat{\mbf{S}}_1 \cdot \hat{\mbf{S}}_2$, so these energy eigenstates are also states of definite total spin!
+It's easy to show that the singlet has $s=0$ and the triplets have $s=1$, and so we label the eigenkets     \vspace{-6pt}
+\begin{align*}
+    \ket{0,0} &= \frac{1}{\sqrt{2}} \ket{+\mbf{z}, -\mbf{z}} - \frac{1}{\sqrt{2}} \ket{-\mbf{z}, +\mbf{z}}, & \ket{1,1} &= \ket{+\mbf{z}, +\mbf{z}}, \\
+    \ket{1,0} &= \frac{1}{\sqrt{2}} \ket{+\mbf{z}, -\mbf{z}} + \frac{1}{\sqrt{2}} \ket{-\mbf{z}, +\mbf{z}}, & \ket{1,-1} &= \ket{-\mbf{z}, -\mbf{z}}.
+\end{align*}
+There's another way we could've come to this conclusion.
+We could have immediately recognized that $\ket{1,1} = \ket{+\mbf{z}, +\mbf{z}}$ and $\ket{1,-1} = \ket{-\mbf{z}, -\mbf{z}}$ because they are eigenstates of $\hat S_z$, and thus of $\hat{\mbf{S}}^2$ with the proper eigenvalue.
+For the other two, we apply
+\begin{align*}
+    \hat S_- \ket{1,1} &= (\hat S_{1-} + \hat S_{2-}) \ket{+\mbf{z}, +\mbf{z}}, \\
+    \sqrt{2} \,\hbar \ket{1,0} &= \hbar (\ket{-\mbf{z}, +\mbf{z}} + \ket{+\mbf{z}, -\mbf{z}})
+\end{align*}
+and normalize to get our expression for $\ket{1,0}$.
+For $\ket{1,1}$ we take the normalized ket that's orthogonal to $\ket{1,0}$.
+
+Notice, however, that having anti-aligned spins in the $z$-basis isn't a sufficient condition for having total spin zero because $\ket{1,0}$ and $\ket{0,0}$ both exist.
+It turns out that $\ket{1,0}$ corresponds to a spin configuration that is always aligned on the $x$-axis, while $\ket{0,0}$ has anti-aligned spins in every basis.
+
+\section{Quantum Entanglement}
+Consider a spin-0 particle at rest that decays into two spin-1/2 particles.
+The particles are moving in opposite directions and comprise a spin state $\ket{0,0}$, so if a measurement of particle 1's spin gives $S_{1z} = \hbar / 2$ then we must get $S_{2z} = -\hbar / 2$ for the other particle, and vice versa (and along any axis).
+Thus measuring particle 1 instantaneously determines particle 2's state, even though the particles are completely non-interacting and may be separated by a very large distance.
+
+Einstein and his colleagues Podolsky and Rosen (EPR) were not happy with this idea.
+Perhaps, they argued, upon decay each particle is assigned a particular spin state (a ``hidden variable'') that is simply unknown until we measure it.
+In particular, suppose we take spin measurements along three coplanar spin axes $\mbf{a},\mbf{b},\mbf{c}$ so that in our hidden-variable model each particle belongs to one of eight populations $N_1, \, \cdots, \, N_8$.
+To name a few,  \vspace{-10pt}
+\begin{align*}
+    N_1: &\quad \left\{ +\mbf{a}, +\mbf{b}, +\mbf{c} \right\}, \;\; \left\{ -\mbf{a}, -\mbf{b}, -\mbf{c} \right\}, \\
+    N_2: &\quad \left\{ +\mbf{a}, +\mbf{b}, -\mbf{c} \right\}, \;\; \left\{ -\mbf{a}, -\mbf{b}, +\mbf{c} \right\}, \\
+    \vdots\quad \\
+    N_8: &\quad \left\{ -\mbf{a}, -\mbf{b}, -\mbf{c} \right\}, \;\; \left\{ +\mbf{a}, +\mbf{b}, +\mbf{c} \right\}.
+\end{align*}
+Suppose we take measurements of the two particles along different axes.
+For populations $N_1$ and $N_8$ this will always result in opposite spin states, while for all other populations this occurs 1/3 of the time.
+We could use the $\mbf{a}$-basis representation of $\ket{0,0}$ along with $\braket{+\mbf{z}}{+\mbf{n}} = \cos(\theta / 2)$ to get
+\[ \left| \braket{+\mbf{a},-\mbf{b}}{0,0} \right|^2 + \left| \braket{-\mbf{a},+\mbf{b}}{0,0} \right|^2 = \cos^2 \frac{\theta_{ab}}{2}, \]
+where $\theta_{ab}$ is the angle between $\mbf{a}$ and $\mbf{b}$.
+We have symmetric results for the other pairs of axes.
+But if we take $\theta_{ab} = \theta_{bc} = \theta_{ac} = 120^\circ$ then the probability of measuring opposite spins is 1/4---below 1/3!
+So at least one of the two models we've considered thus far is incorrect.
+If the hidden-variable model is correct then we must have
+\begin{align*}
+    N_3 + N_4 &\leq (N_2 + N_4) + (N_3 + N_7), \\
+    \intertext{which we can divide by $N_\textrm{tot}$ to get the Bell's inequality}
+    P(+\mbf{a}; +\mbf{b}) &\leq P(+\mbf{a}; +\mbf{c}) + P(+\mbf{c}; +\mbf{b}).
+\end{align*}
+This inequality is not consistent with the predictions of quantum mechanics for certain $\theta$-values, so if quantum mechanics is valid and Bell's inequality is violated then no (local) hidden-variable theory can be valid.
+Experiments have shown, to around 250 standard deviations, that this is actually the case.
+
+As an application, consider the problem of cloning (or copying) a quantum state $\ket{\psi}$.
+For this to be possible there must exist a unitary operator $\hat U$ satisfying $\hat U \ket{\psi}_1 \ket{e}_2 = \ket{\psi}_1 \ket{\psi}_2$ for some initial state $\ket{e}$ independent of $\ket{\psi}$; consequently, we must have the same for some other state $\ket{\varphi}$.
+Since $\braket{e}{e} = 1$ we can write
+\begin{align*}
+    \braket{\varphi}{\psi} &= \left( \leftindex_1{\bra{\varphi}} \leftindex_2{\bra{e}} \right) \left( \ket{\psi}_1 \ket{e}_2 \right) \\
+    &= \leftindex_1{\bra{\varphi}} \leftindex_2{\bra{e}} \hat U^\dagger \hat U \ket{\psi}_1 \ket{e}_2 \\
+    &= \braket{\varphi}{\psi}^2,
+\end{align*}
+which is not true for arbitrary $\ket{\psi}, \ket{\varphi}$.
+Thus it is impossible to clone quantum states.
+We can, however, teleport states with the power of quantum entanglement.
+
+Suppose we'd like to teleport the state $\ket{\psi_1} = a \ket{+\mbf{z}}_1 + b\ket{-\mbf{z}}_1$, and further that there is another pair of particles in a total spin-0 state.
+Before we take any measurements, the three-particle state is
+\[ \ket{\psi_{123}} = \left( a \ket{+\mbf{z}}_1 + b \ket{-\mbf{z}}_1 \right) \left( \frac{1}{\sqrt{2}} \ket{+\mbf{z}}_2 \ket{-\mbf{z}}_3 - \frac{1}{\sqrt{2}} \ket{-\mbf{z}}_2 \ket{+\mbf{z}}_3 \right). \]
+We say that particles 2 and 3 are entangled because it is impossible factor their two-particle state into independent one-particle states.
+The idea, now, is to take a very specific measurement in order to entangle particles 1 and 2; this measurement occurs in the Bell basis defined by
+\begin{align*}
+    \ket{\Psi_1^{(\pm)}} &= \frac{1}{\sqrt{2}} \ket{+\mbf{z}}_1 \ket{-\mbf{z}}_2 \pm \frac{1}{\sqrt{2}} \ket{-\mbf{z}}_1 \ket{+\mbf{z}}_2, \\
+    \ket{\Phi_1^{(\pm)}} &= \frac{1}{\sqrt{2}} \ket{+\mbf{z}}_1 \ket{+\mbf{z}}_2 \pm \frac{1}{\sqrt{2}} \ket{-\mbf{z}}_1 \ket{-\mbf{z}}_2.
+\end{align*}
+In terms of these states,
+\begin{align*}
+    \ket{\psi_{123}} &= \frac{1}{2} \ket{\Psi_{12}^{(-)}} \left( -a \ket{+\mbf{z}}_3 - b \ket{-\mbf{z}}_3 \right) + \frac{1}{2} \ket{\Psi_{12}^{(+)}} \left( -a \ket{+\mbf{z}}_3 + b \ket{-\mbf{z}}_3 \right) \\
+    &\qquad + \frac{1}{2} \ket{\Phi_{12}^{(-)}} \left( b \ket{+\mbf{z}}_3 + a\ket{-\mbf{z}}_3 \right) + \frac{1}{2} \ket{\Phi_{12}^{(+)}} \left( -b \ket{+\mbf{z}} + a \ket{-\mbf{z}}_3 \right).
+\end{align*}
+Thus by taking a Bell-state measurement we disentangle particle 3 from particle 2, and we can use the result of our measurement to determine precisely how to modify particle 3 to put it in the state we desire.
+Notably, the original state of particle 1 is destroyed in the process and so the no-cloning theorem remains intact.
+
+\section{The Density Operator}
+So far, whenever we've dealt with ensembles of particles we've worked primarily with pure states---that is, ensembles of particles that are all in exactly the same state.
+Such states, however, are merely an idealization of the physical world, and so we should develop a systemic way to handle mixed states as well.
+We do so using the density operator, which is defined by
+\[ \hat \rho = \sum_{k}^{} p_k \ket{\psi^{(k)}} \bra{\psi^{(k)}} \]
+where $p_k$ is the probability that a particle is in the state $\ket{\psi^{(k)}}$.
+The trace of such an operator is always
+\[ \tr \hat \rho = \sum_{i,k}^{} p_k \braket{i}{\psi^{(k)}} \braket{\psi^{(k)}}{i} = \sum_{k}^{} p_k \sum_{i}^{} \braket{\psi^{(k)}}{i} \braket{i}{\psi^{(k)}} = 1. \]
+However, since we can always diagonalize the density matrix with diagonal entries $p_k$, we have
+\[ \tr \hat \rho^2 = \sum_{k}^{} p_k^2 \leq 1 \]
+with equality only for a pure state.
+Thus we can test for a mixed state by computing $\tr \hat \rho^2$ and seeing if it's less than one.
+The expected value of an observable $A$ is the weighted average
+\begin{align*}
+    \left< A \right> &= \sum_{k}^{} p_k \bra{\psi^{(k)}} \hat A \ket{\psi^{(k)}} = \sum_{i,j,k}^{} p_k \braket{\psi^{(k)}}{i} \bra{i} \hat A \ket{j} \braket{j}{\psi^{(k)}} = \sum_{i,j}^{} A_{ij} \rho_{ji} = \tr (\hat A \hat \rho).
+\end{align*}
+If we imagine $\hat A$ and $\hat \rho$ as represented in the basis in which $\hat \rho$ is diagonalized, this trace is simply the weighted sum of all the different states' expectation values.
+Notice that we can take $\hat A = \hat P_{\ket{\varphi}} = \ket{\varphi} \bra{\varphi}$ for some other state $\ket{\varphi}$ to get
+\[ \left| \braket{\varphi}{\psi} \right|^2 = \tr \left( \hat P_{\ket{\varphi}} \hat \rho \right). \]
+Also, we can do some product rule work on $d \hat \rho / dt$ (with the Schrödinger equation) to get the time evolution:
+\begin{align*}
+    \frac{d}{dt} \hat \rho(t) &= \sum_{k}^{} \left[ \left( \frac{d}{dt} \ket{\psi^{(k)}(t)} \right) \bra{\psi^{(k)}(t)} + \bra{\psi^{(k)}(t)} \left( \frac{d}{dt} \ket{\psi^{(k)}(t)} \right) \right] \\
+    &= \sum_{k}^{} \left[ \frac{1}{i\hbar} \hat H \ket{\psi^{(k)}(t)} \bra{\psi^{(k)}(t)} + \frac{1}{-i\hbar} \ket{\psi^{(k)}(t)} \bra{\psi^{(k)}(t)} \hat H \right] = \frac{1}{i\hbar} [\hat H, \hat \rho(t)].
+\end{align*}
+The density matrix for a two-particle system is defined in precisely the same way.
+To compute the expectation value of, say, $\left< S_{1z} \right>$, we could either compute $\tr \big( (\hat S_{1z} \otimes 1) \hat \rho \big)$ or we can define the reduced density operator
+\[ \hat \rho^{(1)} = \sum_{k}^{} \leftindex_2{\bra{k}} \hat \rho \ket{k}_2 \]
+and compute $\tr (\hat S_{1z} \hat \rho^{(1)})$.
+The matrix elements of $\hat \rho^{(1)}$ are $\leftindex_1{\bra{i}} \hat \rho^{(1)} \ket{j}_1 = \sum_{k}^{} \bra{i,k} \hat \rho \ket{j,k}$.
+We can see that here we're essentially computing a ``partial trace''---we imagine the matrix for $\hat \rho$ as being broken into four $2 \times 2$ chunks, computing the trace of each chunk, and taking these as our matrix elements.
+We can employ similar methods for arbitrarily large systems of particles.
+
+Importantly, if a particle is entangled with another particle then its reduced density operator is a mixed state.
+So if we look at our three-particle state $\ket{\psi_{123}}$ from the previous section, we could compute the reduced density operator for particle 3:
+\begin{align*}
+    \hat \rho^{(3)} &= \frac{1}{2} \left( |a|^2 + |b|^2 \right) \left( \ket{+\mbf{z}}_3 \right) \left( \leftindex_3{\bra{+\mbf{z}}} \right) + \frac{1}{2} \left( |a|^2 + |b|^2 \right) \left( \ket{-\mbf{z}}_3 \right) \left( \leftindex_3{\bra{-\mbf{z}}} \right) \\
+    &= \frac{1}{2} \left( \ket{+\mbf{z}}_3 \right) \left( \leftindex_3{\bra{+\mbf{z}}} \right) + \frac{1}{2} \left( \ket{-\mbf{z}}_3 \right) \left( \leftindex_3{\bra{-\mbf{z}}} \right).
+\end{align*}
+This matrix describes what would happen if the recipient of a teleported state were to make a measurement before learning how to maneuver their particle into the proper state.
+The particle is in a completely unpolarized state, so the recipient cannot get any information from such a measurement.
+
+As an important final note, it is possible that seemingly different mixed states can correspond to the same density operator (for example, $\left( \ket{+\mbf{z}} \bra{+\mbf{z}} + \ket{-\mbf{z}} \bra{-\mbf{z}} \right) / 2$ and $\left( \ket{+\mbf{x}} \bra{+\mbf{x}} + \ket{-\mbf{x}} \bra{-\mbf{x}} \right) / 2$).
+In this case the two mixed states are actually the same quantum state, since all of their expectation values match.
+
+\end{document}
