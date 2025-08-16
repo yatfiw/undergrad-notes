@@ -1,8 +1,7 @@
-
 # undergrad-notes
 
-This is an incomplete compilation of notes from all the mathematics and physics courses I've taken at Harvey Mudd College.
-Contents are below, including planned but incomplete notes.
+This is a compilation of notes from all the math and physics courses I've taken at Harvey Mudd College.
+Contents are below, excluding the intentionally incomplete notes.
 
 <table>
  <tr>
@@ -53,32 +52,47 @@ Contents are below, including planned but incomplete notes.
     <td>MATH171</td>
     <td>Abstract Algebra I</td>
     <td>FA24</td>
-    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
- </tr>
- <tr>
-   <td>MATH180</td>
-    <td>Intro. to PDEs</td>
-    <td>FA24</td>
-    <td>ASTR122</td>
-    <td>High-Energy Astrophysics</td>
-    <td>SP25</td>
- </tr>
- <tr>
-    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
     <td>PHYS116</td>
     <td>Quantum Mechanics</td>
     <td>SP25</td>
  </tr>
  <tr>
+    <td>MATH180</td>
+    <td>Intro. to PDEs</td>
+    <td>FA24</td>
+    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
+ </tr>
+ <tr>
     <td>MATH136</td>
     <td>Complex Vars. & Int. Transforms </td>
     <td>SP25</td>
-    <td>PHYS164</td>
-    <td>Particle Physics</td>
-    <td>SP25</td>
+    <td>PHYS117</td>
+    <td>Statistical Mechanics</td>
+    <td>FA25</td>
+ </tr>
+ <tr>
+    <th colspan = "3"><b style="font-size:30px">In Progress</b></td>
+    <td></td>
+    <td></td>
+    <td></td>
+ </tr>
+ <tr>
+    <td>MATH165</td>
+    <td>Numerical Analysis</td>
+    <td>FA25</td>
+    <td></td>
+    <td></td>
+    <td></td>
  </tr>
 </table>
 
-There's a couple of other courses I'd like to add in the future, if I get around to it.
+The two courses in `unfinished` are there for different reasons.
+* ASTR122 High-Energy Astrophysics (SP25).
+The existing notes are incredibly messy and incomplete and I don't really want to deal with that.
+* PHYS164 Particle Physics (SP25).
+I dropped this one after a couple of weeks.
+
+Also, I started work on this repo after already having finished the following courses.
+Maybe I'll get around to them in the future.
 * PHYS024 Mechanics and Wave Motion (SP23)
 * MATH019 Single and Multivariable Calculus (FA22)
