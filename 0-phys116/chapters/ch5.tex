@@ -1,0 +1,311 @@
+\documentclass[../p116main.tex]{subfiles}
+\graphicspath{{\subfix{../figures/}}}
+
+% listen to led zepplin (start with 4, untitled)
+
+\begin{document}
+
+\chapter{More Complex Systems}
+\section{Time-Independent Perturbation Theory}
+Lots of the systems we care about don't have Hamiltonians that we can solve exactly.
+But in many cases they are sufficiently close to ones that we can solve, in which case we can treat the differences as small ``perturbations'' and real with them in a systematic way.
+We begin by expressing such a Hamiltonian in the form
+\[ \hat H = \hat H_0 + \hat H_1, \]
+where we say the ``big'' $\hat H_0$ is the unperturbed Hamiltonian and the ``small'' $\hat H_1$ is the perturbing Hamiltonian.
+The unperturbed part has known eigenstates and eigenvalues that satisfy
+\[ \hat H_0 \ket{\varphi_n^{(0)}} = E_n^{(0)} \ket{\varphi_n^{(0)}}, \]
+and we seek an approximate solution to $\hat H \ket{\psi_n} = E_n \ket{\psi_n}$.
+To this end we introduce a ``tuning'' parameter $\lambda$ via $\hat H = \hat H_0 + \lambda \hat H_1$ and assume that we can express the exact eigenstates and eigenvalues as power-series expansions in $\lambda$:  \vspace{-10pt}
+\begin{align*}
+    \ket{\psi_n} &= \ket{\varphi_n^{(0)}} + \lambda \ket{\varphi_n^{(1)}} + \lambda^2 \ket{\varphi_n^{(2)}} + \cdots, \\
+    E_n &= E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots.
+\end{align*}
+We require that as $\lambda \to 0$, the energies and eigenstates go smoothly to the exact values for the unperturbed Hamiltonian.
+Now, if we substitute these expressions into the energy eigenvalue equation we get
+\begin{align*}
+    \left( \hat H_0 + \lambda \hat H_1 \right) & \left( \ket{\varphi_n^{(0)}} + \lambda \ket{\varphi_n^{(1)}} + \lambda^2 \ket{\varphi_n^{(2)}} + \cdots \right) \\
+    &= \left( E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots \right) \left( \ket{\varphi_n^{(0)}} + \lambda \ket{\varphi_n^{(1)}} + \lambda^2 \ket{\varphi_n^{(2)}} + \cdots \right).
+\end{align*}
+Expanding and collecting like terms yields
+\begin{align*}
+    \hat H_0 \ket{\varphi_n^{(0)}} \phantom{\;\; + \hat H_0 \ket{\varphi_n^{(0)}}} &= E_n^{(0)} \ket{\varphi_n^{(0)}}, \\
+    \hat H_0 \ket{\varphi_n^{(1)}} + \hat H_1 \ket{\varphi_n^{(0)}} &= E_n^{(0)} \ket{\varphi_n^{(1)}} + E_n^{(1)} \ket{\varphi_n^{(0)}}, \\
+    \hat H_0 \ket{\varphi_n^{(2)}} + \hat H_1 \ket{\varphi_n^{(1)}} &= E_n^{(0)} \ket{\varphi_n^{(2)}} + E_n^{(1)} \ket{\varphi_n^{(1)}} + E_n^{(2)} \ket{\varphi_n^{(0)}}
+\end{align*}
+for the $\lambda^{0}$, $\lambda^{1}$, and $\lambda^2$ terms, respectively.
+A pattern emerges in higher-order terms, but these suffice for us.
+These equations encode information about the corrections we must make to the eigenstates and energies!
+
+The first-order correction to the energy is found by applying $\bra{\varphi_n^{(0)}}$ to the $\lambda^{1}$ equation:
+\begin{align*}
+    \bra{\varphi_n^{(0)}} \hat H_0 \ket{\varphi_n^{(1)}} + \bra{\varphi_n^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}} &= \bra{\varphi_n^{(0)}} E_n^{(0)} \ket{\varphi_n^{(1)}} + \bra{\varphi_n^{(0)}} E_n^{(1)} \ket{\varphi_n^{(0)}}, \\
+    \bra{\varphi_n^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}} &= E_n^{(1)}.
+\end{align*}
+Thus the first-order shift in the $n$th energy level is simply the perturbing $\langle E \rangle$ for the $n$th unperturbed state.
+If we were to instead apply some other $\bra{\varphi_k^{(0)}}$ with $k \neq n$ we'd get \vspace{-6pt}
+\[ \bra{\varphi_k^{(0)}} \hat H_0 \ket{\varphi_n^{(1)}} + \bra{\varphi_k^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}} = E_n^{(0)} \braket{\varphi_k^{(0)}}{\varphi_n^{(1)}} \;\implies\; \braket{\varphi_k^{(0)}}{\varphi_n^{(1)}} = \frac{\bra{\varphi_k^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}}}{E_n^{(0)} - E_k^{(0)}}, \vspace{-6pt} \]
+meaning $\ket{\varphi_n^{(1)}}$ generally has a nonzero component along $\ket{\varphi_k^{(0)}}$ for $k \neq n$.
+For the $k=n$ case we use the expansion from before to write
+\[ 1 = \braket{\psi_n}{\psi_n} = \braket{\varphi_n^{(0)}}{\varphi_n^{(0)}} + \lambda \braket{\varphi_n^{(0)}}{\varphi_n^{(1)}} + \lambda \braket{\varphi_n^{(1)}}{\varphi_n^{(0)}} + \cdots, \]
+meaning $\braket{\varphi_n^{(0)}}{\varphi_n^{(1)}}$ is purely imaginary.
+Inserting the identity operator into the $\ket{\psi_n}$ expansion gives
+\begin{align*}
+    \ket{\psi_n} &= \ket{\varphi_n^{(0)}} + ia \, \lambda \ket{\varphi_n^{(0)}} + \lambda \sum_{k \neq n}^{} \ket{\varphi_k^{(0)}} \braket{\varphi_k^{(0)}}{\varphi_n^{(1)}} + \mathcal O (\lambda^2) \\
+    &= e^{ia \lambda} \ket{\varphi_n^{(0)}} + \lambda \sum_{k \neq n}^{} \ket{\varphi_k^{(0)}} \braket{\varphi_k^{(0)}}{\varphi_n^{(1)}} + \mathcal O (\lambda^2). \\
+    \intertext{Even after normalizing $\ket{\psi_n}$ it turns out that $a$ is not determined, so we can set $a = 0$ so that the first-order correction is orthogonal to the unperturbed state and}
+    &= \ket{\varphi_n^{(0)}} + \lambda \sum_{k \neq n}^{} \ket{\varphi_k^{(0)}} \frac{\bra{\varphi_k^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}}}{E_n^{(0)} - E_k^{(0)}} + \mathcal O(\lambda^2).
+\end{align*}
+This summation is the $\ket{\varphi_n^{(1)}}$ we sought.
+For the second-order energy shift we take the $\lambda^2$ equation and apply $\bra{\varphi_n^{(0)}}$; after some cancellation we can substitute this expression for $\ket{\varphi_n^{(1)}}$ to get
+\begin{align*}
+    E_n^{(2)} &= \bra{\varphi_n^{(0)}} \hat H_1 \ket{\varphi_n^{(1)}} \\
+    &= \sum_{k \neq n}^{} \frac{\bra{\varphi_n^{(0)}} \hat H_1 \ket{\varphi_k^{(0)}} \bra{\varphi_k^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}}}{E_n^{(0)} - E_k^{(0)}} = \sum_{k \neq n}^{} \frac{\left| \bra{\varphi_k^{(0)}} \hat H_1 \ket{\varphi_n^{(0)}} \right|^2}{E_n^{(0)} - E_k^{(0)}}.
+\end{align*}
+Everything we've done so far has assumed that there is no degeneracy in $E_n^{(0)}$.
+But if there is, we then face the additional problem of figuring out which combinations of the degenerate states will converge to the correct eigenstates and energies of $\hat H$.
+To solve this problem we first allow for degeneracy in writing
+\[ \ket{\psi_n} = \sum_{i=1}^{N} c_i \ket{\varphi_{n,i}^{(0)}} + \lambda \ket{\varphi_n^{(1)}} + \cdots, \]
+and if we substitute this into the energy eigenvalue equation we obtain, for the $\lambda^{1}$ term,
+\[ \hat H_0 \ket{\varphi_n^{(1)}} + \hat H_1 \sum_{i=1}^{N} c_i \ket{\varphi_{n,i}^{(0)}} = E_n^{(0)} \ket{\varphi_n^{(1)}} + E_n^{(1)} \sum_{i=1}^{N} c_i \ket{\varphi_{n,i}^{(0)}}. \]
+Note the similarities to the $\lambda^{1}$ equation from before.
+Now we apply each of the degenerate $\bra{\varphi_{n,j}^{(0)}}$ to get
+\[ \sum_{i=1}^{N} \bra{\varphi_{n,j}^{(0)}} \hat H_1 \ket{\varphi_{n,i}^{(0)}} c_i = E_n^{(1)} \sum_{i=1}^{N} \braket{\varphi_{n,j}^{(0)}}{\varphi_{n,i}^{(0)}} = E_n^{(1)} \sum_{i=1}^{N} \delta_{ji} c_i = E_n^{(1)} c_j, \]
+where we have assumed that the degenerate states are orthonormal.
+We can recognize this as the $j$th component of an energy eigenvalue equation!
+In the $N=2$ case the equation looks like
+\[ \begin{bmatrix} \bra{\varphi_{n,1}^{(0)}} \hat H_1 \ket{\varphi_{n,1}^{(0)}} & \bra{\varphi_{n,1}^{(0)}} \hat H_1 \ket{\varphi_{n,2}^{(0)}} \\ \bra{\varphi_{n,2}^{(0)}} \hat H_1 \ket{\varphi_{n,1}^{(0)}} & \bra{\varphi_{n,2}^{(0)}} \hat H_1 \ket{\varphi_{n,2}^{(0)}} \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} = E_n^{(1)} \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}. \]
+Notice howe we're looking only at how the Hamiltonian behaves in the subspace of degenerate states
+The eigenvalues are the first-order shifts, and the eigenstates are the ``correct'' linear combinations of the degenerate states that we sought.
+
+\section{Perturbing Electric Fields}
+As a first example we will apply an external electric field $\mbf{E} = |\mbf{E}| \mbf{z}$ to the hydrogen atom.
+The relevant Hamiltonians are
+\[ \hat H_0 = \frac{\hat{\mbf{p}}^2}{2\mu} - \frac{q_e^2}{|\hat{\mbf{r}}|}, \qquad \hat H_1 = q_e |\mbf{E}| \hat z. \]
+The ground-state first-order shift can be easily computed using the nondegenerate theory: we could show that the eigenstates $\ket{n,l,m}$ have definite parity $(-1)^{l}$, meaning the position expectation value
+\[ E_1^{(1)} = q_e |\mbf{E}| \bra{1,0,0} \hat z \ket{1,0,0} = 0. \]
+The second-order shift is
+\[ E_1^{(2)} = \sum_{\substack{n,l,m \\ n \neq 1}}^{} \frac{q_e^2 |\mbf{E}|^2 \left| \bra{n,l,m} \hat z \ket{1,0,0} \right|^2}{E_1^{(0)} - E_n^{(0)}}. \]
+As for the first-excited states, the degenerate subspace is spanned by $\left\{ \ket{2,0,0}, \ket{2,1,0}, \ket{2,1,1}, \ket{2,1,-1} \right\}$.
+In principle this gives us sixteen matrix elements to compute, but we can use symmetry to simplify things considerably.
+For one, all of the elements in which the bra and ket have the same $l$-value vanish immediately, since the parity $(-1)^{l}$ depends only on $l$.
+
+For most of the remaining states, we can also take advantage of the fact that $[\hat H_1, \hat L_z] = 0$ to write 
+\begin{align*}
+    m' \hbar \bra{n, l', m'} \hat z \ket{n,l,m} &= \bra{n, l', m'} \hat L_z \hat z \ket{n,l,m} \\
+    &= \bra{n, l', m'} \hat z \hat L_z \ket{n,l,m} \\
+    &= m\hbar \bra{n, l', m'} \hat z \ket{n,l,m}.
+\end{align*}
+Thus the matrix elements with different $m$-values vanish.
+(This is true in general---if an operator $\hat A$ commutes with $\hat H_1$ then matrix elements with different eigenvalues $a$ vanish.)
+Thus the only entry we must evaluate is
+\[ \bra{2,0,0} \hat H_1 \ket{2,1,0} = q_e |\mbf{E}| \int_{0}^{\infty} r^2 dr \int_{0}^{\pi} \sin \theta \,d\theta \int_{0}^{2\pi} d\phi \, R_{2,0}^* Y_{0,0}^* r \cos \theta \, R_{2,1} Y_{1,0} = -3q_e |\mbf{E}| a_0, \]
+where $a_0$ is the Bohr radius.
+We can use this to construct the matrix representation of $\hat H_1$, and some computations give the first-order shifts $E_2^{(1)} = 0, \; 0, \; 3q_e|\mbf{E}| a_0, \; -3q_e|\mbf{E}| a_0$ with corresponding kets
+\[ \ket{2,1,1}, \quad \ket{2,1,-1}, \quad \frac{1}{\sqrt{2}} \big( \ket{2,0,0} - \ket{2,1,0} \big), \quad \frac{1}{\sqrt{2}} \big( \ket{2,0,0} + \ket{2,1,0} \big), \]
+respectively.
+This splitting is known as the Stark effect.
+Notice that, as a consequence of $[\hat H_1, \hat L_z] = 0$, eigenkets with different $m$-values are not mixed by the perturbation.
+Commutativity therefore would have allowed us to focus only on the $m=0$ states, analyzing the others using the nondegenerate theory.
+
+As a second example, consider again the ammonia molecule in a weak external electric field.
+We have, in the energy eigenbasis,
+\[ \hat H_0 \to \begin{bmatrix} E_0 - A & 0 \\ 0 & E_0 + A \end{bmatrix}, \qquad \hat H_1 \to \begin{bmatrix} 0 & \mu_e |\mbf{E}| \\ \mu_e |\mbf{E}| & 0 \end{bmatrix}. \]
+The vanishing first-order shift is explained by $\hat \Pi \ket{I} = \ket{I}$ and $\hat \Pi \ket{II} = -\ket{II}$, as the electric dipole moment operator has a vanishing expectation value in a state of definite parity.
+Notice how this conclusion is in agreement with the Taylor expansion
+\[ E = E_0 \pm A \pm A \left[ \frac{1}{2} \left( \frac{\mu_e |\mbf{E}|^2}{A} \right)^2 - \frac{1}{8} \left( \frac{\mu_e |\mbf{E}|^2}{A} \right)^4 + \cdots \right]. \]
+But in the case of a strong electric field $\mu_e |\mbf{E}| \gg A$ the expansion is
+\[ E = E_0 \pm \mu_e |\mbf{E}| \pm \frac{A^2}{2\mu_e |\mbf{E}|} \mp \cdots, \]
+which has a term that is linear in $|\mbf{E}|$.
+We therefore have a nonzero first-order shift, suggesting that we cannot use the nondegenerate theory here.
+Roughly speaking, this is because the states $\ket{I}$ and $\ket{II}$ are very close together in energy, so the factor
+\[ \frac{\bra{II} \hat H_1 \ket{I}}{E_{II}^{(0)} - E_I^{(0)}} = \frac{\mu_e |\mbf{E}|}{2A} \]
+diverges.
+Thus we use the degenerate theory on the $\ket{1}$-$\ket{2}$ representations of $\hat H_0$ and $\hat H_1$ to determine the relevant information.
+
+\section{Relativistic Perturbations to the Hydrogen Atom}
+We've already studied the hydrogen atom extensively, but now we'll discuss three relativistic perturbations to the Hamiltonian that together create a fine structure to our previously-derived energy levels.
+First, we write the relativistically correct expression for the kinetic energy in the system (using $m_p \gg m_e$):
+\begin{align*}
+    \hat K &= m_e c^2 \left( \sqrt{1 + (\hat{\mbf{p}}_e^2 / m_e^2 c^2)} - 1 \right) + \frac{\hat{\mbf{p}}_p^2}{2m_p} \\
+    &= \frac{\hat{\mbf{p}}_e^2}{2m_e} - \frac{(\hat{\mbf{p}}_e^2)^2}{8m_e^3 c^2} + \cdots + \frac{\hat{\mbf{p}}_p^2}{2m_p} \;=\; \frac{\hat{\mbf{p}}^2}{2\mu} - \frac{(\hat{\mbf{p}}^2)^2}{8m_e^3 c^2} + \cdots.
+\end{align*}
+Our perturbing Hamiltonians is therefore $\hat H_K = -(\hat{\mbf{p}}^2)^2 / 8m_e^3 c^2$.
+Conveniently, $[\hat H_K, \hat{\mbf{L}}^2] = 0$, so we can use the nondegenerate theory to compute the first-order shift
+\begin{align*}
+    E_{n,l}^{(1)} &= - \bra{n,l,m} \frac{(\hat{\mbf{p}}^2)^2}{8m_e^3 c^2} \ket{n,l,m} \\
+    &= -\frac{1}{2m_e c^2} \bra{n,l,m} \left( \hat H_0 + \frac{Zq_e^2}{|\hat{\mbf{r}}|} \right)^2 \ket{n,l,m}.
+\end{align*}
+Going through the motions here reveals that
+\[ E_K^{(1)} = -\frac{1}{2} m_e c^2 Z^{4} \alpha^{4} \left( -\frac{3}{4n^{4}} + \frac{1}{n^3 (l + 1 / 2)} \right). \]
+Now we'll look at the interaction between the electron's spin and its orbital angular momentum.
+In the electron's rest frame the proton generates a magnetic field $\mbf{B}$, and so the interaction energy is
+\[ -\bm \mu \cdot \mbf{B} = - \left( -\frac{ge}{2m_e c} \mbf{S} \cdot \frac{-Z q_e \mbf{v} \times \mbf{r}}{c r^3} \right) = \frac{Zq_e^2}{m_e^2 c^2 r^3} \mbf{S} \cdot \mbf{L}, \]
+where $g = 2$ for the electron, and $\mbf{L}$ and $\mbf{v}$ are the electron's angular momentum and velocity (in the proton's frame).
+An effect called Thomas precession reduces this energy by a factor of two, so
+\[ \hat H_\textrm{S-O} = \frac{Zq_e^2}{2m_e^2 c^2 |\hat{\mbf{r}}|^3} \hat{\mbf{L}} \cdot \hat{\mbf{S}}. \]
+The work we'll do here is very similar to what we did much earlier for the spin-spin interaction between the proton and electron.
+% We first note that $\hat{\mbf{L}}^2$, $\hat L_z$, $\hat{\mbf{S}}^2$, and $\hat S_z$ all commute with one another, so we can form simultaneous eigenstates $\ket{l, m_l, \pm \mbf{z}} = \ket{l,m_l} \otimes \ket{\frac{1}{2}, \pm \frac{1}{2}}$.
+Rather than work with the total spin $\hat{\mbf{S}} = \hat{\mbf{S}}_1 + \hat{\mbf{S}}_2$, we will use the total angular momentum $\hat{\mbf{J}} = \hat{\mbf{L}} + \hat{\mbf{S}}$:   \vspace{-10pt}
+\begin{align*}
+    \hat{\mbf{J}}^2 &= \hat{\mbf{L}}^2 + \hat{\mbf{S}}^2 + 2 \hat{\mbf{L}} \cdot \hat{\mbf{S}}, \\
+    \hat J_z &= \hat L_z + \hat S_z,
+\end{align*}
+We can see that $\hat{\mbf{L}} \cdot \hat{\mbf{S}}$ commutes with $\hat J_z$---the latter commutes with $\hat{\mbf{J}}^2$, $\hat{\mbf{L}}^2$, and $\hat{\mbf{S}}^2$, so it must also commute with $\hat{\mbf{L}} \cdot \hat{\mbf{S}}$.
+Also notice that each of these three ``standalone'' operators commute with one another, and so they must have simultaneous eigenstates with $\hat{\mbf{L}} \cdot \hat{\mbf{S}}$; in particular, $[\hat{\mbf{L}} \cdot \hat{\mbf{S}}, \, \hat{\mbf{L}}^2] = 0$.
+
+This simplifies things considerably.
+We now know that only states with the same values of $l$ and $m_j$ can be mixed in the spin-orbit perturbation.
+For fixed $l$ and $m_j = (m_l + 1 / 2) \hbar$, the only two such states are
+\[ \ket{l, m_l, +\mbf{z}}, \qquad \ket{l, \, m_l + 1, \, -\mbf{z}}, \]
+unless $m_l = l$ (in which case only the former state exists).
+We'll now determine the two linear combinations of these states that are eigenstates of $2 \hat{\mbf{L}} \cdot \hat{\mbf{S}} = \hat L_+ \hat S_- + \hat L_- \hat S_+ + 2 \hat L_z \hat S_z$.
+The matrix representation in the above basis is
+\[ 2 \hat{\mbf{L}} \cdot \hat{\mbf{S}} \to \hbar^2 \begin{bmatrix} m & \sqrt{l(l+1) - m(m+1)} \\ \sqrt{l(l+1) - m(m+1)} & -(m+1) \end{bmatrix}, \]
+and the eigenvalues are $\lambda = l$ and $\lambda = -(l+1)$.
+So the total angular momentum $j$ satisfies
+\[ j(j+1) = l(l+1) + \tfrac{1}{2} (\tfrac{1}{2} + 1) + \begin{cases} l, \\ -(l+1), \end{cases} \]
+meaning $j = l \pm 1 / 2$.
+We therefore label the eigenstates
+\begin{align*}
+    \ket{j = l + \tfrac{1}{2}, \, m_j} &= \sqrt{\frac{l + m_l + 1}{2l + 1}} \; \ket{l, m, +\mbf{z}} + \sqrt{\frac{l - m_l}{2l + 1}} \; \ket{l, \, m+1, \, -\mbf{z}}, \\
+    \ket{j = l - \tfrac{1}{2}, \, m_j} &= \sqrt{\frac{l - m_l}{2l + 1}} \; \ket{l, m, +\mbf{z}} - \sqrt{\frac{l + m_l + 1}{2l + 1}} \; \ket{l, \, m+1, \, -\mbf{z}}.
+\end{align*}
+Note that we can use $m_j = m_l + 1 / 2$ to write the above directly in terms of $m_j$.
+The first order shift for each of these is
+\[ E_\textrm{S-O}^{(1)} = \frac{m_e c^2 Z^{4} \alpha^{4}}{4n^3 l(l + 1 / 2)(l+1)} \begin{cases} l & j = l + 1 / 2, \\ -(l+1) & j = l - 1 / 2. \end{cases} \]
+To label these states we use the spectroscopic notation $1s_{1 / 2}, \, 2s_{1 / 2}, \, 2p_{1 / 2}, \, 2p_{3 / 2}$, and so on---the coefficient denotes $n$, the letter $l$, and the subscript $j$.
+
+But there's a problem here: evaluating the above for $l=0$ gives a nonzero result, but a state with zero orbital angular momentum should have no spin-orbit coupling!
+Solving using the more exact Dirac equation gives a result consistent with this, but it also spits out an additional perturbation
+\[ \hat H_D = -\frac{1}{8m_e^2 c^2} \Big[ \hat{\mbf{p}} \,\cdot, \, \big[ \hat{\mbf{p}}, V(|\hat{\mbf{r}}|) \big] \Big], \]
+where the momentum operators are dotted with one another in the expansion.
+When we go to compute the first-order shift due to this Darwin term, we find that it contributes only for $s$ states---in fact, its magnitude
+\[ E_D^{(1)} = \bra{n,0,0} \hat H_D \ket{n,0,0} = \frac{m_e c^2 Z^{4} \alpha^{4}}{2n^3} \]
+is exactly the same as the seemingly nonphysical $l=0$ contribution from the spin-orbit Hamiltonian!
+Finally, if we were to add together all of these first-order shifts we would get
+\[ E_K^{(1)} + E_\textrm{S-O}^{(1)} + E_D^{(1)} = E_{n,j}^{(1)} = -\frac{m_e c^2 (Z\alpha)^{4}}{2n^3} \left( \frac{1}{j + 1 / 2} - \frac{3}{4n} \right), \]
+which is $(Z\alpha)^2$ times the unperturbed energy (hence the term ``fine structure'').
+The surprising degeneracy in $l$ is, as it turns out, maintained to all orders!
+(We could show this by finding an exact solution the Dirac equation with a Coulomb potential.)
+
+There's one more phenomenon here that we haven't yet considered: a very small but observable energy difference between the $2s_{1 / 2}$ and $2p_{1 / 2}$ levels.
+This Lamb shift, which is on the order of $m_e c^2 (Z\alpha)^{4} \alpha \log \alpha$, is explained by quantum electrodynamics.
+Taken with the hyperfine structure discussed much earlier, all this gives us a much more complete look at the energy structure of the hydrogen atom.
+
+\section{The Zeeman Effect}
+We've seen what happens when the hydrogen atom is put in an external electric field.
+For a magnetic field $\mbf{B} = B\mbf{z}$, \vspace{-10pt}
+\begin{align*}
+    \hat H_B &= -\bm \mu \cdot \mbf{B} \\
+    &= \frac{q_e B}{2m_e c} (\hat L_z + 2\hat S_z) = \frac{q_e B}{2m_e c} (\hat J_z + \hat S_z),
+\end{align*}
+which clearly commutes with $\hat J_z$.
+We can therefore compute the shifts in the (nondegenerate) $j = l \pm 1 / 2$ states:
+\begin{align*}
+    E_B^{(1)} &= \frac{q_e B}{2m_e c} \bra{j = l \pm \tfrac{1}{2}, \, m_j} (\hat J_Z + \hat S_z) \ket{j = l \pm \tfrac{1}{2}, \, m_j} \\
+    &= \frac{q_e \hbar B}{2m_e c} m_j \left( 1 \pm \frac{1}{2l + 1} \right) = \frac{g(j,l) q_e \hbar B}{2m_e c} m_j, \qquad g(j = l \pm \tfrac{1}{2}, \, l) \,=\, 1 \pm \frac{1}{2l+1},
+\end{align*}
+where $g(j,l)$ is called the Landé $g$ factor.
+
+\section{Identical Particles}
+For the remainder of the chapter we will focus on systems of identical particles.
+The key here is that, unlike in the macroscopic world, identical particles in quantum mechanics are entirely indistinguishable.
+There is no measurement we can take to distinguish, say, one electron from any other.
+
+To formalize this we introduce the exchange operator $\hat P_{12}$, which ``exchanges'' the roles of particles 1 and 2 in a system.
+In other words, we swap how the kets are labeled:
+\[ \hat P_{12} \ket{a,b} = \ket{b,a} \quad\text{or}\quad \hat P_{12} (\ket{a}_1 \otimes \ket{b}_2) = \ket{b}_1 \otimes \ket{a}_2. \]
+The ``exchanged'' must be the same overall physical state as the original state, meaning the states must differ by at most an overall phase; further, since $\hat P_{12}^2 = 1$, it follows that the exchange operator has eigenvalues $\pm 1$.
+A state with $\lambda = 1$ is called symmetric, while one with $\lambda = -1$ is called antisymmetric.
+
+Since we are doing nonrelativistic quantum mechanics we must state the spin-statistics theorem as a law of nature:
+\begin{itemize}[topsep=0pt]
+    \item particles with integral spin, called bosons, are found only in symmetric states and obey Bose-Einstein statistics; and
+    \item those with half-integral spin, called fermions, are found only in antisymmetric states and obey Fermi-Dirac statistics.
+\end{itemize}
+If two identical particles are in the same state then clearly the state is symmetric under exchange; it follows that no two fermions can be in the same state.
+This is known as the Pauli exclusion principle.
+
+\section{The Helium Atom}
+As an example of a system with two identical fermions, consider an atom with two electrons and a nuclear charge $Z$.
+We will take the unperturbed and perturbed Hamiltonians to be
+\[ \hat H_0 = \frac{\hat{\mbf{p}}_1^2}{2m_e} - \frac{Zq_e^2}{|\hat{\mbf{r}}_1|} + \frac{\hat{\mbf{p}}_2^2}{2m_e} - \frac{Zq_e^2}{|\hat{\mbf{r}}_2|}, \qquad \hat H_1 \frac{q_e^2}{|\hat{\mbf{r}}_1 - \hat{\mbf{r}}_2|}. \]
+In the atom's ground state the identical electrons occupy the same spatial state, forcing their spin state to be antisymmetric:
+\[ \ket{1s, 1s} = \ket{1,0,0}_1 \ket{1,0,0}_2 \, \frac{1}{\sqrt{2}} \big( \ket{+\mbf{z}}_1 \ket{-\mbf{z}}_2 - \ket{-\mbf{z}}_1\ket{+\mbf{z}}_2 \big). \]
+The unperturbed energy is known to be $E_{1s, 1s}^{(0)} = 2(-\frac{1}{2} m_e c^2 Z^2 \alpha^2)$.
+The first-order shift is the integral
+\[ E_{1s,1s}^{(1)} = \bra{1s,1s} \frac{q_e^2}{|\hat{\mbf{r}}_1 - \hat{\mbf{r}}_2|} \ket{1s,1s} = \iint d^3 r_1 d^3 r_2 \left| \braket{\mbf{r}_1}{1,0,0} \right|^2 \left| \braket{\mbf{r}_2}{1,0,0} \right|^2 \frac{q_e^2}{|\mbf{r}_1 - \mbf{r}_2|}, \]
+where we have inserted the symmetric spatial state
+\begin{align*}
+    \ket{\psi_S} &= \frac{1}{2} \iint d^3 r_1 d^3 r_2 \left( \frac{1}{\sqrt{2}} \ket{\mbf{r}_1, \mbf{r}_2} + \frac{1}{\sqrt{2}} \ket{\mbf{r}_2, \mbf{r}_1} \right) \left( \frac{1}{\sqrt{2}} \braket{\mbf{r}_1, \mbf{r}_2}{\psi_S} + \frac{1}{\sqrt{2}} \braket{\mbf{r}_2, \mbf{r}_1}{\psi_S} \right) \\
+    &= \frac{1}{2} \iint d^3 r_1 d^3 r_2 \big( \ket{\mbf{r}_1. \mbf{r}_2} \braket{\mbf{r}_1, \mbf{r}_2}{\psi_S} + \ket{\mbf{r}_2, \mbf{r}_1} \braket{\mbf{r}_1, \mbf{r}_2}{\psi_S} \big) \\
+    &= \iint d^3 r_1 d^3 r_2 \ket{\mbf{r}_1, \mbf{r}_2} \braket{\mbf{r}_1, \mbf{r}_2}{\psi_S}.
+\end{align*}
+We could get a similar integral for $\ket{\psi_A}$.
+To evaluate, we'd substitute the known $R_{1,0}(r) Y_{0,0}(\theta,\phi)$ from our previous discussion of the hydrogen atom; after doing this we'd find a sizable discrepancy with the experimental value due to the fact that the Coulomb repulsion between the electrons isn't actually that small.
+We'll look at a more accurate way of determining the energies shortly.
+
+As for the first-excited states, one of the particles is in $\ket{1,0,0}$ while the other has $\ket{2,l,m}$; there are four states that fit this description.
+The unperturbed energy is $E_{1s, \, 2s \text{ or } 2p} = -\frac{1}{2} m_e c^2 Z^2 \alpha^2 (1 + 1 / 2^2)$.
+Now, taking advantage of the fact that $\hat H_1$ commutes with the exchange operator in both space and spin, we can diagonalize $\hat H_1$ by choosing states that are (overall antisymmetric) eigenstates of both $\hat P_{12}^\textrm{spin}$ and $\hat P_{12}^\textrm{space}$.
+
+We'd end up with a first-order shift of the form $E^{(1)} = J \pm K$, where the $\pm$ is correlated with the value of the total spin so that the overall state is antisymmetric: we have $J - K$ for the triplet states, while the singlet has $J + K$.
+(This reflects how the antisymmetric wave functions vanish at $\mbf{r}_1 = \mbf{r}_2$, causing increased separation due to Coulomb repulsion.)
+
+For atoms with more electrons the Hamiltonian is much less wieldy.
+We can hone in on what the potential looks like by taking a guess (based on what we know about the limiting values), numerically solving the Schrödinger equation for this guess, determining the charge distribution $q_e \left| \braket{\mbf{r}_1}{n,l,m} \right|^2$ corresponding to the resulting wave function, and using that to determine a new guess potential, all in succession until a self-consistent solution materializes.
+The states fill according to the Pauli exclusion principle.
+\begin{itemize}[topsep=0pt]
+    \item The $1s$, $2s$, $2p$, $3s$, and $3p$ states fill like normal.
+    \item The $4s$ level is very slightly below the $3d$ level, so those fill next.
+    \item By the time the $3d$ level is filled with four electrons, the $4s$ level has been raised enough to be slightly above the $3d$ level; chromium therefore has $4s^1 \,3d^5$.
+    \item Manganese, iron, cobalt, and nickel have $4s^2 \,3d^5$ through $4s^2 \,3d^8$, but then again the pattern changes and copper gets $4s^1 \,3d^{10}$.
+    (This configuration is so close in energy to $4s^2 \,3d^9$, however, that copper may be one or the other depending on its environment.)
+    \item The rest of the row fills like normal.
+\end{itemize}
+
+\section{The Variational Method}
+In practice, we estimate the energy levels of helium (and heavier) atoms using the variational method.
+The idea is to exploit the fact that every state $\ket{\psi}$ is a linear combination of energy eigenstates $\ket{E_n}$, each of which satisfies $E_n \geq E_0$, meaning the expectation value $\bra{\psi} \hat H \ket{\psi} \geq E_0$.
+
+The method itself is also pretty simple.
+We begin by picking a trial state $\ket{\psi(\alpha_1, \alpha_2, \ldots)}$ which depends on parameters $\alpha_1, \alpha_2, \ldots$.
+We then compute $\left< E \right>$ for this state and then minimize it with respect to the free parameters to get as close as possible to the ground-state $E_0$.
+
+When we go to pick a trial state, we generally choose one that closely resembles what we think the actual state should look like.
+Two common wave functions are the (radial) ground state of the hydrogen atom
+\[ \psi(r) = \frac{b^{3 / 2}}{\sqrt{\pi}} e^{-br} \]
+and that of the one-dimensional harmonic oscillator
+\[ \psi(x) = \left( \frac{2a}{\pi} \right)^{1 / 4} e^{-ax^2}. \]
+Note that we could use a similar method to determine higher energy eigenvalues $E_n$ simply by picking a trial state that is orthogonal every eigenstate $\ket{E_0}, \, \ldots, \, \ket{E_{n-1}}$ below it.
+We may do this either by simply making a clever choice, or we might construct one; for example, if $\ket{\psi}$ is the trial ground state then we can build an excited trial state via
+\[ \ket{\varphi} \longrightarrow \frac{\ket{\varphi} - \ket{\psi} \braket{\psi}{\varphi}}{\sqrt{1 - \left| \braket{\psi}{\varphi} \right|^2}}. \]
+However, since $\ket{\psi}$ is only a trial state rather than the true ground state, minimizing $\bra{\varphi} \hat H \ket{\varphi}$ will not necessarily yield an upper bound for $E_1$.
+
+\section{Covalent Bonding}
+Ionic bonding can be explained classically as the exchange of electrons, but covalent bonding is pure quantum mechanics.
+Suppose two nuclei are spaced a fixed distance $R$ apart; if we allow this distance to appear as a parameter in our wave functions, we can minimize $\left< E \right>$ with respect to $R$ to approximate both the energy and size of a molecule held together by a covalent bond.
+
+Consider the hydrogen molecule ion $\text{H}_2^+$.
+If the protons are spaced far apart, there are clearly at least two possible states: the electron is bound to one proton or the other.
+The corresponding wave functions are
+\[ \braket{\mbf{r}}{1} = \frac{1}{\sqrt{\pi a_0^3}} e^{-|\mbf{r} - \mbf{R} / 2| / a_0}, \qquad \braket{\mbf{r}}{2} = \frac{1}{\sqrt{\pi a_0^3}} e^{-|\mbf{r} + \mbf{R} / 2| / a_0}, \]
+where $\mbf{r}$ is the position of the electron and $\mbf{R}$/2 is the position of each proton with respect to their midpoint.
+The linear combinations of $\ket{1}$ and $\ket{2}$ that diagonalize the Hamiltonian turn out to be
+\[ \ket{\pm} = \frac{1}{\sqrt{2 \pm 2 \braket{1}{2}}} \big( \ket{1} \pm \ket{2} \big), \qquad E_\pm \frac{1}{1 \pm \braket{1}{2}} \big( H_{11} \pm H_{12} \big), \]
+where $H_{11}$ and $H_{12}$ are the matrix elements of $\hat H$ (expressed as integrals).
+Notice that $\braket{\mbf{r}}{+}$ and $\braket{\mbf{r}}{-}$ have even and odd parity, respectively.
+Of course, only the even parity state has a minimum, and so we call $\ket{+}$ a bonding molecular orbital; the state $\ket{-}$ is called an antibonding molecular orbital.
+Note that these molecular orbitals are linear combinations of atomic orbitals.
+(Also note that our simple trial wave functions, despite producing pretty good qualitative results, undershoot the binding energy and overshoot the separation.)
+
+Adding another electron into the mix produces $\textrm{H}_2$, which has a higher binding energy and a smaller internuclear separation.
+The electrons' spatial state, of course, is symmetric, meaning their spin state has to be antisymmetric in a spin-0 state.
+Bonding \textit{only} occurs in such a state---in a spin-1 state the spatial state would be antisymmetric, meaning the electrons wouldn't exist in the space between the protons.
+
+This explains why, say, hydrogen and helium do not bind together to form HHe.
+The electrons in He are already paired up in the spatial state $1s$ and the total-spin-0 state, so if the H electron were to form a covalent bond by pairing up with one of the He electrons it would expend a great deal of energy in kicking the other one up to the $2s$.
+If the He electrons were instead in a total-spin-1 state we would see repulsion between the two atoms.
+Helium is therefore inert, along with all the other noble gases.
+
+\end{document}

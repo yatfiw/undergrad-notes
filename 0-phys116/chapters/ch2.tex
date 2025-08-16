@@ -3,8 +3,6 @@
 
 \begin{document}
 
-% region PAST UNFINISHED TOPICS
-
 \chapter{Quantized Observables}
 \section{The Angular Momentum Eigenstates}
 The first observable we'll discuss is angular momentum, the generator of rotations.
@@ -105,7 +103,7 @@ If $\hat H$ is time-independent then we get $\hat U(t) = e^{-i \hat H t / \hbar}
 Now we can see that $\hat H$ has units of energy, and because $\hat H$ commutes with $\hat U$ the observable associated with $\hat H$ has a time-independent expectation value:
 \[ \bra{\psi(t)} \hat H \ket{\psi(t)} = \bra{\psi(0)} \hat U^\dagger \hat H \hat U \ket{\psi(0)} = \bra{\psi(0)} \hat H \ket{\psi(0)}. \]
 We therefore identify $\hat H$ as the energy operator, more commonly known as the Hamiltonian, and so it has eigenstates $\ket{E}$ satisfying
-\[ \hat H \ket{E} = E \ket{E}, \qquad \left< E \right> = \bra{\psi} \hat H \ket{\psi}. \]
+\[ \hat H \ket{E} = E \ket{E}, \qquad \langle E \rangle = \bra{\psi} \hat H \ket{\psi}. \]
 So if the initial state of a system is an energy eigenstate $\ket{\psi(0)} = \ket{E}$, we have
 \[ \ket{\psi(t)} = e^{-i\hat H t / \hbar} \ket{\psi(0)} = e^{-iEt / \hbar} \ket{E}. \]
 Thus time evolution simply causes $\ket{E}$ to pick up an overall phase (i.e., essentially stay the same), so we call $\ket{E}$ a stationary state.
@@ -119,11 +117,11 @@ leading to the Schrödinger equation
 This is the fundamental equation of motion in quantum mechanics---it provides all the information we need to determine how a quantum state will evolve in time.
 We can leverage this equation to determine whether an arbitrary observable $A$ has a time-dependent expectation value:
 \begin{align*}
-    \frac{d \left< A \right>}{dt} &= \left( \frac{d}{dt} \bra{\psi(t)} \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{d}{dt} \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
-    &= \left( \frac{1}{-i\hbar} \hat H \bra{\psi(t)} \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{1}{i\hbar} \hat H \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
+    \frac{d \langle A \rangle}{dt} &= \left( \frac{d}{dt} \bra{\psi(t)} \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{d}{dt} \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
+    &= \left( \frac{1}{-i\hbar} \bra{\psi(t)} \hat H \right) \hat A \ket{\psi(t)} + \bra{\psi(t)} \hat A \left( \frac{1}{i\hbar} \hat H \ket{\psi(t)} \right) + \bra{\psi(t)} \frac{\partial A}{\partial t} \ket{\psi(t)} \\
     &= \frac{i}{\hbar} \bra{\psi(t)} [\hat H, \hat A] \ket{\psi(t)} + \bra{\psi(t)} \frac{\partial \hat A}{\partial t} \ket{\psi(t)}.
 \end{align*}
-Thus a time-independent operator $\hat A$ has a time-independent $\left< A \right>$ if and only if it commutes with $\hat H$.
+Thus a time-independent operator $\hat A$ has a time-independent $\langle A \rangle$ if and only if it commutes with $\hat H$.
 
 \section{Examples of Quantum Dynamics}
 As a simple example of how all this plays out in actual quantum systems, consider a spin-1/2 particle in a constant magnetic field $\mbf{B} = B_0 \mbf{k}$.
@@ -136,8 +134,8 @@ So as time passes, the state gets rotated about the $z$-axis!
 For instance, if we take $\ket{\psi(0)} = \ket{+\mbf{x}}$ then we'd find
 \[ \ket{\psi(t)} = e^{-i \omega_0 t / 2} \left( \frac{1}{\sqrt{2}} \ket{+\mbf{z}} + \frac{e^{i \omega_0 t}}{\sqrt{2}} \ket{-\mbf{z}} \right), \]
 the spin expectation values of which are what we'd expect based on the symmetry of the system.
-(Specifically, we get $\left< S_z \right> = 0$, $\left< S_x \right> = (\hbar / 2) \cos \omega_0 t$, and $\left< S_y \right> = (\hbar / 2) \sin \omega_0 t$.)
-Note that we could've determined that $S_z$ was a constant of motion ahead of time by leveraging the rotational symmetry of the system about the $z$-axis---rotations about this axis must leave $\hat H$ unchanged, meaning $\hat S_z$ commutes with $\hat H$ and so $\left< S_z \right>$ is constant, unlike the other observables.
+(Specifically, we get $\langle S_z \rangle = 0$, $\langle S_x \rangle = (\hbar / 2) \cos \omega_0 t$, and $\langle S_y \rangle = (\hbar / 2) \sin \omega_0 t$.)
+Note that we could've determined that $S_z$ was a constant of motion ahead of time by leveraging the rotational symmetry of the system about the $z$-axis---rotations about this axis must leave $\hat H$ unchanged, meaning $\hat S_z$ commutes with $\hat H$ and so $\langle S_z \rangle$ is constant, unlike the other observables.
 
 Suppose we complicate things by letting $\mbf{B}$ oscillate very slightly in the $x$-direction, so $\mbf{B} = B_1 (\cos \omega t) \mbf{i} + B_0 \mbf{k}$.
 The Hamiltonian is
@@ -175,15 +173,15 @@ In the case of a time-dependent electric field like $\mbf{E} = \mbf{E}_0 \cos \o
 
 \section{Uncertainty Relations}
 We've seen that commuting operators have simultaneous eigenstates, but now we'll make a very important note about the quantitative conclusions we can draw when two operators do not commute.
-Let $[\hat A, \hat B] = i \hat C$ with all operators Hermitian, and define $\ket{\alpha} = (\hat A - \left< A \right>) \ket{\psi}$ and $\ket{\beta} = (\hat B - \left< B \right>) \ket{\psi}$ so that $\braket{\alpha}{\alpha} = (\Delta A)^2$ and $\braket{\beta}{\beta} = (\Delta B)^2$.
+Let $[\hat A, \hat B] = i \hat C$ with all operators Hermitian, and define $\ket{\alpha} = (\hat A - \langle A \rangle) \ket{\psi}$ and $\ket{\beta} = (\hat B - \langle B \rangle) \ket{\psi}$ so that $\braket{\alpha}{\alpha} = (\Delta A)^2$ and $\braket{\beta}{\beta} = (\Delta B)^2$.
 Now we'd like to compute $\braket{\alpha}{\beta}$ to apply the Schwarz inequality $\braket{\alpha}{\alpha} \braket{\beta}{\beta} \geq \left| \braket{\alpha}{\beta} \right|^2$.
 
-To this end, define $\hat O = (\hat A - \left< A \right>)(\hat B - \left< B \right>)$ so that
+To this end, define $\hat O = (\hat A - \langle A \rangle)(\hat B - \langle B \rangle)$ so that
 \[ \braket{\alpha}{\beta} = \bra{\psi} \hat O \ket{\psi} = \bra{\psi} \left( \frac{\hat O + \hat O^\dagger}{2} + \frac{\hat O - \hat O^\dagger}{2} \right) \ket{\psi}. \]
 We can see that $\hat O - \hat O^\dagger = [\hat A, \hat B] = i \hat C$, so
-\[ \left| \braket{\alpha}{\beta} \right|^2 = \left| \bra{\psi} \left( \frac{\hat O + \hat O^\dagger}{2} \right) \ket{\psi} + \frac{i}{2} \bra{\psi} \hat C \ket{\psi} \right|^2 \geq \frac{\left| \left< C \right> \right|^2}{4}, \]
+\[ \left| \braket{\alpha}{\beta} \right|^2 = \left| \bra{\psi} \left( \frac{\hat O + \hat O^\dagger}{2} \right) \ket{\psi} + \frac{i}{2} \bra{\psi} \hat C \ket{\psi} \right|^2 \geq \frac{\left| \langle C \rangle \right|^2}{4}, \]
 and thus
-\[ (\Delta A)^2 (\Delta B)^2 \geq \frac{\left| \left< C \right> \right|^2}{4} \;\implies\; \Delta A \, \Delta B \geq \frac{\left| \left< C \right> \right|}{2}. \]
+\[ (\Delta A)^2 (\Delta B)^2 \geq \frac{\left| \langle C \rangle \right|^2}{4} \;\implies\; \Delta A \, \Delta B \geq \frac{\left| \langle C \rangle \right|}{2}. \]
 This lines up nicely with the results of our Stern-Gerlach experiments.
 If we have $\hat C = S_z$ and take a measurement of $S_z$, then $\Delta J_z$ is certainly nonzero since we can get either spin-up or spin-down.
 Thus $\Delta J_x$ and $\Delta J_y$ must also be nonzero.
@@ -194,9 +192,9 @@ There is one very important uncertainty relation that is similar in form but dif
 Here $\Delta t$ is not an uncertainty---time is a parameter, not an observable.
 Instead, it denotes a state's ``evolutionary time'', which is the time it takes for the expectation value of an observable $A$ to change significantly (i.e., by an amount on the order of its uncertainty).
 Mathematically, we can take advantage of the statements
-\[ \Delta A \Delta E \geq \frac{1}{2} \left| \bra{\psi} [\hat A, \hat H] \ket{\psi} \right|, \qquad \frac{d \left< A \right>}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat A] \ket{\psi} \]
+\[ \Delta A \Delta E \geq \frac{1}{2} \left| \bra{\psi} [\hat A, \hat H] \ket{\psi} \right|, \qquad \frac{d \langle A \rangle}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat A] \ket{\psi} \]
 to write
-\[ \Delta A \Delta E \geq \frac{\hbar}{2} \left| \frac{d \left< A \right>}{dt} \right| \;\implies\; \Delta t = \frac{\Delta A}{|d \left< A \right> / dt|}. \]
+\[ \Delta A \Delta E \geq \frac{\hbar}{2} \left| \frac{d \langle A \rangle}{dt} \right| \;\implies\; \Delta t = \frac{\Delta A}{|d \langle A \rangle / dt|}. \]
 This is where the natural linewidth comes from.
 The excited states of an atom are not stationary states, and so they decay on some characteristic timescale $\Delta t$ with a corresponding uncertainty in energy $\Delta E$.
 
@@ -221,8 +219,8 @@ We'll discuss it in more detail later on, but for now we'll focus on the ``hyper
 for some experimentally-determined $A$ with dimensions of energy.
 We've expressed $\hat H$ in terms of raising and lowering operators because that makes it easier to determine the matrix elements, especially because most of the elements are zero:
 \[ \hat H \longrightarrow \begin{bmatrix} A / 2 & 0 & 0 & 0 \\ 0 & -A / 2 & A & 0 \\ 0 & A & -A / 2 & 0 \\ 0 & 0 & 0 & A / 2 \end{bmatrix}. \]
-This produces one ``singlet'' eigenket with $E = -3A / 2$ and three ``triplet'' eigenkets with $E = A / 2$.
-The Hamiltonian commutes with $\hat{\mbf{S}}^2 = \hat{\mbf{S}}_1^2 + \hat{\mbf{S}}_2^2 + 2 \hat{\mbf{S}}_1 \cdot \hat{\mbf{S}}_2$, so these energy eigenstates are also states of definite total spin!
+This produces one ``singlet'' eigenket with $E = -3A / 2$ and three ``triplet'' eigenkets with $E = A / 2$; these kets are given below.
+We could show that each is also an eigenstate of both $\mbf{S}_1^2$ and $\mbf{S}_2^2$, so the energy eigenstates are also states of definite total spin!
 It's easy to show that the singlet has $s=0$ and the triplets have $s=1$, and so we label the eigenkets     \vspace{-6pt}
 \begin{align*}
     \ket{0,0} &= \frac{1}{\sqrt{2}} \ket{+\mbf{z}, -\mbf{z}} - \frac{1}{\sqrt{2}} \ket{-\mbf{z}, +\mbf{z}}, & \ket{1,1} &= \ket{+\mbf{z}, +\mbf{z}}, \\
@@ -316,7 +314,7 @@ with equality only for a pure state.
 Thus we can test for a mixed state by computing $\tr \hat \rho^2$ and seeing if it's less than one.
 The expected value of an observable $A$ is the weighted average
 \begin{align*}
-    \left< A \right> &= \sum_{k}^{} p_k \bra{\psi^{(k)}} \hat A \ket{\psi^{(k)}} = \sum_{i,j,k}^{} p_k \braket{\psi^{(k)}}{i} \bra{i} \hat A \ket{j} \braket{j}{\psi^{(k)}} = \sum_{i,j}^{} A_{ij} \rho_{ji} = \tr (\hat A \hat \rho).
+    \langle A \rangle &= \sum_{k}^{} p_k \bra{\psi^{(k)}} \hat A \ket{\psi^{(k)}} = \sum_{i,j,k}^{} p_k \braket{\psi^{(k)}}{i} \bra{i} \hat A \ket{j} \braket{j}{\psi^{(k)}} = \sum_{i,j}^{} A_{ij} \rho_{ji} = \tr (\hat A \hat \rho).
 \end{align*}
 If we imagine $\hat A$ and $\hat \rho$ as represented in the basis in which $\hat \rho$ is diagonalized, this trace is simply the weighted sum of all the different states' expectation values.
 Notice that we can take $\hat A = \hat P_{\ket{\varphi}} = \ket{\varphi} \bra{\varphi}$ for some other state $\ket{\varphi}$ to get
@@ -327,7 +325,7 @@ Also, we can do some product rule work on $d \hat \rho / dt$ (with the Schrödin
     &= \sum_{k}^{} \left[ \frac{1}{i\hbar} \hat H \ket{\psi^{(k)}(t)} \bra{\psi^{(k)}(t)} + \frac{1}{-i\hbar} \ket{\psi^{(k)}(t)} \bra{\psi^{(k)}(t)} \hat H \right] = \frac{1}{i\hbar} [\hat H, \hat \rho(t)].
 \end{align*}
 The density matrix for a two-particle system is defined in precisely the same way.
-To compute the expectation value of, say, $\left< S_{1z} \right>$, we could either compute $\tr \big( (\hat S_{1z} \otimes 1) \hat \rho \big)$ or we can define the reduced density operator
+To compute the expectation value of, say, $\langle S_{1z} \rangle$, we could either compute $\tr \big( (\hat S_{1z} \otimes 1) \hat \rho \big)$ or we can define the reduced density operator
 \[ \hat \rho^{(1)} = \sum_{k}^{} \leftindex_2{\bra{k}} \hat \rho \ket{k}_2 \]
 and compute $\tr (\hat S_{1z} \hat \rho^{(1)})$.
 The matrix elements of $\hat \rho^{(1)}$ are $\leftindex_1{\bra{i}} \hat \rho^{(1)} \ket{j}_1 = \sum_{k}^{} \bra{i,k} \hat \rho \ket{j,k}$.

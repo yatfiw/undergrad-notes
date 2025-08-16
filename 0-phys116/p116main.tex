@@ -15,7 +15,11 @@
 \usepackage{bm}
 \usepackage{leftindex}
 
-\def\bi#1{\textsf{\textit{#1}}}
+\newcommand{\ket}[1]{|{#1}\rangle}
+\newcommand{\bra}[1]{\langle{#1}|}
+\newcommand{\braket}[2]{\langle{#1}|{#2}\rangle}
+
+\newcommand{\bi}[1]{\textsf{\textit{#1}}}
 \newcommand{\tr}{\operatorname{tr}}
 
 % ------------------------ %
@@ -30,5 +34,6 @@
 \subfile{chapters/ch2} % quantized observables
 \subfile{chapters/ch3} % wave mechanics
 \subfile{chapters/ch4} % central potentials
+\subfile{chapters/ch5} % more complex systems
 
 \end{document}

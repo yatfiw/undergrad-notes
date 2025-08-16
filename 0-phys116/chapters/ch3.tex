@@ -27,7 +27,7 @@ The amplitude density function $\braket{x}{\psi}$, often denoted $\psi(x)$, is c
 \[ 1 = \int dx \, \psi^*(x) \psi(x) = \int dx \, |\psi(x)|^2. \]
 The expected position of a particle in a state $\ket{\psi}$ is given by
 \begin{align*}
-    \left< x \right> = \bra{\psi} \hat x \ket{\psi} &= \int dx \bra{\psi} \hat x \ket{x} \braket{x}{\psi}, \\
+    \langle x \rangle = \bra{\psi} \hat x \ket{\psi} &= \int dx \bra{\psi} \hat x \ket{x} \braket{x}{\psi}, \\
     &= \int dx \braket{\psi}{x} x \braket{x}{\psi} \\
     &= \int dx \, |\psi(x)|^2 x,
 \end{align*}
@@ -76,13 +76,13 @@ With this commutation relation in mind, let's now look at time evolution---if ou
 for some potential $V$.
 So the position expectation value changes like
 \begin{align*}
-    \frac{d \left< x \right>}{dt} &= \frac{i}{2m\hbar} [\hat p_x^2, \hat x] \ket{\psi} \\
+    \frac{d \langle x \rangle}{dt} &= \frac{i}{2m\hbar} [\hat p_x^2, \hat x] \ket{\psi} \\
     &= \frac{i}{2m\hbar} \bra{\psi} \left( \hat p_x [\hat p_x, \hat x] + [\hat p_x, \hat x] \hat p_x \right) \ket{\psi} \\
-    &= \frac{\bra{\psi} \hat p_x \ket{\psi}}{m} = \frac{\left< p_x \right>}{m}.
+    &= \frac{\bra{\psi} \hat p_x \ket{\psi}}{m} = \frac{\langle p_x \rangle}{m}.
 \end{align*}
 This is the familiar expression for classical linear momentum!
 Further, we could show that
-\[ \frac{d \left< p_x \right>}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat p_x] \ket{\psi} = \left< -\frac{dV}{dx} \right>, \]
+\[ \frac{d \langle p_x \rangle}{dt} = \frac{i}{\hbar} \bra{\psi} [\hat H, \hat p_x] \ket{\psi} = \langle -\frac{dV}{dx} \rangle, \]
 which is just Newton's second law!
 Note that the momentum is a constant of motion only when $[\hat H, \hat p_x]$, that is, when the Hamiltonian is translationally invariant (when $V(x)$ is independent of $x$).
 
@@ -128,10 +128,10 @@ These together show that $\braket{p}{\psi}$ and $\braket{x}{\psi}$ form a Fourie
 
 As an application, consider the Gaussian wave packet
 \[ \braket{x}{\psi} = \psi(x) = N e^{-x^2 / 2a^2}, \quad N = \frac{1}{\sqrt{a \sqrt{\pi}}}. \]
-By symmetry $\left< x \right> = 0$, and by integration $\left< x^2 \right> = a^2 / 2$ and so $\Delta x = a / \sqrt{2}$, which reflects the fact that the Gaussian narrows as $a \to 0$.
+By symmetry $\langle x \rangle = 0$, and by integration $\langle x^2 \rangle = a^2 / 2$ and so $\Delta x = a / \sqrt{2}$, which reflects the fact that the Gaussian narrows as $a \to 0$.
 We could show, using the above integrals, that
 \[ \braket{p}{\psi} = \sqrt{\frac{a}{\hbar \sqrt{\pi}}} e^{-p^2 a^2 / 2\hbar^2}. \]
-Once again, by symmetry $\left< p_x \right> = 0$, by integration $\left< p_x^2 \right> = \hbar^2 / 2a^2$, and $ \Delta p_x = \hbar / a \sqrt{2}$.
+Once again, by symmetry $\langle p_x \rangle = 0$, by integration $\langle p_x^2 \rangle = \hbar^2 / 2a^2$, and $ \Delta p_x = \hbar / a \sqrt{2}$.
 Note that $\Delta x \Delta p_x = \hbar / 2$, so this Gaussian wave packet is a minimum uncertainty state.
 (We could prove that it is \textit{the} minimum uncertainty state by requiring $\ket{\beta} = c \ket{\alpha}$ and $\bra{\psi} (\hat O + \hat O^\dagger) \ket{\psi} = 0$ in the proof of the uncertainty principle.)
 
@@ -215,18 +215,18 @@ We can use this to generate all of the position-space energy eigenfunctions:
 \[ \braket{x}{n} = \frac{1}{\sqrt{n!}} \bra{x} (a^\dagger)^n \ket{0} = \frac{1}{\sqrt{n!}} \left( \frac{m\omega}{2\hbar} \right)^{n / 2} \left( x - \frac{\hbar}{m\omega} \frac{d}{dx} \right)^{n} \left( \frac{m\omega}{\pi \hbar} \right)^{1 / 4} e^{-m\omega x / 2\hbar}. \]
 Note that both of the energies' expectation values
 \begin{align*}
-    \frac{\left< p_x^2 \right>}{2m} &= -\frac{\hbar^2}{2m} \int dx \braket{n}{x} \frac{d^2}{dx^2} \braket{x}{n}, \\
-    \left< V(x) \right> &= \frac{1}{2} m\omega^2 \int dx \braket{n}{x} x^2 \braket{x}{n}.
+    \frac{\langle p_x^2 \rangle}{2m} &= -\frac{\hbar^2}{2m} \int dx \braket{n}{x} \frac{d^2}{dx^2} \braket{x}{n}, \\
+    \langle V(x) \rangle &= \frac{1}{2} m\omega^2 \int dx \braket{n}{x} x^2 \braket{x}{n}.
 \end{align*}
 get larger with increasing $n$ due to the wave function's increasing curvature (for the kinetic energy) and widening domain of applicability (for the potential).
 
 Let's hone in on the ground-state energy.
 In a classical oscillator the lowest energy occurs when the particle is at rest, but for us this is disallowed by the Heisenberg uncertainty principle.
 These uncertainties influence the energy via
-\[ \left< E \right> = \frac{(\Delta p_x)^2 + \left< p_x \right>^2}{2m} + \frac{1}{2} m\omega^2 [(\Delta x)^2 + \left< x \right>^2]. \]
-It's easy to show, using the raising and lowering operators, that $\left< x \right> = \left< p_x \right> = 0$ in an energy eigenstate, and so in such a state
-\[ \left< E \right> = \frac{(\Delta p_x)^2}{2m} + \frac{1}{2} m\omega^2 (\Delta x)^2. \]
-To minimize the energy nature picks the combination of $(\Delta x)^2 = \left< x^2 \right>$ and $(\Delta p_x)^2 = \left< p_x^2 \right>$ that minimizes this expression.
+\[ \langle E \rangle = \frac{(\Delta p_x)^2 + \langle p_x \rangle^2}{2m} + \frac{1}{2} m\omega^2 [(\Delta x)^2 + \langle x \rangle^2]. \]
+It's easy to show, using the raising and lowering operators, that $\langle x \rangle = \langle p_x \rangle = 0$ in an energy eigenstate, and so in such a state
+\[ \langle E \rangle = \frac{(\Delta p_x)^2}{2m} + \frac{1}{2} m\omega^2 (\Delta x)^2. \]
+To minimize the energy nature picks the combination of $(\Delta x)^2 = \langle x^2 \rangle$ and $(\Delta p_x)^2 = \langle p_x^2 \rangle$ that minimizes this expression.
 In the ground state these quantities are
 \begin{align*}
     (\Delta x)^2 &= \frac{\hbar}{2m \omega} \bra{0} (\hat a + \hat a^\dagger)^2 \ket{0} & (\Delta p_x)^2 &= -\frac{m\omega \hbar}{2} \bra{0} (\hat a - \hat a^\dagger)^2 \ket{0} \\
@@ -256,7 +256,7 @@ The energy eigenstates of the harmonic oscillator are stationary states.
 So time dependence, as we've come to expect, results from superpositions of eigenstates with different energies.
 If this superposition is of two adjacent energy states $\ket{\psi(0)} = c_n \ket{n} + c_{n+1} \ket{n+1}$ then the time evolution is
 \[ \ket{\psi(t)} = e^{-i(n + 1 / 2) \omega t} \left( c_n \ket{n} + c_{n+1} e^{-i\omega t} \ket{n+1} \right), \]
-and we could use the raising and lowering operators to compute $\left< x \right> = A \cos(\omega t + \delta)$.
+and we could use the raising and lowering operators to compute $\langle x \rangle = A \cos(\omega t + \delta)$.
 
 Another example of a state with interesting time evolution is the coherent state $\ket{\alpha}$, which satisfies $\hat a \ket{\alpha} = \alpha \ket{\alpha}$.
 If we start by writing such a state as a superposition of the energy eigenstates with coefficients $c_n$, the eigenvalue equation becomes   \vspace{-6pt}
@@ -278,7 +278,7 @@ so the eigenvalue $\alpha$ of the lowering operator becomes $\alpha e^{i \omega 
 
 As a first step in investigating the behavior of this coherent state, let's compute the expectation values:
 \begin{align*}
-    \left< x \right> &= \sqrt{\frac{\hbar}{2m\omega}} \bra{\alpha(t)} (\hat a + \hat a^\dagger) \ket{\alpha(t)} & \left< p_x \right> &= -i\sqrt{\frac{m\omega\hbar}{2}} \bra{\alpha(t)} (\hat a - \hat a^\dagger) \ket{\alpha(t)} \\
+    \langle x \rangle &= \sqrt{\frac{\hbar}{2m\omega}} \bra{\alpha(t)} (\hat a + \hat a^\dagger) \ket{\alpha(t)} & \langle p_x \rangle &= -i\sqrt{\frac{m\omega\hbar}{2}} \bra{\alpha(t)} (\hat a - \hat a^\dagger) \ket{\alpha(t)} \\
     &= \sqrt{\frac{\hbar}{2m\omega}} \left( \alpha e^{-i\omega t} + \alpha^* e^{i\omega t} \right) &&= -i\sqrt{\frac{m\omega\hbar}{2}} \left( \alpha e^{-i \omega t} - \alpha^* e^{i\omega t} \right) \\
     &= \sqrt{\frac{\hbar}{2m\omega}} \, 2|\alpha| \cos (\omega t + \delta), &&= -\sqrt{\frac{m\omega\hbar}{2}} \, 2|\alpha| \sin (\omega t + \delta),
 \end{align*}
@@ -287,7 +287,7 @@ We can see that the position and momentum are oscillating back and forth, as we'
 Note that the phase $\delta$ of the eigenvalue determines the phase of these expectation values.
 Now we'll compute the uncertainties, using the commutator $[\hat a, \hat a^\dagger] = 1$ to swap the order of operators as needed:
 \begin{align*}
-    \left< x^2 \right> &= \frac{\hbar}{2m\omega} \bra{\alpha(t)} (\hat a + \hat a^\dagger)^2 \ket{\alpha(t)} & \left< p_x^2 \right> &= -\frac{m\omega \hbar}{2} \bra{\alpha(t)} (\hat a - \hat a^\dagger)^2 \ket{\alpha(t)} \\
+    \langle x^2 \rangle &= \frac{\hbar}{2m\omega} \bra{\alpha(t)} (\hat a + \hat a^\dagger)^2 \ket{\alpha(t)} & \langle p_x^2 \rangle &= -\frac{m\omega \hbar}{2} \bra{\alpha(t)} (\hat a - \hat a^\dagger)^2 \ket{\alpha(t)} \\
     &= \frac{\hbar}{2m\omega} \bra{\alpha(t)} (\hat a + (\hat a^\dagger)^2 + 2 \hat a^\dagger \hat a + 1) \ket{\alpha(t)} &&= -\frac{m\omega\hbar}{2} \bra{\alpha(t)} (\hat a^2 + (\hat a^\dagger)^2 - 2\hat a^\dagger \hat a - 1) \ket{\alpha(t)} \\
     &= \frac{\hbar}{2m\omega} \left( \alpha(t) + \alpha^*(t)^2 + 2|\alpha(t)|^2 + 1 \right), &&= \frac{m\omega\hbar}{2} \left( 2|\alpha(t)|^2 + 1 - \alpha(t)^2 - \alpha^*(t)^2 \right),
 \end{align*}
